@@ -1,0 +1,20 @@
+[Desktop Entry]
+Exec=kcmshell4 webaccounts
+Icon=applications-internet
+Type=Service
+
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=webaccounts
+X-KDE-ParentApp=kcontrol
+
+X-KDE-System-Settings-Parent-Category=network-and-connectivity
+X-KDE-Weight=60
+
+Name=Web Accounts
+
+Comment=Configure your internet accounts such Google, Live, Owncloud
+
+X-KDE-Keywords=Network,Google,Live,ownCloud
+
+Categories=Qt;KDE;X-KDE-settings-webaccounts;
