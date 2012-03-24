@@ -39,34 +39,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QListWidget" name="accList">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="gridSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Create Account</string>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
-       </widget>
+       <widget class="QListWidget" name="accList"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -87,7 +60,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="plusBtn">
+         <widget class="QPushButton" name="addBtn">
           <property name="text">
            <string/>
           </property>
@@ -99,7 +72,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="minusBtn">
+         <widget class="QPushButton" name="remoteBtn">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -127,7 +100,7 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Choose a Web Account to create</string>
+      <string/>
      </property>
     </widget>
    </item>
