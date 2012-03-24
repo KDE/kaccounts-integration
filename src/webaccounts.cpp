@@ -33,11 +33,35 @@ K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 WebAccounts::WebAccounts(QWidget *parent, const QVariantList&) : KCModule(WebAccountsFactory::componentData(), parent)
 {
 
-    Ui::KCMWebAccounts *kcmUi = new Ui::KCMWebAccounts();
-    kcmUi->setupUi(this);
+    m_ui = new Ui::KCMWebAccounts();
+    m_ui->setupUi(this);
+
+    m_newAccountItem = new QListWidgetItem(i18n("New Account"), m_ui->accList);
+    m_newAccountItem->setIcon(QIcon::fromTheme("applications-education-miscellaneous"));
+    m_ui->accList->setIconSize(QSize(64, 64));
+    m_ui->accList->addItem(m_newAccountItem);
+
+
+    connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
+    connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+            this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
 }
 
 WebAccounts::~WebAccounts()
-{}
+{
+    delete m_ui;
+}
+
+void WebAccounts::addBtnClicked()
+{
+    m_ui->accList->setCurrentItem(m_newAccountItem, QItemSelectionModel::SelectCurrent);
+}
+
+void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    if (current == m_newAccountItem) {
+        m_ui->accountInfo->setTitle(i18n("Select a supported Web Account"));
+    }
+}
 
 #include "webaccounts.moc"

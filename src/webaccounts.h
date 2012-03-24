@@ -21,12 +21,26 @@
 
 #include <kcmodule.h>
 
+class QListWidgetItem;
+namespace Ui {
+    class KCMWebAccounts;
+}
+
 class WebAccounts : public KCModule
 {
 Q_OBJECT
 public:
     WebAccounts(QWidget *parent, const QVariantList&);
     virtual ~WebAccounts();
+
+private Q_SLOTS:
+    void addBtnClicked();
+    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+private:
+    QListWidgetItem *m_newAccountItem;
+    Ui::KCMWebAccounts *m_ui;
+
 };
 
 #endif // webaccounts_H
