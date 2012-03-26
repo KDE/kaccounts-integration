@@ -102,6 +102,11 @@
      <property name="title">
       <string/>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </layout>
     </widget>
    </item>
   </layout>

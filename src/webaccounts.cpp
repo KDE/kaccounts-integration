@@ -67,8 +67,7 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
         QWidget *widget = new QWidget();
         form->setupUi(widget);
 
-        QVBoxLayout *vbox = new QVBoxLayout(m_ui->accountInfo);
-        vbox->addWidget(widget);
+        m_ui->accountInfo->layout()->addWidget(widget);
     }
 }
 
