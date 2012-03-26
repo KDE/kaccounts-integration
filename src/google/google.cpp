@@ -22,6 +22,8 @@
 #include "oauth.h"
 #include "services.h"
 
+#include <kpushbutton.h>
+#include <kstandardguiitem.h>
 GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
 {
     Credentials *credentialsPage = new Credentials(this);
@@ -31,6 +33,15 @@ GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
     addPage(credentialsPage);
     addPage(oauth);
     addPage(services);
+
+    setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
+    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
+
+    //We do not want "Forward" as text
+    setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard", "Next"));
+    setButtonText(QWizard::FinishButton, i18nc("Action to finish the wizard", "Finish"));
 }
 
 GoogleWizard::~GoogleWizard()
