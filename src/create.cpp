@@ -21,7 +21,9 @@
 
 #include <QtGui/QWidget>
 
-Create::Create(QWidget* parent): QObject(parent)
+Create::Create(QWidget* parent)
+: QObject(parent)
+, m_form(0)
 {
     m_parent = parent;
 }
