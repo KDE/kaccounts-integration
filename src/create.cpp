@@ -44,7 +44,6 @@ Create::~Create()
 
 }
 
-
 QWidget* Create::widget()
 {
     if (!m_form) {
@@ -58,7 +57,6 @@ QWidget* Create::widget()
 
     return widget;
 }
-
 
 void Create::stablishConnections()
 {
