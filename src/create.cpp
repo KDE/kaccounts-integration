@@ -16,33 +16,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef webaccounts_H
-#define webaccounts_H
+#include "create.h"
+#include "ui_types.h"
 
-#include <kcmodule.h>
+#include <QtGui/QWidget>
 
-class Create;
-class QListWidgetItem;
-namespace Ui {
-    class KCMWebAccounts;
+Create::Create(QWidget* parent): QObject(parent)
+{
+    m_parent = parent;
 }
 
-class WebAccounts : public KCModule
+Create::~Create()
 {
-Q_OBJECT
-public:
-    WebAccounts(QWidget *parent, const QVariantList&);
-    virtual ~WebAccounts();
 
-private Q_SLOTS:
-    void addBtnClicked();
-    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+}
 
-private:
-    Create *m_create;
-    QListWidgetItem *m_newAccountItem;
-    Ui::KCMWebAccounts *m_ui;
 
-};
+QWidget* Create::widget()
+{
+    m_form = new Ui::createForm();
 
-#endif // webaccounts_H
+    QWidget *widget = new QWidget(m_parent);
+    m_form->setupUi(widget);
+
+    return widget;
+}

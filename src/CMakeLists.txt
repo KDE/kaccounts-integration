@@ -2,6 +2,7 @@
 
 set(webaccounts_SRCS
     webaccounts.cpp
+    create.cpp
 )
 
 qt4_automoc(${webaccounts_SRCS})

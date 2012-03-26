@@ -17,8 +17,8 @@
  *************************************************************************************/
 
 #include "webaccounts.h"
+#include "create.h"
 #include "ui_kcm.h"
-#include "ui_types.h"
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
@@ -30,7 +30,9 @@
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 
-WebAccounts::WebAccounts(QWidget *parent, const QVariantList&) : KCModule(WebAccountsFactory::componentData(), parent)
+WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
+: KCModule(WebAccountsFactory::componentData(), parent)
+, m_create(0)
 {
 
     m_ui = new Ui::KCMWebAccounts();
@@ -61,13 +63,12 @@ void WebAccounts::addBtnClicked()
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == m_newAccountItem) {
+        if (!m_create) {
+            m_create = new Create(this);
+        }
         m_ui->accountInfo->setTitle(i18n("Select a supported Web Account"));
-        Ui::createForm *form = new Ui::createForm();
 
-        QWidget *widget = new QWidget();
-        form->setupUi(widget);
-
-        m_ui->accountInfo->layout()->addWidget(widget);
+        m_ui->accountInfo->layout()->addWidget(m_create->widget());
     }
 }
 
