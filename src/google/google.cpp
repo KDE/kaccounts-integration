@@ -22,6 +22,8 @@
 #include "oauth.h"
 #include "services.h"
 
+#include <QtCore/QDebug>
+
 #include <kpushbutton.h>
 #include <kstandardguiitem.h>
 GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
@@ -49,6 +51,24 @@ GoogleWizard::~GoogleWizard()
 
 }
 
+void GoogleWizard::done(int result)
+{
+    QWizard::done(result);
+
+    if (result != 1) {
+        return;
+    }
+
+    qDebug() << "Creating a new account:";
+    qDebug() << m_username;
+    qDebug() << m_password;
+    QStringList keys = m_services.keys();
+    Q_FOREACH(const QString &key, keys) {
+        qDebug() << key << ": " << m_services[key];
+    }
+}
+
+
 void GoogleWizard::setUsername(const QString& username)
 {
     m_username = username;
@@ -67,4 +87,10 @@ const QString GoogleWizard::username() const
 const QString GoogleWizard::password() const
 {
     return m_password;
+}
+
+void GoogleWizard::activateOption(const QString& name, bool checked )
+{
+    qDebug() << name << " " << checked;
+    m_services[name] = checked;
 }

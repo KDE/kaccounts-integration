@@ -19,6 +19,8 @@
 #ifndef GOOGLEWIZARD_H
 #define GOOGLEWIZARD_H
 
+#include <QtCore/QHash>
+
 #include <QtGui/QWizard>
 
 class GoogleWizard : public QWizard
@@ -28,15 +30,21 @@ Q_OBJECT
         GoogleWizard(QWidget *parent);
         virtual ~GoogleWizard();
 
+        void activateOption(const QString &name, bool checked);
         void setUsername(const QString &username);
         void setPassword(const QString &password);
 
         const QString username() const;
         const QString password() const;
 
+    public Q_SLOTS:
+        virtual void done(int result);
+
     private:
         QString m_username;
         QString m_password;
+
+        QHash<QString, bool> m_services;
 };
 
 #endif //GOOGLEWIZARD_H

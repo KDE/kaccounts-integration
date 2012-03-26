@@ -32,10 +32,11 @@ Q_OBJECT
 public:
     ServiceOption(const QString& checkboxText, QWidget* parent = 0);
 
-    void setChecked(bool check);
+public Q_SLOTS:
+    void setToggled(bool checked);
 
-private Q_SLOTS:
-    void toggled(bool);
+Q_SIGNALS:
+    void toggled(bool, const QString &name);
 };
 
 #endif // SERVICEOPTION_H

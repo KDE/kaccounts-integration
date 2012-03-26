@@ -18,6 +18,7 @@
 
 #include "services.h"
 #include "serviceoption.h"
+#include "google.h"
 
 Services::Services(GoogleWizard* parent)
 {
@@ -33,9 +34,26 @@ Services::~Services()
 
 void Services::initializePage()
 {
-    d_layout->addWidget(new ServiceOption(i18n("EMail")));
-    d_layout->addWidget(new ServiceOption(i18n("Calendar")));
-    d_layout->addWidget(new ServiceOption(i18n("Contact")));
-    d_layout->addWidget(new ServiceOption(i18n("Tasks")));
-    d_layout->addWidget(new ServiceOption(i18n("Chat")));
+
+    addOption(i18n("EMail"));
+    addOption(i18n("Calendar"));
+    addOption(i18n("Contact"));
+    addOption(i18n("Tasks"));
+    addOption(i18n("Chat"));
 }
+
+void Services::addOption(const QString& text)
+{
+    ServiceOption *option = new ServiceOption(text, this);
+    connect(option, SIGNAL(toggled(bool,QString)), this, SLOT(optionToggled(bool,QString)));
+
+    m_wizard->activateOption(text, true);
+
+    d_layout->addWidget(option);
+}
+
+void Services::optionToggled(bool checked, const QString& name)
+{
+    m_wizard->activateOption(name, checked);
+}
+

@@ -33,6 +33,12 @@ Q_OBJECT
 
         virtual void initializePage();
 
+    private Q_SLOTS:
+        void optionToggled(bool checked, const QString &name);
+
+    private:
+        void addOption(const QString &text);
+
     private:
         GoogleWizard *m_wizard;
 };

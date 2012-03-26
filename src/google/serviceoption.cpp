@@ -24,17 +24,11 @@ ServiceOption::ServiceOption(const QString& checkboxText, QWidget* parent): QWid
 
     checkBox->setText(checkboxText);
 
-    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(toggled(bool)));
+    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(setToggled(bool)));
 }
 
-void ServiceOption::setChecked(bool checked)
+void ServiceOption::setToggled(bool checked)
 {
-    checkBox->setChecked(checked);
-}
-
-void ServiceOption::toggled(bool checked)
-{
-    if (checked == true) {
-//         emit selected(m_service);
-    }
+    const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());
+    Q_EMIT toggled(checked, checkbox->text());
 }
