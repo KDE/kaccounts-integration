@@ -16,69 +16,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "create.h"
-#include "google/google.h"
+#ifndef GOOGLESERVICES_H
+#define GOOGLESERVICES_H
 
-#include "ui_types.h"
+#include "ui_services.h"
 
-#include <QtCore/QDebug>
+#include <QtGui/QWizardPage>
 
-#include <QtGui/QWidget>
-
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
-
-using namespace KGoogle;
-
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
+class GoogleWizard;
+class Services : public QWizardPage, Ui::Services
 {
-    m_parent = parent;
-}
+Q_OBJECT
+    public:
+        Services(GoogleWizard *parent);
+        virtual ~Services();
 
-Create::~Create()
-{
+        virtual void initializePage();
 
-}
+    private:
+        GoogleWizard *m_wizard;
+};
 
-
-QWidget* Create::widget()
-{
-    if (!m_form) {
-        m_form = new Ui::createForm();
-    }
-
-    QWidget *widget = new QWidget(m_parent);
-    m_form->setupUi(widget);
-
-    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
-
-    return widget;
-}
-
-
-void Create::stablishConnections()
-{
-    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
-    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
-}
-
-void Create::startGoogle()
-{
-    GoogleWizard *google = new GoogleWizard(m_parent);
-    google->show();
-}
-
-void Create::startFacebook()
-{
-    qWarning("FAcebook not implemented yet");
-}
-
-void Create::startLive()
-{
-    qWarning("Live not implemented yet");
-}
+#endif //GOOGLESERVICES_H

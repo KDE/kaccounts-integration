@@ -16,69 +16,38 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "create.h"
-#include "google/google.h"
+#ifndef GOOGLEOAUTH_H
+#define GOOGLEOAUTH_H
 
-#include "ui_types.h"
+#include "ui_oauth.h"
+#include <libkgoogle/common.h>
+#include <libkgoogle/account.h>
 
-#include <QtCore/QDebug>
+#include <QtGui/QWizardPage>
 
-#include <QtGui/QWidget>
-
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
-
-using namespace KGoogle;
-
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
+class GoogleWizard;
+class OAuth : public QWizardPage, Ui::OAuth
 {
-    m_parent = parent;
-}
+Q_OBJECT
+    public:
+        OAuth(GoogleWizard *parent);
+        virtual ~OAuth();
 
-Create::~Create()
-{
+        virtual bool validatePage();
+        virtual void initializePage();
+        virtual bool isComplete() const;
 
-}
+    private Q_SLOTS:
+        void error(KGoogle::Error, QString);
+        void authenticated(KGoogle::Account::Ptr& acc);
 
+    private:
+        bool accountExists();
+        void getTokenForAccount();
 
-QWidget* Create::widget()
-{
-    if (!m_form) {
-        m_form = new Ui::createForm();
-    }
+    private:
+        bool    m_valid;
+        GoogleWizard *m_wizard;
+};
 
-    QWidget *widget = new QWidget(m_parent);
-    m_form->setupUi(widget);
-
-    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
-
-    return widget;
-}
-
-
-void Create::stablishConnections()
-{
-    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
-    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
-}
-
-void Create::startGoogle()
-{
-    GoogleWizard *google = new GoogleWizard(m_parent);
-    google->show();
-}
-
-void Create::startFacebook()
-{
-    qWarning("FAcebook not implemented yet");
-}
-
-void Create::startLive()
-{
-    qWarning("Live not implemented yet");
-}
+#endif //GOOGLEOAUTH_H

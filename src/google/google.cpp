@@ -16,69 +16,44 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "create.h"
-#include "google/google.h"
+#include "google.h"
 
-#include "ui_types.h"
+#include "credentials.h"
+#include "oauth.h"
+#include "services.h"
 
-#include <QtCore/QDebug>
-
-#include <QtGui/QWidget>
-
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
-
-using namespace KGoogle;
-
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
+GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
 {
-    m_parent = parent;
+    Credentials *credentialsPage = new Credentials(this);
+    OAuth *oauth = new OAuth(this);
+    Services *services = new Services(this);
+
+    addPage(credentialsPage);
+    addPage(oauth);
+    addPage(services);
 }
 
-Create::~Create()
+GoogleWizard::~GoogleWizard()
 {
 
 }
 
-
-QWidget* Create::widget()
+void GoogleWizard::setUsername(const QString& username)
 {
-    if (!m_form) {
-        m_form = new Ui::createForm();
-    }
-
-    QWidget *widget = new QWidget(m_parent);
-    m_form->setupUi(widget);
-
-    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
-
-    return widget;
+    m_username = username;
 }
 
-
-void Create::stablishConnections()
+void GoogleWizard::setPassword(const QString& password)
 {
-    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
-    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
+    m_password = password;
 }
 
-void Create::startGoogle()
+const QString GoogleWizard::username() const
 {
-    GoogleWizard *google = new GoogleWizard(m_parent);
-    google->show();
+    return m_username;
 }
 
-void Create::startFacebook()
+const QString GoogleWizard::password() const
 {
-    qWarning("FAcebook not implemented yet");
-}
-
-void Create::startLive()
-{
-    qWarning("Live not implemented yet");
+    return m_password;
 }
