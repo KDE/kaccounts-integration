@@ -30,12 +30,14 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QCommandLinkButton" name="commandLinkButton">
+      <widget class="QCommandLinkButton" name="googleBtn">
        <property name="text">
         <string>Google Account</string>
        </property>
        <property name="icon">
-        <iconset theme="im-google-talk"/>
+        <iconset theme="im-google-talk">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -46,12 +48,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QCommandLinkButton" name="commandLinkButton_2">
+      <widget class="QCommandLinkButton" name="facebookBtn">
        <property name="text">
         <string>Facebook</string>
        </property>
        <property name="icon">
-        <iconset theme="im-facebook"/>
+        <iconset theme="im-facebook">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -62,12 +66,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QCommandLinkButton" name="commandLinkButton_3">
+      <widget class="QCommandLinkButton" name="liveBtn">
        <property name="text">
-        <string>MSN Live</string>
+        <string>Live</string>
        </property>
        <property name="icon">
-        <iconset theme="im-msn"/>
+        <iconset theme="im-msn">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>

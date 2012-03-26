@@ -34,6 +34,12 @@ Q_OBJECT
 
         QWidget* widget();
 
+    private Q_SLOTS:
+        void stablishConnections();
+        void startGoogle();
+        void startFacebook();
+        void startLive();
+
     private:
         QWidget *m_parent;
         Ui::createForm *m_form;

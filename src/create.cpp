@@ -19,6 +19,8 @@
 #include "create.h"
 #include "ui_types.h"
 
+#include <QtCore/QDebug>
+
 #include <QtGui/QWidget>
 
 Create::Create(QWidget* parent)
@@ -36,10 +38,37 @@ Create::~Create()
 
 QWidget* Create::widget()
 {
-    m_form = new Ui::createForm();
+    if (!m_form) {
+        m_form = new Ui::createForm();
+    }
 
     QWidget *widget = new QWidget(m_parent);
     m_form->setupUi(widget);
 
+    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
+
     return widget;
+}
+
+
+void Create::stablishConnections()
+{
+    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
+    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
+    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
+}
+
+void Create::startGoogle()
+{
+    qDebug() << "Staring Google auth";
+}
+
+void Create::startFacebook()
+{
+    qWarning("FAcebook not implemented yet");
+}
+
+void Create::startLive()
+{
+    qWarning("Live not implemented yet");
 }
