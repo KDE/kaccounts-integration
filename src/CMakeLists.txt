@@ -6,7 +6,7 @@ set(webaccounts_SRCS
 
 qt4_automoc(${webaccounts_SRCS})
 
-kde4_add_ui_files(webaccounts_SRCS kcm.ui)
+kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
 

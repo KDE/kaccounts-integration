@@ -41,10 +41,11 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&) : KCModule(WebAcc
     m_ui->accList->setIconSize(QSize(64, 64));
     m_ui->accList->addItem(m_newAccountItem);
 
-
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
     connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
             this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
+
+    m_ui->accList->setCurrentItem(m_newAccountItem);
 }
 
 WebAccounts::~WebAccounts()
@@ -61,6 +62,13 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 {
     if (current == m_newAccountItem) {
         m_ui->accountInfo->setTitle(i18n("Select a supported Web Account"));
+        Ui::createForm *form = new Ui::createForm();
+
+        QWidget *widget = new QWidget();
+        form->setupUi(widget);
+
+        QVBoxLayout *vbox = new QVBoxLayout(m_ui->accountInfo);
+        vbox->addWidget(widget);
     }
 }
 
