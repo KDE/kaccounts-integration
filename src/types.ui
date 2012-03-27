@@ -35,7 +35,7 @@
         <string>Google Account</string>
        </property>
        <property name="icon">
-        <iconset theme="im-google-talk">
+        <iconset theme="gmail">
          <normaloff/>
         </iconset>
        </property>
