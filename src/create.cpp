@@ -68,6 +68,7 @@ void Create::stablishConnections()
 void Create::startGoogle()
 {
     GoogleWizard *google = new GoogleWizard(m_parent);
+    connect(google, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
     google->show();
 }
 

@@ -46,6 +46,9 @@ Q_OBJECT
         void startFacebook();
         void startLive();
 
+    Q_SIGNALS:
+        void newAccount(const QString &type, const QString &name);
+
     private:
         QDialog *m_dialog;
         QWidget *m_parent;
