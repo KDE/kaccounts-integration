@@ -37,12 +37,16 @@ public:
 private Q_SLOTS:
     void addBtnClicked();
     void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void newAccount(const QString &type, const QString &name);
+    void addExistingAccounts();
+
+private:
+    void addAccount(const QString &name, const QString &type);
 
 private:
     Create *m_create;
     QListWidgetItem *m_newAccountItem;
     Ui::KCMWebAccounts *m_ui;
-
 };
 
 #endif // webaccounts_H
