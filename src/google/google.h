@@ -40,6 +40,9 @@ Q_OBJECT
     public Q_SLOTS:
         virtual void done(int result);
 
+    Q_SIGNALS:
+        void newAccount(const QString &type, const QString &name);
+
     private:
         QString m_username;
         QString m_password;

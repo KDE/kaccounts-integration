@@ -62,10 +62,18 @@ void GoogleWizard::done(int result)
     qDebug() << "Creating a new account:";
     qDebug() << m_username;
     qDebug() << m_password;
+
+    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("google");
+
+    KConfigGroup group = config.group(m_username).group("services");
     QStringList keys = m_services.keys();
     Q_FOREACH(const QString &key, keys) {
         qDebug() << key << ": " << m_services[key];
+        group.writeEntry(key, m_services[key]);
     }
+    group.sync();
+
+    Q_EMIT newAccount("google", m_username);
 }
 
 
