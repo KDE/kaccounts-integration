@@ -90,13 +90,10 @@ void WebAccounts::addExistingAccounts()
 
 void WebAccounts::addAccount(const QString& name, const QString& type)
 {
-    QListWidgetItem *newItem = new QListWidgetItem(name, m_ui->accList);
-    newItem->setIcon(QIcon::fromTheme("gmail"));
-    newItem->setData(Qt::UserRole, QVariant(name));
-    AccountWidget *lb = new AccountWidget(this);
-    m_layout->addWidget(lb);
-    newItem->setData(Qt::UserRole + 1, QVariant::fromValue<QWidget *>(lb));
+    AccountWidget *accountWidget = new AccountWidget(this);
+    m_layout->addWidget(accountWidget);
 
+    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);
     m_ui->accList->addItem(newItem);
 }
 
