@@ -132,15 +132,20 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-    QLabel *lb = new QLabel("Meh");
-    m_layout->addWidget(lb);
 
-    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, lb);
+    AccountWidget *accountWidget = new AccountWidget(name, this);
+    m_layout->addWidget(accountWidget);
+
+    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);
+    m_ui->accList->addItem(newItem);
+
     int row = m_ui->accList->row(m_newAccountItem);
 
     m_ui->accList->takeItem(row);
     m_ui->accList->insertItem(row, newItem);
     m_ui->accList->addItem(m_newAccountItem);
+
+    m_ui->accList->setCurrentItem(newItem);
 }
 
 QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& icon, const QString& title, QWidget *widget)
