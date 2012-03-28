@@ -66,7 +66,7 @@ void WebAccounts::addExistingAccounts()
     Q_FOREACH(const QString &group, groups) {
         QStringList accounts = config->group(group).groupList();
         Q_FOREACH(const QString &account, accounts) {
-            addAccount(account, group);
+            addAccount(account, account);
         }
     }
 
@@ -88,9 +88,9 @@ void WebAccounts::addExistingAccounts()
     m_ui->accList->setCurrentItem(m_ui->accList->item(0));
 }
 
-void WebAccounts::addAccount(const QString& name, const QString& type)
+void WebAccounts::addAccount(const QString& name, const QString& account)
 {
-    AccountWidget *accountWidget = new AccountWidget(this);
+    AccountWidget *accountWidget = new AccountWidget(account, this);
     m_layout->addWidget(accountWidget);
 
     QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);

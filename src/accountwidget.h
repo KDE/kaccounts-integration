@@ -27,7 +27,7 @@ class AccountWidget : public QWidget, Ui::Services
 {
 Q_OBJECT
     public:
-        explicit AccountWidget(QWidget* parent = 0);
+        explicit AccountWidget(const QString &account, QWidget* parent);
         virtual ~AccountWidget();
 };
 

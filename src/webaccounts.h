@@ -24,6 +24,7 @@
 class Create;
 class QStackedLayout;
 class QListWidgetItem;
+class KConfigGroup;
 namespace Ui {
     class KCMWebAccounts;
 }
@@ -42,7 +43,7 @@ private Q_SLOTS:
     void addExistingAccounts();
 
 private:
-    void addAccount(const QString &name, const QString &type);
+    void addAccount(const QString &name, const QString &account);
     QListWidgetItem* createQListWidgetItem(const QString &name, const QString &icon, const QString &title, QWidget *widget);
 
 private:

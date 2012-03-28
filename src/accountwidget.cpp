@@ -19,11 +19,23 @@
 
 #include <accountwidget.h>
 
-#include "ui_serviceoption.h"
+#include "google/serviceoption.h"
 
-AccountWidget::AccountWidget(QWidget* parent) : QWidget(parent)
+#include <QtCore/QDebug>
+
+AccountWidget::AccountWidget(const QString& account, QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
+
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(account).group("services");
+
+    bool enabled = false;
+    QStringList keys = group.keyList();
+    Q_FOREACH(const QString &key, keys) {
+        enabled = group.readEntry<bool>(key, false);
+        ServiceOption *option = new ServiceOption(key, this);
+        d_layout->addWidget(option);
+    }
 }
 
 AccountWidget::~AccountWidget()
