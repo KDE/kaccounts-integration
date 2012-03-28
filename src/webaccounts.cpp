@@ -126,6 +126,8 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
     m_ui->accountInfo->setTitle(current->data(Qt::UserRole).toString());
     m_layout->setCurrentWidget(current->data(Qt::UserRole + 1).value<QWidget *>());
+
+    m_ui->remoteBtn->setEnabled(current != m_newAccountItem);
 }
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
