@@ -18,6 +18,7 @@
 
 #include "webaccounts.h"
 #include "create.h"
+#include "accountwidget.h"
 #include "ui_kcm.h"
 
 #include <QDebug>
@@ -26,6 +27,7 @@
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QAction>
+#include <QtGui/QStackedLayout>
 
 #include <kpluginfactory.h>
 
@@ -35,12 +37,14 @@ K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 : KCModule(WebAccountsFactory::componentData(), parent)
 , m_create(0)
+, m_layout(new QStackedLayout)
 {
 
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
 
-    m_ui->accList->setIconSize(QSize(48, 48));
+    m_ui->accountInfo->setLayout(m_layout);
+    m_ui->accList->setIconSize(QSize(64, 64));
 
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
     connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
@@ -66,8 +70,14 @@ void WebAccounts::addExistingAccounts()
         }
     }
 
-    m_newAccountItem = new QListWidgetItem(i18n("New Account"), m_ui->accList);
-    m_newAccountItem->setIcon(QIcon::fromTheme("applications-education-miscellaneous"));
+    m_create = new Create(this);
+    connect(m_create, SIGNAL(newAccount(QString,QString)), this, SLOT(newAccount(QString,QString)));
+
+    QWidget *widget = m_create->widget();
+    m_newAccountItem = createQListWidgetItem(i18n("New Account"), "applications-education-miscellaneous", i18n("Select a supported Web Account"), widget);
+
+    m_layout->addWidget(widget);
+
     m_ui->accList->addItem(m_newAccountItem);
 
     if (m_ui->accList->count() == 0) {
@@ -82,6 +92,10 @@ void WebAccounts::addAccount(const QString& name, const QString& type)
 {
     QListWidgetItem *newItem = new QListWidgetItem(name, m_ui->accList);
     newItem->setIcon(QIcon::fromTheme("gmail"));
+    newItem->setData(Qt::UserRole, QVariant(name));
+    AccountWidget *lb = new AccountWidget(this);
+    m_layout->addWidget(lb);
+    newItem->setData(Qt::UserRole + 1, QVariant::fromValue<QWidget *>(lb));
 
     m_ui->accList->addItem(newItem);
 }
@@ -93,28 +107,35 @@ void WebAccounts::addBtnClicked()
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    if (current == m_newAccountItem) {
-        if (!m_create) {
-            m_create = new Create(this);
-            connect(m_create, SIGNAL(newAccount(QString,QString)), this, SLOT(newAccount(QString,QString)));
-        }
-        m_ui->accountInfo->setTitle(i18n("Select a supported Web Account"));
-
-        m_ui->accountInfo->layout()->addWidget(m_create->widget());
+    if (!current) {
+        return;
     }
+
+    m_ui->accountInfo->setTitle(current->data(Qt::UserRole).toString());
+    m_layout->setCurrentWidget(current->data(Qt::UserRole + 1).value<QWidget *>());
 }
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-    QListWidgetItem *newItem = new QListWidgetItem();
-    newItem->setIcon(QIcon::fromTheme("gmail"));
-    newItem->setText(name);
+    QLabel *lb = new QLabel("Meh");
+    m_layout->addWidget(lb);
 
+    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, lb);
     int row = m_ui->accList->row(m_newAccountItem);
     m_ui->accList->takeItem(row);
     m_ui->accList->insertItem(row, newItem);
     m_ui->accList->addItem(m_newAccountItem);
 }
 
+QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& icon, const QString& title, QWidget *widget)
+{
+    QListWidgetItem *newItem = new QListWidgetItem();
+    newItem->setIcon(QIcon::fromTheme(icon));
+    newItem->setText(name);
+    newItem->setData(Qt::UserRole, QVariant(title));
+    newItem->setData(Qt::UserRole + 1, QVariant::fromValue<QWidget *>(widget));
+
+    return newItem;
+}
 
 #include "webaccounts.moc"

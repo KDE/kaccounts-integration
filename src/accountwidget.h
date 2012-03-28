@@ -16,40 +16,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef webaccounts_H
-#define webaccounts_H
+#ifndef ACCOUNTWIDGET_H
+#define ACCOUNTWIDGET_H
 
-#include <kcmodule.h>
+#include "ui_services.h"
 
-class Create;
-class QStackedLayout;
-class QListWidgetItem;
-namespace Ui {
-    class KCMWebAccounts;
-}
+#include <QtGui/QWidget>
 
-class WebAccounts : public KCModule
+class AccountWidget : public QWidget, Ui::Services
 {
 Q_OBJECT
-public:
-    WebAccounts(QWidget *parent, const QVariantList&);
-    virtual ~WebAccounts();
-
-private Q_SLOTS:
-    void addBtnClicked();
-    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-    void newAccount(const QString &type, const QString &name);
-    void addExistingAccounts();
-
-private:
-    void addAccount(const QString &name, const QString &type);
-    QListWidgetItem* createQListWidgetItem(const QString &name, const QString &icon, const QString &title, QWidget *widget);
-
-private:
-    Create *m_create;
-    QStackedLayout *m_layout;
-    QListWidgetItem *m_newAccountItem;
-    Ui::KCMWebAccounts *m_ui;
+    public:
+        explicit AccountWidget(QWidget* parent = 0);
+        virtual ~AccountWidget();
 };
 
-#endif // webaccounts_H
+#endif //ACCOUNTWIDGET_H

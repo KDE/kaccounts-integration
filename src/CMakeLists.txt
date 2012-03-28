@@ -3,6 +3,7 @@
 set(webaccounts_SRCS
     webaccounts.cpp
     create.cpp
+    accountwidget.cpp
     google/google.cpp
     google/credentials.cpp
     google/oauth.cpp
