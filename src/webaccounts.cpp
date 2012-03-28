@@ -119,6 +119,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, lb);
     int row = m_ui->accList->row(m_newAccountItem);
+
     m_ui->accList->takeItem(row);
     m_ui->accList->insertItem(row, newItem);
     m_ui->accList->addItem(m_newAccountItem);
