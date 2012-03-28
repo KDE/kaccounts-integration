@@ -38,6 +38,7 @@ public:
 
 private Q_SLOTS:
     void addBtnClicked();
+    void rmBtnClicked();
     void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void newAccount(const QString &type, const QString &name);
     void addExistingAccounts();

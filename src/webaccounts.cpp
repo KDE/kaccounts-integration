@@ -46,6 +46,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountInfo->setLayout(m_layout);
     m_ui->accList->setIconSize(QSize(64, 64));
 
+    connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
     connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
             this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
@@ -100,6 +101,21 @@ void WebAccounts::addAccount(const QString& name, const QString& account)
 void WebAccounts::addBtnClicked()
 {
     m_ui->accList->setCurrentItem(m_newAccountItem, QItemSelectionModel::SelectCurrent);
+}
+
+void WebAccounts::rmBtnClicked()
+{
+    QListWidgetItem *item = m_ui->accList->currentItem();
+    if (item == m_newAccountItem) {
+        return;
+    }
+
+    QString accName = item->data(Qt::UserRole).toString();
+
+    KSharedConfig::openConfig("webaccounts")->group("google").deleteGroup(accName);
+    m_ui->accList->takeItem(m_ui->accList->row(item));
+
+    delete item->data(Qt::UserRole + 1).value<QWidget *>();
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
