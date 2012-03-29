@@ -132,7 +132,6 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-
     AccountWidget *accountWidget = new AccountWidget(name, this);
     m_layout->addWidget(accountWidget);
 
