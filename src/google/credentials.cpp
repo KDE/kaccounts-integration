@@ -22,7 +22,7 @@
 Credentials::Credentials(GoogleWizard* parent) : QWizardPage(parent)
 {
     setupUi(this);
-    googleIcon->setPixmap(QIcon::fromTheme("im-google-talk").pixmap(32, 32));
+    googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
 
     m_wizard = parent;
 }
