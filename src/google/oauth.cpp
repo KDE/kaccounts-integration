@@ -50,6 +50,7 @@ void OAuth::initializePage()
     label->setText(i18n("Account already configured"));
     m_valid = true;
 
+    QMetaObject::invokeMethod(m_wizard, "next", Qt::QueuedConnection);
     Q_EMIT completeChanged();
 }
 
@@ -99,6 +100,7 @@ void OAuth::authenticated(KGoogle::Account::Ptr& acc)
 {
     m_valid = true;
     label->setText(i18n("Authenticated"));
+    m_wizard->next();
 }
 
 void OAuth::error(Error , QString )
