@@ -36,7 +36,7 @@ public Q_SLOTS:
     void setToggled(bool checked);
 
 Q_SIGNALS:
-    void toggled(bool, const QString &name);
+    void toggled(const QString &name, bool);
 };
 
 #endif // SERVICEOPTION_H

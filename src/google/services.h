@@ -34,7 +34,7 @@ Q_OBJECT
         virtual void initializePage();
 
     private Q_SLOTS:
-        void optionToggled(bool checked, const QString &name);
+        void optionToggled(const QString &name, bool checked);
 
     private:
         void addOption(const QString &text);

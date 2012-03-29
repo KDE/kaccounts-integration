@@ -45,15 +45,14 @@ void Services::initializePage()
 void Services::addOption(const QString& text)
 {
     ServiceOption *option = new ServiceOption(text, this);
-    connect(option, SIGNAL(toggled(bool,QString)), this, SLOT(optionToggled(bool,QString)));
+    connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
 
     m_wizard->activateOption(text, true);
 
     d_layout->addWidget(option);
 }
 
-void Services::optionToggled(bool checked, const QString& name)
+void Services::optionToggled(const QString& name, bool checked)
 {
     m_wizard->activateOption(name, checked);
 }
-

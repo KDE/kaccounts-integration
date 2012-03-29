@@ -30,5 +30,5 @@ ServiceOption::ServiceOption(const QString& checkboxText, QWidget* parent): QWid
 void ServiceOption::setToggled(bool checked)
 {
     const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());
-    Q_EMIT toggled(checked, checkbox->text());
+    Q_EMIT toggled(checkbox->text(), checked);
 }
