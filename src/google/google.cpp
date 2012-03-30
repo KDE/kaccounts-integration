@@ -99,6 +99,10 @@ const QString GoogleWizard::password() const
 
 void GoogleWizard::activateOption(const QString& name, bool checked )
 {
-    qDebug() << name << " " << checked;
-    m_services[name] = checked;
+    if (!checked) {
+        m_services[name] = 0;
+        return;
+    }
+
+    m_services[name] = 2;
 }

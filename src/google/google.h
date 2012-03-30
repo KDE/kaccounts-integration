@@ -47,7 +47,7 @@ Q_OBJECT
         QString m_username;
         QString m_password;
 
-        QHash<QString, bool> m_services;
+        QHash<QString, int> m_services;
 };
 
 #endif //GOOGLEWIZARD_H
