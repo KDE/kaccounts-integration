@@ -23,9 +23,14 @@
 #include "services.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QApplication>
 
+#include <kwallet.h>
 #include <kpushbutton.h>
 #include <kstandardguiitem.h>
+
+using namespace KWallet;
+
 GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
 {
     Credentials *credentialsPage = new Credentials(this);
@@ -53,27 +58,38 @@ GoogleWizard::~GoogleWizard()
 
 void GoogleWizard::done(int result)
 {
-    QWizard::done(result);
-
     if (result != 1) {
         return;
     }
 
-    qDebug() << "Creating a new account:";
-    qDebug() << m_username;
-    qDebug() << m_password;
+    WId windowId = 0;
+    if (qApp->activeWindow()) {
+        windowId = qApp->activeWindow()->winId();
+    }
+
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Synchronous);
+
+    if (!wallet->isOpen() || !wallet->isEnabled()) {
+        return;
+    }
+
+    wallet->createFolder("WebAccounts");
+    wallet->setFolder("WebAccounts");
+    wallet->writePassword(m_username, m_password);
+    wallet->sync();
 
     KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("google");
 
     KConfigGroup group = config.group(m_username).group("services");
     QStringList keys = m_services.keys();
     Q_FOREACH(const QString &key, keys) {
-        qDebug() << key << ": " << m_services[key];
         group.writeEntry(key, m_services[key]);
     }
     group.sync();
 
     Q_EMIT newAccount("google", m_username);
+
+    QWizard::done(result);
 }
 
 
