@@ -101,7 +101,10 @@ void CreateCalendar::resourceCreated(KJob* job)
 
 void CreateCalendar::useTaskResource()
 {
-    m_agent = AgentManager::self()->instance("akonadi_googlecalendar_resource_94");
+    QString identify = m_config.group("private").readEntry<QString>("calendarAndTasksResource", "");
+    identify.remove("org.freedesktop.Akonadi.Resource.");
+
+    m_agent = AgentManager::self()->instance(identify);
     m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
     AccessManager *gam = new AccessManager;
 
