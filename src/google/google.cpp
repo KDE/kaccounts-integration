@@ -77,6 +77,7 @@ void GoogleWizard::done(int result)
     wallet->setFolder("WebAccounts");
     wallet->writePassword(m_username, m_password);
     wallet->sync();
+    wallet->deleteLater();
 
     KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("google");
 
