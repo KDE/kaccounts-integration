@@ -53,7 +53,7 @@ CreateCalendar::~CreateCalendar()
 
 void CreateCalendar::start()
 {
-    if (m_config.hasGroup("private")  && m_config.group("private").hasKey("tasksResource")) {
+    if (m_config.hasGroup("private")  && m_config.group("private").hasKey("calendarAndTasksResource")) {
         QMetaObject::invokeMethod(this, "useTaskResource", Qt::QueuedConnection);
         return;
     }
@@ -80,11 +80,11 @@ void CreateCalendar::resourceCreated(KJob* job)
     QDBusInterface iface( "org.freedesktop.Akonadi.Resource." + m_agent.identifier(), "/Settings");
 
     QString username = m_config.name();
-    m_agent.setName(username + " " + i18n("Calendar"));
+    m_agent.setName(username + " " + i18n("Calendar / Tasks"));
 
     QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
     KConfigGroup privates(&m_config, "private");
-    privates.writeEntry("tasksResource", service);
+    privates.writeEntry("calendarAndTasksResource", service);
     m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(service, "/Settings", QDBusConnection::sessionBus());
     m_calendarSettings->setAccount(username);
 
@@ -102,7 +102,7 @@ void CreateCalendar::resourceCreated(KJob* job)
 void CreateCalendar::useTaskResource()
 {
     m_agent = AgentManager::self()->instance("akonadi_googlecalendar_resource_94");
-    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("tasksResource"), "/Settings", QDBusConnection::sessionBus());
+    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
     AccessManager *gam = new AccessManager;
 
     connect(gam, SIGNAL(replyReceived(KGoogle::Reply*)),
