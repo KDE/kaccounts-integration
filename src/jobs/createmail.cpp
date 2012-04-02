@@ -65,6 +65,8 @@ void CreateMail::instanceCreateResult(KJob* job)
     wallet->setFolder("WebAccounts");
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");
+        setError(-1);
+        emitResult();
         return;
     }
 
@@ -75,6 +77,7 @@ void CreateMail::instanceCreateResult(KJob* job)
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("emailResource", service);
+    privates.sync();
 
     org::kde::Akonadi::Imap::Settings *settings = new org::kde::Akonadi::Imap::Settings(service, "/Settings", QDBusConnection::sessionBus());
 
@@ -107,6 +110,8 @@ void CreateMail::instanceCreateResult(KJob* job)
     mt->writeConfig();
     MailTransport::TransportManager::self()->addTransport( mt );
     MailTransport::TransportManager::self()->setDefaultTransport( mt->id() );
+
+    emitResult();
 }
 
 

@@ -72,4 +72,6 @@ void CreateTask::replyReceived(KGoogle::Reply* reply)
     m_calendarSettings->writeConfig();
 
     delete reply;
+
+    emitResult();
 }

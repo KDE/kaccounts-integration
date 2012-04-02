@@ -66,6 +66,8 @@ void CreateContact::createResource()
 void CreateContact::resourceCreated(KJob* job)
 {
     if (job->error()) {
+        setError(-1);
+        emitResult();
         return;
     }
 
@@ -75,10 +77,13 @@ void CreateContact::resourceCreated(KJob* job)
     QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("contactResource", service);
+    privates.sync();
 
     org::kde::Akonadi::GoogleContacts::Settings *settings = new org::kde::Akonadi::GoogleContacts::Settings(service, "/Settings", QDBusConnection::sessionBus());
     settings->setAccount(m_config.name());
     settings->writeConfig();
 
     agent.reconfigure();
+
+    emitResult();
 }

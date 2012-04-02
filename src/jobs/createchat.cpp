@@ -94,12 +94,15 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("chatUID", account->uniqueIdentifier());
+    privates.sync();
 
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("WebAccounts");
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");
+        setError(-1);
+        emitResult();
         return;
     }
 
@@ -109,4 +112,6 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     account->setRequestedPresence(Tp::Presence::available(QLatin1String("Online")));
 
     account->setIconName("im-google-talk");
+
+    emitResult();
 }

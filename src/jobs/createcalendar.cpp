@@ -53,6 +53,7 @@ CreateCalendar::~CreateCalendar()
 
 void CreateCalendar::start()
 {
+    m_config.sync();
     if (m_config.hasGroup("private")  && m_config.group("private").hasKey("calendarAndTasksResource")) {
         QMetaObject::invokeMethod(this, "useTaskResource", Qt::QueuedConnection);
         return;
@@ -73,6 +74,8 @@ void CreateCalendar::createResource()
 void CreateCalendar::resourceCreated(KJob* job)
 {
     if (job->error()) {
+        setError(-1);
+        emitResult();
         return;
     }
 
@@ -83,6 +86,7 @@ void CreateCalendar::resourceCreated(KJob* job)
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("calendarAndTasksResource", service);
+    m_config.sync();
 
     m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(service, "/Settings", QDBusConnection::sessionBus());
     m_calendarSettings->setAccount(m_config.name());
@@ -125,4 +129,6 @@ void CreateCalendar::replyReceived(KGoogle::Reply* reply)
     m_calendarSettings->writeConfig();
 
     delete reply;
+
+    emitResult();
 }
