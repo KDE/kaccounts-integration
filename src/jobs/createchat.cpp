@@ -19,6 +19,7 @@
 #include "createchat.h"
 
 #include <TelepathyQt/Types>
+#include <TelepathyQt/Account>
 #include <TelepathyQt/PendingReady>
 #include <TelepathyQt/PendingOperation>
 #include <TelepathyQt/AccountFactory>
@@ -90,6 +91,9 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     Tp::PendingAccount *pendingAccount = qobject_cast<Tp::PendingAccount*>(op);
 
     Tp::AccountPtr account = pendingAccount->account();
+
+    KConfigGroup privates(&m_config, "private");
+    privates.writeEntry("chatUID", account->uniqueIdentifier());
 
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);

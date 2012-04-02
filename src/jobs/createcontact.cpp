@@ -75,6 +75,9 @@ void CreateContact::resourceCreated(KJob* job)
     m_instance.setName(m_config.name() + " Contact");
 
     QString service = "org.freedesktop.Akonadi.Resource." + m_instance.identifier();
+    KConfigGroup privates(&m_config, "private");
+    privates.writeEntry("contactResource", service);
+
     org::kde::Akonadi::GoogleContacts::Settings *settings = new org::kde::Akonadi::GoogleContacts::Settings(service, "/Settings", QDBusConnection::sessionBus());
     settings->setAccount(m_config.name());
     settings->writeConfig();

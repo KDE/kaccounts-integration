@@ -74,6 +74,10 @@ void CreateMail::instanceCreateResult(KJob* job)
     m_instance.setName(m_config.name() + " Disconnected IMAP");
 
     QString service = "org.freedesktop.Akonadi.Resource." + m_instance.identifier();
+
+    KConfigGroup privates(&m_config, "private");
+    privates.writeEntry("emailResource", service);
+
     org::kde::Akonadi::Imap::Settings *settings = new org::kde::Akonadi::Imap::Settings(service, "/Settings", QDBusConnection::sessionBus());
 
     settings->setAuthentication(7);
