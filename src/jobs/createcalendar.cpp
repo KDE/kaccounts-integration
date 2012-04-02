@@ -86,16 +86,11 @@ void CreateCalendar::resourceCreated(KJob* job)
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("calendarAndTasksResource", service);
 
-    configureAccountName(service);
-
-    fetchDefaultCollections();
-}
-
-void CreateCalendar::configureAccountName(const QString &service)
-{
     m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(service, "/Settings", QDBusConnection::sessionBus());
     m_calendarSettings->setAccount(m_config.name());
     m_calendarSettings->writeConfig();
+
+    fetchDefaultCollections();
 }
 
 void CreateCalendar::fetchDefaultCollections()
