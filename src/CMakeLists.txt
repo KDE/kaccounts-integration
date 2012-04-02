@@ -13,6 +13,7 @@ set(webaccounts_SRCS
     jobs/createtask.cpp
     jobs/createchat.cpp
     jobs/createmail.cpp
+    jobs/createcontact.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -22,6 +23,10 @@ qt4_add_dbus_interface(webaccounts_SRCS
 qt4_add_dbus_interface(webaccounts_SRCS
     jobs/org.kde.Akonadi.Imap.Settings.xml
     akonadi_imap_settings
+)
+qt4_add_dbus_interface(webaccounts_SRCS
+    jobs/org.kde.Akonadi.GoogleContacts.Settings.xml
+    google_contact_settings
 )
 
 qt4_automoc(${webaccounts_SRCS})
