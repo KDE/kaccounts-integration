@@ -68,12 +68,10 @@ void CreateMail::instanceCreateResult(KJob* job)
         return;
     }
 
-    AgentInstance m_instance = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    QDBusInterface iface( "org.freedesktop.Akonadi.Resource." + m_instance.identifier(), "/Settings");
+    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    agent.setName(m_config.name() + " Disconnected IMAP");
 
-    m_instance.setName(m_config.name() + " Disconnected IMAP");
-
-    QString service = "org.freedesktop.Akonadi.Resource." + m_instance.identifier();
+    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("emailResource", service);
@@ -94,7 +92,7 @@ void CreateMail::instanceCreateResult(KJob* job)
 
     imapWallet->setPassword(password);
 
-    m_instance.reconfigure();
+    agent.reconfigure();
 
     MailTransport::Transport* mt = MailTransport::TransportManager::self()->createTransport();
     mt->setName("smtp.googlemail.com");

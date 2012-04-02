@@ -69,12 +69,10 @@ void CreateContact::resourceCreated(KJob* job)
         return;
     }
 
-    AgentInstance m_instance = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    QDBusInterface iface( "org.freedesktop.Akonadi.Resource." + m_instance.identifier(), "/Settings");
+    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    agent.setName(m_config.name() + " Contact");
 
-    m_instance.setName(m_config.name() + " Contact");
-
-    QString service = "org.freedesktop.Akonadi.Resource." + m_instance.identifier();
+    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("contactResource", service);
 
@@ -82,5 +80,5 @@ void CreateContact::resourceCreated(KJob* job)
     settings->setAccount(m_config.name());
     settings->writeConfig();
 
-    m_instance.reconfigure();
+    agent.reconfigure();
 }

@@ -76,13 +76,11 @@ void CreateCalendar::resourceCreated(KJob* job)
         return;
     }
 
-    m_agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    QDBusInterface iface( "org.freedesktop.Akonadi.Resource." + m_agent.identifier(), "/Settings");
+    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    agent.setName(m_config.name() + " " + i18n("Calendar / Tasks"));
 
-    QString username = m_config.name();
-    m_agent.setName(username + " " + i18n("Calendar / Tasks"));
+    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
 
-    QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("calendarAndTasksResource", service);
 

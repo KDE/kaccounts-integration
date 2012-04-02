@@ -54,9 +54,6 @@ class CreateCalendar : public KJob
     protected:
         OrgKdeAkonadiGoogleCalendarSettingsInterface *m_calendarSettings;
         KConfigGroup m_config;
-
-    private:
-        AgentInstance m_agent;
 };
 
 #endif //CREATECALENDAR_H
