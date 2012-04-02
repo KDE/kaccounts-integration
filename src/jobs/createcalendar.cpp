@@ -85,27 +85,21 @@ void CreateCalendar::resourceCreated(KJob* job)
     QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("calendarAndTasksResource", service);
-    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(service, "/Settings", QDBusConnection::sessionBus());
-    m_calendarSettings->setAccount(username);
 
-    m_calendarSettings->writeConfig();
+    configureAccountName(service);
 
-    AccessManager *gam = new AccessManager;
-
-    connect(gam, SIGNAL(replyReceived(KGoogle::Reply*)),
-            this, SLOT(replyReceived(KGoogle::Reply*)));
-
-    Request *request = new Request(Services::Calendar::fetchCalendarsUrl(), Request::FetchAll, "Calendar",  Auth::instance()->getAccount(username));
-    gam->sendRequest(request);
+    fetchDefaultCollections();
 }
 
-void CreateCalendar::useTaskResource()
+void CreateCalendar::configureAccountName(const QString &service)
 {
-    QString identify = m_config.group("private").readEntry<QString>("calendarAndTasksResource", "");
-    identify.remove("org.freedesktop.Akonadi.Resource.");
+    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(service, "/Settings", QDBusConnection::sessionBus());
+    m_calendarSettings->setAccount(m_config.name());
+    m_calendarSettings->writeConfig();
+}
 
-    m_agent = AgentManager::self()->instance(identify);
-    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
+void CreateCalendar::fetchDefaultCollections()
+{
     AccessManager *gam = new AccessManager;
 
     connect(gam, SIGNAL(replyReceived(KGoogle::Reply*)),
@@ -113,6 +107,13 @@ void CreateCalendar::useTaskResource()
 
     Request *request = new Request(Services::Calendar::fetchCalendarsUrl(), Request::FetchAll, "Calendar",  Auth::instance()->getAccount(m_config.name()));
     gam->sendRequest(request);
+}
+
+void CreateCalendar::useTaskResource()
+{
+    m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
+
+    fetchDefaultCollections();
 }
 
 void CreateCalendar::replyReceived(KGoogle::Reply* reply)

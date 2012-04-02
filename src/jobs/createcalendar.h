@@ -42,13 +42,17 @@ class CreateCalendar : public KJob
 
         virtual void start();
 
-    private Q_SLOTS:
+    protected:
+        void configureAccountName(const QString &service);
+        void fetchDefaultCollections();
+
+    protected Q_SLOTS:
         void useTaskResource();
         void createResource();
         void resourceCreated(KJob *job);
         void replyReceived(KGoogle::Reply *reply);
 
-    private:
+    protected:
         OrgKdeAkonadiGoogleCalendarSettingsInterface *m_calendarSettings;
         KConfigGroup m_config;
         AgentInstance m_agent;
