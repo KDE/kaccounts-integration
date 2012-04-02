@@ -12,11 +12,16 @@ set(webaccounts_SRCS
     jobs/createcalendar.cpp
     jobs/createtask.cpp
     jobs/createchat.cpp
+    jobs/createmail.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
     jobs/org.kde.Akonadi.GoogleCalendar.Settings.xml
     google_calendar_settings
+)
+qt4_add_dbus_interface(webaccounts_SRCS
+    jobs/org.kde.Akonadi.Imap.Settings.xml
+    akonadi_imap_settings
 )
 
 qt4_automoc(${webaccounts_SRCS})
