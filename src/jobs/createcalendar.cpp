@@ -61,6 +61,11 @@ void CreateCalendar::start()
     QMetaObject::invokeMethod(this, "createResource", Qt::QueuedConnection);
 }
 
+KConfigGroup CreateCalendar::config() const
+{
+    return m_config;
+}
+
 void CreateCalendar::createResource()
 {
     qDebug() << "Creating new resource";

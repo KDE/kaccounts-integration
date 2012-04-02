@@ -42,6 +42,8 @@ class CreateCalendar : public KJob
 
         virtual void start();
 
+        KConfigGroup config() const;
+
     protected:
         virtual void fetchDefaultCollections();
 
