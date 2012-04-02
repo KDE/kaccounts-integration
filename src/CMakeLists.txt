@@ -10,6 +10,7 @@ set(webaccounts_SRCS
     google/services.cpp
     google/serviceoption.cpp
     jobs/createcalendar.cpp
+    jobs/createtask.cpp
     jobs/createchat.cpp
 )
 
