@@ -21,6 +21,7 @@
 
 #include <kcmodule.h>
 
+class KJob;
 class Create;
 class QStackedLayout;
 class QListWidgetItem;
@@ -42,6 +43,7 @@ private Q_SLOTS:
     void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void newAccount(const QString &type, const QString &name);
     void addExistingAccounts();
+    void createTasks(KJob*);
 
 private:
     void addAccount(const QString &name, const QString &account);

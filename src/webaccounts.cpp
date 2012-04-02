@@ -20,6 +20,11 @@
 #include "create.h"
 #include "accountwidget.h"
 #include "ui_kcm.h"
+#include "jobs/createcontact.h"
+#include "jobs/createcalendar.h"
+#include "jobs/createtask.h"
+#include "jobs/createmail.h"
+#include "jobs/createchat.h"
 
 #include <QDebug>
 
@@ -145,6 +150,33 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
     m_ui->accList->addItem(m_newAccountItem);
 
     m_ui->accList->setCurrentItem(newItem);
+
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(name);
+
+    CreateContact *create = new CreateContact(group, this);
+    create->start();
+
+    CreateCalendar *createCalendar = new CreateCalendar(group, this);
+    connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
+    createCalendar->start();
+
+    CreateMail *createMail = new CreateMail(group, this);
+    createMail->start();
+
+    CreateChat *createChat = new CreateChat(group, this);
+    createChat->start();
+}
+
+void WebAccounts::createTasks(KJob* job)
+{
+    if (job->error()) {
+        qWarning("Error creating calendar resource");
+        return;
+    }
+
+    KConfigGroup group  = qobject_cast< CreateCalendar* >(job)->config();
+    CreateTask *createTask = new CreateTask(group, this);
+    createTask->start();
 }
 
 QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& icon, const QString& title, QWidget *widget)
