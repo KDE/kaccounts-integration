@@ -14,6 +14,7 @@ set(webaccounts_SRCS
     jobs/createchat.cpp
     jobs/createmail.cpp
     jobs/createcontact.cpp
+    jobs/removechat.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
