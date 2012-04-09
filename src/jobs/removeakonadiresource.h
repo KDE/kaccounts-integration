@@ -26,15 +26,19 @@ class RemoveAkonadiResource : public KJob
 {
     Q_OBJECT
     public:
-        explicit RemoveAkonadiResource(KConfigGroup &group, QObject* parent = 0);
+        explicit RemoveAkonadiResource(const QString &name, KConfigGroup &group, QObject* parent = 0);
         virtual ~RemoveAkonadiResource();
 
         virtual void start();
+
+        QString id() const;
+        KConfigGroup config();
 
     private Q_SLOTS:
         void removeResource();
 
     private:
+        QString m_id;
         KConfigGroup m_config;
 };
 

@@ -44,6 +44,7 @@ private Q_SLOTS:
     void newAccount(const QString &type, const QString &name);
     void addExistingAccounts();
     void createTasks(KJob*);
+    void serviceRemoved(KJob *job);
 
 private:
     void addAccount(const QString &name, const QString &account);

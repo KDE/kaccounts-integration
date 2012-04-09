@@ -25,6 +25,8 @@
 #include "jobs/createtask.h"
 #include "jobs/createmail.h"
 #include "jobs/createchat.h"
+#include "jobs/removechat.h"
+#include "jobs/removeakonadiresource.h"
 
 #include <QDebug>
 
@@ -117,10 +119,34 @@ void WebAccounts::rmBtnClicked()
 
     QString accName = item->data(Qt::UserRole).toString();
 
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(accName);
+    group.sync();
+
+    RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
+    connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+    removeEmail->start();
+
+    RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
+    connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+    removeContact->start();
+
+    RemoveAkonadiResource *removeCalendar = new RemoveAkonadiResource("calendarAndTasksResource", group, this);
+    connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+    removeCalendar->start();
+
+    RemoveChat *removeChat = new RemoveChat(group, this);
+    removeChat->start();
+
     KSharedConfig::openConfig("webaccounts")->group("google").deleteGroup(accName);
     m_ui->accList->takeItem(m_ui->accList->row(item));
 
     delete item->data(Qt::UserRole + 1).value<QWidget *>();
+}
+
+void WebAccounts::serviceRemoved(KJob *job)
+{
+    RemoveAkonadiResource *resource = qobject_cast<RemoveAkonadiResource*>(job);
+    resource->config().group("services").writeEntry(resource->id(), 0);
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)

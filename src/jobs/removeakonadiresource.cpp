@@ -26,11 +26,11 @@
 
 using namespace Akonadi;
 
-RemoveAkonadiResource::RemoveAkonadiResource(KConfigGroup& group, QObject* parent)
+RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, KConfigGroup& group, QObject* parent)
 : KJob(parent)
+, m_id(name)
 , m_config(group)
 {
-
 }
 
 
@@ -46,10 +46,26 @@ void RemoveAkonadiResource::start()
 
 void RemoveAkonadiResource::removeResource()
 {
-    QString id = m_config.group("private").readEntry("calendarAndTasksResource");
-    id.remove("org.freedesktop.Akonadi.Resource.");
+    m_config.sync();
 
+    qDebug() << m_config.groupList();
+    QString id = m_config.group("private").readEntry(m_id);
+    id.remove("org.freedesktop.Akonadi.Resource.");
+    qDebug() << "REMOVE: " << id;
     AgentInstance instance = AgentManager::self()->instance(id);
 
     AgentManager::self()->removeInstance(instance);
+
+    emitResult();
+}
+
+
+QString RemoveAkonadiResource::id() const
+{
+    return m_id;
+}
+
+KConfigGroup RemoveAkonadiResource::config()
+{
+    return m_config;
 }
