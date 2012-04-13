@@ -54,10 +54,12 @@ void ServiceOption::setStatus(int status )
 {
     switch(status) {
         case 0:
+            working->setVisible(false);
             checkBox->setVisible(true);
             checkBox->setChecked(false);
             break;
         case 1:
+            working->setVisible(false);
             checkBox->setVisible(true);
             checkBox->setChecked(true);
             break;
