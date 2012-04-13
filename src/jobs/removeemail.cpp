@@ -54,6 +54,7 @@ void RemoveEmail::removeTransport()
 
     MailTransport::TransportManager::self()->removeTransport(id);
 
+    m_config.group("private").deleteEntry("emailTransport");
     m_config.group("services").writeEntry("EMail", 0);
 
     emitResult();
