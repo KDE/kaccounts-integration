@@ -19,6 +19,9 @@ set(webaccounts_SRCS
     jobs/removeemail.cpp
     jobs/removecalendar.cpp
     jobs/removetask.cpp
+
+    facebook/facebook.cpp
+    facebook/fcredentials.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS

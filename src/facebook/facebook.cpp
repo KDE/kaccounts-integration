@@ -16,71 +16,48 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "create.h"
-#include "google/google.h"
-#include "facebook/facebook.h"
+#include "facebook.h"
+#include "fcredentials.h"
 
-#include "ui_types.h"
+#include <kpushbutton.h>
+#include <kstandardguiitem.h>
 
-#include <QtCore/QDebug>
-
-#include <QtGui/QWidget>
-
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
-
-using namespace KGoogle;
-
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
+FacebookWizard::FacebookWizard(QWidget* parent): QWizard(parent)
 {
-    m_parent = parent;
+    FCredentials *credentialsPage = new FCredentials(this);
+    addPage(credentialsPage);
+
+    setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
+    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
+
+    //We do not want "Forward" as text
+    setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard", "Next"));
+    setButtonText(QWizard::FinishButton, i18nc("Action to finish the wizard", "Finish"));
 }
 
-Create::~Create()
+FacebookWizard::~FacebookWizard()
 {
 
 }
 
-QWidget* Create::widget()
+void FacebookWizard::setUsername(const QString& username)
 {
-    if (!m_form) {
-        m_form = new Ui::createForm();
-    }
-
-    QWidget *widget = new QWidget(m_parent);
-    m_form->setupUi(widget);
-
-    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
-
-    return widget;
+    m_username = username;
 }
 
-void Create::stablishConnections()
+void FacebookWizard::setPassword(const QString& password)
 {
-    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
-    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
+    m_password = password;
 }
 
-void Create::startGoogle()
+const QString FacebookWizard::username() const
 {
-    GoogleWizard *google = new GoogleWizard(m_parent);
-    connect(google, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    google->show();
+    return m_username;
 }
 
-void Create::startFacebook()
+const QString FacebookWizard::password() const
 {
-    FacebookWizard *google = new FacebookWizard(m_parent);
-    connect(google, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    google->show();
-}
-
-void Create::startLive()
-{
-    qWarning("Live not implemented yet");
+    return m_password;
 }
