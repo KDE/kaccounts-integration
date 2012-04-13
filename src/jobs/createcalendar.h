@@ -37,7 +37,7 @@ class CreateCalendar : public KJob
 {
     Q_OBJECT
     public:
-        explicit CreateCalendar(KConfigGroup &group, QObject* parent = 0);
+        explicit CreateCalendar(KConfigGroup group, QObject* parent);
         virtual ~CreateCalendar();
 
         virtual void start();

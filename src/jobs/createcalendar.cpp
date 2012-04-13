@@ -37,7 +37,7 @@
 using namespace Akonadi;
 using namespace KGoogle;
 
-CreateCalendar::CreateCalendar(KConfigGroup &group, QObject* parent)
+CreateCalendar::CreateCalendar(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {

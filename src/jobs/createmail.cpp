@@ -32,7 +32,7 @@
 using namespace KWallet;
 using namespace Akonadi;
 
-CreateMail::CreateMail(KConfigGroup& group, QObject* parent)
+CreateMail::CreateMail(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {

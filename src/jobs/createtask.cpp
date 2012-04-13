@@ -28,7 +28,7 @@
 
 using namespace KGoogle;
 
-CreateTask::CreateTask(KConfigGroup& group, QObject* parent) : CreateCalendar(group, parent)
+CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(group, parent)
 {
     qRegisterMetaType< KGoogle::Services::Tasks >("Task");
 }

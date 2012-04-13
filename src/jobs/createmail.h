@@ -26,7 +26,7 @@ class CreateMail : public KJob
 {
     Q_OBJECT
     public:
-        explicit CreateMail(KConfigGroup &group,  QObject* parent = 0);
+        explicit CreateMail(KConfigGroup group,  QObject* parent);
         virtual ~CreateMail();
 
         virtual void start();

@@ -32,7 +32,7 @@ class CreateChat : public KJob
     Q_OBJECT
 
     public:
-        explicit CreateChat(KConfigGroup &group, QObject* parent = 0);
+        explicit CreateChat(KConfigGroup group, QObject* parent);
         virtual ~CreateChat();
 
         virtual void start();

@@ -35,7 +35,7 @@
 using namespace KGoogle;
 using namespace Akonadi;
 
-CreateContact::CreateContact(KConfigGroup& group, QObject* parent)
+CreateContact::CreateContact(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {

@@ -31,7 +31,7 @@
 
 using namespace KWallet;
 
-CreateChat::CreateChat(KConfigGroup& group, QObject* parent)
+CreateChat::CreateChat(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {

@@ -27,7 +27,7 @@ class CreateTask : public CreateCalendar
 {
     Q_OBJECT
     public:
-        CreateTask(KConfigGroup &group, QObject* parent = 0);
+        CreateTask(KConfigGroup group, QObject* parent);
         virtual ~CreateTask();
 
         virtual void start();

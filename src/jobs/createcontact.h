@@ -26,7 +26,7 @@ class CreateContact : public KJob
 {
     Q_OBJECT
     public:
-        explicit CreateContact(KConfigGroup &group, QObject* parent = 0);
+        explicit CreateContact(KConfigGroup group, QObject* parent);
         virtual ~CreateContact();
 
         virtual void start();
