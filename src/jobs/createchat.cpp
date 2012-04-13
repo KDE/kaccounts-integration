@@ -93,7 +93,7 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     Tp::AccountPtr account = pendingAccount->account();
 
     KConfigGroup privates(&m_config, "private");
-    privates.writeEntry("chatUID", account->uniqueIdentifier());
+    privates.writeEntry("chatPath", account->objectPath());
     privates.sync();
 
     QString password;

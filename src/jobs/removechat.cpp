@@ -51,18 +51,8 @@ void RemoveChat::removeResource()
 
 void RemoveChat::onAccountManagerReady(Tp::PendingOperation* op)
 {
-    QString accID = m_config.group("private").readEntry<QString>("chatUID", "");
-//     m_manager->accountForPath(accID)->remove();
-
-    QList <Tp::AccountPtr > accounts =  m_manager->allAccounts();
-
-    Q_FOREACH(Tp::AccountPtr acc, accounts) {
-        if (acc->uniqueIdentifier() == accID) {
-            acc->remove();
-            m_config.group("private").deleteEntry("chatUID");
-            break;
-        }
-    }
+    QString accID = m_config.group("private").readEntry<QString>("chatPath", "");
+    m_manager->accountForPath(accID)->remove();
 
     emitResult();
 }
