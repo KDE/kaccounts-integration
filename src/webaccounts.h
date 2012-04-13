@@ -49,7 +49,7 @@ private Q_SLOTS:
 private:
     KConfigGroup accounts();
     KConfigGroup account(const QString &accName);
-    void addAccount(const QString &name, const QString &account);
+    void addAccount(const QString &name, const QString &accountName);
     QListWidgetItem* createQListWidgetItem(const QString &name, const QString &icon, const QString &title, QWidget *widget);
 
 private:
