@@ -29,16 +29,23 @@ AccountWidget::AccountWidget(const QString& account, QWidget* parent) : QWidget(
 
     KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(account).group("services");
 
-    bool enabled = false;
+    int status = 0;
     QStringList keys = group.keyList();
     Q_FOREACH(const QString &key, keys) {
-        enabled = group.readEntry<bool>(key, false);
+        status = group.readEntry(key, 0);
         ServiceOption *option = new ServiceOption(key, key, this);
+        option->setStatus(status);
+        connect(option, SIGNAL(toggled(QString,bool)), this, SLOT(serviceChanged(QString,bool)));
         d_layout->addWidget(option);
     }
 }
 
 AccountWidget::~AccountWidget()
+{
+
+}
+
+void AccountWidget::serviceChanged(const QString& name, bool enabled)
 {
 
 }

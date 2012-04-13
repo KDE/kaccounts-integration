@@ -34,6 +34,7 @@ public:
 
 public Q_SLOTS:
     void setToggled(bool checked);
+    void setStatus(int status);
 
 Q_SIGNALS:
     void toggled(const QString &name, bool);

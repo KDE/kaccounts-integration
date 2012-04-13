@@ -29,6 +29,9 @@ Q_OBJECT
     public:
         explicit AccountWidget(const QString &account, QWidget* parent);
         virtual ~AccountWidget();
+
+    public Q_SLOTS:
+        void serviceChanged(const QString &name, bool enabled);
 };
 
 #endif //ACCOUNTWIDGET_H

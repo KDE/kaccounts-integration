@@ -18,12 +18,21 @@
 
 #include "serviceoption.h"
 
+#include <kpixmapsequenceoverlaypainter.h>
+#include <QDebug>
 ServiceOption::ServiceOption(const QString& name, const QString& displayText, QWidget* parent): QWidget(parent)
 {
     setupUi(this);
 
     setObjectName(name);
-    checkBox->setText(displayText);
+    checkLabel->setText(displayText);
+
+    working->setVisible(false);
+    working->setMinimumSize(checkBox->sizeHint());
+
+    KPixmapSequenceOverlayPainter *painter = new KPixmapSequenceOverlayPainter(this);
+    painter->setWidget(working);
+    painter->start();
 
     connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(setToggled(bool)));
 }
@@ -31,5 +40,25 @@ ServiceOption::ServiceOption(const QString& name, const QString& displayText, QW
 void ServiceOption::setToggled(bool checked)
 {
     const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());
+    setStatus(2);
+
     Q_EMIT toggled(objectName(), checked);
+}
+
+void ServiceOption::setStatus(int status )
+{
+    switch(status) {
+        case 0:
+            checkBox->setVisible(true);
+            checkBox->setChecked(false);
+            break;
+        case 1:
+            checkBox->setVisible(true);
+            checkBox->setChecked(true);
+            break;
+        case 2:
+            checkBox->setVisible(false);
+            working->setVisible(true);
+            break;
+    }
 }
