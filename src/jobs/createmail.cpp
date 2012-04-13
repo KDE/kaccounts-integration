@@ -110,7 +110,6 @@ void CreateMail::instanceCreateResult(KJob* job)
     mt->setRequiresAuthentication(true);
     mt->writeConfig();
     MailTransport::TransportManager::self()->addTransport( mt );
-    MailTransport::TransportManager::self()->setDefaultTransport( mt->id() );
 
     m_config.group("services").writeEntry("EMail", 1);
     emitResult();
