@@ -79,11 +79,11 @@ void GoogleWizard::done(int result)
     wallet->sync();
     wallet->deleteLater();
 
-    KSharedConfig::Ptr config = KSharedConfig::openConfig("webaccounts");
+    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group(m_username);
 
-    config->group(m_username).group("properties").writeEntry("type", "google");
+    config.group("properties").writeEntry("type", "google");
 
-    KConfigGroup group = config->group(m_username).group("services");
+    KConfigGroup group = config.group("services");
     QStringList keys = m_services.keys();
     Q_FOREACH(const QString &key, keys) {
         group.writeEntry(key, m_services[key]);

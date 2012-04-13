@@ -69,13 +69,11 @@ WebAccounts::~WebAccounts()
 void WebAccounts::addExistingAccounts()
 {
     KSharedConfigPtr config = KSharedConfig::openConfig("webaccounts");
-    QStringList groups = config->groupList();
 
-    Q_FOREACH(const QString &group, groups) {
-        QStringList accounts = config->group(group).groupList();
-        Q_FOREACH(const QString &account, accounts) {
-            addAccount(account, account);
-        }
+    QStringList accounts = config->group("accounts").groupList();
+    qDebug() << "Existing accounts: " << accounts;
+    Q_FOREACH(const QString &account, accounts) {
+        addAccount(account, account);
     }
 
     m_create = new Create(this);
@@ -119,7 +117,7 @@ void WebAccounts::rmBtnClicked()
 
     QString accName = item->data(Qt::UserRole).toString();
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(accName);
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(accName);
     group.sync();
 
     RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
@@ -137,7 +135,7 @@ void WebAccounts::rmBtnClicked()
     RemoveChat *removeChat = new RemoveChat(group, this);
     removeChat->start();
 
-    KSharedConfig::openConfig("webaccounts")->group("google").deleteGroup(accName);
+    KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
     m_ui->accList->takeItem(m_ui->accList->row(item));
 
     delete item->data(Qt::UserRole + 1).value<QWidget *>();
@@ -177,7 +175,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group(name);
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(name);
 
     qDebug() << group.groupList();
     qDebug() << group.group("services").entryMap();
