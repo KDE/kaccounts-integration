@@ -68,11 +68,9 @@ WebAccounts::~WebAccounts()
 
 void WebAccounts::addExistingAccounts()
 {
-    KSharedConfigPtr config = KSharedConfig::openConfig("webaccounts");
-
-    QStringList accounts = config->group("accounts").groupList();
-    qDebug() << "Existing accounts: " << accounts;
-    Q_FOREACH(const QString &account, accounts) {
+    QStringList accountsList = accounts().groupList();
+    qDebug() << "Existing accounts: " << accountsList;
+    Q_FOREACH(const QString &account, accountsList) {
         addAccount(account, account);
     }
 
@@ -117,7 +115,7 @@ void WebAccounts::rmBtnClicked()
 
     QString accName = item->data(Qt::UserRole).toString();
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(accName);
+    KConfigGroup group = accounts().group(accName);
     group.sync();
 
     RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
@@ -135,7 +133,7 @@ void WebAccounts::rmBtnClicked()
     RemoveChat *removeChat = new RemoveChat(group, this);
     removeChat->start();
 
-    KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
+    accounts().deleteGroup(accName);
     m_ui->accList->takeItem(m_ui->accList->row(item));
 
     delete item->data(Qt::UserRole + 1).value<QWidget *>();
@@ -175,7 +173,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(name);
+    KConfigGroup group = accounts().group(name);
 
     qDebug() << group.groupList();
     qDebug() << group.group("services").entryMap();
@@ -215,6 +213,11 @@ QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const Q
     newItem->setData(Qt::UserRole + 1, QVariant::fromValue<QWidget *>(widget));
 
     return newItem;
+}
+
+KConfigGroup WebAccounts::accounts()
+{
+    return KSharedConfig::openConfig("webaccounts")->group("accounts");
 }
 
 #include "webaccounts.moc"
