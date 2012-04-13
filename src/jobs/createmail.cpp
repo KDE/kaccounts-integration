@@ -78,7 +78,6 @@ void CreateMail::instanceCreateResult(KJob* job)
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("emailResource", service);
-    privates.sync();
 
     org::kde::Akonadi::Imap::Settings *settings = new org::kde::Akonadi::Imap::Settings(service, "/Settings", QDBusConnection::sessionBus());
 
