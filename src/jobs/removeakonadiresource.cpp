@@ -57,6 +57,7 @@ void RemoveAkonadiResource::removeResource()
 
     AgentManager::self()->removeInstance(instance);
 
+    m_config.group("private").deleteEntry(m_id);
     emitResult();
 }
 
