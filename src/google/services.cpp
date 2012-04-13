@@ -35,16 +35,16 @@ Services::~Services()
 void Services::initializePage()
 {
 
-    addOption(i18n("EMail"));
-    addOption(i18n("Calendar"));
-    addOption(i18n("Contact"));
-    addOption(i18n("Tasks"));
-    addOption(i18n("Chat"));
+    addOption("EMail", i18n("EMail"));
+    addOption("Calendar", i18n("Calendar"));
+    addOption("Contact", i18n("Contact"));
+    addOption("Tasks", i18n("Tasks"));
+    addOption("Chat", i18n("Chat"));
 }
 
-void Services::addOption(const QString& text)
+void Services::addOption(const QString& text, const QString& displayText)
 {
-    ServiceOption *option = new ServiceOption(text, this);
+    ServiceOption *option = new ServiceOption(text, displayText, this);
     connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
 
     m_wizard->activateOption(text, true);

@@ -18,11 +18,12 @@
 
 #include "serviceoption.h"
 
-ServiceOption::ServiceOption(const QString& checkboxText, QWidget* parent): QWidget(parent)
+ServiceOption::ServiceOption(const QString& name, const QString& displayText, QWidget* parent): QWidget(parent)
 {
     setupUi(this);
 
-    checkBox->setText(checkboxText);
+    setObjectName(name);
+    checkBox->setText(displayText);
 
     connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(setToggled(bool)));
 }
@@ -30,5 +31,5 @@ ServiceOption::ServiceOption(const QString& checkboxText, QWidget* parent): QWid
 void ServiceOption::setToggled(bool checked)
 {
     const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());
-    Q_EMIT toggled(checkbox->text(), checked);
+    Q_EMIT toggled(objectName(), checked);
 }

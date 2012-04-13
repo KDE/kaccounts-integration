@@ -30,7 +30,7 @@ class ServiceOption : public QWidget
 Q_OBJECT
 
 public:
-    ServiceOption(const QString& checkboxText, QWidget* parent = 0);
+    ServiceOption(const QString& name, const QString& displayText, QWidget* parent = 0);
 
 public Q_SLOTS:
     void setToggled(bool checked);

@@ -33,7 +33,7 @@ AccountWidget::AccountWidget(const QString& account, QWidget* parent) : QWidget(
     QStringList keys = group.keyList();
     Q_FOREACH(const QString &key, keys) {
         enabled = group.readEntry<bool>(key, false);
-        ServiceOption *option = new ServiceOption(key, this);
+        ServiceOption *option = new ServiceOption(key, key, this);
         d_layout->addWidget(option);
     }
 }

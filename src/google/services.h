@@ -37,7 +37,7 @@ Q_OBJECT
         void optionToggled(const QString &name, bool checked);
 
     private:
-        void addOption(const QString &text);
+        void addOption(const QString& text, const QString& displayText);
 
     private:
         GoogleWizard *m_wizard;
