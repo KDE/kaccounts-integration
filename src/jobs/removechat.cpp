@@ -26,7 +26,7 @@ RemoveChat::RemoveChat(KConfigGroup& group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {
-
+    setObjectName(m_config.name());
 }
 
 
@@ -57,5 +57,6 @@ void RemoveChat::onAccountManagerReady(Tp::PendingOperation* op)
         account->remove();
     }
 
+    m_config.group("private").writeEntry("Chat", 0);
     emitResult();
 }

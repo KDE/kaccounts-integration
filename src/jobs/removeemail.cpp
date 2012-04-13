@@ -25,6 +25,7 @@ RemoveEmail::RemoveEmail(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {
+    setObjectName(m_config.name());
 }
 
 RemoveEmail::~RemoveEmail()

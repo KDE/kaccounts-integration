@@ -31,6 +31,7 @@ RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, KConfigGroup& 
 , m_id(name)
 , m_config(group)
 {
+    setObjectName(m_config.name());
 }
 
 

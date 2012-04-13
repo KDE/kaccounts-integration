@@ -150,6 +150,20 @@ void WebAccounts::rmBtnClicked()
 
 void WebAccounts::serviceRemoved(KJob *job)
 {
+    QString accName = job->objectName();
+    KConfigGroup services = account(accName).group("services");
+    QStringList keys = services.keyList();
+    bool deleteAccount = true;
+    Q_FOREACH(const QString &key, keys) {
+        if (services.readEntry(key, 0) != 0) {
+            deleteAccount = false;
+            break;
+        }
+    }
+
+    if (deleteAccount) {
+        KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
+    }
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
