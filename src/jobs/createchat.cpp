@@ -96,6 +96,8 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     privates.writeEntry("chatPath", account->objectPath());
     privates.sync();
 
+    m_config.group("services").writeEntry("Chat", 1);
+
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("WebAccounts");

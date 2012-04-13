@@ -66,6 +66,7 @@ void CreateMail::instanceCreateResult(KJob* job)
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");
         setError(-1);
+        m_config.group("services").writeEntry("EMail", -1);
         emitResult();
         return;
     }
@@ -111,6 +112,7 @@ void CreateMail::instanceCreateResult(KJob* job)
     MailTransport::TransportManager::self()->addTransport( mt );
     MailTransport::TransportManager::self()->setDefaultTransport( mt->id() );
 
+    m_config.group("services").writeEntry("EMail", 1);
     emitResult();
 }
 

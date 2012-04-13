@@ -73,5 +73,6 @@ void CreateTask::replyReceived(KGoogle::Reply* reply)
 
     delete reply;
 
+    m_config.group("services").writeEntry("Tasks", 1);
     emitResult();
 }

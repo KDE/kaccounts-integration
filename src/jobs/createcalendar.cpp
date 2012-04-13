@@ -135,5 +135,7 @@ void CreateCalendar::replyReceived(KGoogle::Reply* reply)
 
     delete reply;
 
+    m_config.group("services").writeEntry("Calendar", 1);
+
     emitResult();
 }
