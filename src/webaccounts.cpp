@@ -26,6 +26,7 @@
 #include "jobs/createmail.h"
 #include "jobs/createchat.h"
 #include "jobs/removechat.h"
+#include "jobs/removeemail.h"
 #include "jobs/removeakonadiresource.h"
 
 #include <QDebug>
@@ -119,7 +120,7 @@ void WebAccounts::rmBtnClicked()
     KConfigGroup services = group.group("services");
 
     if (services.readEntry("EMail", 0) == 1) {
-        RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
+        RemoveEmail *removeEmail = new RemoveEmail(group, this);
         connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeEmail->start();
     }
@@ -138,10 +139,10 @@ void WebAccounts::rmBtnClicked()
 
     if (services.readEntry("Chat", 0) == 1) {
         RemoveChat *removeChat = new RemoveChat(group, this);
+        connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeChat->start();
     }
 
-    accounts().deleteGroup(accName);
     m_ui->accList->takeItem(m_ui->accList->row(item));
 
     delete item->data(Qt::UserRole + 1).value<QWidget *>();
@@ -149,8 +150,6 @@ void WebAccounts::rmBtnClicked()
 
 void WebAccounts::serviceRemoved(KJob *job)
 {
-    RemoveAkonadiResource *resource = qobject_cast<RemoveAkonadiResource*>(job);
-    resource->config().group("services").writeEntry(resource->id(), 0);
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
