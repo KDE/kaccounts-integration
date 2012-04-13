@@ -27,7 +27,7 @@ AccountWidget::AccountWidget(const QString& account, QWidget* parent) : QWidget(
 {
     setupUi(this);
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(account).group("services");
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(account).group("services");
 
     bool enabled = false;
     QStringList keys = group.keyList();
