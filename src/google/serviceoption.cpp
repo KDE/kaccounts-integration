@@ -34,7 +34,7 @@ ServiceOption::ServiceOption(const QString& name, const QString& displayText, QW
     painter->setWidget(working);
     painter->start();
 
-    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(setToggled(bool)));
+    connect(checkBox, SIGNAL(clicked(bool)), this, SLOT(setToggled(bool)));
 }
 
 void ServiceOption::setToggled(bool checked)
