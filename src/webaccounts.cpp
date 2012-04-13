@@ -115,7 +115,7 @@ void WebAccounts::rmBtnClicked()
 
     QString accName = item->data(Qt::UserRole).toString();
 
-    KConfigGroup group = accounts().group(accName);
+    KConfigGroup group = account(accName);
     group.sync();
 
     RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
@@ -173,7 +173,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup group = accounts().group(name);
+    KConfigGroup group = account(name);
 
     qDebug() << group.groupList();
     qDebug() << group.group("services").entryMap();
@@ -218,6 +218,11 @@ QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const Q
 KConfigGroup WebAccounts::accounts()
 {
     return KSharedConfig::openConfig("webaccounts")->group("accounts");
+}
+
+KConfigGroup WebAccounts::account(const QString& accName)
+{
+    return accounts().group(accName);
 }
 
 #include "webaccounts.moc"

@@ -47,6 +47,8 @@ private Q_SLOTS:
     void serviceRemoved(KJob *job);
 
 private:
+    KConfigGroup accounts();
+    KConfigGroup account(const QString &accName);
     void addAccount(const QString &name, const QString &account);
     QListWidgetItem* createQListWidgetItem(const QString &name, const QString &icon, const QString &title, QWidget *widget);
 
