@@ -27,6 +27,8 @@
 #include "jobs/createchat.h"
 #include "jobs/removechat.h"
 #include "jobs/removeemail.h"
+#include "jobs/removecalendar.h"
+#include "jobs/removetask.h"
 #include "jobs/removeakonadiresource.h"
 
 #include <QDebug>
@@ -132,10 +134,16 @@ void WebAccounts::rmBtnClicked()
     }
 
     if (services.readEntry("Calendar", 0) == 1) {
-        RemoveAkonadiResource *removeCalendar = new RemoveAkonadiResource("calendarAndTasksResource", group, this);
+        RemoveCalendar *removeCalendar = new RemoveCalendar(group, this);
         connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeCalendar->start();
     }
+
+     if (services.readEntry("Tasks", 0) == 1) {
+        RemoveTask *removeCalendar = new RemoveTask(group, this);
+        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeCalendar->start();
+     }
 
     if (services.readEntry("Chat", 0) == 1) {
         RemoveChat *removeChat = new RemoveChat(group, this);

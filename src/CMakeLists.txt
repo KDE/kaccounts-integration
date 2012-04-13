@@ -17,6 +17,8 @@ set(webaccounts_SRCS
     jobs/removechat.cpp
     jobs/removeakonadiresource.cpp
     jobs/removeemail.cpp
+    jobs/removecalendar.cpp
+    jobs/removetask.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
