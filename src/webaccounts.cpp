@@ -177,7 +177,10 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("google").group(name);
+    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group(name);
+
+    qDebug() << group.groupList();
+    qDebug() << group.group("services").entryMap();
 
     CreateContact *create = new CreateContact(group, this);
     create->start();

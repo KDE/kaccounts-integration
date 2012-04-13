@@ -79,14 +79,15 @@ void GoogleWizard::done(int result)
     wallet->sync();
     wallet->deleteLater();
 
-    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("google");
+    KSharedConfig::Ptr config = KSharedConfig::openConfig("webaccounts");
 
-    KConfigGroup group = config.group(m_username).group("services");
+    config->group(m_username).group("properties").writeEntry("type", "google");
+
+    KConfigGroup group = config->group(m_username).group("services");
     QStringList keys = m_services.keys();
     Q_FOREACH(const QString &key, keys) {
         group.writeEntry(key, m_services[key]);
     }
-    group.sync();
 
     Q_EMIT newAccount("google", m_username);
 
