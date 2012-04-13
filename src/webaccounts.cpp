@@ -116,22 +116,30 @@ void WebAccounts::rmBtnClicked()
     QString accName = item->data(Qt::UserRole).toString();
 
     KConfigGroup group = account(accName);
-    group.sync();
+    KConfigGroup services = group.group("services");
 
-    RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
-    connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-    removeEmail->start();
+    if (services.readEntry("EMail", 0) == 1) {
+        RemoveAkonadiResource *removeEmail = new RemoveAkonadiResource("emailResource", group, this);
+        connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeEmail->start();
+    }
 
-    RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
-    connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-    removeContact->start();
+    if (services.readEntry("Contact", 0) == 1) {
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
+        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeContact->start();
+    }
 
-    RemoveAkonadiResource *removeCalendar = new RemoveAkonadiResource("calendarAndTasksResource", group, this);
-    connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-    removeCalendar->start();
+    if (services.readEntry("Calendar", 0) == 1) {
+        RemoveAkonadiResource *removeCalendar = new RemoveAkonadiResource("calendarAndTasksResource", group, this);
+        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeCalendar->start();
+    }
 
-    RemoveChat *removeChat = new RemoveChat(group, this);
-    removeChat->start();
+    if (services.readEntry("Chat", 0) == 1) {
+        RemoveChat *removeChat = new RemoveChat(group, this);
+        removeChat->start();
+    }
 
     accounts().deleteGroup(accName);
     m_ui->accList->takeItem(m_ui->accList->row(item));
