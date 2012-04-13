@@ -37,6 +37,11 @@ ServiceOption::ServiceOption(const QString& name, const QString& displayText, QW
     connect(checkBox, SIGNAL(clicked(bool)), this, SLOT(setToggled(bool)));
 }
 
+bool ServiceOption::isChecked()
+{
+    return checkBox->isChecked();
+}
+
 void ServiceOption::setToggled(bool checked)
 {
     const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());

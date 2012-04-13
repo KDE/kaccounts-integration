@@ -32,6 +32,8 @@ Q_OBJECT
 public:
     ServiceOption(const QString& name, const QString& displayText, QWidget* parent = 0);
 
+    bool isChecked();
+
 public Q_SLOTS:
     void setToggled(bool checked);
     void setStatus(int status);
