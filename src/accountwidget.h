@@ -25,6 +25,7 @@
 
 #include <KConfigGroup>
 
+class ServiceOption;
 class AccountWidget : public QWidget, Ui::Services
 {
 Q_OBJECT
@@ -33,10 +34,26 @@ Q_OBJECT
         virtual ~AccountWidget();
 
     public Q_SLOTS:
-        void serviceChanged(const QString &name, bool enabled);
+        void serviceChanged(const QString& service, bool enabled);
+
+    private Q_SLOTS:
+        void updateCalendar();
+        void updateMail();
+        void updateTask();
+        void updateContact();
+        void updateChat();
 
     private:
+        void modifyCalendar(bool enabled);
+        void modifyTasks(bool enabled);
+        void modifyContact(bool enabled);
+        void modifyEMail(bool enabled);
+        void modifyChat(bool enabled);
+
+        void updateService(const QString &name);
+    private:
         KConfigGroup m_config;
+        QHash<QString, ServiceOption*> m_serviceWidgets;
 };
 
 #endif //ACCOUNTWIDGET_H
