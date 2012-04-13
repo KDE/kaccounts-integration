@@ -138,13 +138,13 @@ void AccountWidget::modifyEMail(bool enabled)
 {
     if (!enabled) {
         RemoveEmail *removeEMail = new RemoveEmail(m_config, this);
-        connect(removeEMail, SIGNAL(finished(KJob*)), this, SLOT(updateEMail()));
+        connect(removeEMail, SIGNAL(finished(KJob*)), this, SLOT(updateMail()));
         removeEMail->start();
         return;
     }
 
     CreateMail *createEMail = new CreateMail(m_config, this);
-    connect(createEMail, SIGNAL(finished(KJob*)), this, SLOT(updateEMail()));
+    connect(createEMail, SIGNAL(finished(KJob*)), this, SLOT(updateMail()));
     createEMail->start();
 }
 
