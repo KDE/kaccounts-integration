@@ -23,15 +23,20 @@
 
 #include <QtGui/QWidget>
 
+#include <KConfigGroup>
+
 class AccountWidget : public QWidget, Ui::Services
 {
 Q_OBJECT
     public:
-        explicit AccountWidget(const QString &account, QWidget* parent);
+        explicit AccountWidget(KConfigGroup group, QWidget* parent);
         virtual ~AccountWidget();
 
     public Q_SLOTS:
         void serviceChanged(const QString &name, bool enabled);
+
+    private:
+        KConfigGroup m_config;
 };
 
 #endif //ACCOUNTWIDGET_H

@@ -97,7 +97,7 @@ void WebAccounts::addExistingAccounts()
 
 void WebAccounts::addAccount(const QString& name, const QString& accountName)
 {
-    AccountWidget *accountWidget = new AccountWidget(accountName, this);
+    AccountWidget *accountWidget = new AccountWidget(account(accountName), this);
     m_layout->addWidget(accountWidget);
 
     QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);
@@ -188,7 +188,7 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-    AccountWidget *accountWidget = new AccountWidget(name, this);
+    AccountWidget *accountWidget = new AccountWidget(account(name), this);
     m_layout->addWidget(accountWidget);
 
     QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);

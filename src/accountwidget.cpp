@@ -23,16 +23,17 @@
 
 #include <QtCore/QDebug>
 
-AccountWidget::AccountWidget(const QString& account, QWidget* parent) : QWidget(parent)
+AccountWidget::AccountWidget(KConfigGroup group, QWidget* parent)
+ : QWidget(parent)
+ , m_config(group)
 {
     setupUi(this);
 
-    KConfigGroup group = KSharedConfig::openConfig("webaccounts")->group("accounts").group(account).group("services");
-
     int status = 0;
-    QStringList keys = group.keyList();
+    KConfigGroup services = m_config.group("services");
+    QStringList keys = services.keyList();
     Q_FOREACH(const QString &key, keys) {
-        status = group.readEntry(key, 0);
+        status = services.readEntry(key, 0);
         ServiceOption *option = new ServiceOption(key, key, this);
         option->setStatus(status);
         connect(option, SIGNAL(toggled(QString,bool)), this, SLOT(serviceChanged(QString,bool)));
