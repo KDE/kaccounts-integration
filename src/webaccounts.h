@@ -48,9 +48,11 @@ private Q_SLOTS:
 
 private:
     KConfigGroup accounts();
-    KConfigGroup account(const QString &accName);
-    void addAccount(const QString &name, const QString &accountName);
-    QListWidgetItem* createQListWidgetItem(const QString &name, const QString &icon, const QString &title, QWidget *widget);
+    KConfigGroup account(const QString &accName, const QString &type);
+    void addAccount(const QString& name, const QString& accountName, const QString& type);
+    QListWidgetItem* createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget* widget);
+    QString iconForType(const QString &type);
+    void removeAccountIfPossible(const QString &name, const QString &type);
 
 private:
     Create *m_create;
