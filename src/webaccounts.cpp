@@ -54,7 +54,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->setupUi(this);
 
     m_ui->accountInfo->setLayout(m_layout);
-    m_ui->accList->setIconSize(QSize(64, 64));
+    m_ui->accList->setIconSize(QSize(48, 48));
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
@@ -71,17 +71,21 @@ WebAccounts::~WebAccounts()
 
 void WebAccounts::addExistingAccounts()
 {
-    QStringList accountsList = accounts().groupList();
-    qDebug() << "Existing accounts: " << accountsList;
-    Q_FOREACH(const QString &account, accountsList) {
-        addAccount(account, account);
+    KConfigGroup accGroup = accounts();
+    QStringList accountTypes = accGroup.groupList();
+    qDebug() << "Existing accounts: " << accountTypes;
+    Q_FOREACH(const QString &accType, accountTypes) {
+        QStringList accountList = accGroup.group(accType).groupList();
+        Q_FOREACH(const QString &account, accountList) {
+            addAccount(account, account, accType);
+        }
     }
 
     m_create = new Create(this);
     connect(m_create, SIGNAL(newAccount(QString,QString)), this, SLOT(newAccount(QString,QString)));
 
     QWidget *widget = m_create->widget();
-    m_newAccountItem = createQListWidgetItem(i18n("New Account"), "applications-education-miscellaneous", i18n("Select a supported Web Account"), widget);
+    m_newAccountItem = createQListWidgetItem(i18n("New Account"), i18n("Select a supported Web Account"), "new", widget);
 
     m_layout->addWidget(widget);
 
@@ -95,12 +99,12 @@ void WebAccounts::addExistingAccounts()
     m_ui->accList->setCurrentItem(m_ui->accList->item(0));
 }
 
-void WebAccounts::addAccount(const QString& name, const QString& accountName)
+void WebAccounts::addAccount(const QString& name, const QString& accountName, const QString& type)
 {
-    AccountWidget *accountWidget = new AccountWidget(account(accountName), this);
+    AccountWidget *accountWidget = new AccountWidget(account(accountName, type), this);
     m_layout->addWidget(accountWidget);
 
-    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);
+    QListWidgetItem *newItem = createQListWidgetItem(name, name, type, accountWidget);
     m_ui->accList->addItem(newItem);
 }
 
@@ -117,8 +121,9 @@ void WebAccounts::rmBtnClicked()
     }
 
     QString accName = item->data(Qt::UserRole).toString();
+    QString type = item->data(Qt::UserRole + 2).toString();
 
-    KConfigGroup group = account(accName);
+    KConfigGroup group = account(accName, type);
     KConfigGroup services = group.group("services");
 
     if (services.readEntry("EMail", 0) == 1) {
@@ -158,20 +163,20 @@ void WebAccounts::rmBtnClicked()
 
 void WebAccounts::serviceRemoved(KJob *job)
 {
-    QString accName = job->objectName();
-    KConfigGroup services = account(accName).group("services");
-    QStringList keys = services.keyList();
-    bool deleteAccount = true;
-    Q_FOREACH(const QString &key, keys) {
-        if (services.readEntry(key, 0) != 0) {
-            deleteAccount = false;
-            break;
-        }
-    }
-
-    if (deleteAccount) {
-        KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
-    }
+//     QString accName = job->objectName();
+//     KConfigGroup services = account(accName).group("services");
+//     QStringList keys = services.keyList();
+//     bool deleteAccount = true;
+//     Q_FOREACH(const QString &key, keys) {
+//         if (services.readEntry(key, 0) != 0) {
+//             deleteAccount = false;
+//             break;
+//         }
+//     }
+//
+//     if (deleteAccount) {
+//         KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
+//     }
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
@@ -188,10 +193,10 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-    AccountWidget *accountWidget = new AccountWidget(account(name), this);
+    AccountWidget *accountWidget = new AccountWidget(account(name, type), this);
     m_layout->addWidget(accountWidget);
 
-    QListWidgetItem *newItem = createQListWidgetItem(name, "gmail", name, accountWidget);
+    QListWidgetItem *newItem = createQListWidgetItem(name, name, type, accountWidget);
     m_ui->accList->addItem(newItem);
 
     int row = m_ui->accList->row(m_newAccountItem);
@@ -202,27 +207,27 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup services = account(name).group("services");
+    KConfigGroup services = account(name, type).group("services");
 
 #warning Fix Tasks but not Calendar
     if (services.readEntry("Contact", 0) == 2) {
-        CreateContact *create = new CreateContact(account(name), this);
+        CreateContact *create = new CreateContact(account(name, type), this);
         create->start();
     }
 
     if (services.readEntry("Calendar", 0) == 2) {
-        CreateCalendar *createCalendar = new CreateCalendar(account(name), this);
+        CreateCalendar *createCalendar = new CreateCalendar(account(name, type), this);
         connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
         createCalendar->start();
     }
 
     if (services.readEntry("EMail", 0) == 2) {
-        CreateMail *createMail = new CreateMail(account(name), this);
+        CreateMail *createMail = new CreateMail(account(name, type), this);
         createMail->start();
     }
 
     if (services.readEntry("Chat", 0) == 2) {
-        CreateChat *createChat = new CreateChat(account(name), this);
+        CreateChat *createChat = new CreateChat(account(name, type), this);
         createChat->start();
     }
 }
@@ -239,13 +244,14 @@ void WebAccounts::createTasks(KJob* job)
     createTask->start();
 }
 
-QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& icon, const QString& title, QWidget *widget)
+QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget *widget)
 {
     QListWidgetItem *newItem = new QListWidgetItem();
-    newItem->setIcon(QIcon::fromTheme(icon));
+    newItem->setIcon(QIcon::fromTheme(iconForType(type)));
     newItem->setText(name);
     newItem->setData(Qt::UserRole, QVariant(title));
     newItem->setData(Qt::UserRole + 1, QVariant::fromValue<QWidget *>(widget));
+    newItem->setData(Qt::UserRole + 2, QVariant(type));
 
     return newItem;
 }
@@ -255,9 +261,26 @@ KConfigGroup WebAccounts::accounts()
     return KSharedConfig::openConfig("webaccounts")->group("accounts");
 }
 
-KConfigGroup WebAccounts::account(const QString& accName)
+KConfigGroup WebAccounts::account(const QString& accName, const QString &type)
 {
-    return accounts().group(accName);
+    return accounts().group(type).group(accName);
+}
+
+QString WebAccounts::iconForType(const QString& type)
+{
+    if (type == "google") {
+        return "gmail";
+    }
+
+    if (type == "facebook") {
+        return "facebookresource";
+    }
+
+    if (type == "new") {
+        return "applications-education-miscellaneous";
+    }
+
+    return "gmail";
 }
 
 #include "webaccounts.moc"

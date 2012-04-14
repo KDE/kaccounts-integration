@@ -79,7 +79,7 @@ void GoogleWizard::done(int result)
     wallet->sync();
     wallet->deleteLater();
 
-    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group(m_username);
+    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group("google").group(m_username);
 
     config.group("properties").writeEntry("type", "google");
 
