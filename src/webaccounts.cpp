@@ -40,6 +40,7 @@
 #include <QtGui/QStackedLayout>
 
 #include <kpluginfactory.h>
+#include <boost/graph/graph_concepts.hpp>
 
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
@@ -190,28 +191,12 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
     m_ui->accList->setCurrentItem(newItem);
 
-    KConfigGroup services = account(name, type).group("services");
+    KConfigGroup group = account(name, type);
 
-#warning Fix Tasks but not Calendar
-    if (services.readEntry("Contact", 0) == 2) {
-        CreateContact *create = new CreateContact(account(name, type), this);
-        create->start();
-    }
+    if (type == "google") {
+        createGoogleAccount(group);
+    } else if(type == "facebook") {
 
-    if (services.readEntry("Calendar", 0) == 2) {
-        CreateCalendar *createCalendar = new CreateCalendar(account(name, type), this);
-        connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
-        createCalendar->start();
-    }
-
-    if (services.readEntry("EMail", 0) == 2) {
-        CreateMail *createMail = new CreateMail(account(name, type), this);
-        createMail->start();
-    }
-
-    if (services.readEntry("Chat", 0) == 2) {
-        CreateChat *createChat = new CreateChat(account(name, type), this);
-        createChat->start();
     }
 }
 
@@ -264,6 +249,33 @@ QString WebAccounts::iconForType(const QString& type)
     }
 
     return "gmail";
+}
+
+void WebAccounts::createGoogleAccount(KConfigGroup group)
+{
+    KConfigGroup services = group.group("services");
+
+    #warning Fix Tasks but not Calendar
+    if (services.readEntry("Contact", 0) == 2) {
+        CreateContact *create = new CreateContact(group, this);
+        create->start();
+    }
+
+    if (services.readEntry("Calendar", 0) == 2) {
+        CreateCalendar *createCalendar = new CreateCalendar(group, this);
+        connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
+        createCalendar->start();
+    }
+
+    if (services.readEntry("EMail", 0) == 2) {
+        CreateMail *createMail = new CreateMail(group, this);
+        createMail->start();
+    }
+
+    if (services.readEntry("Chat", 0) == 2) {
+        CreateChat *createChat = new CreateChat(group, this);
+        createChat->start();
+    }
 }
 
 void WebAccounts::removeGoogleAccount(KConfigGroup group)
