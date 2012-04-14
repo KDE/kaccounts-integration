@@ -124,36 +124,11 @@ void WebAccounts::rmBtnClicked()
     QString type = item->data(Qt::UserRole + 2).toString();
 
     KConfigGroup group = account(accName, type);
-    KConfigGroup services = group.group("services");
 
-    if (services.readEntry("EMail", 0) == 1) {
-        RemoveEmail *removeEmail = new RemoveEmail(group, this);
-        connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-        removeEmail->start();
-    }
+    if (type == "google") {
+        removeGoogleAccount(group);
+    } else if(type == "facebook") {
 
-    if (services.readEntry("Contact", 0) == 1) {
-        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
-        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-        removeContact->start();
-    }
-
-    if (services.readEntry("Calendar", 0) == 1) {
-        RemoveCalendar *removeCalendar = new RemoveCalendar(group, this);
-        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-        removeCalendar->start();
-    }
-
-     if (services.readEntry("Tasks", 0) == 1) {
-        RemoveTask *removeCalendar = new RemoveTask(group, this);
-        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-        removeCalendar->start();
-     }
-
-    if (services.readEntry("Chat", 0) == 1) {
-        RemoveChat *removeChat = new RemoveChat(group, this);
-        connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
-        removeChat->start();
     }
 
     removeAccountIfPossible(accName, type);
@@ -289,6 +264,40 @@ QString WebAccounts::iconForType(const QString& type)
     }
 
     return "gmail";
+}
+
+void WebAccounts::removeGoogleAccount(KConfigGroup group)
+{
+    KConfigGroup services = group.group("services");
+    if (services.readEntry("EMail", 0) == 1) {
+        RemoveEmail *removeEmail = new RemoveEmail(group, this);
+        connect(removeEmail, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeEmail->start();
+    }
+
+    if (services.readEntry("Contact", 0) == 1) {
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
+        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeContact->start();
+    }
+
+    if (services.readEntry("Calendar", 0) == 1) {
+        RemoveCalendar *removeCalendar = new RemoveCalendar(group, this);
+        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeCalendar->start();
+    }
+
+     if (services.readEntry("Tasks", 0) == 1) {
+        RemoveTask *removeCalendar = new RemoveTask(group, this);
+        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeCalendar->start();
+     }
+
+    if (services.readEntry("Chat", 0) == 1) {
+        RemoveChat *removeChat = new RemoveChat(group, this);
+        connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeChat->start();
+    }
 }
 
 #include "webaccounts.moc"

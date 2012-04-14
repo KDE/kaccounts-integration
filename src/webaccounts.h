@@ -53,6 +53,7 @@ private:
     QListWidgetItem* createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget* widget);
     QString iconForType(const QString &type);
     void removeAccountIfPossible(const QString &name, const QString &type);
+    void removeGoogleAccount(KConfigGroup group);
 
 private:
     Create *m_create;
