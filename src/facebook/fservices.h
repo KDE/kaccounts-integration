@@ -16,40 +16,30 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef FACEBOOK_H
-#define FACEBOOK_H
+#ifndef FSERVICES_H
+#define FSERVICES_H
 
-#include <QWizard>
-#include <QHash>
+#include "ui_services.h"
+#include <QWizardPage>
 
-class FacebookWizard : public QWizard
+class FacebookWizard;
+class FServices : public QWizardPage, Ui::Services
 {
     Q_OBJECT
     public:
-        explicit FacebookWizard(QWidget* parent);
-        virtual ~FacebookWizard();
+        explicit FServices(FacebookWizard *wizard);
+        virtual ~FServices();
 
-        virtual void done(int result);
+        virtual void initializePage();
 
-        void setUsername(const QString &username);
-        void setPassword(const QString &password);
-        void setAccessToken(const QString &accessToken);
-
-        const QString username() const;
-        const QString password() const;
-        const QString accessToken() const;
-
-        void activateOption(const QString& name, bool checked);
-
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
+    private Q_SLOTS:
+        void optionToggled(const QString &name, bool checked);
 
     private:
-        QString m_username;
-        QString m_password;
-        QString m_accessToken;
+        void addOption(const QString& text, const QString& displayText);
 
-        QHash<QString, int> m_services;
+    private:
+        FacebookWizard *m_wizard;
 };
 
-#endif //FACEBOOK_H
+#endif //FSERVICES_H

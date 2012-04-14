@@ -16,40 +16,39 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef FACEBOOK_H
-#define FACEBOOK_H
+#include "fservices.h"
+#include "facebook.h"
+#include "google/serviceoption.h"
 
-#include <QWizard>
-#include <QHash>
-
-class FacebookWizard : public QWizard
+FServices::FServices(FacebookWizard* wizard)
+ : QWizardPage()
+ , m_wizard(wizard)
 {
-    Q_OBJECT
-    public:
-        explicit FacebookWizard(QWidget* parent);
-        virtual ~FacebookWizard();
+    setupUi(this);
+}
 
-        virtual void done(int result);
+FServices::~FServices()
+{
 
-        void setUsername(const QString &username);
-        void setPassword(const QString &password);
-        void setAccessToken(const QString &accessToken);
+}
 
-        const QString username() const;
-        const QString password() const;
-        const QString accessToken() const;
+void FServices::initializePage()
+{
+    addOption("Chat", i18n("Chat"));
+    addOption("contacts_events", i18n("Contacts and Events"));
+}
 
-        void activateOption(const QString& name, bool checked);
+void FServices::addOption(const QString& text, const QString& displayText)
+{
+    ServiceOption *option = new ServiceOption(text, displayText, this);
+    connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
 
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
+    m_wizard->activateOption(text, true);
 
-    private:
-        QString m_username;
-        QString m_password;
-        QString m_accessToken;
+    d_layout->addWidget(option);
+}
 
-        QHash<QString, int> m_services;
-};
-
-#endif //FACEBOOK_H
+void FServices::optionToggled(const QString& name, bool checked)
+{
+    m_wizard->activateOption(name, checked);
+}

@@ -22,6 +22,8 @@ set(webaccounts_SRCS
 
     facebook/facebook.cpp
     facebook/fcredentials.cpp
+    facebook/foauth.cpp
+    facebook/fservices.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -42,8 +44,8 @@ qt4_automoc(${webaccounts_SRCS})
 kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui google/google.ui google/oauth.ui google/services.ui google/serviceoption.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
-message (WARNING ${KDEPIMLIBS_AKONADI_LIBS})
-target_link_libraries(webaccounts ${KDE4_KIO_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDEPIMLIBS_AKONADI_LIBS} ${KDEPIMLIBS_MAILTRANSPORT_LIBS} ${LIBKGOOGLE_LIBRARY} ${TELEPATHY_QT4_LIBRARIES} ${KTP_LIBRARIES})
+
+target_link_libraries(webaccounts ${KDE4_KIO_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDEPIMLIBS_AKONADI_LIBS} ${KDEPIMLIBS_MAILTRANSPORT_LIBS} ${LIBKGOOGLE_LIBRARY} ${TELEPATHY_QT4_LIBRARIES} ${KTP_LIBRARIES} ${LIBKFACEBOOK_LIBRARY})
 
 install(TARGETS webaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
 

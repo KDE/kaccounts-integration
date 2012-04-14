@@ -16,40 +16,30 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef FACEBOOK_H
-#define FACEBOOK_H
+#ifndef FOAUTH_H
+#define FOAUTH_H
 
-#include <QWizard>
-#include <QHash>
+#include <google/oauth.h>
 
-class FacebookWizard : public QWizard
+class FacebookWizard;
+class FOauth : public QWizardPage, Ui::OAuth
 {
     Q_OBJECT
     public:
-        explicit FacebookWizard(QWidget* parent);
-        virtual ~FacebookWizard();
+        explicit FOauth(FacebookWizard* parent);
+        virtual ~FOauth();
 
-        virtual void done(int result);
+        virtual bool validatePage();
+        virtual void initializePage();
+        virtual bool isComplete() const;
 
-        void setUsername(const QString &username);
-        void setPassword(const QString &password);
-        void setAccessToken(const QString &accessToken);
-
-        const QString username() const;
-        const QString password() const;
-        const QString accessToken() const;
-
-        void activateOption(const QString& name, bool checked);
-
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
+    private Q_SLOTS:
+        void authenticated(const QString &accessToken);
+        void error();
 
     private:
-        QString m_username;
-        QString m_password;
-        QString m_accessToken;
-
-        QHash<QString, int> m_services;
+        FacebookWizard *m_wizard;
+        bool m_valid;
 };
 
-#endif //FACEBOOK_H
+#endif //FOAUTH_H
