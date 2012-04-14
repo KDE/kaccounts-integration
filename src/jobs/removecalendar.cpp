@@ -25,6 +25,7 @@ RemoveCalendar::RemoveCalendar(KConfigGroup group, QObject* parent)
  , m_config(group)
 {
     setObjectName(m_config.name());
+    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
 RemoveCalendar::~RemoveCalendar()

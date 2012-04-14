@@ -32,6 +32,7 @@ RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, KConfigGroup& 
 , m_config(group)
 {
     setObjectName(m_config.name());
+    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
 

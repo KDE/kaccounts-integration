@@ -156,6 +156,7 @@ void WebAccounts::rmBtnClicked()
         removeChat->start();
     }
 
+    removeAccountIfPossible(accName, type);
     m_ui->accList->takeItem(m_ui->accList->row(item));
 
     delete item->data(Qt::UserRole + 1).value<QWidget *>();
@@ -163,20 +164,27 @@ void WebAccounts::rmBtnClicked()
 
 void WebAccounts::serviceRemoved(KJob *job)
 {
-//     QString accName = job->objectName();
-//     KConfigGroup services = account(accName).group("services");
-//     QStringList keys = services.keyList();
-//     bool deleteAccount = true;
-//     Q_FOREACH(const QString &key, keys) {
-//         if (services.readEntry(key, 0) != 0) {
-//             deleteAccount = false;
-//             break;
-//         }
-//     }
-//
-//     if (deleteAccount) {
-//         KSharedConfig::openConfig("webaccounts")->group("accounts").deleteGroup(accName);
-//     }
+    QString accName = job->objectName();
+    QString type = job->property("type").toString();
+
+    removeAccountIfPossible(accName, type);
+}
+
+void WebAccounts::removeAccountIfPossible(const QString& name, const QString& type)
+{
+    KConfigGroup services = account(name, type).group("services");
+    QStringList keys = services.keyList();
+    bool deleteAccount = true;
+    Q_FOREACH(const QString &key, keys) {
+        if (services.readEntry(key, 0) != 0) {
+            deleteAccount = false;
+            break;
+        }
+    }
+
+    if (deleteAccount) {
+        KSharedConfig::openConfig("webaccounts")->group("accounts").group(type).deleteGroup(name);
+    }
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)

@@ -52,6 +52,7 @@ private:
     void addAccount(const QString& name, const QString& accountName, const QString& type);
     QListWidgetItem* createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget* widget);
     QString iconForType(const QString &type);
+    void removeAccountIfPossible(const QString &name, const QString &type);
 
 private:
     Create *m_create;
