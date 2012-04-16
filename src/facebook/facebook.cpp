@@ -73,10 +73,12 @@ void FacebookWizard::done(int result)
     wallet->setFolder("WebAccounts");
     wallet->writePassword(m_username, m_password);
     wallet->writeEntry("facebookUsername", m_facebookUsername.toAscii());
+    wallet->writeEntry("facebookAccessToken", m_accessToken.toAscii());
     wallet->sync();
     wallet->deleteLater();
 
     KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group("facebook").group(m_username);
+    config.writeEntry("type", "google");
 
     KConfigGroup group = config.group("services");
     QStringList keys = m_services.keys();
