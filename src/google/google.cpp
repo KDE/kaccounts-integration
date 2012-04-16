@@ -81,7 +81,7 @@ void GoogleWizard::done(int result)
 
     KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group("google").group(m_username);
 
-    config.group("properties").writeEntry("type", "google");
+    config.writeEntry("type", "google");
 
     KConfigGroup group = config.group("services");
     QStringList keys = m_services.keys();
