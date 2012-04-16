@@ -32,6 +32,7 @@
 #include "jobs/removeakonadiresource.h"
 
 #include "jobs/fcreatechat.h"
+#include "jobs/fcreatepim.h"
 
 #include <QDebug>
 
@@ -131,7 +132,7 @@ void WebAccounts::rmBtnClicked()
     if (type == "google") {
         removeGoogleAccount(group);
     } else if(type == "facebook") {
-
+        removeFacebookACcount(group);
     }
 
     removeAccountIfPossible(accName, type);
@@ -322,11 +323,27 @@ void WebAccounts::createFacebookAccount(KConfigGroup group)
         FCreateChat *create = new FCreateChat(group, this);
         create->start();
     }
+
+    if (services.readEntry("PIM", 0) == 2) {
+        FCreatePIM *create = new FCreatePIM(group, this);
+        create->start();
+    }
 }
 
 void WebAccounts::removeFacebookACcount(KConfigGroup group)
 {
+    KConfigGroup services = group.group("services");
+    if (services.readEntry("Chat", 0) == 1) {
+        RemoveChat *removeChat = new RemoveChat(group, this);
+        connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeChat->start();
+    }
 
+    if (services.readEntry("PIM", 0) == 1) {
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("facebookResource", group, this);
+        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeContact->start();
+    }
 }
 
 #include "webaccounts.moc"

@@ -25,6 +25,7 @@ set(webaccounts_SRCS
     facebook/foauth.cpp
     facebook/fservices.cpp
     jobs/fcreatechat.cpp
+    jobs/fcreatepim.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -38,6 +39,10 @@ qt4_add_dbus_interface(webaccounts_SRCS
 qt4_add_dbus_interface(webaccounts_SRCS
     jobs/org.kde.Akonadi.GoogleContacts.Settings.xml
     google_contact_settings
+)
+qt4_add_dbus_interface(webaccounts_SRCS
+    jobs/org.kde.Akonadi.Facebook.Settings.xml
+    facebook_settings
 )
 
 qt4_automoc(${webaccounts_SRCS})
