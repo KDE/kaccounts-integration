@@ -20,8 +20,11 @@
 #include "facebook.h"
 
 #include <QDebug>
+#include <qjson/parser.h>
 
 #include <kfacebook/authenticationdialog.h>
+
+#include <KIO/Job>
 
 FOauth::FOauth(FacebookWizard* parent)
  : QWizardPage(parent)
@@ -48,7 +51,8 @@ void FOauth::initializePage()
                 << "friends_work_history"
                 << "friends_relationships"
                 << "user_events"
-                << "user_notes";
+                << "user_notes"
+                << "user_about_me";
     authDialog->setPermissions( permissions );
     authDialog->setEnabled(true);
     authDialog->setUsername(m_wizard->username());
@@ -72,16 +76,49 @@ bool FOauth::isComplete() const
 
 void FOauth::authenticated(const QString &accessToken)
 {
+    sender()->disconnect();
     m_wizard->setAccessToken(accessToken);
-    m_valid = true;
 
-    label->setText(i18n("Authenticated"));
-    Q_EMIT completeChanged();
-    m_wizard->next();
+    label->setText(i18n("Checking username"));
+
+    KUrl url("https://graph.facebook.com/me");
+    url.addQueryItem("access_token", accessToken);
+
+    qDebug() << url;
+    KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));
+    job->start();
 }
 
 void FOauth::error()
 {
     m_valid = false;
     label->setText(i18n("Error trying to gain access"));
+}
+
+void FOauth::gotUsername(KIO::Job *job, const QByteArray &data)
+{
+    m_json.append(data);
+}
+
+void FOauth::usernameFinished()
+{
+    QJson::Parser parser;
+    QMap <QString, QVariant > data = parser.parse(m_json).toMap();;
+
+    if (!data.contains("username")) {
+        return;
+    }
+
+    QString username = data["username"].toString();
+    if (username.isEmpty()) {
+        return;
+    }
+
+    m_valid = true;
+    m_wizard->setFacebookUsername(username);
+
+    Q_EMIT completeChanged();
+    m_wizard->next();
 }

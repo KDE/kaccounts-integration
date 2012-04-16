@@ -12,6 +12,7 @@ find_package(LibKGoogle REQUIRED)
 find_package(LibKFacebook REQUIRED)
 find_package(KdepimLibs 4.7.41 REQUIRED)
 find_package (TelepathyQt4 0.8.9 REQUIRED)
+find_package(QJSON)
 find_package (KTp REQUIRED)
 
 add_definitions (${KDE4_DEFINITIONS}

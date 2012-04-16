@@ -21,6 +21,10 @@
 
 #include <google/oauth.h>
 
+namespace KIO {
+    class Job;
+};
+class KJob;
 class FacebookWizard;
 class FOauth : public QWizardPage, Ui::OAuth
 {
@@ -36,8 +40,11 @@ class FOauth : public QWizardPage, Ui::OAuth
     private Q_SLOTS:
         void authenticated(const QString &accessToken);
         void error();
+        void gotUsername(KIO::Job* job, const QByteArray &data);
+        void usernameFinished();
 
     private:
+        QByteArray m_json;
         FacebookWizard *m_wizard;
         bool m_valid;
 };

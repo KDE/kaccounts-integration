@@ -34,10 +34,12 @@ class FacebookWizard : public QWizard
         void setUsername(const QString &username);
         void setPassword(const QString &password);
         void setAccessToken(const QString &accessToken);
+        void setFacebookUsername(const QString &username);
 
         const QString username() const;
         const QString password() const;
         const QString accessToken() const;
+        const QString facebookUsername() const;
 
         void activateOption(const QString& name, bool checked);
 
@@ -48,6 +50,7 @@ class FacebookWizard : public QWizard
         QString m_username;
         QString m_password;
         QString m_accessToken;
+        QString m_facebookUsername;
 
         QHash<QString, int> m_services;
 };

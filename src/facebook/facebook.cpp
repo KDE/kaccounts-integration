@@ -72,6 +72,7 @@ void FacebookWizard::done(int result)
     wallet->createFolder("WebAccounts");
     wallet->setFolder("WebAccounts");
     wallet->writePassword(m_username, m_password);
+    wallet->writeEntry("facebookUsername", m_facebookUsername.toAscii());
     wallet->sync();
     wallet->deleteLater();
 
@@ -104,6 +105,11 @@ void FacebookWizard::setAccessToken(const QString& accessToken)
     m_accessToken = accessToken;
 }
 
+void FacebookWizard::setFacebookUsername(const QString& username)
+{
+    m_facebookUsername = username;
+}
+
 const QString FacebookWizard::username() const
 {
     return m_username;
@@ -117,6 +123,11 @@ const QString FacebookWizard::password() const
 const QString FacebookWizard::accessToken() const
 {
     return m_accessToken;
+}
+
+const QString FacebookWizard::facebookUsername() const
+{
+    return m_facebookUsername;
 }
 
 void FacebookWizard::activateOption(const QString& name, bool checked )
