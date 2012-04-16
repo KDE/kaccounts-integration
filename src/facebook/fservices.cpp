@@ -35,7 +35,7 @@ FServices::~FServices()
 void FServices::initializePage()
 {
     addOption("Chat", i18n("Chat"));
-    addOption("contacts_events", i18n("Contacts and Events"));
+    addOption("PIM", i18n("Contacts and Events"));
 }
 
 void FServices::addOption(const QString& text, const QString& displayText)
