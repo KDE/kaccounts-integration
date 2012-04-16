@@ -31,6 +31,8 @@
 #include "jobs/removetask.h"
 #include "jobs/removeakonadiresource.h"
 
+#include "jobs/fcreatechat.h"
+
 #include <QDebug>
 
 #include <QtGui/QLabel>
@@ -196,7 +198,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
     if (type == "google") {
         createGoogleAccount(group);
     } else if(type == "facebook") {
-
+        createFacebookAccount(group);
     }
 }
 
@@ -310,6 +312,21 @@ void WebAccounts::removeGoogleAccount(KConfigGroup group)
         connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeChat->start();
     }
+}
+
+void WebAccounts::createFacebookAccount(KConfigGroup group)
+{
+    KConfigGroup services = group.group("services");
+
+    if (services.readEntry("Chat", 0) == 2) {
+        FCreateChat *create = new FCreateChat(group, this);
+        create->start();
+    }
+}
+
+void WebAccounts::removeFacebookACcount(KConfigGroup group)
+{
+
 }
 
 #include "webaccounts.moc"

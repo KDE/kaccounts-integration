@@ -16,55 +16,31 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef webaccounts_H
-#define webaccounts_H
+#ifndef F_CREATE_CHAT_H
+#define F_CREATE_CHAT_H
 
-#include <kcmodule.h>
+#include <TelepathyQt/AccountManager>
 
-class KJob;
-class Create;
-class QStackedLayout;
-class QListWidgetItem;
-class KConfigGroup;
-namespace Ui {
-    class KCMWebAccounts;
-}
+#include <KJob>
+#include <KConfigGroup>
 
-class WebAccounts : public KCModule
+class FCreateChat : public KJob
 {
-Q_OBJECT
-public:
-    WebAccounts(QWidget *parent, const QVariantList&);
-    virtual ~WebAccounts();
+    Q_OBJECT
+    public:
+        explicit FCreateChat(KConfigGroup &group, QObject* parent = 0);
+        virtual ~FCreateChat();
 
-private Q_SLOTS:
-    void addBtnClicked();
-    void rmBtnClicked();
-    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-    void newAccount(const QString &type, const QString &name);
-    void addExistingAccounts();
-    void createTasks(KJob*);
-    void serviceRemoved(KJob *job);
+        virtual void start();
 
-private:
-    KConfigGroup accounts();
-    KConfigGroup account(const QString &accName, const QString &type);
-    void addAccount(const QString& name, const QString& accountName, const QString& type);
-    QListWidgetItem* createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget* widget);
-    QString iconForType(const QString &type);
-    void removeAccountIfPossible(const QString &name, const QString &type);
+    public Q_SLOTS:
+        void createAccount();
+        void onAccountManagerReady(Tp::PendingOperation *op);
+        void onAccountCreated(Tp::PendingOperation *op);
 
-    void createGoogleAccount(KConfigGroup group);
-    void removeGoogleAccount(KConfigGroup group);
-
-    void createFacebookAccount(KConfigGroup group);
-    void removeFacebookACcount(KConfigGroup group);
-
-private:
-    Create *m_create;
-    QStackedLayout *m_layout;
-    QListWidgetItem *m_newAccountItem;
-    Ui::KCMWebAccounts *m_ui;
+    private:
+        KConfigGroup m_config;
+        Tp::AccountManagerPtr m_manager;
 };
 
-#endif // webaccounts_H
+#endif //F_CREATE_CHAT_H
