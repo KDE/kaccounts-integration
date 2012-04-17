@@ -21,12 +21,27 @@
 
 #include <QtGui/QWizard>
 
+#include <kurl.h>
+
 class OwnCloudWizard : public QWizard
 {
     Q_OBJECT
     public:
         explicit OwnCloudWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
         virtual ~OwnCloudWizard();
+
+        void setUsername(const QString &username);
+        void setPassword(const QString &password);
+        void setServer(const KUrl &server);
+
+        const QString username() const;
+        const QString password() const;
+        const KUrl server() const;
+
+    private:
+        QString m_username;
+        QString m_password;
+        KUrl m_server;
 };
 
 #endif //OWNCLOUD_H

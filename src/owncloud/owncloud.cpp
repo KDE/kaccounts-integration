@@ -43,3 +43,33 @@ OwnCloudWizard::~OwnCloudWizard()
 {
 
 }
+
+void OwnCloudWizard::setUsername(const QString& username)
+{
+    m_username = username;
+}
+
+void OwnCloudWizard::setPassword(const QString& password)
+{
+    m_password = password;
+}
+
+void OwnCloudWizard::setServer(const KUrl& server)
+{
+    m_server = server;
+}
+
+const QString OwnCloudWizard::username() const
+{
+    return m_username;
+}
+
+const QString OwnCloudWizard::password() const
+{
+    return m_password;
+}
+
+const KUrl OwnCloudWizard::server() const
+{
+    return m_server;
+}
