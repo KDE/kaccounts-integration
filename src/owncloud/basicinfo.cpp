@@ -54,7 +54,15 @@ bool BasicInfo::validatePage()
         return false;
     }
 
-    return m_validServer;
+    if (!m_validServer) {
+        return false;
+    }
+
+    m_wizard->setUsername(username->text());
+    m_wizard->setPassword(password->text());
+    m_wizard->setServer(m_server);
+
+    return true;
 }
 
 void BasicInfo::checkServer()
@@ -130,6 +138,8 @@ void BasicInfo::fileChecked(KJob* job)
         return;
     }
 
+    m_server = kJob->url();
+    m_server.setFileName("");
     setResult(true);
 }
 
