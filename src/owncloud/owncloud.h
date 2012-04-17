@@ -16,45 +16,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef CREATE_H
-#define CREATE_H
+#ifndef OWNCLOUD_H
+#define OWNCLOUD_H
 
-#include <QtCore/QObject>
+#include <QtGui/QWizard>
 
-#include <libkgoogle/account.h>
-
-class QDialog;
-class QWidget;
-namespace Ui {
-    class Google;
-    class createForm;
-}
-
-class Create : public QObject
+class OwnCloudWizard : public QWizard
 {
-Q_OBJECT
-
+    Q_OBJECT
     public:
-        Create (QWidget *parent);
-        virtual ~Create();
-
-        QWidget* widget();
-
-    private Q_SLOTS:
-        void stablishConnections();
-        void startGoogle();
-        void startFacebook();
-        void startOwncloud();
-        void startLive();
-
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
-
-    private:
-        QDialog *m_dialog;
-        QWidget *m_parent;
-        Ui::Google *m_google;
-        Ui::createForm *m_form;
-
+        explicit OwnCloudWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+        virtual ~OwnCloudWizard();
 };
-#endif// CREATE_H
+
+#endif //OWNCLOUD_H

@@ -19,6 +19,7 @@
 #include "create.h"
 #include "google/google.h"
 #include "facebook/facebook.h"
+#include "owncloud/owncloud.h"
 
 #include "ui_types.h"
 
@@ -64,6 +65,7 @@ void Create::stablishConnections()
     connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
     connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
     connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
+    connect(m_form->owncloudBtn, SIGNAL(clicked(bool)), this, SLOT(startOwncloud()));
 }
 
 void Create::startGoogle()
@@ -83,4 +85,11 @@ void Create::startFacebook()
 void Create::startLive()
 {
     qWarning("Live not implemented yet");
+}
+
+void Create::startOwncloud()
+{
+    OwnCloudWizard *owncloud = new OwnCloudWizard(m_parent);
+    connect(owncloud, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
+    owncloud->show();
 }

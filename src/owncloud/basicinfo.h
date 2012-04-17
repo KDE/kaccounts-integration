@@ -16,45 +16,47 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef CREATE_H
-#define CREATE_H
+#ifndef BASIC_INFO_H
+#define BASIC_INFO_H
 
-#include <QtCore/QObject>
+#include "ui_basicinfo.h"
 
-#include <libkgoogle/account.h>
+#include <QWizardPage>
+#include <KDE/KIO/AccessManager>
 
-class QDialog;
-class QWidget;
-namespace Ui {
-    class Google;
-    class createForm;
-}
-
-class Create : public QObject
+namespace KIO
 {
-Q_OBJECT
-
+    class Job;
+};
+class KJob;
+class OwnCloudWizard;
+class KPixmapSequenceOverlayPainter;
+class BasicInfo : public QWizardPage, Ui_Owncloud
+{
+    Q_OBJECT
     public:
-        Create (QWidget *parent);
-        virtual ~Create();
+        BasicInfo(OwnCloudWizard *parent);
+        virtual ~BasicInfo();
 
-        QWidget* widget();
+        virtual bool validatePage();
 
     private Q_SLOTS:
-        void stablishConnections();
-        void startGoogle();
-        void startFacebook();
-        void startOwncloud();
-        void startLive();
-
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
+        void checkServer();
+        void fileChecked(KJob* job);
+        void dataReceived(KIO::Job *job, const QByteArray &data);
 
     private:
-        QDialog *m_dialog;
-        QWidget *m_parent;
-        Ui::Google *m_google;
-        Ui::createForm *m_form;
+        void checkServer(const QString &path);
+        void checkServer(const KUrl &url);
+        void figureOutServer(const QString& urlStr);
 
+        void setWorking(bool start);
+        void setResult(bool result);
+
+    private:
+        QByteArray m_json;
+        KPixmapSequenceOverlayPainter *m_painter;
+        OwnCloudWizard *m_wizard;
 };
-#endif// CREATE_H
+
+#endif //BASIC_INFO_H

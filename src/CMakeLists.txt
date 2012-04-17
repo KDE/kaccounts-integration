@@ -26,6 +26,9 @@ set(webaccounts_SRCS
     facebook/fservices.cpp
     jobs/fcreatechat.cpp
     jobs/fcreatepim.cpp
+
+    owncloud/owncloud.cpp
+    owncloud/basicinfo.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -47,7 +50,7 @@ qt4_add_dbus_interface(webaccounts_SRCS
 
 qt4_automoc(${webaccounts_SRCS})
 
-kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui google/google.ui google/oauth.ui google/services.ui google/serviceoption.ui)
+kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui google/google.ui google/oauth.ui google/services.ui google/serviceoption.ui owncloud/basicinfo.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
 

@@ -16,45 +16,30 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef CREATE_H
-#define CREATE_H
+#include "owncloud.h"
+#include "basicinfo.h"
 
-#include <QtCore/QObject>
+#include <klocalizedstring.h>
+#include <kpushbutton.h>
+#include <kstandardguiitem.h>
 
-#include <libkgoogle/account.h>
+OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
+{
+    BasicInfo *basicInfo = new BasicInfo(this);
 
-class QDialog;
-class QWidget;
-namespace Ui {
-    class Google;
-    class createForm;
+    addPage(basicInfo);
+
+    setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
+    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
+    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
+
+    //We do not want "Forward" as text
+    setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard", "Next"));
+    setButtonText(QWizard::FinishButton, i18nc("Action to finish the wizard", "Finish"));
 }
 
-class Create : public QObject
+OwnCloudWizard::~OwnCloudWizard()
 {
-Q_OBJECT
 
-    public:
-        Create (QWidget *parent);
-        virtual ~Create();
-
-        QWidget* widget();
-
-    private Q_SLOTS:
-        void stablishConnections();
-        void startGoogle();
-        void startFacebook();
-        void startOwncloud();
-        void startLive();
-
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
-
-    private:
-        QDialog *m_dialog;
-        QWidget *m_parent;
-        Ui::Google *m_google;
-        Ui::createForm *m_form;
-
-};
-#endif// CREATE_H
+}
