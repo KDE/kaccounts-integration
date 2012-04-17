@@ -251,7 +251,7 @@ QString WebAccounts::iconForType(const QString& type)
         return "applications-education-miscellaneous";
     }
 
-    return "gmail";
+    return type;
 }
 
 void WebAccounts::createGoogleAccount(KConfigGroup group)
