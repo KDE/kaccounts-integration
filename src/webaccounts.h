@@ -60,6 +60,8 @@ private:
     void createFacebookAccount(KConfigGroup group);
     void removeFacebookACcount(KConfigGroup group);
 
+    void createOwncloudAccount(KConfigGroup group);
+
 private:
     Create *m_create;
     QStackedLayout *m_layout;

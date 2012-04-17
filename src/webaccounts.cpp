@@ -34,6 +34,8 @@
 #include "jobs/fcreatechat.h"
 #include "jobs/fcreatepim.h"
 
+#include "jobs/ocreatefile.h"
+
 #include <QDebug>
 
 #include <QtGui/QLabel>
@@ -43,7 +45,7 @@
 #include <QtGui/QStackedLayout>
 
 #include <kpluginfactory.h>
-#include <boost/graph/graph_concepts.hpp>
+#include <kstandarddirs.h>
 
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
@@ -200,6 +202,8 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
         createGoogleAccount(group);
     } else if(type == "facebook") {
         createFacebookAccount(group);
+    } else if (type == "owncloud") {
+        createOwncloudAccount(group);
     }
 }
 
@@ -343,6 +347,15 @@ void WebAccounts::removeFacebookACcount(KConfigGroup group)
         RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("facebookResource", group, this);
         connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeContact->start();
+    }
+}
+
+void WebAccounts::createOwncloudAccount(KConfigGroup group)
+{
+    KConfigGroup services = group.group("services");
+    if (services.readEntry("File", 0) == 2) {
+        OCreateFile *create = new OCreateFile(group, this);
+        create->start();
     }
 }
 
