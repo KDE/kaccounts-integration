@@ -53,6 +53,47 @@ OwnCloudWizard::~OwnCloudWizard()
 
 }
 
+void OwnCloudWizard::done(int result)
+{
+    if (result != 1) {
+        return;
+    }
+
+    WId windowId = 0;
+    if (qApp->activeWindow()) {
+        windowId = qApp->activeWindow()->winId();
+    }
+
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Synchronous);
+
+    if (!wallet->isOpen() || !wallet->isEnabled()) {
+        return;
+    }
+
+    wallet->createFolder("WebAccounts");
+    wallet->setFolder("WebAccounts");
+    wallet->createFolder("owncloud");
+    wallet->setFolder("owncloud");
+    wallet->createFolder(m_username);
+    wallet->setFolder(m_username);
+    wallet->writePassword(m_username, m_password);
+    wallet->sync();
+    wallet->deleteLater();
+
+    KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group("owncloud").group(m_username);
+    config.writeEntry("type", "owncloud");
+    config.writeEntry("server", m_server.url());
+    KConfigGroup group = config.group("services");
+    QStringList keys = m_services.keys();
+    Q_FOREACH(const QString &key, keys) {
+        group.writeEntry(key, m_services[key]);
+    }
+
+    Q_EMIT newAccount("owncloud", m_username);
+
+    QWizard::done(result);
+}
+
 void OwnCloudWizard::setUsername(const QString& username)
 {
     m_username = username;
@@ -81,4 +122,14 @@ const QString OwnCloudWizard::password() const
 const KUrl OwnCloudWizard::server() const
 {
     return m_server;
+}
+
+void OwnCloudWizard::activateOption(const QString& name, bool checked )
+{
+    if (!checked) {
+        m_services[name] = 0;
+        return;
+    }
+
+    m_services[name] = 2;
 }

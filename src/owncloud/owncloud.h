@@ -30,6 +30,8 @@ class OwnCloudWizard : public QWizard
         explicit OwnCloudWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
         virtual ~OwnCloudWizard();
 
+        virtual void done(int result);
+
         void setUsername(const QString &username);
         void setPassword(const QString &password);
         void setServer(const KUrl &server);
@@ -38,10 +40,17 @@ class OwnCloudWizard : public QWizard
         const QString password() const;
         const KUrl server() const;
 
+        void activateOption(const QString& name, bool checked);
+
+    Q_SIGNALS:
+        void newAccount(const QString &type, const QString &name);
+
     private:
         QString m_username;
         QString m_password;
         KUrl m_server;
+
+        QHash<QString, int> m_services;
 };
 
 #endif //OWNCLOUD_H
