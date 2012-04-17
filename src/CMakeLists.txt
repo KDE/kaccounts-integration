@@ -30,6 +30,7 @@ set(webaccounts_SRCS
     owncloud/owncloud.cpp
     owncloud/basicinfo.cpp
     owncloud/connecting.cpp
+    owncloud/oservices.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS

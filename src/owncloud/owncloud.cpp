@@ -19,18 +19,24 @@
 #include "owncloud.h"
 #include "basicinfo.h"
 #include "connecting.h"
+#include "oservices.h"
 
 #include <klocalizedstring.h>
 #include <kpushbutton.h>
 #include <kstandardguiitem.h>
 
+#include <KWallet/Wallet>
+
+using namespace KWallet;
 OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
 {
     BasicInfo *basicInfo = new BasicInfo(this);
     Connecting *connecting = new Connecting(this);
+    OServices *services = new OServices(this);
 
     addPage(basicInfo);
     addPage(connecting);
+    addPage(services);
 
     setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
     setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
