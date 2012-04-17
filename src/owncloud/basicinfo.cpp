@@ -27,6 +27,7 @@
 
 BasicInfo::BasicInfo(OwnCloudWizard* parent)
  : QWizardPage(parent)
+ , m_validServer(false)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
  , m_wizard(parent)
 {
@@ -49,7 +50,11 @@ BasicInfo::~BasicInfo()
 
 bool BasicInfo::validatePage()
 {
-    return true;
+    if (username->text().isEmpty() || password->text().isEmpty()) {
+        return false;
+    }
+
+    return m_validServer;
 }
 
 void BasicInfo::checkServer()
@@ -149,6 +154,7 @@ void BasicInfo::setResult(bool result)
         icon = "dialog-close";
     }
 
+    m_validServer = result;
     setWorking(false);
     working->setPixmap(QIcon::fromTheme(icon).pixmap(working->sizeHint()));
 }

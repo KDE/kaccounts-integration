@@ -83,7 +83,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="email">
+      <widget class="QLineEdit" name="username">
        <property name="text">
         <string/>
        </property>

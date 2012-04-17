@@ -54,6 +54,7 @@ class BasicInfo : public QWizardPage, Ui_Owncloud
         void setResult(bool result);
 
     private:
+        bool m_validServer;
         QByteArray m_json;
         KPixmapSequenceOverlayPainter *m_painter;
         OwnCloudWizard *m_wizard;
