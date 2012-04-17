@@ -92,6 +92,7 @@ void BasicInfo::checkServer(const QString &path)
 void BasicInfo::checkServer(const KUrl& url)
 {
     qDebug() << url;
+    setResult(false);
     setWorking(true);
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
 
