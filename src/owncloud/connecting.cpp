@@ -16,63 +16,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "owncloud.h"
-#include "basicinfo.h"
 #include "connecting.h"
+#include "owncloud.h"
+#include <KPixmapSequenceOverlayPainter>
 
-#include <klocalizedstring.h>
-#include <kpushbutton.h>
-#include <kstandardguiitem.h>
-
-OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
+Connecting::Connecting(OwnCloudWizard* parent)
+ : QWizardPage(parent)
+ , m_wizard(parent)
 {
-    BasicInfo *basicInfo = new BasicInfo(this);
-    Connecting *connecting = new Connecting(this);
-
-    addPage(basicInfo);
-    addPage(connecting);
-
-    setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
-    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
-
-    //We do not want "Forward" as text
-    setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard", "Next"));
-    setButtonText(QWizard::FinishButton, i18nc("Action to finish the wizard", "Finish"));
+    setupUi(this);
+    KPixmapSequenceOverlayPainter *painter = new KPixmapSequenceOverlayPainter(this);
+    painter->setWidget(working);
+    painter->start();
 }
 
-OwnCloudWizard::~OwnCloudWizard()
+Connecting::~Connecting()
 {
 
 }
 
-void OwnCloudWizard::setUsername(const QString& username)
+void Connecting::initializePage()
 {
-    m_username = username;
-}
-
-void OwnCloudWizard::setPassword(const QString& password)
-{
-    m_password = password;
-}
-
-void OwnCloudWizard::setServer(const KUrl& server)
-{
-    m_server = server;
-}
-
-const QString OwnCloudWizard::username() const
-{
-    return m_username;
-}
-
-const QString OwnCloudWizard::password() const
-{
-    return m_password;
-}
-
-const KUrl OwnCloudWizard::server() const
-{
-    return m_server;
+    server->setText(m_wizard->server().host());
 }
