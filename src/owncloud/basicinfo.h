@@ -39,6 +39,7 @@ class BasicInfo : public QWizardPage, Ui_Owncloud
         virtual ~BasicInfo();
 
         virtual bool validatePage();
+        virtual bool isComplete() const;
 
     private Q_SLOTS:
         void checkServer();
@@ -46,6 +47,7 @@ class BasicInfo : public QWizardPage, Ui_Owncloud
         void dataReceived(KIO::Job *job, const QByteArray &data);
 
     private:
+        bool validData() const;
         void checkServer(const QString &path);
         void checkServer(const KUrl &url);
         void figureOutServer(const QString& urlStr);

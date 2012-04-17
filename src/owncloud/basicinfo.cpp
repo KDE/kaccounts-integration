@@ -41,6 +41,8 @@ BasicInfo::BasicInfo(OwnCloudWizard* parent)
     m_painter->setWidget(working);
 
     connect(server, SIGNAL(textChanged(QString)), this, SLOT(checkServer()));
+    connect(username, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+    connect(password, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
 }
 
 BasicInfo::~BasicInfo()
@@ -50,11 +52,7 @@ BasicInfo::~BasicInfo()
 
 bool BasicInfo::validatePage()
 {
-    if (username->text().isEmpty() || password->text().isEmpty()) {
-        return false;
-    }
-
-    if (!m_validServer) {
+    if (!validData()) {
         return false;
     }
 
@@ -65,9 +63,27 @@ bool BasicInfo::validatePage()
     return true;
 }
 
+bool BasicInfo::isComplete() const
+{
+    return validData();
+}
+
 void BasicInfo::checkServer()
 {
     checkServer(server->text());
+}
+
+bool BasicInfo::validData() const
+{
+    if (username->text().isEmpty() || password->text().isEmpty()) {
+        return false;
+    }
+
+    if (!m_validServer) {
+        return false;
+    }
+
+    return true;
 }
 
 void BasicInfo::checkServer(const QString &path)
@@ -142,6 +158,8 @@ void BasicInfo::fileChecked(KJob* job)
     m_server = kJob->url();
     m_server.setFileName("");
     setResult(true);
+
+    Q_EMIT completeChanged();
 }
 
 void BasicInfo::setWorking(bool start)
