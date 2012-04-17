@@ -18,7 +18,11 @@
 
 #include "connecting.h"
 #include "owncloud.h"
+
+#include <QtCore/QDebug>
+
 #include <KPixmapSequenceOverlayPainter>
+#include <KIO/Job>
 
 Connecting::Connecting(OwnCloudWizard* parent)
  : QWizardPage(parent)
@@ -38,4 +42,37 @@ Connecting::~Connecting()
 void Connecting::initializePage()
 {
     server->setText(m_wizard->server().host());
+
+    QMetaObject::invokeMethod(this, "checkAuth", Qt::QueuedConnection);
+}
+
+void Connecting::checkAuth()
+{
+    KUrl url(m_wizard->server());
+
+    url.setUser(m_wizard->username());
+    url.setPass(m_wizard->password());
+
+    url.addPath("apps/calendar/caldav.php/");
+    qDebug() << "FinalUrL: " << url;
+    KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(httpResult(KJob*)));
+
+    job->setUiDelegate(0);
+}
+
+void Connecting::httpResult(KJob* job)
+{
+    if (job->error()) {
+        qDebug() << job->errorString();
+        qDebug() << job->errorText();
+    }
+
+    KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob*>(job);
+    if (kJob->isErrorPage()) {
+        error->setText(i18n("User or password are incorrect"));
+        return;
+    }
+
+    m_wizard->next();
 }

@@ -24,6 +24,7 @@
 #include <QtGui/QWizardPage>
 #include <KJob>
 
+class KJob;
 class OwnCloudWizard;
 class Connecting : public QWizardPage, Ui::Connecting
 {
@@ -33,6 +34,11 @@ class Connecting : public QWizardPage, Ui::Connecting
         virtual ~Connecting();
 
         virtual void initializePage();
+
+    private Q_SLOTS:
+        void checkAuth();
+        void httpResult(KJob *job);
+
     private:
         OwnCloudWizard *m_wizard;
 };
