@@ -100,7 +100,6 @@ void BasicInfo::checkServer(const QString &path)
     m_json.clear();
 
     url.setFileName("status.php");
-    url.setQuery("");
 
     checkServer(url);
 }
@@ -157,6 +156,7 @@ void BasicInfo::fileChecked(KJob* job)
 
     m_server = kJob->url();
     m_server.setFileName("");
+    qDebug() << m_server;
     setResult(true);
 
     Q_EMIT completeChanged();
