@@ -99,5 +99,6 @@ void OCreateFile::createNetAttach()
     wallet->writeMap(walletUrl, info);
     wallet->sync();
 
+    m_config.group("services").writeEntry("File", 1);
     emitResult();
 }
