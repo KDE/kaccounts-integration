@@ -45,6 +45,7 @@ private Q_SLOTS:
     void addExistingAccounts();
     void createTasks(KJob*);
     void serviceRemoved(KJob *job);
+    void createOCalendar(KJob*);
 
 private:
     KConfigGroup accounts();

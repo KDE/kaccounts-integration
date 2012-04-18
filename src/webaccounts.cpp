@@ -35,6 +35,8 @@
 #include "jobs/fcreatepim.h"
 
 #include "jobs/ocreatefile.h"
+#include "jobs/ocreatecontact.h"
+#include "jobs/ocreatecalendar.h"
 
 #include <QDebug>
 
@@ -357,6 +359,20 @@ void WebAccounts::createOwncloudAccount(KConfigGroup group)
         OCreateFile *create = new OCreateFile(group, this);
         create->start();
     }
+    if (services.readEntry("Contact", 0) == 2) {
+        OCreateContact *contact = new OCreateContact(group, this);
+        connect(contact, SIGNAL(finished(KJob*)), this, SLOT(createOCalendar(KJob*)));
+        contact->start();
+    }
 }
+
+void WebAccounts::createOCalendar(KJob* job)
+{
+    qDebug() << "Creating oCalendar";
+    KConfigGroup group  = qobject_cast< OCreateContact* >(job)->config();
+    OCreateCalendar *calendar = new OCreateCalendar(group, this);
+    calendar->start();
+}
+
 
 #include "webaccounts.moc"

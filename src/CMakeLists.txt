@@ -32,6 +32,8 @@ set(webaccounts_SRCS
     owncloud/connecting.cpp
     owncloud/oservices.cpp
     jobs/ocreatefile.cpp
+    jobs/ocreatecontact.cpp
+    jobs/ocreatecalendar.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -49,6 +51,10 @@ qt4_add_dbus_interface(webaccounts_SRCS
 qt4_add_dbus_interface(webaccounts_SRCS
     jobs/org.kde.Akonadi.Facebook.Settings.xml
     facebook_settings
+)
+qt4_add_dbus_interface(webaccounts_SRCS
+    jobs/org.kde.Akonadi.davGroupware.Settings.xml
+    davGroupware_settings
 )
 
 qt4_automoc(${webaccounts_SRCS})
