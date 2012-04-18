@@ -35,6 +35,7 @@
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
+#include <unistd.h>
 
 #include <KWallet/Wallet>
 
@@ -112,8 +113,10 @@ void OCreateContact::resourceCreated(KJob* job)
     settings->setDefaultUsername(m_config.name());
     settings->setRemoteUrls(QStringList(davUrl()));
     settings->setDisplayName(m_config.name());
+    settings->setSettingsVersion(2);
 
     settings->writeConfig();
+    agent.reconfigure();
 
     WId windowId = 0;
     if (qApp->activeWindow()) {
@@ -144,13 +147,26 @@ void OCreateContact::resourceCreated(KJob* job)
 
 void OCreateContact::useCalendarResource()
 {
-    org::kde::Akonadi::davGroupware::Settings *settings = new org::kde::Akonadi::davGroupware::Settings(m_config.group("private").readEntry("contactAndCalendarResource"), "/Settings", QDBusConnection::sessionBus());
+    QString resource = m_config.group("private").readEntry("contactAndCalendarResource");
+    org::kde::Akonadi::davGroupware::Settings *settings = new org::kde::Akonadi::davGroupware::Settings(resource, "/Settings", QDBusConnection::sessionBus());
 
     QStringList list = settings->remoteUrls().value();
     list.append(davUrl());
     qDebug() << list;
-    settings->setRemoteUrls(list);
-    settings->setDefaultUsername(m_config.name());
+    settings->setRemoteUrls(list).waitForFinished();
+    settings->setDefaultUsername(m_config.name()).waitForFinished();
 
-    settings->writeConfig();
+    settings->writeConfig().waitForFinished();
+
+    resource.remove("org.freedesktop.Akonadi.Resource.");
+
+    AgentInstance instance = AgentManager::self()->instance(resource);
+    if (!instance.isValid()) {
+        return;
+    }
+
+    instance.reconfigure();
+    instance.synchronize();
+
+    emitResult();
 }
