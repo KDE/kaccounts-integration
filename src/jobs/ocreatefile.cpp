@@ -94,9 +94,13 @@ void OCreateFile::createNetAttach()
         return;
     }
 
+    QString password;
+    wallet->setFolder("WebAccounts");
+    wallet->readPassword("owncloud-" + m_config.name(), password);
+
     QMap<QString, QString> info;
     info["login"] = m_config.name();
-    info["password"] = "12344321";
+    info["password"] = password;
 
     wallet->setFolder("Passwords");
     wallet->writeMap(walletUrl, info);
