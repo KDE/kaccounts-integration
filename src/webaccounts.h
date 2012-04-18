@@ -62,6 +62,7 @@ private:
     void removeFacebookACcount(KConfigGroup group);
 
     void createOwncloudAccount(KConfigGroup group);
+    void removeOwncloudAccount(KConfigGroup group);
 
 private:
     Create *m_create;

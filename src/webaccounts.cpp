@@ -37,6 +37,9 @@
 #include "jobs/ocreatefile.h"
 #include "jobs/ocreatecontact.h"
 #include "jobs/ocreatecalendar.h"
+#include "jobs/oremovecalendar.h"
+#include "jobs/oremovecontact.h"
+#include "jobs/oremovefile.h"
 
 #include <QDebug>
 
@@ -137,6 +140,8 @@ void WebAccounts::rmBtnClicked()
         removeGoogleAccount(group);
     } else if(type == "facebook") {
         removeFacebookACcount(group);
+    } else if(type == "owncloud") {
+        removeOwncloudAccount(group);
     }
 
     removeAccountIfPossible(accName, type);
@@ -365,6 +370,29 @@ void WebAccounts::createOwncloudAccount(KConfigGroup group)
         contact->start();
     }
 }
+
+void WebAccounts::removeOwncloudAccount(KConfigGroup group)
+{
+    KConfigGroup services = group.group("services");
+    if (services.readEntry("Calendar", 0) == 1) {
+        ORemoveCalendar *removeCalendar = new ORemoveCalendar(group, this);
+        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeCalendar->start();
+    }
+
+    if (services.readEntry("Contact", 0) == 1) {
+        ORemoveContact *removeContact = new ORemoveContact(group, this);
+        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeContact->start();
+    }
+
+    if (services.readEntry("File", 0) == 1) {
+        ORemoveFile *removeFile = new ORemoveFile(group, this);
+        connect(removeFile, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
+        removeFile->start();
+    }
+}
+
 
 void WebAccounts::createOCalendar(KJob* job)
 {

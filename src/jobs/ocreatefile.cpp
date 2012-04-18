@@ -63,6 +63,8 @@ void OCreateFile::createNetAttach()
     qDebug() << path;
     qDebug() << url.prettyUrl();
 
+    m_config.group("private").writeEntry("fileDesktop", path);
+
     KConfig _desktopFile( path, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
@@ -95,6 +97,7 @@ void OCreateFile::createNetAttach()
     QMap<QString, QString> info;
     info["login"] = m_config.name();
     info["password"] = "12344321";
+
     wallet->setFolder("Passwords");
     wallet->writeMap(walletUrl, info);
     wallet->sync();

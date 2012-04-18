@@ -34,6 +34,9 @@ set(webaccounts_SRCS
     jobs/ocreatefile.cpp
     jobs/ocreatecontact.cpp
     jobs/ocreatecalendar.cpp
+    jobs/oremovecalendar.cpp
+    jobs/oremovecontact.cpp
+    jobs/oremovefile.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
