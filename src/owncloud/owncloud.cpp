@@ -72,11 +72,8 @@ void OwnCloudWizard::done(int result)
 
     wallet->createFolder("WebAccounts");
     wallet->setFolder("WebAccounts");
-    wallet->createFolder("owncloud");
-    wallet->setFolder("owncloud");
-    wallet->createFolder(m_username);
-    wallet->setFolder(m_username);
-    wallet->writePassword(m_username, m_password);
+
+    wallet->writePassword("owncloud-" + m_username, m_password);
     wallet->sync();
     wallet->deleteLater();
 
