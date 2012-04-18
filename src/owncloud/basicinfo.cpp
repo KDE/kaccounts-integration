@@ -111,7 +111,7 @@ void BasicInfo::checkServer(const KUrl& url)
     setResult(false);
     setWorking(true);
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
-
+    job->setUiDelegate(0);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataReceived(KIO::Job*,QByteArray)));
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(fileChecked(KJob*)));
 }
