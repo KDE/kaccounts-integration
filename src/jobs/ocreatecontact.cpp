@@ -86,6 +86,8 @@ const QString OCreateContact::davUrl()
     QString str("$default$|CardDav|");
     str.append(url.url());
 
+    m_config.group("services").writeEntry("Contact", 1);
+
     return str;
 }
 
@@ -137,7 +139,6 @@ void OCreateContact::resourceCreated(KJob* job)
 
     agent.synchronize();
 
-    m_config.group("services").writeEntry("Contact", 1);
     emitResult();
 }
 
@@ -149,6 +150,7 @@ void OCreateContact::useCalendarResource()
     list.append(davUrl());
     qDebug() << list;
     settings->setRemoteUrls(list);
+    settings->setDefaultUsername(m_config.name());
 
     settings->writeConfig();
 }

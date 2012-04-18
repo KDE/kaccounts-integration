@@ -42,6 +42,8 @@ const QString OCreateCalendar::davUrl()
     QString str("$default$|CalDav|");
     str.append(url.url());
 
+    m_config.group("services").writeEntry("Contact", 1);
+
     return str;
 }
 
