@@ -186,3 +186,12 @@ void AccountWidget::updateTask()
 {
     updateService("Tasks");
 }
+
+void AccountWidget::updateAll()
+{
+    KConfigGroup services = m_config.group("services");
+    QStringList keys = services.keyList();
+    Q_FOREACH(const QString &key, keys) {
+        updateService(key);
+    }
+}

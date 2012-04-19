@@ -43,6 +43,8 @@ Q_OBJECT
         void updateContact();
         void updateChat();
 
+        void updateAll();
+
     private:
         void modifyCalendar(bool enabled);
         void modifyTasks(bool enabled);

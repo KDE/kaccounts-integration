@@ -26,6 +26,7 @@ class Create;
 class QStackedLayout;
 class QListWidgetItem;
 class KConfigGroup;
+class AccountWidget;
 namespace Ui {
     class KCMWebAccounts;
 }
@@ -55,13 +56,13 @@ private:
     QString iconForType(const QString &type);
     void removeAccountIfPossible(const QString &name, const QString &type);
 
-    void createGoogleAccount(KConfigGroup group);
+    void createGoogleAccount(KConfigGroup group, AccountWidget *accountWidget);
     void removeGoogleAccount(KConfigGroup group);
 
-    void createFacebookAccount(KConfigGroup group);
+    void createFacebookAccount(KConfigGroup group, AccountWidget *accountWidget);
     void removeFacebookACcount(KConfigGroup group);
 
-    void createOwncloudAccount(KConfigGroup group);
+    void createOwncloudAccount(KConfigGroup group, AccountWidget *accountWidget);
     void removeOwncloudAccount(KConfigGroup group);
 
 private:
@@ -72,3 +73,5 @@ private:
 };
 
 #endif // webaccounts_H
+
+class Account;
