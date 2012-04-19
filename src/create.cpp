@@ -64,7 +64,6 @@ void Create::stablishConnections()
 {
     connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
     connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->liveBtn, SIGNAL(clicked(bool)), this, SLOT(startLive()));
     connect(m_form->owncloudBtn, SIGNAL(clicked(bool)), this, SLOT(startOwncloud()));
 }
 
