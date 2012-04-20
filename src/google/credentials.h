@@ -41,7 +41,6 @@ Q_OBJECT
     private:
         bool m_completed;
         GoogleWizard *m_wizard;
-        QRegExpValidator *m_validator;
 };
 
 #endif //GOOGLECREDENTIALS_H
