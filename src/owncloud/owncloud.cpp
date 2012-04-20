@@ -55,7 +55,8 @@ OwnCloudWizard::~OwnCloudWizard()
 
 void OwnCloudWizard::done(int result)
 {
-    if (result != 1) {
+    if (result != 1 || m_services.isEmpty()) {
+        QWizard::done(result);
         return;
     }
 
