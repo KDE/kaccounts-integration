@@ -27,12 +27,11 @@
 using namespace KGoogle;
 
 OAuth::OAuth(GoogleWizard *parent)
-: QWizardPage(parent)
-, m_valid(false)
+ : QWizardPage(parent)
+ , m_valid(false)
+ , m_wizard(parent)
 {
     setupUi(this);
-
-    m_wizard = parent;
 }
 
 OAuth::~OAuth()
