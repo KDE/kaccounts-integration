@@ -69,16 +69,18 @@ void Create::stablishConnections()
 
 void Create::startGoogle()
 {
-    GoogleWizard *google = new GoogleWizard(m_parent);
-    connect(google, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    google->show();
+    GoogleWizard *wizard = new GoogleWizard(m_parent);
+    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
+    wizard->setModal(true);
+    wizard->show();
 }
 
 void Create::startFacebook()
 {
-    FacebookWizard *google = new FacebookWizard(m_parent);
-    connect(google, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    google->show();
+    FacebookWizard *wizard = new FacebookWizard(m_parent);
+    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
+    wizard->setModal(true);
+    wizard->show();
 }
 
 void Create::startLive()
@@ -88,7 +90,8 @@ void Create::startLive()
 
 void Create::startOwncloud()
 {
-    OwnCloudWizard *owncloud = new OwnCloudWizard(m_parent);
-    connect(owncloud, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    owncloud->show();
+    OwnCloudWizard *wizard = new OwnCloudWizard(m_parent);
+    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
+    wizard->setModal(true);
+    wizard->show();
 }
