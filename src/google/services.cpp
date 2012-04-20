@@ -23,7 +23,7 @@
 Services::Services(GoogleWizard* parent)
 {
     setupUi(this);
-
+    setTitle(i18n("Select services"));
     m_wizard = parent;
 }
 

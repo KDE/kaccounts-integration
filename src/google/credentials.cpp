@@ -32,6 +32,7 @@ Credentials::Credentials(GoogleWizard* parent)
  , m_wizard(parent)
 {
     setupUi(this);
+    setTitle(i18n("Credentials"));
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
 
     QList <QWizard::WizardButton> list;

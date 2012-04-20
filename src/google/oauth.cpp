@@ -32,6 +32,7 @@ OAuth::OAuth(GoogleWizard *parent)
  , m_wizard(parent)
 {
     setupUi(this);
+    setTitle(i18n("Google Authentication"));
 }
 
 OAuth::~OAuth()
