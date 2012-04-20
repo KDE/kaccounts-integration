@@ -21,10 +21,11 @@
 #include "google.h"
 
 Services::Services(GoogleWizard* parent)
+ : QWizardPage(parent)
+ , m_wizard(parent)
 {
     setupUi(this);
     setTitle(i18n("Select services"));
-    m_wizard = parent;
 }
 
 Services::~Services()
