@@ -32,9 +32,14 @@ Q_OBJECT
         Credentials(GoogleWizard *parent);
         virtual ~Credentials();
 
+        virtual bool isComplete() const;
         virtual bool validatePage();
 
+    public Q_SLOTS:
+        void validateForm();
+
     private:
+        bool m_completed;
         GoogleWizard *m_wizard;
         QRegExpValidator *m_validator;
 };

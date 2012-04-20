@@ -28,7 +28,8 @@
 
 Credentials::Credentials(GoogleWizard* parent)
  : QWizardPage(parent)
- ,m_wizard(parent)
+ , m_completed(false)
+ , m_wizard(parent)
 {
     setupUi(this);
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
@@ -49,6 +50,9 @@ Credentials::Credentials(GoogleWizard* parent)
 
     KPIMUtils::EmailValidator* emailValidator = new KPIMUtils::EmailValidator( this );
     email->setValidator( emailValidator );
+
+    connect(email, SIGNAL(textChanged(QString)), SLOT(validateForm()));
+    connect(password, SIGNAL(textChanged(QString)), SLOT(validateForm()));
 }
 
 Credentials::~Credentials()
@@ -90,4 +94,15 @@ bool Credentials::validatePage()
     m_wizard->setUsername(email->text());
     m_wizard->setPassword(password->text());
     return true;
+}
+
+bool Credentials::isComplete() const
+{
+    return m_completed;
+}
+
+void Credentials::validateForm()
+{
+    m_completed = validatePage();
+    Q_EMIT completeChanged();
 }
