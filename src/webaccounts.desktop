@@ -9,7 +9,6 @@ X-KDE-Library=webaccounts
 X-KDE-ParentApp=kcontrol
 
 X-KDE-System-Settings-Parent-Category=network-and-connectivity
-X-KDE-Weight=60
 
 Name=Web Accounts
 
