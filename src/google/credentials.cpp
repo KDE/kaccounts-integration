@@ -33,6 +33,12 @@ Credentials::Credentials(GoogleWizard* parent)
     setupUi(this);
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
 
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
+
     KColorScheme scheme(QPalette::Normal);
     KColorScheme::ForegroundRole role;
 
