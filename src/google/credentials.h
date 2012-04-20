@@ -24,6 +24,7 @@
 #include <QtGui/QWizardPage>
 
 class GoogleWizard;
+class QRegExpValidator;
 class Credentials : public QWizardPage, Ui::Google
 {
 Q_OBJECT
@@ -35,6 +36,7 @@ Q_OBJECT
 
     private:
         GoogleWizard *m_wizard;
+        QRegExpValidator *m_validator;
 };
 
 #endif //GOOGLECREDENTIALS_H

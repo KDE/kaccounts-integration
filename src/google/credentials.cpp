@@ -19,12 +19,30 @@
 #include "credentials.h"
 #include "google.h"
 
+#include <QLabel>
+#include <QRegExpValidator>
+
+#include <KColorScheme>
+#include <kpimutils/email.h>
+#include <kpimutils/emailvalidator.h>
+
 Credentials::Credentials(GoogleWizard* parent) : QWizardPage(parent)
 {
     setupUi(this);
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
 
     m_wizard = parent;
+
+    KColorScheme scheme(QPalette::Normal);
+    KColorScheme::ForegroundRole role;
+
+    QPalette palette(error->palette());
+    palette.setColor(QPalette::Foreground, scheme.foreground(KColorScheme::NegativeText).color());
+
+    error->setPalette(palette);
+
+    KPIMUtils::EmailValidator* emailValidator = new KPIMUtils::EmailValidator( this );
+    email->setValidator( emailValidator );
 }
 
 Credentials::~Credentials()
@@ -34,10 +52,35 @@ Credentials::~Credentials()
 
 bool Credentials::validatePage()
 {
-    if (email->text().isEmpty() || password->text().isEmpty()) {
+    QString errorString;
+    if (email->text().isEmpty() && password->text().isEmpty()) {
+        errorString.append(i18n("The email and password are required"));
+        error->setText(errorString);
         return false;
     }
 
+    if (email->text().isEmpty()) {
+        errorString.append(i18n("The email is required"));
+    }
+
+    int a = 0;
+    QString str;
+    if (!KPIMUtils::isValidSimpleAddress(email->text())) {
+        str = i18n("The email seems to be wrong (Invalid format)");
+        !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
+    }
+
+    if (password->text().isEmpty()) {
+        str = i18n("The password is required");
+        !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
+    }
+
+    if (!errorString.isEmpty()) {
+        error->setText(errorString);
+        return false;
+    }
+
+    error->setText("");
     m_wizard->setUsername(email->text());
     m_wizard->setPassword(password->text());
     return true;
