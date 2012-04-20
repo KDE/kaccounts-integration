@@ -26,12 +26,12 @@
 #include <kpimutils/email.h>
 #include <kpimutils/emailvalidator.h>
 
-Credentials::Credentials(GoogleWizard* parent) : QWizardPage(parent)
+Credentials::Credentials(GoogleWizard* parent)
+ : QWizardPage(parent)
+ ,m_wizard(parent)
 {
     setupUi(this);
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
-
-    m_wizard = parent;
 
     KColorScheme scheme(QPalette::Normal);
     KColorScheme::ForegroundRole role;
