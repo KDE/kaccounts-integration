@@ -19,7 +19,7 @@
 #ifndef FACEBOOKCREDENTIALS_H
 #define FACEBOOKCREDENTIALS_H
 
-#include "ui_google.h"
+#include "ui_credentials.h"
 
 #include <QtGui/QWizardPage>
 

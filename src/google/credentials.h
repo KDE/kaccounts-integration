@@ -19,7 +19,7 @@
 #ifndef GOOGLECREDENTIALS_H
 #define GOOGLECREDENTIALS_H
 
-#include "ui_google.h"
+#include "ui_credentials.h"
 
 #include <QtGui/QWizardPage>
 
