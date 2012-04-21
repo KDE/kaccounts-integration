@@ -35,7 +35,7 @@ OServices::~OServices()
 
 void OServices::initializePage()
 {
-    addOption("File", i18n("Chat"));
+    addOption("File", i18n("Files"));
     addOption("Calendar", i18n("Calendar"));
     addOption("Contact", i18n("Contacts"));
 }
