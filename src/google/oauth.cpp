@@ -43,6 +43,13 @@ OAuth::~OAuth()
 
 void OAuth::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::BackButton;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
+
     if (!accountExists()) {
         getTokenForAccount();
         return;
