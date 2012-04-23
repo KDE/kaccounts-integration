@@ -24,6 +24,7 @@
 #include <libkgoogle/services/contacts.h>
 #include <libkgoogle/services/calendar.h>
 
+#include <KDebug>
 using namespace KGoogle;
 
 OAuth::OAuth(GoogleWizard *parent)
@@ -103,11 +104,11 @@ void OAuth::authenticated(KGoogle::Account::Ptr& acc)
     m_wizard->next();
 }
 
-void OAuth::error(Error , QString )
+void OAuth::error(Error , QString err)
 {
-    //TODO Show try again button
+    kDebug() << err;
     m_valid = false;
-    label->setText(i18n("Error trying to gain access"));
+    label->setText(i18n("Error authenticating with Google, please press back and check your credentials"));
 }
 
 bool OAuth::validatePage()
