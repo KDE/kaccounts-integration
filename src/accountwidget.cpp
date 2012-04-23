@@ -16,16 +16,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "google/serviceoption.h"
-#include "jobs/createcontact.h"
-#include "jobs/createcalendar.h"
-#include "jobs/createtask.h"
-#include "jobs/createmail.h"
-#include "jobs/createchat.h"
-#include "jobs/removechat.h"
-#include "jobs/removeemail.h"
-#include "jobs/removecalendar.h"
-#include "jobs/removetask.h"
+#include "google/pages/serviceoption.h"
+#include "google/jobs/createcontact.h"
+#include "google/jobs/createcalendar.h"
+#include "google/jobs/createtask.h"
+#include "google/jobs/createmail.h"
+#include "google/jobs/createchat.h"
+#include "google/jobs/removechat.h"
+#include "google/jobs/removeemail.h"
+#include "google/jobs/removecalendar.h"
+#include "google/jobs/removetask.h"
 #include "jobs/removeakonadiresource.h"
 
 #include <accountwidget.h>

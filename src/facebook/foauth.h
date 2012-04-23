@@ -19,7 +19,7 @@
 #ifndef FOAUTH_H
 #define FOAUTH_H
 
-#include <google/oauth.h>
+#include <google/pages/oauth.h>
 
 namespace KIO {
     class Job;

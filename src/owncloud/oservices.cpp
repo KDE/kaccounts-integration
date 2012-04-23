@@ -19,7 +19,7 @@
 #include "oservices.h"
 #include "owncloud.h"
 
-#include "google/serviceoption.h"
+#include "google/pages/serviceoption.h"
 
 OServices::OServices(OwnCloudWizard* wizard)
  : QWizardPage()

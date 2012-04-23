@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "removecalendar.h"
-#include "removeakonadiresource.h"
+#include "jobs/removeakonadiresource.h"
 #include "google_calendar_settings.h"
 
 RemoveCalendar::RemoveCalendar(KConfigGroup group, QObject* parent)

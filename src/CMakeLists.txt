@@ -4,21 +4,22 @@ set(webaccounts_SRCS
     webaccounts.cpp
     create.cpp
     accountwidget.cpp
-    google/google.cpp
-    google/credentials.cpp
-    google/oauth.cpp
-    google/services.cpp
-    google/serviceoption.cpp
-    jobs/createcalendar.cpp
-    jobs/createtask.cpp
-    jobs/createchat.cpp
-    jobs/createmail.cpp
-    jobs/createcontact.cpp
-    jobs/removechat.cpp
     jobs/removeakonadiresource.cpp
-    jobs/removeemail.cpp
-    jobs/removecalendar.cpp
-    jobs/removetask.cpp
+
+    google/google.cpp
+    google/pages/credentials.cpp
+    google/pages/oauth.cpp
+    google/pages/services.cpp
+    google/pages/serviceoption.cpp
+    google/jobs/createcalendar.cpp
+    google/jobs/createtask.cpp
+    google/jobs/createchat.cpp
+    google/jobs/createmail.cpp
+    google/jobs/createcontact.cpp
+    google/jobs/removechat.cpp
+    google/jobs/removeemail.cpp
+    google/jobs/removecalendar.cpp
+    google/jobs/removetask.cpp
 
     facebook/facebook.cpp
     facebook/fcredentials.cpp
@@ -40,15 +41,15 @@ set(webaccounts_SRCS
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
-    jobs/org.kde.Akonadi.GoogleCalendar.Settings.xml
+    google/jobs/org.kde.Akonadi.GoogleCalendar.Settings.xml
     google_calendar_settings
 )
 qt4_add_dbus_interface(webaccounts_SRCS
-    jobs/org.kde.Akonadi.Imap.Settings.xml
+    google/jobs/org.kde.Akonadi.Imap.Settings.xml
     akonadi_imap_settings
 )
 qt4_add_dbus_interface(webaccounts_SRCS
-    jobs/org.kde.Akonadi.GoogleContacts.Settings.xml
+    google/jobs/org.kde.Akonadi.GoogleContacts.Settings.xml
     google_contact_settings
 )
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -62,7 +63,14 @@ qt4_add_dbus_interface(webaccounts_SRCS
 
 qt4_automoc(${webaccounts_SRCS})
 
-kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui google/credentials.ui google/oauth.ui google/services.ui google/serviceoption.ui owncloud/basicinfo.ui owncloud/connecting.ui)
+kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui
+    google/pages/credentials.ui
+    google/pages/oauth.ui
+    google/pages/services.ui
+    google/pages/serviceoption.ui
+
+    owncloud/basicinfo.ui
+    owncloud/connecting.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
 

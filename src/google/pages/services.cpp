@@ -18,7 +18,7 @@
 
 #include "services.h"
 #include "serviceoption.h"
-#include "google.h"
+#include "google/google.h"
 
 Services::Services(GoogleWizard* parent)
  : QWizardPage(parent)
@@ -42,7 +42,7 @@ void Services::initializePage()
 
     addOption("EMail", i18n("EMail"));
     addOption("Calendar", i18n("Calendar"));
-    addOption("Contact", i18n("Contact"));
+    addOption("Contact", i18n("Contacts"));
     addOption("Tasks", i18n("Tasks"));
     addOption("Chat", i18n("Chat"));
 }

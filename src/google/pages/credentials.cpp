@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "credentials.h"
-#include "google.h"
+#include "google/google.h"
 
 #include <QLabel>
 #include <QRegExpValidator>

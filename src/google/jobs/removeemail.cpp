@@ -16,68 +16,47 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "removetask.h"
-#include "removeakonadiresource.h"
+#include "removeemail.h"
+#include "jobs/removeakonadiresource.h"
 
-#include "google_calendar_settings.h"
+#include <mailtransport/transportmanager.h>
 
-RemoveTask::RemoveTask(KConfigGroup group, QObject* parent)
- : KJob(parent)
- , m_config(group)
+RemoveEmail::RemoveEmail(KConfigGroup group, QObject* parent)
+: KJob(parent)
+, m_config(group)
 {
     setObjectName(m_config.name());
     setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
-RemoveTask::~RemoveTask()
+RemoveEmail::~RemoveEmail()
 {
 
 }
 
-void RemoveTask::start()
+void RemoveEmail::start()
 {
-    QMetaObject::invokeMethod(this, "deleteTask", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "removeResource", Qt::QueuedConnection);
 }
 
-void RemoveTask::deleteTask()
+void RemoveEmail::removeResource()
 {
-    KConfigGroup services = m_config.group("services");
-    if (services.readEntry("Calendar", 0) == 0) {
-        removeResource();
+    RemoveAkonadiResource *removeJob = new RemoveAkonadiResource("emailResource", m_config, this);
+    connect(removeJob, SIGNAL(finished(KJob*)), this, SLOT(removeTransport()));
+    removeJob->start();
+}
+
+void RemoveEmail::removeTransport()
+{
+    int id = m_config.group("private").readEntry("emailTransport", -1);
+    if (id == -1) {
         return;
     }
 
-    removeTaskInResource();
-}
+    MailTransport::TransportManager::self()->removeTransport(id);
 
-void RemoveTask::removeResource()
-{
-    RemoveAkonadiResource *remove = new RemoveAkonadiResource("calendarAndTasksResource", m_config, this);
-    connect(remove, SIGNAL(finished(KJob*)), this, SLOT(resourceRemoved()));
-    remove->start();
-}
+    m_config.group("private").deleteEntry("emailTransport");
+    m_config.group("services").writeEntry("EMail", 0);
 
-void RemoveTask::removeTaskInResource()
-{
-    org::kde::Akonadi::GoogleCalendar::Settings *calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
-    calendarSettings->setCalendars(QStringList());
-    calendarSettings->writeConfig();
-
-    calendarSettings->deleteLater();
-
-    //Since removeCalendar and removeTask jobs can be run in paralel we have to check in the last step
-    //if the other has been removed to remove the resource
-    if (m_config.group("services").readEntry("Calendar", 0) == 0) {
-        removeResource();
-        return;
-    }
-
-    m_config.group("services").writeEntry("Tasks", 0);
-    emitResult();
-}
-
-void RemoveTask::resourceRemoved()
-{
-    m_config.group("services").writeEntry("Tasks", 0);
     emitResult();
 }

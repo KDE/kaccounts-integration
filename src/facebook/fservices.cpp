@@ -18,7 +18,7 @@
 
 #include "fservices.h"
 #include "facebook.h"
-#include "google/serviceoption.h"
+#include "google/pages/serviceoption.h"
 
 FServices::FServices(FacebookWizard* wizard)
  : QWizardPage()

@@ -18,9 +18,9 @@
 
 #include "google.h"
 
-#include "credentials.h"
-#include "oauth.h"
-#include "services.h"
+#include "pages/credentials.h"
+#include "pages/oauth.h"
+#include "pages/services.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QApplication>
