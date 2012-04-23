@@ -35,6 +35,11 @@ Services::~Services()
 
 void Services::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::FinishButton;
+    m_wizard->setButtonLayout(list);
+
     addOption("EMail", i18n("EMail"));
     addOption("Calendar", i18n("Calendar"));
     addOption("Contact", i18n("Contact"));
