@@ -19,11 +19,11 @@
 #include "foauth.h"
 #include "facebook.h"
 
-#include <QDebug>
 #include <qjson/parser.h>
 
 #include <kfacebook/authenticationdialog.h>
 
+#include <KDebug>
 #include <KIO/Job>
 
 FOauth::FOauth(FacebookWizard* parent)
@@ -84,7 +84,7 @@ void FOauth::authenticated(const QString &accessToken)
     KUrl url("https://graph.facebook.com/me");
     url.addQueryItem("access_token", accessToken);
 
-    qDebug() << url;
+    kDebug() << url;
     KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));

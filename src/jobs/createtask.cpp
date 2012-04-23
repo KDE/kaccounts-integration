@@ -26,6 +26,8 @@
 #include <libkgoogle/objects/tasklist.h>
 #include <libkgoogle/services/tasks.h>
 
+#include <KDebug>
+
 using namespace KGoogle;
 
 CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(group, parent)
@@ -63,7 +65,7 @@ void CreateTask::replyReceived(KGoogle::Reply* reply)
         Objects::TaskList *task;
 
         task = static_cast< Objects::TaskList* >(object);
-        qDebug() << task->uid();
+        kDebug() << task->uid();
         tasks.append(task->uid());
         delete task;
     }

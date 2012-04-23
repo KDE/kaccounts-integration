@@ -20,6 +20,8 @@
 #include "removeakonadiresource.h"
 #include "davGroupware_settings.h"
 
+#include <KDebug>
+
 ORemoveCalendar::ORemoveCalendar(KConfigGroup group, QObject* parent)
  : KJob(parent)
  , m_config(group)
@@ -66,7 +68,7 @@ void ORemoveCalendar::removeCalendarsInResource()
             list.removeOne(url);
         }
     }
-    qDebug() << "Updated list: " << list;
+    kDebug() << "Updated list: " << list;
     settings->setRemoteUrls(list);
 
     settings->writeConfig();

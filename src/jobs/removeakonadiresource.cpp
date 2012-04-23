@@ -18,11 +18,11 @@
 
 #include "removeakonadiresource.h"
 
-#include <QDebug>
-
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
+
+#include <KDebug>
 
 using namespace Akonadi;
 
@@ -50,10 +50,10 @@ void RemoveAkonadiResource::removeResource()
 {
     m_config.sync();
 
-    qDebug() << m_config.groupList();
+    kDebug() << m_config.groupList();
     QString id = m_config.group("private").readEntry(m_id);
     id.remove("org.freedesktop.Akonadi.Resource.");
-    qDebug() << "REMOVE: " << id;
+    kDebug() << "REMOVE: " << id;
     AgentInstance instance = AgentManager::self()->instance(id);
 
     AgentManager::self()->removeInstance(instance);

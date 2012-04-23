@@ -19,7 +19,7 @@
 #include "basicinfo.h"
 #include "owncloud.h"
 
-#include <QDebug>
+#include <KDebug>
 #include <qjson/parser.h>
 
 #include <kpixmapsequenceoverlaypainter.h>
@@ -106,7 +106,7 @@ void BasicInfo::checkServer(const QString &path)
 
 void BasicInfo::checkServer(const KUrl& url)
 {
-    qDebug() << url;
+    kDebug() << url;
     setResult(false);
     setWorking(true);
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
@@ -141,8 +141,8 @@ void BasicInfo::fileChecked(KJob* job)
 {
     KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob *>(job);
     if (kJob->error()) {
-        qDebug() << job->errorString();
-        qDebug() << job->errorText();
+        kDebug() << job->errorString();
+        kDebug() << job->errorText();
         figureOutServer(kJob->url().url());
         return;
     }
@@ -156,7 +156,7 @@ void BasicInfo::fileChecked(KJob* job)
 
     m_server = kJob->url();
     m_server.setFileName("");
-    qDebug() << m_server;
+    kDebug() << m_server;
     setResult(true);
 
     Q_EMIT completeChanged();

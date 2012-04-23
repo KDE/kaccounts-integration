@@ -19,7 +19,7 @@
 #include "connecting.h"
 #include "owncloud.h"
 
-#include <QtCore/QDebug>
+#include <KDebug>
 
 #include <KPixmapSequenceOverlayPainter>
 #include <KIO/Job>
@@ -54,7 +54,7 @@ void Connecting::checkAuth()
     url.setPass(m_wizard->password());
 
     url.addPath("apps/calendar/caldav.php/");
-    qDebug() << "FinalUrL: " << url;
+    kDebug() << "FinalUrL: " << url;
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(httpResult(KJob*)));
 
@@ -64,8 +64,8 @@ void Connecting::checkAuth()
 void Connecting::httpResult(KJob* job)
 {
     if (job->error()) {
-        qDebug() << job->errorString();
-        qDebug() << job->errorText();
+        kDebug() << job->errorString();
+        kDebug() << job->errorText();
     }
 
     KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob*>(job);

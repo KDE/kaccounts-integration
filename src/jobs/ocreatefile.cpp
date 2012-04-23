@@ -26,7 +26,7 @@
 #include <KDirNotify>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
-#include <QDebug>
+#include <KDebug>
 
 using namespace KWallet;
 
@@ -59,9 +59,9 @@ void OCreateFile::createNetAttach()
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
     path +=  m_config.name() + "ownCloud.desktop";
 
-    qDebug() << "Creating knetAttach place";
-    qDebug() << path;
-    qDebug() << url.prettyUrl();
+    kDebug() << "Creating knetAttach place";
+    kDebug() << path;
+    kDebug() << url.prettyUrl();
 
     m_config.group("private").writeEntry("fileDesktop", path);
 

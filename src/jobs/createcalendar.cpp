@@ -19,8 +19,6 @@
 #include "createcalendar.h"
 #include "google_calendar_settings.h"
 
-#include <QtCore/QDebug>
-
 #include <QtDBus/QDBusInterface>
 
 #include <libkgoogle/auth.h>
@@ -33,6 +31,8 @@
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
+
+#include <KDebug>
 
 using namespace Akonadi;
 using namespace KGoogle;
@@ -68,7 +68,7 @@ KConfigGroup CreateCalendar::config() const
 
 void CreateCalendar::createResource()
 {
-    qDebug() << "Creating new resource";
+    kDebug() << "Creating new resource";
     const AgentType type = AgentManager::self()->type("akonadi_googlecalendar_resource");
 
     AgentInstanceCreateJob *job = new AgentInstanceCreateJob( type, this );

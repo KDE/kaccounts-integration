@@ -41,14 +41,13 @@
 #include "jobs/oremovecontact.h"
 #include "jobs/oremovefile.h"
 
-#include <QDebug>
-
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QAction>
 #include <QtGui/QStackedLayout>
 
+#include <KDebug>
 #include <kpluginfactory.h>
 #include <kstandarddirs.h>
 
@@ -84,7 +83,7 @@ void WebAccounts::addExistingAccounts()
 {
     KConfigGroup accGroup = accounts();
     QStringList accountTypes = accGroup.groupList();
-    qDebug() << "Existing accounts: " << accountTypes;
+    kDebug() << "Existing accounts: " << accountTypes;
     Q_FOREACH(const QString &accType, accountTypes) {
         QStringList accountList = accGroup.group(accType).groupList();
         Q_FOREACH(const QString &account, accountList) {
@@ -405,7 +404,7 @@ void WebAccounts::removeOwncloudAccount(KConfigGroup group)
 
 void WebAccounts::createOCalendar(KJob* job)
 {
-    qDebug() << "Creating oCalendar";
+    kDebug() << "Creating oCalendar";
     KConfigGroup group  = qobject_cast< OCreateContact* >(job)->config();
     OCreateCalendar *calendar = new OCreateCalendar(group, this);
 //     connect(calendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
