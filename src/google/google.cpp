@@ -33,6 +33,8 @@ using namespace KWallet;
 
 GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
 {
+    setWindowTitle(i18n("Google account Wizard"));
+
     Credentials *credentialsPage = new Credentials(this);
     OAuth *oauth = new OAuth(this);
     Services *services = new Services(this);
