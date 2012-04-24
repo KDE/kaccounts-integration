@@ -40,7 +40,7 @@ CreateChat::CreateChat(KConfigGroup group, QObject* parent)
 
 CreateChat::~CreateChat()
 {
-
+    m_manager->deleteLater();
 }
 
 void CreateChat::start()
@@ -105,9 +105,11 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");
         setError(-1);
+        wallet->deleteLater();
         emitResult();
         return;
     }
+    wallet->deleteLater();
 
     KTp::WalletInterface ktpWallet(0);
     ktpWallet.setPassword(account, password);
