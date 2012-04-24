@@ -78,7 +78,7 @@ void GoogleWizard::done(int result)
 
     wallet->createFolder("WebAccounts");
     wallet->setFolder("WebAccounts");
-    wallet->writePassword(m_username, m_password);
+    wallet->writePassword("google-" + m_username, m_password);
     wallet->sync();
     wallet->deleteLater();
 
