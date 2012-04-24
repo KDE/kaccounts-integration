@@ -269,7 +269,6 @@ void WebAccounts::createGoogleAccount(KConfigGroup group, AccountWidget* account
 {
     KConfigGroup services = group.group("services");
 
-    #warning Fix Tasks but not Calendar
     if (services.readEntry("Contact", 0) == 2) {
         CreateContact *create = new CreateContact(group, this);
         connect(create, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
@@ -279,8 +278,14 @@ void WebAccounts::createGoogleAccount(KConfigGroup group, AccountWidget* account
     if (services.readEntry("Calendar", 0) == 2) {
         CreateCalendar *createCalendar = new CreateCalendar(group, this);
         connect(createCalendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
-        connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
+        if (services.readEntry("Tasks", 0) == 2) {
+            connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
+        }
         createCalendar->start();
+    } else if(services.readEntry("Tasks", 0) == 2) {
+        CreateTask *createTasks = new CreateTask(group, this);
+        connect(createTasks, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
+        createTasks->start();
     }
 
     if (services.readEntry("EMail", 0) == 2) {
