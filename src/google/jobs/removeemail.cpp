@@ -49,11 +49,9 @@ void RemoveEmail::removeResource()
 void RemoveEmail::removeTransport()
 {
     int id = m_config.group("private").readEntry("emailTransport", -1);
-    if (id == -1) {
-        return;
+    if (id != -1) {
+        MailTransport::TransportManager::self()->removeTransport(id);
     }
-
-    MailTransport::TransportManager::self()->removeTransport(id);
 
     m_config.group("private").deleteEntry("emailTransport");
     m_config.group("services").writeEntry("EMail", 0);
