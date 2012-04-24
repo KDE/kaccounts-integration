@@ -60,7 +60,7 @@ void RemoveTask::removeResource()
 void RemoveTask::removeTaskInResource()
 {
     org::kde::Akonadi::GoogleCalendar::Settings *calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
-    calendarSettings->setCalendars(QStringList());
+    calendarSettings->setTaskLists(QStringList());
     calendarSettings->writeConfig();
 
     calendarSettings->deleteLater();
