@@ -37,7 +37,6 @@ CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(gro
 
 CreateTask::~CreateTask()
 {
-    delete m_accessManager;
 }
 
 void CreateTask::start()
