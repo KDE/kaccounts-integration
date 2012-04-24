@@ -20,6 +20,10 @@
 #include "jobs/removeakonadiresource.h"
 #include "google_calendar_settings.h"
 
+#include <akonadi/agentmanager.h>
+
+using namespace Akonadi;
+
 RemoveCalendar::RemoveCalendar(KConfigGroup group, QObject* parent)
  : KJob(parent)
  , m_config(group)
@@ -60,9 +64,11 @@ void RemoveCalendar::removeCalendarsInResource()
 {
     org::kde::Akonadi::GoogleCalendar::Settings *calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
     calendarSettings->setCalendars(QStringList());
-    calendarSettings->writeConfig();
-
     calendarSettings->deleteLater();
+
+    QString id = m_config.group("private").readEntry("calendarAndTasksResource").remove("org.freedesktop.Akonadi.Resource.");
+    AgentInstance agent = AgentManager::self()->instance(id);
+    agent.reconfigure();
 
     if (m_config.group("services").readEntry("Tasks", 0) == 0) {
         removeResource();

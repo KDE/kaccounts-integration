@@ -21,6 +21,10 @@
 
 #include "google_calendar_settings.h"
 
+#include <akonadi/agentmanager.h>
+
+using namespace Akonadi;
+
 RemoveTask::RemoveTask(KConfigGroup group, QObject* parent)
  : KJob(parent)
  , m_config(group)
@@ -61,9 +65,11 @@ void RemoveTask::removeTaskInResource()
 {
     org::kde::Akonadi::GoogleCalendar::Settings *calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
     calendarSettings->setTaskLists(QStringList());
-    calendarSettings->writeConfig();
-
     calendarSettings->deleteLater();
+
+    QString id = m_config.group("private").readEntry("calendarAndTasksResource").remove("org.freedesktop.Akonadi.Resource.");
+    AgentInstance agent = AgentManager::self()->instance(id);
+    agent.reconfigure();
 
     //Since removeCalendar and removeTask jobs can be run in paralel we have to check in the last step
     //if the other has been removed to remove the resource
