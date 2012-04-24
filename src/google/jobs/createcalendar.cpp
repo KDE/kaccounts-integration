@@ -48,7 +48,7 @@ CreateCalendar::CreateCalendar(KConfigGroup group, QObject* parent)
 
 CreateCalendar::~CreateCalendar()
 {
-
+    m_accessManager->deleteLater();
 }
 
 void CreateCalendar::start()
@@ -102,13 +102,13 @@ void CreateCalendar::resourceCreated(KJob* job)
 
 void CreateCalendar::fetchDefaultCollections()
 {
-    AccessManager *gam = new AccessManager;
+    m_accessManager = new AccessManager;
 
-    connect(gam, SIGNAL(replyReceived(KGoogle::Reply*)),
+    connect(m_accessManager, SIGNAL(replyReceived(KGoogle::Reply*)),
             this, SLOT(replyReceived(KGoogle::Reply*)));
 
     Request *request = new Request(Services::Calendar::fetchCalendarsUrl(), Request::FetchAll, "Calendar",  Auth::instance()->getAccount(m_config.name()));
-    gam->sendRequest(request);
+    m_accessManager->sendRequest(request);
 }
 
 void CreateCalendar::useTaskResource()

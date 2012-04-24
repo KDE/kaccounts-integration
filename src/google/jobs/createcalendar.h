@@ -28,6 +28,7 @@
 
 namespace KGoogle {
     class Reply;
+    class AccessManager;
 };
 using namespace Akonadi;
 class KConfigGroup;
@@ -57,6 +58,7 @@ class CreateCalendar : public KJob
         OrgKdeAkonadiGoogleCalendarSettingsInterface *m_calendarSettings;
         KConfigGroup m_config;
         AgentInstance m_agent;
+        KGoogle::AccessManager *m_accessManager;
 };
 
 #endif //CREATECALENDAR_H

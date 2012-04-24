@@ -37,7 +37,7 @@ CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(gro
 
 CreateTask::~CreateTask()
 {
-
+    delete m_accessManager;
 }
 
 void CreateTask::start()
@@ -47,13 +47,13 @@ void CreateTask::start()
 
 void CreateTask::fetchDefaultCollections()
 {
-    AccessManager *gam = new AccessManager;
+    m_accessManager = new AccessManager;
 
-    connect(gam, SIGNAL(replyReceived(KGoogle::Reply*)),
+    connect(m_accessManager, SIGNAL(replyReceived(KGoogle::Reply*)),
             this, SLOT(replyReceived(KGoogle::Reply*)));
 
     Request *request = new Request(Services::Tasks::fetchTaskListsUrl(), Request::FetchAll, "Task",  Auth::instance()->getAccount(m_config.name()));
-    gam->sendRequest(request);
+    m_accessManager->sendRequest(request);
 }
 
 void CreateTask::replyReceived(KGoogle::Reply* reply)
