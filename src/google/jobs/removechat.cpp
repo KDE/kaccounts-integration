@@ -59,6 +59,7 @@ void RemoveChat::onAccountManagerReady(Tp::PendingOperation* op)
         account->remove();
     }
 
+    m_config.group("private").deleteEntry("chatPath");
     m_config.group("services").writeEntry("Chat", 0);
     m_config.sync();
     emitResult();
