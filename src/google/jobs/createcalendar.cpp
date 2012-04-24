@@ -84,10 +84,10 @@ void CreateCalendar::resourceCreated(KJob* job)
         return;
     }
 
-    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    agent.setName(m_config.name() + " " + i18n("Calendar / Tasks"));
+    m_agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    m_agent.setName(m_config.name() + " " + i18n("Calendar / Tasks"));
 
-    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
+    QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
 
     KConfigGroup privates(&m_config, "private");
     privates.writeEntry("calendarAndTasksResource", service);
@@ -115,6 +115,9 @@ void CreateCalendar::useTaskResource()
 {
     m_calendarSettings = new org::kde::Akonadi::GoogleCalendar::Settings(m_config.group("private").readEntry("calendarAndTasksResource"), "/Settings", QDBusConnection::sessionBus());
 
+    QString id = m_config.group("private").readEntry("calendarAndTasksResource").remove("org.freedesktop.Akonadi.Resource.");
+    m_agent = AgentManager::self()->instance(id);
+
     fetchDefaultCollections();
 }
 
@@ -131,7 +134,7 @@ void CreateCalendar::replyReceived(KGoogle::Reply* reply)
     }
 
     m_calendarSettings->setCalendars(calendars);
-    m_calendarSettings->writeConfig();
+    m_agent.reconfigure();
 
     delete reply;
 

@@ -71,7 +71,7 @@ void CreateTask::replyReceived(KGoogle::Reply* reply)
     }
 
     m_calendarSettings->setTaskLists(tasks);
-    m_calendarSettings->writeConfig();
+    m_agent.reconfigure();
 
     delete reply;
 
