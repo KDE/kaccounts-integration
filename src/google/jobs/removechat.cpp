@@ -54,6 +54,7 @@ void RemoveChat::onAccountManagerReady(Tp::PendingOperation* op)
 {
     QString accID = m_config.group("private").readEntry<QString>("chatPath", "");
     Tp::AccountPtr account = m_manager->accountForPath(accID);
+
     if (!account.isNull()) {
         account->remove();
     }
