@@ -26,10 +26,15 @@
 #include <kpimutils/email.h>
 #include <kpimutils/emailvalidator.h>
 
+#include <KWallet/Wallet>
+
+using namespace KWallet;
+
 Credentials::Credentials(GoogleWizard* parent)
  : QWizardPage(parent)
  , m_completed(false)
  , m_wizard(parent)
+ , m_wallet(0)
 {
     setupUi(this);
     setTitle(i18n("Credentials"));
@@ -58,7 +63,7 @@ Credentials::Credentials(GoogleWizard* parent)
 
 Credentials::~Credentials()
 {
-
+    delete m_wallet;
 }
 
 bool Credentials::validatePage()
@@ -78,6 +83,9 @@ bool Credentials::validatePage()
     QString str;
     if (!KPIMUtils::isValidSimpleAddress(email->text())) {
         str = i18n("The email seems to be wrong (Invalid format)");
+        !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
+    } else if(accountExists(email->text())) {
+        str = i18n("This account is already configured as a Web Account");
         !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
     }
 
@@ -106,4 +114,14 @@ void Credentials::validateForm()
 {
     m_completed = validatePage();
     Q_EMIT completeChanged();
+}
+
+bool Credentials::accountExists(const QString& email)
+{
+    if (!m_wallet) {
+        m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+        m_wallet->setFolder("WebAccounts");
+    }
+
+    return m_wallet->hasEntry("google-" + email);
 }

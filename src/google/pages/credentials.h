@@ -23,6 +23,9 @@
 
 #include <QtGui/QWizardPage>
 
+namespace KWallet {
+    class Wallet;
+};
 class GoogleWizard;
 class QRegExpValidator;
 class Credentials : public QWizardPage, Ui::Google
@@ -39,8 +42,12 @@ Q_OBJECT
         void validateForm();
 
     private:
+        bool accountExists(const QString &email);
+
+    private:
         bool m_completed;
         GoogleWizard *m_wizard;
+        KWallet::Wallet *m_wallet;
 };
 
 #endif //GOOGLECREDENTIALS_H
