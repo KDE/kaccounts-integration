@@ -57,6 +57,7 @@ void RemoveEmail::removeTransport()
 
     m_config.group("private").deleteEntry("emailTransport");
     m_config.group("services").writeEntry("EMail", 0);
+    m_config.sync();
 
     emitResult();
 }

@@ -70,12 +70,14 @@ void RemoveCalendar::removeCalendarsInResource()
     }
 
     m_config.group("services").writeEntry("Calendar", 0);
+    m_config.sync();
     emitResult();
 }
 
 void RemoveCalendar::resourceRemoved()
 {
     m_config.group("services").writeEntry("Calendar", 0);
+    m_config.sync();
     emitResult();
 }
 

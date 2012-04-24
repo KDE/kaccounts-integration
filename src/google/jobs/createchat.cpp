@@ -97,6 +97,7 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     privates.sync();
 
     m_config.group("services").writeEntry("Chat", 1);
+    m_config.sync();
 
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);

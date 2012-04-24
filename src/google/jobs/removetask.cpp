@@ -73,11 +73,13 @@ void RemoveTask::removeTaskInResource()
     }
 
     m_config.group("services").writeEntry("Tasks", 0);
+    m_config.sync();
     emitResult();
 }
 
 void RemoveTask::resourceRemoved()
 {
     m_config.group("services").writeEntry("Tasks", 0);
+    m_config.sync();
     emitResult();
 }

@@ -113,6 +113,7 @@ void CreateMail::instanceCreateResult(KJob* job)
     privates.writeEntry("emailTransport", mt->id());
 
     m_config.group("services").writeEntry("EMail", 1);
+    m_config.sync();
     emitResult();
 }
 

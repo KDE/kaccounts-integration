@@ -86,5 +86,6 @@ void CreateContact::resourceCreated(KJob* job)
     agent.reconfigure();
 
     m_config.group("services").writeEntry("Contact", 1);
+    m_config.sync();
     emitResult();
 }

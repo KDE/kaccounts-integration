@@ -59,5 +59,6 @@ void RemoveChat::onAccountManagerReady(Tp::PendingOperation* op)
     }
 
     m_config.group("services").writeEntry("Chat", 0);
+    m_config.sync();
     emitResult();
 }
