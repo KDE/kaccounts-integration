@@ -67,9 +67,12 @@ void CreateMail::instanceCreateResult(KJob* job)
         qWarning("Can't open wallet");
         setError(-1);
         m_config.group("services").writeEntry("EMail", -1);
+        m_config.sync();
+        wallet->deleteLater();
         emitResult();
         return;
     }
+    wallet->deleteLater();
 
     AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
     agent.setName(m_config.name() + " Disconnected IMAP");
