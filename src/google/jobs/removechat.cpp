@@ -33,7 +33,7 @@ RemoveChat::RemoveChat(KConfigGroup& group, QObject* parent)
 
 RemoveChat::~RemoveChat()
 {
-
+    m_manager->deleteLater();
 }
 
 void RemoveChat::start()
