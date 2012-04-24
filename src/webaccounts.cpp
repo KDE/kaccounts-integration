@@ -51,6 +51,10 @@
 #include <kpluginfactory.h>
 #include <kstandarddirs.h>
 
+#include <KWallet/Wallet>
+
+using namespace KWallet;
+
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 
@@ -157,6 +161,8 @@ void WebAccounts::serviceRemoved(KJob *job)
     removeAccountIfPossible(accName, type);
 }
 
+#include <QDebug>
+
 void WebAccounts::removeAccountIfPossible(const QString& name, const QString& type)
 {
     KConfigGroup services = account(name, type).group("services");
@@ -171,7 +177,15 @@ void WebAccounts::removeAccountIfPossible(const QString& name, const QString& ty
 
     if (deleteAccount) {
         KSharedConfig::openConfig("webaccounts")->group("accounts").group(type).deleteGroup(name);
+        KSharedConfig::openConfig("webaccounts")->sync();
     }
+
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    wallet->setFolder("WebAccounts");
+
+    QString eh = type + "-" + name;
+    qDebug() << "REmoving: " << eh;
+    wallet->removeEntry(type + "-" + name);
 }
 
 void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
