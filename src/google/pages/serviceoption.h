@@ -37,9 +37,13 @@ public:
 public Q_SLOTS:
     void setToggled(bool checked);
     void setStatus(int status);
+    void setBinary(bool binary);
 
 Q_SIGNALS:
     void toggled(const QString &name, bool);
+
+private:
+    bool m_binaryMode;
 };
 
 #endif // SERVICEOPTION_H

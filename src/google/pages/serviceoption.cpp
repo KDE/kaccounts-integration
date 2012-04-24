@@ -20,7 +20,9 @@
 
 #include <kpixmapsequenceoverlaypainter.h>
 #include <QDebug>
-ServiceOption::ServiceOption(const QString& name, const QString& displayText, QWidget* parent): QWidget(parent)
+ServiceOption::ServiceOption(const QString& name, const QString& displayText, QWidget* parent)
+ : QWidget(parent)
+ , m_binaryMode(false)
 {
     setupUi(this);
 
@@ -45,7 +47,9 @@ bool ServiceOption::isChecked()
 void ServiceOption::setToggled(bool checked)
 {
     const QCheckBox *checkbox = qobject_cast< const QCheckBox* >(sender());
-    setStatus(2);
+    if (!m_binaryMode) {
+        setStatus(2);
+    }
 
     Q_EMIT toggled(objectName(), checked);
 }
@@ -68,4 +72,9 @@ void ServiceOption::setStatus(int status )
             working->setVisible(true);
             break;
     }
+}
+
+void ServiceOption::setBinary(bool binary)
+{
+    m_binaryMode = binary;
 }
