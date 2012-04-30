@@ -63,7 +63,9 @@ qt4_add_dbus_interface(webaccounts_SRCS
 
 qt4_automoc(${webaccounts_SRCS})
 
-kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui
+kde4_add_ui_files(webaccounts_SRCS
+    kcm.ui
+    types.ui
     google/pages/credentials.ui
     google/pages/oauth.ui
     google/pages/services.ui
