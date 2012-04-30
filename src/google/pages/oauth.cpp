@@ -98,6 +98,7 @@ void OAuth::getTokenForAccount()
 
     auth->setUsername(m_wizard->username());
     auth->setPassword(m_wizard->password());
+    auth->setDialogAutoClose(true);
     auth->authenticate(acc, true);
 
     connect(auth, SIGNAL(authenticated(KGoogle::Account::Ptr&)), this, SLOT(authenticated(KGoogle::Account::Ptr&)));
