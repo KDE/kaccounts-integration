@@ -175,10 +175,12 @@ void WebAccounts::removeAccountIfPossible(const QString& name, const QString& ty
         }
     }
 
-    if (deleteAccount) {
-        KSharedConfig::openConfig("webaccounts")->group("accounts").group(type).deleteGroup(name);
-        KSharedConfig::openConfig("webaccounts")->sync();
+    if (!deleteAccount) {
+        return;
     }
+
+    KSharedConfig::openConfig("webaccounts")->group("accounts").group(type).deleteGroup(name);
+    KSharedConfig::openConfig("webaccounts")->sync();
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("WebAccounts");
