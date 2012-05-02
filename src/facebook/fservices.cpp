@@ -34,6 +34,11 @@ FServices::~FServices()
 
 void FServices::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::FinishButton;
+    m_wizard->setButtonLayout(list);
+
     addOption("Chat", i18n("Chat"));
     addOption("PIM", i18n("Contacts and Events"));
 }
