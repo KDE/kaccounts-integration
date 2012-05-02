@@ -38,6 +38,7 @@ class BasicInfo : public QWizardPage, Ui_Owncloud
         BasicInfo(OwnCloudWizard *parent);
         virtual ~BasicInfo();
 
+        virtual void initializePage();
         virtual bool validatePage();
         virtual bool isComplete() const;
 

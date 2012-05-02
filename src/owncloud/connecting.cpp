@@ -41,6 +41,13 @@ Connecting::~Connecting()
 
 void Connecting::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::BackButton;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
+
     server->setText(m_wizard->server().host());
 
     QMetaObject::invokeMethod(this, "checkAuth", Qt::QueuedConnection);

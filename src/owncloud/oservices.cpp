@@ -35,6 +35,11 @@ OServices::~OServices()
 
 void OServices::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::FinishButton;
+    m_wizard->setButtonLayout(list);
+
     addOption("File", i18n("Files"));
     addOption("Calendar", i18n("Calendar"));
     addOption("Contact", i18n("Contacts"));

@@ -51,6 +51,15 @@ BasicInfo::~BasicInfo()
 
 }
 
+void BasicInfo::initializePage()
+{
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
+}
+
 bool BasicInfo::validatePage()
 {
     if (!validData()) {
