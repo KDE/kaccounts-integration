@@ -28,6 +28,7 @@
 
 #include <KTp/wallet-interface.h>
 
+#include <KDebug>
 #include <KWallet/Wallet>
 
 using namespace KWallet;
@@ -95,6 +96,14 @@ void FCreateChat::onAccountManagerReady(Tp::PendingOperation* op)
 void FCreateChat::onAccountCreated(Tp::PendingOperation* op)
 {
     Tp::PendingAccount *pendingAccount = qobject_cast<Tp::PendingAccount*>(op);
+
+    if (pendingAccount->isError()) {
+        kDebug() << "Can't create account";
+        m_config.group("services").writeEntry("Chat", -1);
+        setError(-1);
+        emitResult();
+        return;
+    }
 
     Tp::AccountPtr account = pendingAccount->account();
 
