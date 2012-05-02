@@ -37,12 +37,6 @@ FOauth::FOauth(FacebookWizard* parent)
     setupUi(this);
     setTitle(i18n("Facebook Authentication"));
 
-    QList <QWizard::WizardButton> list;
-    list << QWizard::Stretch;
-    list << QWizard::BackButton;
-    list << QWizard::NextButton;
-    list << QWizard::CancelButton;
-
     m_painter->setWidget(working);
     m_painter->start();
 
@@ -57,6 +51,13 @@ FOauth::~FOauth()
 
 void FOauth::initializePage()
 {
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::BackButton;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
+
     AuthenticationDialog * const authDialog = new AuthenticationDialog( this );
     authDialog->setAppId("175243235841602");
     QStringList permissions;

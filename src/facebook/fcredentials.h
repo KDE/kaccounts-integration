@@ -34,6 +34,7 @@ class FCredentials : public QWizardPage, Ui::Google
         FCredentials(FacebookWizard *parent);
         virtual ~FCredentials();
 
+        virtual void initializePage();
         virtual bool isComplete() const;
         virtual bool validatePage();
 

@@ -36,12 +36,6 @@ FCredentials::FCredentials(FacebookWizard* parent)
     setupUi(this);
     googleIcon->setPixmap(QIcon::fromTheme("im-facebook").pixmap(32, 32));
 
-    QList <QWizard::WizardButton> list;
-    list << QWizard::Stretch;
-    list << QWizard::NextButton;
-    list << QWizard::CancelButton;
-    m_wizard->setButtonLayout(list);
-
     KColorScheme scheme(QPalette::Normal);
     KColorScheme::ForegroundRole role;
 
@@ -60,6 +54,15 @@ FCredentials::FCredentials(FacebookWizard* parent)
 FCredentials::~FCredentials()
 {
 
+}
+
+void FCredentials::initializePage()
+{
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
 }
 
 bool FCredentials::validatePage()
