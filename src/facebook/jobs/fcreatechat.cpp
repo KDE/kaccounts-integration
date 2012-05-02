@@ -118,6 +118,7 @@ void FCreateChat::onAccountCreated(Tp::PendingOperation* op)
     wallet->setFolder("WebAccounts");
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");
+        m_config.group("services").writeEntry("Chat", -1);
         setError(-1);
         emitResult();
         return;

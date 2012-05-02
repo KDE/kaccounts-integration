@@ -56,6 +56,14 @@ void FCreatePIM::createResource()
 
 void FCreatePIM::instanceCreateResult(KJob* job)
 {
+    if (job->error()) {
+        setError(-1);
+        m_config.group("services").writeEntry("PIM", -1);
+        m_config.sync();
+        emitResult();
+        return;
+    }
+
     QByteArray accessToken;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("WebAccounts");
