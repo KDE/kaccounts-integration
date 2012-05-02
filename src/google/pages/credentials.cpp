@@ -40,12 +40,6 @@ Credentials::Credentials(GoogleWizard* parent)
     setTitle(i18n("Credentials"));
     googleIcon->setPixmap(QIcon::fromTheme("gmail").pixmap(32, 32));
 
-    QList <QWizard::WizardButton> list;
-    list << QWizard::Stretch;
-    list << QWizard::NextButton;
-    list << QWizard::CancelButton;
-    m_wizard->setButtonLayout(list);
-
     KColorScheme scheme(QPalette::Normal);
     KColorScheme::ForegroundRole role;
 
@@ -64,6 +58,15 @@ Credentials::Credentials(GoogleWizard* parent)
 Credentials::~Credentials()
 {
     delete m_wallet;
+}
+
+void Credentials::initializePage()
+{
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
+    m_wizard->setButtonLayout(list);
 }
 
 bool Credentials::validatePage()

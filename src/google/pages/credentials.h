@@ -34,6 +34,7 @@ Q_OBJECT
         Credentials(GoogleWizard *parent);
         virtual ~Credentials();
 
+        virtual void initializePage();
         virtual bool isComplete() const;
         virtual bool validatePage();
 
