@@ -45,6 +45,8 @@ FOauth::FOauth(FacebookWizard* parent)
 
     m_painter->setWidget(working);
     m_painter->start();
+
+    tryAgain->setVisible(false);
 }
 
 FOauth::~FOauth()
@@ -126,7 +128,8 @@ void FOauth::usernameFinished()
     QMap <QString, QVariant > data = parser.parse(m_json).toMap();;
 
     if (!data.contains("username") || data["username"].toString().isEmpty()) {
-        label->setText(i18n("This is your username, not your normal Facebook login.<br/> Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose a Facebook username."));
+        tryAgain->setVisible(true);
+        label->setText(i18n("A facebook username is needed to connect external applications to it.<br/> Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose one."));
         return;
     }
 

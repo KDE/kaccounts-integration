@@ -71,6 +71,7 @@ kde4_add_ui_files(webaccounts_SRCS
     google/pages/services.ui
     google/pages/serviceoption.ui
 
+    facebook/foauth.ui
     owncloud/basicinfo.ui
     owncloud/connecting.ui)
 

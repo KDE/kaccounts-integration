@@ -19,7 +19,9 @@
 #ifndef FOAUTH_H
 #define FOAUTH_H
 
-#include <google/pages/oauth.h>
+#include "ui_foauth.h"
+
+#include <QWizardPage>
 
 namespace KIO {
     class Job;
@@ -27,7 +29,7 @@ namespace KIO {
 class KJob;
 class FacebookWizard;
 class KPixmapSequenceOverlayPainter;
-class FOauth : public QWizardPage, Ui::OAuth
+class FOauth : public QWizardPage, Ui::FOAuth
 {
     Q_OBJECT
     public:
