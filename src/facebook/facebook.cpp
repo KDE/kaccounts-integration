@@ -29,6 +29,8 @@ using namespace KWallet;
 
 FacebookWizard::FacebookWizard(QWidget* parent): QWizard(parent)
 {
+    setWindowTitle(i18n("Facebook account Wizard"));
+
     FCredentials *credentialsPage = new FCredentials(this);
     FOauth *foauth = new FOauth(this);
     FServices *services = new FServices(this);
