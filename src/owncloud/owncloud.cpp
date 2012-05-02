@@ -17,9 +17,9 @@
  *************************************************************************************/
 
 #include "owncloud.h"
-#include "basicinfo.h"
-#include "connecting.h"
-#include "oservices.h"
+#include "pages/basicinfo.h"
+#include "pages/connecting.h"
+#include "pages/oservices.h"
 
 #include <klocalizedstring.h>
 #include <kpushbutton.h>

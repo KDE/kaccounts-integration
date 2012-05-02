@@ -29,9 +29,10 @@ set(webaccounts_SRCS
     facebook/jobs/fcreatepim.cpp
 
     owncloud/owncloud.cpp
-    owncloud/basicinfo.cpp
-    owncloud/connecting.cpp
-    owncloud/oservices.cpp
+    owncloud/pages/basicinfo.cpp
+    owncloud/pages/connecting.cpp
+    owncloud/pages/oservices.cpp
+
     jobs/ocreatefile.cpp
     jobs/ocreatecontact.cpp
     jobs/ocreatecalendar.cpp
@@ -72,8 +73,8 @@ kde4_add_ui_files(webaccounts_SRCS
     google/pages/serviceoption.ui
 
     facebook/foauth.ui
-    owncloud/basicinfo.ui
-    owncloud/connecting.ui)
+    owncloud/pages/basicinfo.ui
+    owncloud/pages/connecting.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
 

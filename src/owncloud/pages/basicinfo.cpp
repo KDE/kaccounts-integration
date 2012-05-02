@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "basicinfo.h"
-#include "owncloud.h"
+#include "owncloud/owncloud.h"
 
 #include <KDebug>
 #include <qjson/parser.h>

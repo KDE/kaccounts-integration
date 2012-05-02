@@ -16,70 +16,46 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "connecting.h"
-#include "owncloud.h"
+#include "oservices.h"
+#include "owncloud/owncloud.h"
 
-#include <KDebug>
+#include "google/pages/serviceoption.h"
 
-#include <KPixmapSequenceOverlayPainter>
-#include <KIO/Job>
-
-Connecting::Connecting(OwnCloudWizard* parent)
- : QWizardPage(parent)
- , m_wizard(parent)
+OServices::OServices(OwnCloudWizard* wizard)
+ : QWizardPage()
+ , m_wizard(wizard)
 {
     setupUi(this);
-    KPixmapSequenceOverlayPainter *painter = new KPixmapSequenceOverlayPainter(this);
-    painter->setWidget(working);
-    painter->start();
 }
 
-Connecting::~Connecting()
+OServices::~OServices()
 {
 
 }
 
-void Connecting::initializePage()
+void OServices::initializePage()
 {
     QList <QWizard::WizardButton> list;
     list << QWizard::Stretch;
-    list << QWizard::BackButton;
-    list << QWizard::NextButton;
-    list << QWizard::CancelButton;
+    list << QWizard::FinishButton;
     m_wizard->setButtonLayout(list);
 
-    server->setText(m_wizard->server().host());
-
-    QMetaObject::invokeMethod(this, "checkAuth", Qt::QueuedConnection);
+    addOption("File", i18n("Files"));
+    addOption("Calendar", i18n("Calendar"));
+    addOption("Contact", i18n("Contacts"));
 }
 
-void Connecting::checkAuth()
+void OServices::addOption(const QString& text, const QString& displayText)
 {
-    KUrl url(m_wizard->server());
+    ServiceOption *option = new ServiceOption(text, displayText, this);
+    connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
 
-    url.setUser(m_wizard->username());
-    url.setPass(m_wizard->password());
+    m_wizard->activateOption(text, true);
 
-    url.addPath("apps/calendar/caldav.php/");
-    kDebug() << "FinalUrL: " << url;
-    KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(httpResult(KJob*)));
-
-    job->setUiDelegate(0);
+    d_layout->addWidget(option);
 }
 
-void Connecting::httpResult(KJob* job)
+void OServices::optionToggled(const QString& name, bool checked)
 {
-    if (job->error()) {
-        kDebug() << job->errorString();
-        kDebug() << job->errorText();
-    }
-
-    KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob*>(job);
-    if (kJob->isErrorPage()) {
-        error->setText(i18n("User or password are incorrect"));
-        return;
-    }
-
-    m_wizard->next();
+    m_wizard->activateOption(name, checked);
 }
