@@ -231,14 +231,14 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
 
 void WebAccounts::createTasks(KJob* job)
 {
+    KConfigGroup group  = qobject_cast< CreateCalendar* >(job)->config();
     if (job->error()) {
         qWarning("Error creating calendar resource");
+        group.group("services").writeEntry("Tasks", -1);
         return;
     }
 
-    KConfigGroup group  = qobject_cast< CreateCalendar* >(job)->config();
     CreateTask *createTask = new CreateTask(group, this);
-//     connect(createTask, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
     createTask->start();
 }
 
