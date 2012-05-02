@@ -80,6 +80,8 @@ void CreateCalendar::resourceCreated(KJob* job)
 {
     if (job->error()) {
         setError(-1);
+        m_config.group("services").writeEntry("Calendar", -1);
+        m_config.sync();
         emitResult();
         return;
     }
