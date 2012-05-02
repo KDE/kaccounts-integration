@@ -40,6 +40,7 @@ BasicInfo::BasicInfo(OwnCloudWizard* parent)
 
     m_painter->setWidget(working);
 
+    username->setFocus();
     connect(server, SIGNAL(textChanged(QString)), this, SLOT(checkServer()));
     connect(username, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
     connect(password, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
