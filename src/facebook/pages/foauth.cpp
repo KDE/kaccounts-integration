@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "foauth.h"
-#include "facebook.h"
+#include "facebook/facebook.h"
 
 #include <qjson/parser.h>
 

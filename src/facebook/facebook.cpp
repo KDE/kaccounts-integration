@@ -17,9 +17,9 @@
  *************************************************************************************/
 
 #include "facebook.h"
-#include "fcredentials.h"
-#include "foauth.h"
-#include "fservices.h"
+#include "pages/fcredentials.h"
+#include "pages/foauth.h"
+#include "pages/fservices.h"
 
 #include <kwallet.h>
 #include <kpushbutton.h>

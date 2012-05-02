@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "fcredentials.h"
-#include "facebook.h"
+#include "facebook/facebook.h"
 
 #include <KColorScheme>
 #include <kpimutils/email.h>

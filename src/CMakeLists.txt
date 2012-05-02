@@ -22,9 +22,9 @@ set(webaccounts_SRCS
     google/jobs/removetask.cpp
 
     facebook/facebook.cpp
-    facebook/fcredentials.cpp
-    facebook/foauth.cpp
-    facebook/fservices.cpp
+    facebook/pages/fcredentials.cpp
+    facebook/pages/foauth.cpp
+    facebook/pages/fservices.cpp
     facebook/jobs/fcreatechat.cpp
     facebook/jobs/fcreatepim.cpp
 
@@ -72,7 +72,7 @@ kde4_add_ui_files(webaccounts_SRCS
     google/pages/services.ui
     google/pages/serviceoption.ui
 
-    facebook/foauth.ui
+    facebook/pages/foauth.ui
     owncloud/pages/basicinfo.ui
     owncloud/pages/connecting.ui)
 
