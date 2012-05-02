@@ -32,6 +32,13 @@ FOauth::FOauth(FacebookWizard* parent)
  , m_wizard(parent)
 {
     setupUi(this);
+    setTitle(i18n("Facebook Authentication"));
+
+    QList <QWizard::WizardButton> list;
+    list << QWizard::Stretch;
+    list << QWizard::BackButton;
+    list << QWizard::NextButton;
+    list << QWizard::CancelButton;
 }
 
 FOauth::~FOauth()
