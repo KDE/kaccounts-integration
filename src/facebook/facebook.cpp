@@ -81,7 +81,7 @@ void FacebookWizard::done(int result)
     wallet->deleteLater();
 
     KConfigGroup config = KSharedConfig::openConfig("webaccounts")->group("accounts").group("facebook").group(m_username);
-    config.writeEntry("type", "google");
+    config.writeEntry("type", "facebook");
 
     KConfigGroup group = config.group("services");
     QStringList keys = m_services.keys();
