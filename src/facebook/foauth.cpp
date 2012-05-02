@@ -21,6 +21,8 @@
 
 #include <qjson/parser.h>
 
+#include <KPixmapSequenceOverlayPainter>
+
 #include <kfacebook/authenticationdialog.h>
 
 #include <KDebug>
@@ -30,6 +32,7 @@ FOauth::FOauth(FacebookWizard* parent)
  : QWizardPage(parent)
  , m_valid(false)
  , m_wizard(parent)
+ , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     setupUi(this);
     setTitle(i18n("Facebook Authentication"));
@@ -39,6 +42,9 @@ FOauth::FOauth(FacebookWizard* parent)
     list << QWizard::BackButton;
     list << QWizard::NextButton;
     list << QWizard::CancelButton;
+
+    m_painter->setWidget(working);
+    m_painter->start();
 }
 
 FOauth::~FOauth()

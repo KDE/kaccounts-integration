@@ -26,6 +26,7 @@ namespace KIO {
 };
 class KJob;
 class FacebookWizard;
+class KPixmapSequenceOverlayPainter;
 class FOauth : public QWizardPage, Ui::OAuth
 {
     Q_OBJECT
@@ -46,6 +47,7 @@ class FOauth : public QWizardPage, Ui::OAuth
     private:
         QByteArray m_json;
         FacebookWizard *m_wizard;
+        KPixmapSequenceOverlayPainter *m_painter;
         bool m_valid;
 };
 
