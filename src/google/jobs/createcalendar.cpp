@@ -48,7 +48,7 @@ CreateCalendar::CreateCalendar(KConfigGroup group, QObject* parent)
 
 CreateCalendar::~CreateCalendar()
 {
-    m_accessManager->deleteLater();
+//     m_accessManager->deleteLater();
 }
 
 void CreateCalendar::start()
