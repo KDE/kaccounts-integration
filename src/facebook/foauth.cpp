@@ -47,6 +47,7 @@ FOauth::FOauth(FacebookWizard* parent)
     m_painter->start();
 
     tryAgain->setVisible(false);
+    connect(tryAgain, SIGNAL(clicked(bool)), this, SLOT(tryAgainSlot()));
 }
 
 FOauth::~FOauth()
@@ -94,16 +95,7 @@ void FOauth::authenticated(const QString &accessToken)
     sender()->disconnect();
     m_wizard->setAccessToken(accessToken);
 
-    label->setText(i18n("Checking username..."));
-
-    KUrl url("https://graph.facebook.com/me");
-    url.addQueryItem("access_token", accessToken);
-
-    kDebug() << url;
-    KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));
-    job->start();
+    checkUsername();
 }
 
 void FOauth::error()
@@ -129,7 +121,8 @@ void FOauth::usernameFinished()
 
     if (!data.contains("username") || data["username"].toString().isEmpty()) {
         tryAgain->setVisible(true);
-        label->setText(i18n("A facebook username is needed to connect external applications to it.<br/> Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose one."));
+        tryAgain->setDisabled(false);
+        label->setText("A facebook username is needed to connect external applications to it.<br/> Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose one.");
         return;
     }
 
@@ -140,4 +133,24 @@ void FOauth::usernameFinished()
 
     Q_EMIT completeChanged();
     m_wizard->next();
+}
+
+void FOauth::checkUsername()
+{
+    label->setText(i18n("Checking username..."));
+    tryAgain->setDisabled(true);
+
+    KUrl url("https://graph.facebook.com/me");
+    url.addQueryItem("access_token", m_wizard->accessToken());
+
+    kDebug() << url;
+    KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));
+    job->start();
+}
+
+void FOauth::tryAgainSlot()
+{
+    checkUsername();
 }

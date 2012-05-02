@@ -45,6 +45,10 @@ class FOauth : public QWizardPage, Ui::FOAuth
         void error();
         void gotUsername(KIO::Job* job, const QByteArray &data);
         void usernameFinished();
+        void tryAgainSlot();
+
+    private:
+        void checkUsername();
 
     private:
         QByteArray m_json;
