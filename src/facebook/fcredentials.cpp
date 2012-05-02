@@ -34,6 +34,7 @@ FCredentials::FCredentials(FacebookWizard* parent)
  , m_wallet(0)
 {
     setupUi(this);
+    setTitle(i18n("Credentials"));
     googleIcon->setPixmap(QIcon::fromTheme("im-facebook").pixmap(32, 32));
 
     KColorScheme scheme(QPalette::Normal);
