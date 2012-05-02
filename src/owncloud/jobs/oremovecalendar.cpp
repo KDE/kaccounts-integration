@@ -16,13 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "oremovecontact.h"
-#include "removeakonadiresource.h"
+#include "oremovecalendar.h"
+#include "jobs/removeakonadiresource.h"
 #include "davGroupware_settings.h"
 
 #include <KDebug>
 
-ORemoveContact::ORemoveContact(KConfigGroup group, QObject* parent)
+ORemoveCalendar::ORemoveCalendar(KConfigGroup group, QObject* parent)
  : KJob(parent)
  , m_config(group)
 {
@@ -30,20 +30,20 @@ ORemoveContact::ORemoveContact(KConfigGroup group, QObject* parent)
     setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
-ORemoveContact::~ORemoveContact()
+ORemoveCalendar::~ORemoveCalendar()
 {
 
 }
 
-void ORemoveContact::start()
+void ORemoveCalendar::start()
 {
-    QMetaObject::invokeMethod(this, "deleteContact", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "deleteCalendar", Qt::QueuedConnection);
 }
 
-void ORemoveContact::deleteContact()
+void ORemoveCalendar::deleteCalendar()
 {
     KConfigGroup services = m_config.group("services");
-    if (services.readEntry("Calendar", 0) == 0) {
+    if (services.readEntry("Contact", 0) == 0) {
         removeResource();
         return;
     }
@@ -51,20 +51,20 @@ void ORemoveContact::deleteContact()
     removeCalendarsInResource();
 }
 
-void ORemoveContact::removeResource()
+void ORemoveCalendar::removeResource()
 {
-    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", "Contact", m_config, this);
+    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", "Calendar", m_config, this);
     connect(remove, SIGNAL(finished(KJob*)), this, SLOT(resourceRemoved()));
     remove->start();
 }
 
-void ORemoveContact::removeCalendarsInResource()
+void ORemoveCalendar::removeCalendarsInResource()
 {
     org::kde::Akonadi::davGroupware::Settings *settings = new org::kde::Akonadi::davGroupware::Settings(m_config.group("private").readEntry("contactAndCalendarResource"), "/Settings", QDBusConnection::sessionBus());
 
     QStringList list = settings->remoteUrls().value();
     Q_FOREACH(const QString &url, list) {
-        if (url.contains("CardDav")) {
+        if (url.contains("CalDav")) {
             list.removeOne(url);
         }
     }
@@ -73,7 +73,7 @@ void ORemoveContact::removeCalendarsInResource()
 
     settings->writeConfig();
 
-    if (m_config.group("services").readEntry("Calendar", 0) == 0) {
+    if (m_config.group("services").readEntry("Contact", 0) == 0) {
         removeResource();
         return;
     }
@@ -81,9 +81,9 @@ void ORemoveContact::removeCalendarsInResource()
     resourceRemoved();
 }
 
-void ORemoveContact::resourceRemoved()
+void ORemoveCalendar::resourceRemoved()
 {
-    m_config.group("services").writeEntry("Contact", 0);
+    m_config.group("services").writeEntry("Calendar", 0);
     emitResult();
 }
 

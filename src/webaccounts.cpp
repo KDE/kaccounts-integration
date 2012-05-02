@@ -34,12 +34,12 @@
 #include "facebook/jobs/fcreatechat.h"
 #include "facebook/jobs/fcreatepim.h"
 
-#include "jobs/ocreatefile.h"
-#include "jobs/ocreatecontact.h"
-#include "jobs/ocreatecalendar.h"
-#include "jobs/oremovecalendar.h"
-#include "jobs/oremovecontact.h"
-#include "jobs/oremovefile.h"
+#include "owncloud/jobs/ocreatefile.h"
+#include "owncloud/jobs/ocreatecontact.h"
+#include "owncloud/jobs/ocreatecalendar.h"
+#include "owncloud/jobs/oremovecalendar.h"
+#include "owncloud/jobs/oremovecontact.h"
+#include "owncloud/jobs/oremovefile.h"
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>

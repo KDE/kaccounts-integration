@@ -33,12 +33,12 @@ set(webaccounts_SRCS
     owncloud/pages/connecting.cpp
     owncloud/pages/oservices.cpp
 
-    jobs/ocreatefile.cpp
-    jobs/ocreatecontact.cpp
-    jobs/ocreatecalendar.cpp
-    jobs/oremovecalendar.cpp
-    jobs/oremovecontact.cpp
-    jobs/oremovefile.cpp
+    owncloud/jobs/ocreatefile.cpp
+    owncloud/jobs/ocreatecontact.cpp
+    owncloud/jobs/ocreatecalendar.cpp
+    owncloud/jobs/oremovecalendar.cpp
+    owncloud/jobs/oremovecontact.cpp
+    owncloud/jobs/oremovefile.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
@@ -54,11 +54,11 @@ qt4_add_dbus_interface(webaccounts_SRCS
     google_contact_settings
 )
 qt4_add_dbus_interface(webaccounts_SRCS
-    jobs/org.kde.Akonadi.Facebook.Settings.xml
+    facebook/jobs/org.kde.Akonadi.Facebook.Settings.xml
     facebook_settings
 )
 qt4_add_dbus_interface(webaccounts_SRCS
-    jobs/org.kde.Akonadi.davGroupware.Settings.xml
+    owncloud/jobs/org.kde.Akonadi.davGroupware.Settings.xml
     davGroupware_settings
 )
 
