@@ -26,9 +26,10 @@
 
 using namespace Akonadi;
 
-RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, KConfigGroup& group, QObject* parent)
+RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, const QString &serviceName, KConfigGroup& group, QObject* parent)
 : KJob(parent)
 , m_id(name)
+, m_serviceName(serviceName)
 , m_config(group)
 {
     setObjectName(m_config.name());
@@ -55,10 +56,14 @@ void RemoveAkonadiResource::removeResource()
     id.remove("org.freedesktop.Akonadi.Resource.");
     kDebug() << "REMOVE: " << id;
     AgentInstance instance = AgentManager::self()->instance(id);
-
-    AgentManager::self()->removeInstance(instance);
+    if (instance.isValid()) {
+        AgentManager::self()->removeInstance(instance);
+    } else {
+        kDebug() << "Agent not found, removing it anyway";
+    }
 
     m_config.group("private").deleteEntry(m_id);
+    m_config.group("services").deleteEntry(m_serviceName);
     emitResult();
 }
 

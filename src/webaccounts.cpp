@@ -327,7 +327,7 @@ void WebAccounts::removeGoogleAccount(KConfigGroup group)
     }
 
     if (services.readEntry("Contact", 0) == 1) {
-        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", group, this);
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", "Contact", group, this);
         connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeContact->start();
     }
@@ -378,7 +378,7 @@ void WebAccounts::removeFacebookACcount(KConfigGroup group)
     }
 
     if (services.readEntry("PIM", 0) == 1) {
-        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("facebookResource", group, this);
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("facebookResource", "PIM", group, this);
         connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(serviceRemoved(KJob*)));
         removeContact->start();
     }

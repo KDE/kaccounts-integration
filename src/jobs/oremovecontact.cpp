@@ -53,7 +53,7 @@ void ORemoveContact::deleteContact()
 
 void ORemoveContact::removeResource()
 {
-    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", m_config, this);
+    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", "Contact", m_config, this);
     connect(remove, SIGNAL(finished(KJob*)), this, SLOT(resourceRemoved()));
     remove->start();
 }

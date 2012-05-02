@@ -53,7 +53,7 @@ void ORemoveCalendar::deleteCalendar()
 
 void ORemoveCalendar::removeResource()
 {
-    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", m_config, this);
+    RemoveAkonadiResource *remove = new RemoveAkonadiResource("contactAndCalendarResource", "Calendar", m_config, this);
     connect(remove, SIGNAL(finished(KJob*)), this, SLOT(resourceRemoved()));
     remove->start();
 }

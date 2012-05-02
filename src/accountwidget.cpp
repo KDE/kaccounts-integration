@@ -123,7 +123,7 @@ void AccountWidget::modifyChat(bool enabled)
 void AccountWidget::modifyContact(bool enabled)
 {
     if (!enabled) {
-        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", m_config, this);
+        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", "Contact", m_config, this);
         connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(updateContact()));
         removeContact->start();
         return;

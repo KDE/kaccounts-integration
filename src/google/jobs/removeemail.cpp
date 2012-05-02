@@ -41,7 +41,7 @@ void RemoveEmail::start()
 
 void RemoveEmail::removeResource()
 {
-    RemoveAkonadiResource *removeJob = new RemoveAkonadiResource("emailResource", m_config, this);
+    RemoveAkonadiResource *removeJob = new RemoveAkonadiResource("emailResource", "Email", m_config, this);
     connect(removeJob, SIGNAL(finished(KJob*)), this, SLOT(removeTransport()));
     removeJob->start();
 }

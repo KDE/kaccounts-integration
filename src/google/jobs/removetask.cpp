@@ -56,7 +56,7 @@ void RemoveTask::deleteTask()
 
 void RemoveTask::removeResource()
 {
-    RemoveAkonadiResource *remove = new RemoveAkonadiResource("calendarAndTasksResource", m_config, this);
+    RemoveAkonadiResource *remove = new RemoveAkonadiResource("calendarAndTasksResource", "Tasks", m_config, this);
     connect(remove, SIGNAL(finished(KJob*)), this, SLOT(resourceRemoved()));
     remove->start();
 }
