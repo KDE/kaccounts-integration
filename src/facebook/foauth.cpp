@@ -92,7 +92,7 @@ void FOauth::authenticated(const QString &accessToken)
     sender()->disconnect();
     m_wizard->setAccessToken(accessToken);
 
-    label->setText(i18n("Checking username"));
+    label->setText(i18n("Checking username..."));
 
     KUrl url("https://graph.facebook.com/me");
     url.addQueryItem("access_token", accessToken);
@@ -106,6 +106,8 @@ void FOauth::authenticated(const QString &accessToken)
 
 void FOauth::error()
 {
+    m_painter->stop();
+    working->setVisible(false);
     m_valid = false;
     label->setText(i18n("Error authenticating with Facebook, please press back and check your credentials"));
 }
@@ -117,17 +119,18 @@ void FOauth::gotUsername(KIO::Job *job, const QByteArray &data)
 
 void FOauth::usernameFinished()
 {
+    m_painter->stop();
+    working->setVisible(false);
+
     QJson::Parser parser;
     QMap <QString, QVariant > data = parser.parse(m_json).toMap();;
 
-    if (!data.contains("username")) {
+    if (!data.contains("username") || data["username"].toString().isEmpty()) {
+        label->setText(i18n("This is your username, not your normal Facebook login.<br/> Use <a href=\"http://www.facebook.com/username/\">this page</a> to choose a Facebook username."));
         return;
     }
 
     QString username = data["username"].toString();
-    if (username.isEmpty()) {
-        return;
-    }
 
     m_valid = true;
     m_wizard->setFacebookUsername(username);
