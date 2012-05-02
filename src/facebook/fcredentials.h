@@ -23,6 +23,9 @@
 
 #include <QtGui/QWizardPage>
 
+namespace KWallet {
+    class Wallet;
+};
 class FacebookWizard;
 class FCredentials : public QWizardPage, Ui::Google
 {
@@ -31,10 +34,19 @@ class FCredentials : public QWizardPage, Ui::Google
         FCredentials(FacebookWizard *parent);
         virtual ~FCredentials();
 
+        virtual bool isComplete() const;
         virtual bool validatePage();
 
+    public Q_SLOTS:
+        void validateForm();
+
     private:
+        bool accountExists(const QString &email);
+
+    private:
+        bool m_completed;
         FacebookWizard *m_wizard;
+        KWallet::Wallet *m_wallet;
 };
 
 #endif //FACEBOOKCREDENTIALS_H
