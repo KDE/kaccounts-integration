@@ -68,6 +68,13 @@ void CreateChat::createAccount()
 
 void CreateChat::onAccountManagerReady(Tp::PendingOperation* op)
 {
+    if (op->isError()) {
+        kDebug() << "Can't create account";
+        m_config.group("services").writeEntry("Chat", -1);
+        setError(-1);
+        emitResult();
+        return;
+    }
     QString plugin("gabble");
     QString protocol("jabber");
     QString displayName(m_config.name());

@@ -22,6 +22,8 @@
 
 #include <akonadi/agentmanager.h>
 
+#include <KDebug>
+
 using namespace Akonadi;
 
 RemoveCalendar::RemoveCalendar(KConfigGroup group, QObject* parent)
@@ -68,7 +70,11 @@ void RemoveCalendar::removeCalendarsInResource()
 
     QString id = m_config.group("private").readEntry("calendarAndTasksResource").remove("org.freedesktop.Akonadi.Resource.");
     AgentInstance agent = AgentManager::self()->instance(id);
-    agent.reconfigure();
+    if (agent.isValid()) {
+        agent.reconfigure();
+    } else {
+        kDebug() << "Agent not found, removing calendars anyway";
+    }
 
     if (m_config.group("services").readEntry("Tasks", 0) == 0) {
         removeResource();

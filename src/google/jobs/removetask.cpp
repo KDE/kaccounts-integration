@@ -23,6 +23,8 @@
 
 #include <akonadi/agentmanager.h>
 
+#include <KDebug>
+
 using namespace Akonadi;
 
 RemoveTask::RemoveTask(KConfigGroup group, QObject* parent)
@@ -69,7 +71,11 @@ void RemoveTask::removeTaskInResource()
 
     QString id = m_config.group("private").readEntry("calendarAndTasksResource").remove("org.freedesktop.Akonadi.Resource.");
     AgentInstance agent = AgentManager::self()->instance(id);
-    agent.reconfigure();
+    if (agent.isValid()) {
+        agent.reconfigure();
+    } else {
+        kDebug() << "Agent not found, removing tasks anyway";
+    }
 
     //Since removeCalendar and removeTask jobs can be run in paralel we have to check in the last step
     //if the other has been removed to remove the resource
