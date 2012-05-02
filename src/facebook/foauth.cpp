@@ -101,7 +101,7 @@ void FOauth::authenticated(const QString &accessToken)
 void FOauth::error()
 {
     m_valid = false;
-    label->setText(i18n("Error trying to gain access"));
+    label->setText(i18n("Error authenticating with Facebook, please press back and check your credentials"));
 }
 
 void FOauth::gotUsername(KIO::Job *job, const QByteArray &data)
