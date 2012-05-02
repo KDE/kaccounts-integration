@@ -169,7 +169,7 @@ void WebAccounts::removeAccountIfPossible(const QString& name, const QString& ty
     QStringList keys = services.keyList();
     bool deleteAccount = true;
     Q_FOREACH(const QString &key, keys) {
-        if (services.readEntry(key, 0) != 0) {
+        if (services.readEntry(key, 0) > 0) {
             deleteAccount = false;
             break;
         }
