@@ -37,14 +37,18 @@ CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(gro
 
 CreateTask::~CreateTask()
 {
-    if (m_config.group("services").readEntry("Tasks", -1) == 2) {
-        m_config.group("services").writeEntry("Tasks", -1);
-    }
 }
 
 void CreateTask::start()
 {
+    kDebug();
     CreateCalendar::start();
+}
+
+void CreateTask::startByCalendar()
+{
+    kDebug();
+    start();
 }
 
 void CreateTask::fetchDefaultCollections()

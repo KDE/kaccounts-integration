@@ -35,6 +35,9 @@ class CreateTask : public CreateCalendar
     protected:
         virtual void fetchDefaultCollections();
 
+    public Q_SLOTS:
+        void startByCalendar();
+
     private Q_SLOTS:
         void replyReceived(KGoogle::Reply *reply);
 };

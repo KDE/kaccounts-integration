@@ -229,19 +229,6 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
     }
 }
 
-void WebAccounts::createTasks(KJob* job)
-{
-    KConfigGroup group  = qobject_cast< CreateCalendar* >(job)->config();
-    if (job->error()) {
-        qWarning("Error creating calendar resource");
-        group.group("services").writeEntry("Tasks", -1);
-        return;
-    }
-
-    CreateTask *createTask = new CreateTask(group, this);
-    createTask->start();
-}
-
 QListWidgetItem* WebAccounts::createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget *widget)
 {
     QListWidgetItem *newItem = new QListWidgetItem();
@@ -295,7 +282,9 @@ void WebAccounts::createGoogleAccount(KConfigGroup group, AccountWidget* account
         CreateCalendar *createCalendar = new CreateCalendar(group, this);
         connect(createCalendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
         if (services.readEntry("Tasks", 0) == 2) {
-            connect(createCalendar, SIGNAL(result(KJob*)), this, SLOT(createTasks(KJob*)));
+            CreateTask *createTasks = new CreateTask(group, this);
+            connect(createCalendar, SIGNAL(result(KJob*)), createTasks, SLOT(startByCalendar()));
+            connect(createTasks, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
         }
         createCalendar->start();
     } else if(services.readEntry("Tasks", 0) == 2) {
