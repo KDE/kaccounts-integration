@@ -87,9 +87,8 @@ void AccountWidget::serviceChanged(const QString& service, bool enabled)
 
 void AccountWidget::updateService(const QString& name)
 {
-    int status = m_serviceWidgets[name]->isChecked() ? 1 : 0;
+    int status = m_config.group("services").readEntry(name, -1);
     m_serviceWidgets[name]->setStatus(status);
-    m_config.group("services").writeEntry(name, status);
 }
 
 void AccountWidget::modifyCalendar(bool enabled)
