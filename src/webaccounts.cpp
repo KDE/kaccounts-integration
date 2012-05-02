@@ -161,8 +161,6 @@ void WebAccounts::serviceRemoved(KJob *job)
     removeAccountIfPossible(accName, type);
 }
 
-#include <QDebug>
-
 void WebAccounts::removeAccountIfPossible(const QString& name, const QString& type)
 {
     KConfigGroup services = account(name, type).group("services");
