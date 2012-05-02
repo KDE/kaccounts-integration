@@ -31,8 +31,8 @@
 #include "google/jobs/removetask.h"
 #include "jobs/removeakonadiresource.h"
 
-#include "jobs/fcreatechat.h"
-#include "jobs/fcreatepim.h"
+#include "facebook/jobs/fcreatechat.h"
+#include "facebook/jobs/fcreatepim.h"
 
 #include "jobs/ocreatefile.h"
 #include "jobs/ocreatecontact.h"

@@ -25,8 +25,8 @@ set(webaccounts_SRCS
     facebook/fcredentials.cpp
     facebook/foauth.cpp
     facebook/fservices.cpp
-    jobs/fcreatechat.cpp
-    jobs/fcreatepim.cpp
+    facebook/jobs/fcreatechat.cpp
+    facebook/jobs/fcreatepim.cpp
 
     owncloud/owncloud.cpp
     owncloud/basicinfo.cpp
