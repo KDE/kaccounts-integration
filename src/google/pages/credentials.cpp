@@ -79,7 +79,6 @@ bool Credentials::validatePage()
         errorString.append(i18n("The email is required"));
     }
 
-    int a = 0;
     QString str;
     if (!KPIMUtils::isValidSimpleAddress(email->text())) {
         str = i18n("The email seems to be wrong (Invalid format)");

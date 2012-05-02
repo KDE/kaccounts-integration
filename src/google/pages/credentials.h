@@ -27,7 +27,6 @@ namespace KWallet {
     class Wallet;
 };
 class GoogleWizard;
-class QRegExpValidator;
 class Credentials : public QWizardPage, Ui::Google
 {
 Q_OBJECT
