@@ -11,6 +11,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=network-and-connectivity
 
 Name=Web Accounts
+Name[cs]=Webové účty
 Name[nl]=Web-accounts
 Name[pt]=Contas na Web
 Name[pt_BR]=Contas da Web
@@ -19,8 +20,15 @@ Name[uk]=Облікові записи у інтернеті
 Name[x-test]=xxWeb Accountsxx
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
+Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
+Comment[nl]=Uw internet-accounts instellen zoals Google, Live, Owncloud
+Comment[pt]=Configure as suas contas de Internet, como a Google, a Live ou a Owncloud
+Comment[pt_BR]=Configure suas contas na Internet tais como o Google, Live, Owncloud
+Comment[uk]=Налаштування ваших облікових записів у інтернеті, зокрема у Google, Live, Owncloud
+Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
+X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
 X-KDE-Keywords[nl]=Netwerk,Google,Live,ownCloud
 X-KDE-Keywords[pt]=Rede,Google,Live,ownCloud
 X-KDE-Keywords[pt_BR]=Rede,Google,Live,ownCloud
