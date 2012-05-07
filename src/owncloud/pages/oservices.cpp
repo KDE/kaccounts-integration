@@ -48,6 +48,7 @@ void OServices::initializePage()
 void OServices::addOption(const QString& text, const QString& displayText)
 {
     ServiceOption *option = new ServiceOption(text, displayText, this);
+    option->setBinary(true);
     connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
 
     m_wizard->activateOption(text, true);
