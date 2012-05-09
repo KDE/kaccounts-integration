@@ -63,7 +63,7 @@ void RemoveAkonadiResource::removeResource()
     }
 
     m_config.group("private").deleteEntry(m_id);
-    m_config.group("services").deleteEntry(m_serviceName);
+    m_config.group("services").writeEntry(m_serviceName, 0);
     emitResult();
 }
 
