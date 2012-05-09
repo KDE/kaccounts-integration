@@ -31,9 +31,11 @@
 #include "google/jobs/removetask.h"
 #include "jobs/removeakonadiresource.h"
 
+#include "facebook/faccountwidget.h"
 #include "facebook/jobs/fcreatechat.h"
 #include "facebook/jobs/fcreatepim.h"
 
+#include "owncloud/oaccountwidget.h"
 #include "owncloud/jobs/ocreatefile.h"
 #include "owncloud/jobs/ocreatecontact.h"
 #include "owncloud/jobs/ocreatecalendar.h"
@@ -115,7 +117,15 @@ void WebAccounts::addExistingAccounts()
 
 void WebAccounts::addAccount(const QString& name, const QString& accountName, const QString& type)
 {
-    AccountWidget *accountWidget = new AccountWidget(account(accountName, type), this);
+    QWidget *accountWidget = 0;
+    if (type == "google") {
+        accountWidget = new AccountWidget(account(name, type), this);
+    } else if (type == "facebook") {
+        accountWidget = new FAccountWidget(account(name, type), this);
+    } else if (type == "owncloud") {
+        accountWidget = new OAccountWidget(account(name, type), this);
+    }
+
     m_layout->addWidget(accountWidget);
 
     QListWidgetItem *newItem = createQListWidgetItem(name, name, type, accountWidget);
@@ -202,7 +212,15 @@ void WebAccounts::currentItemChanged(QListWidgetItem *current, QListWidgetItem *
 
 void WebAccounts::newAccount(const QString& type, const QString& name)
 {
-    AccountWidget *accountWidget = new AccountWidget(account(name, type), this);
+    QWidget *accountWidget = 0;
+    if (type == "google") {
+        accountWidget = new AccountWidget(account(name, type), this);
+    } else if (type == "facebook") {
+        accountWidget = new FAccountWidget(account(name, type), this);
+    } else if (type == "owncloud") {
+        accountWidget = new OAccountWidget(account(name, type), this);
+    }
+
     m_layout->addWidget(accountWidget);
 
     QListWidgetItem *newItem = createQListWidgetItem(name, name, type, accountWidget);
@@ -219,11 +237,11 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
     KConfigGroup group = account(name, type);
 
     if (type == "google") {
-        createGoogleAccount(group, accountWidget);
+        createGoogleAccount(group, qobject_cast<AccountWidget *>(accountWidget));
     } else if(type == "facebook") {
-        createFacebookAccount(group, accountWidget);
+        createFacebookAccount(group, qobject_cast<FAccountWidget *>(accountWidget));
     } else if (type == "owncloud") {
-        createOwncloudAccount(group, accountWidget);
+        createOwncloudAccount(group, qobject_cast<OAccountWidget *>(accountWidget));
     }
 }
 
@@ -338,7 +356,7 @@ void WebAccounts::removeGoogleAccount(KConfigGroup group)
     }
 }
 
-void WebAccounts::createFacebookAccount(KConfigGroup group, AccountWidget* accountWidget)
+void WebAccounts::createFacebookAccount(KConfigGroup group, FAccountWidget* accountWidget)
 {
     KConfigGroup services = group.group("services");
 
@@ -371,7 +389,7 @@ void WebAccounts::removeFacebookACcount(KConfigGroup group)
     }
 }
 
-void WebAccounts::createOwncloudAccount(KConfigGroup group, AccountWidget* accountWidget)
+void WebAccounts::createOwncloudAccount(KConfigGroup group, OAccountWidget* accountWidget)
 {
     KConfigGroup services = group.group("services");
     if (services.readEntry("File", 0) == 2) {

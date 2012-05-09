@@ -22,6 +22,7 @@ set(webaccounts_SRCS
     google/jobs/removetask.cpp
 
     facebook/facebook.cpp
+    facebook/faccountwidget.cpp
     facebook/pages/fcredentials.cpp
     facebook/pages/foauth.cpp
     facebook/pages/fservices.cpp
@@ -29,6 +30,7 @@ set(webaccounts_SRCS
     facebook/jobs/fcreatepim.cpp
 
     owncloud/owncloud.cpp
+    owncloud/oaccountwidget.cpp
     owncloud/pages/basicinfo.cpp
     owncloud/pages/connecting.cpp
     owncloud/pages/oservices.cpp

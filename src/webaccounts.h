@@ -27,6 +27,8 @@ class QStackedLayout;
 class QListWidgetItem;
 class KConfigGroup;
 class AccountWidget;
+class FAccountWidget;
+class OAccountWidget;
 namespace Ui {
     class KCMWebAccounts;
 }
@@ -58,10 +60,10 @@ private:
     void createGoogleAccount(KConfigGroup group, AccountWidget *accountWidget);
     void removeGoogleAccount(KConfigGroup group);
 
-    void createFacebookAccount(KConfigGroup group, AccountWidget *accountWidget);
+    void createFacebookAccount(KConfigGroup group, FAccountWidget* accountWidget);
     void removeFacebookACcount(KConfigGroup group);
 
-    void createOwncloudAccount(KConfigGroup group, AccountWidget *accountWidget);
+    void createOwncloudAccount(KConfigGroup group, OAccountWidget *accountWidget);
     void removeOwncloudAccount(KConfigGroup group);
 
 private:
