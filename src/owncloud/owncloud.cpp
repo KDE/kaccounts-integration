@@ -30,6 +30,8 @@
 using namespace KWallet;
 OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
 {
+    setWindowTitle(i18n("ownCloud account Wizard"));
+
     BasicInfo *basicInfo = new BasicInfo(this);
     Connecting *connecting = new Connecting(this);
     OServices *services = new OServices(this);
