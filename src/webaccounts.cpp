@@ -122,7 +122,7 @@ void WebAccounts::addAccount(const QString& name, const QString& accountName, co
         accountWidget = new AccountWidget(account(name, type), this);
     } else if (type == "facebook") {
         accountWidget = new FAccountWidget(account(name, type), this);
-    } else if (type == "owncloud") {
+    } else if (type == "owncloud" || type == "runnerid") {
         accountWidget = new OAccountWidget(account(name, type), this);
     }
 
@@ -153,7 +153,7 @@ void WebAccounts::rmBtnClicked()
         removeGoogleAccount(group);
     } else if(type == "facebook") {
         removeFacebookACcount(group);
-    } else if(type == "owncloud") {
+    } else if(type == "owncloud" || type == "runnerid") {
         removeOwncloudAccount(group);
     }
 
@@ -217,7 +217,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
         accountWidget = new AccountWidget(account(name, type), this);
     } else if (type == "facebook") {
         accountWidget = new FAccountWidget(account(name, type), this);
-    } else if (type == "owncloud") {
+    } else if (type == "owncloud" || type == "runnerid") {
         accountWidget = new OAccountWidget(account(name, type), this);
     }
 
@@ -240,7 +240,7 @@ void WebAccounts::newAccount(const QString& type, const QString& name)
         createGoogleAccount(group, qobject_cast<AccountWidget *>(accountWidget));
     } else if(type == "facebook") {
         createFacebookAccount(group, qobject_cast<FAccountWidget *>(accountWidget));
-    } else if (type == "owncloud") {
+    } else if (type == "owncloud" || type == "runnerid") {
         createOwncloudAccount(group, qobject_cast<OAccountWidget *>(accountWidget));
     }
 }

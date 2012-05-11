@@ -45,6 +45,7 @@ Q_OBJECT
         void startGoogle();
         void startFacebook();
         void startOwncloud();
+        void startRunnerID();
         void startLive();
 
     Q_SIGNALS:

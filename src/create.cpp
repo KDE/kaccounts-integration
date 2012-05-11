@@ -20,6 +20,7 @@
 #include "google/google.h"
 #include "facebook/facebook.h"
 #include "owncloud/owncloud.h"
+#include "runnerid/runnerid.h"
 
 #include "ui_types.h"
 
@@ -65,6 +66,7 @@ void Create::stablishConnections()
     connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
     connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
     connect(m_form->owncloudBtn, SIGNAL(clicked(bool)), this, SLOT(startOwncloud()));
+    connect(m_form->runnerId, SIGNAL(clicked(bool)), this, SLOT(startRunnerID()));
 }
 
 void Create::startGoogle()
@@ -91,6 +93,14 @@ void Create::startLive()
 void Create::startOwncloud()
 {
     OwnCloudWizard *wizard = new OwnCloudWizard(m_parent);
+    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
+    wizard->setModal(true);
+    wizard->show();
+}
+
+void Create::startRunnerID()
+{
+    RunnerIDWizard *wizard = new RunnerIDWizard(m_parent);
     connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
     wizard->setModal(true);
     wizard->show();

@@ -41,6 +41,10 @@ set(webaccounts_SRCS
     owncloud/jobs/oremovecalendar.cpp
     owncloud/jobs/oremovecontact.cpp
     owncloud/jobs/oremovefile.cpp
+
+    runnerid/runnerid.cpp
+    runnerid/pages/rcredentials.cpp
+    runnerid/pages/rservices.cpp
 )
 
 qt4_add_dbus_interface(webaccounts_SRCS
