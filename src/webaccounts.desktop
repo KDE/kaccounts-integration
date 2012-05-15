@@ -12,6 +12,7 @@ X-KDE-System-Settings-Parent-Category=network-and-connectivity
 
 Name=Web Accounts
 Name[cs]=Webové účty
+Name[ga]=Cuntais Ghréasáin
 Name[nl]=Web-accounts
 Name[pl]=Konta sieciowe
 Name[pt]=Contas na Web
@@ -31,6 +32,7 @@ Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Ownclou
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
 X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
+X-KDE-Keywords[ga]=Líonra,Google,Live,ownCloud
 X-KDE-Keywords[nl]=Netwerk,Google,Live,ownCloud
 X-KDE-Keywords[pl]=Sieć,Google,Live,ownCloud
 X-KDE-Keywords[pt]=Rede,Google,Live,ownCloud
