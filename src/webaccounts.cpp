@@ -281,6 +281,10 @@ QString WebAccounts::iconForType(const QString& type)
         return "applications-education-miscellaneous";
     }
 
+    if (type == "runnerid") {
+        return "netrunnerid";
+    }
+
     return type;
 }
 
