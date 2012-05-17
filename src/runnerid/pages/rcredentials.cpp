@@ -35,7 +35,7 @@ RCredentials::RCredentials(RunnerIDWizard* parent)
 {
     setupUi(this);
     setTitle(i18n("Credentials"));
-    googleIcon->setPixmap(QIcon::fromTheme("im-facebook").pixmap(32, 32));
+    googleIcon->setPixmap(QIcon::fromTheme("netrunnerid").pixmap(32, 32));
 
     KColorScheme scheme(QPalette::Normal);
     KColorScheme::ForegroundRole role;
@@ -45,6 +45,7 @@ RCredentials::RCredentials(RunnerIDWizard* parent)
 
     error->setPalette(palette);
 
+    label_3->setText(i18n("Username:"));
     connect(email, SIGNAL(textChanged(QString)), SLOT(validateForm()));
     connect(password, SIGNAL(textChanged(QString)), SLOT(validateForm()));
 }
@@ -67,13 +68,13 @@ bool RCredentials::validatePage()
 {
     QString errorString;
     if (email->text().isEmpty() && password->text().isEmpty()) {
-        errorString.append(i18n("The email and password are required"));
+        errorString.append(i18n("The username and password are required"));
         error->setText(errorString);
         return false;
     }
 
     if (email->text().isEmpty()) {
-        errorString.append(i18n("The email is required"));
+        errorString.append(i18n("The username is required"));
     }
 
     QString str;
