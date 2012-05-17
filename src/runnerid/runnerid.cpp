@@ -83,7 +83,7 @@ void RunnerIDWizard::done(int result)
     KConfigGroup config =
     KSharedConfig::openConfig("webaccounts")->group("accounts").group("runnerid").group(m_username);
     config.writeEntry("type", "runnerid");
-    config.writeEntry("server", "http://runners-id.org/myowncloud/public/");
+    config.writeEntry("server", "http://myowncloud.com/");
     KConfigGroup group = config.group("services");
     QStringList keys = m_services.keys();
     Q_FOREACH(const QString &key, keys) {
