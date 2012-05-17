@@ -34,6 +34,11 @@ void OCreateCalendar::start()
     OCreateContact::start();
 }
 
+void OCreateCalendar::startByContact()
+{
+    start();
+}
+
 const QString OCreateCalendar::davUrl()
 {
     KUrl url(m_config.readEntry("server", ""));

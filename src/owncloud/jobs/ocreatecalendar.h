@@ -30,6 +30,9 @@ class OCreateCalendar : public OCreateContact
 
         virtual void start();
 
+    public Q_SLOTS:
+        void startByContact();
+
     protected:
         virtual const QString davUrl();
 };
