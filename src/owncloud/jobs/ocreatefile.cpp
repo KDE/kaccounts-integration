@@ -68,7 +68,11 @@ void OCreateFile::createNetAttach()
     KConfig _desktopFile( path, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
-    desktopFile.writeEntry("Icon", "owncloud");
+    if (m_config.readEntry("type", "") == "runnerid") {
+        desktopFile.writeEntry("Icon", "netrunnerid");
+    } else {
+        desktopFile.writeEntry("Icon", "owncloud");
+    }
     desktopFile.writeEntry("Name", url.host());
     desktopFile.writeEntry("Type", "Link");
     desktopFile.writeEntry("URL", url.prettyUrl());
