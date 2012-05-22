@@ -70,6 +70,9 @@ void FCreateChat::createAccount()
 void FCreateChat::onAccountManagerReady(Tp::PendingOperation* op)
 {
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    if (!wallet) {
+        return;
+    }
     wallet->setFolder("WebAccounts");
 
     QByteArray username;
@@ -115,6 +118,14 @@ void FCreateChat::onAccountCreated(Tp::PendingOperation* op)
 
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    if (!wallet) {
+        qWarning("Can't open wallet");
+        m_config.group("services").writeEntry("Chat", -1);
+        setError(-1);
+        emitResult();
+        return;
+    }
+
     wallet->setFolder("WebAccounts");
     if (wallet->readPassword(m_config.name(), password) != 0) {
         qWarning("Can't open wallet");

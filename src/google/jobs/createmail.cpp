@@ -70,6 +70,16 @@ void CreateMail::instanceCreateResult(KJob* job)
 
     QString password;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    if (!wallet) {
+        qWarning("Can't open wallet");
+        setError(-1);
+        m_config.group("services").writeEntry("EMail", -1);
+        m_config.sync();
+        wallet->deleteLater();
+        emitResult();
+        return;
+    }
+
     wallet->setFolder("WebAccounts");
     if (wallet->readPassword("google-" + m_config.name(), password) != 0) {
         qWarning("Can't open wallet");

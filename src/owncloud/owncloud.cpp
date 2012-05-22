@@ -69,7 +69,7 @@ void OwnCloudWizard::done(int result)
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Synchronous);
 
-    if (!wallet->isOpen() || !wallet->isEnabled()) {
+    if (!wallet || !wallet->isOpen() || !wallet->isEnabled()) {
         return;
     }
 

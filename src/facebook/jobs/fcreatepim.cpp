@@ -66,6 +66,14 @@ void FCreatePIM::instanceCreateResult(KJob* job)
 
     QByteArray accessToken;
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    if (!wallet) {
+        qWarning("Can't open wallet");
+        setError(-1);
+        m_config.group("services").writeEntry("PIM", -1);
+        emitResult();
+        return;
+    }
+
     wallet->setFolder("WebAccounts");
     if (wallet->readEntry("facebookAccessToken", accessToken) != 0) {
         qWarning("Can't open wallet");

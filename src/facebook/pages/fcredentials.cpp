@@ -54,7 +54,7 @@ FCredentials::FCredentials(FacebookWizard* parent)
 
 FCredentials::~FCredentials()
 {
-
+    delete m_wallet;
 }
 
 void FCredentials::initializePage()
@@ -119,6 +119,9 @@ bool FCredentials::accountExists(const QString& email)
 {
     if (!m_wallet) {
         m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+        if (!m_wallet) {
+            return false;
+        }
         m_wallet->setFolder("WebAccounts");
     }
 

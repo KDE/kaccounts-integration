@@ -191,6 +191,9 @@ void WebAccounts::removeAccountIfPossible(const QString& name, const QString& ty
     KSharedConfig::openConfig("webaccounts")->sync();
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    if (!wallet) {
+        return;
+    }
     wallet->setFolder("WebAccounts");
 
     QString eh = type + "-" + name;

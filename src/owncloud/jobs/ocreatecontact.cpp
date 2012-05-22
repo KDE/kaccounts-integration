@@ -124,7 +124,7 @@ void OCreateContact::resourceCreated(KJob* job)
     }
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Synchronous);
 
-    if (!wallet->isOpen() || !wallet->isEnabled()) {
+    if (!wallet || !wallet->isOpen() || !wallet->isEnabled()) {
         setError(-1);
         emitResult();
         return;
