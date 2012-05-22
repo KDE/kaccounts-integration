@@ -68,7 +68,7 @@
      <item>
       <widget class="QCommandLinkButton" name="owncloudBtn">
        <property name="text">
-        <string>ownClouod</string>
+        <string>ownCloud</string>
        </property>
        <property name="icon">
         <iconset theme="owncloud">
@@ -89,7 +89,9 @@
         <string>Runners-ID</string>
        </property>
        <property name="icon">
-        <iconset theme="netrunnerid"/>
+        <iconset theme="netrunnerid">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
