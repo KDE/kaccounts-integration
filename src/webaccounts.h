@@ -47,7 +47,6 @@ private Q_SLOTS:
     void newAccount(const QString &type, const QString &name);
     void addExistingAccounts();
     void serviceRemoved(KJob *job);
-    void createOCalendar(KJob*);
 
 private:
     KConfigGroup accounts();

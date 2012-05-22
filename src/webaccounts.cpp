@@ -404,8 +404,17 @@ void WebAccounts::createOwncloudAccount(KConfigGroup group, OAccountWidget* acco
     if (services.readEntry("Contact", 0) == 2) {
         OCreateContact *contact = new OCreateContact(group, this);
         connect(contact, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
-        connect(contact, SIGNAL(finished(KJob*)), this, SLOT(createOCalendar(KJob*)));
+        if (services.readEntry("Calendar", 0) == 2) {
+            OCreateCalendar *calendar = new OCreateCalendar(group, this);
+            connect(calendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
+            connect(contact, SIGNAL(finished(KJob*)), calendar, SLOT(startByContact()));
+        }
         contact->start();
+    } else if (services.readEntry("Calendar", 0) == 2) {
+        OCreateCalendar *calendar = new OCreateCalendar(group, this);
+        connect(calendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
+        calendar->start();
+
     }
 }
 
@@ -431,15 +440,6 @@ void WebAccounts::removeOwncloudAccount(KConfigGroup group)
     }
 }
 
-
-void WebAccounts::createOCalendar(KJob* job)
-{
-    kDebug() << "Creating oCalendar";
-    KConfigGroup group  = qobject_cast< OCreateContact* >(job)->config();
-    OCreateCalendar *calendar = new OCreateCalendar(group, this);
-//     connect(calendar, SIGNAL(finished(KJob*)), accountWidget, SLOT(updateAll()));
-    calendar->start();
-}
 
 
 #include "webaccounts.moc"
