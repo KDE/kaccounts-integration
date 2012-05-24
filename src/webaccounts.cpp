@@ -49,6 +49,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QStackedLayout>
 
+#include <Akonadi/Control>
 #include <KDebug>
 #include <kpluginfactory.h>
 #include <kstandarddirs.h>
@@ -76,6 +77,8 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
     connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
             this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
+
+    Akonadi::Control::widgetNeedsAkonadi( this );
 
     QMetaObject::invokeMethod(this, "addExistingAccounts", Qt::QueuedConnection);
 }
