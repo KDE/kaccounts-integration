@@ -115,9 +115,6 @@ void OCreateContact::resourceCreated(KJob* job)
     settings->setDisplayName(m_config.name());
     settings->setSettingsVersion(2);
 
-    settings->writeConfig();
-    agent.reconfigure();
-
     WId windowId = 0;
     if (qApp->activeWindow()) {
         windowId = qApp->activeWindow()->winId();
@@ -130,9 +127,15 @@ void OCreateContact::resourceCreated(KJob* job)
         return;
     }
 
-    QString password;
+    QString password, prefix;
+    if (m_config.readEntry("type", "owncloud") == "runnerid") {
+        prefix = "runnerid";
+    } else {
+        prefix = "owncloud";
+    }
+
     wallet->setFolder("WebAccounts");
-    wallet->readPassword("owncloud-" + m_config.name(), password);
+    wallet->readPassword(prefix + "-" + m_config.name(), password);
 
     QString key (agent.identifier());
     key.append(",$default$");
@@ -140,7 +143,8 @@ void OCreateContact::resourceCreated(KJob* job)
     wallet->setFolder(Wallet::PasswordFolder());
     wallet->writePassword(key, password);
 
-    agent.synchronize();
+    settings->writeConfig();
+    agent.reconfigure();
 
     emitResult();
 }
@@ -166,7 +170,6 @@ void OCreateContact::useCalendarResource()
     }
 
     instance.reconfigure();
-    instance.synchronize();
 
     emitResult();
 }
