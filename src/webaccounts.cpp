@@ -61,6 +61,8 @@ using namespace KWallet;
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 
+Wallet *WebAccounts::s_wallet = 0;
+
 WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 : KCModule(WebAccountsFactory::componentData(), parent)
 , m_create(0)
@@ -86,6 +88,12 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 WebAccounts::~WebAccounts()
 {
     delete m_ui;
+}
+
+Wallet* WebAccounts::wallet()
+{
+    WebAccounts::s_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    return WebAccounts::s_wallet;
 }
 
 void WebAccounts::addExistingAccounts()

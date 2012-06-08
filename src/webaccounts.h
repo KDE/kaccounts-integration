@@ -21,6 +21,10 @@
 
 #include <kcmodule.h>
 
+namespace KWallet {
+    class Wallet;
+}
+
 class KJob;
 class Create;
 class QStackedLayout;
@@ -39,6 +43,8 @@ Q_OBJECT
 public:
     WebAccounts(QWidget *parent, const QVariantList&);
     virtual ~WebAccounts();
+
+    static KWallet::Wallet *wallet();
 
 private Q_SLOTS:
     void addBtnClicked();
@@ -70,6 +76,8 @@ private:
     QStackedLayout *m_layout;
     QListWidgetItem *m_newAccountItem;
     Ui::KCMWebAccounts *m_ui;
+
+    static KWallet::Wallet *s_wallet;
 };
 
 #endif // webaccounts_H

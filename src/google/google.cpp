@@ -21,6 +21,7 @@
 #include "pages/credentials.h"
 #include "pages/oauth.h"
 #include "pages/services.h"
+#include "pages/wallet.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QApplication>
@@ -35,10 +36,12 @@ GoogleWizard::GoogleWizard(QWidget* parent) : QWizard(parent)
 {
     setWindowTitle(i18n("Google account Wizard"));
 
+    WalletPage *wallet = new WalletPage(this);
     Credentials *credentialsPage = new Credentials(this);
     OAuth *oauth = new OAuth(this);
     Services *services = new Services(this);
 
+    addPage(wallet);
     addPage(credentialsPage);
     addPage(oauth);
     addPage(services);
