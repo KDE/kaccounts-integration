@@ -122,6 +122,9 @@ bool Credentials::accountExists(const QString& email)
 {
     if (!m_wallet) {
         m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+        if (!m_wallet || !m_wallet->isEnabled()) {
+            return false;
+        }
         m_wallet->setFolder("WebAccounts");
     }
 
