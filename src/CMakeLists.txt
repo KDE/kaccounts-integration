@@ -11,6 +11,7 @@ set(webaccounts_SRCS
     google/pages/oauth.cpp
     google/pages/services.cpp
     google/pages/serviceoption.cpp
+    google/pages/wallet.cpp
     google/jobs/createcalendar.cpp
     google/jobs/createtask.cpp
     google/jobs/createchat.cpp
@@ -77,6 +78,7 @@ kde4_add_ui_files(webaccounts_SRCS
     google/pages/oauth.ui
     google/pages/services.ui
     google/pages/serviceoption.ui
+    google/pages/wallet.ui
 
     facebook/pages/foauth.ui
     owncloud/pages/basicinfo.ui

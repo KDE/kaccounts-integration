@@ -32,13 +32,19 @@ class OAccountWidget;
 namespace Ui {
     class KCMWebAccounts;
 }
+namespace KWallet {
+    class Wallet;
+}
 
+using namespace KWallet;
 class WebAccounts : public KCModule
 {
 Q_OBJECT
 public:
     WebAccounts(QWidget *parent, const QVariantList&);
     virtual ~WebAccounts();
+
+    static Wallet* wallet();
 
 private Q_SLOTS:
     void addBtnClicked();
@@ -66,6 +72,7 @@ private:
     void removeOwncloudAccount(KConfigGroup group);
 
 private:
+    static Wallet *s_wallet;
     Create *m_create;
     QStackedLayout *m_layout;
     QListWidgetItem *m_newAccountItem;
