@@ -19,7 +19,7 @@
 #include "runnerid.h"
 #include "pages/rcredentials.h"
 #include "pages/rservices.h"
-
+#include "../google/pages/wallet.h"
 #include <klocalizedstring.h>
 #include <kpushbutton.h>
 #include <kstandardguiitem.h>
@@ -31,9 +31,11 @@ RunnerIDWizard::RunnerIDWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(
 {
     setWindowTitle(i18n("Runner-id Wizad"));
 
+    WalletPage *wallet = new WalletPage(this);
     RCredentials *credentials = new RCredentials(this);
     RServices *services = new RServices(this);
 
+    addPage(wallet);
     addPage(credentials);
     addPage(services);
 

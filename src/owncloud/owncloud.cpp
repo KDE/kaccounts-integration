@@ -20,6 +20,7 @@
 #include "pages/basicinfo.h"
 #include "pages/connecting.h"
 #include "pages/oservices.h"
+#include "../google/pages/wallet.h"
 
 #include <klocalizedstring.h>
 #include <kpushbutton.h>
@@ -32,10 +33,12 @@ OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(
 {
     setWindowTitle(i18n("ownCloud account Wizard"));
 
+    WalletPage *wallet = new WalletPage(this);
     BasicInfo *basicInfo = new BasicInfo(this);
     Connecting *connecting = new Connecting(this);
     OServices *services = new OServices(this);
 
+    addPage(wallet);
     addPage(basicInfo);
     addPage(connecting);
     addPage(services);

@@ -20,6 +20,7 @@
 #include "pages/fcredentials.h"
 #include "pages/foauth.h"
 #include "pages/fservices.h"
+#include "../google/pages/wallet.h"
 
 #include <kwallet.h>
 #include <kpushbutton.h>
@@ -31,10 +32,12 @@ FacebookWizard::FacebookWizard(QWidget* parent): QWizard(parent)
 {
     setWindowTitle(i18n("Facebook account Wizard"));
 
+    WalletPage *wallet = new WalletPage(this);
     FCredentials *credentialsPage = new FCredentials(this);
     FOauth *foauth = new FOauth(this);
     FServices *services = new FServices(this);
 
+    addPage(wallet);
     addPage(credentialsPage);
     addPage(foauth);
     addPage(services);
