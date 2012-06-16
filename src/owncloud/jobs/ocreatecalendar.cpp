@@ -42,7 +42,7 @@ void OCreateCalendar::startByContact()
 const QString OCreateCalendar::davUrl()
 {
     KUrl url(m_config.readEntry("server", ""));
-    url.addPath("apps/calendar/caldav.php/");
+    url.addPath("remote.php/caldav/");
 
     QString str("$default$|CalDav|");
     str.append(url.url());
