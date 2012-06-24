@@ -28,12 +28,12 @@
 
 #include <QtGui/QWidget>
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
+#include <libkgapi/auth.h>
+#include <libkgapi/services/tasks.h>
+#include <libkgapi/services/contacts.h>
+#include <libkgapi/services/calendar.h>
 
-using namespace KGoogle;
+using namespace KGAPI;
 
 Create::Create(QWidget* parent)
 : QObject(parent)
@@ -50,7 +50,7 @@ Create::~Create()
 QWidget* Create::widget()
 {
     if (!m_form) {
-        m_form = new Ui::createForm();
+        m_form = new Ui_createForm();
     }
 
     QWidget *widget = new QWidget(m_parent);

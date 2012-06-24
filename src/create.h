@@ -21,14 +21,11 @@
 
 #include <QtCore/QObject>
 
-#include <libkgoogle/account.h>
+#include <libkgapi/account.h>
 
 class QDialog;
 class QWidget;
-namespace Ui {
-    class Google;
-    class createForm;
-}
+class Ui_createForm;
 
 class Create : public QObject
 {
@@ -54,8 +51,7 @@ Q_OBJECT
     private:
         QDialog *m_dialog;
         QWidget *m_parent;
-        Ui::Google *m_google;
-        Ui::createForm *m_form;
+        Ui_createForm *m_form;
 
 };
 #endif// CREATE_H
