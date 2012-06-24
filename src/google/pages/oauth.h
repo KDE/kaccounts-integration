@@ -20,8 +20,8 @@
 #define GOOGLEOAUTH_H
 
 #include "ui_oauth.h"
-#include <libkgoogle/common.h>
-#include <libkgoogle/account.h>
+#include <libkgapi/common.h>
+#include <libkgapi/account.h>
 
 #include <QtGui/QWizardPage>
 
@@ -38,8 +38,8 @@ Q_OBJECT
         virtual bool isComplete() const;
 
     private Q_SLOTS:
-        void error(KGoogle::Error, QString);
-        void authenticated(KGoogle::Account::Ptr& acc);
+        void error(KGAPI::Error, QString);
+        void authenticated(KGAPI::Account::Ptr& acc);
 
     private:
         bool accountExists();

@@ -21,18 +21,18 @@
 
 #include <QDBusInterface>
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/reply.h>
-#include <libkgoogle/request.h>
-#include <libkgoogle/accessmanager.h>
-#include <libkgoogle/objects/contact.h>
-#include <libkgoogle/services/contacts.h>
+#include <libkgapi/auth.h>
+#include <libkgapi/reply.h>
+#include <libkgapi/request.h>
+#include <libkgapi/accessmanager.h>
+#include <libkgapi/objects/contact.h>
+#include <libkgapi/services/contacts.h>
 
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 
-using namespace KGoogle;
+using namespace KGAPI;
 using namespace Akonadi;
 
 CreateContact::CreateContact(KConfigGroup group, QObject* parent)
@@ -41,7 +41,7 @@ CreateContact::CreateContact(KConfigGroup group, QObject* parent)
 {
     Auth *auth = Auth::instance();
     auth->init("Akonadi Google", "554041944266.apps.googleusercontent.com", "mdT1DjzohxN3npUUzkENT0gO");
-    qRegisterMetaType< KGoogle::Services::Contacts >("Contact");
+    qRegisterMetaType< KGAPI::Services::Contacts >("Contact");
 }
 
 CreateContact::~CreateContact()

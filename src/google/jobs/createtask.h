@@ -39,7 +39,7 @@ class CreateTask : public CreateCalendar
         void startByCalendar();
 
     private Q_SLOTS:
-        void replyReceived(KGoogle::Reply *reply);
+        void replyReceived(KGAPI::Reply *reply);
 };
 
 #endif //CREATETASK_H

@@ -26,7 +26,7 @@
 
 #include <akonadi/agentinstance.h>
 
-namespace KGoogle {
+namespace KGAPI {
     class Reply;
     class AccessManager;
 };
@@ -52,13 +52,13 @@ class CreateCalendar : public KJob
         void useTaskResource();
         void createResource();
         void resourceCreated(KJob *job);
-        void replyReceived(KGoogle::Reply *reply);
+        void replyReceived(KGAPI::Reply *reply);
 
     protected:
         OrgKdeAkonadiGoogleCalendarSettingsInterface *m_calendarSettings;
         KConfigGroup m_config;
         AgentInstance m_agent;
-        KGoogle::AccessManager *m_accessManager;
+        KGAPI::AccessManager *m_accessManager;
 };
 
 #endif //CREATECALENDAR_H

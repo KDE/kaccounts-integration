@@ -19,20 +19,20 @@
 #include "createtask.h"
 #include "google_calendar_settings.h"
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/reply.h>
-#include <libkgoogle/request.h>
-#include <libkgoogle/accessmanager.h>
-#include <libkgoogle/objects/tasklist.h>
-#include <libkgoogle/services/tasks.h>
+#include <libkgapi/auth.h>
+#include <libkgapi/reply.h>
+#include <libkgapi/request.h>
+#include <libkgapi/accessmanager.h>
+#include <libkgapi/objects/tasklist.h>
+#include <libkgapi/services/tasks.h>
 
 #include <KDebug>
 
-using namespace KGoogle;
+using namespace KGAPI;
 
 CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(group, parent)
 {
-    qRegisterMetaType< KGoogle::Services::Tasks >("Task");
+    qRegisterMetaType< KGAPI::Services::Tasks >("Task");
 }
 
 CreateTask::~CreateTask()
@@ -58,19 +58,19 @@ void CreateTask::fetchDefaultCollections()
 {
     m_accessManager = new AccessManager;
 
-    connect(m_accessManager, SIGNAL(replyReceived(KGoogle::Reply*)),
-            this, SLOT(replyReceived(KGoogle::Reply*)));
+    connect(m_accessManager, SIGNAL(replyReceived(KGAPI::Reply*)),
+            this, SLOT(replyReceived(KGAPI::Reply*)));
 
     Request *request = new Request(Services::Tasks::fetchTaskListsUrl(), Request::FetchAll, "Task",  Auth::instance()->getAccount(m_config.name()));
     m_accessManager->sendRequest(request);
 }
 
-void CreateTask::replyReceived(KGoogle::Reply* reply)
+void CreateTask::replyReceived(KGAPI::Reply* reply)
 {
     QStringList tasks;
-    QList< KGoogle::Object* > objects = reply->replyData();
+    QList< KGAPI::Object* > objects = reply->replyData();
 
-    Q_FOREACH(KGoogle::Object * object, objects) {
+    Q_FOREACH(KGAPI::Object * object, objects) {
         Objects::TaskList *task;
 
         task = static_cast< Objects::TaskList* >(object);

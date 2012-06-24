@@ -19,13 +19,13 @@
 #include "oauth.h"
 #include "google/google.h"
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/services/tasks.h>
-#include <libkgoogle/services/contacts.h>
-#include <libkgoogle/services/calendar.h>
+#include <libkgapi/auth.h>
+#include <libkgapi/services/tasks.h>
+#include <libkgapi/services/contacts.h>
+#include <libkgapi/services/calendar.h>
 
 #include <KDebug>
-using namespace KGoogle;
+using namespace KGAPI;
 
 OAuth::OAuth(GoogleWizard *parent)
  : QWizardPage(parent)
@@ -90,7 +90,7 @@ void OAuth::getTokenForAccount()
 {
     Auth *auth = Auth::instance();
 
-    Account::Ptr acc(new KGoogle::Account());
+    Account::Ptr acc(new KGAPI::Account());
     acc->addScope(Services::Tasks::ScopeUrl);
     acc->addScope(Services::Contacts::ScopeUrl);
     acc->addScope(Services::Calendar::ScopeUrl);
@@ -101,11 +101,11 @@ void OAuth::getTokenForAccount()
     auth->setDialogAutoClose(true);
     auth->authenticate(acc, true);
 
-    connect(auth, SIGNAL(authenticated(KGoogle::Account::Ptr&)), this, SLOT(authenticated(KGoogle::Account::Ptr&)));
-    connect(auth, SIGNAL(error(KGoogle::Error,QString)), this, SLOT(error(KGoogle::Error,QString)));
+    connect(auth, SIGNAL(authenticated(KGAPI::Account::Ptr&)), this, SLOT(authenticated(KGAPI::Account::Ptr&)));
+    connect(auth, SIGNAL(error(KGAPI::Error,QString)), this, SLOT(error(KGAPI::Error,QString)));
 }
 
-void OAuth::authenticated(KGoogle::Account::Ptr& acc)
+void OAuth::authenticated(KGAPI::Account::Ptr& acc)
 {
     m_valid = true;
     label->setVisible(false);

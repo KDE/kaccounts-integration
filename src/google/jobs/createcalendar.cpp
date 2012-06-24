@@ -21,12 +21,12 @@
 
 #include <QtDBus/QDBusInterface>
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/reply.h>
-#include <libkgoogle/request.h>
-#include <libkgoogle/accessmanager.h>
-#include <libkgoogle/objects/calendar.h>
-#include <libkgoogle/services/calendar.h>
+#include <libkgapi/auth.h>
+#include <libkgapi/reply.h>
+#include <libkgapi/request.h>
+#include <libkgapi/accessmanager.h>
+#include <libkgapi/objects/calendar.h>
+#include <libkgapi/services/calendar.h>
 
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
@@ -35,7 +35,7 @@
 #include <KDebug>
 
 using namespace Akonadi;
-using namespace KGoogle;
+using namespace KGAPI;
 
 CreateCalendar::CreateCalendar(KConfigGroup group, QObject* parent)
 : KJob(parent)
@@ -43,7 +43,7 @@ CreateCalendar::CreateCalendar(KConfigGroup group, QObject* parent)
 {
     Auth *auth = Auth::instance();
     auth->init("Akonadi Google", "554041944266.apps.googleusercontent.com", "mdT1DjzohxN3npUUzkENT0gO");
-    qRegisterMetaType< KGoogle::Services::Calendar >("Calendar");
+    qRegisterMetaType< KGAPI::Services::Calendar >("Calendar");
 }
 
 CreateCalendar::~CreateCalendar()
@@ -106,8 +106,8 @@ void CreateCalendar::fetchDefaultCollections()
 {
     m_accessManager = new AccessManager;
 
-    connect(m_accessManager, SIGNAL(replyReceived(KGoogle::Reply*)),
-            this, SLOT(replyReceived(KGoogle::Reply*)));
+    connect(m_accessManager, SIGNAL(replyReceived(KGAPI::Reply*)),
+            this, SLOT(replyReceived(KGAPI::Reply*)));
 
     Request *request = new Request(Services::Calendar::fetchCalendarsUrl(), Request::FetchAll, "Calendar",  Auth::instance()->getAccount(m_config.name()));
     m_accessManager->sendRequest(request);
@@ -123,12 +123,12 @@ void CreateCalendar::useTaskResource()
     fetchDefaultCollections();
 }
 
-void CreateCalendar::replyReceived(KGoogle::Reply* reply)
+void CreateCalendar::replyReceived(KGAPI::Reply* reply)
 {
     QStringList calendars;
-    QList< KGoogle::Object* > objects = reply->replyData();
+    QList< KGAPI::Object* > objects = reply->replyData();
 
-    Q_FOREACH(KGoogle::Object * object, objects) {
+    Q_FOREACH(KGAPI::Object * object, objects) {
         Objects::Calendar *calendar;
 
         calendar = static_cast< Objects::Calendar* >(object);

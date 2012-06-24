@@ -135,8 +135,7 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     }
     wallet->deleteLater();
 
-    KTp::WalletInterface ktpWallet(0);
-    ktpWallet.setPassword(account, password);
+    KTp::WalletInterface::setPassword(account, password);
 
     account->setRequestedPresence(Tp::Presence::available(QLatin1String("Online")));
 

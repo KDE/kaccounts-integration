@@ -24,24 +24,17 @@
 
 #include <QtDBus/QDBusInterface>
 
-#include <libkgoogle/auth.h>
-#include <libkgoogle/reply.h>
-#include <libkgoogle/request.h>
-#include <libkgoogle/accessmanager.h>
-#include <libkgoogle/objects/calendar.h>
-#include <libkgoogle/services/calendar.h>
-
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 #include <unistd.h>
 
 #include <KDebug>
+#include <klocalizedstring.h>
 #include <KWallet/Wallet>
 
 using namespace KWallet;
 using namespace Akonadi;
-using namespace KGoogle;
 
 OCreateContact::OCreateContact(KConfigGroup group, QObject* parent)
 : KJob(parent)
