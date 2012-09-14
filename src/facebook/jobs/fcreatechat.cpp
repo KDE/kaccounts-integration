@@ -26,7 +26,7 @@
 #include <TelepathyQt/AccountManager>
 #include <TelepathyQt/PendingAccount>
 
-#include <KTp/wallet-interface.h>
+#include <KTp/wallet-utils.h>
 
 #include <KDebug>
 #include <KWallet/Wallet>
@@ -135,7 +135,7 @@ void FCreateChat::onAccountCreated(Tp::PendingOperation* op)
         return;
     }
 
-    KTp::WalletInterface::setPassword(account, password);
+    KTp::WalletUtils::setAccountPassword(account, password);
 
     account->setRequestedPresence(Tp::Presence::available(QLatin1String("Online")));
 

@@ -28,6 +28,7 @@
 #include <KDebug>
 #include <KIO/Job>
 
+using namespace KFacebook;
 FOauth::FOauth(FacebookWizard* parent)
  : QWizardPage(parent)
  , m_valid(false)
