@@ -99,8 +99,8 @@ bool BasicInfo::validData() const
 void BasicInfo::checkServer(const QString &path)
 {
     QString fixedUrl;
-    if (!path.startsWith("http://")) {
-        fixedUrl.append("http://");
+    if (!path.startsWith("http://") && !path.startsWith("https://")) {
+        fixedUrl.append("https://");
         fixedUrl.append(path);
     } else {
         fixedUrl = path;
