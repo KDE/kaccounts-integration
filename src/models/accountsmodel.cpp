@@ -44,7 +44,6 @@ AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
  , m_manager(new Accounts::Manager(this))
 {
     m_accIdList = m_manager->accountList();
-    qDebug() << m_accIdList.count();
 }
 
 Accounts::Account* AccountsModelPrivate::accountById(int id)
