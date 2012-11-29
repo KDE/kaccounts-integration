@@ -4,6 +4,7 @@ set(webaccounts_SRCS
     webaccounts.cpp
     create.cpp
     accountwidget.cpp
+    models/accountsmodel.cpp
     jobs/removeakonadiresource.cpp
 
     google/google.cpp
