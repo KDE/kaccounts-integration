@@ -42,12 +42,14 @@
 #include "owncloud/jobs/oremovecalendar.h"
 #include "owncloud/jobs/oremovecontact.h"
 #include "owncloud/jobs/oremovefile.h"
+#include "models/accountsmodel.h"
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QAction>
 #include <QtGui/QStackedLayout>
+#include <QtGui/QListView>
 
 #include <Akonadi/Control>
 #include <KDebug>
@@ -75,6 +77,8 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountInfo->setLayout(m_layout);
     m_ui->accList->setIconSize(QSize(48, 48));
     m_ui->accList->hide();
+    m_ui->accountsView->setModel(new AccountsModel(this));return;
+
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
