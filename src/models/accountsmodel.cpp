@@ -18,9 +18,57 @@
 
 #include "accountsmodel.h"
 
-AccountsModel::AccountsModel(QObject* parent): QAbstractListModel(parent)
-{
+#include <QtCore/QDebug>
 
+#include <QtGui/QIcon>
+
+#include <Accounts/Account>
+#include <Accounts/Manager>
+
+class AccountsModelPrivate : public QObject
+{
+    public:
+        AccountsModelPrivate(AccountsModel *model);
+        Accounts::Account* accountById(int id);
+
+        Accounts::Manager *m_manager;
+        Accounts::AccountIdList m_accIdList;
+        QHash<int, Accounts::Account*> m_accHash;
+
+    private:
+        AccountsModel* q;
+};
+
+AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
+ : q(model)
+ , m_manager(new Accounts::Manager(this))
+{
+    m_accIdList = m_manager->accountList();
+    qDebug() << m_accIdList.count();
+}
+
+Accounts::Account* AccountsModelPrivate::accountById(int id)
+{
+    qDebug() << "AccountsModelPrivate::accountById: " << id;
+    if (m_accHash.contains(id)) {
+        qDebug() << "\t cached";
+        return m_accHash.value(id);
+    }
+
+    Accounts::Account* account = m_manager->account(id);
+    if (!account) {
+        qDebug() << "\t Failed to get the account from manager";
+        return 0;
+    }
+
+    m_accHash[id] = account;
+    return account;
+}
+
+AccountsModel::AccountsModel(QObject* parent)
+ : QAbstractListModel(parent)
+ , d(new AccountsModelPrivate(this))
+{
 }
 
 AccountsModel::~AccountsModel()
@@ -30,7 +78,7 @@ AccountsModel::~AccountsModel()
 
 int AccountsModel::rowCount(const QModelIndex& parent) const
 {
-    return 0;
+    return d->m_accIdList.count();
 }
 
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -40,6 +88,30 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
 
 QVariant AccountsModel::data(const QModelIndex& index, int role) const
 {
+    qDebug() << "AccountsModel::data: " << index.row();
+    if(!index.isValid()) {
+        qDebug() << "\t Invalid index";
+        return QVariant();
+    }
+
+    if (index.row() >= d->m_accIdList.count()) {
+        qDebug() << "\t out of range index";
+        return QVariant();
+    }
+
+    Accounts::Account *account = d->accountById(d->m_accIdList.value(index.row()));
+    if (role == Qt::DisplayRole) {
+        return account->displayName();
+    }
+
+    if (role == Qt::DecorationRole) {
+        QIcon icon = QIcon::fromTheme(d->m_manager->provider(account->providerName()).iconName());
+        if (!icon.isNull()) {
+            return icon;
+        }
+
+        return QIcon::fromTheme("system-help");
+    }
     return QVariant();
 }
 

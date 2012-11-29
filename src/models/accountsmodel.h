@@ -21,6 +21,14 @@
 
 #include <QtCore/QAbstractListModel>
 
+#include <Accounts/Account>
+
+class AccountsModelPrivate;
+namespace Accounts
+{
+    class Manager;
+}
+
 class AccountsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -34,6 +42,9 @@ class AccountsModel : public QAbstractListModel
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
         virtual bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
         virtual bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
+
+    private:
+        AccountsModelPrivate *d;
 };
 
 #endif //ACCOUNTS_MODEL_H
