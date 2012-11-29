@@ -74,6 +74,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_ui->accountInfo->setLayout(m_layout);
     m_ui->accList->setIconSize(QSize(48, 48));
+    m_ui->accList->hide();
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));

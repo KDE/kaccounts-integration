@@ -39,6 +39,9 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QListView" name="accountsView"/>
+      </item>
+      <item>
        <widget class="QListWidget" name="accList"/>
       </item>
       <item>
