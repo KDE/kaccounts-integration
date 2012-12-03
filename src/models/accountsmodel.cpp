@@ -87,11 +87,11 @@ AccountsModel::AccountsModel(QObject* parent)
  , d(new AccountsModelPrivate(this))
 {
     d->m_accIdList = d->m_manager->accountList();
+    d->m_accIdList.append(-1);
+
     connect(d->m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
     connect(d->m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
     connect(d->m_manager, SIGNAL(accountUpdated(Accounts::AccountId)), SLOT(accountUpdated(Accounts::AccountId)));
-
-    d->m_accIdList.append(-1);
 }
 
 AccountsModel::~AccountsModel()
