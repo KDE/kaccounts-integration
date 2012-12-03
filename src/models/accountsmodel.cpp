@@ -58,17 +58,17 @@ QVariant AccountsModelPrivate::createAccountData(int role)
         return QIcon::fromTheme("list-add");
     }
 
-    qDebug() << "CreateAccountData: ";
-    qDebug() << "\tUnimplemented role: " << role;
+//     qDebug() << "CreateAccountData: ";
+//     qDebug() << "\tUnimplemented role: " << role;
 
     return QVariant();
 }
 
 Accounts::Account* AccountsModelPrivate::accountById(int id)
 {
-    qDebug() << "AccountsModelPrivate::accountById: " << id;
+//     qDebug() << "AccountsModelPrivate::accountById: " << id;
     if (m_accHash.contains(id)) {
-        qDebug() << "\t cached";
+//         qDebug() << "\t cached";
         return m_accHash.value(id);
     }
 
@@ -119,14 +119,14 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
 
 QVariant AccountsModel::data(const QModelIndex& index, int role) const
 {
-    qDebug() << "AccountsModel::data: " << index.row();
+//     qDebug() << "AccountsModel::data: " << index.row();
     if(!index.isValid()) {
-        qDebug() << "\t Invalid index";
+//         qDebug() << "\t Invalid index";
         return QVariant();
     }
 
     if (index.row() >= d->m_accIdList.count()) {
-        qDebug() << "\t out of range index";
+//         qDebug() << "\t out of range index";
         return QVariant();
     }
 
@@ -149,8 +149,8 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
         return QIcon::fromTheme("system-help");
     }
 
-    qDebug() << "data: ";
-    qDebug() << "\tUnimplemented role: " << role;
+//     qDebug() << "data: ";
+//     qDebug() << "\tUnimplemented role: " << role;
     return QVariant();
 }
 
