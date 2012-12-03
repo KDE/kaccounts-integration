@@ -30,6 +30,7 @@ class AccountsModelPrivate : public QObject
 {
     public:
         AccountsModelPrivate(AccountsModel *model);
+        virtual ~AccountsModelPrivate();
 
         QVariant createAccountData(int role);
         Accounts::Account* accountById(int id);
@@ -42,6 +43,12 @@ class AccountsModelPrivate : public QObject
     private:
         AccountsModel* q;
 };
+
+AccountsModelPrivate::~AccountsModelPrivate()
+{
+    qDeleteAll(m_accHash);
+    delete m_manager;
+}
 
 AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
  : q(model)
@@ -106,7 +113,7 @@ AccountsModel::AccountsModel(QObject* parent)
 
 AccountsModel::~AccountsModel()
 {
-
+    delete d;
 }
 
 int AccountsModel::rowCount(const QModelIndex& parent) const
