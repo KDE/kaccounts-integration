@@ -30,6 +30,8 @@ class AccountsModelPrivate : public QObject
 {
     public:
         AccountsModelPrivate(AccountsModel *model);
+        void insertCreateAccount();
+        QVariant createAccountData(int role);
         Accounts::Account* accountById(int id);
 
         Accounts::Manager *m_manager;
@@ -48,6 +50,29 @@ AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
     connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), q,  SLOT(accountCreated(Accounts::AccountId)));
     connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), q, SLOT(accountRemoved(Accounts::AccountId)));
     connect(m_manager, SIGNAL(accountUpdated(Accounts::AccountId)), q, SLOT(accountUpdated(Accounts::AccountId)));
+
+    insertCreateAccount();
+}
+
+void AccountsModelPrivate::insertCreateAccount()
+{
+    m_accIdList.append(-1);
+}
+
+QVariant AccountsModelPrivate::createAccountData(int role)
+{
+    if (role == Qt::DisplayRole) {
+        return i18n("Create");
+    }
+
+    if (role == Qt::DecorationRole) {
+        return QIcon::fromTheme("list-add");
+    }
+
+    qDebug() << "CreateAccountData: ";
+    qDebug() << "\tUnimplemented role: " << role;
+
+    return QVariant();
 }
 
 Accounts::Account* AccountsModelPrivate::accountById(int id)
@@ -110,7 +135,12 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
         return QVariant();
     }
 
-    Accounts::Account *account = d->accountById(d->m_accIdList.value(index.row()));
+    Accounts::AccountId accountId = d->m_accIdList.value(index.row());
+    if (accountId == -1) {
+        return d->createAccountData(role);
+    }
+
+    Accounts::Account *account = d->accountById(accountId);
     if (role == Qt::DisplayRole) {
         return account->displayName();
     }
