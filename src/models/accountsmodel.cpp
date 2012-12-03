@@ -33,6 +33,7 @@ class AccountsModelPrivate : public QObject
         void insertCreateAccount();
         QVariant createAccountData(int role);
         Accounts::Account* accountById(int id);
+        void removeAccount(Accounts::AccountId accountId);
 
         Accounts::Manager *m_manager;
         Accounts::AccountIdList m_accIdList;
@@ -89,6 +90,12 @@ Accounts::Account* AccountsModelPrivate::accountById(int id)
 
     m_accHash[id] = account;
     return account;
+}
+
+void AccountsModelPrivate::removeAccount(Accounts::AccountId accountId)
+{
+    m_accIdList.removeOne(accountId);
+    delete m_accHash.take(accountId);
 }
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -184,7 +191,7 @@ void AccountsModel::accountRemoved(Accounts::AccountId accountId)
 {
     qDebug() << "AccountsModel::accountRemoved: " << accountId;
     beginRemoveRows(QModelIndex(), d->m_accIdList.indexOf(accountId), d->m_accIdList.indexOf(accountId));
-    d->m_accIdList.removeOne(accountId);
+    d->removeAccount(accountId);
     endRemoveRows();
 }
 
