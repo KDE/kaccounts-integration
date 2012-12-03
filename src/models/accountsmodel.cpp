@@ -134,7 +134,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     }
 
     Accounts::AccountId accountId = d->m_accIdList.value(index.row());
-    if (accountId == -1) {
+    if (accountId == 0) {
         return d->createAccountData(role);
     }
 
