@@ -24,11 +24,6 @@
 #include <Accounts/Account>
 
 class AccountsModelPrivate;
-namespace Accounts
-{
-    class Manager;
-}
-
 class AccountsModel : public QAbstractListModel
 {
     Q_OBJECT
