@@ -45,7 +45,7 @@ class AccountsModel : public QAbstractListModel
     public Q_SLOTS:
         void accountCreated(Accounts::AccountId accountId);
         void accountRemoved(Accounts::AccountId accountId);
-        void accountUpdated(Accounts::AccountId accountId);
+        void accountUpdated();
 
     private:
         AccountsModelPrivate *d;

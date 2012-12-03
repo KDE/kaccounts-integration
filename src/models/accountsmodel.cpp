@@ -80,6 +80,8 @@ Accounts::Account* AccountsModelPrivate::accountById(int id)
         return 0;
     }
 
+    connect(account, SIGNAL(displayNameChanged(QString)), q, SLOT(accountUpdated()));
+
     m_accHash[id] = account;
     return account;
 }
@@ -90,7 +92,6 @@ AccountsModel::AccountsModel(QObject* parent)
 {
     connect(d->m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
     connect(d->m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
-    connect(d->m_manager, SIGNAL(accountUpdated(Accounts::AccountId)), SLOT(accountUpdated(Accounts::AccountId)));
 }
 
 AccountsModel::~AccountsModel()
@@ -184,7 +185,12 @@ void AccountsModel::accountRemoved(Accounts::AccountId accountId)
     endRemoveRows();
 }
 
-void AccountsModel::accountUpdated(Accounts::AccountId accountId)
+void AccountsModel::accountUpdated()
 {
+    Accounts::Account *acc = qobject_cast<Accounts::Account*>(sender());
+    Accounts::AccountId accountId = acc->id();
     qDebug() << "Account updated: " << accountId;
+
+    QModelIndex accountIndex = index(d->m_accIdList.indexOf(accountId), 0);
+    Q_EMIT dataChanged(accountIndex, accountIndex);
 }
