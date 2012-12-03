@@ -101,6 +101,10 @@ AccountsModel::~AccountsModel()
 
 int AccountsModel::rowCount(const QModelIndex& parent) const
 {
+    if (parent.isValid()) {
+        return 0;
+    }
+
     return d->m_accIdList.count();
 }
 
