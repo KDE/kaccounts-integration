@@ -48,6 +48,11 @@ AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
 {
     m_accIdList = m_manager->accountList();
     m_accIdList.append(0); //For the dummy account Create
+
+    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), 
+            q, SLOT(accountCreated(Accounts::AccountId)));
+    connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), 
+            q, SLOT(accountRemoved(Accounts::AccountId)));
 }
 
 QVariant AccountsModelPrivate::createAccountData(int role)
@@ -90,8 +95,6 @@ AccountsModel::AccountsModel(QObject* parent)
  : QAbstractListModel(parent)
  , d(new AccountsModelPrivate(this))
 {
-    connect(d->m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
-    connect(d->m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
 }
 
 AccountsModel::~AccountsModel()
