@@ -30,7 +30,7 @@ class AccountsModelPrivate : public QObject
 {
     public:
         AccountsModelPrivate(AccountsModel *model);
-        void insertCreateAccount();
+
         QVariant createAccountData(int role);
         Accounts::Account* accountById(int id);
         void removeAccount(Accounts::AccountId accountId);
