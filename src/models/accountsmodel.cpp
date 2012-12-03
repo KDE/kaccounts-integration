@@ -168,12 +168,6 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
-{
-    endRemoveRows();
-    return true;
-}
-
 void AccountsModel::accountCreated(Accounts::AccountId accountId)
 {
     qDebug() << "AccountsModel::accountCreated: " << accountId;
