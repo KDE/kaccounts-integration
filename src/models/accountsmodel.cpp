@@ -21,6 +21,7 @@
 #include <QtCore/QDebug>
 
 #include <QtGui/QIcon>
+#include <klocalizedstring.h>
 
 #include <Accounts/Account>
 #include <Accounts/Manager>
@@ -44,6 +45,9 @@ AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
  , m_manager(new Accounts::Manager(this))
 {
     m_accIdList = m_manager->accountList();
+    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), q,  SLOT(accountCreated(Accounts::AccountId)));
+    connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), q, SLOT(accountRemoved(Accounts::AccountId)));
+    connect(m_manager, SIGNAL(accountUpdated(Accounts::AccountId)), q, SLOT(accountUpdated(Accounts::AccountId)));
 }
 
 Accounts::Account* AccountsModelPrivate::accountById(int id)
@@ -82,7 +86,15 @@ int AccountsModel::rowCount(const QModelIndex& parent) const
 
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    return QAbstractItemModel::headerData(section, orientation, role);
+    if (role != Qt::DisplayRole) {
+        return QVariant();
+    }
+
+    if (orientation == Qt::Vertical) {
+        return QVariant();
+    }
+
+    return i18n("Accounts");
 }
 
 QVariant AccountsModel::data(const QModelIndex& index, int role) const
@@ -114,12 +126,29 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-bool AccountsModel::insertRows(int row, int count, const QModelIndex& parent)
-{
-    return QAbstractItemModel::insertRows(row, count, parent);
-}
-
 bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-    return QAbstractItemModel::removeRows(row, count, parent);
+    endRemoveRows();
+    return true;
+}
+
+void AccountsModel::accountCreated(Accounts::AccountId accountId)
+{
+    qDebug() << "AccountsModel::accountCreated: " << accountId;
+    beginInsertRows(QModelIndex(), d->m_accIdList.count(), d->m_accIdList.count());
+    d->m_accIdList.append(accountId);
+    endInsertRows();
+}
+
+void AccountsModel::accountRemoved(Accounts::AccountId accountId)
+{
+    qDebug() << "AccountsModel::accountRemoved: " << accountId;
+    beginRemoveRows(QModelIndex(), d->m_accIdList.indexOf(accountId), d->m_accIdList.indexOf(accountId));
+    d->m_accIdList.removeOne(accountId);
+    endRemoveRows();
+}
+
+void AccountsModel::accountUpdated(Accounts::AccountId accountId)
+{
+    qDebug() << "Account updated: " << accountId;
 }
