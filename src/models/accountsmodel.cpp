@@ -153,6 +153,9 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
 
         return QIcon::fromTheme("system-help");
     }
+
+    qDebug() << "data: ";
+    qDebug() << "\tUnimplemented role: " << role;
     return QVariant();
 }
 
