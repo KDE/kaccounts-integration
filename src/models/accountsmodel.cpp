@@ -167,8 +167,13 @@ bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
 void AccountsModel::accountCreated(Accounts::AccountId accountId)
 {
     qDebug() << "AccountsModel::accountCreated: " << accountId;
-    beginInsertRows(QModelIndex(), d->m_accIdList.count(), d->m_accIdList.count());
-    d->m_accIdList.append(accountId);
+    int row = d->m_accIdList.count();
+    if (accountId) {
+        row -= 1; // last item will always be the dummy create account
+    }
+
+    beginInsertRows(QModelIndex(), row, row);
+    d->m_accIdList.insert(row, accountId);
     endInsertRows();
 }
 
