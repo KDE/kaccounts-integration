@@ -22,6 +22,7 @@
 
 #include <QtGui/QIcon>
 #include <klocalizedstring.h>
+#include <kicon.h>
 
 #include <Accounts/Account>
 #include <Accounts/Manager>
@@ -154,7 +155,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     }
 
     if (role == Qt::DecorationRole) {
-        QIcon icon = QIcon::fromTheme(d->m_manager->provider(account->providerName()).iconName());
+        KIcon icon = KIcon(d->m_manager->provider(account->providerName()).iconName());
         if (!icon.isNull()) {
             return icon;
         }
