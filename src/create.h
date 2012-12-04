@@ -38,12 +38,7 @@ Q_OBJECT
         QWidget* widget();
 
     private Q_SLOTS:
-        void stablishConnections();
-        void startGoogle();
-        void startFacebook();
-        void startOwncloud();
-        void startRunnerID();
-        void startLive();
+        void fillInterface();
 
     Q_SIGNALS:
         void newAccount(const QString &type, const QString &name);

@@ -27,6 +27,10 @@
 #include <QtCore/QDebug>
 
 #include <QtGui/QWidget>
+#include <QtGui/QCommandLinkButton>
+
+#include <Accounts/Manager>
+#include <Accounts/Provider>
 
 #include <libkgapi/auth.h>
 #include <libkgapi/services/tasks.h>
@@ -56,52 +60,21 @@ QWidget* Create::widget()
     QWidget *widget = new QWidget(m_parent);
     m_form->setupUi(widget);
 
-    QMetaObject::invokeMethod(this, "stablishConnections", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "fillInterface", Qt::QueuedConnection);
 
     return widget;
 }
 
-void Create::stablishConnections()
+void Create::fillInterface()
 {
-    connect(m_form->googleBtn, SIGNAL(clicked(bool)), this, SLOT(startGoogle()));
-    connect(m_form->facebookBtn, SIGNAL(clicked(bool)), this, SLOT(startFacebook()));
-    connect(m_form->owncloudBtn, SIGNAL(clicked(bool)), this, SLOT(startOwncloud()));
-    connect(m_form->runnerId, SIGNAL(clicked(bool)), this, SLOT(startRunnerID()));
-}
+    Accounts::Manager *manager = new Accounts::Manager(this);
+    Accounts::ProviderList providerList = manager->providerList();
 
-void Create::startGoogle()
-{
-    GoogleWizard *wizard = new GoogleWizard(m_parent);
-    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    wizard->setModal(true);
-    wizard->show();
-}
+    QCommandLinkButton *button;
+    Q_FOREACH(const Accounts::Provider& provider, providerList) {
+        button = new QCommandLinkButton(provider.displayName());
+        button->setIcon(KIcon(provider.iconName()));
 
-void Create::startFacebook()
-{
-    FacebookWizard *wizard = new FacebookWizard(m_parent);
-    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    wizard->setModal(true);
-    wizard->show();
-}
-
-void Create::startLive()
-{
-    qWarning("Live not implemented yet");
-}
-
-void Create::startOwncloud()
-{
-    OwnCloudWizard *wizard = new OwnCloudWizard(m_parent);
-    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    wizard->setModal(true);
-    wizard->show();
-}
-
-void Create::startRunnerID()
-{
-    RunnerIDWizard *wizard = new RunnerIDWizard(m_parent);
-    connect(wizard, SIGNAL(newAccount(QString,QString)), this, SIGNAL(newAccount(QString,QString)));
-    wizard->setModal(true);
-    wizard->show();
+        m_form->verticalLayout->addWidget(button);
+    }
 }
