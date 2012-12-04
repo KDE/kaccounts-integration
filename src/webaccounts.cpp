@@ -43,6 +43,7 @@
 #include "owncloud/jobs/oremovecontact.h"
 #include "owncloud/jobs/oremovefile.h"
 #include "models/accountsmodel.h"
+#include "models/modeltest.h"
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
@@ -77,8 +78,10 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountInfo->setLayout(m_layout);
     m_ui->accList->setIconSize(QSize(48, 48));
     m_ui->accList->hide();
-    m_ui->accountsView->setModel(new AccountsModel(this));return;
 
+    AccountsModel *model = new AccountsModel(this);
+    m_ui->accountsView->setIconSize(QSize(32,32));
+    m_ui->accountsView->setModel(model);
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
