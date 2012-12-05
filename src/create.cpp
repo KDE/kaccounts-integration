@@ -42,13 +42,14 @@ using namespace KGAPI;
 Create::Create(QWidget* parent)
 : QObject(parent)
 , m_form(0)
+, m_manager(new Accounts::Manager(this))
 {
     m_parent = parent;
 }
 
 Create::~Create()
 {
-
+    delete m_manager;
 }
 
 QWidget* Create::widget()
@@ -67,8 +68,7 @@ QWidget* Create::widget()
 
 void Create::fillInterface()
 {
-    Accounts::Manager *manager = new Accounts::Manager(this);
-    Accounts::ProviderList providerList = manager->providerList();
+    Accounts::ProviderList providerList = m_manager->providerList();
 
     QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider& provider, providerList) {
