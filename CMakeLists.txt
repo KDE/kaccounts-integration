@@ -15,6 +15,7 @@ find_package (TelepathyQt4 0.8.9 REQUIRED)
 find_package(QJSON)
 find_package (KTp REQUIRED)
 find_package(AccountsQt REQUIRED)
+find_package(SignOnQt REQUIRED)
 
 add_definitions (${KDE4_DEFINITIONS}
                  -fexceptions
@@ -27,7 +28,7 @@ include(MacroOptionalAddSubdirectory)
 MESSAGE(WARNING ${LIBKFACEBOOK_INCLUDE_DIR})
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/src 
 ${KDE4_INCLUDES} ${LibKGAPI_INCLUDE_DIR} ${AKONADI_INCLUDE_DIR} ${TELEPATHY_QT4_INCLUDE_DIR} 
-${KTP_INCLUDE_DIR} ${ACCOUNTSQT_INCLUDE_DIRS})
+${KTP_INCLUDE_DIR} ${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
 
 add_subdirectory(src)
 add_subdirectory(icons)
