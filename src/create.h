@@ -27,6 +27,11 @@ class QDialog;
 class QWidget;
 class Ui_createForm;
 
+namespace Accounts
+{
+    class Manager;
+}
+
 class Create : public QObject
 {
 Q_OBJECT
@@ -47,6 +52,7 @@ Q_OBJECT
         QDialog *m_dialog;
         QWidget *m_parent;
         Ui_createForm *m_form;
+        Accounts::Manager *m_manager;
 
 };
 #endif// CREATE_H
