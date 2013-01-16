@@ -70,10 +70,11 @@ void OCreateFile::createNetAttach()
 
     if (m_config.readEntry("type", "") == "runnerid") {
         desktopFile.writeEntry("Icon", "netrunnerid");
+        desktopFile.writeEntry("Name", "Runners-ID-Storage");
     } else {
         desktopFile.writeEntry("Icon", "owncloud");
+        desktopFile.writeEntry("Name", url.host());
     }
-    desktopFile.writeEntry("Name", url.host());
     desktopFile.writeEntry("Type", "Link");
     desktopFile.writeEntry("URL", url.prettyUrl());
     desktopFile.writeEntry("Charset", url.fileEncoding());
