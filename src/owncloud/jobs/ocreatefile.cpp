@@ -69,7 +69,7 @@ void OCreateFile::createNetAttach()
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
     if (m_config.readEntry("type", "") == "runnerid") {
-        desktopFile.writeEntry("Icon", "netrunnerid");
+        desktopFile.writeEntry("Icon", "netrunnerplace");
         desktopFile.writeEntry("Name", "Runners-ID-Storage");
     } else {
         desktopFile.writeEntry("Icon", "owncloud");
