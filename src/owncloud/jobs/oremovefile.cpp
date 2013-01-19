@@ -19,6 +19,7 @@
 #include "oremovefile.h"
 
 #include <QFile>
+#include <QDesktopServices>
 
 #include <KDirNotify>
 
@@ -42,6 +43,11 @@ void ORemoveFile::start()
 
 void ORemoveFile::removeFile()
 {
+    if (m_config.readEntry("type", "") == "runnerid") {
+        QString networkPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+        networkPath.append("/Network/Runners-ID-Storage");
+        QFile::remove(networkPath);
+    }
     QFile::remove(m_config.group("private").readEntry("fileDesktop"));
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
     m_config.group("services").writeEntry("File", 0);

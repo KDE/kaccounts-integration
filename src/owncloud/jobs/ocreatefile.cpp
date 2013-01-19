@@ -20,6 +20,7 @@
 
 #include <QWidget>
 #include <QApplication>
+#include <QtGui/QDesktopServices>
 
 #include <KGlobal>
 #include <KConfig>
@@ -79,8 +80,20 @@ void OCreateFile::createNetAttach()
     desktopFile.writeEntry("URL", url.prettyUrl());
     desktopFile.writeEntry("Charset", url.fileEncoding());
     desktopFile.sync();
+    _desktopFile.sync();
 
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
+
+    if (m_config.readEntry("type", "") == "runnerid") {
+        QString networkPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+        networkPath.append("/Network/");
+        if (QDir().exists(networkPath)) {
+            QDir().mkdir(networkPath);
+        }
+        networkPath.append("Runners-ID-Storage");
+        qDebug() << path << networkPath;
+        qDebug() << QFile::copy(path, networkPath);
+    }
 
     QString walletUrl(url.scheme());
     walletUrl.append("-");
