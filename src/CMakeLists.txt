@@ -5,6 +5,7 @@ set(webaccounts_SRCS
     create.cpp
     accountwidget.cpp
     models/accountsmodel.cpp
+    models/modeltest.cpp
     jobs/removeakonadiresource.cpp
 
     google/google.cpp
@@ -94,4 +95,10 @@ ${ACCOUNTSQT_LIBRARIES} ${SIGNONQT_LIBRARIES})
 
 install(TARGETS webaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
 
+<<<<<<< Updated upstream
 install(FILES webaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+=======
+install(FILES webaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+
+add_subdirectory(kded)
+>>>>>>> Stashed changes
