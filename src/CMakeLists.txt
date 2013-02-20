@@ -8,6 +8,7 @@ set(webaccounts_SRCS
     models/modeltest.cpp
     providerconfig.cpp
     jobs/removeakonadiresource.cpp
+    jobs/createaccount.cpp
 
     google/google.cpp
     google/pages/credentials.cpp
