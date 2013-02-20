@@ -17,10 +17,6 @@
  *************************************************************************************/
 
 #include "create.h"
-#include "google/google.h"
-#include "facebook/facebook.h"
-#include "owncloud/owncloud.h"
-#include "runnerid/runnerid.h"
 
 #include "ui_types.h"
 
@@ -31,13 +27,6 @@
 
 #include <Accounts/Manager>
 #include <Accounts/Provider>
-
-#include <libkgapi/auth.h>
-#include <libkgapi/services/tasks.h>
-#include <libkgapi/services/contacts.h>
-#include <libkgapi/services/calendar.h>
-
-using namespace KGAPI;
 
 Create::Create(QWidget* parent)
 : QObject(parent)
@@ -74,7 +63,14 @@ void Create::fillInterface()
     Q_FOREACH(const Accounts::Provider& provider, providerList) {
         button = new QCommandLinkButton(provider.displayName());
         button->setIcon(KIcon(provider.iconName()));
+        button->setProperty("providerName", provider.name());
 
-        m_form->verticalLayout->addWidget(button);
+        connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
+        m_form->verticalLayout->insertWidget(0, button);
     }
+}
+
+void Create::createAccount()
+{
+    QString providerName = sender()->property("providerName").toString();
 }

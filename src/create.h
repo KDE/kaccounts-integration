@@ -44,6 +44,7 @@ Q_OBJECT
 
     private Q_SLOTS:
         void fillInterface();
+        void createAccount();
 
     Q_SIGNALS:
         void newAccount(const QString &type, const QString &name);
