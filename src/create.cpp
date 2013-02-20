@@ -17,6 +17,7 @@
  *************************************************************************************/
 
 #include "create.h"
+#include "jobs/createaccount.h"
 
 #include "ui_types.h"
 
@@ -73,4 +74,6 @@ void Create::fillInterface()
 void Create::createAccount()
 {
     QString providerName = sender()->property("providerName").toString();
+    CreateAccount *acc = new CreateAccount(providerName, this);
+    acc->start();
 }
