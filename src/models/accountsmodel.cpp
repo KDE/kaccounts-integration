@@ -52,8 +52,8 @@ AccountsModelPrivate::~AccountsModelPrivate()
 }
 
 AccountsModelPrivate::AccountsModelPrivate(AccountsModel *model)
- : q(model)
- , m_manager(new Accounts::Manager(this))
+ : m_manager(new Accounts::Manager(this))
+ , q(model)
 {
     m_accIdList = m_manager->accountList();
     m_accIdList.append(0); //For the dummy account Create
@@ -123,6 +123,7 @@ int AccountsModel::rowCount(const QModelIndex& parent) const
 
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
+    Q_UNUSED(section)
     if (role != Qt::DisplayRole) {
         return QVariant();
     }
