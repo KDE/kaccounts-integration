@@ -48,8 +48,6 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->setupUi(this);
 
     m_ui->accountInfo->setLayout(m_layout);
-    m_ui->accList->setIconSize(QSize(48, 48));
-    m_ui->accList->hide();
 
     AccountsModel *model = new AccountsModel(this);
     m_ui->accountsView->setIconSize(QSize(32,32));
@@ -57,10 +55,9 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
-    connect(m_ui->accList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
-            this, SLOT(currentItemChanged(QListWidgetItem*,QListWidgetItem*)));
 
-    QMetaObject::invokeMethod(this, "addExistingAccounts", Qt::QueuedConnection);
+    m_create = new Create(this);
+    m_layout->addWidget(m_create->widget());
 }
 
 WebAccounts::~WebAccounts()
