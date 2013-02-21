@@ -21,22 +21,12 @@
 
 #include <kcmodule.h>
 
-class KJob;
 class Create;
 class QStackedLayout;
-class QListWidgetItem;
-class KConfigGroup;
-class AccountWidget;
-class FAccountWidget;
-class OAccountWidget;
 namespace Ui {
     class KCMWebAccounts;
 }
-namespace KWallet {
-    class Wallet;
-}
 
-using namespace KWallet;
 class WebAccounts : public KCModule
 {
 Q_OBJECT
@@ -44,41 +34,14 @@ public:
     WebAccounts(QWidget *parent, const QVariantList&);
     virtual ~WebAccounts();
 
-    static Wallet* wallet();
-
 private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
-    void currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-    void newAccount(const QString &type, const QString &name);
-    void addExistingAccounts();
-    void serviceRemoved(KJob *job);
 
 private:
-    KConfigGroup accounts();
-    KConfigGroup account(const QString &accName, const QString &type);
-    void addAccount(const QString& name, const QString& accountName, const QString& type);
-    QListWidgetItem* createQListWidgetItem(const QString& name, const QString& title, const QString& type, QWidget* widget);
-    QString iconForType(const QString &type);
-    void removeAccountIfPossible(const QString &name, const QString &type);
-
-    void createGoogleAccount(KConfigGroup group, AccountWidget *accountWidget);
-    void removeGoogleAccount(KConfigGroup group);
-
-    void createFacebookAccount(KConfigGroup group, FAccountWidget* accountWidget);
-    void removeFacebookACcount(KConfigGroup group);
-
-    void createOwncloudAccount(KConfigGroup group, OAccountWidget *accountWidget);
-    void removeOwncloudAccount(KConfigGroup group);
-
-private:
-    static Wallet *s_wallet;
     Create *m_create;
     QStackedLayout *m_layout;
-    QListWidgetItem *m_newAccountItem;
     Ui::KCMWebAccounts *m_ui;
 };
 
 #endif // webaccounts_H
-
-class Account;
