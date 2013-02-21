@@ -25,6 +25,7 @@ namespace Accounts
 {
     class Account;
     class Manager;
+    class AccountService;
 };
 namespace SignOn
 {
@@ -50,6 +51,7 @@ class CreateAccount : public KJob
         QString m_providerName;
         Accounts::Manager *m_manager;
         Accounts::Account *m_account;
+        Accounts::AccountService *m_accInfo;
         SignOn::Identity *m_identity;
 };
 #endif //CREATE_ACCOUNT_JOB_H

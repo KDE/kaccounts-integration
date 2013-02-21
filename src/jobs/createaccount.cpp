@@ -31,6 +31,7 @@ CreateAccount::CreateAccount(const QString& providerName, QObject* parent)
  , m_providerName(providerName)
  , m_manager(new Accounts::Manager(this))
  , m_account(0)
+ , m_accInfo(0)
  , m_identity(0)
 {
 
@@ -50,23 +51,18 @@ void CreateAccount::start()
     m_identity->storeCredentials();
 
     Accounts::Service service;
-    Accounts::AccountService* accInfo = new Accounts::AccountService(m_account, service);
+    m_accInfo = new Accounts::AccountService(m_account, service, this);
 
-    QVariantMap data = accInfo->authData().parameters();
+    QVariantMap data = m_accInfo->authData().parameters();
     data.insert("Embedded", false);
-
-    QStringList schemes;
-    schemes.append("https");
-    schemes.append("http");
-    data.insert("AllowedSchemes", schemes);
 
     SignOn::SessionData sessionData(data);
 
-    SignOn::AuthSessionP session = m_identity->createSession(accInfo->authData().method());
-    qDebug() << connect(session, SIGNAL(error(SignOn::Error)), SLOT(error(SignOn::Error)));
-    qDebug() << connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(response(SignOn::SessionData)));
+    SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
+    connect(session, SIGNAL(error(SignOn::Error)), SLOT(error(SignOn::Error)));
+    connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(response(SignOn::SessionData)));
 
-    session->process(sessionData, accInfo->authData().mechanism());
+    session->process(sessionData, m_accInfo->authData().mechanism());
 }
 
 void CreateAccount::response(const SignOn::SessionData& data)
@@ -99,16 +95,35 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
 
     m_account->setDisplayName(info.userName());
     m_account->setCredentialsId(info.id());
-//     account->setValue("auth/mechanism", "user_agent");
-//     account->setValue("auth/method", "oauth2");
-//     account->setValue("auth/oauth2/user_agent/AuthPath", "o/oauth2/auth");
-//     account->setValue("auth/oauth2/user_agent/ClientId", "759250720802-4sii0me9963n9fdqdmi7cepn6ub8luoh.apps.googleusercontent.com");
-//     account->setValue("auth/oauth2/user_agent/Host", "accounts.google.com");
-//     account->setValue("auth/oauth2/user_agent/RedirectUri","https://wiki.ubuntu.com/");
-//     account->setValue("auth/oauth2/user_agent/ResponseType", "token");
-//     account->setValue("auth/oauth2/user_agent/Scope", scopes);
-//     account->setValue("auth/oauth2/user_agent/TokenPath", "o/oauth2/token");
+
+    Accounts::AuthData authData = m_accInfo->authData();
+    m_account->setValue("auth/mechanism", authData.mechanism());
+    m_account->setValue("auth/method", authData.method());
+    QString base("auth/");
+    base.append(authData.method());
+    base.append("/");
+    base.append(authData.mechanism());
+    base.append("HMAC-SHA1/");
+
+    QVariantMap data = authData.parameters();
+    QMapIterator<QString, QVariant> i(data);
+    while (i.hasNext()) {
+        i.next();
+        m_account->setValue(base + i.key(), i.value());
+    }
+
+    m_account->setValue("auth/oauth2/HMAC-SHA1/ConsumerKey", "anonymous");
+    m_account->setValue("auth/oauth2/HMAC-SHA1/ConsumerSecret", "anonymous");
+    m_account->setValue("auth/oauth2/HMAC-SHA1/Callback", "http://localhost.com/twitter_login.php");
+
     m_account->setEnabled(true);
+
+    Accounts::ServiceList services = m_account->services();
+    Q_FOREACH(const Accounts::Service &service, services) {
+        m_account->selectService(service);
+        m_account->setEnabled(true);
+    }
+
     m_account->sync();
 }
 
