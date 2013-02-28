@@ -26,7 +26,7 @@
 #include <SignOn/Identity>
 #include <SignOn/AuthSession>
 
-CreateAccount::CreateAccount(const QString& providerName, QObject* parent)
+CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  : KJob(parent)
  , m_providerName(providerName)
  , m_manager(new Accounts::Manager(this))
@@ -38,6 +38,11 @@ CreateAccount::CreateAccount(const QString& providerName, QObject* parent)
 }
 
 void CreateAccount::start()
+{
+    QMetaObject::invokeMethod(this, "processSession");
+}
+
+void CreateAccount::processSession()
 {
     m_account = m_manager->createAccount(m_providerName);
 
@@ -64,6 +69,7 @@ void CreateAccount::start()
 
     session->process(sessionData, m_accInfo->authData().mechanism());
 }
+
 
 void CreateAccount::response(const SignOn::SessionData& data)
 {
@@ -125,6 +131,8 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     }
 
     m_account->sync();
+
+    emitResult();
 }
 
 void CreateAccount::error(const SignOn::Error& error)
