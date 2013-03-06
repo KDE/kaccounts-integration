@@ -109,7 +109,7 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     base.append(authData.method());
     base.append("/");
     base.append(authData.mechanism());
-    base.append("HMAC-SHA1/");
+    base.append("/");
 
     QVariantMap data = authData.parameters();
     QMapIterator<QString, QVariant> i(data);
@@ -117,10 +117,6 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
         i.next();
         m_account->setValue(base + i.key(), i.value());
     }
-
-    m_account->setValue("auth/oauth2/HMAC-SHA1/ConsumerKey", "anonymous");
-    m_account->setValue("auth/oauth2/HMAC-SHA1/ConsumerSecret", "anonymous");
-    m_account->setValue("auth/oauth2/HMAC-SHA1/Callback", "http://localhost.com/twitter_login.php");
 
     m_account->setEnabled(true);
 
