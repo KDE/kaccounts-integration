@@ -22,7 +22,9 @@
 #include <kcmodule.h>
 
 class Create;
+class AccountsModel;
 class QStackedLayout;
+class QItemSelectionModel;
 namespace Ui {
     class KCMWebAccounts;
 }
@@ -42,6 +44,8 @@ private:
     Create *m_create;
     QStackedLayout *m_layout;
     Ui::KCMWebAccounts *m_ui;
+    AccountsModel *m_model;
+    QItemSelectionModel *m_selectionModel;
 };
 
 #endif // webaccounts_H

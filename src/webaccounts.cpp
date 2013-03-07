@@ -30,6 +30,8 @@
 #include <QtGui/QStackedLayout>
 #include <QtGui/QListView>
 
+#include <Accounts/Manager>
+
 #include <KDebug>
 #include <kpluginfactory.h>
 #include <kstandarddirs.h>
@@ -49,15 +51,21 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_ui->accountInfo->setLayout(m_layout);
 
-    AccountsModel *model = new AccountsModel(this);
+    m_model = new AccountsModel(this);
+
+    m_selectionModel = new QItemSelectionModel(m_model);
+
     m_ui->accountsView->setIconSize(QSize(32,32));
-    m_ui->accountsView->setModel(model);
+    m_ui->accountsView->setModel(m_model);
+    m_ui->accountsView->setSelectionModel(m_selectionModel);
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
     m_create = new Create(this);
     m_layout->addWidget(m_create->widget());
+
+    m_ui->remoteBtn->setEnabled(true);
 }
 
 WebAccounts::~WebAccounts()
@@ -72,7 +80,12 @@ void WebAccounts::addBtnClicked()
 
 void WebAccounts::rmBtnClicked()
 {
-
+    qDebug() << m_selectionModel->currentIndex();
+    qDebug() << m_model->data(m_selectionModel->currentIndex(), AccountsModel::Id);
+    Accounts::Manager* manager = new Accounts::Manager(this);
+    Accounts::Account* acc = manager->account(m_model->data(m_selectionModel->currentIndex(), AccountsModel::Id).toInt());
+    acc->remove();
+    acc->sync();
 }
 
 

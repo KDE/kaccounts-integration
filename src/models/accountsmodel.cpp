@@ -164,6 +164,10 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
         return QIcon::fromTheme("system-help");
     }
 
+    if (role == Id) {
+        return accountId;
+    }
+
     return QVariant();
 }
 
