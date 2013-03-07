@@ -84,7 +84,14 @@ void CreateAccount::response(const SignOn::SessionData& data)
     qDebug() << "\tSecret:" << data.Secret();
     qDebug() << "\tUsername:" << data.UserName();
     qDebug() << "\t:" << data.getProperty("ScreenName");
-    m_account->setDisplayName(data.getProperty("ScreenName").toString());
+
+    QString displayName = data.getProperty("ScreenName").toString();
+    if (displayName.isEmpty()) {
+        displayName = data.UserName();
+    }
+
+    m_account->setDisplayName(displayName);
+
 
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
     m_identity->queryInfo();
