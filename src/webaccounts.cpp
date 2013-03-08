@@ -49,11 +49,14 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_ui->accountInfo->setLayout(m_layout);
 
-    AccountsModel *model = new AccountsModel(this);
+    m_model = new AccountsModel(this);
     m_ui->accountsView->setIconSize(QSize(32,32));
-    m_ui->accountsView->setModel(model);
+    m_ui->accountsView->setModel(m_model);
 
-    connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
+    m_selectionModel = new QItemSelectionModel(m_model);
+    m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
+
+    m_ui->accountsView->setSelectionModel(m_selectionModel);
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
@@ -73,7 +76,11 @@ void WebAccounts::addBtnClicked()
 
 void WebAccounts::rmBtnClicked()
 {
-
+    QModelIndex index = m_selectionModel->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
+    m_model->removeRows(index.row(), 1);
 }
 
 
