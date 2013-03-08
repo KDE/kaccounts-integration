@@ -38,6 +38,7 @@ class AccountsModel : public QAbstractListModel
         virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
         virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+        virtual bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
 
     public Q_SLOTS:
         void accountCreated(Accounts::AccountId accountId);

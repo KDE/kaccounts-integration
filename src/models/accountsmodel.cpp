@@ -170,6 +170,23 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
+bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
+{
+    if (row >= d->m_accIdList.count()) {
+        return false;
+    }
+    Accounts::AccountId accountId = d->m_accIdList.value(row);
+    if (accountId == 0) {
+        return false;
+    }
+
+    Accounts::Account *acc = d->accountById(accountId);
+    acc->remove();
+    acc->sync();
+
+    return true;
+}
+
 void AccountsModel::accountCreated(Accounts::AccountId accountId)
 {
     qDebug() << "AccountsModel::accountCreated: " << accountId;
