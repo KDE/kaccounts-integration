@@ -50,19 +50,20 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountInfo->setLayout(m_layout);
 
     m_model = new AccountsModel(this);
-    m_ui->accountsView->setIconSize(QSize(32,32));
-    m_ui->accountsView->setModel(m_model);
-
     m_selectionModel = new QItemSelectionModel(m_model);
     connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
     m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
 
+    m_ui->accountsView->setIconSize(QSize(32,32));
+    m_ui->accountsView->setModel(m_model);
     m_ui->accountsView->setSelectionModel(m_selectionModel);
+
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
     m_create = new Create(this);
     m_layout->addWidget(m_create->widget());
+
 }
 
 void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
