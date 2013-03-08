@@ -54,6 +54,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountsView->setModel(model);
 
     connect(m_ui->remoteBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
+    connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
     m_create = new Create(this);
