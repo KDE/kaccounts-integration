@@ -29,6 +29,9 @@ class AccountsModel : public QAbstractListModel
     Q_OBJECT
 
     public:
+        enum Roles {
+            Id = Qt::UserRole
+        };
         explicit AccountsModel(QObject* parent = 0);
         virtual ~AccountsModel();
 
