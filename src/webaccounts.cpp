@@ -54,6 +54,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_ui->accountsView->setModel(m_model);
 
     m_selectionModel = new QItemSelectionModel(m_model);
+    connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
     m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
 
     m_ui->accountsView->setSelectionModel(m_selectionModel);
@@ -62,6 +63,19 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_create = new Create(this);
     m_layout->addWidget(m_create->widget());
+}
+
+void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
+{
+    if (!current.isValid()) {
+        return;
+    }
+    if (current.row() == m_model->rowCount() - 1) {
+        m_ui->removeBtn->setDisabled(true);
+        return;
+    }
+
+    m_ui->removeBtn->setDisabled(false);
 }
 
 WebAccounts::~WebAccounts()

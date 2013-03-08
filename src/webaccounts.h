@@ -22,6 +22,7 @@
 #include <kcmodule.h>
 
 class Create;
+class QModelIndex;
 class AccountsModel;
 class QStackedLayout;
 class QItemSelectionModel;
@@ -39,6 +40,7 @@ public:
 private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
+    void currentChanged(const QModelIndex& current, const QModelIndex& previous);
 
 private:
     Create *m_create;
