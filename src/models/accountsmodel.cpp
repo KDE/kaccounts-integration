@@ -151,17 +151,18 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     }
 
     Accounts::Account *account = d->accountById(accountId);
-    if (role == Qt::DisplayRole) {
-        return account->displayName();
-    }
+    switch (role) {
+        case Qt::DisplayRole:
+            return account->displayName();
+        case Qt::DecorationRole:
+        {
+            KIcon icon = KIcon(d->m_manager->provider(account->providerName()).iconName());
+            if (!icon.isNull()) {
+                return icon;
+            }
 
-    if (role == Qt::DecorationRole) {
-        KIcon icon = KIcon(d->m_manager->provider(account->providerName()).iconName());
-        if (!icon.isNull()) {
-            return icon;
+            return QIcon::fromTheme("system-help");
         }
-
-        return QIcon::fromTheme("system-help");
     }
 
     return QVariant();
