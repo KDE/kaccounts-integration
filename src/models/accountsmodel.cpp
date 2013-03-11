@@ -24,6 +24,8 @@
 #include <klocalizedstring.h>
 #include <kicon.h>
 
+#include <SignOn/Identity>
+
 #include <Accounts/Account>
 #include <Accounts/Manager>
 
@@ -181,6 +183,10 @@ bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
     }
 
     Accounts::Account *acc = d->accountById(accountId);
+    SignOn::Identity *identity = SignOn::Identity::existingIdentity(acc->credentialsId(), this);
+    identity->remove();
+    identity->deleteLater();
+
     acc->remove();
     acc->sync();
 
