@@ -2,9 +2,10 @@
 set(webaccounts_SRCS
     webaccounts.cpp
     create.cpp
-    models/accountsmodel.cpp
-    models/modeltest.cpp
-    jobs/createaccount.cpp
+#     models/accountsmodel.cpp
+#     models/modeltest.cpp
+#     jobs/createaccount.cpp
+#     jobs/getcredentials.cpp
 )
 
 qt4_automoc(${webaccounts_SRCS})

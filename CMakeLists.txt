@@ -8,8 +8,8 @@ enable_testing()
 
 find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
-find_package(AccountsQt REQUIRED)
-find_package(SignOnQt REQUIRED)
+# find_package(AccountsQt REQUIRED)
+# find_package(SignOnQt REQUIRED)
 
 add_definitions (${KDE4_DEFINITIONS}
                  -fexceptions

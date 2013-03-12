@@ -23,7 +23,7 @@
 
 class Create;
 class QModelIndex;
-class AccountsModel;
+// class AccountsModel;
 class QStackedLayout;
 class QItemSelectionModel;
 namespace Ui {
@@ -46,7 +46,7 @@ private:
     Create *m_create;
     QStackedLayout *m_layout;
     Ui::KCMWebAccounts *m_ui;
-    AccountsModel *m_model;
+//     AccountsModel *m_model;
     QItemSelectionModel *m_selectionModel;
 };
 

@@ -19,9 +19,9 @@
 #include "webaccounts.h"
 #include "create.h"
 #include "ui_kcm.h"
-
+/*
 #include "models/accountsmodel.h"
-#include "models/modeltest.h"
+#include "models/modeltest.h"*/
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
@@ -49,39 +49,39 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_ui->accountInfo->setLayout(m_layout);
 
-    m_model = new AccountsModel(this);
-    m_selectionModel = new QItemSelectionModel(m_model);
-    connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
-    m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
-
-    m_ui->accountsView->setIconSize(QSize(32,32));
-    m_ui->accountsView->setModel(m_model);
-    m_ui->accountsView->setSelectionModel(m_selectionModel);
+//     m_model = new AccountsModel(this);
+//     m_selectionModel = new QItemSelectionModel(m_model);
+//     connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
+//     m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
+//
+//     m_ui->accountsView->setIconSize(QSize(32,32));
+//     m_ui->accountsView->setModel(m_model);
+//     m_ui->accountsView->setSelectionModel(m_selectionModel);
 
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
     m_create = new Create(this);
-    m_layout->addWidget(m_create->widget());
+//     m_layout->addWidget(m_create->widget());
 
 }
 
 void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-    if (!current.isValid()) {
-        return;
-    }
-    if (current.row() == m_model->rowCount() - 1) {
-        m_ui->removeBtn->setDisabled(true);
-        return;
-    }
+//     if (!current.isValid()) {
+//         return;
+//     }
+//     if (current.row() == m_model->rowCount() - 1) {
+//         m_ui->removeBtn->setDisabled(true);
+//         return;
+//     }
 
-    m_ui->removeBtn->setDisabled(false);
+//     m_ui->removeBtn->setDisabled(false);
 }
 
 WebAccounts::~WebAccounts()
 {
-    delete m_ui;
+//     delete m_ui;
 }
 
 void WebAccounts::addBtnClicked()
@@ -91,11 +91,11 @@ void WebAccounts::addBtnClicked()
 
 void WebAccounts::rmBtnClicked()
 {
-    QModelIndex index = m_selectionModel->currentIndex();
-    if (!index.isValid()) {
-        return;
-    }
-    m_model->removeRows(index.row(), 1);
+//     QModelIndex index = m_selectionModel->currentIndex();
+//     if (!index.isValid()) {
+//         return;
+//     }
+//     m_model->removeRows(index.row(), 1);
 }
 
 

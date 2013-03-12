@@ -26,20 +26,19 @@
 #include <QtGui/QWidget>
 #include <QtGui/QCommandLinkButton>
 
-#include <Accounts/Manager>
-#include <Accounts/Provider>
+// #include <Accounts/Manager>
+// #include <Accounts/Provider>
 
 Create::Create(QWidget* parent)
 : QObject(parent)
 , m_form(0)
-, m_manager(new Accounts::Manager(this))
 {
     m_parent = parent;
 }
 
 Create::~Create()
 {
-    delete m_manager;
+//     delete m_manager;
 }
 
 QWidget* Create::widget()
@@ -58,22 +57,22 @@ QWidget* Create::widget()
 
 void Create::fillInterface()
 {
-    Accounts::ProviderList providerList = m_manager->providerList();
-
-    QCommandLinkButton *button;
-    Q_FOREACH(const Accounts::Provider& provider, providerList) {
-        button = new QCommandLinkButton(provider.displayName());
-        button->setIcon(KIcon(provider.iconName()));
-        button->setProperty("providerName", provider.name());
-
-        connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
-        m_form->verticalLayout->insertWidget(0, button);
-    }
+//     Accounts::ProviderList providerList = m_manager->providerList();
+//
+//     QCommandLinkButton *button;
+//     Q_FOREACH(const Accounts::Provider& provider, providerList) {
+//         button = new QCommandLinkButton(provider.displayName());
+//         button->setIcon(KIcon(provider.iconName()));
+//         button->setProperty("providerName", provider.name());
+//
+//         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
+//         m_form->verticalLayout->insertWidget(0, button);
+//     }
 }
 
 void Create::createAccount()
 {
-    QString providerName = sender()->property("providerName").toString();
-    CreateAccount *acc = new CreateAccount(providerName, this);
-    acc->start();
+//     QString providerName = sender()->property("providerName").toString();
+//     CreateAccount *acc = new CreateAccount(providerName, this);
+//     acc->start();
 }
