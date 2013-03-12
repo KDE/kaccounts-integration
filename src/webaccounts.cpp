@@ -41,13 +41,11 @@ K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 : KCModule(WebAccountsFactory::componentData(), parent)
 , m_create(0)
-, m_layout(new QStackedLayout)
 {
 
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
 
-    m_ui->accountInfo->setLayout(m_layout);
 
 //     m_model = new AccountsModel(this);
 //     m_selectionModel = new QItemSelectionModel(m_model);
@@ -81,7 +79,7 @@ void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& 
 
 WebAccounts::~WebAccounts()
 {
-//     delete m_ui;
+     delete m_ui;
 }
 
 void WebAccounts::addBtnClicked()
