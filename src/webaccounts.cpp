@@ -45,7 +45,6 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
-    m_ui->scrollAreaContent->setBackgroundRole(QPalette::Base);
 
 //     m_model = new AccountsModel(this);
 //     m_selectionModel = new QItemSelectionModel(m_model);
