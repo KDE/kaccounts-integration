@@ -58,6 +58,8 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 
+    connect(m_ui->configureCalendarLabel, SIGNAL(leftClickedUrl()), SLOT(configureCalendar()));
+
     m_create = new Create(this);
 //     m_layout->addWidget(m_create->widget());
 
@@ -95,5 +97,9 @@ void WebAccounts::rmBtnClicked()
 //     m_model->removeRows(index.row(), 1);
 }
 
+void WebAccounts::configureCalendar()
+{
+    kWarning();
+}
 
 #include "webaccounts.moc"

@@ -91,7 +91,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel:focus {
+      <string notr="true">KUrlLabel:focus {
 border: 1px dotted qpalette(dark);
 }</string>
      </property>
@@ -150,6 +150,9 @@ border: 1px dotted qpalette(dark);
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
            </property>
+           <property name="buddy">
+            <cstring>klineedit</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
@@ -169,6 +172,9 @@ border: 1px dotted qpalette(dark);
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+           </property>
+           <property name="buddy">
+            <cstring>klineedit_2</cstring>
            </property>
           </widget>
          </item>
@@ -215,12 +221,12 @@ border: 1px dotted qpalette(dark);
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label">
-             <property name="focusPolicy">
-              <enum>Qt::TabFocus</enum>
-             </property>
+            <widget class="KUrlLabel" name="configureCalendarLabel">
              <property name="text">
-              <string>&lt;a href=&quot;#&quot;&gt;Configure&lt;/a&gt;</string>
+              <string>Configure</string>
+             </property>
+             <property name="url">
+              <string>#</string>
              </property>
             </widget>
            </item>
@@ -243,12 +249,9 @@ border: 1px dotted qpalette(dark);
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_10">
-             <property name="focusPolicy">
-              <enum>Qt::TabFocus</enum>
-             </property>
+            <widget class="KUrlLabel" name="kurllabel">
              <property name="text">
-              <string>&lt;a href=&quot;#&quot;&gt;Configure&lt;/a&gt;</string>
+              <string>Configure</string>
              </property>
             </widget>
            </item>
@@ -264,18 +267,15 @@ border: 1px dotted qpalette(dark);
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_11">
-             <property name="focusPolicy">
-              <enum>Qt::TabFocus</enum>
-             </property>
+            <widget class="KUrlLabel" name="kurllabel_2">
              <property name="text">
-              <string>&lt;a href=&quot;#&quot;&gt;Configure&lt;/a&gt;</string>
+              <string>Configure</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
-         <item row="7" column="1">
+         <item row="8" column="1">
           <widget class="QCheckBox" name="checkBox_5">
            <property name="text">
             <string>Chat</string>
@@ -325,6 +325,11 @@ border: 1px dotted qpalette(dark);
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KUrlLabel</class>
+   <extends>QLabel</extends>
+   <header>kurllabel.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>accountsView</tabstop>
@@ -333,12 +338,10 @@ border: 1px dotted qpalette(dark);
   <tabstop>klineedit</tabstop>
   <tabstop>klineedit_2</tabstop>
   <tabstop>checkBox_6</tabstop>
-  <tabstop>label</tabstop>
+  <tabstop>configureCalendarLabel</tabstop>
   <tabstop>checkBox_2</tabstop>
   <tabstop>checkBox_3</tabstop>
-  <tabstop>label_10</tabstop>
   <tabstop>checkBox_4</tabstop>
-  <tabstop>label_11</tabstop>
   <tabstop>checkBox_5</tabstop>
  </tabstops>
  <resources/>

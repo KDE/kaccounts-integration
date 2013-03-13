@@ -41,6 +41,7 @@ private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
     void currentChanged(const QModelIndex& current, const QModelIndex& previous);
+    void configureCalendar();
 
 private:
     Create *m_create;
