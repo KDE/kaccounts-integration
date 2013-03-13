@@ -220,6 +220,9 @@
            </item>
            <item>
             <widget class="KUrlLabel" name="configureCalendarLabel">
+             <property name="focusPolicy">
+              <enum>Qt::TabFocus</enum>
+             </property>
              <property name="text">
               <string>Configure</string>
              </property>
@@ -248,6 +251,9 @@
            </item>
            <item>
             <widget class="KUrlLabel" name="kurllabel">
+             <property name="focusPolicy">
+              <enum>Qt::TabFocus</enum>
+             </property>
              <property name="text">
               <string>Configure</string>
              </property>
@@ -266,6 +272,9 @@
            </item>
            <item>
             <widget class="KUrlLabel" name="kurllabel_2">
+             <property name="focusPolicy">
+              <enum>Qt::TabFocus</enum>
+             </property>
              <property name="text">
               <string>Configure</string>
              </property>
@@ -339,7 +348,9 @@
   <tabstop>configureCalendarLabel</tabstop>
   <tabstop>checkBox_2</tabstop>
   <tabstop>checkBox_3</tabstop>
+  <tabstop>kurllabel</tabstop>
   <tabstop>checkBox_4</tabstop>
+  <tabstop>kurllabel_2</tabstop>
   <tabstop>checkBox_5</tabstop>
  </tabstops>
  <resources/>
