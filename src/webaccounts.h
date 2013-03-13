@@ -30,6 +30,8 @@ namespace Ui {
     class KCMWebAccounts;
 }
 
+class KUrlLabel;
+
 class WebAccounts : public KCModule
 {
 Q_OBJECT
@@ -43,12 +45,17 @@ private Q_SLOTS:
     void currentChanged(const QModelIndex& current, const QModelIndex& previous);
     void configureCalendar();
 
+protected:
+    bool eventFilter(QObject *, QEvent *);
+
 private:
     Create *m_create;
     QStackedLayout *m_layout;
     Ui::KCMWebAccounts *m_ui;
 //     AccountsModel *m_model;
     QItemSelectionModel *m_selectionModel;
+
+    void fixKUrlLabel(KUrlLabel *);
 };
 
 #endif // webaccounts_H

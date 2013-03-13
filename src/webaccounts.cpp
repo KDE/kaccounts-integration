@@ -23,6 +23,7 @@
 #include "models/accountsmodel.h"
 #include "models/modeltest.h"*/
 
+#include <QtGui/QKeyEvent>
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
@@ -57,6 +58,10 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
+
+    Q_FOREACH(KUrlLabel *label, findChildren<KUrlLabel*>()) {
+        fixKUrlLabel(label);
+    }
 
     connect(m_ui->configureCalendarLabel, SIGNAL(leftClickedUrl()), SLOT(configureCalendar()));
 
@@ -100,6 +105,29 @@ void WebAccounts::rmBtnClicked()
 void WebAccounts::configureCalendar()
 {
     kWarning();
+}
+
+void WebAccounts::fixKUrlLabel(KUrlLabel *label)
+{
+    label->setFocusPolicy(Qt::TabFocus);
+    label->setStyleSheet(
+        "KUrlLabel:focus {"
+        "   border: 1px dotted qpalette(dark);"
+        "}"
+    );
+    label->installEventFilter(this);
+}
+
+bool WebAccounts::eventFilter(QObject *obj, QEvent *ev)
+{
+    if (ev->type() == QEvent::KeyPress) {
+        QKeyEvent *event = static_cast<QKeyEvent *>(ev);
+        if (event->key() == Qt::Key_Space) {
+            QMetaObject::invokeMethod(obj, "leftClickedUrl");
+            return true;
+        }
+    }
+    return false;
 }
 
 #include "webaccounts.moc"
