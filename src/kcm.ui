@@ -91,9 +91,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">KUrlLabel:focus {
-border: 1px dotted qpalette(dark);
-}</string>
+      <string notr="true"/>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
