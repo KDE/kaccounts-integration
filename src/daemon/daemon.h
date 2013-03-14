@@ -42,11 +42,13 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         virtual ~AccountsDaemon();
 
     public Q_SLOTS:
+        void startDaemon();
         void accountCreated(const Accounts::AccountId &id);
         void resourceCreated(KJob* job);
         void enabledChanged(const QString &serviceName, bool enabled);
 
     private:
+        void monitorAccount(const Accounts::AccountId &id);
         void findResource(const QString &serviceName);
         void createResource(const Akonadi::AgentType &type);
 

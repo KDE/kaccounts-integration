@@ -45,19 +45,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
 {
-    kDebug();
-    Accounts::Account *acc = 0;
-    Accounts::ServiceList services;
-    Accounts::AccountIdList accList = m_manager->accountList();
-    Q_FOREACH(const Accounts::AccountId &id, accList) {
-        acc = m_manager->account(id);
-        services = acc->services();
-        Q_FOREACH(const Accounts::Service &service, services) {
-            acc->selectService(service);
-        }
-        connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
-    }
-    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
+    QMetaObject::InvokeMetaMethod(this, "startDaemon");
 }
 
 AccountsDaemon::~AccountsDaemon()
@@ -65,15 +53,39 @@ AccountsDaemon::~AccountsDaemon()
     delete m_manager;
 }
 
-void AccountsDaemon::accountCreated(const Accounts::AccountId& id)
+void AccountsDaemon::startDaemon()
+{
+    kDebug();
+    Accounts::AccountIdList accList = m_manager->accountList();
+    Q_FOREACH(const Accounts::AccountId &id, accList) {
+        monitorAccount(id);
+    }
+}
+
+void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 {
     kDebug() << id;
+    Accounts::Account *acc = m_manager->account(id);
+    Accounts::ServiceList services = acc->services();
+    Q_FOREACH(const Accounts::Service &service, services) {
+        acc->selectService(service);
+    }
+    connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
+    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
+}
+
+void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
+{
+    kDebug() << id;
+    monitorAccount(id);
+
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
     Q_FOREACH(const Accounts::Service &service, services) {
         findResource(service.name());
     }
+    delete acc;
 }
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
@@ -100,8 +112,8 @@ void AccountsDaemon::findResource(const QString &serviceName)
 
 void AccountsDaemon::createResource(const AgentType& type)
 {
-    AgentInstanceCreateJob *job = new AgentInstanceCreateJob( type, this );
-    connect( job, SIGNAL(result(KJob*)), SLOT(resourceCreated(KJob*)));
+    AgentInstanceCreateJob *job = new AgentInstanceCreateJob(type, this);
+    connect(job, SIGNAL(result(KJob*)), SLOT(resourceCreated(KJob*)));
     job->start();
 }
 
@@ -115,7 +127,6 @@ void AccountsDaemon::resourceCreated(KJob* job)
 
     kDebug();
     AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    agent.setName("YAYAYA");
     QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
     QString path = "/org/kde/mklapetek";
     QString method = "org.kde.akonadi_";
@@ -125,5 +136,5 @@ void AccountsDaemon::resourceCreated(KJob* job)
     QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
 
     QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(msg);
-    call.waitForFinished();
+
 }
