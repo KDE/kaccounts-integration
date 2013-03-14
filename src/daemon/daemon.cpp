@@ -134,6 +134,7 @@ void AccountsDaemon::resourceCreated(KJob* job)
     method.append(".MicroblogResource");
 
     QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
+    msg.setArguments(QList<QVariant>() << 16);
 
     QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(msg);
 
