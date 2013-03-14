@@ -45,7 +45,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
 {
-    QMetaObject::InvokeMetaMethod(this, "startDaemon");
+    QMetaObject::invokeMethod(this, "startDaemon");
 }
 
 AccountsDaemon::~AccountsDaemon()
