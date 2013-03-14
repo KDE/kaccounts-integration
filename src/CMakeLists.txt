@@ -1,3 +1,4 @@
+add_subdirectory(daemon)
 
 set(webaccounts_SRCS
     webaccounts.cpp
