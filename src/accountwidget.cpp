@@ -16,181 +16,79 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "google/pages/serviceoption.h"
-#include "google/jobs/createcontact.h"
-#include "google/jobs/createcalendar.h"
-#include "google/jobs/createtask.h"
-#include "google/jobs/createmail.h"
-#include "google/jobs/createchat.h"
-#include "google/jobs/removechat.h"
-#include "google/jobs/removeemail.h"
-#include "google/jobs/removecalendar.h"
-#include "google/jobs/removetask.h"
-#include "jobs/removeakonadiresource.h"
-
-#include <accountwidget.h>
+#include "accountwidget.h"
+#include "models/accountsmodel.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QCheckBox>
 
-AccountWidget::AccountWidget(KConfigGroup group, QWidget* parent)
+#include <Accounts/Account>
+#include <Accounts/Service>
+#include <Accounts/Manager>
+
+#include <KDebug>
+
+AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
  : QWidget(parent)
- , m_config(group)
+ , m_account(0)
+ , m_manager(new Accounts::Manager(this))
 {
     setupUi(this);
 
-    int status = 0;
-    KConfigGroup services = m_config.group("services");
-    QStringList keys = services.keyList();
-    Q_FOREACH(const QString &key, keys) {
-        status = services.readEntry(key, 0);
-        m_serviceWidgets[key] = new ServiceOption(key, key, this);
-        m_serviceWidgets[key]->setStatus(status);
-        connect(m_serviceWidgets[key], SIGNAL(toggled(QString,bool)), this, SLOT(serviceChanged(QString,bool)));
-        d_layout->addWidget(m_serviceWidgets[key]);
+    if (!m_account) {
+        return;
     }
+
+    setAccount(m_account);
 }
 
 AccountWidget::~AccountWidget()
 {
-
+    qDeleteAll(m_checkboxes);
+    delete m_manager;
 }
 
-void AccountWidget::serviceChanged(const QString& service, bool enabled)
+void AccountWidget::setAccount(Accounts::Account* account)
 {
-    if (service == "Calendar") {
-        modifyCalendar(enabled);
+    if (m_account == account) {
         return;
     }
 
-    if (service == "Contact") {
-        modifyContact(enabled);
-        return;
+    if (m_account) {
+        disconnect(m_account, 0, this, 0);
     }
 
-    if (service == "EMail") {
-        modifyEMail(enabled);
-        return;
+    qDeleteAll(m_checkboxes);
+    m_checkboxes.clear();
+
+    m_account = account;
+
+    QCheckBox *checkbox = 0;
+    Accounts::ServiceList services = account->services();
+    Q_FOREACH(const Accounts::Service &service, services) {
+        m_account->selectService(service);
+        checkbox = new QCheckBox(service.displayName(), this);
+        checkbox->setChecked(m_account->enabled());
+        checkbox->setProperty("service", service.name());
+        d_layout->addWidget(checkbox);
+        connect(checkbox, SIGNAL(clicked(bool)), SLOT(serviceChanged(bool)));
+        m_checkboxes.insert(service.name(), checkbox);
     }
-
-    if (service == "Chat") {
-        modifyChat(enabled);
-        return;
-    }
-
-    if (service == "Tasks") {
-        modifyTasks(enabled);
-        return;
-    }
-
-    qWarning() << "Not implemented service: " << service;
+    connect(account, SIGNAL(enabledChanged(QString,bool)), SLOT(serviceEnabledChanged(QString,bool)));
 }
 
-void AccountWidget::updateService(const QString& name)
+void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabled)
 {
-    int status = m_config.group("services").readEntry(name, -1);
-    m_serviceWidgets[name]->setStatus(status);
+    Q_ASSERT(m_checkboxes.contains(serviceName));
+
+    m_checkboxes[serviceName]->setChecked(enabled);
 }
 
-void AccountWidget::modifyCalendar(bool enabled)
+void AccountWidget::serviceChanged(bool enabled)
 {
-    if (!enabled) {
-        RemoveCalendar *removeCalendar = new RemoveCalendar(m_config, this);
-        connect(removeCalendar, SIGNAL(finished(KJob*)), this, SLOT(updateCalendar()));
-        removeCalendar->start();
-        return;
-    }
-
-    CreateCalendar *createCalendar = new CreateCalendar(m_config, this);
-    connect(createCalendar, SIGNAL(finished(KJob*)), this, SLOT(updateCalendar()));
-    createCalendar->start();
-}
-
-void AccountWidget::modifyChat(bool enabled)
-{
-    if (!enabled) {
-        RemoveChat *removeChat = new RemoveChat(m_config, this);
-        connect(removeChat, SIGNAL(finished(KJob*)), this, SLOT(updateChat()));
-        removeChat->start();
-        return;
-    }
-
-    CreateChat *createChat = new CreateChat(m_config, this);
-    connect(createChat, SIGNAL(finished(KJob*)), this, SLOT(updateChat()));
-    createChat->start();
-}
-
-void AccountWidget::modifyContact(bool enabled)
-{
-    if (!enabled) {
-        RemoveAkonadiResource *removeContact = new RemoveAkonadiResource("contactResource", "Contact", m_config, this);
-        connect(removeContact, SIGNAL(finished(KJob*)), this, SLOT(updateContact()));
-        removeContact->start();
-        return;
-    }
-
-    CreateContact *createContact = new CreateContact(m_config, this);
-    connect(createContact, SIGNAL(finished(KJob*)), this, SLOT(updateContact()));
-    createContact->start();
-}
-
-void AccountWidget::modifyEMail(bool enabled)
-{
-    if (!enabled) {
-        RemoveEmail *removeEMail = new RemoveEmail(m_config, this);
-        connect(removeEMail, SIGNAL(finished(KJob*)), this, SLOT(updateMail()));
-        removeEMail->start();
-        return;
-    }
-
-    CreateMail *createEMail = new CreateMail(m_config, this);
-    connect(createEMail, SIGNAL(finished(KJob*)), this, SLOT(updateMail()));
-    createEMail->start();
-}
-
-void AccountWidget::modifyTasks(bool enabled)
-{
-    if (!enabled) {
-        RemoveTask *removeTask = new RemoveTask(m_config, this);
-        connect(removeTask, SIGNAL(finished(KJob*)), this, SLOT(updateTask()));
-        removeTask->start();
-        return;
-    }
-
-    CreateTask *createTasks = new CreateTask(m_config, this);
-    connect(createTasks, SIGNAL(finished(KJob*)), this, SLOT(updateTask()));
-    createTasks->start();
-}
-
-void AccountWidget::updateCalendar()
-{
-    updateService("Calendar");
-}
-
-void AccountWidget::updateChat()
-{
-    updateService("Chat");
-}
-
-void AccountWidget::updateContact()
-{
-    updateService("Contact");
-}
-
-void AccountWidget::updateMail()
-{
-    updateService("EMail");
-}
-
-void AccountWidget::updateTask()
-{
-    updateService("Tasks");
-}
-
-void AccountWidget::updateAll()
-{
-    KConfigGroup services = m_config.group("services");
-    QStringList keys = services.keyList();
-    Q_FOREACH(const QString &key, keys) {
-        updateService(key);
-    }
+    QString service = sender()->property("service").toString();
+    kDebug() << "Enabling: " << service << " enabled";
+    m_account->selectService(m_manager->service(service));
+    m_account->setEnabled(enabled);
+    m_account->sync();
 }
