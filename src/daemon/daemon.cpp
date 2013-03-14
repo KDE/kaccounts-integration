@@ -118,7 +118,7 @@ void AccountsDaemon::resourceCreated(KJob* job)
     agent.setName("YAYAYA");
     QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
     QString path = "/org/kde/mklapetek";
-    QString method = "org.kde.akonadi_";
+    QString method = "org.kde.";
     method.append(agent.identifier());
     method.append(".MicroblogResource");
 
