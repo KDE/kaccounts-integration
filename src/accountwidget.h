@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2012-2013 by Alejandro Fiestas Olivares <afiestas@kde.org>         *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -20,42 +20,29 @@
 #define ACCOUNTWIDGET_H
 
 #include "ui_services.h"
+#include "create.h"
 
-#include <QtGui/QWidget>
+namespace Accounts {
+    class Account;
+};
 
-#include <KConfigGroup>
-
-class ServiceOption;
+class QCheckBox;
 class AccountWidget : public QWidget, Ui::Services
 {
 Q_OBJECT
     public:
-        explicit AccountWidget(KConfigGroup group, QWidget* parent);
+        explicit AccountWidget(Accounts::Account* model, QWidget* parent);
         virtual ~AccountWidget();
 
+        void setAccount(Accounts::Account* account);
     public Q_SLOTS:
-        void serviceChanged(const QString& service, bool enabled);
-
-    private Q_SLOTS:
-        void updateCalendar();
-        void updateMail();
-        void updateTask();
-        void updateContact();
-        void updateChat();
-
-        void updateAll();
+        void serviceEnabledChanged(const QString &serviceName, bool enabled);
+        void serviceChanged(bool enabled);
 
     private:
-        void modifyCalendar(bool enabled);
-        void modifyTasks(bool enabled);
-        void modifyContact(bool enabled);
-        void modifyEMail(bool enabled);
-        void modifyChat(bool enabled);
-
-        void updateService(const QString &name);
-    private:
-        KConfigGroup m_config;
-        QHash<QString, ServiceOption*> m_serviceWidgets;
+        QHash<QString, QCheckBox*> m_checkboxes;
+        Accounts::Account *m_account;
+        Accounts::Manager *m_manager;
 };
 
 #endif //ACCOUNTWIDGET_H

@@ -3,6 +3,7 @@ add_subdirectory(daemon)
 set(webaccounts_SRCS
     webaccounts.cpp
     create.cpp
+    accountwidget.cpp
     models/accountsmodel.cpp
     models/modeltest.cpp
     jobs/createaccount.cpp
@@ -10,6 +11,7 @@ set(webaccounts_SRCS
 
 qt4_automoc(${webaccounts_SRCS})
 
+kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui services.ui)
 kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui)
 
 kde4_add_plugin(webaccounts ${webaccounts_SRCS})
