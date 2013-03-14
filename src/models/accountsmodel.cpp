@@ -167,6 +167,8 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
         }
         case Id:
             return account->id();
+        case Data:
+            return QVariant::fromValue<QObject*>(account);
     }
 
     return QVariant();
