@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Accounts
+Comment=Accounts management
+
+Type=Service
+Icon=preferences-system-power-management
+X-KDE-ServiceTypes=KDEDModule
+X-KDE-Library=accounts
+X-KDE-DBus-ModuleName=accounts
+X-KDE-Kded-autoload=true
+X-KDE-Kded-load-on-demand=false
+X-KDE-Kded-phase=1
