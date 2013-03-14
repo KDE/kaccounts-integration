@@ -16,11 +16,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 #include "daemon.h"
+#include "createresource.h"
 
 #include <QtCore/QTimer>
-#include <QDBusConnection>
-#include <QDBusMessage>
-#include <QDBusPendingCall>
 
 #include <kdebug.h>
 #include <kdemacros.h>
@@ -34,7 +32,6 @@
 
 #include <Akonadi/AgentType>
 #include <Akonadi/AgentManager>
-#include <Akonadi/AgentInstanceCreateJob>
 
 K_PLUGIN_FACTORY(KScreenDaemonFactory, registerPlugin<AccountsDaemon>();)
 K_EXPORT_PLUGIN(KScreenDaemonFactory("accounts", "accounts"))
@@ -83,7 +80,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::ServiceList services = acc->enabledServices();
 
     Q_FOREACH(const Accounts::Service &service, services) {
-        findResource(service.name());
+        findResource(service.name(), acc->id());
     }
     delete acc;
 }
@@ -91,10 +88,10 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 {
     kDebug();
-    findResource(serviceName);
+    findResource(serviceName, qobject_cast<Accounts::Account*>(sender())->id());
 }
 
-void AccountsDaemon::findResource(const QString &serviceName)
+void AccountsDaemon::findResource(const QString &serviceName, const Accounts::AccountId &id)
 {
     kDebug() << serviceName;
     QString mime = "text/x-vnd.accounts.";
@@ -106,36 +103,7 @@ void AccountsDaemon::findResource(const QString &serviceName)
             continue;
         }
 
-        createResource(type);
+        CreateResource *job = new CreateResource(id, type, this);
+        job->start();
     }
-}
-
-void AccountsDaemon::createResource(const AgentType& type)
-{
-    AgentInstanceCreateJob *job = new AgentInstanceCreateJob(type, this);
-    connect(job, SIGNAL(result(KJob*)), SLOT(resourceCreated(KJob*)));
-    job->start();
-}
-
-void AccountsDaemon::resourceCreated(KJob* job)
-{
-    kDebug();
-    if (job->error()) {
-        kDebug() << "Error creating the job";
-        return;
-    }
-
-    kDebug();
-    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
-    QString path = "/org/kde/mklapetek";
-    QString method = "org.kde.";
-    method.append(agent.identifier());
-    method.append(".MicroblogResource");
-
-    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
-    msg.setArguments(QList<QVariant>() << 16);
-
-    QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(msg);
-
 }

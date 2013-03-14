@@ -5,6 +5,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
+    createresource.cpp
 )
 
 kde4_add_plugin(kded_accounts

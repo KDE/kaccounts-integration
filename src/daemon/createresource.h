@@ -16,42 +16,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef CREATE_RESOURCE_H
+#define CREATE_RESOURCE_H
 
-#include <kdedmodule.h>
+#include <Akonadi/AgentType>
 
-#include <Accounts/Account>
+#include <kjob.h>
 
-namespace Accounts {
-    class Manager;
-};
-
-namespace Akonadi {
-    class AgentType;
-};
-class KJob;
-
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class CreateResource : public KJob
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit CreateResource(int accountId, const Akonadi::AgentType &type, QObject* parent = 0);
+        virtual ~CreateResource();
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
+        virtual void start();
+
+    private Q_SLOTS:
+        void resourceCreated(KJob* job);
 
     private:
-        void monitorAccount(const Accounts::AccountId &id);
-        void findResource(const QString &serviceName, const Accounts::AccountId &id);
-        void createResource(const Akonadi::AgentType &type);
-
-        Accounts::Manager* m_manager;
+        int m_accountId;
+        Akonadi::AgentType m_type;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //CREATE_RESOURCE_H

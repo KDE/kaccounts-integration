@@ -16,42 +16,60 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#include "createresource.h"
 
-#include <kdedmodule.h>
+#include <QtCore/QDebug>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
 
-#include <Accounts/Account>
+#include <Akonadi/AgentManager>
+#include <Akonadi/AgentInstanceCreateJob>
 
-namespace Accounts {
-    class Manager;
-};
+#include <kdebug.h>
 
-namespace Akonadi {
-    class AgentType;
-};
-class KJob;
+using namespace Akonadi;
 
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+CreateResource::CreateResource(int accountId, const AgentType &type, QObject* parent)
+ : KJob(parent)
+ , m_accountId(accountId)
+ , m_type(type)
 {
-    Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
+}
 
-    public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+CreateResource::~CreateResource()
+{
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
+}
 
-    private:
-        void monitorAccount(const Accounts::AccountId &id);
-        void findResource(const QString &serviceName, const Accounts::AccountId &id);
-        void createResource(const Akonadi::AgentType &type);
+void CreateResource::start()
+{
+    qDebug() << m_accountId;
+    AgentInstanceCreateJob *job = new AgentInstanceCreateJob(m_type, this);
+    connect(job, SIGNAL(result(KJob*)), SLOT(resourceCreated(KJob*)));
 
-        Accounts::Manager* m_manager;
-};
+    job->start();
+}
 
-#endif /*KSCREN_DAEMON_H*/
+void CreateResource::resourceCreated(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        kDebug() << "Error creating the job";
+        return;
+    }
+
+    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
+    QString path = "/org/kde/mklapetek";
+    QString method = "org.kde.";
+    method.append(agent.identifier());
+    method.append(".MicroblogResource");
+
+    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
+    msg.setArguments(QList<QVariant>() << m_accountId);
+
+    QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(msg);
+
+    emitResult();
+}
