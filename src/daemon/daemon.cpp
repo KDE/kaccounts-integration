@@ -129,9 +129,9 @@ void AccountsDaemon::resourceCreated(KJob* job)
     AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
     QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
     QString path = "/org/kde/mklapetek";
-    QString method = "org.kde.akonadi_";
+    QString method = "org.kde.";
     method.append(agent.identifier());
-    method.append("MicroblogResource");
+    method.append(".MicroblogResource");
 
     QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
 
