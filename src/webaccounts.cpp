@@ -22,6 +22,7 @@
 
 #include "models/accountsmodel.h"
 #include "models/modeltest.h"
+#include "accountwidget.h"
 
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
@@ -34,7 +35,6 @@
 #include <kpluginfactory.h>
 #include <kstandarddirs.h>
 
-
 K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
 K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
 
@@ -43,11 +43,15 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 , m_create(0)
 , m_layout(new QStackedLayout)
 {
-
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
 
     m_ui->accountInfo->setLayout(m_layout);
+    m_create = new Create(this);
+    m_layout->addWidget(m_create->widget());
+
+    m_accWidget = new AccountWidget(0, this);
+    m_layout->addWidget(m_accWidget);
 
     m_model = new AccountsModel(this);
     m_selectionModel = new QItemSelectionModel(m_model);
@@ -60,10 +64,6 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
 
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
-
-    m_create = new Create(this);
-    m_layout->addWidget(m_create->widget());
-
 }
 
 void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -71,12 +71,17 @@ void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& 
     if (!current.isValid()) {
         return;
     }
+
     if (current.row() == m_model->rowCount() - 1) {
         m_ui->removeBtn->setDisabled(true);
+        m_layout->setCurrentIndex(0);
         return;
     }
 
+    Accounts::Account* acc = qobject_cast<Accounts::Account*>(m_model->data(current, AccountsModel::Data).value<QObject*>());
+    m_accWidget->setAccount(acc);
     m_ui->removeBtn->setDisabled(false);
+    m_layout->setCurrentIndex(1);
 }
 
 WebAccounts::~WebAccounts()
