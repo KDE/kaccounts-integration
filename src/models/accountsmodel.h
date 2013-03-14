@@ -30,7 +30,8 @@ class AccountsModel : public QAbstractListModel
 
     public:
         enum Roles {
-            Id = Qt::UserRole
+            Id = Qt::UserRole,
+            Data
         };
         explicit AccountsModel(QObject* parent = 0);
         virtual ~AccountsModel();
