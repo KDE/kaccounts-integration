@@ -19,6 +19,8 @@
 #ifndef CREATE_RESOURCE_H
 #define CREATE_RESOURCE_H
 
+#include <Accounts/Account>
+
 #include <Akonadi/AgentType>
 
 #include <kjob.h>
@@ -26,18 +28,31 @@
 class CreateResource : public KJob
 {
     Q_OBJECT
+
     public:
-        explicit CreateResource(int accountId, const Akonadi::AgentType &type, QObject* parent = 0);
+        explicit CreateResource(QObject* parent = 0);
         virtual ~CreateResource();
 
         virtual void start();
+
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accId);
+
+        QString serviceName() const;
+        void setServiceName(const QString &serviceName);
+
+        void setAgentType(const Akonadi::AgentType &type);
+
+        QString agentIdentifier() const;
 
     private Q_SLOTS:
         void resourceCreated(KJob* job);
 
     private:
-        int m_accountId;
+        QString m_serviceName;
+        QString m_agentIdentifier;
         Akonadi::AgentType m_type;
+        Accounts::AccountId m_accountId;
 };
 
 #endif //CREATE_RESOURCE_H

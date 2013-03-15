@@ -30,10 +30,8 @@
 
 using namespace Akonadi;
 
-CreateResource::CreateResource(int accountId, const AgentType &type, QObject* parent)
+CreateResource::CreateResource(QObject* parent)
  : KJob(parent)
- , m_accountId(accountId)
- , m_type(type)
 {
 }
 
@@ -49,6 +47,36 @@ void CreateResource::start()
     connect(job, SIGNAL(result(KJob*)), SLOT(resourceCreated(KJob*)));
 
     job->start();
+}
+
+Accounts::AccountId CreateResource::accountId() const
+{
+    return m_accountId;
+}
+
+void CreateResource::setAccountId(const Accounts::AccountId& accId)
+{
+    m_accountId = accId;
+}
+
+QString CreateResource::serviceName() const
+{
+    return m_serviceName;
+}
+
+void CreateResource::setServiceName(const QString& serviceName)
+{
+    m_serviceName = serviceName;
+}
+
+void CreateResource::setAgentType(const AgentType& type)
+{
+    m_type = type;
+}
+
+QString CreateResource::agentIdentifier() const
+{
+    return m_agentIdentifier;
 }
 
 void CreateResource::resourceCreated(KJob* job)
@@ -69,7 +97,8 @@ void CreateResource::resourceCreated(KJob* job)
     QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
     msg.setArguments(QList<QVariant>() << m_accountId);
 
-    QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(msg);
+    QDBusConnection::sessionBus().asyncCall(msg);
 
+    m_agentIdentifier = agent.identifier();
     emitResult();
 }

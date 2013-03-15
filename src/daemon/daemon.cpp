@@ -103,7 +103,12 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
             continue;
         }
 
-        CreateResource *job = new CreateResource(id, type, this);
+        CreateResource *job = new CreateResource(this);
+        connect(job, SIGNAL(finished(KJob*)), SLOT(resourceCreated(KJob*)));
+
+        job->setAccountId(id);
+        job->setAgentType(type);
+        job->setServiceName(serviceName);
         job->start();
     }
 }
