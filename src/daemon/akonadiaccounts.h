@@ -30,6 +30,8 @@ class AkonadiAccounts
         void addResource(const Accounts::AccountId &accId, const QString &serviceName, const QString &agentIdentifier);
         void removeResources(const Accounts::AccountId &accId, const QString &serviceName);
 
+        QStringList resources(const Accounts::AccountId &accId, const QString &serviceName) const;
+
     private:
         KSharedConfig::Ptr m_accounts;
 };
