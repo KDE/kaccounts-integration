@@ -17,7 +17,7 @@
  *************************************************************************************/
 #include "daemon.h"
 #include "createresource.h"
-#include <akonadiaccounts.h>
+#include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
 
