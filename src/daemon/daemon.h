@@ -46,6 +46,7 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
     public Q_SLOTS:
         void startDaemon();
         void accountCreated(const Accounts::AccountId &id);
+        void accountRemoved(const Accounts::AccountId &id);
         void enabledChanged(const QString &serviceName, bool enabled);
         void resourceCreated(KJob *job);
 
