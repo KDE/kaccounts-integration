@@ -150,3 +150,17 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
         job->start();
     }
 }
+
+void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)
+{
+    kDebug() << accId << serviceName;
+    QStringList resources = m_accounts->resources(accId, serviceName);
+    kDebug() << resources;
+    RemoveResource* removeJob = 0;
+    Q_FOREACH(const QString &agent, resources) {
+        removeJob = new RemoveResource(this);
+        removeJob->setAgentIdentifier(agent);
+        removeJob->start();
+    }
+    m_accounts->removeResources(accId, serviceName);
+}
