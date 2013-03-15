@@ -48,6 +48,13 @@ void AkonadiAccounts::removeResources(const Accounts::AccountId& accId, const QS
     m_accounts->group(key).sync();
 }
 
+void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
+{
+    kDebug() << accId;
+    QString key("Account_" + QString::number(accId));
+    m_accounts->deleteGroup(key);
+}
+
 QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId, const QString& serviceName) const
 {
     QString key("Account_" + QString::number(accId));
