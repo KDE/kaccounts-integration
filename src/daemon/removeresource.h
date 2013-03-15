@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2012-2013 by Alejandro Fiestas Olivares <afiestas@kde.org>         *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,31 +16,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef REMOVEAKONADIRESOURCE_H
-#define REMOVEAKONADIRESOURCE_H
+#ifndef REMOVE_RESOURCE_H
+#define REMOVE_RESOURCE_H
 
 #include <kjob.h>
-#include <kconfiggroup.h>
 
-class RemoveAkonadiResource : public KJob
+class RemoveResource : public KJob
 {
     Q_OBJECT
     public:
-        explicit RemoveAkonadiResource(const QString &name, const QString &serviceName, KConfigGroup &group, QObject* parent = 0);
-        virtual ~RemoveAkonadiResource();
+        explicit RemoveResource(QObject* parent = 0);
+        virtual ~RemoveResource();
 
         virtual void start();
 
-        QString id() const;
-        KConfigGroup config();
+        void setAgentIdentifier(const QString &agent);
 
     private Q_SLOTS:
         void removeResource();
 
     private:
-        QString m_id;
-        QString m_serviceName;
-        KConfigGroup m_config;
+        QString m_agentIdentifier;
 };
 
-#endif //REMOVEAKONADIRESOURCE_H
+#endif //REMOVE_RESOURCE_H

@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2012-2013 by Alejandro Fiestas Olivares <afiestas@kde.org>         *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,64 +16,44 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "removeakonadiresource.h"
+#include "removeresource.h"
 
-#include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
-#include <akonadi/agentinstancecreatejob.h>
 
 #include <KDebug>
 
 using namespace Akonadi;
 
-RemoveAkonadiResource::RemoveAkonadiResource(const QString &name, const QString &serviceName, KConfigGroup& group, QObject* parent)
+RemoveResource::RemoveResource(QObject* parent)
 : KJob(parent)
-, m_id(name)
-, m_serviceName(serviceName)
-, m_config(group)
 {
-    setObjectName(m_config.name());
-    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
 
-RemoveAkonadiResource::~RemoveAkonadiResource()
+RemoveResource::~RemoveResource()
 {
 
 }
 
-void RemoveAkonadiResource::start()
+void RemoveResource::start()
 {
     QMetaObject::invokeMethod(this, "removeResource", Qt::QueuedConnection);
 }
 
-void RemoveAkonadiResource::removeResource()
+void RemoveResource::setAgentIdentifier(const QString& agent)
 {
-    m_config.sync();
+    m_agentIdentifier = agent;
+}
 
-    kDebug() << m_config.groupList();
-    QString id = m_config.group("private").readEntry(m_id);
-    id.remove("org.freedesktop.Akonadi.Resource.");
-    kDebug() << "REMOVE: " << id;
-    AgentInstance instance = AgentManager::self()->instance(id);
+void RemoveResource::removeResource()
+{
+
+    AgentInstance instance = AgentManager::self()->instance(m_agentIdentifier);
     if (instance.isValid()) {
         AgentManager::self()->removeInstance(instance);
     } else {
-        kDebug() << "Agent not found, removing it anyway";
+        kDebug() << "Agent not found";
     }
 
-    m_config.group("private").deleteEntry(m_id);
-    m_config.group("services").writeEntry(m_serviceName, 0);
     emitResult();
-}
-
-
-QString RemoveAkonadiResource::id() const
-{
-    return m_id;
-}
-
-KConfigGroup RemoveAkonadiResource::config()
-{
-    return m_config;
 }
