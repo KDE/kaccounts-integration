@@ -79,8 +79,11 @@ void AccountWidget::setAccount(Accounts::Account* account)
 
 void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabled)
 {
-    Q_ASSERT(m_checkboxes.contains(serviceName));
+    if (serviceName.isEmpty()) {
+        return;
+    }
 
+    Q_ASSERT(m_checkboxes.contains(serviceName));
     m_checkboxes[serviceName]->setChecked(enabled);
 }
 
