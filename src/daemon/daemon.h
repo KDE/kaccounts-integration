@@ -53,7 +53,6 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         void monitorAccount(const Accounts::AccountId &id);
         void findResource(const QString &serviceName, const Accounts::AccountId &id);
         void removeService(const Accounts::AccountId& accId, const QString& serviceName);
-        void createResource(const Akonadi::AgentType &type);
 
         Accounts::Manager* m_manager;
         AkonadiAccounts* m_accounts;
