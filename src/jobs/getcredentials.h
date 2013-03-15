@@ -22,13 +22,13 @@
 #include <kjob.h>
 
 #include <Accounts/Account>
+#include <SignOn/SessionData>
 
 namespace Accounts {
     class Manager;
 };
 namespace SignOn {
     class Error;
-    class SessionData;
     class IdentityInfo;
 };
 class GetCredentials : public KJob
@@ -39,6 +39,8 @@ class GetCredentials : public KJob
         virtual void start();
 
         void setServiceType(const QString &serviceType);
+
+        SignOn::SessionData sessionData() const;
 
     Q_SIGNALS:
         void gotCredentials(const SignOn::SessionData& data);
@@ -53,6 +55,7 @@ class GetCredentials : public KJob
         QString m_serviceType;
         Accounts::AccountId m_id;
         Accounts::Manager *m_manager;
+        SignOn::SessionData m_sessionData;
 };
 
 #endif //GET_CREDENTIALS_H

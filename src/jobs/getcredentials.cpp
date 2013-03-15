@@ -71,10 +71,16 @@ void GetCredentials::info(const SignOn::IdentityInfo& info)
 void GetCredentials::sessionResponse(const SignOn::SessionData& data)
 {
     qDebug() << data.toMap();
-    Q_EMIT gotCredentials(data);
+    m_sessionData = data;
+    emitResult();
 }
 
 void GetCredentials::sessionError(const SignOn::Error& error)
 {
     qDebug() << error.message();
+}
+
+SignOn::SessionData GetCredentials::sessionData() const
+{
+    return m_sessionData;
 }
