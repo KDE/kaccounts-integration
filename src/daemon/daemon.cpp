@@ -17,6 +17,7 @@
  *************************************************************************************/
 #include "daemon.h"
 #include "createresource.h"
+#include <akonadiaccounts.h>
 
 #include <QtCore/QTimer>
 
@@ -41,6 +42,7 @@ using namespace Akonadi;
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
+ , m_accounts(new AkonadiAccounts())
 {
     QMetaObject::invokeMethod(this, "startDaemon");
 }
@@ -48,6 +50,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
 AccountsDaemon::~AccountsDaemon()
 {
     delete m_manager;
+    delete m_accounts;
 }
 
 void AccountsDaemon::startDaemon()
@@ -67,6 +70,7 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
     Q_FOREACH(const Accounts::Service &service, services) {
         acc->selectService(service);
     }
+
     connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
     connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
 }
@@ -88,7 +92,21 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 {
     kDebug();
-    findResource(serviceName, qobject_cast<Accounts::Account*>(sender())->id());
+    Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
+
+    if (!enabled) {
+        m_accounts->removeResources(accId, serviceName);
+        return;
+    }
+
+    findResource(serviceName, accId);
+}
+
+void AccountsDaemon::resourceCreated(KJob* job)
+{
+    kDebug();
+    CreateResource *cJob = qobject_cast<CreateResource*>(job);
+    m_accounts->addResource(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
 }
 
 void AccountsDaemon::findResource(const QString &serviceName, const Accounts::AccountId &id)
