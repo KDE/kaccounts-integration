@@ -46,6 +46,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  , m_accounts(new AkonadiAccounts())
 {
     QMetaObject::invokeMethod(this, "startDaemon");
+    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
 }
 
 AccountsDaemon::~AccountsDaemon()
@@ -73,7 +74,6 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
     }
 
     connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
-    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
 }
 
 void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
