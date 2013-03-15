@@ -91,7 +91,7 @@ WebAccounts::~WebAccounts()
 
 void WebAccounts::addBtnClicked()
 {
-
+    m_selectionModel->setCurrentIndex(m_model->index(m_model->rowCount() - 1), QItemSelectionModel::SelectCurrent);
 }
 
 void WebAccounts::rmBtnClicked()
