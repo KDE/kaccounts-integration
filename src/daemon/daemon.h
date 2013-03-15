@@ -30,7 +30,9 @@ namespace Accounts {
 namespace Akonadi {
     class AgentType;
 };
+
 class KJob;
+class AkonadiAccounts;
 
 class KDE_EXPORT AccountsDaemon : public KDEDModule
 {
@@ -45,6 +47,7 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         void startDaemon();
         void accountCreated(const Accounts::AccountId &id);
         void enabledChanged(const QString &serviceName, bool enabled);
+        void resourceCreated(KJob *job);
 
     private:
         void monitorAccount(const Accounts::AccountId &id);
@@ -52,6 +55,7 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         void createResource(const Akonadi::AgentType &type);
 
         Accounts::Manager* m_manager;
+        AkonadiAccounts* m_accounts;
 };
 
 #endif /*KSCREN_DAEMON_H*/
