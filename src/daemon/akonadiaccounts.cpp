@@ -33,7 +33,7 @@ void AkonadiAccounts::addResource(const Accounts::AccountId& accId, const QStrin
     QString key("Account_" + QString::number(accId));
 
     KConfigGroup account = m_accounts->group(key);
-    QVariantList resources = account.readEntry(serviceName, QVariantList());
+    QStringList resources = account.readEntry(serviceName, QStringList());
     resources.append(agentIdentifier);
 
     account.writeEntry(serviceName, resources);
@@ -46,4 +46,10 @@ void AkonadiAccounts::removeResources(const Accounts::AccountId& accId, const QS
     QString key("Account_" + QString::number(accId));
     m_accounts->group(key).deleteEntry(serviceName);
     m_accounts->group(key).sync();
+}
+
+QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId, const QString& serviceName) const
+{
+    QString key("Account_" + QString::number(accId));
+    return m_accounts->group(key).readEntry(serviceName, QStringList());
 }
