@@ -6,6 +6,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 set(accounts_daemon_SRCS
     daemon.cpp
     createresource.cpp
+    removeresource.cpp
     akonadiaccounts.cpp
 )
 
