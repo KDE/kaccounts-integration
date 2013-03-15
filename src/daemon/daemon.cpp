@@ -90,20 +90,32 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     delete acc;
 }
 
+void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
+{
+    kDebug() << id;
+
+    Accounts::Account *acc = m_manager->account(id);
+    Accounts::ServiceList services = acc->enabledServices();
+
+    Q_FOREACH(const Accounts::Service &service, services) {
+        removeService(acc->id(), service.name());
+    }
+
+    m_accounts->removeAccount(acc->id());
+    delete acc;
+}
+
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 {
     kDebug();
-    Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
+    if (serviceName.isEmpty()) {
+        kDebug() << "ServiceName is Empty";
+        return;
+    }
 
+    Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
     if (!enabled) {
-        QStringList resources = m_accounts->resources(accId, serviceName);
-        RemoveResource* removeJob = 0;
-        Q_FOREACH(const QString &agent, resources) {
-            removeJob = new RemoveResource(this);
-            removeJob->setAgentIdentifier(agent);
-            removeJob->start();
-        }
-        m_accounts->removeResources(accId, serviceName);
+        removeService(accId, serviceName);
         return;
     }
 
