@@ -17,6 +17,7 @@
  *************************************************************************************/
 #include "daemon.h"
 #include "createresource.h"
+#include "removeresource.h"
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
@@ -95,6 +96,13 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
     Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
 
     if (!enabled) {
+        QStringList resources = m_accounts->resources(accId, serviceName);
+        RemoveResource* removeJob = 0;
+        Q_FOREACH(const QString &agent, resources) {
+            removeJob = new RemoveResource(this);
+            removeJob->setAgentIdentifier(agent);
+            removeJob->start();
+        }
         m_accounts->removeResources(accId, serviceName);
         return;
     }
