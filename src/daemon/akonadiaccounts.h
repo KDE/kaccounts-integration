@@ -29,6 +29,7 @@ class AkonadiAccounts
 
         void addResource(const Accounts::AccountId &accId, const QString &serviceName, const QString &agentIdentifier);
         void removeResources(const Accounts::AccountId &accId, const QString &serviceName);
+        void removeAccount(const Accounts::AccountId &accId);
 
         QStringList resources(const Accounts::AccountId &accId, const QString &serviceName) const;
 
