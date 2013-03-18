@@ -8,6 +8,7 @@ set(accounts_daemon_SRCS
     createresource.cpp
     removeresource.cpp
     akonadiaccounts.cpp
+    setaccountid.cpp
 )
 
 kde4_add_plugin(kded_accounts
@@ -16,6 +17,7 @@ kde4_add_plugin(kded_accounts
 
 target_link_libraries(kded_accounts
     ${QT_QTCORE_LIBRARIES}
+    ${QT_QTXML_LIBRARIES}
     ${QT_QTGUI_LIBRARIES}
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KDEUI_LIBS}

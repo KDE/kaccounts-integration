@@ -17,11 +17,11 @@
  *************************************************************************************/
 
 #include "createresource.h"
+#include "setaccountid.h"
 
 #include <QtCore/QDebug>
 #include <QDBusConnection>
 #include <QDBusMessage>
-#include <QDBusPendingCall>
 
 #include <Akonadi/AgentManager>
 #include <Akonadi/AgentInstanceCreateJob>
@@ -76,7 +76,7 @@ void CreateResource::setAgentType(const AgentType& type)
 
 QString CreateResource::agentIdentifier() const
 {
-    return m_agentIdentifier;
+    return m_agent.identifier();
 }
 
 void CreateResource::resourceCreated(KJob* job)
@@ -87,18 +87,21 @@ void CreateResource::resourceCreated(KJob* job)
         return;
     }
 
-    AgentInstance agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    QString service = "org.freedesktop.Akonadi.Resource." + agent.identifier();
-    QString path = "/org/kde/mklapetek";
-    QString method = "org.kde.";
-    method.append(agent.identifier());
-    method.append(".MicroblogResource");
+    m_agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    SetAccountId *setAccJob = new SetAccountId(this);
+    connect(setAccJob, SIGNAL(finished(KJob*)), SLOT(setAccountDone(KJob*)));
+    setAccJob->setAgentInstance(m_agent);
+    setAccJob->setAccountId(m_accountId);
+    setAccJob->start();
+}
 
-    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, method, "configureByAccount");
-    msg.setArguments(QList<QVariant>() << m_accountId);
+void CreateResource::setAccountDone(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        setError(job->error());
+        setErrorText(job->errorText());
+    }
 
-    QDBusConnection::sessionBus().asyncCall(msg);
-
-    m_agentIdentifier = agent.identifier();
     emitResult();
 }

@@ -16,47 +16,42 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef CREATE_RESOURCE_H
-#define CREATE_RESOURCE_H
+#ifndef SETACCOUNTID_RESOURCE_H
+#define SETACCOUNTID_RESOURCE_H
 
+#include <QDBusMessage>
+
+#include <KJob>
+#include <Akonadi/AgentInstance>
 #include <Accounts/Account>
 
-#include <Akonadi/AgentType>
-#include <Akonadi/AgentInstance>
-
-#include <kjob.h>
-
 class QDBusPendingCallWatcher;
-class CreateResource : public KJob
+class SetAccountId : public KJob
 {
     Q_OBJECT
-
     public:
-        explicit CreateResource(QObject* parent = 0);
-        virtual ~CreateResource();
+        explicit SetAccountId(QObject* parent = 0);
+        virtual ~SetAccountId();
 
         virtual void start();
 
-        Accounts::AccountId accountId() const;
         void setAccountId(const Accounts::AccountId &accId);
-
-        QString serviceName() const;
-        void setServiceName(const QString &serviceName);
-
-        void setAgentType(const Akonadi::AgentType &type);
-
-        QString agentIdentifier() const;
+        void setAgentInstance(const Akonadi::AgentInstance &agent);
 
     private Q_SLOTS:
-        void resourceCreated(KJob* job);
-        void setAccountDone(KJob* job);
+        void getMethodName();
+        void introspectDo(QDBusPendingCallWatcher* watcher);
+        void accountSet(QDBusPendingCallWatcher* watcher);
+        void configWritten(QDBusPendingCallWatcher* watcher);
 
     private:
-        QString m_serviceName;
-        QString m_agentIdentifier;
-        Akonadi::AgentType m_type;
+        QDBusMessage createCall(const QString &method);
+        void setAccountId();
+        void writeConfig();
+
+        QString m_resource;
         Akonadi::AgentInstance m_agent;
         Accounts::AccountId m_accountId;
 };
 
-#endif //CREATE_RESOURCE_H
+#endif //SETACCOUNTID
