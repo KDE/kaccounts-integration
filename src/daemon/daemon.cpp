@@ -134,8 +134,9 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
 {
     kDebug() << serviceName;
     QString mime = "text/x-vnd.accounts.";
-    mime.append(serviceName);
+    mime.append(m_manager->service(serviceName).serviceType());
 
+    kDebug() << "Looking for: " << mime;
     AgentType::List types = AgentManager::self()->types();
     Q_FOREACH(const AgentType &type, types) {
         if (!type.mimeTypes().contains(mime)) {
