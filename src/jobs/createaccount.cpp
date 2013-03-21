@@ -108,11 +108,9 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     qDebug() << "\towner:" << info.owner();
     qDebug() << "\tuserName:" << info.userName();
 
-//     if (!info.userName().isEmpty()) {
-//         m_account->setDisplayName(info.userName());
-//     } else {
-//         m_account->setDisplayName(info.caption());
-//     }
+    if (m_account->displayName().isEmpty()) {
+        m_account->setDisplayName(info.userName());
+    }
     m_account->setCredentialsId(info.id());
 
     Accounts::AuthData authData = m_accInfo->authData();
