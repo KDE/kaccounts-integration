@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "getcredentials.h"
+#include "getcredentialsjob.h"
 
 #include <QtCore/QDebug>
 
@@ -26,61 +26,67 @@
 
 #include <SignOn/Identity>
 
-GetCredentials::GetCredentials(const Accounts::AccountId& id, QObject* parent)
- : KJob(parent)
- , m_id(id)
- , m_manager(new Accounts::Manager())
+GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId& id, QObject* parent)
+: KJob(parent)
+, m_id(id)
+, m_manager(new Accounts::Manager())
 {
 
 }
 
-void GetCredentials::start()
+void GetCredentialsJob::start()
 {
     QMetaObject::invokeMethod(this, "getCredentials", Qt::QueuedConnection);
 }
 
-void GetCredentials::setServiceType(const QString& serviceType)
+void GetCredentialsJob::setServiceType(const QString& serviceType)
 {
     m_serviceType = serviceType;
 }
 
-void GetCredentials::getCredentials()
+void GetCredentialsJob::getCredentials()
 {
     Accounts::Account* acc = m_manager->account(m_id);
     Accounts::AccountService *service = new Accounts::AccountService(acc, m_manager->service(m_serviceType), this);
 
     Accounts::AuthData authData = service->authData();
+    m_authData = authData.parameters();
     SignOn::Identity* identity = SignOn::Identity::existingIdentity(authData.credentialsId(), this);
 
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authData.method());
 
     connect(authSession, SIGNAL(response(SignOn::SessionData)),
-                    SLOT(sessionResponse(SignOn::SessionData)));
+            SLOT(sessionResponse(SignOn::SessionData)));
     connect(authSession, SIGNAL(error(SignOn::Error)),
-                    SLOT(sessionError(SignOn::Error)));
+            SLOT(sessionError(SignOn::Error)));
 
     qDebug() << authData.parameters();
     qDebug() << authData.mechanism();
     authSession->process(authData.parameters(), authData.mechanism());
 }
 
-void GetCredentials::info(const SignOn::IdentityInfo& info)
+void GetCredentialsJob::info(const SignOn::IdentityInfo& info)
 {
 }
 
-void GetCredentials::sessionResponse(const SignOn::SessionData& data)
+void GetCredentialsJob::sessionResponse(const SignOn::SessionData& data)
 {
     qDebug() << data.toMap();
     m_sessionData = data;
     emitResult();
 }
 
-void GetCredentials::sessionError(const SignOn::Error& error)
+void GetCredentialsJob::sessionError(const SignOn::Error& error)
 {
     qDebug() << error.message();
 }
 
-SignOn::SessionData GetCredentials::sessionData() const
+Accounts::AccountId GetCredentialsJob::accountId() const
 {
-    return m_sessionData;
+    return m_id;
+}
+
+QVariantMap GetCredentialsJob::credentialsData() const
+{
+    return m_sessionData.toMap().unite(m_authData);
 }

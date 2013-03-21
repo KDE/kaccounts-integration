@@ -16,12 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef GET_CREDENTIALS_H
-#define GET_CREDENTIALS_H
+#ifndef GET_CREDENTIALS_JOB_H
+#define GET_CREDENTIALS_JOB_H
 
 #include <kjob.h>
 
 #include <Accounts/Account>
+#include <Accounts/AuthData>
 #include <SignOn/SessionData>
 
 namespace Accounts {
@@ -31,31 +32,34 @@ namespace SignOn {
     class Error;
     class IdentityInfo;
 };
-class GetCredentials : public KJob
+
+class GetCredentialsJob : public KJob
 {
     Q_OBJECT
-    public:
-        explicit GetCredentials(const Accounts::AccountId &id, QObject* parent = 0);
-        virtual void start();
+public:
+    explicit GetCredentialsJob(const Accounts::AccountId &id, QObject* parent = 0);
+    virtual void start();
 
-        void setServiceType(const QString &serviceType);
+    void setServiceType(const QString &serviceType);
 
-        SignOn::SessionData sessionData() const;
+    QVariantMap credentialsData() const;
+    Accounts::AccountId accountId() const;
 
-    Q_SIGNALS:
-        void gotCredentials(const SignOn::SessionData& data);
+Q_SIGNALS:
+    void gotCredentials(const SignOn::SessionData& data);
 
-    private Q_SLOTS:
-        void getCredentials();
-        void info(const SignOn::IdentityInfo &info);
-        void sessionResponse(const SignOn::SessionData &data);
-        void sessionError(const SignOn::Error &error);
+private Q_SLOTS:
+    void getCredentials();
+    void info(const SignOn::IdentityInfo &info);
+    void sessionResponse(const SignOn::SessionData &data);
+    void sessionError(const SignOn::Error &error);
 
-    private:
-        QString m_serviceType;
-        Accounts::AccountId m_id;
-        Accounts::Manager *m_manager;
-        SignOn::SessionData m_sessionData;
+private:
+    QString m_serviceType;
+    Accounts::AccountId m_id;
+    QVariantMap m_authData;
+    Accounts::Manager *m_manager;
+    SignOn::SessionData m_sessionData;
 };
 
-#endif //GET_CREDENTIALS_H
+#endif //GET_CREDENTIALS_JOB_H
