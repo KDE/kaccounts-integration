@@ -7,7 +7,7 @@ set(webaccounts_SRCS
     models/accountsmodel.cpp
     models/modeltest.cpp
     jobs/createaccount.cpp
-    jobs/getcredentials.cpp
+    jobs/getcredentialsjob.cpp
 )
 
 qt4_automoc(${webaccounts_SRCS})
