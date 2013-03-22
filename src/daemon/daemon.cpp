@@ -137,15 +137,24 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
     mime.append(m_manager->service(serviceName).serviceType());
 
     kDebug() << "Looking for: " << mime;
+    QString resourceInstance;
     AgentType::List types = AgentManager::self()->types();
     Q_FOREACH(const AgentType &type, types) {
         if (!type.mimeTypes().contains(mime)) {
             continue;
         }
 
+        resourceInstance = m_accounts->createdResource(id, type.identifier());
+        if (!resourceInstance.isEmpty()) {
+            kDebug() << "Already created, enabling service";
+            continue;
+        }
+
+        kDebug() << "Creating a new resource";
         CreateResource *job = new CreateResource(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(resourceCreated(KJob*)));
 
+        kDebug() << "Found one: " << id << type.name() << serviceName;
         job->setAccountId(id);
         job->setAgentType(type);
         job->setServiceName(serviceName);
