@@ -8,7 +8,7 @@ set(accounts_daemon_SRCS
     createresource.cpp
     removeresource.cpp
     akonadiaccounts.cpp
-    setaccountid.cpp
+    changesettingsjob.cpp
 )
 
 kde4_add_plugin(kded_accounts

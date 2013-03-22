@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "createresource.h"
-#include "setaccountid.h"
+#include "changesettingsjob.h"
 
 #include <QtCore/QDebug>
 #include <QDBusConnection>
@@ -88,10 +88,13 @@ void CreateResource::resourceCreated(KJob* job)
     }
 
     m_agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
-    SetAccountId *setAccJob = new SetAccountId(this);
+    ChangeSettingsJob *setAccJob = new ChangeSettingsJob(this);
     connect(setAccJob, SIGNAL(finished(KJob*)), SLOT(setAccountDone(KJob*)));
+
     setAccJob->setAgentInstance(m_agent);
     setAccJob->setAccountId(m_accountId);
+    setAccJob->setMethod("setAccountId");
+    setAccJob->setArguments(QVariantList() << m_accountId);
     setAccJob->start();
 }
 

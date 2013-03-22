@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "setaccountid.h"
+#include "changesettingsjob.h"
 
 #include <QDBusInterface>
 #include <QDBusConnection>
@@ -27,22 +27,22 @@
 
 #include <KDebug>
 
-SetAccountId::SetAccountId(QObject* parent): KJob(parent)
+ChangeSettingsJob::ChangeSettingsJob(QObject* parent): KJob(parent)
 {
 }
 
-SetAccountId::~SetAccountId()
+ChangeSettingsJob::~ChangeSettingsJob()
 {
 
 }
 
-void SetAccountId::start()
+void ChangeSettingsJob::start()
 {
     kDebug();
     QMetaObject::invokeMethod(this, "getMethodName", Qt::QueuedConnection);
 }
 
-void SetAccountId::getMethodName()
+void ChangeSettingsJob::getMethodName()
 {
     kDebug();
     QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
@@ -56,17 +56,23 @@ void SetAccountId::getMethodName()
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDo(QDBusPendingCallWatcher*)));
 }
 
-void SetAccountId::setAccountId(const Accounts::AccountId& accId)
+void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
 {
     m_accountId = accId;
 }
 
-void SetAccountId::setAgentInstance(const Akonadi::AgentInstance& agent)
+void ChangeSettingsJob::setAgentInstance(const Akonadi::AgentInstance& agent)
 {
     m_agent = agent;
 }
 
-void SetAccountId::introspectDo(QDBusPendingCallWatcher* watcher)
+void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)
+{
+    m_key = key;
+    m_value = value;
+}
+
+void ChangeSettingsJob::introspectDo(QDBusPendingCallWatcher* watcher)
 {
     kDebug();
     QDBusPendingReply<QString> reply = *watcher;
@@ -114,19 +120,19 @@ void SetAccountId::introspectDo(QDBusPendingCallWatcher* watcher)
     setAccountId();
 }
 
-void SetAccountId::setAccountId()
+void ChangeSettingsJob::setAccountId()
 {
     kDebug();
 
-    QDBusMessage msg = createCall("setAccountId");
-    msg.setArguments(QList<QVariant>() << m_accountId);
+    QDBusMessage msg = createCall(m_key);
+    msg.setArguments(QVariantList() << m_value);
 
     QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(msg);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(accountSet(QDBusPendingCallWatcher*)));
 }
 
-void SetAccountId::accountSet(QDBusPendingCallWatcher* watcher)
+void ChangeSettingsJob::accountSet(QDBusPendingCallWatcher* watcher)
 {
     kDebug();
     QDBusPendingReply<void> reply = *watcher;
@@ -140,7 +146,7 @@ void SetAccountId::accountSet(QDBusPendingCallWatcher* watcher)
     watcher->deleteLater();
 }
 
-void SetAccountId::writeConfig()
+void ChangeSettingsJob::writeConfig()
 {
     kDebug();
     QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(createCall("writeConfig"));
@@ -148,7 +154,7 @@ void SetAccountId::writeConfig()
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(configWritten(QDBusPendingCallWatcher*)));
 }
 
-void SetAccountId::configWritten(QDBusPendingCallWatcher* watcher)
+void ChangeSettingsJob::configWritten(QDBusPendingCallWatcher* watcher)
 {
     kDebug();
     QDBusPendingReply<void> reply = *watcher;
@@ -162,7 +168,7 @@ void SetAccountId::configWritten(QDBusPendingCallWatcher* watcher)
     emitResult();
 }
 
-QDBusMessage SetAccountId::createCall(const QString& method)
+QDBusMessage ChangeSettingsJob::createCall(const QString& method)
 {
     QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
     QString path = "/Settings";

@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef SETACCOUNTID_RESOURCE_H
-#define SETACCOUNTID_RESOURCE_H
+#ifndef CHANGE_SETTINGS_JOB_H
+#define CHANGE_SETTINGS_JOB_H
 
 #include <QDBusMessage>
 
@@ -26,32 +26,36 @@
 #include <Accounts/Account>
 
 class QDBusPendingCallWatcher;
-class SetAccountId : public KJob
+class ChangeSettingsJob : public KJob
 {
     Q_OBJECT
-    public:
-        explicit SetAccountId(QObject* parent = 0);
-        virtual ~SetAccountId();
+public:
+    explicit ChangeSettingsJob(QObject* parent = 0);
+    virtual ~ChangeSettingsJob();
 
-        virtual void start();
+    virtual void start();
 
-        void setAccountId(const Accounts::AccountId &accId);
-        void setAgentInstance(const Akonadi::AgentInstance &agent);
+    void setAccountId(const Accounts::AccountId &accId);
+    void setAgentInstance(const Akonadi::AgentInstance &agent);
 
-    private Q_SLOTS:
-        void getMethodName();
-        void introspectDo(QDBusPendingCallWatcher* watcher);
-        void accountSet(QDBusPendingCallWatcher* watcher);
-        void configWritten(QDBusPendingCallWatcher* watcher);
+    void setSetting(const QString &key, const QVariant &value);
 
-    private:
-        QDBusMessage createCall(const QString &method);
-        void setAccountId();
-        void writeConfig();
+private Q_SLOTS:
+    void getMethodName();
+    void introspectDo(QDBusPendingCallWatcher* watcher);
+    void accountSet(QDBusPendingCallWatcher* watcher);
+    void configWritten(QDBusPendingCallWatcher* watcher);
 
-        QString m_resource;
-        Akonadi::AgentInstance m_agent;
-        Accounts::AccountId m_accountId;
+private:
+    QDBusMessage createCall(const QString &method);
+    void setAccountId();
+    void writeConfig();
+
+    QString m_resource;
+    QString m_key;
+    QVariant m_value;
+    Akonadi::AgentInstance m_agent;
+    Accounts::AccountId m_accountId;
 };
 
-#endif //SETACCOUNTID
+#endif //CHANGE_SETTINGS_JOB_H
