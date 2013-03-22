@@ -93,8 +93,7 @@ void CreateResource::resourceCreated(KJob* job)
 
     setAccJob->setAgentInstance(m_agent);
     setAccJob->setAccountId(m_accountId);
-    setAccJob->setMethod("setAccountId");
-    setAccJob->setArguments(QVariantList() << m_accountId);
+    setAccJob->setSetting("setAccountId", m_accountId);
     setAccJob->start();
 }
 
