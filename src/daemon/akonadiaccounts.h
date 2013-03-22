@@ -32,6 +32,7 @@ class AkonadiAccounts
         void removeAccount(const Accounts::AccountId &accId);
 
         QStringList resources(const Accounts::AccountId &accId, const QString &serviceName) const;
+        QString createdResource(const Accounts::AccountId& accId, const QString& resource) const;
 
     private:
         KSharedConfig::Ptr m_accounts;

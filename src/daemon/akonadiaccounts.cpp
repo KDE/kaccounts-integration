@@ -60,3 +60,17 @@ QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId, const Q
     QString key("Account_" + QString::number(accId));
     return m_accounts->group(key).readEntry(serviceName, QStringList());
 }
+
+QString AkonadiAccounts::createdResource(const Accounts::AccountId& accId, const QString& resource) const
+{
+    QString key("Account_" + QString::number(accId));
+    QStringList resources = m_accounts->group(key).entryMap().values();
+
+    Q_FOREACH(const QString &instance, resources) {
+        if (instance.startsWith(resource)) {
+            return instance;
+        }
+    }
+
+    return QString();
+}
