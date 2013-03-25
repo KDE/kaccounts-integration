@@ -48,7 +48,7 @@ private Q_SLOTS:
 
 private:
     QDBusMessage createCall(const QString &method);
-    void setAccountId();
+    void setConfiguration();
     void writeConfig();
 
     QString m_resourceId;

@@ -51,7 +51,7 @@ void ChangeSettingsJob::init()
         return;
     }
 
-    setAccountId();
+    setConfiguration();
 }
 
 void ChangeSettingsJob::dbusSettingsPath(KJob* job)
@@ -59,7 +59,7 @@ void ChangeSettingsJob::dbusSettingsPath(KJob* job)
     DBusSettingsInterfaceJob *dbusJob = qobject_cast<DBusSettingsInterfaceJob*>(job);
     m_interface = dbusJob->interface();
 
-    setAccountId();
+    setConfiguration();
 }
 
 void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
@@ -78,7 +78,7 @@ void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)
     m_value = value;
 }
 
-void ChangeSettingsJob::setAccountId()
+void ChangeSettingsJob::setConfiguration()
 {
     kDebug();
 
