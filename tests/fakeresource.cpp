@@ -45,6 +45,16 @@ void FakeResource::writeConfig()
     Q_EMIT configWritten();
 }
 
+QStringList FakeResource::accountServices()
+{
+    return m_accountServices;
+}
+
+void FakeResource::setAccountServices(const QStringList& services)
+{
+    m_accountServices = services;
+}
+
 FakeResource::FakeResource(QObject* parent)
 : QDBusAbstractAdaptor(parent)
 , m_accountId(42)

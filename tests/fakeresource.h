@@ -19,6 +19,8 @@
 #ifndef FAKE_RESOURCE_H
 #define FAKE_RESOURCE_H
 
+#include <QtCore/QStringList>
+
 #include <QDBusAbstractAdaptor>
 #include <QDBusConnection>
 
@@ -33,6 +35,8 @@ class FakeResource : public QDBusAbstractAdaptor
     public Q_SLOTS:
         int accountId();
         void setAccountId(int accountId);
+        QStringList accountServices();
+        void setAccountServices(const QStringList &services);
         void writeConfig();
 
     Q_SIGNALS:
@@ -42,6 +46,7 @@ class FakeResource : public QDBusAbstractAdaptor
         FakeResource(QObject* parent = 0);
 
         int m_accountId;
+        QStringList m_accountServices;
         static FakeResource *s_instance;
 };
 
