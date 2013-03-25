@@ -29,30 +29,26 @@ RemoveResource::RemoveResource(QObject* parent)
 {
 }
 
-
-RemoveResource::~RemoveResource()
-{
-
-}
-
 void RemoveResource::start()
 {
     QMetaObject::invokeMethod(this, "removeResource", Qt::QueuedConnection);
 }
 
-void RemoveResource::setAgentIdentifier(const QString& agent)
+void RemoveResource::setResourceId(const QString& resourceId)
 {
-    m_agentIdentifier = agent;
+    m_resourceId = resourceId;
 }
 
 void RemoveResource::removeResource()
 {
 
-    AgentInstance instance = AgentManager::self()->instance(m_agentIdentifier);
+    AgentInstance instance = AgentManager::self()->instance(m_resourceId);
     if (instance.isValid()) {
         AgentManager::self()->removeInstance(instance);
     } else {
         kDebug() << "Agent not found";
+        setError(-1);
+        setErrorText("Agent to be removed can't be found:" + m_resourceId);
     }
 
     emitResult();

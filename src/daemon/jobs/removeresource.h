@@ -26,17 +26,15 @@ class RemoveResource : public KJob
     Q_OBJECT
     public:
         explicit RemoveResource(QObject* parent = 0);
-        virtual ~RemoveResource();
-
         virtual void start();
 
-        void setAgentIdentifier(const QString &agent);
+        void setResourceId(const QString &resourceId);
 
     private Q_SLOTS:
         void removeResource();
 
     private:
-        QString m_agentIdentifier;
+        QString m_resourceId;
 };
 
 #endif //REMOVE_RESOURCE_H

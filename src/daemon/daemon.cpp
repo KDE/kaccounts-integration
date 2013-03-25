@@ -168,9 +168,9 @@ void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QStri
     QStringList resources = m_accounts->resources(accId, serviceName);
     kDebug() << resources;
     RemoveResource* removeJob = 0;
-    Q_FOREACH(const QString &agent, resources) {
+    Q_FOREACH(const QString &resourceId, resources) {
         removeJob = new RemoveResource(this);
-        removeJob->setAgentIdentifier(agent);
+        removeJob->setResourceId(resourceId);
         removeJob->start();
     }
     m_accounts->removeResources(accId, serviceName);
