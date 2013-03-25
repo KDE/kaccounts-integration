@@ -16,6 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
+#include "fakeresource.h"
+
 #include <QtTest/QtTest>
 
 #include "../src/daemon/jobs/dbussettingsinterfacejob.h"
@@ -23,28 +25,6 @@
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
 #include <unistd.h>
-
-class FakeAkonadiResource : public QDBusAbstractAdaptor
-{
-    Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Akonadi.fakeResource.Settings")
-
-    public:
-        explicit FakeAkonadiResource(QObject* parent = 0);
-
-    public Q_SLOTS:
-        void setAccountId(int accountId);
-};
-
-FakeAkonadiResource::FakeAkonadiResource(QObject* parent) : QDBusAbstractAdaptor(parent)
-{
-
-}
-
-void FakeAkonadiResource::setAccountId(int accountId)
-{
-    qDebug() << "AccId: " << accountId;
-}
 
 class testDBusSettingsJob : public QObject
 {
@@ -59,12 +39,7 @@ class testDBusSettingsJob : public QObject
 
 testDBusSettingsJob::testDBusSettingsJob(QObject* parent): QObject(parent)
 {
-    QString path = "/Settings";
-
-    QDBusConnection conn = QDBusConnection::sessionBus();
-    conn.registerService("org.freedesktop.Akonadi.Agent.akonadi_fake_resource_116");
-    conn.registerService("org.freedesktop.Akonadi.Resource.akonadi_fake_resource_116");
-    conn.registerObject(path, new FakeAkonadiResource(qApp), QDBusConnection::ExportAllContents);
+    FakeResource::self();
 }
 
 void testDBusSettingsJob::testFindPath()
