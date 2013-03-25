@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/changesettingsjob.h"
+#include "../src/daemon/jobs/changesettingsjob.h"
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>

@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/dbussettingspathjob.h"
+#include "../src/daemon/jobs/dbussettingspathjob.h"
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>

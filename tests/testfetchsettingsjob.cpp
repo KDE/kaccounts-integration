@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/fetchsettingsjob.h"
+#include "../src/daemon/jobs/fetchsettingsjob.h"
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>

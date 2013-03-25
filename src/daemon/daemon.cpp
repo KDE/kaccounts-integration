@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 #include "daemon.h"
-#include "createresource.h"
-#include "removeresource.h"
+#include "jobs/createresource.h"
+#include "jobs/removeresource.h"
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
