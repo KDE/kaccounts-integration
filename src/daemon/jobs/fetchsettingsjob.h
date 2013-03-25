@@ -21,10 +21,9 @@
 
 #include <QtCore/QVariant>
 #include <QDBusPendingReply>
+#include <QDBusPendingCallWatcher>
 
 #include <kjob.h>
-
-#include <QDBusPendingCallWatcher>
 
 class FetchSettingsJob : public KJob
 {
