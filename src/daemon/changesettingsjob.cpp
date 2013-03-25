@@ -17,13 +17,12 @@
  *************************************************************************************/
 
 #include "changesettingsjob.h"
+#include "dbussettingspathjob.h"
 
 #include <QDBusInterface>
 #include <QDBusConnection>
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
-
-#include <QtXml/QDomDocument>
 
 #include <KDebug>
 
@@ -39,21 +38,28 @@ ChangeSettingsJob::~ChangeSettingsJob()
 void ChangeSettingsJob::start()
 {
     kDebug();
-    QMetaObject::invokeMethod(this, "getMethodName", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
-void ChangeSettingsJob::getMethodName()
+void ChangeSettingsJob::init()
 {
-    kDebug();
-    QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
-    QString path = "/Settings";
-    QString interface = "org.freedesktop.DBus.Introspectable";
+    if (m_interface.isEmpty()) {
+        DBusSettingsPathJob *job = new DBusSettingsPathJob(this);
+        connect(job, SIGNAL(finished(KJob*)), SLOT(dbusSettingsPath(KJob*)));
+        job->setResourceId(m_resourceId);
+        job->start();
+        return;
+    }
 
-    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, interface, "Introspect");
+    setAccountId();
+}
 
-    QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(msg);
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDo(QDBusPendingCallWatcher*)));
+void ChangeSettingsJob::dbusSettingsPath(KJob* job)
+{
+    DBusSettingsPathJob *dbusJob = qobject_cast<DBusSettingsPathJob*>(job);
+    m_interface = dbusJob->interface();
+
+    setAccountId();
 }
 
 void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
@@ -61,63 +67,15 @@ void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
     m_accountId = accId;
 }
 
-void ChangeSettingsJob::setAgentInstance(const Akonadi::AgentInstance& agent)
+void ChangeSettingsJob::setResourceId(const QString& resourceId)
 {
-    m_agent = agent;
+    m_resourceId = resourceId;
 }
 
 void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)
 {
     m_key = key;
     m_value = value;
-}
-
-void ChangeSettingsJob::introspectDo(QDBusPendingCallWatcher* watcher)
-{
-    kDebug();
-    QDBusPendingReply<QString> reply = *watcher;
-    if (reply.isError()) {
-        kDebug();
-        setError(reply.error().type());
-        setErrorText(reply.error().name());
-        watcher->deleteLater();
-        emitResult();
-        return;
-    }
-
-    kDebug() << reply.value();
-    QDomDocument dom;
-    QDomElement node;
-    QString interfaceName;
-    QString akonadi("org.kde.Akonadi.");
-    QString settings(".Settings");
-    dom.setContent(reply.value());
-    watcher->deleteLater();
-
-    QDomNodeList nodeList = dom.documentElement().elementsByTagName("interface");
-    for (int i = 0; i < nodeList.count(); i++) {
-        node = nodeList.item(i).toElement();
-        if (node.isNull() || !node.hasAttribute("name")) {
-            continue;
-        }
-        interfaceName = node.attribute("name");
-        if (!interfaceName.startsWith(akonadi) || !interfaceName.endsWith(settings)) {
-            continue;
-        }
-
-        m_resource = interfaceName.remove(akonadi).remove(settings);
-        break;
-    }
-
-    if (m_resource.isEmpty()) {
-        setError(-1);
-        setErrorText("Resource name not found");
-        emitResult();
-        return;
-    }
-
-    kDebug() << "Resource: " << m_resource;
-    setAccountId();
 }
 
 void ChangeSettingsJob::setAccountId()
@@ -139,6 +97,8 @@ void ChangeSettingsJob::accountSet(QDBusPendingCallWatcher* watcher)
     if (reply.isError()) {
         setError(-1);
         setErrorText(reply.error().message());
+        emitResult();
+        return;
     } else {
         writeConfig();
     }
@@ -157,11 +117,11 @@ void ChangeSettingsJob::writeConfig()
 void ChangeSettingsJob::configWritten(QDBusPendingCallWatcher* watcher)
 {
     kDebug();
+    watcher->deleteLater();
+
     QDBusPendingReply<void> reply = *watcher;
-    if (!reply.isError()) {
+    if (reply.isError()) {
         setError(-1);
-        m_agent.reconfigure();
-    } else {
         setErrorText(reply.error().message());
     }
 
@@ -170,12 +130,9 @@ void ChangeSettingsJob::configWritten(QDBusPendingCallWatcher* watcher)
 
 QDBusMessage ChangeSettingsJob::createCall(const QString& method)
 {
-    QString service = "org.freedesktop.Akonadi.Resource." + m_agent.identifier();
+    QString service = "org.freedesktop.Akonadi.Resource." + m_resourceId;
     QString path = "/Settings";
-    QString interface = "org.kde.Akonadi.";
-    interface.append(m_resource);
-    interface.append(".Settings");
 
-    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, interface, method);
+    QDBusMessage msg = QDBusMessage::createMethodCall(service, path, m_interface, method);
     return msg;
 }

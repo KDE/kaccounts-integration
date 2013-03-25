@@ -36,13 +36,13 @@ public:
     virtual void start();
 
     void setAccountId(const Accounts::AccountId &accId);
-    void setAgentInstance(const Akonadi::AgentInstance &agent);
+    void setResourceId(const QString &resourceId);
 
     void setSetting(const QString &key, const QVariant &value);
 
 private Q_SLOTS:
-    void getMethodName();
-    void introspectDo(QDBusPendingCallWatcher* watcher);
+    void init();
+    void dbusSettingsPath(KJob *job);
     void accountSet(QDBusPendingCallWatcher* watcher);
     void configWritten(QDBusPendingCallWatcher* watcher);
 
@@ -51,10 +51,10 @@ private:
     void setAccountId();
     void writeConfig();
 
-    QString m_resource;
+    QString m_resourceId;
     QString m_key;
+    QString m_interface;
     QVariant m_value;
-    Akonadi::AgentInstance m_agent;
     Accounts::AccountId m_accountId;
 };
 

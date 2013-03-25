@@ -91,7 +91,7 @@ void CreateResource::resourceCreated(KJob* job)
     ChangeSettingsJob *setAccJob = new ChangeSettingsJob(this);
     connect(setAccJob, SIGNAL(finished(KJob*)), SLOT(setAccountDone(KJob*)));
 
-    setAccJob->setAgentInstance(m_agent);
+    setAccJob->setResourceId(m_agent.identifier());
     setAccJob->setAccountId(m_accountId);
     setAccJob->setSetting("setAccountId", m_accountId);
     setAccJob->start();
@@ -100,6 +100,7 @@ void CreateResource::resourceCreated(KJob* job)
 void CreateResource::setAccountDone(KJob* job)
 {
     kDebug();
+    m_agent.reconfigure();
     if (job->error()) {
         setError(job->error());
         setErrorText(job->errorText());
