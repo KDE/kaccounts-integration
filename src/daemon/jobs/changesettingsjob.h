@@ -36,6 +36,7 @@ public:
     virtual void start();
 
     void setAccountId(const Accounts::AccountId &accId);
+    void setInterface(const QString &interface);
     void setResourceId(const QString &resourceId);
 
     void setSetting(const QString &key, const QVariant &value);

@@ -67,6 +67,11 @@ void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
     m_accountId = accId;
 }
 
+void ChangeSettingsJob::setInterface(const QString& interface)
+{
+    m_interface = interface;
+}
+
 void ChangeSettingsJob::setResourceId(const QString& resourceId)
 {
     m_resourceId = resourceId;
