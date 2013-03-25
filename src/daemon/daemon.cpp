@@ -15,9 +15,11 @@
  *  along with this program; if not, write to the Free Software                      *
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
+
 #include "daemon.h"
 #include "jobs/createresourcejob.h"
 #include "jobs/removeresourcejob.h"
+#include "jobs/enableservicejob.h"
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
@@ -146,7 +148,12 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
 
         resourceInstance = m_accounts->createdResource(id, type.identifier());
         if (!resourceInstance.isEmpty()) {
-            kDebug() << "Already created, enabling service";
+            kDebug() << "Already created, enabling service:" << resourceInstance;
+            EnableServiceJob *job = new EnableServiceJob(this);
+            connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
+            job->setResourceId(resourceInstance);
+            job->setService(serviceName, EnableServiceJob::Enable);
+            job->start();
             continue;
         }
 
@@ -160,6 +167,15 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
         job->setServiceName(serviceName);
         job->start();
     }
+}
+
+void AccountsDaemon::enableServiceJobDone(KJob* job)
+{
+    if (job->error()) {
+        kDebug() << job->errorText();
+        return;
+    }
+
 }
 
 void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)

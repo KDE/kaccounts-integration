@@ -49,6 +49,7 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         void accountRemoved(const Accounts::AccountId &id);
         void enabledChanged(const QString &serviceName, bool enabled);
         void resourceCreated(KJob *job);
+        void enableServiceJobDone(KJob *job);
 
     private:
         void monitorAccount(const Accounts::AccountId &id);

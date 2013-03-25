@@ -9,6 +9,7 @@ set(accounts_daemon_SRCS
     jobs/createresourcejob.cpp
     jobs/removeresourcejob.cpp
     jobs/changesettingsjob.cpp
+    jobs/fetchsettingsjob.cpp
     jobs/enableservicejob.cpp
     jobs/dbussettingsinterfacejob.cpp
 )
