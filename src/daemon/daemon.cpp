@@ -17,7 +17,7 @@
  *************************************************************************************/
 #include "daemon.h"
 #include "jobs/createresource.h"
-#include "jobs/removeresource.h"
+#include "jobs/removeresourcejob.h"
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
@@ -167,9 +167,9 @@ void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QStri
     kDebug() << accId << serviceName;
     QStringList resources = m_accounts->resources(accId, serviceName);
     kDebug() << resources;
-    RemoveResource* removeJob = 0;
+    RemoveResourceJob* removeJob = 0;
     Q_FOREACH(const QString &resourceId, resources) {
-        removeJob = new RemoveResource(this);
+        removeJob = new RemoveResourceJob(this);
         removeJob->setResourceId(resourceId);
         removeJob->start();
     }

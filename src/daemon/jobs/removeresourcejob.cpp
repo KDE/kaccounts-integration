@@ -16,25 +16,40 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef REMOVE_RESOURCE_H
-#define REMOVE_RESOURCE_H
+#include "removeresourcejob.h"
 
-#include <kjob.h>
+#include <akonadi/agentmanager.h>
 
-class RemoveResource : public KJob
+#include <KDebug>
+
+using namespace Akonadi;
+
+RemoveResourceJob::RemoveResourceJob(QObject* parent)
+: KJob(parent)
 {
-    Q_OBJECT
-    public:
-        explicit RemoveResource(QObject* parent = 0);
-        virtual void start();
+}
 
-        void setResourceId(const QString &resourceId);
+void RemoveResourceJob::start()
+{
+    QMetaObject::invokeMethod(this, "removeResource", Qt::QueuedConnection);
+}
 
-    private Q_SLOTS:
-        void removeResource();
+void RemoveResourceJob::setResourceId(const QString& resourceId)
+{
+    m_resourceId = resourceId;
+}
 
-    private:
-        QString m_resourceId;
-};
+void RemoveResourceJob::removeResource()
+{
 
-#endif //REMOVE_RESOURCE_H
+    AgentInstance instance = AgentManager::self()->instance(m_resourceId);
+    if (instance.isValid()) {
+        AgentManager::self()->removeInstance(instance);
+    } else {
+        kDebug() << "Agent not found";
+        setError(-1);
+        setErrorText("Agent to be removed can't be found:" + m_resourceId);
+    }
+
+    emitResult();
+}

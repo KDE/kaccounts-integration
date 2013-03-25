@@ -7,7 +7,7 @@ set(accounts_daemon_SRCS
     daemon.cpp
     akonadiaccounts.cpp
     jobs/createresource.cpp
-    jobs/removeresource.cpp
+    jobs/removeresourcejob.cpp
     jobs/changesettingsjob.cpp
     jobs/enableservicejob.cpp
     jobs/dbussettingspathjob.cpp
