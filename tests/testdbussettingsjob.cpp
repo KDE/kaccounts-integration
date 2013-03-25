@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/jobs/dbussettingspathjob.h"
+#include "../src/daemon/jobs/dbussettingsinterfacejob.h"
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
@@ -69,7 +69,7 @@ testDBusSettingsJob::testDBusSettingsJob(QObject* parent): QObject(parent)
 
 void testDBusSettingsJob::testFindPath()
 {
-    DBusSettingsPathJob *job = new DBusSettingsPathJob(this);
+    DBusSettingsInterfaceJob *job = new DBusSettingsInterfaceJob(this);
 
     job->setResourceId("akonadi_fake_resource_116");
     job->exec();
@@ -78,7 +78,7 @@ void testDBusSettingsJob::testFindPath()
     QVERIFY2(!job->interface().isEmpty(), "The path is empty");
     QCOMPARE(job->interface(), QLatin1String("org.kde.Akonadi.fakeResource.Settings"));
 
-    job = new DBusSettingsPathJob(this);
+    job = new DBusSettingsInterfaceJob(this);
 
     job->setResourceId("akonadi_fake_resource_notfound");
     job->exec();

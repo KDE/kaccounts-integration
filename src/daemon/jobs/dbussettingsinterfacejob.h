@@ -16,18 +16,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef DBUS_SETTINGS_PATH_JOB_H
-#define DBUS_SETTINGS_PATH_JOB_H
+#ifndef DBUS_SETTINGS_INTERFACE_JOB_H
+#define DBUS_SETTINGS_INTERFACE_JOB_H
 
 #include <kjob.h>
 
 class QDBusPendingCallWatcher;
-class DBusSettingsPathJob : public KJob
+class DBusSettingsInterfaceJob : public KJob
 {
     Q_OBJECT
 
     public:
-        explicit DBusSettingsPathJob(QObject* parent = 0);
+        explicit DBusSettingsInterfaceJob(QObject* parent = 0);
 
         virtual void start();
 

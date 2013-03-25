@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "changesettingsjob.h"
-#include "dbussettingspathjob.h"
+#include "dbussettingsinterfacejob.h"
 
 #include <QDBusInterface>
 #include <QDBusConnection>
@@ -44,7 +44,7 @@ void ChangeSettingsJob::start()
 void ChangeSettingsJob::init()
 {
     if (m_interface.isEmpty()) {
-        DBusSettingsPathJob *job = new DBusSettingsPathJob(this);
+        DBusSettingsInterfaceJob *job = new DBusSettingsInterfaceJob(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(dbusSettingsPath(KJob*)));
         job->setResourceId(m_resourceId);
         job->start();
@@ -56,7 +56,7 @@ void ChangeSettingsJob::init()
 
 void ChangeSettingsJob::dbusSettingsPath(KJob* job)
 {
-    DBusSettingsPathJob *dbusJob = qobject_cast<DBusSettingsPathJob*>(job);
+    DBusSettingsInterfaceJob *dbusJob = qobject_cast<DBusSettingsInterfaceJob*>(job);
     m_interface = dbusJob->interface();
 
     setAccountId();

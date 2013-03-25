@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "fetchsettingsjob.h"
-#include "dbussettingspathjob.h"
+#include "dbussettingsinterfacejob.h"
 
 #include <QDBusMessage>
 #include <QDBusConnection>
@@ -51,7 +51,7 @@ void FetchSettingsJob::init()
     kDebug();
     if (m_interface.isEmpty()) {
         Q_ASSERT_X(!m_resourceId.isEmpty(), "Asking for the dbus itnerface", "Resource id can't be empty");
-        DBusSettingsPathJob *job = new DBusSettingsPathJob(this);
+        DBusSettingsInterfaceJob *job = new DBusSettingsInterfaceJob(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(dbusSettingsPathDone(KJob*)));
         job->setResourceId(m_resourceId);
         job->start();
@@ -70,7 +70,7 @@ void FetchSettingsJob::dbusSettingsPathDone(KJob* job)
         return;
     }
 
-    DBusSettingsPathJob *dbusJob = qobject_cast<DBusSettingsPathJob*>(job);
+    DBusSettingsInterfaceJob *dbusJob = qobject_cast<DBusSettingsInterfaceJob*>(job);
     m_interface = dbusJob->interface();
 
     fetchSettings();

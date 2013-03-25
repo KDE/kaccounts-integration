@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "dbussettingspathjob.h"
+#include "dbussettingsinterfacejob.h"
 
 #include <QDBusMessage>
 #include <QDBusConnection>
@@ -27,18 +27,18 @@
 
 #include <kdebug.h>
 
-DBusSettingsPathJob::DBusSettingsPathJob(QObject* parent) : KJob(parent)
+DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : KJob(parent)
 {
 
 }
 
-void DBusSettingsPathJob::start()
+void DBusSettingsInterfaceJob::start()
 {
     kDebug();
     QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
-void DBusSettingsPathJob::init()
+void DBusSettingsInterfaceJob::init()
 {
     kDebug();
     QString service = "org.freedesktop.Akonadi.Resource." + m_resourceId;
@@ -52,19 +52,20 @@ void DBusSettingsPathJob::init()
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDone(QDBusPendingCallWatcher*)));
 }
 
-QString DBusSettingsPathJob::interface() const
+QString DBusSettingsInterfaceJob::interface() const
 {
     return m_interface;
 }
 
-void DBusSettingsPathJob::setResourceId(const QString& resourceId)
+void DBusSettingsInterfaceJob::setResourceId(const QString& resourceId)
 {
     m_resourceId = resourceId;
 }
 
-void DBusSettingsPathJob::introspectDone(QDBusPendingCallWatcher* watcher)
+void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
 {
     kDebug();
+    watcher->deleteLater();
     QDBusPendingReply<QString> reply = *watcher;
     if (reply.isError()) {
         kDebug() << reply.error().message();
@@ -72,7 +73,6 @@ void DBusSettingsPathJob::introspectDone(QDBusPendingCallWatcher* watcher)
 
         setError(reply.error().type());
         setErrorText(reply.error().name());
-        watcher->deleteLater();
         emitResult();
         return;
     }
@@ -83,7 +83,6 @@ void DBusSettingsPathJob::introspectDone(QDBusPendingCallWatcher* watcher)
     QString akonadi("org.kde.Akonadi.");
     QString settings(".Settings");
     dom.setContent(reply.value());
-    watcher->deleteLater();
 
     QDomNodeList nodeList = dom.documentElement().elementsByTagName("interface");
     for (int i = 0; i < nodeList.count(); i++) {
@@ -102,9 +101,7 @@ void DBusSettingsPathJob::introspectDone(QDBusPendingCallWatcher* watcher)
 
     if (m_interface.isEmpty()) {
         setError(-1);
-        setErrorText("Settings Path name not found");
-        emitResult();
-        return;
+        setErrorText("Settings Interface not found");
     }
 
     kDebug() << "Interface: " << m_interface;
