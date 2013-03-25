@@ -75,8 +75,8 @@ void testDBusSettingsJob::testFindPath()
     job->exec();
 
     QVERIFY2(!job->error(), "Job is set as finished with error");
-    QVERIFY2(!job->path().isEmpty(), "The path is empty");
-    QCOMPARE(job->path(), QLatin1String("fakeResource"));
+    QVERIFY2(!job->interface().isEmpty(), "The path is empty");
+    QCOMPARE(job->interface(), QLatin1String("org.kde.Akonadi.fakeResource.Settings"));
 
     job = new DBusSettingsPathJob(this);
 
@@ -84,7 +84,7 @@ void testDBusSettingsJob::testFindPath()
     job->exec();
 
     QVERIFY2(job->error(), "There should be an error since the resouce does not exists");
-    QVERIFY2(job->path().isEmpty(), "The path should be empty");
+    QVERIFY2(job->interface().isEmpty(), "The path should be empty");
 }
 
 QTEST_MAIN(testDBusSettingsJob)

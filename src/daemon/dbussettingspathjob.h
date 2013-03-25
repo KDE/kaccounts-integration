@@ -31,7 +31,7 @@ class DBusSettingsPathJob : public KJob
 
         virtual void start();
 
-        QString path() const;
+        QString interface() const;
         void setResourceId(const QString &resourceId);
 
     private Q_SLOTS:
@@ -39,9 +39,8 @@ class DBusSettingsPathJob : public KJob
         void introspectDone(QDBusPendingCallWatcher* watcher);
 
     private:
-        QString m_path;
+        QString m_interface;
         QString m_resourceId;
-
 };
 
 #endif //DBUS_SETTINGS_PATH_JOB_H

@@ -52,9 +52,9 @@ void DBusSettingsPathJob::init()
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDone(QDBusPendingCallWatcher*)));
 }
 
-QString DBusSettingsPathJob::path() const
+QString DBusSettingsPathJob::interface() const
 {
-    return m_path;
+    return m_interface;
 }
 
 void DBusSettingsPathJob::setResourceId(const QString& resourceId)
@@ -96,18 +96,18 @@ void DBusSettingsPathJob::introspectDone(QDBusPendingCallWatcher* watcher)
             continue;
         }
 
-        m_path = interfaceName.remove(akonadi).remove(settings);
+        m_interface = interfaceName;
         break;
     }
 
-    if (m_path.isEmpty()) {
+    if (m_interface.isEmpty()) {
         setError(-1);
         setErrorText("Settings Path name not found");
         emitResult();
         return;
     }
 
-    kDebug() << "Resource: " << m_path;
+    kDebug() << "Interface: " << m_interface;
 
     emitResult();
 }
