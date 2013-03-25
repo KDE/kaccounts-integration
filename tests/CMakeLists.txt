@@ -6,3 +6,11 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 kde4_add_unit_test(${testname} ${testname}.cpp ${testname}.moc ../src/providerconfig.cpp)
 target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY})
 add_test(${testname} ${CMAKE_CURRENT_BINARY_DIR}/${testname})
+
+
+set(testname testdbussettingsjob)
+qt4_generate_moc(${testname}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${testname}.moc ../src/daemon/dbussettingspathjob.cpp)
+include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
+kde4_add_unit_test(${testname} ${testname}.cpp ${testname}.moc ../src/daemon/dbussettingspathjob.cpp)
+target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS})
+add_test(${testname} ${CMAKE_CURRENT_BINARY_DIR}/${testname})
