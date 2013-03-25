@@ -17,52 +17,44 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
-#include "../src/daemon/jobs/fetchsettingsjob.h"
 
-#include <QtTest/QtTest>
+#include <QtCore/QCoreApplication>
 
-#include <QDBusConnection>
-#include <QDBusAbstractAdaptor>
-#include <unistd.h>
+FakeResource* FakeResource::s_instance = 0;
 
-class testFetchSettingsJob : public QObject
+FakeResource* FakeResource::self()
 {
-    Q_OBJECT
-
-public:
-    explicit testFetchSettingsJob(QObject* parent = 0);
-
-private Q_SLOTS:
-    void testChangeSettings();
-};
-
-testFetchSettingsJob::testFetchSettingsJob(QObject* parent): QObject(parent)
-{
-    FakeResource::self();
+    if (!s_instance) {
+        s_instance = new FakeResource(qApp);
+    }
+    return s_instance;
 }
 
-void testFetchSettingsJob::testChangeSettings()
+int FakeResource::accountId()
 {
-    FetchSettingsJob *job = new FetchSettingsJob(this);
-
-    job->setResourceId("akonadi_fake_resource_116");
-    job->setKey("accountId");
-    job->exec();
-
-    QVERIFY2(!job->error(), "Job is set as finished with error");
-    QCOMPARE(job->value<int>(), 42);
-
-    job = new FetchSettingsJob(this);
-
-    job->setResourceId("akonadi_fake_resource_116");
-    job->setKey("accountId");
-    job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->exec();
-
-    QVERIFY2(!job->error(), "Job is set as finished with error");
-    QCOMPARE(job->value<int>(), 42);
+    return m_accountId;
 }
 
-QTEST_MAIN(testFetchSettingsJob)
+void FakeResource::setAccountId(int accountId)
+{
+    m_accountId = accountId;
+}
 
-#include "testfetchsettingsjob.moc"
+void FakeResource::writeConfig()
+{
+    Q_EMIT configWritten();
+}
+
+FakeResource::FakeResource(QObject* parent)
+: QDBusAbstractAdaptor(parent)
+, m_accountId(42)
+{
+    QString path = "/Settings";
+
+    QDBusConnection conn = QDBusConnection::sessionBus();
+    conn.registerService("org.freedesktop.Akonadi.Agent.akonadi_fake_resource_116");
+    conn.registerService("org.freedesktop.Akonadi.Resource.akonadi_fake_resource_116");
+    conn.registerObject(path, this, QDBusConnection::ExportAllContents);
+}
+
+#include "fakeresource.moc"

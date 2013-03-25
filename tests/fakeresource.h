@@ -16,53 +16,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "fakeresource.h"
-#include "../src/daemon/jobs/fetchsettingsjob.h"
+#ifndef FAKE_RESOURCE_H
+#define FAKE_RESOURCE_H
 
-#include <QtTest/QtTest>
-
-#include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
-#include <unistd.h>
+#include <QDBusConnection>
 
-class testFetchSettingsJob : public QObject
+class FakeResource : public QDBusAbstractAdaptor
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.Akonadi.fakeResource.Settings")
 
-public:
-    explicit testFetchSettingsJob(QObject* parent = 0);
+    public:
+        static FakeResource* self();
 
-private Q_SLOTS:
-    void testChangeSettings();
+    public Q_SLOTS:
+        int accountId();
+        void setAccountId(int accountId);
+        void writeConfig();
+
+    Q_SIGNALS:
+        void configWritten();
+
+    private:
+        FakeResource(QObject* parent = 0);
+
+        int m_accountId;
+        static FakeResource *s_instance;
 };
 
-testFetchSettingsJob::testFetchSettingsJob(QObject* parent): QObject(parent)
-{
-    FakeResource::self();
-}
-
-void testFetchSettingsJob::testChangeSettings()
-{
-    FetchSettingsJob *job = new FetchSettingsJob(this);
-
-    job->setResourceId("akonadi_fake_resource_116");
-    job->setKey("accountId");
-    job->exec();
-
-    QVERIFY2(!job->error(), "Job is set as finished with error");
-    QCOMPARE(job->value<int>(), 42);
-
-    job = new FetchSettingsJob(this);
-
-    job->setResourceId("akonadi_fake_resource_116");
-    job->setKey("accountId");
-    job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->exec();
-
-    QVERIFY2(!job->error(), "Job is set as finished with error");
-    QCOMPARE(job->value<int>(), 42);
-}
-
-QTEST_MAIN(testFetchSettingsJob)
-
-#include "testfetchsettingsjob.moc"
+#endif //FAKE_RESOURCE_H
