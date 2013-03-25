@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 #include "daemon.h"
-#include "jobs/createresource.h"
+#include "jobs/createresourcejob.h"
 #include "jobs/removeresourcejob.h"
 #include "akonadiaccounts.h"
 
@@ -126,7 +126,7 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 void AccountsDaemon::resourceCreated(KJob* job)
 {
     kDebug();
-    CreateResource *cJob = qobject_cast<CreateResource*>(job);
+    CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
     m_accounts->addResource(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
 }
 
@@ -151,7 +151,7 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
         }
 
         kDebug() << "Creating a new resource";
-        CreateResource *job = new CreateResource(this);
+        CreateResourceJob *job = new CreateResourceJob(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(resourceCreated(KJob*)));
 
         kDebug() << "Found one: " << id << type.name() << serviceName;

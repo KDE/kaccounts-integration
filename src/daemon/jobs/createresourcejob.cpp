@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "createresource.h"
+#include "createresourcejob.h"
 #include "changesettingsjob.h"
 
 #include <QtCore/QDebug>
@@ -30,17 +30,17 @@
 
 using namespace Akonadi;
 
-CreateResource::CreateResource(QObject* parent)
+CreateResourceJob::CreateResourceJob(QObject* parent)
  : KJob(parent)
 {
 }
 
-CreateResource::~CreateResource()
+CreateResourceJob::~CreateResourceJob()
 {
 
 }
 
-void CreateResource::start()
+void CreateResourceJob::start()
 {
     qDebug() << m_accountId;
     AgentInstanceCreateJob *job = new AgentInstanceCreateJob(m_type, this);
@@ -49,37 +49,37 @@ void CreateResource::start()
     job->start();
 }
 
-Accounts::AccountId CreateResource::accountId() const
+Accounts::AccountId CreateResourceJob::accountId() const
 {
     return m_accountId;
 }
 
-void CreateResource::setAccountId(const Accounts::AccountId& accId)
+void CreateResourceJob::setAccountId(const Accounts::AccountId& accId)
 {
     m_accountId = accId;
 }
 
-QString CreateResource::serviceName() const
+QString CreateResourceJob::serviceName() const
 {
     return m_serviceName;
 }
 
-void CreateResource::setServiceName(const QString& serviceName)
+void CreateResourceJob::setServiceName(const QString& serviceName)
 {
     m_serviceName = serviceName;
 }
 
-void CreateResource::setAgentType(const AgentType& type)
+void CreateResourceJob::setAgentType(const AgentType& type)
 {
     m_type = type;
 }
 
-QString CreateResource::agentIdentifier() const
+QString CreateResourceJob::agentIdentifier() const
 {
     return m_agent.identifier();
 }
 
-void CreateResource::resourceCreated(KJob* job)
+void CreateResourceJob::resourceCreated(KJob* job)
 {
     kDebug();
     if (job->error()) {
@@ -97,7 +97,7 @@ void CreateResource::resourceCreated(KJob* job)
     setAccJob->start();
 }
 
-void CreateResource::setAccountDone(KJob* job)
+void CreateResourceJob::setAccountDone(KJob* job)
 {
     kDebug();
     m_agent.reconfigure();

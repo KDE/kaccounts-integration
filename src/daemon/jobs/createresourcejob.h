@@ -27,13 +27,13 @@
 #include <kjob.h>
 
 class QDBusPendingCallWatcher;
-class CreateResource : public KJob
+class CreateResourceJob : public KJob
 {
     Q_OBJECT
 
     public:
-        explicit CreateResource(QObject* parent = 0);
-        virtual ~CreateResource();
+        explicit CreateResourceJob(QObject* parent = 0);
+        virtual ~CreateResourceJob();
 
         virtual void start();
 
