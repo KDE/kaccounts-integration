@@ -17,19 +17,16 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
+#include "../src/daemon/jobs/dbussettingsinterfacejob.h"
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/jobs/dbussettingsinterfacejob.h"
-
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
-#include <unistd.h>
 
 class testDBusSettingsJob : public QObject
 {
     Q_OBJECT
-
     public:
         explicit testDBusSettingsJob(QObject* parent = 0);
 

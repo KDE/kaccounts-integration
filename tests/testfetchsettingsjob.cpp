@@ -23,17 +23,15 @@
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
-#include <unistd.h>
 
 class testFetchSettingsJob : public QObject
 {
     Q_OBJECT
+    public:
+        explicit testFetchSettingsJob(QObject* parent = 0);
 
-public:
-    explicit testFetchSettingsJob(QObject* parent = 0);
-
-private Q_SLOTS:
-    void testChangeSettings();
+    private Q_SLOTS:
+        void testChangeSettings();
 };
 
 testFetchSettingsJob::testFetchSettingsJob(QObject* parent): QObject(parent)

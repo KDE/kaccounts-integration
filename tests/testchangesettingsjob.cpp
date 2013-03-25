@@ -17,28 +17,26 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
+#include "../src/daemon/jobs/changesettingsjob.h"
 
 #include <QtTest/QtTest>
 
-#include "../src/daemon/jobs/changesettingsjob.h"
-
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
-#include <unistd.h>
 
 class testChangeSettingsJob : public QObject
 {
     Q_OBJECT
+    public:
+        explicit testChangeSettingsJob(QObject* parent = 0);
 
-public:
-    explicit testChangeSettingsJob(QObject* parent = 0);
-
-private Q_SLOTS:
-    void testChangeSettings();
+    private Q_SLOTS:
+        void testChangeSettings();
 };
 
 testChangeSettingsJob::testChangeSettingsJob(QObject* parent): QObject(parent)
 {
+    FakeResource::self();
 }
 
 void testChangeSettingsJob::testChangeSettings()
