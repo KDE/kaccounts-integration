@@ -33,6 +33,7 @@ class testAkonadiAccounts : public QObject
         virtual ~testAkonadiAccounts();
 
     private Q_SLOTS:
+        void testResourceWhenEmpty();
         void testAddResource();
         void testHasServices();
         void testResourceFromType();
@@ -61,6 +62,11 @@ testAkonadiAccounts::testAkonadiAccounts(QObject* parent)
 testAkonadiAccounts::~testAkonadiAccounts()
 {
     QFile::remove(m_path);
+}
+
+void testAkonadiAccounts::testResourceWhenEmpty()
+{
+    QCOMPARE(m_accounts->resourceFromType(10, "akonadi_fake"), QString());
 }
 
 void testAkonadiAccounts::testAddResource()
