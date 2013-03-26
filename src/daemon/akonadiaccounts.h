@@ -27,8 +27,7 @@
 class AkonadiAccounts
 {
     public:
-        AkonadiAccounts();
-        AkonadiAccounts(const QString& configName);
+        AkonadiAccounts(const QString& configName = QLatin1String("accounts-akonadi"));
 
         bool hasServices(const Accounts::AccountId &accId);
         QStringList services(const Accounts::AccountId &accId);
@@ -39,9 +38,8 @@ class AkonadiAccounts
         QString resourceFromType(const Accounts::AccountId &accId, const QString &resourceType) const;
 
     private:
-        QString m_configName;
+        KSharedConfig::Ptr m_config;
         KConfigGroup group(const Accounts::AccountId &accId) const;
-        KSharedConfig::Ptr accounts() const;
 };
 
 #endif //ACCOUNTS_AKONADI_DAEMON_H
