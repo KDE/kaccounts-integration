@@ -175,7 +175,8 @@ void AccountsDaemon::enableServiceJobDone(KJob* job)
         kDebug() << job->errorText();
         return;
     }
-
+    EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
+    AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
 }
 
 void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)
