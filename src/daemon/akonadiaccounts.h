@@ -21,6 +21,7 @@
 
 #include <Accounts/Account>
 #include <KSharedConfig>
+#include <KConfigGroup>
 #include <akonadi/attribute.h>
 
 class AkonadiAccounts
@@ -38,7 +39,9 @@ class AkonadiAccounts
         QString resourceFromType(const Accounts::AccountId &accId, const QString &resourceType) const;
 
     private:
-        KSharedConfig::Ptr m_accounts;
+        QString m_configName;
+        KConfigGroup group(const Accounts::AccountId &accId) const;
+        KSharedConfig::Ptr accounts() const;
 };
 
 #endif //ACCOUNTS_AKONADI_DAEMON_H
