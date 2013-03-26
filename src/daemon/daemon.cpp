@@ -47,7 +47,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  , m_manager(new Accounts::Manager(this))
  , m_accounts(new AkonadiAccounts())
 {
-    QMetaObject::invokeMethod(this, "startDaemon");
+    QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
     connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
 }
