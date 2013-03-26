@@ -37,6 +37,22 @@ void AkonadiAccounts::addResource(const Accounts::AccountId& accId, const QStrin
     addService(accId, serviceName, agentIdentifier);
 }
 
+bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId)
+{
+    kDebug() << accId;
+    QString key("Account_" + QString::number(accId));
+    KConfigGroup account = m_accounts->group(key);
+    return !account.keyList().isEmpty();
+}
+
+QStringList AkonadiAccounts::services(const Accounts::AccountId& accId)
+{
+    kDebug() << accId;
+    QString key("Account_" + QString::number(accId));
+    KConfigGroup account = m_accounts->group(key);
+    return account.keyList();
+}
+
 void AkonadiAccounts::addService(const Accounts::AccountId& accId, const QString& serviceName, const QString& resourceId)
 {
     kDebug() << accId << serviceName << resourceId;
@@ -73,13 +89,21 @@ void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
     m_accounts->deleteGroup(key);
 }
 
+QString AkonadiAccounts::resource(const Accounts::AccountId& accId, const QString& serviceName) const
+{
+    kDebug() << accId << serviceName;
+    QString key("Account_" + QString::number(accId));
+
+    return m_accounts->group(key).readEntry(serviceName, QString());
+}
+
 QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId, const QString& serviceName) const
 {
     QString key("Account_" + QString::number(accId));
     return m_accounts->group(key).readEntry(serviceName, QStringList());
 }
 
-QString AkonadiAccounts::resourceId(const Accounts::AccountId& accId, const QString& resourceType) const
+QString AkonadiAccounts::resourceFromType(const Accounts::AccountId& accId, const QString& resourceType) const
 {
     QString key("Account_" + QString::number(accId));
     QStringList resources = m_accounts->group(key).entryMap().values();
@@ -95,5 +119,5 @@ QString AkonadiAccounts::resourceId(const Accounts::AccountId& accId, const QStr
 
 QString AkonadiAccounts::createdResource(const Accounts::AccountId& accId, const QString& resource) const
 {
-    return resourceId(accId, resource);
+    return resourceFromType(accId, resource);
 }

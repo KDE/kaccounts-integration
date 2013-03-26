@@ -34,7 +34,9 @@ class testAkonadiAccounts : public QObject
 
     private Q_SLOTS:
         void testAddResource();
-        void testResourceId();
+        void testHasServices();
+        void testResourceFromType();
+        void testResource();
         void testRemoveResource();
 
     private:
@@ -87,7 +89,7 @@ void testAkonadiAccounts::testAddResource()
     QVERIFY2(group.hasKey("test-calendar"), "No key for test-calendar");
     QCOMPARE(group.readEntry("test-calendar", QString()), m_resourceId);
 
-    m_accounts->addService(11, "test-calendar", m_resourceId);
+    m_accounts->addService(11, "test-calendar", "akonadi_fake_resource_117");
     QVERIFY2(m_config->hasGroup("Account_11"), "Group Account_11 has not been created");
     QCOMPARE(m_config->groupList().count(), 32);
 
@@ -95,12 +97,26 @@ void testAkonadiAccounts::testAddResource()
     QVERIFY2(!group.keyList().isEmpty(), "There are no keys in account group");
     QCOMPARE(group.keyList().count(), 1);
     QVERIFY2(group.hasKey("test-calendar"), "No key for test-calendar");
-    QCOMPARE(group.readEntry("test-calendar", QString()), m_resourceId);
+    QCOMPARE(group.readEntry("test-calendar", QString()), QLatin1String("akonadi_fake_resource_117"));
 }
 
-void testAkonadiAccounts::testResourceId()
+void testAkonadiAccounts::testHasServices()
 {
-    QCOMPARE(m_accounts->resourceId(10, "akonadi_fake"), QLatin1String("akonadi_fake_resource_116"));
+    QVERIFY(m_accounts->hasServices(10));
+    QVERIFY(!m_accounts->services(10).isEmpty());
+    QCOMPARE(m_accounts->services(10).count(), 2);
+}
+
+void testAkonadiAccounts::testResourceFromType()
+{
+    QCOMPARE(m_accounts->resourceFromType(10, "akonadi_fake"), QLatin1String("akonadi_fake_resource_116"));
+}
+
+void testAkonadiAccounts::testResource()
+{
+    QCOMPARE(m_accounts->resource(10, "test-contacts"), QLatin1String("akonadi_fake_resource_116"));
+    QCOMPARE(m_accounts->resource(10, "test-calendar"), QLatin1String("akonadi_fake_resource_116"));
+    QCOMPARE(m_accounts->resource(11, "test-calendar"), QLatin1String("akonadi_fake_resource_117"));
 }
 
 void testAkonadiAccounts::testRemoveResource()
