@@ -31,19 +31,13 @@ class AkonadiAccounts
 
         bool hasServices(const Accounts::AccountId &accId);
         QStringList services(const Accounts::AccountId &accId);
-        void addResource(const Accounts::AccountId &accId, const QString &serviceName, const QString &agentIdentifier);
         void addService(const Accounts::AccountId &accId, const QString &serviceName, const QString &resourceId);
         void removeService(const Accounts::AccountId &accId, const QString &serviceName);
-        void removeResources(const Accounts::AccountId &accId, const QString &serviceName);
-        void removeAccount(const Accounts::AccountId &accId);
 
         QString resource(const Accounts::AccountId &accId, const QString &serviceName) const;
         QString resourceFromType(const Accounts::AccountId &accId, const QString &resourceType) const;
-        QStringList resources(const Accounts::AccountId &accId, const QString &serviceName) const;
-        QString createdResource(const Accounts::AccountId& accId, const QString& resource) const;
 
     private:
-        QString group(const Accounts::AccountId& accId) const;
         KSharedConfig::Ptr m_accounts;
 };
 

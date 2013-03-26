@@ -104,7 +104,6 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
         removeService(acc->id(), service.name());
     }
 
-    m_accounts->removeAccount(acc->id());
     delete acc;
 }
 
@@ -129,7 +128,7 @@ void AccountsDaemon::resourceCreated(KJob* job)
 {
     kDebug();
     CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
-    m_accounts->addResource(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
+    m_accounts->addService(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
 }
 
 void AccountsDaemon::findResource(const QString &serviceName, const Accounts::AccountId &id)
@@ -146,7 +145,7 @@ void AccountsDaemon::findResource(const QString &serviceName, const Accounts::Ac
             continue;
         }
 
-        resourceInstance = m_accounts->createdResource(id, type.identifier());
+        resourceInstance = m_accounts->resourceFromType(id, type.identifier());
         if (!resourceInstance.isEmpty()) {
             kDebug() << "Already created, enabling service:" << resourceInstance;
             EnableServiceJob *job = new EnableServiceJob(this);
@@ -182,13 +181,20 @@ void AccountsDaemon::enableServiceJobDone(KJob* job)
 void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)
 {
     kDebug() << accId << serviceName;
-    QStringList resources = m_accounts->resources(accId, serviceName);
-    kDebug() << resources;
-    RemoveResourceJob* removeJob = 0;
-    Q_FOREACH(const QString &resourceId, resources) {
-        removeJob = new RemoveResourceJob(this);
-        removeJob->setResourceId(resourceId);
-        removeJob->start();
+    EnableServiceJob *job = new EnableServiceJob(this);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
+    job->setResourceId(m_accounts->resource(accId, serviceName));
+    job->setService(serviceName, EnableServiceJob::Disable);
+    job->setProperty("accId", accId);
+    job->start();
+}
+
+void AccountsDaemon::disableServiceJobDone(KJob* job)
+{
+    if (job->error()) {
+        kDebug() << job->errorText();
+        return;
     }
-    m_accounts->removeResources(accId, serviceName);
+    EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
+    m_accounts->removeService(serviceJob->property("accId").toInt(), serviceJob->service());
 }
