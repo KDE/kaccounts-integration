@@ -24,28 +24,46 @@
 
 AkonadiAccounts::AkonadiAccounts()
 {
-    m_accounts = KSharedConfig::openConfig("accounts-akonadi");
+    AkonadiAccounts(QLatin1String("accounts-akonadi"));
+}
+
+AkonadiAccounts::AkonadiAccounts(const QString& configName)
+{
+    m_accounts = KSharedConfig::openConfig(configName);
 }
 
 void AkonadiAccounts::addResource(const Accounts::AccountId& accId, const QString& serviceName, const QString& agentIdentifier)
 {
-    kDebug() << accId << serviceName << agentIdentifier;
+    addService(accId, serviceName, agentIdentifier);
+}
+
+void AkonadiAccounts::addService(const Accounts::AccountId& accId, const QString& serviceName, const QString& resourceId)
+{
+    kDebug() << accId << serviceName << resourceId;
     QString key("Account_" + QString::number(accId));
 
     KConfigGroup account = m_accounts->group(key);
-    QStringList resources = account.readEntry(serviceName, QStringList());
-    resources.append(agentIdentifier);
-
-    account.writeEntry(serviceName, resources);
+    account.writeEntry(serviceName, resourceId);
     account.sync();
+}
+
+void AkonadiAccounts::removeService(const Accounts::AccountId& accId, const QString& serviceName)
+{
+    kDebug() << accId << serviceName;
+    QString key("Account_" + QString::number(accId));
+    KConfigGroup group = m_accounts->group(key);
+    group.deleteEntry(serviceName);
+
+    if (group.entryMap().isEmpty()) {
+        m_accounts->deleteGroup(key);
+    }
+
+    m_accounts->sync();
 }
 
 void AkonadiAccounts::removeResources(const Accounts::AccountId& accId, const QString& serviceName)
 {
-    kDebug() << accId << serviceName;
-    QString key("Account_" + QString::number(accId));
-    m_accounts->group(key).deleteEntry(serviceName);
-    m_accounts->group(key).sync();
+    removeService(accId, serviceName);
 }
 
 void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
@@ -61,16 +79,21 @@ QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId, const Q
     return m_accounts->group(key).readEntry(serviceName, QStringList());
 }
 
-QString AkonadiAccounts::createdResource(const Accounts::AccountId& accId, const QString& resource) const
+QString AkonadiAccounts::resourceId(const Accounts::AccountId& accId, const QString& resourceType) const
 {
     QString key("Account_" + QString::number(accId));
     QStringList resources = m_accounts->group(key).entryMap().values();
 
     Q_FOREACH(const QString &instance, resources) {
-        if (instance.startsWith(resource)) {
+        if (instance.startsWith(resourceType)) {
             return instance;
         }
     }
 
     return QString();
+}
+
+QString AkonadiAccounts::createdResource(const Accounts::AccountId& accId, const QString& resource) const
+{
+    return resourceId(accId, resource);
 }

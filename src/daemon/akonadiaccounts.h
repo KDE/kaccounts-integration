@@ -21,20 +21,26 @@
 
 #include <Accounts/Account>
 #include <KSharedConfig>
+#include <akonadi/attribute.h>
 
 class AkonadiAccounts
 {
     public:
         AkonadiAccounts();
+        AkonadiAccounts(const QString& configName);
 
         void addResource(const Accounts::AccountId &accId, const QString &serviceName, const QString &agentIdentifier);
+        void addService(const Accounts::AccountId &accId, const QString &serviceName, const QString &resourceId);
+        void removeService(const Accounts::AccountId &accId, const QString &serviceName);
         void removeResources(const Accounts::AccountId &accId, const QString &serviceName);
         void removeAccount(const Accounts::AccountId &accId);
 
+        QString resourceId(const Accounts::AccountId &accId, const QString &resourceType) const;
         QStringList resources(const Accounts::AccountId &accId, const QString &serviceName) const;
         QString createdResource(const Accounts::AccountId& accId, const QString& resource) const;
 
     private:
+        QString group(const Accounts::AccountId& accId) const;
         KSharedConfig::Ptr m_accounts;
 };
 
