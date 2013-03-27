@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 FetchSettingsJob::FetchSettingsJob(QObject* parent)
- : KJob(parent)
+: AbstractAkonadiJob(parent)
  , m_watcher(0)
 {
 
@@ -111,19 +111,4 @@ QString FetchSettingsJob::key() const
 void FetchSettingsJob::setKey(const QString& key)
 {
     m_key = key;
-}
-
-QString FetchSettingsJob::interface() const
-{
-    return m_interface;
-}
-
-void FetchSettingsJob::setInterface(const QString& interface)
-{
-    m_interface = interface;
-}
-
-void FetchSettingsJob::setResourceId(const QString& resourceId)
-{
-    m_resourceId = resourceId;
 }

@@ -19,13 +19,13 @@
 #ifndef FETCH_SETTINGS_JOB_H
 #define FETCH_SETTINGS_JOB_H
 
+#include "abstractakonadijob.h"
+
 #include <QtCore/QVariant>
 #include <QDBusPendingReply>
 #include <QDBusPendingCallWatcher>
 
-#include <kjob.h>
-
-class FetchSettingsJob : public KJob
+class FetchSettingsJob : public AbstractAkonadiJob
 {
     Q_OBJECT
     public:
@@ -48,9 +48,6 @@ class FetchSettingsJob : public KJob
 
         QString key() const;
         void setKey(const QString &key);
-        QString interface() const;
-        void setInterface(const QString &dbusInterface);
-        void setResourceId(const QString &resourceId);
 
     private Q_SLOTS:
         void init();
@@ -61,8 +58,6 @@ class FetchSettingsJob : public KJob
         void fetchSettings();
 
         QString m_key;
-        QString m_interface;
-        QString m_resourceId;
         QDBusPendingCallWatcher *m_watcher;
 };
 
