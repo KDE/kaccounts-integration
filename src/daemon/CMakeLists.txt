@@ -13,6 +13,7 @@ set(accounts_daemon_SRCS
     jobs/enableservicejob.cpp
     jobs/dbussettingsinterfacejob.cpp
     jobs/lookupakonadiservices.cpp
+    jobs/removeakonadiservicesjob.cpp
 )
 
 kde4_add_plugin(kded_accounts

@@ -21,6 +21,8 @@
 #include "jobs/removeresourcejob.h"
 #include "jobs/enableservicejob.h"
 #include "jobs/lookupakonadiservices.h"
+#include "jobs/removeakonadiservicesjob.h"
+
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
@@ -108,9 +110,9 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-    Q_FOREACH(const Accounts::Service &service, services) {
-        removeService(acc->id(), service.name());
-    }
+    RemoveAkonadiServicesJob *job = new RemoveAkonadiServicesJob(m_accounts, this);
+    job->setAccountId(id);
+    job->start();
 
     delete acc;
 }
