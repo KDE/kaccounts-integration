@@ -19,12 +19,12 @@
 #ifndef LOOKUP_AKONADI_SERVICES_H
 #define LOOKUP_AKONADI_SERVICES_H
 
+#include "abstractakonadijob.h"
+
 #include <Accounts/Account>
 
-#include <KJob>
-
 class AkonadiAccounts;
-class LookupAkonadiServices : public KJob
+class LookupAkonadiServices : public AbstractAkonadiJob
 {
     Q_OBJECT
     public:
@@ -33,7 +33,6 @@ class LookupAkonadiServices : public KJob
         virtual void start();
 
         void setServices(const QMap<QString, QString> &services);
-        void setAccountId(const Accounts::AccountId &accId);
 
     private Q_SLOTS:
         void init();
@@ -44,7 +43,6 @@ class LookupAkonadiServices : public KJob
 
     private:
         AkonadiAccounts *m_accounts;
-        Accounts::AccountId m_accountId;
         QMap<QString, QString> m_services;
 };
 

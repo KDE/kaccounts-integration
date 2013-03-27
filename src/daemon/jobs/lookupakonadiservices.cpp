@@ -27,7 +27,7 @@
 using namespace Akonadi;
 
 LookupAkonadiServices::LookupAkonadiServices(AkonadiAccounts *accounts, QObject* parent)
- : KJob(parent)
+ : AbstractAkonadiJob(parent)
  , m_accounts(accounts)
 {
 
@@ -126,11 +126,6 @@ void LookupAkonadiServices::enableServiceJobDone(KJob* job)
     }
 
     findResource();
-}
-
-void LookupAkonadiServices::setAccountId(const Accounts::AccountId& accId)
-{
-    m_accountId = accId;
 }
 
 void LookupAkonadiServices::setServices(const QMap<QString, QString> &services)
