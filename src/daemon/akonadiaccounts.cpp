@@ -108,6 +108,14 @@ QString AkonadiAccounts::resourceFromType(const Accounts::AccountId& accId, cons
     return QString();
 }
 
+void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
+{
+    kDebug();
+    QString key("Account_" + QString::number(accId));
+    m_config->deleteGroup(key);
+    m_config->sync();
+}
+
 KConfigGroup AkonadiAccounts::group(const Accounts::AccountId &accId) const
 {
     QString group("Account_" + QString::number(accId));

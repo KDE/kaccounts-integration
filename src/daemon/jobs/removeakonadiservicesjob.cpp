@@ -48,7 +48,7 @@ void RemoveAkonadiServicesJob::removeResource()
     kDebug();
 
     if (m_resources.isEmpty()) {
-        emitResult();
+        m_accounts->removeAccount(m_accountId);
         return;
     }
 

@@ -38,6 +38,7 @@ class AkonadiAccounts
         QString resource(const Accounts::AccountId &accId, const QString &serviceName) const;
         QString resourceFromType(const Accounts::AccountId &accId, const QString &resourceType) const;
 
+        void removeAccount(const Accounts::AccountId &accId);
     private:
         KSharedConfig::Ptr m_config;
         KConfigGroup group(const Accounts::AccountId &accId) const;
