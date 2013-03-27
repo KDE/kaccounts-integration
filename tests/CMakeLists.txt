@@ -26,6 +26,7 @@ set(testname testenableservicejob)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 kde4_add_unit_test(${testname}
     ${testname}.cpp
+    ../src/daemon/jobs/abstractakonadijob.cpp
     ../src/daemon/jobs/fetchsettingsjob.cpp
     ../src/daemon/jobs/enableservicejob.cpp
     ../src/daemon/jobs/changesettingsjob.cpp

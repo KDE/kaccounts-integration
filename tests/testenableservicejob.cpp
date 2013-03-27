@@ -48,7 +48,7 @@ void testEnableServiceJob::testEnableServiceFromEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setService("foo", EnableServiceJob::Enable);
+    job->setServiceType("foo", EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
@@ -61,7 +61,7 @@ void testEnableServiceJob::testAlreadyEnabledService()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setService("foo", EnableServiceJob::Enable);
+    job->setServiceType("foo", EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
@@ -74,7 +74,7 @@ void testEnableServiceJob::testEnableWhenNotEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setService("bar", EnableServiceJob::Enable);
+    job->setServiceType("bar", EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
@@ -87,7 +87,7 @@ void testEnableServiceJob::testDisableWhenNoEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setService("foo", EnableServiceJob::Disable);
+    job->setServiceType("foo", EnableServiceJob::Disable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
@@ -100,7 +100,7 @@ void testEnableServiceJob::testDisableLast()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setService("bar", EnableServiceJob::Disable);
+    job->setServiceType("bar", EnableServiceJob::Disable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();

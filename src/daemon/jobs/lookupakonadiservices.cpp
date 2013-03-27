@@ -78,7 +78,7 @@ void LookupAkonadiServices::findResource()
             connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
             job->setAccountId(m_accountId);
             job->setResourceId(resourceInstance);
-            job->setService(serviceName, EnableServiceJob::Enable);
+            job->setServiceType(serviceType, EnableServiceJob::Enable);
             job->start();
             return;
         }
@@ -90,7 +90,7 @@ void LookupAkonadiServices::findResource()
         kDebug() << "Found one: " << m_accountId << type.name() << serviceName;
         job->setAccountId(m_accountId);
         job->setAgentType(type);
-        job->setServiceName(serviceName);
+        job->setServiceName(serviceType);
         job->start();
         return;
     }
@@ -110,7 +110,7 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     connect(eJob, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
     eJob->setAccountId(cJob->accountId());
     eJob->setResourceId(cJob->agentIdentifier());
-    eJob->setService(cJob->serviceName(), EnableServiceJob::Enable);
+    eJob->setServiceType(cJob->serviceName(), EnableServiceJob::Enable);
     eJob->start();
 }
 
@@ -119,9 +119,9 @@ void LookupAkonadiServices::enableServiceJobDone(KJob* job)
     kDebug();
     EnableServiceJob *sJob = qobject_cast<EnableServiceJob*>(job);
     if (sJob->error()) {
-        kDebug() << "Error enabling service for: " << sJob->service() << sJob->resourceId();
+        kDebug() << "Error enabling service for: " << sJob->serviceName() << sJob->resourceId();
     } else {
-        m_accounts->addService(sJob->accountId(), sJob->service(), sJob->resourceId());
+        m_accounts->addService(sJob->accountId(), sJob->serviceName(), sJob->resourceId());
         AgentManager::self()->instance(sJob->resourceId()).reconfigure();
     }
 

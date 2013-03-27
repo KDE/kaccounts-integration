@@ -16,32 +16,59 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ENABLE_SERVICE_JOB_H
-#define ENABLE_SERVICE_JOB_H
-
 #include "abstractakonadijob.h"
 
-class EnableServiceJob : public AbstractAkonadiJob
+AbstractAkonadiJob::AbstractAkonadiJob(QObject* parent): KJob(parent)
 {
-    Q_OBJECT
-    public:
-        enum Status {
-            Enable = 1,
-            Disable
-        };
 
-        explicit EnableServiceJob(QObject* parent = 0);
-        virtual void start();
+}
 
-        void setServiceType(const QString &serviceType, Status status);
+QString AbstractAkonadiJob::resourceId() const
+{
+    return m_resourceId;
+}
 
-    public Q_SLOTS:
-        void init();
-        void fetchSettingsJobDone(KJob* job);
-        void changeSettingsDone(KJob* job);
+void AbstractAkonadiJob::setResourceId(const QString& resourceId)
+{
+    m_resourceId = resourceId;
+}
 
-    private:
-        Status m_serviceStatus;
-};
+QString AbstractAkonadiJob::serviceName() const
+{
+    return m_serviceName;
+}
 
-#endif //ENABLE_SERVICE_JOB_H
+void AbstractAkonadiJob::setServiceName(const QString& serviceName)
+{
+    m_serviceName = serviceName;
+}
+
+QString AbstractAkonadiJob::serviceType() const
+{
+    return m_serviceType;
+}
+
+void AbstractAkonadiJob::setServiceType(const QString& serviceType)
+{
+    m_serviceType = serviceType;
+}
+
+QString AbstractAkonadiJob::interface() const
+{
+    return m_interface;
+}
+
+void AbstractAkonadiJob::setInterface(const QString& interface)
+{
+    m_interface = interface;
+}
+
+Accounts::AccountId AbstractAkonadiJob::accountId() const
+{
+    return m_accountId;
+}
+
+void AbstractAkonadiJob::setAccountId(const Accounts::AccountId& accountId)
+{
+    m_accountId = accountId;
+}

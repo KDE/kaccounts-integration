@@ -16,32 +16,39 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ENABLE_SERVICE_JOB_H
-#define ENABLE_SERVICE_JOB_H
+#ifndef ABSTRACT_AKONADI_JOB_H
+#define ABSTRACT_AKONADI_JOB_H
 
-#include "abstractakonadijob.h"
+#include <Accounts/Account>
 
-class EnableServiceJob : public AbstractAkonadiJob
+#include <KJob>
+class AbstractAkonadiJob : public KJob
 {
     Q_OBJECT
     public:
-        enum Status {
-            Enable = 1,
-            Disable
-        };
+        explicit AbstractAkonadiJob(QObject* parent = 0);
 
-        explicit EnableServiceJob(QObject* parent = 0);
-        virtual void start();
+        QString resourceId() const;
+        void setResourceId(const QString &resourceId);
 
-        void setServiceType(const QString &serviceType, Status status);
+        QString serviceName() const;
+        void setServiceName(const QString &serviceName);
 
-    public Q_SLOTS:
-        void init();
-        void fetchSettingsJobDone(KJob* job);
-        void changeSettingsDone(KJob* job);
+        QString serviceType() const;
+        void setServiceType(const QString &serviceType);
 
-    private:
-        Status m_serviceStatus;
+        QString interface() const;
+        void setInterface(const QString &interface);
+
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accountId);
+
+    protected:
+        QString m_resourceId;
+        QString m_serviceName;
+        QString m_serviceType;
+        QString m_interface;
+        Accounts::AccountId m_accountId;
 };
 
-#endif //ENABLE_SERVICE_JOB_H
+#endif

@@ -22,7 +22,7 @@
 
 #include <KDebug>
 
-EnableServiceJob::EnableServiceJob(QObject* parent): KJob(parent)
+EnableServiceJob::EnableServiceJob(QObject* parent): AbstractAkonadiJob(parent)
 {
 
 }
@@ -56,21 +56,21 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
 
     FetchSettingsJob *fetchJob = qobject_cast<FetchSettingsJob*>(job);
     QStringList services = fetchJob->value<QStringList>();
-    if (services.contains(m_service) && m_serviceStatus == Enable) {
-        kDebug() << "Already enabled service: " << m_service;
+    if (services.contains(m_serviceType) && m_serviceStatus == Enable) {
+        kDebug() << "Already enabled service: " << m_serviceType;
         emitResult();
         return;
     }
-    if (!services.contains(m_service) && m_serviceStatus == Disable) {
-        kDebug() << "Trying to disable a not enabled service: " << m_service;
+    if (!services.contains(m_serviceType) && m_serviceStatus == Disable) {
+        kDebug() << "Trying to disable a not enabled service: " << m_serviceType;
         emitResult();
         return;
     }
 
     if (m_serviceStatus == Enable) {
-        services.append(m_service);
+        services.append(m_serviceType);
     } else {
-        services.removeAll(m_service);
+        services.removeAll(m_serviceType);
     }
 
     ChangeSettingsJob *changeJob = new ChangeSettingsJob(this);
@@ -94,43 +94,8 @@ void EnableServiceJob::changeSettingsDone(KJob* job)
     emitResult();
 }
 
-Accounts::AccountId EnableServiceJob::accountId() const
+void EnableServiceJob::setServiceType(const QString& serviceType, EnableServiceJob::Status status)
 {
-    return m_accountId;
-}
-
-void EnableServiceJob::setAccountId(const Accounts::AccountId& accId)
-{
-    m_accountId = accId;
-}
-
-QString EnableServiceJob::interface() const
-{
-    return m_interface;
-}
-
-void EnableServiceJob::setInterface(const QString& interface)
-{
-    m_interface = interface;
-}
-
-QString EnableServiceJob::resourceId() const
-{
-    return m_resourceId;
-}
-
-void EnableServiceJob::setResourceId(const QString& resourceId)
-{
-    m_resourceId = resourceId;
-}
-
-QString EnableServiceJob::service()
-{
-    return m_service;
-}
-
-void EnableServiceJob::setService(const QString& serviceName, EnableServiceJob::Status status)
-{
-    m_service = serviceName;
+    m_serviceType = serviceType;
     m_serviceStatus = status;
 }
