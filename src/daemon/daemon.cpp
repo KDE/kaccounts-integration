@@ -146,8 +146,9 @@ void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QStri
     EnableServiceJob *job = new EnableServiceJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
     job->setResourceId(m_accounts->resource(accId, serviceName));
-    job->setServiceType(serviceName, EnableServiceJob::Disable);
-    job->setProperty("accId", accId);
+    job->setServiceName(serviceName);
+    job->setServiceType(m_manager->service(serviceName).serviceType(), EnableServiceJob::Disable);
+    job->setAccountId(accId);
     job->start();
 }
 
@@ -158,11 +159,9 @@ void AccountsDaemon::disableServiceJobDone(KJob* job)
         return;
     }
     EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
-    int accId = serviceJob->property("accId").toInt();
+    m_accounts->removeService(serviceJob->accountId(), serviceJob->serviceName());
 
-    m_accounts->removeService(serviceJob->property("accId").toInt(), serviceJob->serviceName());
-
-    if (!m_accounts->resources(accId).contains(serviceJob->resourceId())) {
+    if (!m_accounts->resources(serviceJob->accountId()).contains(serviceJob->resourceId())) {
         RemoveResourceJob *rJob = new RemoveResourceJob(this);
         rJob->setResourceId(serviceJob->resourceId());
         rJob->start();

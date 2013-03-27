@@ -78,6 +78,7 @@ void LookupAkonadiServices::findResource()
             connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
             job->setAccountId(m_accountId);
             job->setResourceId(resourceInstance);
+            job->setServiceName(serviceName);
             job->setServiceType(serviceType, EnableServiceJob::Enable);
             job->start();
             return;
@@ -111,6 +112,7 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     eJob->setAccountId(cJob->accountId());
     eJob->setResourceId(cJob->resourceId());
     eJob->setServiceType(cJob->serviceType(), EnableServiceJob::Enable);
+    eJob->setServiceName(cJob->serviceName());
     eJob->start();
 }
 
