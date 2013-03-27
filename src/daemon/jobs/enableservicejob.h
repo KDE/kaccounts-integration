@@ -34,6 +34,9 @@ class EnableServiceJob : public KJob
         explicit EnableServiceJob(QObject* parent = 0);
         virtual void start();
 
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accId);
+
         QString interface() const;
         void setInterface(const QString &interface);
 
@@ -53,6 +56,7 @@ class EnableServiceJob : public KJob
         QString m_interface;
         QString m_resourceId;
         Status m_serviceStatus;
+        Accounts::AccountId m_accountId;
 };
 
 #endif //ENABLE_SERVICE_JOB_H

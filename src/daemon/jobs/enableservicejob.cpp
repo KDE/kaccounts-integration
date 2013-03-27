@@ -94,6 +94,16 @@ void EnableServiceJob::changeSettingsDone(KJob* job)
     emitResult();
 }
 
+Accounts::AccountId EnableServiceJob::accountId() const
+{
+    return m_accountId;
+}
+
+void EnableServiceJob::setAccountId(const Accounts::AccountId& accId)
+{
+    m_accountId = accId;
+}
+
 QString EnableServiceJob::interface() const
 {
     return m_interface;
