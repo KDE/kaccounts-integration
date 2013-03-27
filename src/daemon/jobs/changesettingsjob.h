@@ -29,34 +29,34 @@ class QDBusPendingCallWatcher;
 class ChangeSettingsJob : public KJob
 {
     Q_OBJECT
-public:
-    explicit ChangeSettingsJob(QObject* parent = 0);
-    virtual ~ChangeSettingsJob();
+    public:
+        explicit ChangeSettingsJob(QObject* parent = 0);
+        virtual ~ChangeSettingsJob();
 
-    virtual void start();
+        virtual void start();
 
-    void setAccountId(const Accounts::AccountId &accId);
-    void setInterface(const QString &interface);
-    void setResourceId(const QString &resourceId);
+        void setAccountId(const Accounts::AccountId &accId);
+        void setInterface(const QString &interface);
+        void setResourceId(const QString &resourceId);
 
-    void setSetting(const QString &key, const QVariant &value);
+        void setSetting(const QString &key, const QVariant &value);
 
-private Q_SLOTS:
-    void init();
-    void dbusSettingsPath(KJob *job);
-    void accountSet(QDBusPendingCallWatcher* watcher);
-    void configWritten(QDBusPendingCallWatcher* watcher);
+    private Q_SLOTS:
+        void init();
+        void dbusSettingsPath(KJob *job);
+        void accountSet(QDBusPendingCallWatcher* watcher);
+        void configWritten(QDBusPendingCallWatcher* watcher);
 
-private:
-    QDBusMessage createCall(const QString &method);
-    void setConfiguration();
-    void writeConfig();
+    private:
+        QDBusMessage createCall(const QString &method);
+        void setConfiguration();
+        void writeConfig();
 
-    QString m_resourceId;
-    QString m_key;
-    QString m_interface;
-    QVariant m_value;
-    Accounts::AccountId m_accountId;
+        QString m_resourceId;
+        QString m_key;
+        QString m_interface;
+        QVariant m_value;
+        Accounts::AccountId m_accountId;
 };
 
 #endif //CHANGE_SETTINGS_JOB_H
