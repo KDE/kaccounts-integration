@@ -41,7 +41,7 @@ Q_OBJECT
 
     private:
         QHash<QString, QCheckBox*> m_checkboxes;
-        Accounts::Account *m_account;
+        QWeakPointer<Accounts::Account> m_account;
         Accounts::Manager *m_manager;
 };
 

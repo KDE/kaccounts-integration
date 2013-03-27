@@ -30,16 +30,15 @@
 
 AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
  : QWidget(parent)
- , m_account(0)
  , m_manager(new Accounts::Manager(this))
 {
     setupUi(this);
 
-    if (!m_account) {
+    if (!account) {
         return;
     }
 
-    setAccount(m_account);
+    setAccount(account);
 }
 
 AccountWidget::~AccountWidget()
@@ -50,30 +49,26 @@ AccountWidget::~AccountWidget()
 
 void AccountWidget::setAccount(Accounts::Account* account)
 {
-    if (m_account == account) {
-        return;
-    }
-
     if (m_account) {
-        disconnect(m_account, 0, this, 0);
+        disconnect(m_account.data(), 0, this, 0);
     }
 
     qDeleteAll(m_checkboxes);
     m_checkboxes.clear();
 
-    m_account = account;
-
     QCheckBox *checkbox = 0;
     Accounts::ServiceList services = account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
-        m_account->selectService(service);
+        account->selectService(service);
         checkbox = new QCheckBox(service.displayName(), this);
-        checkbox->setChecked(m_account->enabled());
+        checkbox->setChecked(account->enabled());
         checkbox->setProperty("service", service.name());
         d_layout->addWidget(checkbox);
         connect(checkbox, SIGNAL(clicked(bool)), SLOT(serviceChanged(bool)));
         m_checkboxes.insert(service.name(), checkbox);
     }
+
+    m_account = account;
     connect(account, SIGNAL(enabledChanged(QString,bool)), SLOT(serviceEnabledChanged(QString,bool)));
 }
 
@@ -91,7 +86,10 @@ void AccountWidget::serviceChanged(bool enabled)
 {
     QString service = sender()->property("service").toString();
     kDebug() << "Enabling: " << service << " enabled";
-    m_account->selectService(m_manager->service(service));
-    m_account->setEnabled(enabled);
-    m_account->sync();
+    if (!m_account) {
+        return;
+    }
+    m_account.data()->selectService(m_manager->service(service));
+    m_account.data()->setEnabled(enabled);
+    m_account.data()->sync();
 }
