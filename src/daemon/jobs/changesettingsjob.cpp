@@ -26,7 +26,7 @@
 
 #include <KDebug>
 
-ChangeSettingsJob::ChangeSettingsJob(QObject* parent): KJob(parent)
+ChangeSettingsJob::ChangeSettingsJob(QObject* parent) : AbstractAkonadiJob(parent)
 {
 }
 
@@ -60,21 +60,6 @@ void ChangeSettingsJob::dbusSettingsPath(KJob* job)
     m_interface = dbusJob->interface();
 
     setConfiguration();
-}
-
-void ChangeSettingsJob::setAccountId(const Accounts::AccountId& accId)
-{
-    m_accountId = accId;
-}
-
-void ChangeSettingsJob::setInterface(const QString& interface)
-{
-    m_interface = interface;
-}
-
-void ChangeSettingsJob::setResourceId(const QString& resourceId)
-{
-    m_resourceId = resourceId;
 }
 
 void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)

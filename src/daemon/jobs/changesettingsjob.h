@@ -19,14 +19,15 @@
 #ifndef CHANGE_SETTINGS_JOB_H
 #define CHANGE_SETTINGS_JOB_H
 
+#include "abstractakonadijob.h"
+
 #include <QDBusMessage>
 
-#include <KJob>
 #include <Akonadi/AgentInstance>
 #include <Accounts/Account>
 
 class QDBusPendingCallWatcher;
-class ChangeSettingsJob : public KJob
+class ChangeSettingsJob : public AbstractAkonadiJob
 {
     Q_OBJECT
     public:
@@ -34,10 +35,6 @@ class ChangeSettingsJob : public KJob
         virtual ~ChangeSettingsJob();
 
         virtual void start();
-
-        void setAccountId(const Accounts::AccountId &accId);
-        void setInterface(const QString &interface);
-        void setResourceId(const QString &resourceId);
 
         void setSetting(const QString &key, const QVariant &value);
 
@@ -52,11 +49,8 @@ class ChangeSettingsJob : public KJob
         void setConfiguration();
         void writeConfig();
 
-        QString m_resourceId;
         QString m_key;
-        QString m_interface;
         QVariant m_value;
-        Accounts::AccountId m_accountId;
 };
 
 #endif //CHANGE_SETTINGS_JOB_H
