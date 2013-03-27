@@ -109,8 +109,8 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     EnableServiceJob *eJob = new EnableServiceJob(this);
     connect(eJob, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
     eJob->setAccountId(cJob->accountId());
-    eJob->setResourceId(cJob->agentIdentifier());
-    eJob->setServiceType(cJob->serviceName(), EnableServiceJob::Enable);
+    eJob->setResourceId(cJob->resourceId());
+    eJob->setServiceType(cJob->serviceType(), EnableServiceJob::Enable);
     eJob->start();
 }
 

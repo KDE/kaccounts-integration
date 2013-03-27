@@ -19,15 +19,15 @@
 #ifndef CREATE_RESOURCE_H
 #define CREATE_RESOURCE_H
 
+#include "abstractakonadijob.h"
+
 #include <Accounts/Account>
 
 #include <Akonadi/AgentType>
 #include <Akonadi/AgentInstance>
 
-#include <kjob.h>
-
 class QDBusPendingCallWatcher;
-class CreateResourceJob : public KJob
+class CreateResourceJob : public AbstractAkonadiJob
 {
     Q_OBJECT
 
@@ -37,26 +37,15 @@ class CreateResourceJob : public KJob
 
         virtual void start();
 
-        Accounts::AccountId accountId() const;
-        void setAccountId(const Accounts::AccountId &accId);
-
-        QString serviceName() const;
-        void setServiceName(const QString &serviceName);
-
         void setAgentType(const Akonadi::AgentType &type);
-
-        QString agentIdentifier() const;
 
     private Q_SLOTS:
         void resourceCreated(KJob* job);
         void setAccountDone(KJob* job);
 
     private:
-        QString m_serviceName;
-        QString m_agentIdentifier;
         Akonadi::AgentType m_type;
         Akonadi::AgentInstance m_agent;
-        Accounts::AccountId m_accountId;
 };
 
 #endif //CREATE_RESOURCE_H
