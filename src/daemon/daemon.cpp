@@ -20,6 +20,7 @@
 #include "jobs/createresourcejob.h"
 #include "jobs/removeresourcejob.h"
 #include "jobs/enableservicejob.h"
+#include "jobs/lookupakonadiservices.h"
 #include "akonadiaccounts.h"
 
 #include <QtCore/QTimer>
@@ -87,9 +88,16 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
+    QMap <QString, QString> servicesInfo;
     Q_FOREACH(const Accounts::Service &service, services) {
-        findResource(service.name(), acc->id());
+        servicesInfo.insert(service.name(), service.serviceType());
     }
+
+    LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
+    lookup->setServices(servicesInfo);
+    lookup->setAccountId(id);
+    lookup->start();
+
     delete acc;
 }
 
@@ -121,61 +129,13 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
         return;
     }
 
-    findResource(serviceName, accId);
-}
+    QMap<QString, QString> services;
+    services.insert(serviceName, m_manager->service(serviceName).serviceType());
 
-void AccountsDaemon::resourceCreated(KJob* job)
-{
-    kDebug();
-    CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
-    m_accounts->addService(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
-}
-
-void AccountsDaemon::findResource(const QString &serviceName, const Accounts::AccountId &id)
-{
-    kDebug() << serviceName;
-    QString mime = "text/x-vnd.accounts.";
-    mime.append(m_manager->service(serviceName).serviceType());
-
-    kDebug() << "Looking for: " << mime;
-    QString resourceInstance;
-    AgentType::List types = AgentManager::self()->types();
-    Q_FOREACH(const AgentType &type, types) {
-        if (!type.mimeTypes().contains(mime)) {
-            continue;
-        }
-
-        resourceInstance = m_accounts->resourceFromType(id, type.identifier());
-        if (!resourceInstance.isEmpty()) {
-            kDebug() << "Already created, enabling service:" << resourceInstance;
-            EnableServiceJob *job = new EnableServiceJob(this);
-            connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
-            job->setResourceId(resourceInstance);
-            job->setService(serviceName, EnableServiceJob::Enable);
-            job->start();
-            continue;
-        }
-
-        kDebug() << "Creating a new resource";
-        CreateResourceJob *job = new CreateResourceJob(this);
-        connect(job, SIGNAL(finished(KJob*)), SLOT(resourceCreated(KJob*)));
-
-        kDebug() << "Found one: " << id << type.name() << serviceName;
-        job->setAccountId(id);
-        job->setAgentType(type);
-        job->setServiceName(serviceName);
-        job->start();
-    }
-}
-
-void AccountsDaemon::enableServiceJobDone(KJob* job)
-{
-    if (job->error()) {
-        kDebug() << job->errorText();
-        return;
-    }
-    EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
-    AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
+    LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
+    lookup->setServices(services);
+    lookup->setAccountId(accId);
+    lookup->start();
 }
 
 void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)

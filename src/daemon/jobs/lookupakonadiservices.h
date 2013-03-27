@@ -16,46 +16,36 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
-
-#include <kdedmodule.h>
+#ifndef LOOKUP_AKONADI_SERVICES_H
+#define LOOKUP_AKONADI_SERVICES_H
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
-};
+#include <KJob>
 
-namespace Akonadi {
-    class AgentType;
-};
-
-class KJob;
 class AkonadiAccounts;
-
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class LookupAkonadiServices : public KJob
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit LookupAkonadiServices(AkonadiAccounts *accounts, QObject* parent = 0);
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
-        void disableServiceJobDone(KJob*);
+        virtual void start();
+
+        void setServices(const QMap<QString, QString> &services);
+        void setAccountId(const Accounts::AccountId &accId);
+
+    private Q_SLOTS:
+        void init();
+
+        void findResource();
+        void enableServiceJobDone(KJob *job);
+        void createResourceJobDone(KJob *job);
 
     private:
-        void monitorAccount(const Accounts::AccountId &id);
-        void removeService(const Accounts::AccountId& accId, const QString& serviceName);
-
-        Accounts::Manager* m_manager;
-        AkonadiAccounts* m_accounts;
+        AkonadiAccounts *m_accounts;
+        Accounts::AccountId m_accountId;
+        QMap<QString, QString> m_services;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //LOOKUP_AKONADI_SERVICES_H
