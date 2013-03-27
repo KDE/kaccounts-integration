@@ -19,22 +19,17 @@
 #ifndef REMOVE_RESOURCE_H
 #define REMOVE_RESOURCE_H
 
-#include <kjob.h>
+#include "abstractakonadijob.h"
 
-class RemoveResourceJob : public KJob
+class RemoveResourceJob : public AbstractAkonadiJob
 {
     Q_OBJECT
     public:
         explicit RemoveResourceJob(QObject* parent = 0);
         virtual void start();
 
-        void setResourceId(const QString &resourceId);
-
     private Q_SLOTS:
         void removeResource();
-
-    private:
-        QString m_resourceId;
 };
 
 #endif //REMOVE_RESOURCE_H

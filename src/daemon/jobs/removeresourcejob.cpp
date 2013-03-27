@@ -25,18 +25,13 @@
 using namespace Akonadi;
 
 RemoveResourceJob::RemoveResourceJob(QObject* parent)
-: KJob(parent)
+: AbstractAkonadiJob(parent)
 {
 }
 
 void RemoveResourceJob::start()
 {
     QMetaObject::invokeMethod(this, "removeResource", Qt::QueuedConnection);
-}
-
-void RemoveResourceJob::setResourceId(const QString& resourceId)
-{
-    m_resourceId = resourceId;
 }
 
 void RemoveResourceJob::removeResource()
