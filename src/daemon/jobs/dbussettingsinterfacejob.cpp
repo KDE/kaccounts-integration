@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 
-DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : KJob(parent)
+DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : AbstractAkonadiJob(parent)
 {
 
 }
@@ -50,16 +50,6 @@ void DBusSettingsInterfaceJob::init()
     QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(msg);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDone(QDBusPendingCallWatcher*)));
-}
-
-QString DBusSettingsInterfaceJob::interface() const
-{
-    return m_interface;
-}
-
-void DBusSettingsInterfaceJob::setResourceId(const QString& resourceId)
-{
-    m_resourceId = resourceId;
 }
 
 void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)

@@ -19,10 +19,12 @@
 #ifndef DBUS_SETTINGS_INTERFACE_JOB_H
 #define DBUS_SETTINGS_INTERFACE_JOB_H
 
+#include "abstractakonadijob.h"
+
 #include <kjob.h>
 
 class QDBusPendingCallWatcher;
-class DBusSettingsInterfaceJob : public KJob
+class DBusSettingsInterfaceJob : public AbstractAkonadiJob
 {
     Q_OBJECT
 
@@ -31,16 +33,9 @@ class DBusSettingsInterfaceJob : public KJob
 
         virtual void start();
 
-        QString interface() const;
-        void setResourceId(const QString &resourceId);
-
     private Q_SLOTS:
         void init();
         void introspectDone(QDBusPendingCallWatcher* watcher);
-
-    private:
-        QString m_interface;
-        QString m_resourceId;
 };
 
 #endif //DBUS_SETTINGS_PATH_JOB_H
