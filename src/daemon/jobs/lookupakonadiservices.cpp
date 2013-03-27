@@ -104,10 +104,14 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
     if (cJob->error()) {
         kDebug() << "Error creating resource for: " << cJob->serviceName();
-    } else {
-        m_accounts->addService(cJob->accountId(), cJob->serviceName(), cJob->agentIdentifier());
     }
-    findResource();
+
+    EnableServiceJob *eJob = new EnableServiceJob(this);
+    connect(eJob, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
+    eJob->setAccountId(cJob->accountId());
+    eJob->setResourceId(cJob->agentIdentifier());
+    eJob->setService(cJob->serviceName(), EnableServiceJob::Enable);
+    eJob->start();
 }
 
 void LookupAkonadiServices::enableServiceJobDone(KJob* job)
