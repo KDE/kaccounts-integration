@@ -158,5 +158,13 @@ void AccountsDaemon::disableServiceJobDone(KJob* job)
         return;
     }
     EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
+    int accId = serviceJob->property("accId").toInt();
+
     m_accounts->removeService(serviceJob->property("accId").toInt(), serviceJob->service());
+
+    if (!m_accounts->resources(accId).contains(serviceJob->resourceId())) {
+        RemoveResourceJob *rJob = new RemoveResourceJob(this);
+        rJob->setResourceId(serviceJob->resourceId());
+        rJob->start();
+    }
 }
