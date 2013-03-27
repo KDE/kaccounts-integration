@@ -67,6 +67,24 @@ void AkonadiAccounts::removeService(const Accounts::AccountId& accId, const QStr
     m_config->sync();
 }
 
+QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId)
+{
+    kDebug() << accId;
+    KConfigGroup account = group(accId);
+
+    QStringList cleaned;
+    QStringList duplicated = account.entryMap().values();
+    Q_FOREACH(const QString &resource, duplicated) {
+        if (cleaned.contains(resource)) {
+            continue;
+        }
+
+        cleaned.append(resource);
+    }
+
+    return cleaned;
+}
+
 QString AkonadiAccounts::resource(const Accounts::AccountId& accId, const QString& serviceName) const
 {
     kDebug() << accId << serviceName;

@@ -35,6 +35,7 @@ class testAkonadiAccounts : public QObject
     private Q_SLOTS:
         void testResourceWhenEmpty();
         void testAddResource();
+        void testResources();
         void testHasServices();
         void testResourceFromType();
         void testResource();
@@ -104,6 +105,12 @@ void testAkonadiAccounts::testAddResource()
     QCOMPARE(group.keyList().count(), 1);
     QVERIFY2(group.hasKey("test-calendar"), "No key for test-calendar");
     QCOMPARE(group.readEntry("test-calendar", QString()), QLatin1String("akonadi_fake_resource_117"));
+}
+
+void testAkonadiAccounts::testResources()
+{
+    QStringList resources = m_accounts->resources(10);
+    QCOMPARE(resources.count(), 1);
 }
 
 void testAkonadiAccounts::testHasServices()
