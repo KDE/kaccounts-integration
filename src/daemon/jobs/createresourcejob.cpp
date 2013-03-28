@@ -52,7 +52,6 @@ void CreateResourceJob::start()
 void CreateResourceJob::setAgentType(const AgentType& type)
 {
     m_type = type;
-    m_resourceId = type.identifier();
 }
 
 void CreateResourceJob::resourceCreated(KJob* job)
@@ -64,6 +63,7 @@ void CreateResourceJob::resourceCreated(KJob* job)
     }
 
     m_agent = qobject_cast<AgentInstanceCreateJob*>( job )->instance();
+    m_resourceId = m_agent.identifier();
     ChangeSettingsJob *setAccJob = new ChangeSettingsJob(this);
     connect(setAccJob, SIGNAL(finished(KJob*)), SLOT(setAccountDone(KJob*)));
 

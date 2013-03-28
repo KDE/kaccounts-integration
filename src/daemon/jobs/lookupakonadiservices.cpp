@@ -91,7 +91,8 @@ void LookupAkonadiServices::findResource()
         kDebug() << "Found one: " << m_accountId << type.name() << serviceName;
         job->setAccountId(m_accountId);
         job->setAgentType(type);
-        job->setServiceName(serviceType);
+        job->setServiceName(serviceName);
+        job->setServiceType(serviceType);
         job->start();
         return;
     }
