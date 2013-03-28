@@ -17,6 +17,7 @@
  *************************************************************************************/
 
 #include "daemon.h"
+#include "akonadi/akonadiservices.h"
 #include "akonadi/jobs/createresourcejob.h"
 #include "akonadi/jobs/removeresourcejob.h"
 #include "akonadi/jobs/enableservicejob.h"
@@ -59,6 +60,7 @@ AccountsDaemon::~AccountsDaemon()
 {
     delete m_manager;
     delete m_accounts;
+    delete m_akonadi;
 }
 
 void AccountsDaemon::startDaemon()
@@ -68,6 +70,8 @@ void AccountsDaemon::startDaemon()
     Q_FOREACH(const Accounts::AccountId &id, accList) {
         monitorAccount(id);
     }
+
+    m_akonadi = new AkonadiServices();
 }
 
 void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
@@ -95,10 +99,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
         servicesInfo.insert(service.name(), service.serviceType());
     }
 
-    LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
-    lookup->setServices(servicesInfo);
-    lookup->setAccountId(id);
-    lookup->start();
+    m_akonadi->serviceAdded(id, servicesInfo);
 
     delete acc;
 }
