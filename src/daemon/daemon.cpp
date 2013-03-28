@@ -17,13 +17,13 @@
  *************************************************************************************/
 
 #include "daemon.h"
-#include "jobs/createresourcejob.h"
-#include "jobs/removeresourcejob.h"
-#include "jobs/enableservicejob.h"
-#include "jobs/lookupakonadiservices.h"
-#include "jobs/removeakonadiservicesjob.h"
+#include "akonadi/jobs/createresourcejob.h"
+#include "akonadi/jobs/removeresourcejob.h"
+#include "akonadi/jobs/enableservicejob.h"
+#include "akonadi/jobs/lookupakonadiservices.h"
+#include "akonadi/jobs/removeakonadiservicesjob.h"
 
-#include "akonadiaccounts.h"
+#include "akonadi/akonadiaccounts.h"
 
 #include <QtCore/QTimer>
 
@@ -154,11 +154,14 @@ void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QStri
 
 void AccountsDaemon::disableServiceJobDone(KJob* job)
 {
+    kDebug();
     if (job->error()) {
         kDebug() << job->errorText();
         return;
     }
+
     EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
+    AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
     m_accounts->removeService(serviceJob->accountId(), serviceJob->serviceName());
 
     if (!m_accounts->resources(serviceJob->accountId()).contains(serviceJob->resourceId())) {

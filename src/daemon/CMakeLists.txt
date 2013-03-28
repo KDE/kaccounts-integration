@@ -5,16 +5,16 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
-    akonadiaccounts.cpp
-    jobs/abstractakonadijob.cpp
-    jobs/createresourcejob.cpp
-    jobs/removeresourcejob.cpp
-    jobs/changesettingsjob.cpp
-    jobs/fetchsettingsjob.cpp
-    jobs/enableservicejob.cpp
-    jobs/dbussettingsinterfacejob.cpp
-    jobs/lookupakonadiservices.cpp
-    jobs/removeakonadiservicesjob.cpp
+    akonadi/akonadiaccounts.cpp
+    akonadi/jobs/abstractakonadijob.cpp
+    akonadi/jobs/createresourcejob.cpp
+    akonadi/jobs/removeresourcejob.cpp
+    akonadi/jobs/changesettingsjob.cpp
+    akonadi/jobs/fetchsettingsjob.cpp
+    akonadi/jobs/enableservicejob.cpp
+    akonadi/jobs/dbussettingsinterfacejob.cpp
+    akonadi/jobs/lookupakonadiservices.cpp
+    akonadi/jobs/removeakonadiservicesjob.cpp
 )
 
 kde4_add_plugin(kded_accounts
