@@ -111,9 +111,12 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-    RemoveAkonadiServicesJob *job = new RemoveAkonadiServicesJob(m_accounts, this);
-    job->setAccountId(id);
-    job->start();
+    QMap <QString, QString> servicesInfo;
+    Q_FOREACH(const Accounts::Service &service, services) {
+        servicesInfo.insert(service.name(), service.serviceType());
+    }
+
+    m_akonadi->serviceRemoved(id, servicesInfo);
 
     delete acc;
 }

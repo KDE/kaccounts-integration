@@ -32,7 +32,7 @@ class AkonadiServices : public QObject
         explicit AkonadiServices(QObject* parent = 0);
 
         void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
-        void serviceRemoved(const QString &serviceName);
+        void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
 
     private:
         AkonadiAccounts* m_accounts;
