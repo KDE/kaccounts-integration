@@ -21,13 +21,24 @@
 
 #include "jobs/lookupakonadiservices.h"
 #include "jobs/removeakonadiservicesjob.h"
+#include "jobs/enableservicejob.h"
+#include "jobs/removeresourcejob.h"
 
+#include <KDebug>
+#include <Akonadi/AgentManager>
+
+using namespace Akonadi;
 
 AkonadiServices::AkonadiServices(QObject* parent)
  : QObject(parent)
  , m_accounts(new AkonadiAccounts())
 {
 
+}
+
+AkonadiServices::~AkonadiServices()
+{
+    delete m_accounts;
 }
 
 void AkonadiServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services)
@@ -43,4 +54,40 @@ void AkonadiServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QSt
     RemoveAkonadiServicesJob *job = new RemoveAkonadiServicesJob(m_accounts, this);
     job->setAccountId(accId);
     job->start();
+}
+
+void AkonadiServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+{
+    serviceAdded(accId, services);
+}
+
+void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+{
+    QString serviceName = services.keys().first();
+    EnableServiceJob *job = new EnableServiceJob(this);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
+    job->setResourceId(m_accounts->resource(accId, serviceName));
+    job->setServiceName(serviceName);
+    job->setServiceType(services.value(serviceName), EnableServiceJob::Disable);
+    job->setAccountId(accId);
+    job->start();
+}
+
+void AkonadiServices::disableServiceJobDone(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        kDebug() << job->errorText();
+        return;
+    }
+
+    EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
+    AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
+    m_accounts->removeService(serviceJob->accountId(), serviceJob->serviceName());
+
+    if (!m_accounts->resources(serviceJob->accountId()).contains(serviceJob->resourceId())) {
+        RemoveResourceJob *rJob = new RemoveResourceJob(this);
+        rJob->setResourceId(serviceJob->resourceId());
+        rJob->start();
+    }
 }

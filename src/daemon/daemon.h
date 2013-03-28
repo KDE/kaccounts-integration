@@ -27,12 +27,7 @@ namespace Accounts {
     class Manager;
 };
 
-namespace Akonadi {
-    class AgentType;
-};
-
 class KJob;
-class AkonadiAccounts;
 class AkonadiServices;
 class KDE_EXPORT AccountsDaemon : public KDEDModule
 {
@@ -48,14 +43,11 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
         void accountCreated(const Accounts::AccountId &id);
         void accountRemoved(const Accounts::AccountId &id);
         void enabledChanged(const QString &serviceName, bool enabled);
-        void disableServiceJobDone(KJob*);
 
     private:
         void monitorAccount(const Accounts::AccountId &id);
-        void removeService(const Accounts::AccountId& accId, const QString& serviceName);
 
         Accounts::Manager* m_manager;
-        AkonadiAccounts* m_accounts;
         AkonadiServices* m_akonadi;
 };
 

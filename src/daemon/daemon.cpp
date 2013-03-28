@@ -18,15 +18,6 @@
 
 #include "daemon.h"
 #include "akonadi/akonadiservices.h"
-#include "akonadi/jobs/createresourcejob.h"
-#include "akonadi/jobs/removeresourcejob.h"
-#include "akonadi/jobs/enableservicejob.h"
-#include "akonadi/jobs/lookupakonadiservices.h"
-#include "akonadi/jobs/removeakonadiservicesjob.h"
-
-#include "akonadi/akonadiaccounts.h"
-
-#include <QtCore/QTimer>
 
 #include <kdebug.h>
 #include <kdemacros.h>
@@ -38,18 +29,13 @@
 #include <Accounts/Service>
 #include <Accounts/AccountService>
 
-#include <Akonadi/AgentType>
-#include <Akonadi/AgentManager>
-
 K_PLUGIN_FACTORY(KScreenDaemonFactory, registerPlugin<AccountsDaemon>();)
 K_EXPORT_PLUGIN(KScreenDaemonFactory("accounts", "accounts"))
-
-using namespace Akonadi;
 
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
- , m_accounts(new AkonadiAccounts())
+ , m_akonadi(new AkonadiServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
@@ -59,7 +45,6 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
 AccountsDaemon::~AccountsDaemon()
 {
     delete m_manager;
-    delete m_accounts;
     delete m_akonadi;
 }
 
@@ -70,8 +55,6 @@ void AccountsDaemon::startDaemon()
     Q_FOREACH(const Accounts::AccountId &id, accList) {
         monitorAccount(id);
     }
-
-    m_akonadi = new AkonadiServices();
 }
 
 void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
@@ -130,47 +113,14 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
     }
 
     Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
-    if (!enabled) {
-        removeService(accId, serviceName);
-        return;
-    }
 
     QMap<QString, QString> services;
     services.insert(serviceName, m_manager->service(serviceName).serviceType());
 
-    LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
-    lookup->setServices(services);
-    lookup->setAccountId(accId);
-    lookup->start();
-}
-
-void AccountsDaemon::removeService(const Accounts::AccountId& accId, const QString& serviceName)
-{
-    kDebug() << accId << serviceName;
-    EnableServiceJob *job = new EnableServiceJob(this);
-    connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
-    job->setResourceId(m_accounts->resource(accId, serviceName));
-    job->setServiceName(serviceName);
-    job->setServiceType(m_manager->service(serviceName).serviceType(), EnableServiceJob::Disable);
-    job->setAccountId(accId);
-    job->start();
-}
-
-void AccountsDaemon::disableServiceJobDone(KJob* job)
-{
-    kDebug();
-    if (job->error()) {
-        kDebug() << job->errorText();
+    if (!enabled) {
+        m_akonadi->serviceDisabled(accId, services);
         return;
     }
 
-    EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
-    AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
-    m_accounts->removeService(serviceJob->accountId(), serviceJob->serviceName());
-
-    if (!m_accounts->resources(serviceJob->accountId()).contains(serviceJob->resourceId())) {
-        RemoveResourceJob *rJob = new RemoveResourceJob(this);
-        rJob->setResourceId(serviceJob->resourceId());
-        rJob->start();
-    }
+    m_akonadi->serviceEnabled(accId, services);
 }

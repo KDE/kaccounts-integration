@@ -21,18 +21,26 @@
 
 #include <QtCore/QMap>
 #include <QtCore/QString>
+#include <QtCore/QObject>
 
 #include <Accounts/Account>
 
+class KJob;
 class AkonadiAccounts;
 class AkonadiServices : public QObject
 {
     Q_OBJECT
     public:
         explicit AkonadiServices(QObject* parent = 0);
+        virtual ~AkonadiServices();
 
         void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
         void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+
+    private Q_SLOTS:
+        void disableServiceJobDone(KJob* job);
 
     private:
         AkonadiAccounts* m_accounts;
