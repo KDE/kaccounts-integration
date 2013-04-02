@@ -22,20 +22,34 @@
 #include <KJob>
 #include <KConfigGroup>
 
+namespace KWallet {
+    class Wallet;
+};
 class RemoveNetAttachJob : public KJob
 {
     Q_OBJECT
     public:
-        explicit RemoveNetAttachJob(KConfigGroup group, QObject* parent = 0);
+        explicit RemoveNetAttachJob(QObject *parent);
         virtual ~RemoveNetAttachJob();
 
         virtual void start();
 
+        QString host() const;
+        void setHost(const QString &host);
+
+        QString username() const;
+        void setUsername(const QString &username);
+
     private Q_SLOTS:
-        void removeFile();
+        void removeNetAttach();
+        void walletOpened(bool opened);
+        void deleteDesktopFile();
 
     private:
-        KConfigGroup m_config;
+        QString m_host;
+        QString m_username;
+
+        KWallet::Wallet *m_wallet;
 };
 
 #endif //OREMOVEFILE_H

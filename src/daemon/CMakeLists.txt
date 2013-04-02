@@ -18,6 +18,7 @@ set(accounts_daemon_SRCS
     akonadi/jobs/removeakonadiservicesjob.cpp
 
     kio/createnetattachjob.cpp
+    kio/removenetattachjob.cpp
 )
 
 kde4_add_plugin(kded_accounts

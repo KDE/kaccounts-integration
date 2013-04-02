@@ -18,32 +18,83 @@
 
 #include "removenetattachjob.h"
 
-#include <QFile>
+#include <QtCore/QFile>
+#include <QtGui/QWidget>
+#include <QtGui/QApplication>
 
+#include <KDebug>
+#include <KGlobal>
+#include <KStandardDirs>
+#include <KWallet/Wallet>
 #include <KDirNotify>
 
-RemoveNetAttachJob::ORemoveFile(KConfigGroup group, QObject* parent)
+using namespace KWallet;
+RemoveNetAttachJob::RemoveNetAttachJob(QObject* parent)
  : KJob(parent)
- , m_config(group)
+ , m_wallet(0)
 {
-    setObjectName(m_config.name());
-    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
 }
 
-RemoveNetAttachJob::~ORemoveFile()
+RemoveNetAttachJob::~RemoveNetAttachJob()
 {
-
+    delete m_wallet;
 }
 
 void RemoveNetAttachJob::start()
 {
-    QMetaObject::invokeMethod(this, "removeFile", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "remoteNetAttach", Qt::QueuedConnection);
 }
 
-void RemoveNetAttachJob::removeFile()
+void RemoveNetAttachJob::removeNetAttach()
 {
-    QFile::remove(m_config.group("private").readEntry("fileDesktop"));
+    WId windowId = 0;
+    if (qApp->activeWindow()) {
+        windowId = qApp->activeWindow()->winId();
+    }
+    m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Asynchronous);
+    connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+}
+
+void RemoveNetAttachJob::walletOpened(bool opened)
+{
+    kDebug();
+    if (!opened) {
+        setError(-1);
+        setErrorText("Can't open wallet");
+        emitResult();
+        return;
+    }
+
+    deleteDesktopFile();
+}
+
+void RemoveNetAttachJob::deleteDesktopFile()
+{
+    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
+    QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
+    destPath.append(m_username + "_" + m_host + ".desktop");
+
+    QFile::remove(destPath);
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
-    m_config.group("services").writeEntry("File", 0);
+
     emitResult();
+}
+
+QString RemoveNetAttachJob::host() const
+{
+    return m_host;
+}
+void RemoveNetAttachJob::setHost(const QString &host)
+{
+    m_host = host;
+}
+
+QString RemoveNetAttachJob::username() const
+{
+    return m_username;
+}
+
+void RemoveNetAttachJob::setUsername(const QString &username)
+{
+    m_username = username;
 }
