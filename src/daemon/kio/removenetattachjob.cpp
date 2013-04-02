@@ -77,6 +77,16 @@ void RemoveNetAttachJob::deleteDesktopFile()
     QFile::remove(destPath);
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
 
+    QString walletUrl("webdav");
+    walletUrl.append("-");
+    walletUrl.append(m_username);
+    walletUrl.append("@");
+    walletUrl.append(m_host);
+    walletUrl.append(":-1");//Overwrite the first option
+
+    m_wallet->setFolder("Passwords");
+    m_wallet->removeEntry(walletUrl);
+
     emitResult();
 }
 
