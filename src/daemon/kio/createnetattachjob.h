@@ -30,6 +30,7 @@ class CreateNetAttachJob : public KJob
     Q_OBJECT
     public:
         explicit CreateNetAttachJob(QObject* parent = 0);
+        virtual ~CreateNetAttachJob();
 
         virtual void start();
 

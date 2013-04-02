@@ -36,8 +36,14 @@ using namespace KWallet;
 
 CreateNetAttachJob::CreateNetAttachJob(QObject* parent)
  : KJob(parent)
+ , m_wallet(0)
 {
 
+}
+
+CreateNetAttachJob::~CreateNetAttachJob()
+{
+    delete m_wallet;
 }
 
 void CreateNetAttachJob::start()
