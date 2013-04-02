@@ -47,19 +47,43 @@ void CreateNetAttachJob::start()
 
 void CreateNetAttachJob::createNetAttach()
 {
-    
+    WId windowId = 0;
+    if (qApp->activeWindow()) {
+        windowId = qApp->activeWindow()->winId();
+    }
+    m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Asynchronous);
+    connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+}
+
+void CreateNetAttachJob::walletOpened(bool opened)
+{
+    kDebug();
+    if (!opened) {
+        setError(-1);
+        setErrorText("Can't open wallet");
+        emitResult();
+        return;
+    }
+
+    createDesktopFile();
+}
+
+void CreateNetAttachJob::createDesktopFile()
+{
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 
-    KUrl url(m_host);
+    KUrl url;
+    url.setHost(m_host);
     url.setUser(m_username);
     url.setScheme("webdav");
     url.addPath("files/webdav.php/");
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path +=  m_name + "ownCloud.desktop";
+    path +=  m_username + "_"  + m_host + ".desktop";
 
     qDebug() << "Creating knetAttach place";
     qDebug() << path;
+    qDebug() << url.host();
     qDebug() << url.prettyUrl();
 
     KConfig _desktopFile( path, KConfig::SimpleConfig );
@@ -72,8 +96,6 @@ void CreateNetAttachJob::createNetAttach()
     desktopFile.writeEntry("Charset", url.fileEncoding());
     desktopFile.sync();
 
-    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
-
     QString walletUrl(url.scheme());
     walletUrl.append("-");
     walletUrl.append(m_username);
@@ -81,29 +103,16 @@ void CreateNetAttachJob::createNetAttach()
     walletUrl.append(url.host());
     walletUrl.append(":-1");//Overwrite the first option
 
-    WId windowId = 0;
-    if (qApp->activeWindow()) {
-        windowId = qApp->activeWindow()->winId();
-    }
-    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Synchronous);
-
-    if (!wallet->isOpen() || !wallet->isEnabled()) {
-        return;
-    }
-
-    QString password;
-    wallet->setFolder("WebAccounts");
-    wallet->readPassword("owncloud-" + m_username, password);
-
     QMap<QString, QString> info;
     info["login"] = m_username;
-    info["password"] = password;
+    info["password"] = m_password;
 
-    wallet->setFolder("Passwords");
-    wallet->writeMap(walletUrl, info);
-    wallet->sync();
+    m_wallet->setFolder("Passwords");
+    m_wallet->writeMap(walletUrl, info);
+    m_wallet->sync();
 
-//     m_config.group("services").writeEntry("File", 1);
+    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
+
     emitResult();
 }
 
@@ -134,16 +143,6 @@ QString CreateNetAttachJob::password() const
 void CreateNetAttachJob::setPassword(const QString &password)
 {
     m_password = password;
-}
-
-QString CreateNetAttachJob::name() const
-{
-    return m_name;   
-}
-
-void CreateNetAttachJob::setName(const QString &name)
-{
-    m_name = name;
 }
 
 QString CreateNetAttachJob::icon() const

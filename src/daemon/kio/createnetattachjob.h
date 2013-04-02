@@ -21,6 +21,10 @@
 
 #include <KJob>
 
+namespace KWallet {
+    class Wallet;
+};
+
 class CreateNetAttachJob : public KJob
 {
     Q_OBJECT
@@ -28,7 +32,7 @@ class CreateNetAttachJob : public KJob
         explicit CreateNetAttachJob(QObject* parent = 0);
 
         virtual void start();
-        
+
         QString host() const;
         void setHost(const QString &host);
 
@@ -38,21 +42,23 @@ class CreateNetAttachJob : public KJob
         QString password() const;
         void setPassword(const QString &password);
 
-        QString name() const;
-        void setName(const QString &name);
-
         QString icon() const;
         void setIcon(const QString &icon);
 
     private Q_SLOTS:
         void createNetAttach();
+        void walletOpened(bool opened);
 
     private:
+        void createDesktopFile();
+
         QString m_host;
         QString m_username;
         QString m_password;
-        QString m_name;
+        QString m_uniqueId;
         QString m_icon;
+
+        KWallet::Wallet *m_wallet;
 };
 
 #endif //CREATE_NETATTACH_H
