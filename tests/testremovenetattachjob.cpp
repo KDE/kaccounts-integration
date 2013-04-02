@@ -37,6 +37,9 @@ class testRemoveNetAttachJob : public QObject
 
     private Q_SLOTS:
         void testRemove();
+
+    private:
+        Wallet *m_wallet;
 };
 
 
@@ -50,6 +53,14 @@ testRemoveNetAttachJob::testRemoveNetAttachJob(QObject* parent) : QObject(parent
     file.open(QIODevice::WriteOnly);
     file.write("FooBarFo");
     file.close();
+
+    QMap<QString, QString> data;
+    data["login"] = "username";
+    data["password"] = "password";
+
+    m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    m_wallet->setFolder("Passwords");
+    m_wallet->writeMap("webdav-username@host.com:-1", data);
 }
 
 void testRemoveNetAttachJob::testRemove()
@@ -63,11 +74,8 @@ void testRemoveNetAttachJob::testRemove()
     job->setUsername("username");
     job->exec();
 
-    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
-    wallet->setFolder("Passwords");
-
     QVERIFY2(!QFile::exists(destPath), "Desktop file has not been deleted");
-    QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1"), "Wallet still exists");
+    QVERIFY2(!m_wallet->hasEntry("webdav-username@host.com:-1"), "Wallet still exists");
 }
 
 QTEST_KDEMAIN_CORE(testRemoveNetAttachJob)
