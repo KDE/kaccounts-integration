@@ -16,6 +16,8 @@ set(accounts_daemon_SRCS
     akonadi/jobs/dbussettingsinterfacejob.cpp
     akonadi/jobs/lookupakonadiservices.cpp
     akonadi/jobs/removeakonadiservicesjob.cpp
+
+    kio/createnetattachjob.cpp
 )
 
 kde4_add_plugin(kded_accounts
@@ -28,6 +30,7 @@ target_link_libraries(kded_accounts
     ${QT_QTGUI_LIBRARIES}
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KDEUI_LIBS}
+    ${KDE4_KIO_LIBS}
     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
 )

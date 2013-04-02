@@ -18,15 +18,18 @@
 
 #include "createnetattachjob.h"
 
-#include <QWidget>
 #include <QApplication>
+#include <QWidget>
 
 #include <Accounts/Manager>
 
+#include <KUrl>
 #include <KGlobal>
 #include <KDirNotify>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KDebug>
 
 using namespace KWallet;
@@ -42,47 +45,28 @@ void CreateNetAttachJob::start()
     QMetaObject::invokeMethod(this, "createNetAttach", Qt::QueuedConnection);
 }
 
-void CreateNetAttachJob::setServiceName(const QString& serviceName)
-{
-    m_serviceName = serviceName;
-}
-
-void CreateNetAttachJob::setAccountId(const Accounts::AccountId& accId)
-{
-    m_accountId = accId;
-}
-
 void CreateNetAttachJob::createNetAttach()
 {
+    
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 
-    Accounts::Manager *manager = new Accounts::Manager();
-    Accounts::Account* account = manager->account(m_accountId);
-
-    KUrl url(m_config.readEntry("server", ""));
-    url.setUser(m_config.name());
+    KUrl url(m_host);
+    url.setUser(m_username);
     url.setScheme("webdav");
     url.addPath("files/webdav.php/");
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path +=  m_config.name() + "ownCloud.desktop";
+    path +=  m_name + "ownCloud.desktop";
 
-    kDebug() << "Creating knetAttach place";
-    kDebug() << path;
-    kDebug() << url.prettyUrl();
-
-    m_config.group("private").writeEntry("fileDesktop", path);
+    qDebug() << "Creating knetAttach place";
+    qDebug() << path;
+    qDebug() << url.prettyUrl();
 
     KConfig _desktopFile( path, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
-    if (m_config.readEntry("type", "") == "runnerid") {
-        desktopFile.writeEntry("Icon", "netrunnerid");
-        desktopFile.writeEntry("Name", "Runners-ID-Storage");
-    } else {
-        desktopFile.writeEntry("Icon", "owncloud");
-        desktopFile.writeEntry("Name", url.host());
-    }
+    desktopFile.writeEntry("Icon", m_icon);
+    desktopFile.writeEntry("Name", "Runners-ID-Storage");
     desktopFile.writeEntry("Type", "Link");
     desktopFile.writeEntry("URL", url.prettyUrl());
     desktopFile.writeEntry("Charset", url.fileEncoding());
@@ -92,7 +76,7 @@ void CreateNetAttachJob::createNetAttach()
 
     QString walletUrl(url.scheme());
     walletUrl.append("-");
-    walletUrl.append(m_config.name());
+    walletUrl.append(m_username);
     walletUrl.append("@");
     walletUrl.append(url.host());
     walletUrl.append(":-1");//Overwrite the first option
@@ -109,16 +93,65 @@ void CreateNetAttachJob::createNetAttach()
 
     QString password;
     wallet->setFolder("WebAccounts");
-    wallet->readPassword("owncloud-" + m_config.name(), password);
+    wallet->readPassword("owncloud-" + m_username, password);
 
     QMap<QString, QString> info;
-    info["login"] = m_config.name();
+    info["login"] = m_username;
     info["password"] = password;
 
     wallet->setFolder("Passwords");
     wallet->writeMap(walletUrl, info);
     wallet->sync();
 
-    m_config.group("services").writeEntry("File", 1);
+//     m_config.group("services").writeEntry("File", 1);
     emitResult();
+}
+
+QString CreateNetAttachJob::host() const
+{
+    return m_host;
+}
+void CreateNetAttachJob::setHost(const QString &host)
+{
+    m_host = host;
+}
+
+QString CreateNetAttachJob::username() const
+{
+    return m_username;
+}
+
+void CreateNetAttachJob::setUsername(const QString &username)
+{
+    m_username = username;
+}
+
+QString CreateNetAttachJob::password() const
+{
+    return m_password;
+}
+
+void CreateNetAttachJob::setPassword(const QString &password)
+{
+    m_password = password;
+}
+
+QString CreateNetAttachJob::name() const
+{
+    return m_name;   
+}
+
+void CreateNetAttachJob::setName(const QString &name)
+{
+    m_name = name;
+}
+
+QString CreateNetAttachJob::icon() const
+{
+    return m_icon;
+}
+
+void CreateNetAttachJob::setIcon(const QString &icon)
+{
+    m_icon = icon;
 }

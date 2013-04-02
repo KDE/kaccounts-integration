@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,43 +16,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef CREATE_NETATTACH_H
-#define CREATE_NETATTACH_H
+#include "../src/daemon/kio/createnetattachjob.h"
 
-#include <KJob>
+#include <QtTest/QtTest>
 
-class CreateNetAttachJob : public KJob
+#include <QDBusConnection>
+#include <QDBusAbstractAdaptor>
+
+class testCreateNetAttachJob : public QObject
 {
     Q_OBJECT
-    public:
-        explicit CreateNetAttachJob(QObject* parent = 0);
-
-        virtual void start();
-        
-        QString host() const;
-        void setHost(const QString &host);
-
-        QString username() const;
-        void setUsername(const QString &username);
-
-        QString password() const;
-        void setPassword(const QString &password);
-
-        QString name() const;
-        void setName(const QString &name);
-
-        QString icon() const;
-        void setIcon(const QString &icon);
 
     private Q_SLOTS:
-        void createNetAttach();
-
-    private:
-        QString m_host;
-        QString m_username;
-        QString m_password;
-        QString m_name;
-        QString m_icon;
+        void testCreate();
 };
 
-#endif //CREATE_NETATTACH_H
+
+void testCreateNetAttachJob::testCreate()
+{
+    CreateNetAttachJob *job = new CreateNetAttachJob(this);
+    job->setHost("host.com");
+    job->setUsername("username");
+    job->setPassword("password");
+    job->setName("name");
+    job->setIcon("modem");
+    job->exec();
+}
+
+QTEST_MAIN(testCreateNetAttachJob)
+
+#include "testcreatenetattachjob.moc"
