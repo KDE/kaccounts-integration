@@ -16,34 +16,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "oremovefile.h"
+#ifndef OREMOVEFILE_H
+#define OREMOVEFILE_H
 
-#include <QFile>
+#include <KJob>
+#include <KConfigGroup>
 
-#include <KDirNotify>
-
-ORemoveFile::ORemoveFile(KConfigGroup group, QObject* parent)
- : KJob(parent)
- , m_config(group)
+class RemoveNetAttachJob : public KJob
 {
-    setObjectName(m_config.name());
-    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
-}
+    Q_OBJECT
+    public:
+        explicit RemoveNetAttachJob(KConfigGroup group, QObject* parent = 0);
+        virtual ~RemoveNetAttachJob();
 
-ORemoveFile::~ORemoveFile()
-{
+        virtual void start();
 
-}
+    private Q_SLOTS:
+        void removeFile();
 
-void ORemoveFile::start()
-{
-    QMetaObject::invokeMethod(this, "removeFile", Qt::QueuedConnection);
-}
+    private:
+        KConfigGroup m_config;
+};
 
-void ORemoveFile::removeFile()
-{
-    QFile::remove(m_config.group("private").readEntry("fileDesktop"));
-    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
-    m_config.group("services").writeEntry("File", 0);
-    emitResult();
-}
+#endif //OREMOVEFILE_H

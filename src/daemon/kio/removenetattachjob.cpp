@@ -16,26 +16,34 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OCREATEFILE_H
-#define OCREATEFILE_H
+#include "removenetattachjob.h"
 
-#include <KJob>
-#include <KConfigGroup>
+#include <QFile>
 
-class OCreateFile : public KJob
+#include <KDirNotify>
+
+RemoveNetAttachJob::ORemoveFile(KConfigGroup group, QObject* parent)
+ : KJob(parent)
+ , m_config(group)
 {
-    Q_OBJECT
-    public:
-        explicit OCreateFile(KConfigGroup group, QObject* parent = 0);
-        virtual ~OCreateFile();
+    setObjectName(m_config.name());
+    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
+}
 
-        virtual void start();
+RemoveNetAttachJob::~ORemoveFile()
+{
 
-    private Q_SLOTS:
-        void createNetAttach();
+}
 
-    private:
-        KConfigGroup m_config;
-};
+void RemoveNetAttachJob::start()
+{
+    QMetaObject::invokeMethod(this, "removeFile", Qt::QueuedConnection);
+}
 
-#endif //OCREATEFILE_H
+void RemoveNetAttachJob::removeFile()
+{
+    QFile::remove(m_config.group("private").readEntry("fileDesktop"));
+    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
+    m_config.group("services").writeEntry("File", 0);
+    emitResult();
+}

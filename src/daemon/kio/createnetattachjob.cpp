@@ -16,13 +16,14 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "ocreatefile.h"
+#include "createnetattachjob.h"
 
 #include <QWidget>
 #include <QApplication>
 
+#include <Accounts/Manager>
+
 #include <KGlobal>
-#include <KConfig>
 #include <KDirNotify>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
@@ -30,26 +31,33 @@
 
 using namespace KWallet;
 
-OCreateFile::OCreateFile(KConfigGroup group, QObject* parent)
+CreateNetAttachJob::CreateNetAttachJob(QObject* parent)
  : KJob(parent)
- , m_config(group)
 {
 
 }
 
-OCreateFile::~OCreateFile()
-{
-
-}
-
-void OCreateFile::start()
+void CreateNetAttachJob::start()
 {
     QMetaObject::invokeMethod(this, "createNetAttach", Qt::QueuedConnection);
 }
 
-void OCreateFile::createNetAttach()
+void CreateNetAttachJob::setServiceName(const QString& serviceName)
+{
+    m_serviceName = serviceName;
+}
+
+void CreateNetAttachJob::setAccountId(const Accounts::AccountId& accId)
+{
+    m_accountId = accId;
+}
+
+void CreateNetAttachJob::createNetAttach()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
+
+    Accounts::Manager *manager = new Accounts::Manager();
+    Accounts::Account* account = manager->account(m_accountId);
 
     KUrl url(m_config.readEntry("server", ""));
     url.setUser(m_config.name());

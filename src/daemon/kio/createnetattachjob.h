@@ -16,26 +16,30 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OREMOVEFILE_H
-#define OREMOVEFILE_H
+#ifndef CREATE_NETATTACH_H
+#define CREATE_NETATTACH_H
 
 #include <KJob>
-#include <KConfigGroup>
 
-class ORemoveFile : public KJob
+#include <Accounts/Account>
+
+class CreateNetAttachJob : public KJob
 {
     Q_OBJECT
     public:
-        explicit ORemoveFile(KConfigGroup group, QObject* parent = 0);
-        virtual ~ORemoveFile();
+        explicit CreateNetAttachJob(QObject* parent = 0);
 
         virtual void start();
 
+        void setServiceName(const QString &serviceName);
+        void setAccountId(const Accounts::AccountId &accId);
+
     private Q_SLOTS:
-        void removeFile();
+        void createNetAttach();
 
     private:
-        KConfigGroup m_config;
+        QString m_serviceName;
+        Accounts::AccountId m_accountId;
 };
 
-#endif //OREMOVEFILE_H
+#endif //CREATE_NETATTACH_H
