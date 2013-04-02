@@ -42,7 +42,7 @@ RemoveNetAttachJob::~RemoveNetAttachJob()
 
 void RemoveNetAttachJob::start()
 {
-    QMetaObject::invokeMethod(this, "remoteNetAttach", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "removeNetAttach", Qt::QueuedConnection);
 }
 
 void RemoveNetAttachJob::removeNetAttach()
