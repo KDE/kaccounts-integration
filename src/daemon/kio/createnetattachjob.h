@@ -43,6 +43,9 @@ class CreateNetAttachJob : public KJob
         QString password() const;
         void setPassword(const QString &password);
 
+        QString uniqueId() const;
+        void setUniqueId(const QString &uniqueId);
+
         QString icon() const;
         void setIcon(const QString &icon);
 

@@ -41,13 +41,14 @@ void testCreateNetAttachJob::testCreate()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append("username_host.com.desktop");
+    destPath.append("test-unique-id.desktop");
 
     CreateNetAttachJob *job = new CreateNetAttachJob(this);
     job->setHost("host.com");
     job->setUsername("username");
     job->setPassword("password");
     job->setIcon("modem");
+    job->setUniqueId("test-unique-id");
     job->exec();
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);

@@ -47,7 +47,7 @@ testRemoveNetAttachJob::testRemoveNetAttachJob(QObject* parent) : QObject(parent
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append("username_host.com.desktop");
+    destPath.append("test-unique-id.desktop");
 
     QFile file(destPath);
     file.open(QIODevice::WriteOnly);
@@ -67,11 +67,12 @@ void testRemoveNetAttachJob::testRemove()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append("username_host.com.desktop");
+    destPath.append("test-unique-id.desktop");
 
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
     job->setHost("host.com");
     job->setUsername("username");
+    job->setUniqueId("test-unique-id");
     job->exec();
 
     QVERIFY2(!QFile::exists(destPath), "Desktop file has not been deleted");

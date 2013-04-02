@@ -72,7 +72,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append(m_username + "_" + m_host + ".desktop");
+    destPath.append(m_uniqueId + ".desktop");
 
     QFile::remove(destPath);
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
@@ -107,4 +107,14 @@ QString RemoveNetAttachJob::username() const
 void RemoveNetAttachJob::setUsername(const QString &username)
 {
     m_username = username;
+}
+
+QString RemoveNetAttachJob::uniqueId() const
+{
+    return m_uniqueId;
+}
+
+void RemoveNetAttachJob::setUniqueId(const QString& uniqueId)
+{
+    m_uniqueId = uniqueId;
 }

@@ -85,7 +85,7 @@ void CreateNetAttachJob::createDesktopFile()
     url.addPath("files/webdav.php/");
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path +=  m_username + "_"  + m_host + ".desktop";
+    path += m_uniqueId + ".desktop";
 
     qDebug() << "Creating knetAttach place";
     qDebug() << path;
@@ -149,6 +149,16 @@ QString CreateNetAttachJob::password() const
 void CreateNetAttachJob::setPassword(const QString &password)
 {
     m_password = password;
+}
+
+QString CreateNetAttachJob::uniqueId() const
+{
+    return m_uniqueId;
+}
+
+void CreateNetAttachJob::setUniqueId(const QString& uniqueId)
+{
+    m_uniqueId = uniqueId;
 }
 
 QString CreateNetAttachJob::icon() const
