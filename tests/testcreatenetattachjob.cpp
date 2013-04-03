@@ -24,6 +24,7 @@
 #include <KStandardDirs>
 #include <KWallet/Wallet>
 #include <KDirWatch>
+#include <KConfigGroup>
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
 
@@ -58,6 +59,14 @@ void testCreateNetAttachJob::testCreate()
 
     QVERIFY2(QFile::exists(destPath), "Desktop file has not been created");
     QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1"), "Wallet entry does not exists");
+
+    KConfig _desktopFile(destPath, KConfig::SimpleConfig );
+    KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
+    QCOMPARE(desktopFile.readEntry("Icon", ""), QLatin1String("modem"));
+    QCOMPARE(desktopFile.readEntry("Name", ""), QLatin1String("test-service"));
+    QCOMPARE(desktopFile.readEntry("Type", ""), QLatin1String("Link"));
+    QCOMPARE(desktopFile.readEntry("URL", ""), QLatin1String("webdav://username@host.com/files/webdav.php/"));
+    QCOMPARE(desktopFile.readEntry("Charset", ""), QLatin1String(""));
 
     QMap<QString, QString> data;
     int result = wallet->readMap("webdav-username@host.com:-1", data);
