@@ -82,7 +82,7 @@ void CreateNetAttachJob::createDesktopFile()
     url.setHost(m_host);
     url.setUser(m_username);
     url.setScheme("webdav");
-    url.addPath("files/webdav.php/");
+    url.addPath(m_path);
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
     path += m_uniqueId + ".desktop";
@@ -96,7 +96,7 @@ void CreateNetAttachJob::createDesktopFile()
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
     desktopFile.writeEntry("Icon", m_icon);
-    desktopFile.writeEntry("Name", "Runners-ID-Storage");
+    desktopFile.writeEntry("Name", m_name);
     desktopFile.writeEntry("Type", "Link");
     desktopFile.writeEntry("URL", url.prettyUrl());
     desktopFile.writeEntry("Charset", url.fileEncoding());
@@ -129,6 +129,26 @@ QString CreateNetAttachJob::host() const
 void CreateNetAttachJob::setHost(const QString &host)
 {
     m_host = host;
+}
+
+QString CreateNetAttachJob::path() const
+{
+    return m_path;
+}
+
+void CreateNetAttachJob::setPath(const QString& path)
+{
+    m_path = path;
+}
+
+QString CreateNetAttachJob::name() const
+{
+    return m_name;
+}
+
+void CreateNetAttachJob::setName(const QString& name)
+{
+    m_name = name;
 }
 
 QString CreateNetAttachJob::username() const

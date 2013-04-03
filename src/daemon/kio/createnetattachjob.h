@@ -37,6 +37,12 @@ class CreateNetAttachJob : public KJob
         QString host() const;
         void setHost(const QString &host);
 
+        QString path() const;
+        void setPath(const QString &path);
+
+        QString name() const;
+        void setName(const QString &name);
+
         QString username() const;
         void setUsername(const QString &username);
 
@@ -57,6 +63,8 @@ class CreateNetAttachJob : public KJob
         void createDesktopFile();
 
         QString m_host;
+        QString m_path;
+        QString m_name;
         QString m_username;
         QString m_password;
         QString m_uniqueId;

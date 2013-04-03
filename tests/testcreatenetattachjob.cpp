@@ -49,6 +49,8 @@ void testCreateNetAttachJob::testCreate()
     job->setPassword("password");
     job->setIcon("modem");
     job->setUniqueId("test-unique-id");
+    job->setPath("files/webdav.php/");
+    job->setName("test-service");
     job->exec();
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
