@@ -29,6 +29,7 @@
 #include <KStandardDirs>
 #include <KWallet/Wallet>
 #include <KConfig>
+#include <KIO/Job>
 #include <KConfigGroup>
 #include <KDebug>
 
@@ -53,11 +54,13 @@ void CreateNetAttachJob::start()
 
 void CreateNetAttachJob::createNetAttach()
 {
+    kDebug();
     WId windowId = 0;
     if (qApp->activeWindow()) {
         windowId = qApp->activeWindow()->winId();
     }
     m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Asynchronous);
+
     connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
 }
 
@@ -71,18 +74,49 @@ void CreateNetAttachJob::walletOpened(bool opened)
         return;
     }
 
-    createDesktopFile();
+    getRealm();
 }
 
-void CreateNetAttachJob::createDesktopFile()
+void CreateNetAttachJob::getRealm()
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-
+    kDebug();
     KUrl url;
     url.setHost(m_host);
     url.setUser(m_username);
     url.setScheme("webdav");
     url.addPath(m_path);
+
+    if (!m_realm.isEmpty()) {
+        createDesktopFile(url);
+        return;
+    }
+
+    KIO::TransferJob* job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(gotRealm(KJob*)));
+    KIO::MetaData data;
+    data.insert("PropagateHttpHeader", "true");
+    job->setMetaData(data);
+    job->setUiDelegate(0);
+    job->start();
+}
+
+void CreateNetAttachJob::gotRealm(KJob* job)
+{
+    KIO::TransferJob* hJob = qobject_cast<KIO::TransferJob*>(job);
+    QRegExp rx("www-authenticate: Basic realm=\"(\\S+)\"\n");
+    QString headers = hJob->metaData().value("HTTP-Headers");
+    if (rx.indexIn(headers) != -1) {
+        m_realm = rx.cap(1);
+    }
+
+    createDesktopFile(hJob->url());
+}
+
+
+void CreateNetAttachJob::createDesktopFile(const KUrl &url)
+{
+    kDebug();
+    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
     path += m_uniqueId + ".desktop";
@@ -107,7 +141,12 @@ void CreateNetAttachJob::createDesktopFile()
     walletUrl.append(m_username);
     walletUrl.append("@");
     walletUrl.append(url.host());
-    walletUrl.append(":-1");//Overwrite the first option
+    walletUrl.append(":-1-");//Overwrite the first option
+    if (!m_realm.isEmpty()) {
+        walletUrl.append(m_realm);
+    } else {
+        walletUrl.append("webdav");
+    }
 
     QMap<QString, QString> info;
     info["login"] = m_username;
@@ -139,6 +178,16 @@ QString CreateNetAttachJob::path() const
 void CreateNetAttachJob::setPath(const QString& path)
 {
     m_path = path;
+}
+
+QString CreateNetAttachJob::realm() const
+{
+    return m_realm;
+}
+
+void CreateNetAttachJob::setRealm(const QString &realm)
+{
+    m_realm = realm;
 }
 
 QString CreateNetAttachJob::name() const

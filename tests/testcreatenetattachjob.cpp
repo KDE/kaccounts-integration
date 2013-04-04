@@ -52,13 +52,14 @@ void testCreateNetAttachJob::testCreate()
     job->setUniqueId("test-unique-id");
     job->setPath("files/webdav.php/");
     job->setName("test-service");
+    job->setRealm("testRealm");
     job->exec();
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("Passwords");
 
     QVERIFY2(QFile::exists(destPath), "Desktop file has not been created");
-    QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1"), "Wallet entry does not exists");
+    QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet entry does not exists");
 
     KConfig _desktopFile(destPath, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
@@ -69,7 +70,7 @@ void testCreateNetAttachJob::testCreate()
     QCOMPARE(desktopFile.readEntry("Charset", ""), QLatin1String(""));
 
     QMap<QString, QString> data;
-    int result = wallet->readMap("webdav-username@host.com:-1", data);
+    int result = wallet->readMap("webdav-username@host.com:-1-testRealm", data);
     QCOMPARE(result, 0);
 
     QVERIFY2(data.keys().contains("login"), "Login data is not stored in the wallet");
