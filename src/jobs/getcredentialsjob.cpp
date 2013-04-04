@@ -53,6 +53,13 @@ void GetCredentialsJob::getCredentials()
     m_authData = authData.parameters();
     SignOn::Identity* identity = SignOn::Identity::existingIdentity(authData.credentialsId(), this);
 
+    if (!identity) {
+        setError(-1);
+        setErrorText("Could not find credentials");
+        emitResult();
+        return;
+    }
+
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authData.method());
 
     connect(authSession, SIGNAL(response(SignOn::SessionData)),
