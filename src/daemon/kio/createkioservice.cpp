@@ -1,0 +1,118 @@
+/*************************************************************************************
+ *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *                                                                                   *
+ *  This program is free software; you can redistribute it and/or                    *
+ *  modify it under the terms of the GNU General Public License                      *
+ *  as published by the Free Software Foundation; either version 2                   *
+ *  of the License, or (at your option) any later version.                           *
+ *                                                                                   *
+ *  This program is distributed in the hope that it will be useful,                  *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ *  GNU General Public License for more details.                                     *
+ *                                                                                   *
+ *  You should have received a copy of the GNU General Public License                *
+ *  along with this program; if not, write to the Free Software                      *
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
+ *************************************************************************************/
+
+#include "createkioservice.h"
+#include "createnetattachjob.h"
+#include "../jobs/getcredentialsjob.h"
+
+#include <KDebug>
+#include <Accounts/Manager>
+
+CreateKioService::CreateKioService(QObject* parent) : KJob(parent)
+{
+
+}
+
+CreateKioService::~CreateKioService()
+{
+    delete m_account;
+    delete m_manager;
+}
+
+void CreateKioService::start()
+{
+    QMetaObject::invokeMethod(this, "createKioService", Qt::QueuedConnection);
+}
+
+void CreateKioService::createKioService()
+{
+    kDebug();
+    m_manager = new Accounts::Manager();
+    m_account = m_manager->account(m_accountId);
+
+    GetCredentialsJob *job = new GetCredentialsJob(m_accountId, this);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(gotCredentials(KJob*)));
+    job->setServiceType(m_serviceType);
+    job->start();
+}
+
+void CreateKioService::gotCredentials(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        setError(job->error());
+        setErrorText(job->errorText());
+        emitResult();
+        return;
+    }
+
+    GetCredentialsJob *gjob = qobject_cast<GetCredentialsJob*>(job);
+    QVariantMap data = gjob->credentialsData();
+
+    Accounts::Service service = m_manager->service(m_serviceName);
+    m_account->selectService(service);
+
+    QString username = data["UserName"].toString();
+    QString host = m_account->value("dav/host").toString();
+    CreateNetAttachJob *netJob = new CreateNetAttachJob(this);
+    connect(netJob, SIGNAL(finished(KJob*)), SLOT(netAttachCreated(KJob*)));
+
+    netJob->setHost(host);
+    netJob->setPath(m_account->value("dav/path").toString());
+    netJob->setUsername(username);
+    netJob->setPassword(data["Secret"].toString());
+    netJob->setIcon(service.iconName());
+    netJob->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
+    netJob->setName(m_manager->provider(service.provider()).displayName() + " " + service.displayName());
+    netJob->start();
+}
+
+void CreateKioService::netAttachCreated(KJob* job)
+{
+    emitResult();
+}
+
+Accounts::AccountId CreateKioService::accountId() const
+{
+    return m_accountId;
+}
+
+void CreateKioService::setAccountId(const Accounts::AccountId& accId)
+{
+    m_accountId = accId;
+}
+
+QString CreateKioService::serviceName() const
+{
+    return m_serviceName;
+}
+
+void CreateKioService::setServiceName(const QString& serviceName)
+{
+    m_serviceName = serviceName;
+}
+
+QString CreateKioService::serviceType() const
+{
+    return m_serviceType;
+}
+
+void CreateKioService::setServiceType(const QString& serviceType)
+{
+    m_serviceType = serviceType;
+}

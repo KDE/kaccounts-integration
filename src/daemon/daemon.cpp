@@ -18,6 +18,7 @@
 
 #include "daemon.h"
 #include "akonadi/akonadiservices.h"
+#include "kio/kioservices.h"
 
 #include <kdebug.h>
 #include <kdemacros.h>
@@ -36,6 +37,7 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
  , m_akonadi(new AkonadiServices(this))
+ , m_kio(new KIOServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
@@ -83,6 +85,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     }
 
     m_akonadi->serviceAdded(id, servicesInfo);
+    m_kio->serviceAdded(id, servicesInfo);
 
     delete acc;
 }
@@ -100,6 +103,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     }
 
     m_akonadi->serviceRemoved(id, servicesInfo);
+    m_kio->serviceRemoved(id, servicesInfo);
 
     delete acc;
 }
@@ -119,8 +123,10 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 
     if (!enabled) {
         m_akonadi->serviceDisabled(accId, services);
+        m_kio->serviceDisabled(accId, services);
         return;
     }
 
     m_akonadi->serviceEnabled(accId, services);
+    m_kio->serviceEnabled(accId, services);
 }

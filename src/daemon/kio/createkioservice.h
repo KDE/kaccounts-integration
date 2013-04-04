@@ -16,10 +16,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef CREATE_KIOSERVICE_H
+#define CREATE_KIOSERVICE_H
 
-#include <kdedmodule.h>
+#include <KJob>
 
 #include <Accounts/Account>
 
@@ -27,30 +27,41 @@ namespace Accounts {
     class Manager;
 };
 
-class KJob;
-class KIOServices;
-class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
-{
-    Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
-    public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
-
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
-
-    private:
-        void monitorAccount(const Accounts::AccountId &id);
-
-        Accounts::Manager* m_manager;
-        AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+namespace KWallet {
+    class Wallet;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+class CreateKioService : public KJob
+{
+    Q_OBJECT
+    public:
+        explicit CreateKioService(QObject* parent = 0);
+        virtual ~CreateKioService();
+
+        virtual void start();
+
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accId);
+
+        QString serviceName() const;
+        void setServiceName(const QString &serviceName);
+
+        QString serviceType() const;
+        void setServiceType(const QString &serviceType);
+
+    private Q_SLOTS:
+        void createKioService();
+        void gotCredentials(KJob *job);
+        void netAttachCreated(KJob *job);
+
+    private:
+        void createDesktopFile();
+
+        Accounts::Manager *m_manager;
+        Accounts::Account *m_account;
+        Accounts::AccountId m_accountId;
+        QString m_serviceName;
+        QString m_serviceType;
+};
+
+#endif //CREATE_KIOSERVICE_H

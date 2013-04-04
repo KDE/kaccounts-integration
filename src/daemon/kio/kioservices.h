@@ -16,41 +16,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef KIO_SERVICES_H
+#define KIO_SERVICES_H
 
-#include <kdedmodule.h>
+#include <QtCore/QMap>
+#include <QtCore/QString>
+#include <QtCore/QObject>
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
-};
-
 class KJob;
-class KIOServices;
-class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class AkonadiAccounts;
+class KIOServices : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit KIOServices(QObject* parent = 0);
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
-
-    private:
-        void monitorAccount(const Accounts::AccountId &id);
-
-        Accounts::Manager* m_manager;
-        AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+        void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //KIO_SERVICES_H

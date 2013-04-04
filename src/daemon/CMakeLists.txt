@@ -17,8 +17,12 @@ set(accounts_daemon_SRCS
     akonadi/jobs/lookupakonadiservices.cpp
     akonadi/jobs/removeakonadiservicesjob.cpp
 
+    kio/kioservices.cpp
     kio/createnetattachjob.cpp
     kio/removenetattachjob.cpp
+    kio/createkioservice.cpp
+    kio/removekioservice.cpp
+    ../jobs/getcredentialsjob.cpp
 )
 
 kde4_add_plugin(kded_accounts
@@ -34,6 +38,7 @@ target_link_libraries(kded_accounts
     ${KDE4_KIO_LIBS}
     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
+    ${SIGNONQT_LIBRARIES}
 )
 
 install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
