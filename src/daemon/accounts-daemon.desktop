@@ -2,6 +2,8 @@
 Name=Accounts
 Name[cs]=Účty
 Name[de]=Zugänge
+Name[es]=Cuentas
+Name[mr]=खाते
 Name[nl]=Accounts
 Name[pt]=Contas
 Name[pt_BR]=Contas
@@ -12,6 +14,8 @@ Name[x-test]=xxAccountsxx
 Comment=Accounts management
 Comment[cs]=Správa účtů
 Comment[de]=Zugangs-Verwaltung
+Comment[es]=Gestión de cuentas
+Comment[mr]=खाते व्यवस्थापन
 Comment[nl]=Beheer van accounts
 Comment[pt]=Gestão de contas
 Comment[pt_BR]=Gerenciamento de contas
