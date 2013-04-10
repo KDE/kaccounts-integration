@@ -23,12 +23,12 @@
 
 #include <KPixmapSequenceOverlayPainter>
 
-#include <kfacebook/authenticationdialog.h>
+#include <libkfbapi/authenticationdialog.h>
 
 #include <KDebug>
 #include <KIO/Job>
 
-using namespace KFacebook;
+using namespace KFbAPI;
 FOauth::FOauth(FacebookWizard* parent)
  : QWizardPage(parent)
  , m_valid(false)
