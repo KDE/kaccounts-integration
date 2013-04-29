@@ -27,6 +27,7 @@
 #include <KDirNotify>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
+#include <kio/job.h>
 #include <KDebug>
 
 using namespace KWallet;
@@ -45,7 +46,36 @@ OCreateFile::~OCreateFile()
 
 void OCreateFile::start()
 {
-    QMetaObject::invokeMethod(this, "createNetAttach", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, "getRealm", Qt::QueuedConnection);
+}
+
+void OCreateFile::getRealm()
+{
+    kDebug();
+    KUrl url(m_config.readEntry("server", ""));
+    url.setUser(m_config.name());
+    url.setScheme("webdav");
+    url.addPath("files/webdav.php/");
+
+    KIO::TransferJob* job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(gotRealm(KJob*)));
+    KIO::MetaData data;
+    data.insert("PropagateHttpHeader", "true");
+    job->setMetaData(data);
+    job->setUiDelegate(0);
+    job->start();
+}
+
+void OCreateFile::gotRealm(KJob* job)
+{
+    KIO::TransferJob* hJob = qobject_cast<KIO::TransferJob*>(job);
+    QRegExp rx("www-authenticate: Basic realm=\"(\\S+)\"\n");
+    QString headers = hJob->metaData().value("HTTP-Headers");
+    if (rx.indexIn(headers) != -1) {
+        m_realm = rx.cap(1);
+    }
+
+    createNetAttach();
 }
 
 void OCreateFile::createNetAttach()
@@ -101,6 +131,11 @@ void OCreateFile::createNetAttach()
     walletUrl.append("@");
     walletUrl.append(url.host());
     walletUrl.append(":-1");//Overwrite the first option
+    if (!m_realm.isEmpty()) {
+        walletUrl.append(m_realm);
+    } else {
+        walletUrl.append("webdav");
+    }
 
     WId windowId = 0;
     if (qApp->activeWindow()) {

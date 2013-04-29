@@ -32,9 +32,12 @@ class OCreateFile : public KJob
         virtual void start();
 
     private Q_SLOTS:
+        void getRealm();
+        void gotRealm(KJob* job);
         void createNetAttach();
 
     private:
+        QString m_realm;
         KConfigGroup m_config;
 };
 
