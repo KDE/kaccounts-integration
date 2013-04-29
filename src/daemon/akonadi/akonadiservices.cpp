@@ -20,6 +20,7 @@
 #include "akonadiaccounts.h"
 
 #include "jobs/lookupakonadiservices.h"
+#include "jobs/removeakonadiservicesjob.h"
 
 
 AkonadiServices::AkonadiServices(QObject* parent)
@@ -37,7 +38,9 @@ void AkonadiServices::serviceAdded(const Accounts::AccountId& accId, QMap< QStri
     lookup->start();
 }
 
-void AkonadiServices::serviceRemoved(const QString& serviceName)
+void AkonadiServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
-
+    RemoveAkonadiServicesJob *job = new RemoveAkonadiServicesJob(m_accounts, this);
+    job->setAccountId(accId);
+    job->start();
 }
