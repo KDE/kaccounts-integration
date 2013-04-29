@@ -16,47 +16,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef AKONADI_SERVICES_H
+#define AKONADI_SERVICES_H
 
-#include <kdedmodule.h>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
-};
-
-namespace Akonadi {
-    class AgentType;
-};
-
-class KJob;
 class AkonadiAccounts;
-class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class AkonadiServices : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit AkonadiServices(QObject* parent = 0);
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
-        void disableServiceJobDone(KJob*);
+        void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceRemoved(const QString &serviceName);
 
     private:
-        void monitorAccount(const Accounts::AccountId &id);
-        void removeService(const Accounts::AccountId& accId, const QString& serviceName);
-
-        Accounts::Manager* m_manager;
         AkonadiAccounts* m_accounts;
-        AkonadiServices* m_akonadi;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //AKONADI_SERVICES_H
