@@ -18,7 +18,7 @@
 
 #include "removeakonadiservicesjob.h"
 #include "removeresourcejob.h"
-#include "akonadiaccounts.h"
+#include "../akonadiaccounts.h"
 
 #include <KDebug>
 #include <Akonadi/AgentManager>

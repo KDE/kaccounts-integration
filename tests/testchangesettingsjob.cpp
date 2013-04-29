@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
-#include "../src/daemon/jobs/changesettingsjob.h"
+#include "../src/daemon/akonadi/jobs/changesettingsjob.h"
 
 #include <QtTest/QtTest>
 

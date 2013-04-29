@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
-#include "../src/daemon/jobs/dbussettingsinterfacejob.h"
+#include "../src/daemon/akonadi/jobs/dbussettingsinterfacejob.h"
 
 #include <QtTest/QtTest>
 

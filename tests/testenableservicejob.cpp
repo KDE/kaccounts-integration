@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "fakeresource.h"
-#include "../src/daemon/jobs/enableservicejob.h"
+#include "../src/daemon/akonadi/jobs/enableservicejob.h"
 
 #include <QtTest/QtTest>
 

@@ -19,7 +19,7 @@
 #include "lookupakonadiservices.h"
 #include "enableservicejob.h"
 #include "createresourcejob.h"
-#include "akonadiaccounts.h"
+#include "../akonadiaccounts.h"
 
 #include <KDebug>
 #include <Akonadi/AgentManager>
