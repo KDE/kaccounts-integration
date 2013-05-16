@@ -85,7 +85,13 @@ void RemoveNetAttachJob::deleteDesktopFile()
     walletUrl.append(":-1");//Overwrite the first option
 
     m_wallet->setFolder("Passwords");
-    m_wallet->removeEntry(walletUrl);
+    QStringList entries = m_wallet->entryList();
+    Q_FOREACH(const QString &entry, entries) {
+        if (!entry.startsWith(walletUrl)) {
+            continue;
+        }
+        m_wallet->removeEntry(entry);
+    }
 
     emitResult();
 }
