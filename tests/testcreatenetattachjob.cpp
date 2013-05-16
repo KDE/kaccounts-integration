@@ -72,6 +72,8 @@ void testCreateNetAttachJob::testCreate()
     QMap<QString, QString> data;
     int result = wallet->readMap("webdav-username@host.com:-1-testRealm", data);
     QCOMPARE(result, 0);
+    result = wallet->readMap("webdav-username@host.com:-1-webdav", data);
+    QCOMPARE(result, 0);
 
     QVERIFY2(data.keys().contains("login"), "Login data is not stored in the wallet");
     QVERIFY2(data.keys().contains("password"), "Password data is not stored in the wallet");
