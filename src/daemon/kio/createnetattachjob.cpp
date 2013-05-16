@@ -142,18 +142,17 @@ void CreateNetAttachJob::createDesktopFile(const KUrl &url)
     walletUrl.append("@");
     walletUrl.append(url.host());
     walletUrl.append(":-1-");//Overwrite the first option
-    if (!m_realm.isEmpty()) {
-        walletUrl.append(m_realm);
-    } else {
-        walletUrl.append("webdav");
-    }
 
     QMap<QString, QString> info;
     info["login"] = m_username;
     info["password"] = m_password;
 
     m_wallet->setFolder("Passwords");
-    m_wallet->writeMap(walletUrl, info);
+
+    if (!m_realm.isEmpty()) {
+        m_wallet->writeMap(walletUrl + m_realm, info);
+    }
+    m_wallet->writeMap(walletUrl + "webdav", info);
     m_wallet->sync();
 
     org::kde::KDirNotify::emitFilesAdded( "remote:/" );
