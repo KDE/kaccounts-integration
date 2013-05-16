@@ -24,7 +24,7 @@
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
-#include <KDirWatch>
+#include <KDirNotify>
 #include <KConfigGroup>
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
@@ -34,17 +34,37 @@ class testCreateNetAttachJob : public QObject
 {
     Q_OBJECT
 
+    public:
+        explicit testCreateNetAttachJob(QObject* parent = 0);
     private Q_SLOTS:
         void testCreate();
         void testRemove();
+    private:
+        void enterLoop();
+
+        QTimer m_timer;
+        QEventLoop m_eventLoop;
 };
 
+testCreateNetAttachJob::testCreateNetAttachJob(QObject* parent): QObject(parent)
+{
+    m_timer.setSingleShot(true);
+    m_timer.setInterval(10000);// 10 seconds timeout for eventloop
+
+    connect(&m_timer, SIGNAL(timeout()), &m_eventLoop, SLOT(quit()));
+}
 
 void testCreateNetAttachJob::testCreate()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
     destPath.append("test-unique-id.desktop");
+
+    org::kde::KDirNotify *watch = new org::kde::KDirNotify(
+    QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
+    connect(watch, SIGNAL(FilesAdded(QString)), &m_eventLoop, SLOT(quit()));
+
+    QSignalSpy signalSpy(watch, SIGNAL(FilesAdded(QString)));
 
     CreateNetAttachJob *job = new CreateNetAttachJob(this);
     job->setHost("host.com");
@@ -56,6 +76,10 @@ void testCreateNetAttachJob::testCreate()
     job->setName("test-service");
     job->setRealm("testRealm");
     job->exec();
+
+    enterLoop();
+
+    QCOMPARE(signalSpy.count(), 1);
 
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("Passwords");
@@ -82,6 +106,7 @@ void testCreateNetAttachJob::testCreate()
     QVERIFY2(data.keys().contains("password"), "Password data is not stored in the wallet");
     QCOMPARE(data["login"], QLatin1String("username"));
     QCOMPARE(data["password"], QLatin1String("password"));
+
 }
 
 void testCreateNetAttachJob::testRemove()
@@ -102,6 +127,12 @@ void testCreateNetAttachJob::testRemove()
     QVERIFY2(!QFile::exists(destPath), "Desktop file has not been removed");
     QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet realm entry still exists");
     QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1-webdav"), "Wallet schema entry still exists");
+}
+
+void testCreateNetAttachJob::enterLoop()
+{
+    m_timer.start();
+    m_eventLoop.exec();
 }
 
 QTEST_KDEMAIN_CORE(testCreateNetAttachJob)
