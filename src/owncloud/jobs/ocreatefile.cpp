@@ -57,6 +57,7 @@ void OCreateFile::getRealm()
     url.setScheme("webdav");
     url.addPath("files/webdav.php/");
 
+    kDebug() << url;
     KIO::TransferJob* job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(finished(KJob*)), SLOT(gotRealm(KJob*)));
     KIO::MetaData data;
@@ -130,12 +131,7 @@ void OCreateFile::createNetAttach()
     walletUrl.append(m_config.name());
     walletUrl.append("@");
     walletUrl.append(url.host());
-    walletUrl.append(":-1");//Overwrite the first option
-    if (!m_realm.isEmpty()) {
-        walletUrl.append(m_realm);
-    } else {
-        walletUrl.append("webdav");
-    }
+    walletUrl.append(":-1-");//Overwrite the first option
 
     WId windowId = 0;
     if (qApp->activeWindow()) {
@@ -156,7 +152,10 @@ void OCreateFile::createNetAttach()
     info["password"] = password;
 
     wallet->setFolder("Passwords");
-    wallet->writeMap(walletUrl, info);
+    if (!m_realm.isEmpty()) {
+        wallet->writeMap(walletUrl + m_realm, info);
+    }
+    wallet->writeMap(walletUrl + "webdav", info);
     wallet->sync();
 
     m_config.group("services").writeEntry("File", 1);
