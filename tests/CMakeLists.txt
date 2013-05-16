@@ -52,6 +52,7 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 kde4_add_unit_test(${testname} ${testname}.cpp ../src/daemon/akonadi/akonadiaccounts.cpp)
 target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS})
 
+set(testname testnetattachjobs)
 set(testname testcreatenetattachjob)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 kde4_add_unit_test(${testname} ${testname}.cpp
