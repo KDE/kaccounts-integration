@@ -75,7 +75,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
     destPath.append(m_uniqueId + ".desktop");
 
     QFile::remove(destPath);
-    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
+    org::kde::KDirNotify::emitFilesRemoved(QStringList("remote:/"));
 
     QString walletUrl("webdav");
     walletUrl.append("-");
