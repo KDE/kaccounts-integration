@@ -17,6 +17,7 @@
  *************************************************************************************/
 
 #include "../src/daemon/kio/createnetattachjob.h"
+#include "../src/daemon/kio/removenetattachjob.h"
 
 #include <qtest_kde.h>
 
@@ -35,6 +36,7 @@ class testCreateNetAttachJob : public QObject
 
     private Q_SLOTS:
         void testCreate();
+        void testRemove();
 };
 
 
@@ -59,7 +61,8 @@ void testCreateNetAttachJob::testCreate()
     wallet->setFolder("Passwords");
 
     QVERIFY2(QFile::exists(destPath), "Desktop file has not been created");
-    QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet entry does not exists");
+    QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet realm entry does not exists");
+    QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-webdav"), "Wallet schema entry does not exists");
 
     KConfig _desktopFile(destPath, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
@@ -79,7 +82,26 @@ void testCreateNetAttachJob::testCreate()
     QVERIFY2(data.keys().contains("password"), "Password data is not stored in the wallet");
     QCOMPARE(data["login"], QLatin1String("username"));
     QCOMPARE(data["password"], QLatin1String("password"));
+}
 
+void testCreateNetAttachJob::testRemove()
+{
+    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
+    QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
+    destPath.append("test-unique-id.desktop");
+
+    RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
+    job->setHost("host.com");
+    job->setUsername("username");
+    job->setUniqueId("test-unique-id");
+    job->exec();
+
+    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+    wallet->setFolder("Passwords");
+
+    QVERIFY2(!QFile::exists(destPath), "Desktop file has not been removed");
+    QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet realm entry still exists");
+    QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1-webdav"), "Wallet schema entry still exists");
 }
 
 QTEST_KDEMAIN_CORE(testCreateNetAttachJob)
