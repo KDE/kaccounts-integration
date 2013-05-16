@@ -115,12 +115,20 @@ void testCreateNetAttachJob::testRemove()
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
     destPath.append("test-unique-id.desktop");
 
+    org::kde::KDirNotify *watch = new org::kde::KDirNotify(
+    QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
+    connect(watch, SIGNAL(FilesRemoved(QStringList)), &m_eventLoop, SLOT(quit()));
+
+    QSignalSpy signalSpy(watch, SIGNAL(FilesRemoved(QStringList)));
+
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
     job->setHost("host.com");
     job->setUsername("username");
     job->setUniqueId("test-unique-id");
     job->exec();
 
+    enterLoop();
+    QCOMPARE(signalSpy.count(), 1);
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("Passwords");
 
