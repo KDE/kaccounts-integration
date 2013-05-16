@@ -145,7 +145,11 @@ void OCreateFile::createNetAttach()
 
     QString password;
     wallet->setFolder("WebAccounts");
-    wallet->readPassword("owncloud-" + m_config.name(), password);
+    if (m_config.readEntry("type", "") == "runnerid") {
+        wallet->readPassword("runnerid-" + m_config.name(), password);
+    } else {
+        wallet->readPassword("owncloud-" + m_config.name(), password);
+    }
 
     QMap<QString, QString> info;
     info["login"] = m_config.name();
