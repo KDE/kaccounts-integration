@@ -129,6 +129,7 @@ void testCreateNetAttachJob::testRemove()
 
     enterLoop();
     QCOMPARE(signalSpy.count(), 1);
+    QCOMPARE(signalSpy.first().first().toStringList().first(), QLatin1String("remote:/"));
     Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
     wallet->setFolder("Passwords");
 
