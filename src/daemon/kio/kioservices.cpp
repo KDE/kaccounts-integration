@@ -38,7 +38,7 @@ void KIOServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, 
     QString serviceName = services.keys().first();
     QString serviceType = services.value(serviceName);
     if (serviceType != QLatin1String("dav-storage")) {
-        kWarning() << "We only support dav-storage atm";
+        kWarning() << "We only support dav-storage atm: " << serviceType;
         return;
     }
 
