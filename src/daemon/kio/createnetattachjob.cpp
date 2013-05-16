@@ -155,7 +155,7 @@ void CreateNetAttachJob::createDesktopFile(const KUrl &url)
     m_wallet->writeMap(walletUrl + "webdav", info);
     m_wallet->sync();
 
-    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
+    org::kde::KDirNotify::emitFilesAdded("remote:/");
 
     emitResult();
 }
