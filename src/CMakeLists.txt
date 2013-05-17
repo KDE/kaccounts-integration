@@ -8,6 +8,7 @@ set(webaccounts_SRCS
     models/modeltest.cpp
     jobs/createaccount.cpp
     jobs/getcredentialsjob.cpp
+    jobs/ownclouddialog.cpp
 )
 
 qt4_automoc(${webaccounts_SRCS})

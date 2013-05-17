@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "createaccount.h"
-#include "ui_owncloudDialog.h"
+#include "ownclouddialog.h"
 
 #include <QtCore/QDebug>
 
@@ -29,8 +29,6 @@
 
 #include <SignOn/Identity>
 #include <SignOn/AuthSession>
-
-#include <KGlobalSettings>
 
 CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  : KJob(parent)
@@ -55,17 +53,8 @@ void CreateAccount::start()
 
 void CreateAccount::processSessionOwncloud()
 {
-    KDialog* dialog = new KDialog();
-    int width = QFontMetrics(KGlobalSettings::generalFont()).xHeight() * 60;
-    int iconSize = IconSize(KIconLoader::Small);
+    OwncloudDialog* dialog = new OwncloudDialog();
 
-    QWidget *widget = new QWidget(dialog);
-    widget->setMinimumWidth(width);
-    Ui::owncloudDialog* owncloud = new Ui::owncloudDialog();
-    owncloud->setupUi(widget);
-    owncloud->hostWorking->setMinimumSize(iconSize, iconSize);
-    owncloud->passWorking->setMinimumSize(iconSize, iconSize);
-    dialog->setMainWidget(widget);
 
     dialog->exec();
 }
