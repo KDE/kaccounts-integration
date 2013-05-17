@@ -30,12 +30,12 @@
 #include <QDBusAbstractAdaptor>
 
 using namespace KWallet;
-class testCreateNetAttachJob : public QObject
+class testNetAttachJobs : public QObject
 {
     Q_OBJECT
 
     public:
-        explicit testCreateNetAttachJob(QObject* parent = 0);
+        explicit testNetAttachJobs(QObject* parent = 0);
     private Q_SLOTS:
         void testCreate();
         void testRemove();
@@ -46,7 +46,7 @@ class testCreateNetAttachJob : public QObject
         QEventLoop m_eventLoop;
 };
 
-testCreateNetAttachJob::testCreateNetAttachJob(QObject* parent): QObject(parent)
+testNetAttachJobs::testNetAttachJobs(QObject* parent): QObject(parent)
 {
     m_timer.setSingleShot(true);
     m_timer.setInterval(10000);// 10 seconds timeout for eventloop
@@ -54,7 +54,7 @@ testCreateNetAttachJob::testCreateNetAttachJob(QObject* parent): QObject(parent)
     connect(&m_timer, SIGNAL(timeout()), &m_eventLoop, SLOT(quit()));
 }
 
-void testCreateNetAttachJob::testCreate()
+void testNetAttachJobs::testCreate()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
@@ -109,7 +109,7 @@ void testCreateNetAttachJob::testCreate()
 
 }
 
-void testCreateNetAttachJob::testRemove()
+void testNetAttachJobs::testRemove()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
     QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
@@ -122,8 +122,6 @@ void testCreateNetAttachJob::testRemove()
     QSignalSpy signalSpy(watch, SIGNAL(FilesRemoved(QStringList)));
 
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
-    job->setHost("host.com");
-    job->setUsername("username");
     job->setUniqueId("test-unique-id");
     job->exec();
 
@@ -138,12 +136,12 @@ void testCreateNetAttachJob::testRemove()
     QVERIFY2(!wallet->hasEntry("webdav-username@host.com:-1-webdav"), "Wallet schema entry still exists");
 }
 
-void testCreateNetAttachJob::enterLoop()
+void testNetAttachJobs::enterLoop()
 {
     m_timer.start();
     m_eventLoop.exec();
 }
 
-QTEST_KDEMAIN_CORE(testCreateNetAttachJob)
+QTEST_KDEMAIN_CORE(testNetAttachJobs)
 
-#include "testcreatenetattachjob.moc"
+#include "testnetattachjobs.moc"
