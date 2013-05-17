@@ -43,6 +43,7 @@ class CreateAccount : public KJob
         virtual void start();
 
     private Q_SLOTS:
+        void processSessionOwncloud();
         void processSession();
         void error(const SignOn::Error &error);
         void response(const SignOn::SessionData &data);

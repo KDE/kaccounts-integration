@@ -17,14 +17,20 @@
  *************************************************************************************/
 
 #include "createaccount.h"
+#include "ui_owncloudDialog.h"
 
 #include <QtCore/QDebug>
+
+#include <QtGui/QDialog>
+#include <QtGui/QVBoxLayout>
 
 #include <Accounts/Manager>
 #include <Accounts/AccountService>
 
 #include <SignOn/Identity>
 #include <SignOn/AuthSession>
+
+#include <KGlobalSettings>
 
 CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  : KJob(parent)
@@ -39,7 +45,29 @@ CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
 
 void CreateAccount::start()
 {
-    QMetaObject::invokeMethod(this, "processSession");
+    qDebug() << m_providerName;
+    if (m_providerName == QLatin1String("owncloud")) {
+        QMetaObject::invokeMethod(this, "processSessionOwncloud");
+    } else  {
+        QMetaObject::invokeMethod(this, "processSession");
+    }
+}
+
+void CreateAccount::processSessionOwncloud()
+{
+    KDialog* dialog = new KDialog();
+    int width = QFontMetrics(KGlobalSettings::generalFont()).xHeight() * 60;
+    int iconSize = IconSize(KIconLoader::Small);
+
+    QWidget *widget = new QWidget(dialog);
+    widget->setMinimumWidth(width);
+    Ui::owncloudDialog* owncloud = new Ui::owncloudDialog();
+    owncloud->setupUi(widget);
+    owncloud->hostWorking->setMinimumSize(iconSize, iconSize);
+    owncloud->passWorking->setMinimumSize(iconSize, iconSize);
+    dialog->setMainWidget(widget);
+
+    dialog->exec();
 }
 
 void CreateAccount::processSession()
