@@ -37,6 +37,9 @@ class KIOServices : public QObject
         void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
         void serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
         void serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+
+    private:
+        bool isEnabled(const Accounts::AccountId& accId, const QString &serviceType);
 };
 
 #endif //KIO_SERVICES_H

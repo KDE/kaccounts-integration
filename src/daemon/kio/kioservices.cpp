@@ -42,12 +42,8 @@ void KIOServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, 
         return;
     }
 
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    QString uniqueId(QString::number(accId) + "_" + serviceType);
-    path +=  uniqueId + ".desktop";
-
-    if (QFile::exists(path)) {
-        kDebug() << "Service already exists";
+    if (isEnabled(accId, serviceType)) {
+        kDebug() << "Service already enabled";
         return;
     }
 
@@ -78,4 +74,13 @@ void KIOServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QString
 void KIOServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
     serviceRemoved(accId, services);
+}
+
+bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceType)
+{
+    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+    QString uniqueId(QString::number(accId) + "_" + serviceType);
+    path +=  uniqueId + ".desktop";
+
+    return QFile::exists(path);
 }
