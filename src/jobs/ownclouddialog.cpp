@@ -18,6 +18,10 @@
 
 #include "ownclouddialog.h"
 
+#include <qjson/parser.h>
+
+#include <KDebug>
+#include <KIO/Job>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
 
@@ -39,5 +43,95 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     passWorking->setMinimumSize(iconSize, iconSize);
 
     m_painter->setWidget(hostWorking);
+
+    connect(host, SIGNAL(textChanged(QString)), SLOT(checkServer(QString)));
+}
+
+void OwncloudDialog::checkServer(const QString &path)
+{
+    QString fixedUrl;
+    if (!path.startsWith("http://") && !path.startsWith("https://")) {
+        fixedUrl.append("http://");
+        fixedUrl.append(path);
+    } else {
+        fixedUrl = path;
+    }
+
+    KUrl url(fixedUrl);
+    m_json.clear();
+
+    url.setFileName("status.php");
+
+    checkServer(url);
+}
+
+void OwncloudDialog::checkServer(const KUrl& url)
+{
+    kDebug() << url;
     m_painter->start();
+
+    KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    job->setUiDelegate(0);
+
+    connect(job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataReceived(KIO::Job*,QByteArray)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(fileChecked(KJob*)));
+}
+
+void OwncloudDialog::dataReceived(KIO::Job* job, const QByteArray& data)
+{
+    m_json.append(data);
+}
+
+void OwncloudDialog::fileChecked(KJob* job)
+{
+    KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob *>(job);
+    if (kJob->error()) {
+        kDebug() << job->errorString();
+        kDebug() << job->errorText();
+        figureOutServer(kJob->url().url());
+        return;
+    }
+
+    QJson::Parser parser;
+    QMap <QString, QVariant> map = parser.parse(m_json).toMap();
+    if (!map.contains("version")) {
+        figureOutServer(kJob->url().url());
+        return;
+    }
+
+    m_server = kJob->url();
+    m_server.setFileName("");
+    kDebug() << m_server;
+    setResult(true);
+
+}
+
+void OwncloudDialog::figureOutServer(const QString& urlStr)
+{
+    KUrl url(urlStr);
+    if (url.directory(KUrl::AppendTrailingSlash) == "/") {
+        setResult(false);
+        return;
+    }
+
+    m_json.clear();
+    url.setFileName("");
+    url = url.upUrl();
+    url.setFileName("status.php");
+
+    checkServer(url);
+}
+
+void OwncloudDialog::setResult(bool result)
+{
+    QString icon;
+    if (result) {
+        icon = "dialog-ok-apply";
+    } else {
+        icon = "dialog-close";
+    }
+
+//     m_validServer = result;
+    m_painter->stop();
+    hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
 }

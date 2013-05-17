@@ -22,12 +22,29 @@
 #include "ui_owncloudDialog.h"
 #include <KDialog>
 
+namespace KIO
+{
+    class Job;
+};
+class KJob;
 class KPixmapSequenceOverlayPainter;
 class OwncloudDialog : public KDialog, Ui::owncloudDialog
 {
     public:
         explicit OwncloudDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+
+    public Q_SLOTS:
+        void checkServer(const QString &host);
+        void fileChecked(KJob* job);
+        void dataReceived(KIO::Job *job, const QByteArray &data);
+
     private:
+        void checkServer(const KUrl &url);
+        void figureOutServer(const QString& urlStr);
+        void setResult(bool result);
+
+        KUrl m_server;
+        QByteArray m_json;
         KPixmapSequenceOverlayPainter *m_painter;
 };
 

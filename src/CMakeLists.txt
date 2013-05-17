@@ -21,6 +21,7 @@ target_link_libraries(webaccounts
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
+    ${KDE4_KIO_LIBRARY}
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
 )
