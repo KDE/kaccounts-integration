@@ -30,6 +30,7 @@ class AkonadiAccounts
         AkonadiAccounts(const QString& configName = QLatin1String("accounts-akonadi"));
 
         bool hasServices(const Accounts::AccountId &accId);
+        bool hasServices(const Accounts::AccountId &accId, const QStringList &servicesNames);
         QStringList services(const Accounts::AccountId &accId);
         void addService(const Accounts::AccountId &accId, const QString &serviceName, const QString &resourceId);
         void removeService(const Accounts::AccountId &accId, const QString &serviceName);

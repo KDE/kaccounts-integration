@@ -34,6 +34,23 @@ bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId)
     return !account.keyList().isEmpty();
 }
 
+bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId, const QStringList& servicesNames)
+{
+    kDebug() << accId;
+    KConfigGroup account = group(accId);
+    if (account.keyList().isEmpty()) {
+        return false;
+    }
+
+    QStringList keys = account.keyList();
+    Q_FOREACH(const QString &name, servicesNames) {
+        if (keys.contains(name)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QStringList AkonadiAccounts::services(const Accounts::AccountId& accId)
 {
     kDebug() << accId;
