@@ -34,12 +34,6 @@ class RemoveNetAttachJob : public KJob
 
         virtual void start();
 
-        QString host() const;
-        void setHost(const QString &host);
-
-        QString username() const;
-        void setUsername(const QString &username);
-
         QString uniqueId() const;
         void setUniqueId(const QString &uniqueId);
 
@@ -49,8 +43,6 @@ class RemoveNetAttachJob : public KJob
         void deleteDesktopFile();
 
     private:
-        QString m_host;
-        QString m_username;
         QString m_uniqueId;
 
         KWallet::Wallet *m_wallet;

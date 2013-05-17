@@ -27,6 +27,7 @@
 #include <KStandardDirs>
 #include <KWallet/Wallet>
 #include <KDirNotify>
+#include <KConfig>
 
 using namespace KWallet;
 RemoveNetAttachJob::RemoveNetAttachJob(QObject* parent)
@@ -71,17 +72,25 @@ void RemoveNetAttachJob::walletOpened(bool opened)
 void RemoveNetAttachJob::deleteDesktopFile()
 {
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-    QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append(m_uniqueId + ".desktop");
+    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+    path.append(m_uniqueId + ".desktop");
 
-    QFile::remove(destPath);
+    KConfig _desktopFile(path, KConfig::SimpleConfig);
+    KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
+
+    KUrl url(desktopFile.readEntry("URL", KUrl()));
+    Q_ASSERT(!url.isEmpty());
+
+    kDebug() << url.userName() << url.host() << url;
+
+    QFile::remove(path);
     org::kde::KDirNotify::emitFilesRemoved(QStringList("remote:/"));
 
     QString walletUrl("webdav");
     walletUrl.append("-");
-    walletUrl.append(m_username);
+    walletUrl.append(url.userName());
     walletUrl.append("@");
-    walletUrl.append(m_host);
+    walletUrl.append(url.host());
     walletUrl.append(":-1");//Overwrite the first option
 
     m_wallet->setFolder("Passwords");
@@ -94,25 +103,6 @@ void RemoveNetAttachJob::deleteDesktopFile()
     }
 
     emitResult();
-}
-
-QString RemoveNetAttachJob::host() const
-{
-    return m_host;
-}
-void RemoveNetAttachJob::setHost(const QString &host)
-{
-    m_host = host;
-}
-
-QString RemoveNetAttachJob::username() const
-{
-    return m_username;
-}
-
-void RemoveNetAttachJob::setUsername(const QString &username)
-{
-    m_username = username;
 }
 
 QString RemoveNetAttachJob::uniqueId() const
