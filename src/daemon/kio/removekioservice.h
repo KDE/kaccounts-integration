@@ -39,6 +39,7 @@ class RemoveKioService : public KJob
 
     private Q_SLOTS:
         void removeKioService();
+        void removeNetAatachFinished(KJob* job);
 
     private:
         Accounts::AccountId m_accountId;

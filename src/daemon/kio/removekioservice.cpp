@@ -17,12 +17,14 @@
  *************************************************************************************/
 
 #include "removekioservice.h"
+#include "removenetattachjob.h"
 
 #include <QtCore/QFile>
 
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KDirNotify>
+#include <KDebug>
 
 RemoveKioService::RemoveKioService(QObject* parent): KJob(parent)
 {
@@ -36,11 +38,20 @@ void RemoveKioService::start()
 
 void RemoveKioService::removeKioService()
 {
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path += QString::number(m_accountId) + "_" + m_serviceName + ".desktop";
-    QFile::remove(path);
+    kDebug();
+    RemoveNetAttachJob* job = new RemoveNetAttachJob(this);
+    job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(removeNetAatachFinished(KJob*)));
+    job->start();
+}
 
-    org::kde::KDirNotify::emitFilesAdded("remote:/");
+void RemoveKioService::removeNetAatachFinished(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        setError(job->error());
+        setErrorText(job->errorText());
+    }
 
     emitResult();
 }
