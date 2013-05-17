@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,26 +16,62 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OCREATEFILE_H
-#define OCREATEFILE_H
+#include "removekioservice.h"
+#include "removenetattachjob.h"
 
-#include <KJob>
-#include <KConfigGroup>
+#include <QtCore/QFile>
 
-class OCreateFile : public KJob
+#include <KGlobal>
+#include <KStandardDirs>
+#include <KDirNotify>
+#include <KDebug>
+
+RemoveKioService::RemoveKioService(QObject* parent): KJob(parent)
 {
-    Q_OBJECT
-    public:
-        explicit OCreateFile(KConfigGroup group, QObject* parent = 0);
-        virtual ~OCreateFile();
 
-        virtual void start();
+}
 
-    private Q_SLOTS:
-        void createNetAttach();
+void RemoveKioService::start()
+{
+    QMetaObject::invokeMethod(this, "removeKioService", Qt::QueuedConnection);
+}
 
-    private:
-        KConfigGroup m_config;
-};
+void RemoveKioService::removeKioService()
+{
+    kDebug();
+    RemoveNetAttachJob* job = new RemoveNetAttachJob(this);
+    job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
+    connect(job, SIGNAL(finished(KJob*)), SLOT(removeNetAatachFinished(KJob*)));
+    job->start();
+}
 
-#endif //OCREATEFILE_H
+void RemoveKioService::removeNetAatachFinished(KJob* job)
+{
+    kDebug();
+    if (job->error()) {
+        setError(job->error());
+        setErrorText(job->errorText());
+    }
+
+    emitResult();
+}
+
+Accounts::AccountId RemoveKioService::accountId() const
+{
+    return m_accountId;
+}
+
+void RemoveKioService::setAccountId(const Accounts::AccountId& accId)
+{
+    m_accountId = accId;
+}
+
+QString RemoveKioService::serviceName() const
+{
+    return m_serviceName;
+}
+
+void RemoveKioService::setServiceName(const QString& serviceName)
+{
+    m_serviceName = serviceName;
+}

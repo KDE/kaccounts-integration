@@ -98,7 +98,6 @@ void testAkonadiAccounts::testAddResource()
 
     m_accounts->addService(11, "test-calendar", "akonadi_fake_resource_117");
     QVERIFY2(m_config->hasGroup("Account_11"), "Group Account_11 has not been created");
-    QCOMPARE(m_config->groupList().count(), 32);
 
     group = m_config->group("Account_11");
     QVERIFY2(!group.keyList().isEmpty(), "There are no keys in account group");

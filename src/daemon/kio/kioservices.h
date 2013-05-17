@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,34 +16,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "oremovefile.h"
+#ifndef KIO_SERVICES_H
+#define KIO_SERVICES_H
 
-#include <QFile>
+#include <QtCore/QMap>
+#include <QtCore/QString>
+#include <QtCore/QObject>
 
-#include <KDirNotify>
+#include <Accounts/Account>
 
-ORemoveFile::ORemoveFile(KConfigGroup group, QObject* parent)
- : KJob(parent)
- , m_config(group)
+class KJob;
+class AkonadiAccounts;
+class KIOServices : public QObject
 {
-    setObjectName(m_config.name());
-    setProperty("type", QVariant::fromValue(m_config.readEntry("type")));
-}
+    Q_OBJECT
+    public:
+        explicit KIOServices(QObject* parent = 0);
 
-ORemoveFile::~ORemoveFile()
-{
+        void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+};
 
-}
-
-void ORemoveFile::start()
-{
-    QMetaObject::invokeMethod(this, "removeFile", Qt::QueuedConnection);
-}
-
-void ORemoveFile::removeFile()
-{
-    QFile::remove(m_config.group("private").readEntry("fileDesktop"));
-    org::kde::KDirNotify::emitFilesAdded( "remote:/" );
-    m_config.group("services").writeEntry("File", 0);
-    emitResult();
-}
+#endif //KIO_SERVICES_H

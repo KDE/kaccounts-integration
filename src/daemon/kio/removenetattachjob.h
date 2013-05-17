@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,41 +16,36 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef OREMOVEFILE_H
+#define OREMOVEFILE_H
 
-#include <kdedmodule.h>
+#include <KJob>
+#include <KConfigGroup>
 
-#include <Accounts/Account>
-
-namespace Accounts {
-    class Manager;
+namespace KWallet {
+    class Wallet;
 };
-
-class KJob;
-class KIOServices;
-class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class RemoveNetAttachJob : public KJob
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit RemoveNetAttachJob(QObject *parent);
+        virtual ~RemoveNetAttachJob();
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
+        virtual void start();
+
+        QString uniqueId() const;
+        void setUniqueId(const QString &uniqueId);
+
+    private Q_SLOTS:
+        void removeNetAttach();
+        void walletOpened(bool opened);
+        void deleteDesktopFile();
 
     private:
-        void monitorAccount(const Accounts::AccountId &id);
+        QString m_uniqueId;
 
-        Accounts::Manager* m_manager;
-        AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+        KWallet::Wallet *m_wallet;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //OREMOVEFILE_H

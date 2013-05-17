@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
+ *  Copyright (C) 2013 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,26 +16,52 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OREMOVEFILE_H
-#define OREMOVEFILE_H
+#ifndef CREATE_KIOSERVICE_H
+#define CREATE_KIOSERVICE_H
 
 #include <KJob>
-#include <KConfigGroup>
 
-class ORemoveFile : public KJob
+#include <Accounts/Account>
+
+namespace Accounts {
+    class Manager;
+};
+
+namespace KWallet {
+    class Wallet;
+};
+
+class CreateKioService : public KJob
 {
     Q_OBJECT
     public:
-        explicit ORemoveFile(KConfigGroup group, QObject* parent = 0);
-        virtual ~ORemoveFile();
+        explicit CreateKioService(QObject* parent = 0);
+        virtual ~CreateKioService();
 
         virtual void start();
 
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accId);
+
+        QString serviceName() const;
+        void setServiceName(const QString &serviceName);
+
+        QString serviceType() const;
+        void setServiceType(const QString &serviceType);
+
     private Q_SLOTS:
-        void removeFile();
+        void createKioService();
+        void gotCredentials(KJob *job);
+        void netAttachCreated(KJob *job);
 
     private:
-        KConfigGroup m_config;
+        void createDesktopFile();
+
+        Accounts::Manager *m_manager;
+        Accounts::Account *m_account;
+        Accounts::AccountId m_accountId;
+        QString m_serviceName;
+        QString m_serviceType;
 };
 
-#endif //OREMOVEFILE_H
+#endif //CREATE_KIOSERVICE_H

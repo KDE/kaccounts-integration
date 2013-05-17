@@ -16,41 +16,34 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef ACCOUNTS_DAEMON_H
-#define ACCOUNTS_DAEMON_H
+#ifndef REMOVE_KIOSERVICE_H
+#define REMOVE_KIOSERVICE_H
 
-#include <kdedmodule.h>
+#include <KJob>
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
-};
-
-class KJob;
-class KIOServices;
-class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class RemoveKioService : public KJob
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
-
     public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+        explicit RemoveKioService(QObject* parent = 0);
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
+        virtual void start();
+
+        Accounts::AccountId accountId() const;
+        void setAccountId(const Accounts::AccountId &accId);
+
+        QString serviceName() const;
+        void setServiceName(const QString &serviceName);
+
+    private Q_SLOTS:
+        void removeKioService();
+        void removeNetAatachFinished(KJob* job);
 
     private:
-        void monitorAccount(const Accounts::AccountId &id);
-
-        Accounts::Manager* m_manager;
-        AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+        Accounts::AccountId m_accountId;
+        QString m_serviceName;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif //REMOVE_KIOSERVICE_H
