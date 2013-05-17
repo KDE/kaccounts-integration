@@ -59,6 +59,10 @@ void KIOServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString
     QString serviceName = services.keys().first();
     QString serviceType = services.value(serviceName);
 
+    if (!isEnabled(accId, serviceType)) {
+        kDebug() << "Service not enabled";
+        return;
+    }
 
     RemoveKioService *job = new RemoveKioService(this);
     job->setServiceName(serviceName);
