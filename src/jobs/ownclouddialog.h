@@ -30,6 +30,8 @@ class KJob;
 class KPixmapSequenceOverlayPainter;
 class OwncloudDialog : public KDialog, Ui::owncloudDialog
 {
+    Q_OBJECT
+
     public:
         explicit OwncloudDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
@@ -41,6 +43,7 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
     private:
         void checkServer(const KUrl &url);
         void figureOutServer(const QString& urlStr);
+        void setWorking(bool start);
         void setResult(bool result);
 
         KUrl m_server;

@@ -68,7 +68,7 @@ void OwncloudDialog::checkServer(const QString &path)
 void OwncloudDialog::checkServer(const KUrl& url)
 {
     kDebug() << url;
-    m_painter->start();
+    setWorking(true);
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
@@ -132,6 +132,18 @@ void OwncloudDialog::setResult(bool result)
     }
 
 //     m_validServer = result;
-    m_painter->stop();
+    setWorking(false);
     hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+}
+
+void OwncloudDialog::setWorking(bool start)
+{
+    hostWorking->setPixmap(QPixmap());
+
+    if (!start) {
+        m_painter->stop();;
+        return;
+    }
+
+    m_painter->start();
 }

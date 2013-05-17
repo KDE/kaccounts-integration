@@ -8,6 +8,7 @@ enable_testing()
 
 find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
+find_package(QJSON REQUIRED)
 find_package(AccountsQt REQUIRED)
 find_package(SignOnQt REQUIRED)
 

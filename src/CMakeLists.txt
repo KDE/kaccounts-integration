@@ -24,6 +24,8 @@ target_link_libraries(webaccounts
     ${KDE4_KIO_LIBRARY}
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
+    ${QJSON_LIBRARIES}
+    ${QJSON_LIBRARY}
 )
 
 install(TARGETS webaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
