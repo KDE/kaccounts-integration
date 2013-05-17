@@ -51,6 +51,10 @@ void AkonadiServices::serviceAdded(const Accounts::AccountId& accId, QMap< QStri
 
 void AkonadiServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
+    if (!m_accounts->hasServices(accId, services.keys())) {
+        return;
+    }
+
     RemoveAkonadiServicesJob *job = new RemoveAkonadiServicesJob(m_accounts, this);
     job->setAccountId(accId);
     job->start();
@@ -63,6 +67,9 @@ void AkonadiServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QSt
 
 void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
+    if (!m_accounts->hasServices(accId, services.keys())) {
+        return;
+    }
     QString serviceName = services.keys().first();
     EnableServiceJob *job = new EnableServiceJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
