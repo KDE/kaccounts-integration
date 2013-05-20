@@ -45,6 +45,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     widget->setMinimumWidth(width);
     setMainWidget(widget);
 
+    setCaption(i18n("ownCloud Server"));
     usernameLine->setFocus();
     hostWorking->setMinimumSize(iconSize, iconSize);
     passWorking->setMinimumSize(iconSize, iconSize);
