@@ -155,6 +155,10 @@ void OwncloudDialog::setResult(bool result, Type type)
         m_hostResult = result;
         hostWorking->setToolTip(tooltip);
         hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+        if (!result) {
+            passWorking->setPixmap(QPixmap());
+            passWorking->setToolTip(QString());
+        }
     } else {
         m_authResult = result;
         passWorking->setToolTip(tooltip);
