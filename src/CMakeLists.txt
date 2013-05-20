@@ -9,6 +9,7 @@ set(webaccounts_SRCS
     jobs/createaccount.cpp
     jobs/getcredentialsjob.cpp
     jobs/ownclouddialog.cpp
+    jobs/checkowncloudhostjob.cpp
 )
 
 qt4_automoc(${webaccounts_SRCS})
