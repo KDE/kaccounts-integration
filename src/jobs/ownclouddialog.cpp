@@ -28,6 +28,7 @@
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : KDialog(parent, flags)
+ , m_validHost(false)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
@@ -45,6 +46,8 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     m_painter->setWidget(hostWorking);
 
     connect(host, SIGNAL(textChanged(QString)), SLOT(checkServer(QString)));
+    connect(username, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
+    connect(password, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
 }
 
 void OwncloudDialog::checkServer(const QString &path)
@@ -104,6 +107,7 @@ void OwncloudDialog::fileChecked(KJob* job)
     kDebug() << m_server;
     setResult(true);
 
+    checkAuth();
 }
 
 void OwncloudDialog::figureOutServer(const QString& urlStr)
@@ -122,6 +126,34 @@ void OwncloudDialog::figureOutServer(const QString& urlStr)
     checkServer(url);
 }
 
+void OwncloudDialog::checkAuth()
+{
+    if (!m_validHost || username->text().isEmpty() || password->text().isEmpty()) {
+        return;
+    }
+
+    setWorking(true);
+
+    KUrl url = m_server;
+    url.setPassword(password->text());
+    url.setUserName(username->text());
+
+    KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+    job->setUiDelegate(0);
+
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(authChecked(KJob*)));
+}
+
+void OwncloudDialog::authChecked(KJob* job)
+{
+    if (job->error()) {
+        setResult(false);
+        return;
+    }
+
+    setResult(true);
+}
+
 void OwncloudDialog::setResult(bool result)
 {
     QString icon;
@@ -131,14 +163,23 @@ void OwncloudDialog::setResult(bool result)
         icon = "dialog-close";
     }
 
-//     m_validServer = result;
+    m_validHost = result;
     setWorking(false);
-    hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+    if (!m_validHost) {
+        hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+    } else {
+        passWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+    }
 }
 
 void OwncloudDialog::setWorking(bool start)
 {
-    hostWorking->setPixmap(QPixmap());
+    if (m_validHost) {
+        passWorking->setPixmap(QPixmap());
+        m_painter->setWidget(passWorking);
+    } else {
+        hostWorking->setPixmap(QPixmap());
+    }
 
     if (!start) {
         m_painter->stop();;

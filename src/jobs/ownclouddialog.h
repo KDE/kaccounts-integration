@@ -36,16 +36,18 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
         explicit OwncloudDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
     public Q_SLOTS:
+        void checkAuth();
         void checkServer(const QString &host);
         void fileChecked(KJob* job);
         void dataReceived(KIO::Job *job, const QByteArray &data);
-
+        void authChecked(KJob *job);
     private:
         void checkServer(const KUrl &url);
         void figureOutServer(const QString& urlStr);
         void setWorking(bool start);
         void setResult(bool result);
 
+        bool m_validHost;
         KUrl m_server;
         QByteArray m_json;
         KPixmapSequenceOverlayPainter *m_painter;
