@@ -45,15 +45,15 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     widget->setMinimumWidth(width);
     setMainWidget(widget);
 
-    username->setFocus();
+    usernameLine->setFocus();
     hostWorking->setMinimumSize(iconSize, iconSize);
     passWorking->setMinimumSize(iconSize, iconSize);
 
     m_painter->setWidget(hostWorking);
 
-    connect(host, SIGNAL(textChanged(QString)), SLOT(hostChanged()));
-    connect(username, SIGNAL(textChanged(QString)), SLOT(authChanged()));
-    connect(password, SIGNAL(textChanged(QString)), SLOT(authChanged()));
+    connect(hostLine, SIGNAL(textChanged(QString)), SLOT(hostChanged()));
+    connect(usernameLine, SIGNAL(textChanged(QString)), SLOT(authChanged()));
+    connect(passwordLine, SIGNAL(textChanged(QString)), SLOT(authChanged()));
 
     m_timerHost->setInterval(400);
     m_timerHost->setSingleShot(true);
@@ -81,7 +81,7 @@ void OwncloudDialog::checkServer()
 
     CheckOwncloudHostJob *job = new CheckOwncloudHostJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(hostChecked(KJob*)));
-    job->setUrl(host->text());
+    job->setUrl(hostLine->text());
     job->start();
 
     setWorking(true, Host);
@@ -103,15 +103,15 @@ void OwncloudDialog::hostChecked(KJob* job)
 
 void OwncloudDialog::checkAuth()
 {
-    if (m_url.isEmpty() || username->text().isEmpty() || password->text().isEmpty()) {
+    if (m_url.isEmpty() || usernameLine->text().isEmpty() || passwordLine->text().isEmpty()) {
         return;
     }
 
     setWorking(true, Auth);
 
     KUrl url = m_url;
-    url.setPassword(password->text());
-    url.setUserName(username->text());
+    url.setPassword(passwordLine->text());
+    url.setUserName(usernameLine->text());
     url.setPath(QLatin1String("/files/webdav.php/"));
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
