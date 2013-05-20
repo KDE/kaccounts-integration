@@ -140,18 +140,23 @@ void OwncloudDialog::authChecked(KJob* job)
 void OwncloudDialog::setResult(bool result, Type type)
 {
     QString icon;
+    QString tooltip;
     if (result) {
         icon = "dialog-ok-apply";
+        tooltip = i18n("Everything is Ok");
     } else {
         icon = "dialog-close";
+        tooltip = i18n("Information is invalid");
     }
 
     setWorking(false, type);
     if (type == Host) {
         m_hostResult = result;
+        hostWorking->setToolTip(tooltip);
         hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
     } else {
         m_authResult = result;
+        passWorking->setToolTip(tooltip);
         passWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
     }
 
@@ -166,14 +171,16 @@ void OwncloudDialog::setWorking(bool start, Type type)
 {
     if (type == Auth) {
         passWorking->setPixmap(QPixmap());
+        passWorking->setToolTip(QString());
         m_painter->setWidget(passWorking);
     } else {
         hostWorking->setPixmap(QPixmap());
+        hostWorking->setToolTip(QString());
         m_painter->setWidget(hostWorking);
     }
 
     if (!start) {
-        m_painter->stop();;
+        m_painter->stop();
         return;
     }
 
