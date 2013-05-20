@@ -66,6 +66,21 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     button(KDialog::Ok)->setEnabled(false);
 }
 
+QString OwncloudDialog::username() const
+{
+    return usernameLine->text();
+}
+
+QString OwncloudDialog::password() const
+{
+    return passwordLine->text();
+}
+
+QString OwncloudDialog::host() const
+{
+    return m_url;
+}
+
 void OwncloudDialog::hostChanged()
 {
     m_timerHost->start();

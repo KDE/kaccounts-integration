@@ -32,6 +32,10 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
     public:
         explicit OwncloudDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
+        QString username() const;
+        QString password() const;
+        QString host() const;
+
     public Q_SLOTS:
         void checkAuth();
         void checkServer();
