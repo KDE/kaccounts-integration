@@ -78,7 +78,7 @@ QString OwncloudDialog::password() const
 
 QString OwncloudDialog::host() const
 {
-    return m_url;
+    return KUrl(m_url).host();
 }
 
 void OwncloudDialog::hostChanged()
