@@ -51,6 +51,8 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
         QTimer *m_timerHost;
         QTimer *m_timerAuth;
         QString m_url;
+        bool m_hostResult;
+        bool m_authResult;
         KPixmapSequenceOverlayPainter *m_painter;
 };
 

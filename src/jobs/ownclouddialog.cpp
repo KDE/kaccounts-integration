@@ -25,12 +25,15 @@
 #include <KIO/Job>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
+#include <kpushbutton.h>
 
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : KDialog(parent, flags)
  , m_timerHost(new QTimer(this))
  , m_timerAuth(new QTimer(this))
+ , m_hostResult(false)
+ , m_authResult(false)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
@@ -57,6 +60,8 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     m_timerAuth->setSingleShot(true);
     connect(m_timerHost, SIGNAL(timeout()), SLOT(checkServer()));
     connect(m_timerAuth, SIGNAL(timeout()), SLOT(checkAuth()));
+
+    button(KDialog::Ok)->setEnabled(false);
 }
 
 void OwncloudDialog::hostChanged()
@@ -143,9 +148,17 @@ void OwncloudDialog::setResult(bool result, Type type)
 
     setWorking(false, type);
     if (type == Host) {
+        m_hostResult = result;
         hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
     } else {
+        m_authResult = result;
         passWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+    }
+
+    if (!m_authResult || !m_authResult) {
+        button(KDialog::Ok)->setEnabled(false);
+    } else {
+        button(KDialog::Ok)->setEnabled(true);
     }
 }
 
