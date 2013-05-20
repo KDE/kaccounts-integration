@@ -36,14 +36,21 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
         void checkAuth();
         void checkServer();
         void hostChanged();
+        void authChanged();
         void authChecked(KJob* job);
         void hostChecked(KJob* job);
 
     private:
-        void setWorking(bool start);
-        void setResult(bool result);
+        enum Type {
+            Host,
+            Auth
+        };
+        void setWorking(bool start, Type type);
+        void setResult(bool result, Type type);
 
-        QTimer *m_timer;
+        QTimer *m_timerHost;
+        QTimer *m_timerAuth;
+        QString m_url;
         KPixmapSequenceOverlayPainter *m_painter;
 };
 

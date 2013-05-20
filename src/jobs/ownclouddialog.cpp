@@ -22,13 +22,15 @@
 #include <QTimer>
 
 #include <KDebug>
+#include <KIO/Job>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
 
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : KDialog(parent, flags)
- , m_timer(new QTimer(this))
+ , m_timerHost(new QTimer(this))
+ , m_timerAuth(new QTimer(this))
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
@@ -46,67 +48,82 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     m_painter->setWidget(hostWorking);
 
     connect(host, SIGNAL(textChanged(QString)), SLOT(hostChanged()));
-    connect(username, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
-    connect(password, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
+    connect(username, SIGNAL(textChanged(QString)), SLOT(authChanged()));
+    connect(password, SIGNAL(textChanged(QString)), SLOT(authChanged()));
 
-    m_timer->setInterval(400);
-    m_timer->setSingleShot(true);
-    connect(m_timer, SIGNAL(timeout()), SLOT(checkServer()));
+    m_timerHost->setInterval(400);
+    m_timerHost->setSingleShot(true);
+    m_timerAuth->setInterval(400);
+    m_timerAuth->setSingleShot(true);
+    connect(m_timerHost, SIGNAL(timeout()), SLOT(checkServer()));
+    connect(m_timerAuth, SIGNAL(timeout()), SLOT(checkAuth()));
 }
 
 void OwncloudDialog::hostChanged()
 {
-    m_timer->start();
+    m_timerHost->start();
+}
+
+void OwncloudDialog::authChanged()
+{
+    m_timerAuth->start();
 }
 
 void OwncloudDialog::checkServer()
 {
+    m_url.clear();
+
     CheckOwncloudHostJob *job = new CheckOwncloudHostJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(hostChecked(KJob*)));
     job->setUrl(host->text());
     job->start();
 
-    setWorking(true);
+    setWorking(true, Host);
 }
 
 void OwncloudDialog::hostChecked(KJob* job)
 {
+    setResult(!job->error(), Host);
     if (job->error()) {
         kDebug() << job->errorString();
+        return;
     }
 
-    setResult(!job->error());
+    CheckOwncloudHostJob *cJob = qobject_cast<CheckOwncloudHostJob*>(job);
+    m_url = cJob->url();
+
+    checkAuth();
 }
 
 void OwncloudDialog::checkAuth()
 {
-    if (username->text().isEmpty() || password->text().isEmpty()) {
+    if (m_url.isEmpty() || username->text().isEmpty() || password->text().isEmpty()) {
         return;
     }
-/*
-    setWorking(true);
 
-    KUrl url = m_server;
+    setWorking(true, Auth);
+
+    KUrl url = m_url;
     url.setPassword(password->text());
     url.setUserName(username->text());
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
 
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(authChecked(KJob*)));*/
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(authChecked(KJob*)));
 }
 
 void OwncloudDialog::authChecked(KJob* job)
 {
+    setResult(!job->error(), Auth);
     if (job->error()) {
-        setResult(false);
         return;
     }
 
-    setResult(true);
+    //Enable buttons
 }
 
-void OwncloudDialog::setResult(bool result)
+void OwncloudDialog::setResult(bool result, Type type)
 {
     QString icon;
     if (result) {
@@ -115,23 +132,23 @@ void OwncloudDialog::setResult(bool result)
         icon = "dialog-close";
     }
 
-//     m_validHost = result;
-    setWorking(false);
-//     if (!m_validHost) {
+    setWorking(false, type);
+    if (type == Host) {
         hostWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
-//     } else {
-//         passWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
-//     }
+    } else {
+        passWorking->setPixmap(QIcon::fromTheme(icon).pixmap(hostWorking->sizeHint()));
+    }
 }
 
-void OwncloudDialog::setWorking(bool start)
+void OwncloudDialog::setWorking(bool start, Type type)
 {
-//     if (m_validHost) {
-//         passWorking->setPixmap(QPixmap());
-//         m_painter->setWidget(passWorking);
-//     } else {
+    if (type == Auth) {
+        passWorking->setPixmap(QPixmap());
+        m_painter->setWidget(passWorking);
+    } else {
         hostWorking->setPixmap(QPixmap());
-//     }
+        m_painter->setWidget(hostWorking);
+    }
 
     if (!start) {
         m_painter->stop();;
