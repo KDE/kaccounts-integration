@@ -106,6 +106,7 @@ void OwncloudDialog::checkAuth()
     KUrl url = m_url;
     url.setPassword(password->text());
     url.setUserName(username->text());
+    url.setPath(QLatin1String("/files/webdav.php/"));
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
@@ -115,12 +116,20 @@ void OwncloudDialog::checkAuth()
 
 void OwncloudDialog::authChecked(KJob* job)
 {
-    setResult(!job->error(), Auth);
     if (job->error()) {
+        setResult(false, Auth);
+        kDebug() << job->errorString();
         return;
     }
 
-    //Enable buttons
+    KIO::TransferJob *tJob = qobject_cast<KIO::TransferJob*>(job);
+    KIO::MetaData metadata = tJob->metaData();
+    if (metadata["responsecode"] != QLatin1String("200")) {
+        setResult(false, Auth);
+        return;
+    }
+
+    setResult(true, Auth);
 }
 
 void OwncloudDialog::setResult(bool result, Type type)
