@@ -44,6 +44,7 @@ class CreateAccount : public KJob
 
     private Q_SLOTS:
         void processSessionOwncloud();
+        void accountCreated();
         void processSession();
         void error(const SignOn::Error &error);
         void response(const SignOn::SessionData &data);

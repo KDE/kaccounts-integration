@@ -54,9 +54,63 @@ void CreateAccount::start()
 void CreateAccount::processSessionOwncloud()
 {
     OwncloudDialog* dialog = new OwncloudDialog();
+    int result = dialog->exec();
+    if (result == KDialog::Cancel) {
+        setError(-1);
+        setErrorText("Dialog was cancel");
+        emitResult();
+        return;
+    }
 
+    SignOn::IdentityInfo info;
+    info.setUserName(dialog->username());
+    info.setSecret(dialog->password());
+    info.setCaption(m_providerName);
+    info.setAccessControlList(QStringList(QLatin1String("*")));
+    info.setType(SignOn::IdentityInfo::Application);
 
-    dialog->exec();
+    SignOn::Identity *identity = SignOn::Identity::newIdentity(info, this);
+    identity->storeCredentials();
+
+    Accounts::Account *account = m_manager->createAccount(m_providerName);
+    account->setCredentialsId(identity->id());
+
+    Accounts::Service service;
+    Accounts::AccountService *accInfo = new Accounts::AccountService(account, service, this);
+
+    Accounts::AuthData authData = accInfo->authData();
+    account->setValue("auth/mechanism", authData.mechanism());
+    account->setValue("auth/method", authData.method());
+    QString base("auth/");
+    base.append(authData.method());
+    base.append("/");
+    base.append(authData.mechanism());
+    base.append("/");
+
+    QVariantMap data = authData.parameters();
+    QMapIterator<QString, QVariant> i(data);
+    while (i.hasNext()) {
+        i.next();
+        account->setValue(base + i.key(), i.value());
+    }
+
+    account->setValue(QLatin1String("dav/host"), dialog->host());
+    account->setEnabled(true);
+
+    Accounts::ServiceList services = account->services();
+    Q_FOREACH(const Accounts::Service &service, services) {
+        account->selectService(service);
+        account->setEnabled(true);
+    }
+
+    connect(account, SIGNAL(synced()), SLOT(accountCreated()));
+    account->sync();
+
+}
+
+void CreateAccount::accountCreated()
+{
+    emitResult();
 }
 
 void CreateAccount::processSession()
