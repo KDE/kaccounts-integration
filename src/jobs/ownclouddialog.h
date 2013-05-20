@@ -23,6 +23,7 @@
 #include <KDialog>
 
 class KJob;
+class QTimer;
 class KPixmapSequenceOverlayPainter;
 class OwncloudDialog : public KDialog, Ui::owncloudDialog
 {
@@ -33,7 +34,8 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
 
     public Q_SLOTS:
         void checkAuth();
-        void checkServer(const QString &host);
+        void checkServer();
+        void hostChanged();
         void authChecked(KJob* job);
         void hostChecked(KJob* job);
 
@@ -41,6 +43,7 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
         void setWorking(bool start);
         void setResult(bool result);
 
+        QTimer *m_timer;
         KPixmapSequenceOverlayPainter *m_painter;
 };
 

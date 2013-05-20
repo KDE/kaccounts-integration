@@ -19,6 +19,8 @@
 #include "ownclouddialog.h"
 #include "checkowncloudhostjob.h"
 
+#include <QTimer>
+
 #include <KDebug>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
@@ -26,6 +28,7 @@
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : KDialog(parent, flags)
+ , m_timer(new QTimer(this))
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
@@ -42,17 +45,28 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
 
     m_painter->setWidget(hostWorking);
 
-    connect(host, SIGNAL(textChanged(QString)), SLOT(checkServer(QString)));
+    connect(host, SIGNAL(textChanged(QString)), SLOT(hostChanged()));
     connect(username, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
     connect(password, SIGNAL(textChanged(QString)), SLOT(checkAuth()));
+
+    m_timer->setInterval(400);
+    m_timer->setSingleShot(true);
+    connect(m_timer, SIGNAL(timeout()), SLOT(checkServer()));
 }
 
-void OwncloudDialog::checkServer(const QString &path)
+void OwncloudDialog::hostChanged()
+{
+    m_timer->start();
+}
+
+void OwncloudDialog::checkServer()
 {
     CheckOwncloudHostJob *job = new CheckOwncloudHostJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(hostChecked(KJob*)));
-    job->setUrl(path);
+    job->setUrl(host->text());
     job->start();
+
+    setWorking(true);
 }
 
 void OwncloudDialog::hostChecked(KJob* job)
