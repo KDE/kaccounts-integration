@@ -75,6 +75,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>username</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>host</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
