@@ -49,6 +49,7 @@ class CreateAccount : public KJob
         void error(const SignOn::Error &error);
         void response(const SignOn::SessionData &data);
         void info(const SignOn::IdentityInfo &info);
+        void credentialsStored(quint32 id);
 
     private:
         QString m_providerName;

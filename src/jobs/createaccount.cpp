@@ -69,43 +69,17 @@ void CreateAccount::processSessionOwncloud()
     info.setAccessControlList(QStringList(QLatin1String("*")));
     info.setType(SignOn::IdentityInfo::Application);
 
-    SignOn::Identity *identity = SignOn::Identity::newIdentity(info, this);
-    identity->storeCredentials();
+    m_identity = SignOn::Identity::newIdentity(info, this);
+    m_identity->storeCredentials();
 
-    Accounts::Account *account = m_manager->createAccount(m_providerName);
-    account->setCredentialsId(identity->id());
+    m_account = m_manager->createAccount(m_providerName);
 
     Accounts::Service service;
-    Accounts::AccountService *accInfo = new Accounts::AccountService(account, service, this);
+    m_accInfo = new Accounts::AccountService(m_account, service, this);
 
-    Accounts::AuthData authData = accInfo->authData();
-    account->setValue("auth/mechanism", authData.mechanism());
-    account->setValue("auth/method", authData.method());
-    QString base("auth/");
-    base.append(authData.method());
-    base.append("/");
-    base.append(authData.mechanism());
-    base.append("/");
-
-    QVariantMap data = authData.parameters();
-    QMapIterator<QString, QVariant> i(data);
-    while (i.hasNext()) {
-        i.next();
-        account->setValue(base + i.key(), i.value());
-    }
-
-    account->setValue(QLatin1String("dav/host"), dialog->host());
-    account->setEnabled(true);
-
-    Accounts::ServiceList services = account->services();
-    Q_FOREACH(const Accounts::Service &service, services) {
-        account->selectService(service);
-        account->setEnabled(true);
-    }
-
-    connect(account, SIGNAL(synced()), SLOT(accountCreated()));
-    account->sync();
-
+    connect(m_identity, SIGNAL(credentialsStored(quint32)), SLOT(credentialsStored(quint32)));
+    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+    m_identity->queryInfo();
 }
 
 void CreateAccount::accountCreated()
@@ -141,7 +115,6 @@ void CreateAccount::processSession()
     session->process(sessionData, m_accInfo->authData().mechanism());
 }
 
-
 void CreateAccount::response(const SignOn::SessionData& data)
 {
     qDebug() << "Response:";
@@ -163,7 +136,14 @@ void CreateAccount::response(const SignOn::SessionData& data)
 
     m_account->setDisplayName(displayName);
 
+    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+    m_identity->queryInfo();
+}
 
+
+void CreateAccount::credentialsStored(quint32 id)
+{
+    qDebug() << "Credentials stored: " << id;
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
     m_identity->queryInfo();
 }
@@ -205,12 +185,11 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     Accounts::ServiceList services = m_account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         m_account->selectService(service);
-        m_account->setEnabled(true);
+        m_account->setEnabled(false);
     }
 
+    connect(m_account, SIGNAL(synced()), SLOT(accountCreated()));
     m_account->sync();
-
-    emitResult();
 }
 
 void CreateAccount::error(const SignOn::Error& error)
