@@ -185,7 +185,7 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     Accounts::ServiceList services = m_account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         m_account->selectService(service);
-        m_account->setEnabled(false);
+        m_account->setEnabled(true);
     }
 
     connect(m_account, SIGNAL(synced()), SLOT(accountCreated()));
