@@ -35,39 +35,48 @@ KIOServices::KIOServices(QObject* parent) : QObject(parent)
 void KIOServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
     kDebug();
-    QString serviceName = services.keys().first();
-    QString serviceType = services.value(serviceName);
-    if (serviceType != QLatin1String("dav-storage")) {
-        kWarning() << "We only support dav-storage atm: " << serviceType;
-        return;
-    }
+    QMapIterator<QString, QString> i(services);
+    while (i.hasNext()) {
+        i.next();
+        if (i.value() != QLatin1String("dav-storage")) {
+            kDebug() << "Ignoring: " << i.value();
+            continue;
+        }
+        if (isEnabled(accId, i.key())) {
+            kDebug() << "Already configured: " << i.key();
+            continue;
+        }
 
-    if (isEnabled(accId, serviceName)) {
-        kDebug() << "Service already enabled";
-        return;
+        kDebug() << "Creating: " << i.key() << "Of type: " << i.value();
+        CreateKioService *job = new CreateKioService(this);
+        job->setAccountId(accId);
+        job->setServiceName(i.key());
+        job->setServiceType(i.value());
+        job->start();
     }
-
-    CreateKioService *job = new CreateKioService(this);
-    job->setAccountId(accId);
-    job->setServiceName(serviceName);
-    job->setServiceType(serviceType);
-    job->start();
 }
 
 void KIOServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services)
 {
-    QString serviceName = services.keys().first();
-    QString serviceType = services.value(serviceName);
+    kDebug();
+    QMapIterator<QString, QString> i(services);
+    while (i.hasNext()) {
+        i.next();
+        if (i.value() != QLatin1String("dav-storage")) {
+            kDebug() << "Ignoring: " << i.value();
+            continue;
+        }
+        if (!isEnabled(accId, i.key())) {
+            kDebug() << "Not configured: " << i.key();
+            continue;
+        }
 
-    if (!isEnabled(accId, serviceName)) {
-        kDebug() << "Service not enabled";
-        return;
+        kDebug() << "Removing: " << i.key() << "Of type: " << i.value();
+        RemoveKioService *job = new RemoveKioService(this);
+        job->setServiceName(i.key());
+        job->setAccountId(accId);
+        job->start();
     }
-
-    RemoveKioService *job = new RemoveKioService(this);
-    job->setServiceName(serviceName);
-    job->setAccountId(accId);
-    job->start();
 }
 
 void KIOServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
