@@ -79,17 +79,8 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-    if (services.isEmpty()) {
-        return;
-    }
-
-    QMap <QString, QString> servicesInfo;
-    Q_FOREACH(const Accounts::Service &service, services) {
-        servicesInfo.insert(service.name(), service.serviceType());
-    }
-
-    m_akonadi->serviceAdded(id, servicesInfo);
-    m_kio->serviceAdded(id, servicesInfo);
+    m_akonadi->accountCreated(id, services);
+//     m_kio->serviceAdded(id, services);
 
     delete acc;
 }
@@ -98,22 +89,8 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 {
     kDebug() << id;
 
-    Accounts::Account *acc = m_manager->account(id);
-    Accounts::ServiceList services = acc->enabledServices();
-
-    if (services.isEmpty()) {
-        return;
-    }
-
-    QMap <QString, QString> servicesInfo;
-    Q_FOREACH(const Accounts::Service &service, services) {
-        servicesInfo.insert(service.name(), service.serviceType());
-    }
-
-    m_akonadi->serviceRemoved(id, servicesInfo);
-    m_kio->serviceRemoved(id, servicesInfo);
-
-    delete acc;
+    m_akonadi->accountRemoved(id);
+//     m_kio->serviceRemoved(id, servicesInfo);
 }
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
@@ -126,15 +103,13 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 
     Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
 
-    QMap<QString, QString> services;
-    services.insert(serviceName, m_manager->service(serviceName).serviceType());
-
+    Accounts::Service service = m_manager->service(serviceName);
     if (!enabled) {
-        m_akonadi->serviceDisabled(accId, services);
-        m_kio->serviceDisabled(accId, services);
+        m_akonadi->serviceDisabled(accId, service);
+//         m_kio->serviceDisabled(accId, services);
         return;
     }
 
-    m_akonadi->serviceEnabled(accId, services);
-    m_kio->serviceEnabled(accId, services);
+    m_akonadi->serviceEnabled(accId, service);
+//     m_kio->serviceEnabled(accId, services);
 }

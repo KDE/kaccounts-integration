@@ -41,17 +41,22 @@ AkonadiServices::~AkonadiServices()
     delete m_accounts;
 }
 
-void AkonadiServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void AkonadiServices::accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList)
 {
+    QMap<QString, QString> services;
+    Q_FOREACH(const Accounts::Service &service, serviceList) {
+        services.insert(service.name(), service.serviceType());
+    }
+
     LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
     lookup->setServices(services);
     lookup->setAccountId(accId);
     lookup->start();
 }
 
-void AkonadiServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void AkonadiServices::accountRemoved(const Accounts::AccountId& accId)
 {
-    if (!m_accounts->hasServices(accId, services.keys())) {
+    if (!m_accounts->hasServices(accId)) {
         kDebug() << "No service enabled";
         return;
     }
@@ -61,24 +66,26 @@ void AkonadiServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QSt
     job->start();
 }
 
-void AkonadiServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void AkonadiServices::serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
-    serviceAdded(accId, services);
+    Accounts::ServiceList list;
+    list.append(service);
+    accountCreated(accId, list);
 }
 
-void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
-    if (!m_accounts->hasServices(accId, services.keys())) {
+    if (!m_accounts->hasService(accId, service.name())) {
         kDebug() << "No service enabled";
         return;
     }
 
-    QString serviceName = services.keys().first();
+    QString serviceName = service.name();
     EnableServiceJob *job = new EnableServiceJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
     job->setResourceId(m_accounts->resource(accId, serviceName));
     job->setServiceName(serviceName);
-    job->setServiceType(services.value(serviceName), EnableServiceJob::Disable);
+    job->setServiceType(service.serviceType(), EnableServiceJob::Disable);
     job->setAccountId(accId);
     job->start();
 }

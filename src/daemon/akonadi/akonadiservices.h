@@ -24,6 +24,7 @@
 #include <QtCore/QObject>
 
 #include <Accounts/Account>
+#include <Accounts/Service>
 
 class KJob;
 class AkonadiAccounts;
@@ -34,10 +35,10 @@ class AkonadiServices : public QObject
         explicit AkonadiServices(QObject* parent = 0);
         virtual ~AkonadiServices();
 
-        void serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services);
-        void serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services);
-        void serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
-        void serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services);
+        void accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList);
+        void accountRemoved(const Accounts::AccountId& accId);
+        void serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service);
+        void serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service);
 
     private Q_SLOTS:
         void disableServiceJobDone(KJob* job);

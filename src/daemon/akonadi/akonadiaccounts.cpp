@@ -27,28 +27,18 @@ AkonadiAccounts::AkonadiAccounts(const QString& configName)
     m_config = KSharedConfig::openConfig(configName);
 }
 
+bool AkonadiAccounts::hasService(const Accounts::AccountId& accId, const QString& serviceName)
+{
+    kDebug() << accId;
+    KConfigGroup account = group(accId);
+    return account.keyList().contains(serviceName);
+}
+
 bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId)
 {
     kDebug() << accId;
     KConfigGroup account = group(accId);
     return !account.keyList().isEmpty();
-}
-
-bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId, const QStringList& servicesNames)
-{
-    kDebug() << accId;
-    KConfigGroup account = group(accId);
-    if (account.keyList().isEmpty()) {
-        return false;
-    }
-
-    QStringList keys = account.keyList();
-    Q_FOREACH(const QString &name, servicesNames) {
-        if (keys.contains(name)) {
-            return true;
-        }
-    }
-    return false;
 }
 
 QStringList AkonadiAccounts::services(const Accounts::AccountId& accId)

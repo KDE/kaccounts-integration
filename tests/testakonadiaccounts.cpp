@@ -115,11 +115,8 @@ void testAkonadiAccounts::testResources()
 void testAkonadiAccounts::testHasServices()
 {
     QVERIFY(m_accounts->hasServices(10));
-    QStringList services("test-calendar");
-    QVERIFY(m_accounts->hasServices(10, services));
-    services.append("test-contacts");
-    QVERIFY(m_accounts->hasServices(10, services));
-    QVERIFY(!m_accounts->hasServices(10, QStringList("notfound")));
+    QVERIFY(m_accounts->hasService(10, QLatin1String("test-calendar")));
+    QVERIFY(!m_accounts->hasService(10, QLatin1String("notfound")));
     QVERIFY(!m_accounts->services(10).isEmpty());
     QCOMPARE(m_accounts->services(10).count(), 2);
 }
