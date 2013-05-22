@@ -73,6 +73,7 @@ void CreateAccount::processSessionOwncloud()
     m_identity->storeCredentials();
 
     m_account = m_manager->createAccount(m_providerName);
+    m_account->setValue("dav/host", dialog->host());
 
     Accounts::Service service;
     m_accInfo = new Accounts::AccountService(m_account, service, this);
