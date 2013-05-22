@@ -101,6 +101,10 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
+    if (services.isEmpty()) {
+        return;
+    }
+
     QMap <QString, QString> servicesInfo;
     Q_FOREACH(const Accounts::Service &service, services) {
         servicesInfo.insert(service.name(), service.serviceType());
