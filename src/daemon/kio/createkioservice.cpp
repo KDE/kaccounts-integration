@@ -65,10 +65,10 @@ void CreateKioService::gotCredentials(KJob* job)
     QVariantMap data = gjob->credentialsData();
 
     Accounts::Service service = m_manager->service(m_serviceName);
-    m_account->selectService(service);
-
-    QString username = data["UserName"].toString();
     QString host = m_account->value("dav/host").toString();
+
+    m_account->selectService(service);
+    QString username = data["UserName"].toString();
     CreateNetAttachJob *netJob = new CreateNetAttachJob(this);
     connect(netJob, SIGNAL(finished(KJob*)), SLOT(netAttachCreated(KJob*)));
 
