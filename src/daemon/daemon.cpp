@@ -67,6 +67,7 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
     Q_FOREACH(const Accounts::Service &service, services) {
         acc->selectService(service);
     }
+    acc->selectService();
 
     connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
 }
@@ -80,7 +81,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::ServiceList services = acc->enabledServices();
 
     m_akonadi->accountCreated(id, services);
-//     m_kio->serviceAdded(id, services);
+    m_kio->accountCreated(id, services);
 
     delete acc;
 }
@@ -90,7 +91,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     kDebug() << id;
 
     m_akonadi->accountRemoved(id);
-//     m_kio->serviceRemoved(id, servicesInfo);
+    m_kio->accountRemoved(id);
 }
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
@@ -106,10 +107,10 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
     Accounts::Service service = m_manager->service(serviceName);
     if (!enabled) {
         m_akonadi->serviceDisabled(accId, service);
-//         m_kio->serviceDisabled(accId, services);
+        m_kio->serviceDisabled(accId, service);
         return;
     }
 
     m_akonadi->serviceEnabled(accId, service);
-//     m_kio->serviceEnabled(accId, services);
+    m_kio->serviceEnabled(accId, service);
 }

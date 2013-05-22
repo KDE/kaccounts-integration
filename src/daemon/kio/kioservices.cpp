@@ -22,6 +22,7 @@
 #include "removekioservice.h"
 
 #include <QtCore/QFile>
+#include <QtCore/QDirIterator>
 
 #include <KDebug>
 #include <KGlobal>
@@ -32,61 +33,70 @@ KIOServices::KIOServices(QObject* parent) : QObject(parent)
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 }
 
-void KIOServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void KIOServices::accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList)
 {
     kDebug();
-    QMapIterator<QString, QString> i(services);
-    while (i.hasNext()) {
-        i.next();
-        if (i.value() != QLatin1String("dav-storage")) {
-            kDebug() << "Ignoring: " << i.value();
+    Q_FOREACH(const Accounts::Service &service, serviceList) {
+        if (service.serviceType() != QLatin1String("dav-storage")) {
+            kDebug() << "Ignoring: " << service.serviceType();
             continue;
         }
-        if (isEnabled(accId, i.key())) {
-            kDebug() << "Already configured: " << i.key();
+        if (isEnabled(accId, service.name())) {
+            kDebug() << "Already configured: " << service.name();
             continue;
         }
 
-        kDebug() << "Creating: " << i.key() << "Of type: " << i.value();
-        CreateKioService *job = new CreateKioService(this);
-        job->setAccountId(accId);
-        job->setServiceName(i.key());
-        job->setServiceType(i.value());
-        job->start();
+        kDebug() << "Creating: " << service.name() << "Of type: " << service.serviceType();
+        enableService(accId, service);
     }
 }
 
-void KIOServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void KIOServices::accountRemoved(const Accounts::AccountId& accId)
 {
     kDebug();
-    QMapIterator<QString, QString> i(services);
+    QString accountId = QString::number(accId) + "_";
+    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+
+    QDirIterator i(path, QDir::NoDotAndDotDot | QDir::Files);
     while (i.hasNext()) {
         i.next();
-        if (i.value() != QLatin1String("dav-storage")) {
-            kDebug() << "Ignoring: " << i.value();
-            continue;
-        }
-        if (!isEnabled(accId, i.key())) {
-            kDebug() << "Not configured: " << i.key();
+        if (!i.fileName().startsWith(accountId)) {
             continue;
         }
 
-        kDebug() << "Removing: " << i.key() << "Of type: " << i.value();
-        RemoveKioService *job = new RemoveKioService(this);
-        job->setServiceName(i.key());
-        job->setAccountId(accId);
-        job->start();
+        QString serviceName = i.fileName();
+        kDebug() << "Removing: " << serviceName;
+        serviceName = serviceName.mid(accountId.count(), serviceName.indexOf(QLatin1String(".desktop")) - accountId.count());
+        kDebug() << "Removing N: " << serviceName;
+        disableService(accId, serviceName);
     }
 }
 
-void KIOServices::serviceEnabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void KIOServices::serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
-    serviceAdded(accId, services);
+    enableService(accId, service);
 }
 
-void KIOServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QString, QString >& services)
+void KIOServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
-    serviceRemoved(accId, services);
+    disableService(accId, service.name());
+}
+
+void KIOServices::enableService(const Accounts::AccountId& accId, const Accounts::Service &service)
+{
+    CreateKioService *job = new CreateKioService(this);
+    job->setAccountId(accId);
+    job->setServiceName(service.name());
+    job->setServiceType(service.serviceType());
+    job->start();
+}
+
+void KIOServices::disableService(const Accounts::AccountId& accId, const QString& serviceName)
+{
+    RemoveKioService *job = new RemoveKioService(this);
+    job->setServiceName(serviceName);
+    job->setAccountId(accId);
+    job->start();
 }
 
 bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceName)
