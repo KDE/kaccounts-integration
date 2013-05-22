@@ -42,7 +42,7 @@ void KIOServices::serviceAdded(const Accounts::AccountId& accId, QMap< QString, 
         return;
     }
 
-    if (isEnabled(accId, serviceType)) {
+    if (isEnabled(accId, serviceName)) {
         kDebug() << "Service already enabled";
         return;
     }
@@ -59,7 +59,7 @@ void KIOServices::serviceRemoved(const Accounts::AccountId& accId, QMap< QString
     QString serviceName = services.keys().first();
     QString serviceType = services.value(serviceName);
 
-    if (!isEnabled(accId, serviceType)) {
+    if (!isEnabled(accId, serviceName)) {
         kDebug() << "Service not enabled";
         return;
     }
@@ -80,10 +80,10 @@ void KIOServices::serviceDisabled(const Accounts::AccountId& accId, QMap< QStrin
     serviceRemoved(accId, services);
 }
 
-bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceType)
+bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceName)
 {
     QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    QString uniqueId(QString::number(accId) + "_" + serviceType);
+    QString uniqueId(QString::number(accId) + "_" + serviceName);
     path +=  uniqueId + ".desktop";
 
     return QFile::exists(path);
