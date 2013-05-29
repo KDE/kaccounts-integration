@@ -101,10 +101,10 @@ void OCreateFile::createNetAttach()
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
     if (m_config.readEntry("type", "") == "runnerid") {
-        desktopFile.writeEntry("Icon", "netrunnerplace");
+        desktopFile.writeEntry("Icon", "folder-remote");
         desktopFile.writeEntry("Name", "Runners-ID-Storage");
     } else {
-        desktopFile.writeEntry("Icon", "owncloud");
+        desktopFile.writeEntry("Icon", "folder-remote");
         desktopFile.writeEntry("Name", url.host());
     }
     desktopFile.writeEntry("Type", "Link");
