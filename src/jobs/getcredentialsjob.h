@@ -30,7 +30,6 @@ namespace Accounts {
 };
 namespace SignOn {
     class Error;
-    class IdentityInfo;
 };
 
 class GetCredentialsJob : public KJob
@@ -45,12 +44,8 @@ public:
     QVariantMap credentialsData() const;
     Accounts::AccountId accountId() const;
 
-Q_SIGNALS:
-    void gotCredentials(const SignOn::SessionData& data);
-
 private Q_SLOTS:
     void getCredentials();
-    void info(const SignOn::IdentityInfo &info);
     void sessionResponse(const SignOn::SessionData &data);
     void sessionError(const SignOn::Error &error);
 
