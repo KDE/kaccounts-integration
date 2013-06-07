@@ -47,6 +47,12 @@ void GetCredentialsJob::setServiceType(const QString& serviceType)
 void GetCredentialsJob::getCredentials()
 {
     Accounts::Account *acc = m_manager->account(m_id);
+    if (!acc) {
+        setError(-1);
+        setErrorText("Could not find account");
+        emitResult();
+        return;
+    }
     Accounts::AccountService *service = new Accounts::AccountService(acc, m_manager->service(m_serviceType), this);
 
     Accounts::AuthData authData = service->authData();
