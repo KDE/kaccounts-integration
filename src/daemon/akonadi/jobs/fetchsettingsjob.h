@@ -24,6 +24,7 @@
 #include <QtCore/QVariant>
 #include <QDBusPendingReply>
 #include <QDBusPendingCallWatcher>
+#include <QDebug>
 
 class FetchSettingsJob : public AbstractAkonadiJob
 {
