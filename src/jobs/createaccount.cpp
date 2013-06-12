@@ -130,13 +130,6 @@ void CreateAccount::response(const SignOn::SessionData& data)
     qDebug() << "\tUsername:" << data.UserName();
     qDebug() << "\t:" << data.getProperty("ScreenName");
 
-    QString displayName = data.getProperty("ScreenName").toString();
-    if (displayName.isEmpty()) {
-        displayName = data.UserName();
-    }
-
-    m_account->setDisplayName(displayName);
-
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
     m_identity->queryInfo();
 }
@@ -163,11 +156,14 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     if (m_account->displayName().isEmpty()) {
         m_account->setDisplayName(info.userName());
     }
+    m_account->setValue("username", info.userName());
+
     m_account->setCredentialsId(info.id());
 
     Accounts::AuthData authData = m_accInfo->authData();
     m_account->setValue("auth/mechanism", authData.mechanism());
     m_account->setValue("auth/method", authData.method());
+
     QString base("auth/");
     base.append(authData.method());
     base.append("/");
