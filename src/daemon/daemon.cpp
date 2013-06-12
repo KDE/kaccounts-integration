@@ -82,8 +82,6 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 
     m_akonadi->accountCreated(id, services);
     m_kio->accountCreated(id, services);
-
-    delete acc;
 }
 
 void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
