@@ -74,11 +74,29 @@ void KIOServices::accountRemoved(const Accounts::AccountId& accId)
 
 void KIOServices::serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
+    if (service.serviceType() != QLatin1String("dav-storage")) {
+        kDebug() << "Ignoring: " << service.serviceType();
+        return;
+    }
+    if (isEnabled(accId, service.name())) {
+        kDebug() << "Already configured: " << service.name();
+        return;
+    }
+
     enableService(accId, service);
 }
 
 void KIOServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
+    if (service.serviceType() != QLatin1String("dav-storage")) {
+        kDebug() << "Ignoring: " << service.serviceType();
+        return;
+    }
+    if (!isEnabled(accId, service.name())) {
+        kDebug() << "Already not configured: " << service.name();
+        return;
+    }
+
     disableService(accId, service.name());
 }
 
