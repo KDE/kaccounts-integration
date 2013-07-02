@@ -1,36 +1,16 @@
 [Desktop Entry]
-Exec=kcmshell4 webaccounts
+Exec=kcmshell4 kcm_kdeaccounts
 Icon=applications-internet
 Type=Service
 
 X-KDE-ServiceTypes=KCModule
 
-X-KDE-Library=webaccounts
+X-KDE-Library=kcm_kdeaccounts
 X-KDE-ParentApp=kcontrol
 
 X-KDE-System-Settings-Parent-Category=network-and-connectivity
 
-Name=Web Accounts
-Name[cs]=Webové účty
-Name[de]=Web-Zugänge
-Name[es]=Cuentas web
-Name[et]=Veebikontod
-Name[fi]=Verkkotilit
-Name[fr]=Comptes web
-Name[ga]=Cuntais Ghréasáin
-Name[gl]=Contas web
-Name[hu]=Webes felhasználói fiókok
-Name[km]=គណនី​បណ្ដាញ
-Name[mr]=वेब खाते
-Name[nl]=Web-accounts
-Name[pl]=Konta sieciowe
-Name[pt]=Contas na Web
-Name[pt_BR]=Contas da Web
-Name[sk]=Webové účty
-Name[sv]=Webbkonton
-Name[tr]=Web Hesapları
-Name[uk]=Облікові записи у інтернеті
-Name[x-test]=xxWeb Accountsxx
+Name=Online Accounts
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
 Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
@@ -76,4 +56,4 @@ X-KDE-Keywords[tr]=Ağ,Google,Live,ownCloud
 X-KDE-Keywords[uk]=Network,Google,Live,ownCloud,мережа,гугл,лів,аунклауд
 X-KDE-Keywords[x-test]=xxNetwork,Google,Live,ownCloudxx
 
-Categories=Qt;KDE;X-KDE-settings-webaccounts;
+Categories=Qt;KDE;X-KDE-settings-kdeaccounts;

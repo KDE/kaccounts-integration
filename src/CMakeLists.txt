@@ -1,6 +1,6 @@
 add_subdirectory(daemon)
 
-set(webaccounts_SRCS
+set(kdeaccounts_SRCS
     webaccounts.cpp
     create.cpp
     accountwidget.cpp
@@ -12,13 +12,13 @@ set(webaccounts_SRCS
     jobs/checkowncloudhostjob.cpp
 )
 
-qt4_automoc(${webaccounts_SRCS})
+qt4_automoc(${kdeaccounts_SRCS})
 
-kde4_add_ui_files(webaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
+kde4_add_ui_files(kdeaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
 
-kde4_add_plugin(webaccounts ${webaccounts_SRCS})
+kde4_add_plugin(kcm_kdeaccounts ${kdeaccounts_SRCS})
 
-target_link_libraries(webaccounts
+target_link_libraries(kcm_kdeaccounts
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
@@ -29,6 +29,6 @@ target_link_libraries(webaccounts
     ${QJSON_LIBRARY}
 )
 
-install(TARGETS webaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kcm_kdeaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES webaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES kcm_kdeaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
