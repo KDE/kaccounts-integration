@@ -26,12 +26,12 @@ Comment[km]=កំណត់​រចនាសម្ព័ន្ធ​គណន�
 Comment[mr]=तुमचे महाजाळ खाते जसे  गूगल, लाइव्ह, ओनक्लाउड संयोजीत करा
 Comment[nl]=Uw internet-accounts instellen zoals Google, Live, Owncloud
 Comment[pl]=Skonfiguruj swoje konta internetowe, takie jak Google, Live, Owncloud
-Comment[pt]=Configure as suas contas de Internet, como a Google, a Live ou a Owncloud
-Comment[pt_BR]=Configure suas contas na Internet tais como o Google, Live, Owncloud
+Comment[pt]=Configure as suas contas na Internet, como o Google, Live, Owncloud
+Comment[pt_BR]=Configure suas contas na Internet, como Google, Live, Owncloud
 Comment[sk]=Nastaviť vaše internetové účty ako Google, Live, Owncloud
 Comment[sv]=Anpassa Internetkonton såsom Google, Live, Owncloud
 Comment[tr]=Google, Live, Owncloud benzeri internet hesaplarınızı yapılandırın
-Comment[uk]=Налаштування ваших облікових записів у інтернеті, зокрема у Google, Live, Owncloud
+Comment[uk]=Налаштування ваших облікових записів, зокрема записі у Google, Live, Owncloud
 Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
@@ -53,7 +53,7 @@ X-KDE-Keywords[pt_BR]=Rede,Google,Live,ownCloud
 X-KDE-Keywords[sk]=Sieť,Google,Live,ownCloud
 X-KDE-Keywords[sv]=Nätverk,Google,Live,ownCloud
 X-KDE-Keywords[tr]=Ağ,Google,Live,ownCloud
-X-KDE-Keywords[uk]=Network,Google,Live,ownCloud,мережа,гугл,лів,аунклауд
+X-KDE-Keywords[uk]=мережа,інтернет,Network,Google,Live,ownCloud
 X-KDE-Keywords[x-test]=xxNetwork,Google,Live,ownCloudxx
 
 Categories=Qt;KDE;X-KDE-settings-kdeaccounts;
