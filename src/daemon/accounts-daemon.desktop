@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Accounts
+Name[bs]=Nalozi
 Name[cs]=Účty
 Name[de]=Zugänge
 Name[es]=Cuentas
@@ -16,6 +17,7 @@ Name[tr]=Hesaplar
 Name[uk]=Облікові записи
 Name[x-test]=xxAccountsxx
 Comment=Accounts management
+Comment[bs]=Upravljanje nalozima
 Comment[cs]=Správa účtů
 Comment[de]=Zugangs-Verwaltung
 Comment[es]=Gestión de cuentas

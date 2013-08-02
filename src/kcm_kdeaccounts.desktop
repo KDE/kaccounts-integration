@@ -11,6 +11,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=network-and-connectivity
 
 Name=Online Accounts
+Name[bs]=Nalozi na mreži
 Name[cs]=Účty online
 Name[fi]=Verkkotilit
 Name[fr]=Comptes en ligne
@@ -24,6 +25,7 @@ Name[uk]=Облікові записи у інтернеті
 Name[x-test]=xxOnline Accountsxx
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
+Comment[bs]=Konfigurišite vaše Internet naloge poptu Google, Live, Owncloud
 Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
 Comment[de]=Richten Sie Ihre Web-Zugänge wie Google, Live und ownCloud ein
 Comment[es]=Configurar sus cuentas de Internet, como Google, Live u Owncloud
@@ -46,6 +48,7 @@ Comment[uk]=Налаштування ваших облікових записі�
 Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
+X-KDE-Keywords[bs]=Network,Google,Live,ownCloud
 X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
 X-KDE-Keywords[de]=Netzwerk,Google,Live,ownCloud
 X-KDE-Keywords[es]=Red,Google,Live,ownCloud
