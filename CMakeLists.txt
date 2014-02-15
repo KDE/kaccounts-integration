@@ -9,8 +9,8 @@ enable_testing()
 find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
 find_package(QJSON REQUIRED)
-find_package(AccountsQt REQUIRED)
-find_package(SignOnQt REQUIRED)
+find_package(AccountsQt 1.10 REQUIRED CONFIG)
+find_package(SignOnQt 8.55 REQUIRED CONFIG)
 
 add_definitions (${KDE4_DEFINITIONS}
                  -fexceptions
