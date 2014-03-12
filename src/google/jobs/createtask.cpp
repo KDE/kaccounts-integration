@@ -19,20 +19,16 @@
 #include "createtask.h"
 #include "google_calendar_settings.h"
 
-#include <libkgapi/auth.h>
-#include <libkgapi/reply.h>
-#include <libkgapi/request.h>
-#include <libkgapi/accessmanager.h>
-#include <libkgapi/objects/tasklist.h>
-#include <libkgapi/services/tasks.h>
+#include <libkgapi2/account.h>
+#include <libkgapi2/tasks/tasklist.h>
+#include <libkgapi2/tasks/tasklistfetchjob.h>
 
 #include <KDebug>
 
-using namespace KGAPI;
+using namespace KGAPI2;
 
 CreateTask::CreateTask(KConfigGroup group, QObject* parent) : CreateCalendar(group, parent)
 {
-    qRegisterMetaType< KGAPI::Services::Tasks >("Task");
 }
 
 CreateTask::~CreateTask()
@@ -56,33 +52,38 @@ void CreateTask::startByCalendar()
 
 void CreateTask::fetchDefaultCollections()
 {
-    m_accessManager = new AccessManager;
+    AccountPtr acc(new Account);
+    acc->setAccountName(m_config.name());
+    acc->setAccessToken(m_accInfo[QLatin1String("accessToken")]);
+    acc->setRefreshToken(m_accInfo[QLatin1String("refreshToken")]);
 
-    connect(m_accessManager, SIGNAL(replyReceived(KGAPI::Reply*)),
-            this, SLOT(replyReceived(KGAPI::Reply*)));
+    const QStringList scopes = m_accInfo[QLatin1String( "scopes" )].split( QLatin1Char(','), QString::SkipEmptyParts );
+    QList<QUrl> scopeUrls;
+    Q_FOREACH( const QString &scope, scopes ) {
+        scopeUrls << QUrl( scope );
+    }
+    acc->setScopes(scopeUrls);
 
-    Request *request = new Request(Services::Tasks::fetchTaskListsUrl(), Request::FetchAll, "Task",  Auth::instance()->getAccount(m_config.name()));
-    m_accessManager->sendRequest(request);
+    TaskListFetchJob *job = new TaskListFetchJob(acc, this);
+    connect(job, SIGNAL(finished(KGAPI2::Job*)), SLOT(replyReceived(KGAPI2::Job*)));
 }
 
-void CreateTask::replyReceived(KGAPI::Reply* reply)
+void CreateTask::replyReceived(KGAPI2::Job* job)
 {
+    TaskListFetchJob *cJob = qobject_cast<TaskListFetchJob*>(job);
+    if (!cJob || cJob->error()) {
+        finishWithError();
+        return;
+    }
     QStringList tasks;
-    QList< KGAPI::Object* > objects = reply->replyData();
-
-    Q_FOREACH(KGAPI::Object * object, objects) {
-        Objects::TaskList *task;
-
-        task = static_cast< Objects::TaskList* >(object);
-        kDebug() << task->uid();
-        tasks.append(task->uid());
-        delete task;
+    ObjectsList objects = cJob->items();
+    Q_FOREACH(ObjectPtr object, objects) {
+        const TaskListPtr taskList = object.dynamicCast<TaskList>();
+        tasks.append(taskList->uid());
     }
 
     m_calendarSettings->setTaskLists(tasks);
     m_agent.reconfigure();
-
-    delete reply;
 
     m_config.group("services").writeEntry("Tasks", 1);
     m_config.sync();

@@ -19,13 +19,13 @@
 #include "oauth.h"
 #include "google/google.h"
 
-#include <libkgapi/auth.h>
-#include <libkgapi/services/tasks.h>
-#include <libkgapi/services/contacts.h>
-#include <libkgapi/services/calendar.h>
+#include <libkgapi2/account.h>
+#include <libkgapi2/authjob.h>
 
+#include <kwallet.h>
 #include <KDebug>
-using namespace KGAPI;
+using namespace KGAPI2;
+using namespace KWallet;
 
 OAuth::OAuth(GoogleWizard *parent)
  : QWizardPage(parent)
@@ -64,22 +64,28 @@ void OAuth::initializePage()
 
 bool OAuth::accountExists()
 {
-    Auth::instance()->init("Akonadi Google",
-               "554041944266.apps.googleusercontent.com",
-               "mdT1DjzohxN3npUUzkENT0gO");
-
-    Account::Ptr acc;
-    try {
-        acc = Auth::instance()->getAccount(m_wizard->username());
-    } catch (Exception::BaseException &e) {
+    m_wallet = Wallet::openWallet(Wallet::LocalWallet(), winId());
+    if (!m_wallet || !m_wallet->isEnabled() || !m_wallet->isOpen()) {
         return false;
     }
 
-    if (acc.isNull()) {
+    if (!m_wallet->hasFolder(QLatin1String("Akonadi Google"))) {
         return false;
     }
 
-    if (acc->accessToken().isEmpty() || acc->refreshToken().isEmpty()) {
+    if (!m_wallet->setFolder(QLatin1String("Akonadi Google"))) {
+        return false;
+    }
+    if (!m_wallet->hasEntry(m_wizard->username())) {
+        return false;
+    }
+
+    QMap<QString, QString> entries;
+    if (m_wallet->readMap(m_wizard->username(), entries) != 0) {
+        return false;
+    }
+
+    if (!entries.contains(QLatin1String("accessToken")) || !entries.contains(QLatin1String("refreshToken"))) {
         return false;
     }
 
@@ -88,34 +94,65 @@ bool OAuth::accountExists()
 
 void OAuth::getTokenForAccount()
 {
-    Auth *auth = Auth::instance();
-
-    Account::Ptr acc(new KGAPI::Account());
-    acc->addScope(Services::Tasks::ScopeUrl);
-    acc->addScope(Services::Contacts::ScopeUrl);
-    acc->addScope(Services::Calendar::ScopeUrl);
+    AccountPtr acc(new Account);
+    acc->addScope( Account::contactsScopeUrl() );
+    acc->addScope( Account::calendarScopeUrl() );
+    acc->addScope( Account::tasksScopeUrl() );
+    acc->addScope( Account::accountInfoEmailScopeUrl() );
+    acc->addScope( Account::accountInfoScopeUrl() );
     acc->setAccountName(m_wizard->username());
 
-    auth->setUsername(m_wizard->username());
-    auth->setPassword(m_wizard->password());
-    auth->setDialogAutoClose(true);
-    auth->authenticate(acc, true);
+    AuthJob *job = new AuthJob(acc,
+                               QLatin1String("554041944266.apps.googleusercontent.com"),
+                               QLatin1String("mdT1DjzohxN3npUUzkENT0gO"), this);
 
-    connect(auth, SIGNAL(authenticated(KGAPI::Account::Ptr&)), this, SLOT(authenticated(KGAPI::Account::Ptr&)));
-    connect(auth, SIGNAL(error(KGAPI::Error,QString)), this, SLOT(error(KGAPI::Error,QString)));
+    job->setUsername(m_wizard->username());
+    job->setPassword(m_wizard->password());
+
+    connect(job, SIGNAL(finished(KGAPI2::Job*)), SLOT(authenticated(KGAPI2::Job*)));
 }
 
-void OAuth::authenticated(KGAPI::Account::Ptr& acc)
+void OAuth::authenticated(KGAPI2::Job* job)
 {
-    m_valid = true;
+    AuthJob *authJob = qobject_cast<AuthJob*>(job);
+    if (!authJob || authJob->error()) {
+        kDebug() << job->errorString();
+        setError();
+        return;
+    }
+
+    AccountPtr acc = authJob->account();
+    QStringList scopes;
+    const QList<QUrl> urlScopes = acc->scopes();
+    Q_FOREACH(const QUrl &url, urlScopes) {
+        scopes << url.toString();
+    }
+
+    QMap<QString, QString> accInfo;
+    accInfo.insert(QLatin1String("accessToken"), acc->accessToken());
+    accInfo.insert(QLatin1String("refreshToken"), acc->refreshToken());
+    accInfo.insert(QLatin1String("scopes"), scopes.join(QLatin1String(",")));
+
+    Q_FOREACH(const QString& value, accInfo) {
+        if (value.isEmpty()) {
+            setError();
+            return;
+        }
+    }
+
+    if (!m_wallet->hasFolder(QLatin1String("Akonadi Google"))) {
+        m_wallet->createFolder(QLatin1String("Akonadi Google"));
+    }
+
+    m_wallet->setFolder(QLatin1String("Akonadi Google"));
+    m_wallet->writeMap(acc->accountName(), accInfo);
     label->setVisible(false);
+    m_valid = true;
     m_wizard->next();
 }
 
-void OAuth::error(Error , QString err)
+void OAuth::setError()
 {
-    kDebug() << err;
-    m_valid = false;
     label->setText(i18n("Error authenticating with Google, please press back and check your credentials"));
 }
 

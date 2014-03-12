@@ -20,11 +20,17 @@
 #define GOOGLEOAUTH_H
 
 #include "ui_oauth.h"
-#include <libkgapi/common.h>
-#include <libkgapi/account.h>
+#include <libkgapi2/types.h>
+#include <libkgapi2/account.h>
 
 #include <QtGui/QWizardPage>
 
+namespace KGAPI2 {
+    class Job;
+}
+namespace KWallet {
+    class Wallet;
+}
 class GoogleWizard;
 class OAuth : public QWizardPage, Ui::OAuth
 {
@@ -38,15 +44,16 @@ Q_OBJECT
         virtual bool isComplete() const;
 
     private Q_SLOTS:
-        void error(KGAPI::Error, QString);
-        void authenticated(KGAPI::Account::Ptr& acc);
+        void authenticated(KGAPI2::Job* job);
 
     private:
+        void setError();
         bool accountExists();
         void getTokenForAccount();
 
     private:
         bool    m_valid;
+        KWallet::Wallet *m_wallet;
         GoogleWizard *m_wizard;
 };
 

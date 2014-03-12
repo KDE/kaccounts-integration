@@ -23,6 +23,9 @@
 
 #include <QtCore/QString>
 
+namespace KGAPI2 {
+    class Job;
+};
 class CreateTask : public CreateCalendar
 {
     Q_OBJECT
@@ -39,7 +42,7 @@ class CreateTask : public CreateCalendar
         void startByCalendar();
 
     private Q_SLOTS:
-        void replyReceived(KGAPI::Reply *reply);
+        void replyReceived(KGAPI2::Job* job);
 };
 
 #endif //CREATETASK_H

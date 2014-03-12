@@ -21,27 +21,19 @@
 
 #include <QDBusInterface>
 
-#include <libkgapi/auth.h>
-#include <libkgapi/reply.h>
-#include <libkgapi/request.h>
-#include <libkgapi/accessmanager.h>
-#include <libkgapi/objects/contact.h>
-#include <libkgapi/services/contacts.h>
+#include <libkgapi2/account.h>
 
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 
-using namespace KGAPI;
+using namespace KGAPI2;
 using namespace Akonadi;
 
 CreateContact::CreateContact(KConfigGroup group, QObject* parent)
 : KJob(parent)
 , m_config(group)
 {
-    Auth *auth = Auth::instance();
-    auth->init("Akonadi Google", "554041944266.apps.googleusercontent.com", "mdT1DjzohxN3npUUzkENT0gO");
-    qRegisterMetaType< KGAPI::Services::Contacts >("Contact");
 }
 
 CreateContact::~CreateContact()
@@ -85,6 +77,7 @@ void CreateContact::resourceCreated(KJob* job)
     settings->deleteLater();
 
     agent.reconfigure();
+    agent.synchronize();
 
     m_config.group("services").writeEntry("Contact", 1);
     m_config.sync();

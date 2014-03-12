@@ -26,10 +26,12 @@
 
 #include <akonadi/agentinstance.h>
 
-namespace KGAPI {
-    class Reply;
-    class AccessManager;
+namespace KGAPI2 {
+    class Job;
 };
+namespace KWallet {
+    class Wallet;
+}
 using namespace Akonadi;
 class KConfigGroup;
 class OrgKdeAkonadiGoogleCalendarSettingsInterface;
@@ -47,18 +49,21 @@ class CreateCalendar : public KJob
 
     protected:
         virtual void fetchDefaultCollections();
+        void finishWithError();
 
+        QMap<QString, QString> m_accInfo;
     private Q_SLOTS:
+        void openKWallet();
         void useTaskResource();
         void createResource();
         void resourceCreated(KJob *job);
-        void replyReceived(KGAPI::Reply *reply);
+        void replyReceived(KGAPI2::Job* job);
 
     protected:
         OrgKdeAkonadiGoogleCalendarSettingsInterface *m_calendarSettings;
         KConfigGroup m_config;
         AgentInstance m_agent;
-        KGAPI::AccessManager *m_accessManager;
+        KWallet::Wallet *m_wallet;
 };
 
 #endif //CREATECALENDAR_H
