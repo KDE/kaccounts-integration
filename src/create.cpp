@@ -28,13 +28,6 @@
 
 #include <QtGui/QWidget>
 
-#include <libkgapi/auth.h>
-#include <libkgapi/services/tasks.h>
-#include <libkgapi/services/contacts.h>
-#include <libkgapi/services/calendar.h>
-
-using namespace KGAPI;
-
 Create::Create(QWidget* parent)
 : QObject(parent)
 , m_form(0)

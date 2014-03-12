@@ -21,8 +21,6 @@
 
 #include <QtCore/QObject>
 
-#include <libkgapi/account.h>
-
 class QDialog;
 class QWidget;
 class Ui_createForm;
