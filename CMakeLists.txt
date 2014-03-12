@@ -8,7 +8,7 @@ set(IS_KTP_INTERNAL_MODULE TRUE)
 find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
 find_package(Akonadi REQUIRED)
-find_package(LibKGAPI REQUIRED)
+find_package(LibKGAPI2 REQUIRED)
 find_package(LibKFbAPI REQUIRED)
 find_package(KdepimLibs 4.7.41 REQUIRED)
 find_package (TelepathyQt4 0.8.9 REQUIRED)
@@ -23,8 +23,7 @@ add_definitions (${KDE4_DEFINITIONS}
 include(KDE4Defaults)
 include(MacroOptionalAddSubdirectory)
 
-MESSAGE(WARNING ${LIBKFACEBOOK_INCLUDE_DIR})
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/src ${KDE4_INCLUDES} ${LibKGAPI_INCLUDE_DIR} ${AKONADI_INCLUDE_DIR} ${TELEPATHY_QT4_INCLUDE_DIR} ${KTP_INCLUDE_DIR})
+include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/src ${KDE4_INCLUDES} ${LibKGAPI2_INCLUDE_DIR} ${AKONADI_INCLUDE_DIR} ${TELEPATHY_QT4_INCLUDE_DIR} ${KTP_INCLUDE_DIR})
 
 add_subdirectory(src)
 add_subdirectory(icons)
