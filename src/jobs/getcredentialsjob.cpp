@@ -50,7 +50,7 @@ void GetCredentialsJob::getCredentials()
     Accounts::Account *acc = m_manager->account(m_id);
     if (!acc) {
         setError(-1);
-        setErrorText("Could not find account");
+        setErrorText(QLatin1String("Could not find account"));
         emitResult();
         return;
     }
@@ -62,12 +62,12 @@ void GetCredentialsJob::getCredentials()
 
     if (!identity) {
         setError(-1);
-        setErrorText("Could not find credentials");
+        setErrorText(QLatin1String("Could not find credentials"));
         emitResult();
         return;
     }
 
-    m_authData["AccountUsername"] = acc->value("username").toString();
+    m_authData["AccountUsername"] = acc->value(QLatin1String("username")).toString();
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authData.method());
 
     connect(authSession, SIGNAL(response(SignOn::SessionData)),
@@ -75,14 +75,11 @@ void GetCredentialsJob::getCredentials()
     connect(authSession, SIGNAL(error(SignOn::Error)),
             SLOT(sessionError(SignOn::Error)));
 
-    kDebug() << authData.parameters();
-    kDebug() << authData.mechanism();
     authSession->process(authData.parameters(), authData.mechanism());
 }
 
 void GetCredentialsJob::sessionResponse(const SignOn::SessionData& data)
 {
-    kDebug() << data.toMap();
     m_sessionData = data;
     emitResult();
 }
