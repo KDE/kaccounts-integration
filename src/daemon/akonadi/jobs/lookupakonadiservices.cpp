@@ -60,14 +60,17 @@ void LookupAkonadiServices::findResource()
     QString serviceName = m_services.keys().first();
     QString serviceType = m_services.take(serviceName);
 
-    QString mime = "text/x-vnd.accounts.";
-    mime.append(serviceType);
-
-    kDebug() << "Looking for: " << mime;
+    kDebug() << "Looking for: " << serviceType;
     QString resourceInstance;
+    const QString accProp = QLatin1String("KAccounts");
     AgentType::List types = AgentManager::self()->types();
     Q_FOREACH(const AgentType &type, types) {
-        if (!type.mimeTypes().contains(mime)) {
+        const QVariantMap props = type.customProperties();
+        if (!props.contains(accProp)) {
+            continue;
+        }
+        const QStringList services = props[accProp].toStringList();
+        if (!services.contains(serviceType)) {
             continue;
         }
 
