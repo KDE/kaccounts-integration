@@ -29,5 +29,4 @@ include_directories(${QT_INCLUDES}
 )
 
 add_subdirectory(src)
-add_subdirectory(icons)
 add_subdirectory(tests)
