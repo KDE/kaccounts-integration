@@ -31,17 +31,14 @@
 #include <QtGui/QStackedLayout>
 #include <QtGui/QListView>
 
-#include <KDebug>
-#include <kpluginfactory.h>
-#include <kstandarddirs.h>
+#include <KPluginFactory>
 
-K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
-K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
+K_PLUGIN_FACTORY_WITH_JSON(WebAccountsFactory, "kcm_kdeaccounts.desktop", registerPlugin<WebAccounts>();)
 
 WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
-: KCModule(WebAccountsFactory::componentData(), parent)
-, m_create(0)
-, m_layout(new QStackedLayout)
+    : KCModule(parent)
+      , m_create(0)
+      , m_layout(new QStackedLayout)
 {
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
