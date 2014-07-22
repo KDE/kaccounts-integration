@@ -24,7 +24,7 @@
 #include "jobs/enableservicejob.h"
 #include "jobs/removeresourcejob.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <Akonadi/AgentManager>
 
 using namespace Akonadi;
@@ -57,7 +57,7 @@ void AkonadiServices::accountCreated(const Accounts::AccountId& accId, const Acc
 void AkonadiServices::accountRemoved(const Accounts::AccountId& accId)
 {
     if (!m_accounts->hasServices(accId)) {
-        kDebug() << "No service enabled";
+        qDebug() << "No service enabled";
         return;
     }
 
@@ -76,7 +76,7 @@ void AkonadiServices::serviceEnabled(const Accounts::AccountId& accId, const Acc
 void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
 {
     if (!m_accounts->hasService(accId, service.name())) {
-        kDebug() << "No service enabled";
+        qDebug() << "No service enabled";
         return;
     }
 
@@ -92,9 +92,9 @@ void AkonadiServices::serviceDisabled(const Accounts::AccountId& accId, const Ac
 
 void AkonadiServices::disableServiceJobDone(KJob* job)
 {
-    kDebug();
+    qDebug();
     if (job->error()) {
-        kDebug() << job->errorText();
+        qDebug() << job->errorText();
         return;
     }
 

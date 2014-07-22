@@ -24,9 +24,9 @@
 #include <QDBusInterface>
 #include <QDBusPendingCall>
 #include <QDBusPendingCallWatcher>
-#include <QtXml/QDomDocument>
+#include <QDomDocument>
 
-#include <kdebug.h>
+#include <QDebug>
 
 FetchSettingsJob::FetchSettingsJob(QObject* parent)
 : AbstractAkonadiJob(parent)
@@ -42,13 +42,13 @@ FetchSettingsJob::~FetchSettingsJob()
 
 void FetchSettingsJob::start()
 {
-    kDebug();
+    qDebug();
     QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
 void FetchSettingsJob::init()
 {
-    kDebug();
+    qDebug();
     if (m_interface.isEmpty()) {
         Q_ASSERT_X(!m_resourceId.isEmpty(), "Asking for the dbus itnerface", "Resource id can't be empty");
         DBusSettingsInterfaceJob *job = new DBusSettingsInterfaceJob(this);

@@ -31,7 +31,8 @@
 #include <KConfig>
 #include <KIO/Job>
 #include <KConfigGroup>
-#include <KDebug>
+
+#include <QDebug>
 
 using namespace KWallet;
 
@@ -54,7 +55,7 @@ void CreateNetAttachJob::start()
 
 void CreateNetAttachJob::createNetAttach()
 {
-    kDebug();
+    qDebug();
     WId windowId = 0;
     if (qApp->activeWindow()) {
         windowId = qApp->activeWindow()->winId();
@@ -66,7 +67,7 @@ void CreateNetAttachJob::createNetAttach()
 
 void CreateNetAttachJob::walletOpened(bool opened)
 {
-    kDebug();
+    qDebug();
     if (!opened) {
         setError(-1);
         setErrorText("Can't open wallet");
@@ -79,7 +80,7 @@ void CreateNetAttachJob::walletOpened(bool opened)
 
 void CreateNetAttachJob::getRealm()
 {
-    kDebug();
+    qDebug();
     QUrl url;
     url.setHost(m_host);
     url.setUserName(m_username);
@@ -116,7 +117,7 @@ void CreateNetAttachJob::gotRealm(KJob* job)
 
 void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
-    kDebug();
+    qDebug();
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 
     QString path = KGlobal::dirs()->saveLocation("remote_entries");

@@ -23,7 +23,7 @@
 
 #include <akonadi/agentmanager.h>
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace Akonadi;
 
@@ -74,7 +74,7 @@ void RemoveTask::removeTaskInResource()
     if (agent.isValid()) {
         agent.reconfigure();
     } else {
-        kDebug() << "Agent not found, removing tasks anyway";
+        qDebug() << "Agent not found, removing tasks anyway";
     }
 
     //Since removeCalendar and removeTask jobs can be run in paralel we have to check in the last step

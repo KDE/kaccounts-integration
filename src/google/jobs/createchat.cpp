@@ -27,7 +27,7 @@
 
 #include <KTp/wallet-utils.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <KWallet/Wallet>
 
 using namespace KWallet;
@@ -69,7 +69,7 @@ void CreateChat::createAccount()
 void CreateChat::onAccountManagerReady(Tp::PendingOperation* op)
 {
     if (op->isError()) {
-        kDebug() << "Can't create account";
+        qDebug() << "Can't create account";
         m_config.group("services").writeEntry("Chat", -1);
         setError(-1);
         emitResult();
@@ -99,7 +99,7 @@ void CreateChat::onAccountCreated(Tp::PendingOperation* op)
     Tp::PendingAccount *pendingAccount = qobject_cast<Tp::PendingAccount*>(op);
 
     if (pendingAccount->isError()) {
-        kDebug() << "Can't create account";
+        qDebug() << "Can't create account";
         m_config.group("services").writeEntry("Chat", -1);
         setError(-1);
         emitResult();

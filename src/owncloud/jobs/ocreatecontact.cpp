@@ -21,15 +21,14 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QApplication>
-
 #include <QtDBus/QDBusInterface>
+#include <QDebug>
 
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 #include <unistd.h>
 
-#include <KDebug>
 #include <klocalizedstring.h>
 #include <KWallet/Wallet>
 
@@ -64,7 +63,7 @@ KConfigGroup OCreateContact::config() const
 
 void OCreateContact::createResource()
 {
-    kDebug() << "Creating new resource";
+    qDebug() << "Creating new resource";
     const AgentType type = AgentManager::self()->type("akonadi_davgroupware_resource");
 
     AgentInstanceCreateJob *job = new AgentInstanceCreateJob( type, this );
@@ -150,7 +149,7 @@ void OCreateContact::useCalendarResource()
 
     QStringList list = settings->remoteUrls().value();
     list.append(davUrl());
-    kDebug() << list;
+    qDebug() << list;
     settings->setRemoteUrls(list).waitForFinished();
     settings->setDefaultUsername(m_config.name()).waitForFinished();
 

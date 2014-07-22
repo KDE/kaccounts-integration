@@ -25,7 +25,7 @@
 
 #include <kfacebook/authenticationdialog.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
 
 using namespace KFacebook;
@@ -145,7 +145,7 @@ void FOauth::checkUsername()
     QUrl url("https://graph.facebook.com/me");
     url.addQueryItem("access_token", m_wizard->accessToken());
 
-    kDebug() << url;
+    qDebug() << url;
     KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));

@@ -21,8 +21,8 @@
 #include <QtCore/QFile>
 #include <QtGui/QWidget>
 #include <QtGui/QApplication>
+#include <QDebug>
 
-#include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KWallet/Wallet>
@@ -58,7 +58,7 @@ void RemoveNetAttachJob::removeNetAttach()
 
 void RemoveNetAttachJob::walletOpened(bool opened)
 {
-    kDebug();
+    qDebug();
     if (!opened) {
         setError(-1);
         setErrorText("Can't open wallet");
@@ -81,7 +81,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
     QUrl url(desktopFile.readEntry("URL", QUrl()));
     Q_ASSERT(!url.isEmpty());
 
-    kDebug() << url.userName() << url.host() << url;
+    qDebug() << url.userName() << url.host() << url;
 
     QFile::remove(path);
     org::kde::KDirNotify::emitFilesRemoved(QStringList("remote:/" + m_uniqueId));

@@ -19,7 +19,7 @@
 #include "createresourcejob.h"
 #include "changesettingsjob.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 #include <QDBusConnection>
 #include <QDBusMessage>
 
@@ -56,9 +56,9 @@ void CreateResourceJob::setAgentType(const AgentType& type)
 
 void CreateResourceJob::resourceCreated(KJob* job)
 {
-    kDebug();
+    qDebug();
     if (job->error()) {
-        kDebug() << "Error creating the job";
+        qDebug() << "Error creating the job";
         return;
     }
 
@@ -75,7 +75,7 @@ void CreateResourceJob::resourceCreated(KJob* job)
 
 void CreateResourceJob::setAccountDone(KJob* job)
 {
-    kDebug();
+    qDebug();
     m_agent.reconfigure();
     if (job->error()) {
         setError(job->error());

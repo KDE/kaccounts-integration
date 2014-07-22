@@ -26,7 +26,7 @@
 #include <libkgapi/objects/tasklist.h>
 #include <libkgapi/services/tasks.h>
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace KGAPI;
 
@@ -44,13 +44,13 @@ CreateTask::~CreateTask()
 
 void CreateTask::start()
 {
-    kDebug();
+    qDebug();
     CreateCalendar::start();
 }
 
 void CreateTask::startByCalendar()
 {
-    kDebug();
+    qDebug();
     start();
 }
 
@@ -74,7 +74,7 @@ void CreateTask::replyReceived(KGAPI::Reply* reply)
         Objects::TaskList *task;
 
         task = static_cast< Objects::TaskList* >(object);
-        kDebug() << task->uid();
+        qDebug() << task->uid();
         tasks.append(task->uid());
         delete task;
     }

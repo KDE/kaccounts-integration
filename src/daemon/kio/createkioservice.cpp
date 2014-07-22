@@ -20,7 +20,7 @@
 #include "createnetattachjob.h"
 #include "../jobs/getcredentialsjob.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <Accounts/Manager>
 
 CreateKioService::CreateKioService(QObject* parent) : KJob(parent)
@@ -41,7 +41,7 @@ void CreateKioService::start()
 
 void CreateKioService::createKioService()
 {
-    kDebug();
+    qDebug();
     m_manager = new Accounts::Manager();
     m_account = m_manager->account(m_accountId);
 
@@ -53,7 +53,7 @@ void CreateKioService::createKioService()
 
 void CreateKioService::gotCredentials(KJob* job)
 {
-    kDebug();
+    qDebug();
     if (job->error()) {
         setError(job->error());
         setErrorText(job->errorText());

@@ -20,7 +20,7 @@
 #include "removeresourcejob.h"
 #include "../akonadiaccounts.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <Akonadi/AgentManager>
 
 using namespace Akonadi;
@@ -45,7 +45,7 @@ void RemoveAkonadiServicesJob::init()
 
 void RemoveAkonadiServicesJob::removeResource()
 {
-    kDebug();
+    qDebug();
 
     if (m_resources.isEmpty()) {
         m_accounts->removeAccount(m_accountId);

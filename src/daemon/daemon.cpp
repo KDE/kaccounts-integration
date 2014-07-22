@@ -20,11 +20,12 @@
 #include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
 
-#include <kdebug.h>
 #include <kdemacros.h>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KPluginFactory>
+
+#include <QDebug>
 
 #include <Accounts/Manager>
 #include <Accounts/Service>
@@ -52,7 +53,7 @@ AccountsDaemon::~AccountsDaemon()
 
 void AccountsDaemon::startDaemon()
 {
-    kDebug();
+    qDebug();
     Accounts::AccountIdList accList = m_manager->accountList();
     Q_FOREACH(const Accounts::AccountId &id, accList) {
         monitorAccount(id);
@@ -61,7 +62,7 @@ void AccountsDaemon::startDaemon()
 
 void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 {
-    kDebug() << id;
+    qDebug() << id;
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->services();
     Q_FOREACH(const Accounts::Service &service, services) {
@@ -74,7 +75,7 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 
 void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 {
-    kDebug() << id;
+    qDebug() << id;
     monitorAccount(id);
 
     Accounts::Account *acc = m_manager->account(id);
@@ -86,7 +87,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 
 void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 {
-    kDebug() << id;
+    qDebug() << id;
 
     m_akonadi->accountRemoved(id);
     m_kio->accountRemoved(id);
@@ -94,9 +95,9 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 {
-    kDebug();
+    qDebug();
     if (serviceName.isEmpty()) {
-        kDebug() << "ServiceName is Empty";
+        qDebug() << "ServiceName is Empty";
         return;
     }
 

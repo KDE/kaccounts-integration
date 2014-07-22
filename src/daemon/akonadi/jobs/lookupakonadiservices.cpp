@@ -21,7 +21,7 @@
 #include "createresourcejob.h"
 #include "../akonadiaccounts.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <Akonadi/AgentManager>
 
 using namespace Akonadi;
@@ -50,7 +50,7 @@ void LookupAkonadiServices::init()
 
 void LookupAkonadiServices::findResource()
 {
-    kDebug();
+    qDebug();
 
     if (m_services.isEmpty()) {
         emitResult();
@@ -60,7 +60,7 @@ void LookupAkonadiServices::findResource()
     QString serviceName = m_services.keys().first();
     QString serviceType = m_services.take(serviceName);
 
-    kDebug() << "Looking for: " << serviceType;
+    qDebug() << "Looking for: " << serviceType;
     QString resourceInstance;
     const QString accProp = QLatin1String("KAccounts");
     AgentType::List types = AgentManager::self()->types();
@@ -76,7 +76,7 @@ void LookupAkonadiServices::findResource()
 
         resourceInstance = m_accounts->resourceFromType(m_accountId, type.identifier());
         if (!resourceInstance.isEmpty()) {
-            kDebug() << "Already created, enabling service:" << resourceInstance;
+            qDebug() << "Already created, enabling service:" << resourceInstance;
             EnableServiceJob *job = new EnableServiceJob(this);
             connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
             job->setAccountId(m_accountId);
@@ -87,11 +87,11 @@ void LookupAkonadiServices::findResource()
             return;
         }
 
-        kDebug() << "Creating a new resource";
+        qDebug() << "Creating a new resource";
         CreateResourceJob *job = new CreateResourceJob(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(createResourceJobDone(KJob*)));
 
-        kDebug() << "Found one: " << m_accountId << type.name() << serviceName;
+        qDebug() << "Found one: " << m_accountId << type.name() << serviceName;
         job->setAccountId(m_accountId);
         job->setAgentType(type);
         job->setServiceName(serviceName);
@@ -100,15 +100,15 @@ void LookupAkonadiServices::findResource()
         return;
     }
 
-    kDebug() << "No resource found";
+    qDebug() << "No resource found";
 }
 
 void LookupAkonadiServices::createResourceJobDone(KJob* job)
 {
-    kDebug();
+    qDebug();
     CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
     if (cJob->error()) {
-        kDebug() << "Error creating resource for: " << cJob->serviceName();
+        qDebug() << "Error creating resource for: " << cJob->serviceName();
     }
 
     EnableServiceJob *eJob = new EnableServiceJob(this);
@@ -122,10 +122,10 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
 
 void LookupAkonadiServices::enableServiceJobDone(KJob* job)
 {
-    kDebug();
+    qDebug();
     EnableServiceJob *sJob = qobject_cast<EnableServiceJob*>(job);
     if (sJob->error()) {
-        kDebug() << "Error enabling service for: " << sJob->serviceName() << sJob->resourceId();
+        qDebug() << "Error enabling service for: " << sJob->serviceName() << sJob->resourceId();
     } else {
         m_accounts->addService(sJob->accountId(), sJob->serviceName(), sJob->resourceId());
         AgentManager::self()->instance(sJob->resourceId()).reconfigure();

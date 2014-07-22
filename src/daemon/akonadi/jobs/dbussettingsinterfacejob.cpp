@@ -23,9 +23,8 @@
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
 #include <QDBusPendingCallWatcher>
-#include <QtXml/QDomDocument>
-
-#include <kdebug.h>
+#include <QDomDocument>
+#include <QDebug>
 
 DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : AbstractAkonadiJob(parent)
 {
@@ -34,13 +33,13 @@ DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : AbstractAk
 
 void DBusSettingsInterfaceJob::start()
 {
-    kDebug();
+    qDebug();
     QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
 void DBusSettingsInterfaceJob::init()
 {
-    kDebug();
+    qDebug();
     QString service = "org.freedesktop.Akonadi.Resource." + m_resourceId;
     QString path = "/Settings";
     QString interface = "org.freedesktop.DBus.Introspectable";
@@ -54,12 +53,12 @@ void DBusSettingsInterfaceJob::init()
 
 void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
 {
-    kDebug();
+    qDebug();
     watcher->deleteLater();
     QDBusPendingReply<QString> reply = *watcher;
     if (reply.isError()) {
-        kDebug() << reply.error().message();
-        kDebug() << reply.error().name();
+        qDebug() << reply.error().message();
+        qDebug() << reply.error().name();
 
         setError(reply.error().type());
         setErrorText(reply.error().name());
@@ -94,7 +93,7 @@ void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
         setErrorText("Settings Interface not found");
     }
 
-    kDebug() << "Interface: " << m_interface;
+    qDebug() << "Interface: " << m_interface;
 
     emitResult();
 }

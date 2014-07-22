@@ -20,7 +20,7 @@
 #include "fetchsettingsjob.h"
 #include "changesettingsjob.h"
 
-#include <KDebug>
+#include <QDebug>
 
 EnableServiceJob::EnableServiceJob(QObject* parent): AbstractAkonadiJob(parent)
 {
@@ -57,12 +57,12 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
     FetchSettingsJob *fetchJob = qobject_cast<FetchSettingsJob*>(job);
     QStringList services = fetchJob->value<QStringList>();
     if (services.contains(m_serviceType) && m_serviceStatus == Enable) {
-        kDebug() << "Already enabled service: " << m_serviceType;
+        qDebug() << "Already enabled service: " << m_serviceType;
         emitResult();
         return;
     }
     if (!services.contains(m_serviceType) && m_serviceStatus == Disable) {
-        kDebug() << "Trying to disable a not enabled service: " << m_serviceType;
+        qDebug() << "Trying to disable a not enabled service: " << m_serviceType;
         emitResult();
         return;
     }

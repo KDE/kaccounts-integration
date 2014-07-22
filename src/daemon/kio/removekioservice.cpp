@@ -20,11 +20,11 @@
 #include "removenetattachjob.h"
 
 #include <QtCore/QFile>
+#include <QDebug>
 
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KDirNotify>
-#include <KDebug>
 
 RemoveKioService::RemoveKioService(QObject* parent): KJob(parent)
 {
@@ -38,7 +38,7 @@ void RemoveKioService::start()
 
 void RemoveKioService::removeKioService()
 {
-    kDebug();
+    qDebug();
     RemoveNetAttachJob* job = new RemoveNetAttachJob(this);
     job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
     connect(job, SIGNAL(finished(KJob*)), SLOT(removeNetAatachFinished(KJob*)));
@@ -47,7 +47,7 @@ void RemoveKioService::removeKioService()
 
 void RemoveKioService::removeNetAatachFinished(KJob* job)
 {
-    kDebug();
+    qDebug();
     if (job->error()) {
         setError(job->error());
         setErrorText(job->errorText());
