@@ -21,7 +21,7 @@
 
 #include <QTimer>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
@@ -107,7 +107,7 @@ void OwncloudDialog::hostChecked(KJob* job)
 {
     setResult(!job->error(), Host);
     if (job->error()) {
-        kDebug() << job->errorString();
+        qDebug() << job->errorString();
         return;
     }
 
@@ -140,7 +140,7 @@ void OwncloudDialog::authChecked(KJob* job)
 {
     if (job->error()) {
         setResult(false, Auth);
-        kDebug() << job->errorString();
+        qDebug() << job->errorString();
         return;
     }
 

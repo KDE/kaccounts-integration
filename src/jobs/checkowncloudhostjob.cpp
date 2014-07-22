@@ -20,7 +20,7 @@
 
 #include <qjson/parser.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
 
 CheckOwncloudHostJob::CheckOwncloudHostJob(QObject* parent): KJob(parent)
@@ -59,7 +59,7 @@ void CheckOwncloudHostJob::requestStatus()
 
     url.setFileName("status.php");
 
-    kDebug() << url;
+    qDebug() << url;
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
@@ -77,8 +77,8 @@ void CheckOwncloudHostJob::fileDownloaded(KJob* job)
 {
     KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob *>(job);
     if (kJob->error()) {
-        kDebug() << job->errorString();
-        kDebug() << job->errorText();
+        qDebug() << job->errorString();
+        qDebug() << job->errorText();
         figureOutServer(kJob->url());
         return;
     }

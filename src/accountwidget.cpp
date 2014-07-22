@@ -26,8 +26,6 @@
 #include <Accounts/Service>
 #include <Accounts/Manager>
 
-#include <KDebug>
-
 AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
  : QWidget(parent)
  , m_manager(new Accounts::Manager(this))
@@ -85,7 +83,7 @@ void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabl
 void AccountWidget::serviceChanged(bool enabled)
 {
     QString service = sender()->property("service").toString();
-    kDebug() << "Enabling: " << service << " enabled";
+    qDebug() << "Enabling: " << service << " enabled";
     if (!m_account) {
         return;
     }

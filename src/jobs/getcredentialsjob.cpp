@@ -25,7 +25,7 @@
 
 #include <SignOn/Identity>
 
-#include <KDebug>
+#include <QDebug>
 
 GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId& id, QObject* parent)
 : KJob(parent)
@@ -86,7 +86,7 @@ void GetCredentialsJob::sessionResponse(const SignOn::SessionData& data)
 
 void GetCredentialsJob::sessionError(const SignOn::Error& error)
 {
-    kDebug() << error.message();
+    qDebug() << error.message();
     setError(-1);
     setErrorText(error.message());
     emitResult();
