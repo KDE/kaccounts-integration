@@ -24,9 +24,7 @@
 #include <Accounts/Manager>
 
 #include <QUrl>
-#include <KGlobal>
 #include <KDirNotify>
-#include <KStandardDirs>
 #include <KWallet/Wallet>
 #include <KConfig>
 #include <KIO/Job>
@@ -118,9 +116,16 @@ void CreateNetAttachJob::gotRealm(KJob* job)
 void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
     qDebug();
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview"));
+
+    QDir saveDir(path);
+    if (!saveDir.exists()) {
+        if (!saveDir.mkpath(path)) {
+            qWarning() << "Directory" << path << "for storage couldn't be created!";
+        }
+    }
     path += m_uniqueId + ".desktop";
 
     qDebug() << "Creating knetAttach place";

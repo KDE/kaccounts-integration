@@ -23,8 +23,6 @@
 #include <QtGui/QApplication>
 #include <QDebug>
 
-#include <KGlobal>
-#include <KStandardDirs>
 #include <KWallet/Wallet>
 #include <KDirNotify>
 #include <KConfig>
@@ -71,9 +69,8 @@ void RemoveNetAttachJob::walletOpened(bool opened)
 
 void RemoveNetAttachJob::deleteDesktopFile()
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path.append(m_uniqueId + ".desktop");
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview/") + m_uniqueId + QStringLiteral(".desktop"));
 
     KConfig _desktopFile(path, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");

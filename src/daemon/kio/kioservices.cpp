@@ -25,12 +25,8 @@
 #include <QtCore/QDirIterator>
 #include <QDebug>
 
-#include <KGlobal>
-#include <KStandardDirs>
-
 KIOServices::KIOServices(QObject* parent) : QObject(parent)
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 }
 
 void KIOServices::accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList)
@@ -55,7 +51,9 @@ void KIOServices::accountRemoved(const Accounts::AccountId& accId)
 {
     qDebug();
     QString accountId = QString::number(accId) + "_";
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview/"));
 
     QDirIterator i(path, QDir::NoDotAndDotDot | QDir::Files);
     while (i.hasNext()) {
@@ -119,9 +117,10 @@ void KIOServices::disableService(const Accounts::AccountId& accId, const QString
 
 bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceName)
 {
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
     QString uniqueId(QString::number(accId) + "_" + serviceName);
-    path +=  uniqueId + ".desktop";
+
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path += QStringLiteral("/remoteview/") + uniqueId + QStringLiteral(".desktop");
 
     return QFile::exists(path);
 }
