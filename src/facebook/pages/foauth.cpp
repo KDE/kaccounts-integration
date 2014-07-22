@@ -142,7 +142,7 @@ void FOauth::checkUsername()
     label->setText(i18n("Checking username..."));
     tryAgain->setDisabled(true);
 
-    KUrl url("https://graph.facebook.com/me");
+    QUrl url("https://graph.facebook.com/me");
     url.addQueryItem("access_token", m_wizard->accessToken());
 
     kDebug() << url;

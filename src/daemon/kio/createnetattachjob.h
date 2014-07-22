@@ -20,7 +20,7 @@
 #define CREATE_NETATTACH_H
 
 #include <KJob>
-#include <KUrl>
+#include <QUrl>
 
 namespace KWallet {
     class Wallet;
@@ -66,7 +66,7 @@ class CreateNetAttachJob : public KJob
 
     private:
         void getRealm();
-        void createDesktopFile(const KUrl& url);
+        void createDesktopFile(const QUrl &url);
 
         QString m_host;
         QString m_path;

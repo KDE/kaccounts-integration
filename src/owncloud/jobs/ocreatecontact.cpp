@@ -74,8 +74,9 @@ void OCreateContact::createResource()
 
 const QString OCreateContact::davUrl()
 {
-    KUrl url(m_config.readEntry("server", ""));
-    url.addPath("remote.php/carddav/");
+    QUrl url(m_config.readEntry("server", ""));
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + "remote.php/carddav/");
 
     QString str("$default$|CardDav|");
     str.append(url.url());

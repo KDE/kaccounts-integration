@@ -26,7 +26,7 @@ namespace KIO
     class Job;
 };
 
-class KUrl;
+class QUrl;
 class CheckOwncloudHostJob : public KJob
 {
     Q_OBJECT
@@ -45,7 +45,7 @@ class CheckOwncloudHostJob : public KJob
         void fileDownloaded(KJob *job);
 
     private:
-        void figureOutServer(const KUrl& url);
+        void figureOutServer(const QUrl &url);
 
         QString m_url;
         QByteArray m_json;

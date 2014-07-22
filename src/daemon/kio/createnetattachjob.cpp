@@ -23,7 +23,7 @@
 
 #include <Accounts/Manager>
 
-#include <KUrl>
+#include <QUrl>
 #include <KGlobal>
 #include <KDirNotify>
 #include <KStandardDirs>
@@ -80,11 +80,12 @@ void CreateNetAttachJob::walletOpened(bool opened)
 void CreateNetAttachJob::getRealm()
 {
     kDebug();
-    KUrl url;
+    QUrl url;
     url.setHost(m_host);
-    url.setUser(m_username);
+    url.setUserName(m_username);
     url.setScheme("webdav");
-    url.addPath(m_path);
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + m_path);
 
     if (!m_realm.isEmpty()) {
         createDesktopFile(url);
@@ -113,7 +114,7 @@ void CreateNetAttachJob::gotRealm(KJob* job)
 }
 
 
-void CreateNetAttachJob::createDesktopFile(const KUrl &url)
+void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
     kDebug();
     KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");

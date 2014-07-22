@@ -22,6 +22,7 @@
 
 #include <QDebug>
 #include <KIO/Job>
+#include <KIO/Global>
 
 CheckOwncloudHostJob::CheckOwncloudHostJob(QObject* parent): KJob(parent)
 {
@@ -55,7 +56,7 @@ QString CheckOwncloudHostJob::url() const
 
 void CheckOwncloudHostJob::requestStatus()
 {
-    KUrl url(m_url);
+    QUrl url(m_url);
 
     url.setFileName("status.php");
 
@@ -93,18 +94,19 @@ void CheckOwncloudHostJob::fileDownloaded(KJob* job)
     emitResult();
 }
 
-void CheckOwncloudHostJob::figureOutServer(const KUrl& url)
+void CheckOwncloudHostJob::figureOutServer(const QUrl &url)
 {
-    if (url.directory(KUrl::AppendTrailingSlash) == "/") {
+    if (url.isEmpty() || url.path() == "/") {
         setError(-1);
         setErrorText("Unable to find the host");
         emitResult();
         return;
     }
 
-    KUrl upUrl = url;
-    upUrl.setFileName("");
-    m_url = upUrl.upUrl().url();
+    QUrl upUrl = KIO::upUrl(url);
+    //FIXME?
+//     upUrl.setFileName("");
+    m_url = upUrl.toString();
 
     m_json.clear();
 

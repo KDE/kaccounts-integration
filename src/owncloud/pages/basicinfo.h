@@ -50,14 +50,14 @@ class BasicInfo : public QWizardPage, Ui_Owncloud
     private:
         bool validData() const;
         void checkServer(const QString &path);
-        void checkServer(const KUrl &url);
+        void checkServer(const QUrl &url);
         void figureOutServer(const QString& urlStr);
 
         void setWorking(bool start);
         void setResult(bool result);
 
     private:
-        KUrl m_server;
+        QUrl m_server;
         bool m_validServer;
         QByteArray m_json;
         KPixmapSequenceOverlayPainter *m_painter;

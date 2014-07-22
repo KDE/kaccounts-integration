@@ -80,7 +80,7 @@ QString OwncloudDialog::password() const
 
 QString OwncloudDialog::host() const
 {
-    return KUrl(m_url).host();
+    return QUrl(m_url).host();
 }
 
 void OwncloudDialog::hostChanged()
@@ -127,7 +127,7 @@ void OwncloudDialog::checkAuth()
 
     setWorking(true, Auth);
 
-    KUrl url = m_url;
+    QUrl url = m_url;
     url.setPassword(passwordLine->text());
     url.setUserName(usernameLine->text());
     url.setPath(QLatin1String("/files/webdav.php/"));

@@ -55,12 +55,13 @@ void Connecting::initializePage()
 
 void Connecting::checkAuth()
 {
-    KUrl url(m_wizard->server());
+    QUrl url(m_wizard->server());
 
-    url.setUser(m_wizard->username());
-    url.setPass(m_wizard->password());
+    url.setUserName(m_wizard->username());
+    url.setPassword(m_wizard->password());
 
-    url.addPath("apps/calendar/caldav.php/");
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + "apps/calendar/caldav.php/");
     kDebug() << "FinalUrL: " << url;
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(httpResult(KJob*)));
