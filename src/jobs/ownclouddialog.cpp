@@ -29,7 +29,7 @@
 
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
- : KDialog(parent, flags)
+ : QDialog(parent, flags)
  , m_timerHost(new QTimer(this))
  , m_timerAuth(new QTimer(this))
  , m_hostResult(false)
@@ -43,9 +43,11 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
 
     setupUi(widget);
     widget->setMinimumWidth(width);
-    setMainWidget(widget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(widget);
 
-    setCaption(i18n("ownCloud Server"));
+    setWindowTitle(i18n("ownCloud Server"));
     usernameLine->setFocus();
     hostWorking->setMinimumSize(iconSize, iconSize);
     passWorking->setMinimumSize(iconSize, iconSize);
@@ -63,7 +65,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     connect(m_timerHost, SIGNAL(timeout()), SLOT(checkServer()));
     connect(m_timerAuth, SIGNAL(timeout()), SLOT(checkAuth()));
 
-    button(KDialog::Ok)->setEnabled(false);
+    okButton->setEnabled(false);
 }
 
 QString OwncloudDialog::username() const
@@ -182,9 +184,9 @@ void OwncloudDialog::setResult(bool result, Type type)
     }
 
     if (!m_authResult || !m_authResult) {
-        button(KDialog::Ok)->setEnabled(false);
+        okButton->setEnabled(false);
     } else {
-        button(KDialog::Ok)->setEnabled(true);
+        okButton->setEnabled(true);
     }
 }
 

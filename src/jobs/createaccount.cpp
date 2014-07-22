@@ -55,7 +55,7 @@ void CreateAccount::processSessionOwncloud()
 {
     OwncloudDialog* dialog = new OwncloudDialog();
     int result = dialog->exec();
-    if (result == KDialog::Cancel) {
+    if (result == QDialog::Cancel) {
         setError(-1);
         setErrorText("Dialog was cancel");
         emitResult();
