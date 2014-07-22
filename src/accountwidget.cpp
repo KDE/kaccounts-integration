@@ -19,8 +19,8 @@
 #include "accountwidget.h"
 #include "models/accountsmodel.h"
 
-#include <QtCore/QDebug>
-#include <QtGui/QCheckBox>
+#include <QDebug>
+#include <QCheckBox>
 
 #include <Accounts/Account>
 #include <Accounts/Service>

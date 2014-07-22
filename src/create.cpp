@@ -21,10 +21,10 @@
 
 #include "ui_types.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
-#include <QtGui/QWidget>
-#include <QtGui/QCommandLinkButton>
+#include <QWidget>
+#include <QCommandLinkButton>
 
 #include <Accounts/Manager>
 #include <Accounts/Provider>

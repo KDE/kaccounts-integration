@@ -24,12 +24,12 @@
 #include "models/modeltest.h"
 #include "accountwidget.h"
 
-#include <QtGui/QLabel>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QAction>
-#include <QtGui/QStackedLayout>
-#include <QtGui/QListView>
+#include <QLabel>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include <QStackedLayout>
+#include <QListView>
 
 #include <KPluginFactory>
 

@@ -18,8 +18,8 @@
 
 #include "providerconfig.h"
 
-#include <QtCore/QDebug>
-#include <QtXml/QDomDocument>
+#include <QDebug>
+#include <QDomDocument>
 
 ProviderConfig::ProviderConfig(const QDomDocument& dom)
 {
