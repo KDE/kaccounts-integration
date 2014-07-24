@@ -20,9 +20,11 @@
 #include "pages/rcredentials.h"
 #include "pages/rservices.h"
 #include "../google/pages/wallet.h"
+
 #include <klocalizedstring.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
+
+#include <QPushButton>
 
 #include <KWallet/Wallet>
 
@@ -39,12 +41,20 @@ RunnerIDWizard::RunnerIDWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(
     addPage(credentials);
     addPage(services);
 
-    setButton(QWizard::BackButton, new
-    KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::NextButton, new
-    KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
-    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
+    QPushButton *backButton;
+    QPushButton *forwardButton;
+    QPushButton *applyButton;
+    QPushButton *cancelButton;
+
+    KGuiItem::assign(backButton, KStandardGuiItem::back());
+    KGuiItem::assign(forwardButton, KStandardGuiItem::forward());
+    KGuiItem::assign(applyButton, KStandardGuiItem::apply());
+    KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
+
+    setButton(QWizard::BackButton, backButton);
+    setButton(QWizard::NextButton, forwardButton);
+    setButton(QWizard::FinishButton, applyButton);
+    setButton(QWizard::CancelButton, cancelButton);
 
     //We do not want "Forward" as text
     setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard",
