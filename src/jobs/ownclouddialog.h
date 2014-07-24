@@ -22,6 +22,7 @@
 #include "ui_owncloudDialog.h"
 #include <QDialog>
 
+class QDialogButtonBox;
 class KJob;
 class QTimer;
 class KPixmapSequenceOverlayPainter;
@@ -58,6 +59,7 @@ class OwncloudDialog : public QDialog, Ui::owncloudDialog
         bool m_hostResult;
         bool m_authResult;
         KPixmapSequenceOverlayPainter *m_painter;
+        QDialogButtonBox *m_buttonBox;
 };
 
 #endif //OWNCLOUD_DIALOG_H

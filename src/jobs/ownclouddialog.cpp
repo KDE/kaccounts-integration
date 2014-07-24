@@ -22,11 +22,12 @@
 #include <QTimer>
 
 #include <QDebug>
+#include <QDialogButtonBox>
+#include <QPushButton>
+
 #include <KIO/Job>
 #include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
-#include <kpushbutton.h>
-
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : QDialog(parent, flags)
@@ -47,6 +48,10 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     setLayout(mainLayout);
     mainLayout->addWidget(widget);
 
+    m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
     setWindowTitle(i18n("ownCloud Server"));
     usernameLine->setFocus();
     hostWorking->setMinimumSize(iconSize, iconSize);
@@ -65,7 +70,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     connect(m_timerHost, SIGNAL(timeout()), SLOT(checkServer()));
     connect(m_timerAuth, SIGNAL(timeout()), SLOT(checkAuth()));
 
-    okButton->setEnabled(false);
+    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
 QString OwncloudDialog::username() const
@@ -184,9 +189,9 @@ void OwncloudDialog::setResult(bool result, Type type)
     }
 
     if (!m_authResult || !m_authResult) {
-        okButton->setEnabled(false);
+        m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     } else {
-        okButton->setEnabled(true);
+        m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
 }
 
