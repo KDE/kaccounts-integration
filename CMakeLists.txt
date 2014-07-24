@@ -37,6 +37,8 @@ include_directories(
 #     ${AKONADI_INCLUDE_DIRS}
 )
 
+remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+
 add_subdirectory(src)
 # add_subdirectory(tests)
 
