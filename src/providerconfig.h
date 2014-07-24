@@ -19,8 +19,8 @@
 #ifndef PROVIDER_CONFIG_H
 #define PROVIDER_CONFIG_H
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
+#include <QMap>
+#include <QString>
 
 class QDomNodeList;
 class QDomDocument;

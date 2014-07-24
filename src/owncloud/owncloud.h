@@ -19,8 +19,7 @@
 #ifndef OWNCLOUD_H
 #define OWNCLOUD_H
 
-#include <QtGui/QWizard>
-
+#include <QWizard>
 #include <QUrl>
 
 class OwnCloudWizard : public QWizard

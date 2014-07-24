@@ -19,7 +19,7 @@
 #ifndef CREATE_H
 #define CREATE_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QDialog;
 class QWidget;

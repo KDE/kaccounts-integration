@@ -21,8 +21,8 @@
 #include "createkioservice.h"
 #include "removekioservice.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QDirIterator>
+#include <QFile>
+#include <QDirIterator>
 #include <QDebug>
 
 KIOServices::KIOServices(QObject* parent) : QObject(parent)

@@ -19,10 +19,10 @@
 #include "createaccount.h"
 #include "ownclouddialog.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
-#include <QtGui/QDialog>
-#include <QtGui/QVBoxLayout>
+#include <QDialog>
+#include <QVBoxLayout>
 
 #include <Accounts/Manager>
 #include <Accounts/AccountService>

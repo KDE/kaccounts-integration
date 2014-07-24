@@ -21,7 +21,7 @@
 
 #include "ui_connecting.h"
 
-#include <QtGui/QWizardPage>
+#include <QWizardPage>
 #include <KJob>
 
 class KJob;

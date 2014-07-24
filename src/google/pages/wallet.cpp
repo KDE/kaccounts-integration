@@ -19,8 +19,8 @@
 #include "wallet.h"
 #include "webaccounts.h"
 
-#include <QtGui/QWizard>
-#include <QtGui/QWizardPage>
+#include <QWizard>
+#include <QWizardPage>
 
 #include <KWallet/Wallet>
 

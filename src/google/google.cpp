@@ -23,8 +23,8 @@
 #include "pages/services.h"
 #include "pages/wallet.h"
 
-#include <QtCore/QDebug>
-#include <QtGui/QApplication>
+#include <QDebug>
+#include <QApplication>
 #include <QPushButton>
 
 #include <kwallet.h>

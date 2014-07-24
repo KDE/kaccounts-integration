@@ -23,7 +23,7 @@
 #include <libkgapi/common.h>
 #include <libkgapi/account.h>
 
-#include <QtGui/QWizardPage>
+#include <QWizardPage>
 
 class GoogleWizard;
 class OAuth : public QWizardPage, Ui::OAuth

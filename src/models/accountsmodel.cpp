@@ -18,9 +18,8 @@
 
 #include "accountsmodel.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
-#include <QtGui/QIcon>
 #include <QIcon>
 #include <klocalizedstring.h>
 

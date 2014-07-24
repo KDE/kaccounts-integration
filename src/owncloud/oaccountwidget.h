@@ -21,7 +21,7 @@
 
 #include "ui_services.h"
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include <KConfigGroup>
 

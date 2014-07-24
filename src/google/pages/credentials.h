@@ -21,7 +21,7 @@
 
 #include "ui_credentials.h"
 
-#include <QtGui/QWizardPage>
+#include <QWizardPage>
 
 namespace KWallet {
     class Wallet;

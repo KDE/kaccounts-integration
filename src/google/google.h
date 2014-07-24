@@ -19,9 +19,9 @@
 #ifndef GOOGLEWIZARD_H
 #define GOOGLEWIZARD_H
 
-#include <QtCore/QHash>
+#include <QHash>
 
-#include <QtGui/QWizard>
+#include <QWizard>
 
 class GoogleWizard : public QWizard
 {

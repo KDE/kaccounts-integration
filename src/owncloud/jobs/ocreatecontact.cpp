@@ -19,9 +19,9 @@
 #include "ocreatecontact.h"
 #include "davGroupware_settings.h"
 
-#include <QtGui/QWidget>
-#include <QtGui/QApplication>
-#include <QtDBus/QDBusInterface>
+#include <QWidget>
+#include <QApplication>
+#include <QDBusInterface>
 #include <QDebug>
 
 #include <akonadi/agenttype.h>

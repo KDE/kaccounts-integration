@@ -19,7 +19,7 @@
 #ifndef OCREATECONTACT_H
 #define OCREATECONTACT_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include <kjob.h>
 #include <kconfiggroup.h>

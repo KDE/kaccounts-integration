@@ -21,7 +21,7 @@
 
 #include "ui_services.h"
 
-#include <QtGui/QWizardPage>
+#include <QWizardPage>
 
 class GoogleWizard;
 class Services : public QWizardPage, Ui::Services

@@ -19,7 +19,7 @@
 #ifndef ACCOUNTS_MODEL_H
 #define ACCOUNTS_MODEL_H
 
-#include <QtCore/QAbstractListModel>
+#include <QAbstractListModel>
 
 #include <Accounts/Account>
 
