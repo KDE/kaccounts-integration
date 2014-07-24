@@ -20,13 +20,12 @@
 #include "checkowncloudhostjob.h"
 
 #include <QTimer>
-
+#include <QFontDatabase>
 #include <QDebug>
 #include <QDialogButtonBox>
 #include <QPushButton>
 
 #include <KIO/Job>
-#include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
@@ -38,7 +37,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
-    int width = QFontMetrics(KGlobalSettings::generalFont()).xHeight() * 60;
+    int width = QFontMetrics(QFontDatabase::systemFont()).xHeight() * 60;
 
     QWidget *widget = new QWidget(this);
 
