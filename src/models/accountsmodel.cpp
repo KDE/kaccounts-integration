@@ -21,8 +21,8 @@
 #include <QtCore/QDebug>
 
 #include <QtGui/QIcon>
+#include <QIcon>
 #include <klocalizedstring.h>
-#include <kicon.h>
 
 #include <SignOn/Identity>
 
@@ -158,7 +158,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
             return account->displayName();
         case Qt::DecorationRole:
         {
-            KIcon icon = KIcon(d->m_manager->provider(account->providerName()).iconName());
+            QIcon icon = QIcon(d->m_manager->provider(account->providerName()).iconName());
             if (!icon.isNull()) {
                 return icon;
             }
