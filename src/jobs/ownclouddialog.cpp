@@ -37,7 +37,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
-    int width = QFontMetrics(QFontDatabase::systemFont()).xHeight() * 60;
+    int width = QFontMetrics(QFontDatabase::systemFont(QFontDatabase::GeneralFont)).xHeight() * 60;
 
     QWidget *widget = new QWidget(this);
 
