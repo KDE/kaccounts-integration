@@ -20,9 +20,7 @@
 #include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
 
-#include <kdemacros.h>
 #include <KLocalizedString>
-#include <KActionCollection>
 #include <KPluginFactory>
 
 #include <QDebug>
@@ -31,8 +29,7 @@
 #include <Accounts/Service>
 #include <Accounts/AccountService>
 
-K_PLUGIN_FACTORY(KScreenDaemonFactory, registerPlugin<AccountsDaemon>();)
-K_EXPORT_PLUGIN(KScreenDaemonFactory("accounts", "accounts"))
+K_PLUGIN_FACTORY(AccountsDaemonFactory, registerPlugin<AccountsDaemon>();)
 
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
