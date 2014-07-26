@@ -24,19 +24,21 @@ set(accounts_daemon_SRCS
     ../jobs/getcredentialsjob.cpp
 )
 
-kde4_add_plugin(kded_accounts
+add_library(kded_accounts MODULE
     ${accounts_daemon_SRCS}
 )
 kservice_desktop_to_json(kded_accounts accounts-daemon.desktop)
 
 target_link_libraries(kded_accounts
-    ${QT_QTCORE_LIBRARIES}
-    ${QT_QTXML_LIBRARIES}
-    ${QT_QTGUI_LIBRARIES}
-    ${KDE4_KDECORE_LIBS}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDEPIMLIBS_AKONADI_LIBS}
+    Qt5::Core
+    Qt5::Xml
+    Qt5::Widgets
+    KF5::CoreAddons
+    KF5::ConfigCore
+    KF5::Wallet
+    KF5::KIOCore
+    KF5::I18n
+    KF5::DBusAddons
 
 #     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
