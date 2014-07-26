@@ -22,6 +22,8 @@
 #include "ui_services.h"
 #include "create.h"
 
+#include <QPointer>
+
 namespace Accounts {
     class Account;
 };
@@ -41,7 +43,7 @@ Q_OBJECT
 
     private:
         QHash<QString, QCheckBox*> m_checkboxes;
-        QWeakPointer<Accounts::Account> m_account;
+        QPointer<Accounts::Account> m_account;
         Accounts::Manager *m_manager;
 };
 
