@@ -30,7 +30,8 @@ namespace Accounts {
 class KJob;
 class KIOServices;
 class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+
+class AccountsDaemon : public KDEDModule
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
