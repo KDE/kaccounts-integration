@@ -1,21 +1,21 @@
-find_package(Akonadi REQUIRED)
-find_package(KdepimLibs REQUIRED)
+# find_package(Akonadi REQUIRED)
+# find_package(KdepimLibs REQUIRED)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
-    akonadi/akonadiservices.cpp
-    akonadi/akonadiaccounts.cpp
-    akonadi/jobs/abstractakonadijob.cpp
-    akonadi/jobs/createresourcejob.cpp
-    akonadi/jobs/removeresourcejob.cpp
-    akonadi/jobs/changesettingsjob.cpp
-    akonadi/jobs/fetchsettingsjob.cpp
-    akonadi/jobs/enableservicejob.cpp
-    akonadi/jobs/dbussettingsinterfacejob.cpp
-    akonadi/jobs/lookupakonadiservices.cpp
-    akonadi/jobs/removeakonadiservicesjob.cpp
+#     akonadi/akonadiservices.cpp
+#     akonadi/akonadiaccounts.cpp
+#     akonadi/jobs/abstractakonadijob.cpp
+#     akonadi/jobs/createresourcejob.cpp
+#     akonadi/jobs/removeresourcejob.cpp
+#     akonadi/jobs/changesettingsjob.cpp
+#     akonadi/jobs/fetchsettingsjob.cpp
+#     akonadi/jobs/enableservicejob.cpp
+#     akonadi/jobs/dbussettingsinterfacejob.cpp
+#     akonadi/jobs/lookupakonadiservices.cpp
+#     akonadi/jobs/removeakonadiservicesjob.cpp
     kio/kioservices.cpp
     kio/createnetattachjob.cpp
     kio/removenetattachjob.cpp
@@ -37,6 +37,8 @@ target_link_libraries(kded_accounts
     ${KDE4_KDEUI_LIBS}
     ${KDE4_KIO_LIBS}
     ${KDEPIMLIBS_AKONADI_LIBS}
+
+#     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
 )

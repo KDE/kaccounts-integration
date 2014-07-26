@@ -17,7 +17,7 @@
  *************************************************************************************/
 
 #include "daemon.h"
-#include "akonadi/akonadiservices.h"
+// #include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
 
 #include <KLocalizedString>
@@ -34,7 +34,7 @@ K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts-daemon.json", regist
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  , m_manager(new Accounts::Manager(this))
- , m_akonadi(new AkonadiServices(this))
+ //, m_akonadi(new AkonadiServices(this))
  , m_kio(new KIOServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
@@ -45,7 +45,8 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
 AccountsDaemon::~AccountsDaemon()
 {
     delete m_manager;
-    delete m_akonadi;
+//     delete m_akonadi;
+    delete m_kio;
 }
 
 void AccountsDaemon::startDaemon()
@@ -78,7 +79,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::Account *acc = m_manager->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-    m_akonadi->accountCreated(id, services);
+//     m_akonadi->accountCreated(id, services);
     m_kio->accountCreated(id, services);
 }
 
@@ -86,7 +87,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 {
     qDebug() << id;
 
-    m_akonadi->accountRemoved(id);
+//     m_akonadi->accountRemoved(id);
     m_kio->accountRemoved(id);
 }
 
@@ -102,11 +103,13 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 
     Accounts::Service service = m_manager->service(serviceName);
     if (!enabled) {
-        m_akonadi->serviceDisabled(accId, service);
+//         m_akonadi->serviceDisabled(accId, service);
         m_kio->serviceDisabled(accId, service);
         return;
     }
 
-    m_akonadi->serviceEnabled(accId, service);
+//     m_akonadi->serviceEnabled(accId, service);
     m_kio->serviceEnabled(accId, service);
 }
+
+#include "daemon.moc"
