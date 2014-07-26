@@ -27,6 +27,7 @@ set(accounts_daemon_SRCS
 kde4_add_plugin(kded_accounts
     ${accounts_daemon_SRCS}
 )
+kservice_desktop_to_json(kded_accounts accounts-daemon.desktop)
 
 target_link_libraries(kded_accounts
     ${QT_QTCORE_LIBRARIES}
