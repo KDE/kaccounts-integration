@@ -18,9 +18,10 @@
 
 #include "removenetattachjob.h"
 
-#include <QtCore/QFile>
-#include <QtGui/QWidget>
-#include <QtGui/QApplication>
+#include <QFile>
+#include <QWidget>
+#include <QApplication>
+#include <QUrl>
 #include <QDebug>
 
 #include <KWallet/KWallet>

@@ -19,9 +19,9 @@
 #ifndef KIO_SERVICES_H
 #define KIO_SERVICES_H
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
-#include <QtCore/QObject>
+#include <QMap>
+#include <QString>
+#include <QObject>
 
 #include <Accounts/Account>
 #include <Accounts/Service>

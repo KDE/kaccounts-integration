@@ -19,7 +19,7 @@
 #include "removekioservice.h"
 #include "removenetattachjob.h"
 
-#include <QtCore/QFile>
+#include <QFile>
 #include <QDebug>
 
 #include <KDirNotify>
