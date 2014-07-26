@@ -97,6 +97,7 @@ void WebAccounts::rmBtnClicked()
     if (!index.isValid()) {
         return;
     }
+    // TODO: ask confirmation first?
     m_model->removeRows(index.row(), 1);
 }
 
