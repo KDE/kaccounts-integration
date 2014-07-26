@@ -14,8 +14,8 @@ find_package(KF5 5.0.0 REQUIRED KCMUtils KIO I18n WidgetsAddons)
 # find_package(KdepimLibs REQUIRED)
 # find_package(Akonadi REQUIRED)
 find_package(QJSON REQUIRED)
-find_package(AccountsQt 1.10 REQUIRED CONFIG)
-find_package(SignOnQt 8.55 REQUIRED CONFIG)
+find_package(AccountsQt5 1.10 REQUIRED CONFIG)
+find_package(SignOnQt5 8.55 REQUIRED CONFIG)
 
 add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
