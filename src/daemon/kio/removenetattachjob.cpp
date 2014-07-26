@@ -23,7 +23,7 @@
 #include <QtGui/QApplication>
 #include <QDebug>
 
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 #include <KDirNotify>
 #include <KConfig>
 
@@ -81,7 +81,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
     qDebug() << url.userName() << url.host() << url;
 
     QFile::remove(path);
-    org::kde::KDirNotify::emitFilesRemoved(QStringList("remote:/" + m_uniqueId));
+    org::kde::KDirNotify::emitFilesRemoved(QList<QUrl>() << QUrl("remote:/" + m_uniqueId));
 
     QString walletUrl("webdav");
     walletUrl.append("-");

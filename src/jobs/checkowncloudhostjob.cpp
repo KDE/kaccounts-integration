@@ -58,7 +58,7 @@ void CheckOwncloudHostJob::requestStatus()
 {
     QUrl url(m_url);
 
-    url.setFileName("status.php");
+    url.setPath("status.php");
 
     qDebug() << url;
 

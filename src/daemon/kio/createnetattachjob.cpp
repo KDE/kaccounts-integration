@@ -18,18 +18,18 @@
 
 #include "createnetattachjob.h"
 
-#include <QApplication>
-#include <QWidget>
-
 #include <Accounts/Manager>
 
-#include <QUrl>
 #include <KDirNotify>
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 #include <KConfig>
 #include <KIO/Job>
 #include <KConfigGroup>
 
+#include <QApplication>
+#include <QWidget>
+#include <QUrl>
+#include <QDir>
 #include <QDebug>
 
 using namespace KWallet;
@@ -131,7 +131,7 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     qDebug() << "Creating knetAttach place";
     qDebug() << path;
     qDebug() << url.host();
-    qDebug() << url.prettyUrl();
+    qDebug() << url.toString();
 
     KConfig _desktopFile( path, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
@@ -139,8 +139,8 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     desktopFile.writeEntry("Icon", m_icon);
     desktopFile.writeEntry("Name", m_name);
     desktopFile.writeEntry("Type", "Link");
-    desktopFile.writeEntry("URL", url.prettyUrl());
-    desktopFile.writeEntry("Charset", url.fileEncoding());
+    desktopFile.writeEntry("URL", url.toString());
+//     desktopFile.writeEntry("Charset", url.fileEncoding());
     desktopFile.sync();
 
     QString walletUrl(url.scheme());
@@ -162,7 +162,7 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     m_wallet->writeMap(walletUrl + "webdav", info);
     m_wallet->sync();
 
-    org::kde::KDirNotify::emitFilesAdded("remote:/");
+    org::kde::KDirNotify::emitFilesAdded(QUrl("remote:/"));
 
     emitResult();
 }

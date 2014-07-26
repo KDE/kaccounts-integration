@@ -35,7 +35,7 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(WebAccountsFactory, "kcm_kdeaccounts.json", registerPlugin<WebAccounts>();)
 
-WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
+WebAccounts::WebAccounts(QWidget *parent, const QVariantList &)
     : KCModule(parent)
       , m_create(0)
       , m_layout(new QStackedLayout)

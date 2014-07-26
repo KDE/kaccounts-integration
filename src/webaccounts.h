@@ -35,7 +35,7 @@ class WebAccounts : public KCModule
 {
 Q_OBJECT
 public:
-    WebAccounts(QWidget *parent, const QVariantList&);
+    WebAccounts(QWidget *parent, const QVariantList &);
     virtual ~WebAccounts();
 
 private Q_SLOTS:

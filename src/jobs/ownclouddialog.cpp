@@ -27,6 +27,7 @@
 
 #include <KIO/Job>
 #include <kpixmapsequenceoverlaypainter.h>
+#include <KIconLoader>
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  : QDialog(parent, flags)
@@ -131,7 +132,7 @@ void OwncloudDialog::checkAuth()
 
     setWorking(true, Auth);
 
-    QUrl url = m_url;
+    QUrl url(m_url);
     url.setPassword(passwordLine->text());
     url.setUserName(usernameLine->text());
     url.setPath(QLatin1String("/files/webdav.php/"));

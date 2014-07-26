@@ -23,6 +23,7 @@
 
 #include <QFile>
 #include <QDirIterator>
+#include <QStandardPaths>
 #include <QDebug>
 
 KIOServices::KIOServices(QObject* parent) : QObject(parent)
