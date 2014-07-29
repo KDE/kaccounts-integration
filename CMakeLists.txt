@@ -13,7 +13,6 @@ find_package(Qt5 5.2.0 CONFIG REQUIRED Core Widgets)
 find_package(KF5 5.0.0 REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons IconThemes Config Wallet DBusAddons)
 # find_package(KdepimLibs REQUIRED)
 # find_package(Akonadi REQUIRED)
-find_package(QJSON REQUIRED)
 find_package(AccountsQt5 1.10 REQUIRED CONFIG)
 find_package(SignOnQt5 8.55 REQUIRED CONFIG)
 

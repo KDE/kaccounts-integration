@@ -20,7 +20,8 @@
 #include "owncloud/owncloud.h"
 
 #include <QDebug>
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include <kpixmapsequenceoverlaypainter.h>
 #include <KIO/Job>
@@ -159,8 +160,8 @@ void BasicInfo::fileChecked(KJob* job)
         return;
     }
 
-    QJson::Parser parser;
-    QMap <QString, QVariant> map = parser.parse(m_json).toMap();
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject map = parser.object();
     if (!map.contains("version")) {
         figureOutServer(kJob->url().url());
         return;

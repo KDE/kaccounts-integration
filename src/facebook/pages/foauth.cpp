@@ -19,7 +19,8 @@
 #include "foauth.h"
 #include "facebook/facebook.h"
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include <KPixmapSequenceOverlayPainter>
 
@@ -118,8 +119,8 @@ void FOauth::usernameFinished()
     m_painter->stop();
     working->setVisible(false);
 
-    QJson::Parser parser;
-    QMap <QString, QVariant > data = parser.parse(m_json).toMap();;
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject data = parser.object();
 
     if (!data.contains("username") || data["username"].toString().isEmpty()) {
         tryAgain->setVisible(true);

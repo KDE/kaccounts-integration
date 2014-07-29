@@ -18,7 +18,8 @@
 
 #include "checkowncloudhostjob.h"
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include <QDebug>
 #include <KIO/Job>
@@ -84,8 +85,9 @@ void CheckOwncloudHostJob::fileDownloaded(KJob* job)
         return;
     }
 
-    QJson::Parser parser;
-    QMap <QString, QVariant> map = parser.parse(m_json).toMap();
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject map = parser.object();
+
     if (!map.contains("version")) {
         figureOutServer(kJob->url());
         return;
