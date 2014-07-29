@@ -63,7 +63,7 @@ void Create::fillInterface()
     QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider& provider, providerList) {
         button = new QCommandLinkButton(provider.displayName());
-        button->setIcon(QIcon(provider.iconName()));
+        button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
 
         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));

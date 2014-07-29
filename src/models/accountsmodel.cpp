@@ -157,7 +157,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
             return account->displayName();
         case Qt::DecorationRole:
         {
-            QIcon icon = QIcon(d->m_manager->provider(account->providerName()).iconName());
+            QIcon icon = QIcon::fromTheme(d->m_manager->provider(account->providerName()).iconName());
             if (!icon.isNull()) {
                 return icon;
             }
