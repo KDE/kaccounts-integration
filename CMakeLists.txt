@@ -27,9 +27,6 @@ include(ECMInstallIcons)
 include(FeatureSummary)
 
 include_directories(
-#     ${CMAKE_CURRENT_BINARY_DIR}
-#     ${CMAKE_CURRENT_BINARY_DIR}/src
-#     ${KDE4_INCLUDES}
     ${ACCOUNTSQT_INCLUDE_DIRS}
     ${SIGNONQT_INCLUDE_DIRS}
 #     ${KDEPIMLIBS_INCLUDE_DIRS}
