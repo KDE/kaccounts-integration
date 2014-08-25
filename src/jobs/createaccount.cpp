@@ -302,6 +302,6 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
 
 void CreateAccount::error(const SignOn::Error& error)
 {
-    qDebug() << "Error:";
-    qDebug() << "\t" << error.message();
+    qWarning() << "Error:";
+    qWarning() << "\t" << error.message();
 }
