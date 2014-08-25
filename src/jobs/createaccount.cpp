@@ -18,9 +18,12 @@
 
 #include "createaccount.h"
 #include "ownclouddialog.h"
+#include "lib/kaccountsuiplugin.h"
 
 #include <QDebug>
 
+#include <QPluginLoader>
+#include <QDir>
 #include <QDialog>
 #include <QVBoxLayout>
 
@@ -29,6 +32,9 @@
 
 #include <SignOn/Identity>
 #include <SignOn/AuthSession>
+
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  : KJob(parent)
@@ -47,9 +53,98 @@ void CreateAccount::start()
     qDebug() << m_providerName;
     if (m_providerName == QLatin1String("owncloud")) {
         QMetaObject::invokeMethod(this, "processSessionOwncloud");
-    } else  {
+    } else if (m_providerName.startsWith(QLatin1String("ktp"))) {
+        QMetaObject::invokeMethod(this, "processSessionKTp");
+    } else {
         QMetaObject::invokeMethod(this, "processSession");
     }
+}
+
+void CreateAccount::processSessionKTp()
+{
+    QString pluginPath;
+
+    QStringList paths = QCoreApplication::libraryPaths();
+    Q_FOREACH (const QString &libraryPath, paths) {
+        QString path(libraryPath + QStringLiteral("/kaccounts/ui"));
+        QDir dir(path);
+
+        if (!dir.exists()) {
+            continue;
+        }
+
+        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        Q_FOREACH (const QString &fileName, entryList) {
+            if (fileName == QLatin1String("ktpaccountskcm_plugin_kaccounts.so")) {
+                pluginPath = dir.absoluteFilePath(fileName);
+            }
+        }
+    }
+
+    QPluginLoader loader(pluginPath);
+
+    if (!loader.load()) {
+        qWarning() << "Could not create Extractor: " << pluginPath;
+        qWarning() << loader.errorString();
+        return;
+    }
+
+    QObject *obj = loader.instance();
+    if (obj) {
+        KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
+        if (!ui) {
+            qDebug() << "Plugin could not be converted to an ExtractorPlugin";
+            qDebug() << pluginPath;
+            return;
+        }
+
+        connect(ui, SIGNAL(success(QString,QString,QVariantMap)),
+                this, SLOT(ktpDialogFinished(QString,QString,QVariantMap)));
+
+        connect(ui, SIGNAL(error(QString)),
+                this, SLOT(ktpDialogError(QString)));
+
+        // When the plugin has finished building the UI, show it right away
+        connect(ui, &KAccountsUiPlugin::uiReady, [=](){ui->showDialog();});
+
+        // Pass the provider name without the "ktp-" prefix, the rest matches
+        // a Telepathy service name, which allows to open a specialized KTp
+        // dialog for creating that particular account
+        ui->setProviderName(m_providerName.mid(4));
+    } else {
+        qDebug() << "Plugin could not creaate instance" << pluginPath;
+    }
+}
+
+void CreateAccount::ktpDialogFinished(const QString &username, const QString &password, const QVariantMap &additionalData)
+{
+    // Set up the new identity
+    SignOn::IdentityInfo info;
+    info.setUserName(username);
+    info.setSecret(password);
+    info.setCaption(username);
+    info.setAccessControlList(QStringList(QLatin1String("*")));
+    info.setType(SignOn::IdentityInfo::Application);
+
+    m_identity = SignOn::Identity::newIdentity(info, this);
+    m_identity->storeCredentials();
+
+    m_account = m_manager->createAccount(m_providerName);
+    // The "uid" in additionalData is Telepathy's Account object path
+    // we need this to have a KTp::Account<-->KAccounts::Account mapping
+    m_account->setValue("uid", additionalData.value("uid").toString());
+    m_done = true;
+
+    Accounts::Service service;
+    m_accInfo = new Accounts::AccountService(m_account, service, this);
+    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+    // Proceed to finish creating the new Account
+    m_identity->queryInfo();
+}
+
+void CreateAccount::ktpDialogError(const QString &error)
+{
+    qWarning() << "Error while creating KTp account:" << error;
 }
 
 void CreateAccount::processSessionOwncloud()
@@ -192,6 +287,17 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
 
     connect(m_account, SIGNAL(synced()), SLOT(accountCreated()));
     m_account->sync();
+
+    if (m_providerName.startsWith(QLatin1String("ktp-"))) {
+        QString uid = m_account->value("uid").toString();
+
+        KSharedConfigPtr kaccountsConfig = KSharedConfig::openConfig(QStringLiteral("kaccounts-ktprc"));
+        KConfigGroup ktpKaccountsGroup = kaccountsConfig->group(QStringLiteral("ktp-kaccounts"));
+        ktpKaccountsGroup.writeEntry(uid, m_account->id());
+
+        KConfigGroup kaccountsKtpGroup = kaccountsConfig->group(QStringLiteral("kaccounts-ktp"));
+        kaccountsKtpGroup.writeEntry(QString::number(m_account->id()), uid);
+    }
 }
 
 void CreateAccount::error(const SignOn::Error& error)

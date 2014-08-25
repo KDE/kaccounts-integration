@@ -50,6 +50,7 @@ class CreateAccount : public KJob
         void response(const SignOn::SessionData &data);
         void info(const SignOn::IdentityInfo &info);
         void credentialsStored(quint32 id);
+    void processSessionKTp();
 
     private:
         QString m_providerName;
@@ -57,6 +58,8 @@ class CreateAccount : public KJob
         Accounts::Account *m_account;
         Accounts::AccountService *m_accInfo;
         SignOn::Identity *m_identity;
+    void ktpDialogFinished(const QString &username, const QString &password, const QVariantMap &additionalData);
+    void ktpDialogError(const QString &error);
     bool m_done;
 };
 #endif //CREATE_ACCOUNT_JOB_H
