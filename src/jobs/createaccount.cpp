@@ -188,10 +188,10 @@ void CreateAccount::processSession()
     m_account = m_manager->createAccount(m_providerName);
 
     SignOn::IdentityInfo info;
-    info.setSecret("");
     info.setCaption(m_providerName);
     info.setAccessControlList(QStringList("*"));
     info.setType(SignOn::IdentityInfo::Application);
+    info.setStoreSecret(true);
 
     m_identity = SignOn::Identity::newIdentity(info, this);
     m_identity->storeCredentials();
