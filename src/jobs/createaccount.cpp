@@ -37,6 +37,7 @@ CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  , m_account(0)
  , m_accInfo(0)
  , m_identity(0)
+ , m_done(false)
 {
 
 }
@@ -152,6 +153,10 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     qDebug() << "\tstoringSecret:" << info.isStoringSecret();
     qDebug() << "\towner:" << info.owner();
     qDebug() << "\tuserName:" << info.userName();
+
+    if (!m_done) {
+        return;
+    }
 
     if (m_account->displayName().isEmpty()) {
         m_account->setDisplayName(info.userName());

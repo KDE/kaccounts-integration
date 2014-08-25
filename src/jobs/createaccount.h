@@ -57,5 +57,6 @@ class CreateAccount : public KJob
         Accounts::Account *m_account;
         Accounts::AccountService *m_accInfo;
         SignOn::Identity *m_identity;
+    bool m_done;
 };
 #endif //CREATE_ACCOUNT_JOB_H
