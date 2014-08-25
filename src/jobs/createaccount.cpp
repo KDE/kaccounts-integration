@@ -174,7 +174,6 @@ void CreateAccount::processSessionOwncloud()
     Accounts::Service service;
     m_accInfo = new Accounts::AccountService(m_account, service, this);
 
-    connect(m_identity, SIGNAL(credentialsStored(quint32)), SLOT(credentialsStored(quint32)));
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
     m_identity->queryInfo();
 }
@@ -196,6 +195,8 @@ void CreateAccount::processSession()
 
     m_identity = SignOn::Identity::newIdentity(info, this);
     m_identity->storeCredentials();
+
+    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
 
     Accounts::Service service;
     m_accInfo = new Accounts::AccountService(m_account, service, this);
@@ -226,15 +227,7 @@ void CreateAccount::response(const SignOn::SessionData& data)
     qDebug() << "\tUsername:" << data.UserName();
     qDebug() << "\t:" << data.getProperty("ScreenName");
 
-    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
-    m_identity->queryInfo();
-}
-
-
-void CreateAccount::credentialsStored(quint32 id)
-{
-    qDebug() << "Credentials stored: " << id;
-    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+    m_done = true;
     m_identity->queryInfo();
 }
 
