@@ -1,4 +1,5 @@
 add_subdirectory(daemon)
+add_subdirectory(lib)
 
 set(kdeaccounts_SRCS
     webaccounts.cpp
@@ -28,6 +29,7 @@ target_link_libraries(kcm_kdeaccounts
     ${SIGNONQT_LIBRARIES}
     ${QJSON_LIBRARIES}
     ${QJSON_LIBRARY}
+    kaccounts
 )
 
 
