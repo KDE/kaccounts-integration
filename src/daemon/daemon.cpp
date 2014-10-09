@@ -33,18 +33,16 @@ K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts-daemon.json", regist
 
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
- , m_manager(new Accounts::Manager(this))
  //, m_akonadi(new AkonadiServices(this))
  , m_kio(new KIOServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
-    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
-    connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
+    connect(KAccounts::accountsManager(), SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
+    connect(KAccounts::accountsManager(), SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
 }
 
 AccountsDaemon::~AccountsDaemon()
 {
-    delete m_manager;
 //     delete m_akonadi;
     delete m_kio;
 }
@@ -52,7 +50,7 @@ AccountsDaemon::~AccountsDaemon()
 void AccountsDaemon::startDaemon()
 {
     qDebug();
-    Accounts::AccountIdList accList = m_manager->accountList();
+    Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
     Q_FOREACH(const Accounts::AccountId &id, accList) {
         monitorAccount(id);
     }
@@ -61,7 +59,7 @@ void AccountsDaemon::startDaemon()
 void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 {
     qDebug() << id;
-    Accounts::Account *acc = m_manager->account(id);
+    Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     Accounts::ServiceList services = acc->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         acc->selectService(service);
@@ -76,7 +74,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     qDebug() << id;
     monitorAccount(id);
 
-    Accounts::Account *acc = m_manager->account(id);
+    Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
 //     m_akonadi->accountCreated(id, services);
@@ -101,7 +99,7 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 
     Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
 
-    Accounts::Service service = m_manager->service(serviceName);
+    Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
 //         m_akonadi->serviceDisabled(accId, service);
         m_kio->serviceDisabled(accId, service);

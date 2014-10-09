@@ -49,7 +49,6 @@ class AccountsDaemon : public KDEDModule
     private:
         void monitorAccount(const Accounts::AccountId &id);
 
-        Accounts::Manager* m_manager;
 //         AkonadiServices* m_akonadi;
         KIOServices *m_kio;
 };
