@@ -60,6 +60,11 @@ void Create::fillInterface()
 {
     Accounts::ProviderList providerList = m_manager->providerList();
 
+    // sort accounts alphabetically
+    std::sort(providerList.begin(), providerList.end(), [](const Accounts::Provider &a, const Accounts::Provider &b) {
+        return QString::localeAwareCompare(b.displayName(), a.displayName()) < 0;
+    });
+
     QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider& provider, providerList) {
         button = new QCommandLinkButton(provider.displayName());
