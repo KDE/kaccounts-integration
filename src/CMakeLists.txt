@@ -1,8 +1,8 @@
 add_subdirectory(daemon)
 add_subdirectory(lib)
 
-set(kdeaccounts_SRCS
-    webaccounts.cpp
+set(kaccounts_SRCS
+    kaccounts.cpp
     create.cpp
     accountwidget.cpp
     models/accountsmodel.cpp
@@ -12,12 +12,12 @@ set(kdeaccounts_SRCS
     jobs/checkowncloudhostjob.cpp
 )
 
-ki18n_wrap_ui(kdeaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
+ki18n_wrap_ui(kaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
 
-add_library(kcm_kdeaccounts MODULE ${kdeaccounts_SRCS})
-kservice_desktop_to_json(kcm_kdeaccounts kcm_kdeaccounts.desktop)
+add_library(kcm_kaccounts MODULE ${kaccounts_SRCS})
+kservice_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)
 
-target_link_libraries(kcm_kdeaccounts
+target_link_libraries(kcm_kaccounts
     Qt5::Core
     Qt5::Gui
     KF5::KIOCore
@@ -32,6 +32,6 @@ target_link_libraries(kcm_kdeaccounts
 )
 
 
-install(TARGETS kcm_kdeaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kcm_kaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES kcm_kdeaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES kcm_kaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})

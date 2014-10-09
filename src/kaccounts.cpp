@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "webaccounts.h"
+#include "kaccounts.h"
 #include "create.h"
 #include "ui_kcm.h"
 
@@ -33,9 +33,9 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY_WITH_JSON(WebAccountsFactory, "kcm_kdeaccounts.json", registerPlugin<WebAccounts>();)
+K_PLUGIN_FACTORY_WITH_JSON(KAccountsFactory, "kcm_kaccounts.json", registerPlugin<KAccounts>();)
 
-WebAccounts::WebAccounts(QWidget *parent, const QVariantList &)
+KAccounts::KAccounts(QWidget *parent, const QVariantList &)
     : KCModule(parent)
       , m_create(0)
       , m_layout(new QStackedLayout)
@@ -63,7 +63,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList &)
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 }
 
-void WebAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (!current.isValid()) {
         return;
@@ -81,17 +81,17 @@ void WebAccounts::currentChanged(const QModelIndex &current, const QModelIndex &
     m_layout->setCurrentIndex(1);
 }
 
-WebAccounts::~WebAccounts()
+KAccounts::~KAccounts()
 {
     delete m_ui;
 }
 
-void WebAccounts::addBtnClicked()
+void KAccounts::addBtnClicked()
 {
     m_selectionModel->setCurrentIndex(m_model->index(m_model->rowCount() - 1), QItemSelectionModel::SelectCurrent);
 }
 
-void WebAccounts::rmBtnClicked()
+void KAccounts::rmBtnClicked()
 {
     QModelIndex index = m_selectionModel->currentIndex();
     if (!index.isValid()) {
@@ -101,4 +101,4 @@ void WebAccounts::rmBtnClicked()
     m_model->removeRows(index.row(), 1);
 }
 
-#include "webaccounts.moc"
+#include "kaccounts.moc"
