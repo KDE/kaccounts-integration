@@ -63,7 +63,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList &)
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 }
 
-void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
+void WebAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (!current.isValid()) {
         return;
@@ -100,6 +100,5 @@ void WebAccounts::rmBtnClicked()
     // TODO: ask confirmation first?
     m_model->removeRows(index.row(), 1);
 }
-
 
 #include "webaccounts.moc"

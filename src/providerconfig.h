@@ -24,22 +24,24 @@
 
 class QDomNodeList;
 class QDomDocument;
+
 class ProviderConfig
 {
-    public:
-        ProviderConfig(const QDomDocument &dom);
-        ~ProviderConfig();
+public:
+    ProviderConfig(const QDomDocument &dom);
+    ~ProviderConfig();
 
-        const QString method() const;
-        const QString mechanism() const;
-        const QMap<QString, QString> authInfo() const;
-    private:
-        bool authMethodHasMoreInfo() const;
-        void parseAuthMethod(const QDomNodeList &groupList);
-        void parseAuthInfo(const QDomNodeList &groupList);
+    const QString method() const;
+    const QString mechanism() const;
+    const QMap<QString, QString> authInfo() const;
 
-        QString m_method;
-        QString m_mechanism;
-        QMap<QString, QString> m_authInfo;
+private:
+    bool authMethodHasMoreInfo() const;
+    void parseAuthMethod(const QDomNodeList &groupList);
+    void parseAuthInfo(const QDomNodeList &groupList);
+
+    QString m_method;
+    QString m_mechanism;
+    QMap<QString, QString> m_authInfo;
 };
 #endif //PROVIDER_CONFIG_H

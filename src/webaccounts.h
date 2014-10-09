@@ -27,13 +27,14 @@ class AccountsModel;
 class AccountWidget;
 class QStackedLayout;
 class QItemSelectionModel;
+
 namespace Ui {
     class KCMWebAccounts;
 }
 
 class WebAccounts : public KCModule
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     WebAccounts(QWidget *parent, const QVariantList &);
     virtual ~WebAccounts();
@@ -41,7 +42,7 @@ public:
 private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
-    void currentChanged(const QModelIndex& current, const QModelIndex& previous);
+    void currentChanged(const QModelIndex &current, const QModelIndex &previous);
 
 private:
     Create *m_create;

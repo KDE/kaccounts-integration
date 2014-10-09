@@ -21,7 +21,7 @@
 #include <QDebug>
 #include <QDomDocument>
 
-ProviderConfig::ProviderConfig(const QDomDocument& dom)
+ProviderConfig::ProviderConfig(const QDomDocument &dom)
 {
     QDomNodeList groupList = dom.elementsByTagName("group");
 
@@ -63,7 +63,7 @@ bool ProviderConfig::authMethodHasMoreInfo() const
     return false;
 }
 
-void ProviderConfig::parseAuthMethod(const QDomNodeList& groupList)
+void ProviderConfig::parseAuthMethod(const QDomNodeList &groupList)
 {
     QDomElement setting;
     QDomElement auth = groupList.at(0).toElement();
@@ -81,7 +81,7 @@ void ProviderConfig::parseAuthMethod(const QDomNodeList& groupList)
     }
 }
 
-void ProviderConfig::parseAuthInfo(const QDomNodeList& groupList)
+void ProviderConfig::parseAuthInfo(const QDomNodeList &groupList)
 {
     QDomElement setting;
     QDomNodeList settings;

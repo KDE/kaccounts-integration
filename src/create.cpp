@@ -30,10 +30,10 @@
 #include <Accounts/Manager>
 #include <Accounts/Provider>
 
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
-, m_manager(KAccounts::accountsManager())
+Create::Create(QWidget *parent)
+    : QObject(parent)
+    , m_form(0)
+    , m_manager(KAccounts::accountsManager())
 {
     m_parent = parent;
 }

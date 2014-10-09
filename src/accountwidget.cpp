@@ -27,9 +27,9 @@
 #include <Accounts/Service>
 #include <Accounts/Manager>
 
-AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
- : QWidget(parent)
- , m_manager(KAccounts::accountsManager())
+AccountWidget::AccountWidget(Accounts::Account *account, QWidget *parent)
+    : QWidget(parent)
+    , m_manager(KAccounts::accountsManager())
 {
     setupUi(this);
 
@@ -45,7 +45,7 @@ AccountWidget::~AccountWidget()
     qDeleteAll(m_checkboxes);
 }
 
-void AccountWidget::setAccount(Accounts::Account* account)
+void AccountWidget::setAccount(Accounts::Account *account)
 {
     if (m_account) {
         disconnect(m_account.data(), 0, this, 0);
@@ -70,7 +70,7 @@ void AccountWidget::setAccount(Accounts::Account* account)
     connect(account, SIGNAL(enabledChanged(QString,bool)), SLOT(serviceEnabledChanged(QString,bool)));
 }
 
-void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabled)
+void AccountWidget::serviceEnabledChanged(const QString &serviceName, bool enabled)
 {
     if (serviceName.isEmpty()) {
         return;

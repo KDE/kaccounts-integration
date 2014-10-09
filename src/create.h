@@ -32,26 +32,25 @@ namespace Accounts
 
 class Create : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
-    public:
-        Create (QWidget *parent);
-        virtual ~Create();
+public:
+    Create (QWidget *parent);
+    virtual ~Create();
 
-        QWidget* widget();
+    QWidget* widget();
 
-    private Q_SLOTS:
-        void fillInterface();
-        void createAccount();
+private Q_SLOTS:
+    void fillInterface();
+    void createAccount();
 
-    Q_SIGNALS:
-        void newAccount(const QString &type, const QString &name);
+Q_SIGNALS:
+    void newAccount(const QString &type, const QString &name);
 
-    private:
-        QDialog *m_dialog;
-        QWidget *m_parent;
-        Ui_createForm *m_form;
-        Accounts::Manager *m_manager;
-
+private:
+    QDialog *m_dialog;
+    QWidget *m_parent;
+    Ui_createForm *m_form;
+    Accounts::Manager *m_manager;
 };
 #endif// CREATE_H
