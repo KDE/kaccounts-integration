@@ -26,11 +26,12 @@
 #include <QStandardPaths>
 #include <QDebug>
 
-KIOServices::KIOServices(QObject* parent) : QObject(parent)
+KIOServices::KIOServices(QObject *parent)
+    : KAccountsDPlugin(parent)
 {
 }
 
-void KIOServices::accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList)
+void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
     qDebug();
     Q_FOREACH(const Accounts::Service &service, serviceList) {
@@ -48,7 +49,7 @@ void KIOServices::accountCreated(const Accounts::AccountId& accId, const Account
     }
 }
 
-void KIOServices::accountRemoved(const Accounts::AccountId& accId)
+void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 {
     qDebug();
     QString accountId = QString::number(accId) + "_";
@@ -71,7 +72,7 @@ void KIOServices::accountRemoved(const Accounts::AccountId& accId)
     }
 }
 
-void KIOServices::serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
         qDebug() << "Ignoring: " << service.serviceType();
@@ -85,7 +86,7 @@ void KIOServices::serviceEnabled(const Accounts::AccountId& accId, const Account
     enableService(accId, service);
 }
 
-void KIOServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
         qDebug() << "Ignoring: " << service.serviceType();
@@ -99,7 +100,7 @@ void KIOServices::serviceDisabled(const Accounts::AccountId& accId, const Accoun
     disableService(accId, service.name());
 }
 
-void KIOServices::enableService(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::enableService(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     CreateKioService *job = new CreateKioService(this);
     job->setAccountId(accId);
@@ -108,7 +109,7 @@ void KIOServices::enableService(const Accounts::AccountId& accId, const Accounts
     job->start();
 }
 
-void KIOServices::disableService(const Accounts::AccountId& accId, const QString& serviceName)
+void KIOServices::disableService(const Accounts::AccountId accId, const QString& serviceName)
 {
     RemoveKioService *job = new RemoveKioService(this);
     job->setServiceName(serviceName);
@@ -116,7 +117,7 @@ void KIOServices::disableService(const Accounts::AccountId& accId, const QString
     job->start();
 }
 
-bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceName)
+bool KIOServices::isEnabled(const Accounts::AccountId accId, const QString &serviceName)
 {
     QString uniqueId(QString::number(accId) + "_" + serviceName);
 
