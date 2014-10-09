@@ -27,7 +27,7 @@ set(accounts_daemon_SRCS
 add_library(kded_accounts MODULE
     ${accounts_daemon_SRCS}
 )
-kservice_desktop_to_json(kded_accounts accounts-daemon.desktop)
+kservice_desktop_to_json(kded_accounts accounts.desktop)
 
 target_link_libraries(kded_accounts
     Qt5::Core
