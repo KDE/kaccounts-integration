@@ -8,7 +8,7 @@ X-KDE-ServiceTypes=KCModule
 X-KDE-Library=kcm_kdeaccounts
 X-KDE-ParentApp=kcontrol
 
-X-KDE-System-Settings-Parent-Category=network-and-connectivity
+X-KDE-System-Settings-Parent-Category=personalization
 
 Name=Online Accounts
 Name[bs]=Nalozi na mreži
