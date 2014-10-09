@@ -20,8 +20,8 @@
 #include "facebook/facebook.h"
 
 #include <KColorScheme>
-#include <kpimutils/email.h>
-#include <kpimutils/emailvalidator.h>
+// #include <kpimutils/email.h>
+// #include <kpimutils/emailvalidator.h>
 
 #include <KWallet/Wallet>
 
@@ -45,8 +45,8 @@ FCredentials::FCredentials(FacebookWizard* parent)
 
     error->setPalette(palette);
 
-    KPIMUtils::EmailValidator* emailValidator = new KPIMUtils::EmailValidator( this );
-    email->setValidator( emailValidator );
+//     KPIMUtils::EmailValidator* emailValidator = new KPIMUtils::EmailValidator( this );
+//     email->setValidator( emailValidator );
 
     connect(email, SIGNAL(textChanged(QString)), SLOT(validateForm()));
     connect(password, SIGNAL(textChanged(QString)), SLOT(validateForm()));
@@ -80,10 +80,10 @@ bool FCredentials::validatePage()
     }
 
     QString str;
-    if (!KPIMUtils::isValidSimpleAddress(email->text())) {
+/*    if (!KPIMUtils::isValidSimpleAddress(email->text())) {
         str = i18n("The email seems to be wrong (Invalid format)");
         !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
-    } else if(accountExists(email->text())) {
+    } else */if (accountExists(email->text())) {
         str = i18n("This account is already configured as a Web Account");
         !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
     }
