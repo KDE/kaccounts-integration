@@ -1,7 +1,7 @@
 # find_package(Akonadi REQUIRED)
 # find_package(KdepimLibs REQUIRED)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
@@ -21,7 +21,6 @@ set(accounts_daemon_SRCS
     kio/removenetattachjob.cpp
     kio/createkioservice.cpp
     kio/removekioservice.cpp
-    ../jobs/getcredentialsjob.cpp
 )
 
 add_library(kded_accounts MODULE
@@ -39,6 +38,7 @@ target_link_libraries(kded_accounts
     KF5::KIOCore
     KF5::I18n
     KF5::DBusAddons
+    kaccounts
 
 #     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
@@ -46,4 +46,4 @@ target_link_libraries(kded_accounts
 )
 
 install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES accounts-daemon.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded)
+install(FILES accounts.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded)

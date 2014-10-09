@@ -8,7 +8,6 @@ set(kdeaccounts_SRCS
     models/accountsmodel.cpp
 #     models/modeltest.cpp
     jobs/createaccount.cpp
-    jobs/getcredentialsjob.cpp
     jobs/ownclouddialog.cpp
     jobs/checkowncloudhostjob.cpp
 )
