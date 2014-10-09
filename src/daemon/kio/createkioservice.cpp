@@ -18,20 +18,20 @@
 
 #include "createkioservice.h"
 #include "createnetattachjob.h"
-#include "../jobs/getcredentialsjob.h"
+#include "../lib/getcredentialsjob.h"
+#include <core.h>
 
 #include <QDebug>
 #include <Accounts/Manager>
 
 CreateKioService::CreateKioService(QObject* parent) : KJob(parent)
 {
-
+    m_manager = KAccounts::accountsManager();
 }
 
 CreateKioService::~CreateKioService()
 {
     delete m_account;
-    delete m_manager;
 }
 
 void CreateKioService::start()
@@ -42,10 +42,9 @@ void CreateKioService::start()
 void CreateKioService::createKioService()
 {
     qDebug();
-    m_manager = new Accounts::Manager();
     m_account = m_manager->account(m_accountId);
 
-    GetCredentialsJob *job = new GetCredentialsJob(m_accountId, this);
+    GetCredentialsJob *job = new GetCredentialsJob(m_accountId, QString(), QString(), this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(gotCredentials(KJob*)));
     job->setServiceType(m_serviceType);
     job->start();
