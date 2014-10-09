@@ -18,6 +18,7 @@
 
 #include "create.h"
 #include "jobs/createaccount.h"
+#include <core.h>
 
 #include "ui_types.h"
 
@@ -32,14 +33,13 @@
 Create::Create(QWidget* parent)
 : QObject(parent)
 , m_form(0)
-, m_manager(new Accounts::Manager(this))
+, m_manager(KAccounts::accountsManager())
 {
     m_parent = parent;
 }
 
 Create::~Create()
 {
-    delete m_manager;
 }
 
 QWidget* Create::widget()
@@ -66,7 +66,7 @@ void Create::fillInterface()
     });
 
     QCommandLinkButton *button;
-    Q_FOREACH(const Accounts::Provider& provider, providerList) {
+    Q_FOREACH(const Accounts::Provider &provider, providerList) {
         button = new QCommandLinkButton(provider.displayName());
         button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());

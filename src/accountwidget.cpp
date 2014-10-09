@@ -18,6 +18,7 @@
 
 #include "accountwidget.h"
 #include "models/accountsmodel.h"
+#include <core.h>
 
 #include <QDebug>
 #include <QCheckBox>
@@ -28,7 +29,7 @@
 
 AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
  : QWidget(parent)
- , m_manager(new Accounts::Manager(this))
+ , m_manager(KAccounts::accountsManager())
 {
     setupUi(this);
 
@@ -42,7 +43,6 @@ AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
 AccountWidget::~AccountWidget()
 {
     qDeleteAll(m_checkboxes);
-    delete m_manager;
 }
 
 void AccountWidget::setAccount(Accounts::Account* account)
