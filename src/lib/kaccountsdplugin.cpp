@@ -24,7 +24,6 @@
 KAccountsDPlugin::KAccountsDPlugin(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 KAccountsDPlugin::~KAccountsDPlugin()

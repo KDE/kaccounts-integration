@@ -25,6 +25,8 @@
 #include "kaccounts_export.h"
 
 #include <QObject>
+#include <Accounts/Service>
+#include <Accounts/Account>
 
 class KACCOUNTS_EXPORT KAccountsDPlugin : public QObject
 {
@@ -35,8 +37,10 @@ public:
     virtual ~KAccountsDPlugin();
 
 public Q_SLOTS:
-    virtual void onAccountAdded(quint32 id) = 0;
-    virtual void onAccountRemoved(quint32 id) = 0;
+    virtual void onAccountCreated(const Accounts::AccountId accountId, const Accounts::ServiceList &serviceList) = 0;
+    virtual void onAccountRemoved(const Accounts::AccountId accountId) = 0;
+    virtual void onServiceEnabled(const Accounts::AccountId accountId, const Accounts::Service &service) = 0;
+    virtual void onServiceDisabled(const Accounts::AccountId accountId, const Accounts::Service &service) = 0;
 };
 
 Q_DECLARE_INTERFACE(KAccountsDPlugin, "org.kde.kaccounts.DPlugin")
