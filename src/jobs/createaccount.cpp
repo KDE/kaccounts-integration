@@ -84,7 +84,7 @@ void CreateAccount::processSessionKTp()
     QPluginLoader loader(pluginPath);
 
     if (!loader.load()) {
-        qWarning() << "Could not create Extractor: " << pluginPath;
+        qWarning() << "Could not create KAccountsUiPlugin: " << pluginPath;
         qWarning() << loader.errorString();
         return;
     }
@@ -93,7 +93,7 @@ void CreateAccount::processSessionKTp()
     if (obj) {
         KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
         if (!ui) {
-            qDebug() << "Plugin could not be converted to an ExtractorPlugin";
+            qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
             qDebug() << pluginPath;
             return;
         }
@@ -140,11 +140,16 @@ void CreateAccount::ktpDialogFinished(const QString &username, const QString &pa
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
     // Proceed to finish creating the new Account
     m_identity->queryInfo();
+
+    // Delete the KTp dialog
+    sender()->deleteLater();
 }
 
 void CreateAccount::ktpDialogError(const QString &error)
 {
     qWarning() << "Error while creating KTp account:" << error;
+    // Delete the KTp dialog
+    sender()->deleteLater();
 }
 
 void CreateAccount::processSessionOwncloud()
@@ -167,6 +172,7 @@ void CreateAccount::processSessionOwncloud()
 
     m_identity = SignOn::Identity::newIdentity(info, this);
     m_identity->storeCredentials();
+    m_done = true;
 
     m_account = m_manager->createAccount(m_providerName);
     m_account->setValue("dav/host", dialog->host());
@@ -180,6 +186,19 @@ void CreateAccount::processSessionOwncloud()
 
 void CreateAccount::accountCreated()
 {
+    if (m_providerName.startsWith(QLatin1String("ktp-"))) {
+        QString uid = m_account->value("uid").toString();
+
+        KSharedConfigPtr kaccountsConfig = KSharedConfig::openConfig(QStringLiteral("kaccounts-ktprc"));
+        KConfigGroup ktpKaccountsGroup = kaccountsConfig->group(QStringLiteral("ktp-kaccounts"));
+        ktpKaccountsGroup.writeEntry(uid, m_account->id());
+
+        KConfigGroup kaccountsKtpGroup = kaccountsConfig->group(QStringLiteral("kaccounts-ktp"));
+        kaccountsKtpGroup.writeEntry(QString::number(m_account->id()), uid);
+        qDebug() << "Syncing config";
+        kaccountsConfig->sync();
+    }
+
     emitResult();
 }
 
@@ -280,17 +299,6 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
 
     connect(m_account, SIGNAL(synced()), SLOT(accountCreated()));
     m_account->sync();
-
-    if (m_providerName.startsWith(QLatin1String("ktp-"))) {
-        QString uid = m_account->value("uid").toString();
-
-        KSharedConfigPtr kaccountsConfig = KSharedConfig::openConfig(QStringLiteral("kaccounts-ktprc"));
-        KConfigGroup ktpKaccountsGroup = kaccountsConfig->group(QStringLiteral("ktp-kaccounts"));
-        ktpKaccountsGroup.writeEntry(uid, m_account->id());
-
-        KConfigGroup kaccountsKtpGroup = kaccountsConfig->group(QStringLiteral("kaccounts-ktp"));
-        kaccountsKtpGroup.writeEntry(QString::number(m_account->id()), uid);
-    }
 }
 
 void CreateAccount::error(const SignOn::Error& error)
