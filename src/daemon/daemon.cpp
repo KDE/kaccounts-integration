@@ -40,7 +40,6 @@ K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugi
 
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
- //, m_akonadi(new AkonadiServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(KAccounts::accountsManager(), SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
@@ -88,12 +87,11 @@ AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
         }
     }
 
-    m_plugins << new KIOServices(this);
+    m_plugins << new KIOServices(this); //TODO: uncomment once Akonadi available << new AkonadiServices(this);
 }
 
 AccountsDaemon::~AccountsDaemon()
 {
-//     delete m_akonadi;
     qDeleteAll(m_plugins);
 }
 
@@ -127,7 +125,6 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-//     m_akonadi->accountCreated(id, services);
     Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
         plugin->onAccountCreated(id, services);
     }
@@ -137,7 +134,6 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 {
     qDebug() << id;
 
-//     m_akonadi->accountRemoved(id);
     Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
         plugin->onAccountRemoved(id);
     }
@@ -155,12 +151,10 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 
     Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
-//         m_akonadi->serviceDisabled(accId, service);
         Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
             plugin->onServiceDisabled(accId, service);
         }
     } else {
-//       m_akonadi->serviceEnabled(accId, service);
         Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
             plugin->onServiceEnabled(accId, service);
         }

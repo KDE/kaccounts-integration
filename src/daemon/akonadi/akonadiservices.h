@@ -19,32 +19,34 @@
 #ifndef AKONADI_SERVICES_H
 #define AKONADI_SERVICES_H
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
 #include <QtCore/QObject>
 
 #include <Accounts/Account>
 #include <Accounts/Service>
 
+#include <kaccountsdplugin.h>
+
 class KJob;
 class AkonadiAccounts;
-class AkonadiServices : public QObject
+class AkonadiServices : public KAccountsDPlugin
 {
     Q_OBJECT
-    public:
-        explicit AkonadiServices(QObject* parent = 0);
-        virtual ~AkonadiServices();
 
-        void accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList);
-        void accountRemoved(const Accounts::AccountId& accId);
-        void serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service);
-        void serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service);
+public:
+    explicit AkonadiServices(QObject *parent = 0);
+    virtual ~AkonadiServices();
 
-    private Q_SLOTS:
-        void disableServiceJobDone(KJob* job);
+public Q_SLOTS:
+    void onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList);
+    void onAccountRemoved(const Accounts::AccountId accId);
+    void onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service);
+    void onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service);
 
-    private:
-        AkonadiAccounts* m_accounts;
+private Q_SLOTS:
+    void disableServiceJobDone(KJob *job);
+
+private:
+    AkonadiAccounts* m_accounts;
 };
 
 #endif //AKONADI_SERVICES_H

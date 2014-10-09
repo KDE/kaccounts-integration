@@ -49,7 +49,6 @@ class AccountsDaemon : public KDEDModule
     private:
         void monitorAccount(const Accounts::AccountId &id);
 
-//         AkonadiServices* m_akonadi;
         QList<KAccountsDPlugin*> m_plugins;
 };
 
