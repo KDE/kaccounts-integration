@@ -19,11 +19,18 @@
 #include "daemon.h"
 // #include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
+#include "src/lib/kaccountsdplugin.h"
+#include <core.h>
 
 #include <KLocalizedString>
 #include <KPluginFactory>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QDebug>
+#include <QDir>
+#include <QPluginLoader>
+#include <QCoreApplication>
 
 #include <Accounts/Manager>
 #include <Accounts/Service>
@@ -34,17 +41,60 @@ K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugi
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
  //, m_akonadi(new AkonadiServices(this))
- , m_kio(new KIOServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(KAccounts::accountsManager(), SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
     connect(KAccounts::accountsManager(), SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
+
+    QStringList pluginPaths;
+
+    QStringList paths = QCoreApplication::libraryPaths();
+    Q_FOREACH (const QString &libraryPath, paths) {
+        QString path(libraryPath + QStringLiteral("/kaccounts/daemonplugins"));
+        QDir dir(path);
+
+        if (!dir.exists()) {
+            continue;
+        }
+
+        QStringList dirEntries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+
+        Q_FOREACH(const QString &file, dirEntries) {
+            pluginPaths.append(path + '/' + file);
+        }
+    }
+
+    Q_FOREACH (const QString &pluginPath, pluginPaths) {
+        QPluginLoader loader(pluginPath);
+
+        if (!loader.load()) {
+            qWarning() << "Could not create Extractor: " << pluginPath;
+            qWarning() << loader.errorString();
+            continue;
+        }
+
+        QObject *obj = loader.instance();
+        if (obj) {
+            KAccountsDPlugin *plugin = qobject_cast<KAccountsDPlugin*>(obj);
+            if (!plugin) {
+                qDebug() << "Plugin could not be converted to an ExtractorPlugin";
+                qDebug() << pluginPath;
+                continue;
+            }
+            qDebug() << "Loaded KAccounts plugin" << pluginPath;
+            m_plugins << plugin;
+        } else {
+            qDebug() << "Plugin could not creaate instance" << pluginPath;
+        }
+    }
+
+    m_plugins << new KIOServices(this);
 }
 
 AccountsDaemon::~AccountsDaemon()
 {
 //     delete m_akonadi;
-    delete m_kio;
+    qDeleteAll(m_plugins);
 }
 
 void AccountsDaemon::startDaemon()
@@ -78,7 +128,9 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     Accounts::ServiceList services = acc->enabledServices();
 
 //     m_akonadi->accountCreated(id, services);
-    m_kio->accountCreated(id, services);
+    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        plugin->onAccountCreated(id, services);
+    }
 }
 
 void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
@@ -86,7 +138,9 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     qDebug() << id;
 
 //     m_akonadi->accountRemoved(id);
-    m_kio->accountRemoved(id);
+    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        plugin->onAccountRemoved(id);
+    }
 }
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
@@ -102,12 +156,15 @@ void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
     Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
 //         m_akonadi->serviceDisabled(accId, service);
-        m_kio->serviceDisabled(accId, service);
-        return;
+        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+            plugin->onServiceDisabled(accId, service);
+        }
+    } else {
+//       m_akonadi->serviceEnabled(accId, service);
+        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+            plugin->onServiceEnabled(accId, service);
+        }
     }
-
-//     m_akonadi->serviceEnabled(accId, service);
-    m_kio->serviceEnabled(accId, service);
 }
 
 #include "daemon.moc"

@@ -28,8 +28,8 @@ namespace Accounts {
 };
 
 class KJob;
-class KIOServices;
 class AkonadiServices;
+class KAccountsDPlugin;
 
 class AccountsDaemon : public KDEDModule
 {
@@ -50,7 +50,7 @@ class AccountsDaemon : public KDEDModule
         void monitorAccount(const Accounts::AccountId &id);
 
 //         AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+        QList<KAccountsDPlugin*> m_plugins;
 };
 
 #endif /*KSCREN_DAEMON_H*/
