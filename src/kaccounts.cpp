@@ -53,7 +53,15 @@ KAccounts::KAccounts(QWidget *parent, const QVariantList &)
     m_model = new AccountsModel(this);
     m_selectionModel = new QItemSelectionModel(m_model);
     connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
-    m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
+
+    if (m_model->rowCount() == 0) {
+        m_layout->setCurrentIndex(0);
+    } else {
+        QLabel *label = new QLabel(i18n("Select an account from the left column to configure"), this);
+        label->setAlignment(Qt::AlignCenter);
+        m_layout->addWidget(label);
+        m_layout->setCurrentIndex(2);
+    }
 
     m_ui->accountsView->setIconSize(QSize(32,32));
     m_ui->accountsView->setModel(m_model);
