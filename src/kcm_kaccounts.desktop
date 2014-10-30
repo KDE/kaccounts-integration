@@ -11,9 +11,33 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=personalization
 
 Name=Online Accounts
+Name[cs]=Účty online
+Name[de]=Online-Zugänge
+Name[fr]=Comptes en ligne
+Name[nl]=Online accounts
+Name[pt]=Contas na Internet
+Name[pt_BR]=Contas online
+Name[uk]=Облікові записи у мережі
+Name[x-test]=xxOnline Accountsxx
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
+Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
+Comment[de]=Richten Sie Ihre Web-Zugänge wie Google, Live und ownCloud ein
+Comment[fr]=Configurez vos comptes Internet tels que Google, Live, OwnCloud
+Comment[nl]=Uw internet-accounts instellen zoals Google, Live, Owncloud
+Comment[pt]=Configure as suas contas da Internet, como o Google, Live, Owncloud
+Comment[pt_BR]=Configure suas contas na Internet, como Google, Live, Owncloud
+Comment[uk]=Налаштування ваших облікових записів у Google, Live, Owncloud тощо
+Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
+X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
+X-KDE-Keywords[de]=Netzwerk,Google,Live,ownCloud
+X-KDE-Keywords[fr]=Réseau, Google, Live, OwnCloud
+X-KDE-Keywords[nl]=Netwerk,Google,Live,ownCloud
+X-KDE-Keywords[pt]=Rede,Google,Live,ownCloud
+X-KDE-Keywords[pt_BR]=Rede,Google,Live,ownCloud
+X-KDE-Keywords[uk]=Network;Google;Live;ownCloud;мережа;гугл;ґуґл;лайф;аунклауд;
+X-KDE-Keywords[x-test]=xxNetwork,Google,Live,ownCloudxx
 
 Categories=Qt;KDE;X-KDE-settings-kaccounts;

@@ -1,6 +1,22 @@
 [Desktop Entry]
 Name=Accounts
+Name[cs]=Účty
+Name[de]=Zugänge
+Name[fr]=Comptes
+Name[nl]=Accounts
+Name[pt]=Contas
+Name[pt_BR]=Contas
+Name[uk]=Облікові записи
+Name[x-test]=xxAccountsxx
 Comment=Accounts management
+Comment[cs]=Správa účtů
+Comment[de]=Zugangs-Verwaltung
+Comment[fr]=Gestion des comptes
+Comment[nl]=Beheer van accounts
+Comment[pt]=Gestão de contas
+Comment[pt_BR]=Gerenciamento de contas
+Comment[uk]=Керування обліковими записами
+Comment[x-test]=xxAccounts managementxx
 
 Type=Service
 Icon=preferences-system-power-management
