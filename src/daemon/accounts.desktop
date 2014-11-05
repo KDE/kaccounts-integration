@@ -11,6 +11,7 @@ Name[pl]=Konta
 Name[pt]=Contas
 Name[pt_BR]=Contas
 Name[sk]=Účty
+Name[sl]=Računi
 Name[uk]=Облікові записи
 Name[x-test]=xxAccountsxx
 Comment=Accounts management
@@ -25,6 +26,7 @@ Comment[pl]=Zarządzanie kontami
 Comment[pt]=Gestão de contas
 Comment[pt_BR]=Gerenciamento de contas
 Comment[sk]=Správa účtov
+Comment[sl]=Upravljanje računov
 Comment[uk]=Керування обліковими записами
 Comment[x-test]=xxAccounts managementxx
 
