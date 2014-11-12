@@ -70,6 +70,7 @@ void Create::fillInterface()
         button = new QCommandLinkButton(provider.displayName());
         button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
+        button->setToolTip(provider.description());
 
         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
         m_form->verticalLayout->insertWidget(0, button);
