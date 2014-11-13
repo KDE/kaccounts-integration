@@ -26,6 +26,7 @@
 
 #include <QWidget>
 #include <QCommandLinkButton>
+#include <QMessageBox>
 
 #include <Accounts/Manager>
 #include <Accounts/Provider>
@@ -81,5 +82,12 @@ void Create::createAccount()
 {
     QString providerName = sender()->property("providerName").toString();
     CreateAccount *acc = new CreateAccount(providerName, this);
+
+    connect(acc, &CreateAccount::finished, [=](KJob *job) {
+        if (job->error() == KJob::UserDefinedError) {
+            QMessageBox::critical(m_parent, i18nc("Messagebox title; meaning 'Unable to finish the action you started'", "Unable to finish"), job->errorText());
+        }
+    });
+
     acc->start();
 }

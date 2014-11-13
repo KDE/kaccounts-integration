@@ -158,7 +158,8 @@ void CreateAccount::processSessionOwncloud()
     int result = dialog->exec();
     if (result == QDialog::Rejected) {
         setError(-1);
-        setErrorText("Dialog was cancel");
+        // this should not be user visible string
+        setErrorText("Dialog was canceled");
         emitResult();
         return;
     }
@@ -305,4 +306,8 @@ void CreateAccount::error(const SignOn::Error& error)
 {
     qWarning() << "Error:";
     qWarning() << "\t" << error.message();
+
+    setError(KJob::UserDefinedError);
+    setErrorText(i18n("There was an error while trying to process the request: %1", error.message()));
+    emitResult();
 }
