@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>KCMWebAccounts</class>
  <widget class="QWidget" name="KCMWebAccounts">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>949</width>
-    <height>528</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
@@ -30,7 +22,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
+       <width>350</width>
        <height>16777215</height>
       </size>
      </property>
@@ -93,12 +85,6 @@
    </item>
    <item>
     <widget class="QGroupBox" name="accountInfo">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="title">
       <string/>
      </property>

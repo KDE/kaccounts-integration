@@ -24,7 +24,7 @@
 #include <libkgapi/services/contacts.h>
 #include <libkgapi/services/calendar.h>
 
-#include <KDebug>
+#include <QDebug>
 using namespace KGAPI;
 
 OAuth::OAuth(GoogleWizard *parent)
@@ -114,7 +114,7 @@ void OAuth::authenticated(KGAPI::Account::Ptr& acc)
 
 void OAuth::error(Error , QString err)
 {
-    kDebug() << err;
+    qDebug() << err;
     m_valid = false;
     label->setText(i18n("Error authenticating with Google, please press back and check your credentials"));
 }

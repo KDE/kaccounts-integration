@@ -18,28 +18,29 @@
 
 #include "create.h"
 #include "jobs/createaccount.h"
+#include <core.h>
 
 #include "ui_types.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
-#include <QtGui/QWidget>
-#include <QtGui/QCommandLinkButton>
+#include <QWidget>
+#include <QCommandLinkButton>
+#include <QMessageBox>
 
 #include <Accounts/Manager>
 #include <Accounts/Provider>
 
-Create::Create(QWidget* parent)
-: QObject(parent)
-, m_form(0)
-, m_manager(new Accounts::Manager(this))
+Create::Create(QWidget *parent)
+    : QObject(parent)
+    , m_form(0)
+    , m_manager(KAccounts::accountsManager())
 {
     m_parent = parent;
 }
 
 Create::~Create()
 {
-    delete m_manager;
 }
 
 QWidget* Create::widget()
@@ -60,11 +61,17 @@ void Create::fillInterface()
 {
     Accounts::ProviderList providerList = m_manager->providerList();
 
+    // sort accounts alphabetically
+    std::sort(providerList.begin(), providerList.end(), [](const Accounts::Provider &a, const Accounts::Provider &b) {
+        return QString::localeAwareCompare(b.displayName(), a.displayName()) < 0;
+    });
+
     QCommandLinkButton *button;
-    Q_FOREACH(const Accounts::Provider& provider, providerList) {
+    Q_FOREACH(const Accounts::Provider &provider, providerList) {
         button = new QCommandLinkButton(provider.displayName());
-        button->setIcon(KIcon(provider.iconName()));
+        button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
+        button->setToolTip(provider.description());
 
         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
         m_form->verticalLayout->insertWidget(0, button);
@@ -75,5 +82,12 @@ void Create::createAccount()
 {
     QString providerName = sender()->property("providerName").toString();
     CreateAccount *acc = new CreateAccount(providerName, this);
+
+    connect(acc, &CreateAccount::finished, [=](KJob *job) {
+        if (job->error() == KJob::UserDefinedError) {
+            QMessageBox::critical(m_parent, i18nc("Messagebox title; meaning 'Unable to finish the action you started'", "Unable to finish"), job->errorText());
+        }
+    });
+
     acc->start();
 }

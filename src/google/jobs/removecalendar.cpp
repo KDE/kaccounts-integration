@@ -22,7 +22,7 @@
 
 #include <akonadi/agentmanager.h>
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace Akonadi;
 
@@ -73,7 +73,7 @@ void RemoveCalendar::removeCalendarsInResource()
     if (agent.isValid()) {
         agent.reconfigure();
     } else {
-        kDebug() << "Agent not found, removing calendars anyway";
+        qDebug() << "Agent not found, removing calendars anyway";
     }
 
     if (m_config.group("services").readEntry("Tasks", 0) == 0) {

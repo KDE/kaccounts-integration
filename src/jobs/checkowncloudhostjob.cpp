@@ -18,10 +18,12 @@
 
 #include "checkowncloudhostjob.h"
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
+#include <KIO/Global>
 
 CheckOwncloudHostJob::CheckOwncloudHostJob(QObject* parent): KJob(parent)
 {
@@ -55,11 +57,11 @@ QString CheckOwncloudHostJob::url() const
 
 void CheckOwncloudHostJob::requestStatus()
 {
-    KUrl url(m_url);
+    QUrl url(m_url);
 
-    url.setFileName("status.php");
+    url.setPath("status.php");
 
-    kDebug() << url;
+    qDebug() << url;
 
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
@@ -77,14 +79,15 @@ void CheckOwncloudHostJob::fileDownloaded(KJob* job)
 {
     KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob *>(job);
     if (kJob->error()) {
-        kDebug() << job->errorString();
-        kDebug() << job->errorText();
+        qDebug() << job->errorString();
+        qDebug() << job->errorText();
         figureOutServer(kJob->url());
         return;
     }
 
-    QJson::Parser parser;
-    QMap <QString, QVariant> map = parser.parse(m_json).toMap();
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject map = parser.object();
+
     if (!map.contains("version")) {
         figureOutServer(kJob->url());
         return;
@@ -93,18 +96,19 @@ void CheckOwncloudHostJob::fileDownloaded(KJob* job)
     emitResult();
 }
 
-void CheckOwncloudHostJob::figureOutServer(const KUrl& url)
+void CheckOwncloudHostJob::figureOutServer(const QUrl &url)
 {
-    if (url.directory(KUrl::AppendTrailingSlash) == "/") {
+    if (url.isEmpty() || url.path() == "/") {
         setError(-1);
         setErrorText("Unable to find the host");
         emitResult();
         return;
     }
 
-    KUrl upUrl = url;
-    upUrl.setFileName("");
-    m_url = upUrl.upUrl().url();
+    QUrl upUrl = KIO::upUrl(url);
+    //FIXME?
+//     upUrl.setFileName("");
+    m_url = upUrl.toString();
 
     m_json.clear();
 

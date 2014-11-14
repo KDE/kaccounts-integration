@@ -22,27 +22,31 @@
 #include "ui_services.h"
 #include "create.h"
 
+#include <QPointer>
+
 namespace Accounts {
     class Account;
 };
 
 class QCheckBox;
+
 class AccountWidget : public QWidget, Ui::Services
 {
-Q_OBJECT
-    public:
-        explicit AccountWidget(Accounts::Account* model, QWidget* parent);
-        virtual ~AccountWidget();
+    Q_OBJECT
 
-        void setAccount(Accounts::Account* account);
-    public Q_SLOTS:
-        void serviceEnabledChanged(const QString &serviceName, bool enabled);
-        void serviceChanged(bool enabled);
+public:
+    explicit AccountWidget(Accounts::Account *model, QWidget *parent);
+    virtual ~AccountWidget();
 
-    private:
-        QHash<QString, QCheckBox*> m_checkboxes;
-        QWeakPointer<Accounts::Account> m_account;
-        Accounts::Manager *m_manager;
+    void setAccount(Accounts::Account *account);
+public Q_SLOTS:
+    void serviceEnabledChanged(const QString &serviceName, bool enabled);
+    void serviceChanged(bool enabled);
+
+private:
+    QHash<QString, QCheckBox*> m_checkboxes;
+    QPointer<Accounts::Account> m_account;
+    Accounts::Manager *m_manager;
 };
 
 #endif //ACCOUNTWIDGET_H

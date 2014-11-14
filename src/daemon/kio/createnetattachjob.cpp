@@ -18,20 +18,19 @@
 
 #include "createnetattachjob.h"
 
-#include <QApplication>
-#include <QWidget>
-
 #include <Accounts/Manager>
 
-#include <KUrl>
-#include <KGlobal>
 #include <KDirNotify>
-#include <KStandardDirs>
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 #include <KConfig>
 #include <KIO/Job>
 #include <KConfigGroup>
-#include <KDebug>
+
+#include <QApplication>
+#include <QWidget>
+#include <QUrl>
+#include <QDir>
+#include <QDebug>
 
 using namespace KWallet;
 
@@ -54,7 +53,7 @@ void CreateNetAttachJob::start()
 
 void CreateNetAttachJob::createNetAttach()
 {
-    kDebug();
+    qDebug();
     WId windowId = 0;
     if (qApp->activeWindow()) {
         windowId = qApp->activeWindow()->winId();
@@ -66,7 +65,7 @@ void CreateNetAttachJob::createNetAttach()
 
 void CreateNetAttachJob::walletOpened(bool opened)
 {
-    kDebug();
+    qDebug();
     if (!opened) {
         setError(-1);
         setErrorText("Can't open wallet");
@@ -79,12 +78,13 @@ void CreateNetAttachJob::walletOpened(bool opened)
 
 void CreateNetAttachJob::getRealm()
 {
-    kDebug();
-    KUrl url;
+    qDebug();
+    QUrl url;
     url.setHost(m_host);
-    url.setUser(m_username);
+    url.setUserName(m_username);
     url.setScheme("webdav");
-    url.addPath(m_path);
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + m_path);
 
     if (!m_realm.isEmpty()) {
         createDesktopFile(url);
@@ -113,18 +113,25 @@ void CreateNetAttachJob::gotRealm(KJob* job)
 }
 
 
-void CreateNetAttachJob::createDesktopFile(const KUrl &url)
+void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
-    kDebug();
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
+    qDebug();
 
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview"));
+
+    QDir saveDir(path);
+    if (!saveDir.exists()) {
+        if (!saveDir.mkpath(path)) {
+            qWarning() << "Directory" << path << "for storage couldn't be created!";
+        }
+    }
     path += m_uniqueId + ".desktop";
 
     qDebug() << "Creating knetAttach place";
     qDebug() << path;
     qDebug() << url.host();
-    qDebug() << url.prettyUrl();
+    qDebug() << url.toString();
 
     KConfig _desktopFile( path, KConfig::SimpleConfig );
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
@@ -132,8 +139,8 @@ void CreateNetAttachJob::createDesktopFile(const KUrl &url)
     desktopFile.writeEntry("Icon", m_icon);
     desktopFile.writeEntry("Name", m_name);
     desktopFile.writeEntry("Type", "Link");
-    desktopFile.writeEntry("URL", url.prettyUrl());
-    desktopFile.writeEntry("Charset", url.fileEncoding());
+    desktopFile.writeEntry("URL", url.toString());
+//     desktopFile.writeEntry("Charset", url.fileEncoding());
     desktopFile.sync();
 
     QString walletUrl(url.scheme());
@@ -155,7 +162,7 @@ void CreateNetAttachJob::createDesktopFile(const KUrl &url)
     m_wallet->writeMap(walletUrl + "webdav", info);
     m_wallet->sync();
 
-    org::kde::KDirNotify::emitFilesAdded("remote:/");
+    org::kde::KDirNotify::emitFilesAdded(QUrl("remote:/"));
 
     emitResult();
 }

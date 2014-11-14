@@ -32,7 +32,7 @@
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace Akonadi;
 using namespace KGAPI;
@@ -68,7 +68,7 @@ KConfigGroup CreateCalendar::config() const
 
 void CreateCalendar::createResource()
 {
-    kDebug() << "Creating new resource";
+    qDebug() << "Creating new resource";
     const AgentType type = AgentManager::self()->type("akonadi_googlecalendar_resource");
 
     AgentInstanceCreateJob *job = new AgentInstanceCreateJob( type, this );

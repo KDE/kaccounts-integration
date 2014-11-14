@@ -19,7 +19,7 @@
 #include "serviceoption.h"
 
 #include <kpixmapsequenceoverlaypainter.h>
-#include <QDebug>
+
 ServiceOption::ServiceOption(const QString& name, const QString& displayText, QWidget* parent)
  : QWidget(parent)
  , m_binaryMode(false)

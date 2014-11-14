@@ -20,24 +20,21 @@
 #ifndef GET_CREDENTIALS_JOB_H
 #define GET_CREDENTIALS_JOB_H
 
-#include <kjob.h>
+#include "kaccounts_export.h"
 
+#include <KJob>
 #include <Accounts/Account>
-#include <Accounts/AuthData>
-#include <SignOn/SessionData>
 
 namespace Accounts {
     class Manager;
-};
-namespace SignOn {
-    class Error;
-};
+}
 
-class GetCredentialsJob : public KJob
+class KACCOUNTS_EXPORT GetCredentialsJob : public KJob
 {
     Q_OBJECT
 public:
-    explicit GetCredentialsJob(const Accounts::AccountId &id, QObject* parent = 0);
+    GetCredentialsJob(const Accounts::AccountId &id, QObject *parent = 0);
+    GetCredentialsJob(const Accounts::AccountId &id, const QString &authMethod = QString(), const QString &authMechanism = QString(), QObject *parent = 0);
     virtual void start();
 
     void setServiceType(const QString &serviceType);
@@ -47,15 +44,10 @@ public:
 
 private Q_SLOTS:
     void getCredentials();
-    void sessionResponse(const SignOn::SessionData &data);
-    void sessionError(const SignOn::Error &error);
 
 private:
-    QString m_serviceType;
-    Accounts::AccountId m_id;
-    QVariantMap m_authData;
-    Accounts::Manager *m_manager;
-    SignOn::SessionData m_sessionData;
+    class Private;
+    Private * const d;
 };
 
 #endif //GET_CREDENTIALS_JOB_H

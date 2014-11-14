@@ -19,17 +19,16 @@
 #include "ocreatecontact.h"
 #include "davGroupware_settings.h"
 
-#include <QtGui/QWidget>
-#include <QtGui/QApplication>
-
-#include <QtDBus/QDBusInterface>
+#include <QWidget>
+#include <QApplication>
+#include <QDBusInterface>
+#include <QDebug>
 
 #include <akonadi/agenttype.h>
 #include <akonadi/agentmanager.h>
 #include <akonadi/agentinstancecreatejob.h>
 #include <unistd.h>
 
-#include <KDebug>
 #include <klocalizedstring.h>
 #include <KWallet/Wallet>
 
@@ -64,7 +63,7 @@ KConfigGroup OCreateContact::config() const
 
 void OCreateContact::createResource()
 {
-    kDebug() << "Creating new resource";
+    qDebug() << "Creating new resource";
     const AgentType type = AgentManager::self()->type("akonadi_davgroupware_resource");
 
     AgentInstanceCreateJob *job = new AgentInstanceCreateJob( type, this );
@@ -74,8 +73,9 @@ void OCreateContact::createResource()
 
 const QString OCreateContact::davUrl()
 {
-    KUrl url(m_config.readEntry("server", ""));
-    url.addPath("remote.php/carddav/");
+    QUrl url(m_config.readEntry("server", ""));
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + "remote.php/carddav/");
 
     QString str("$default$|CardDav|");
     str.append(url.url());
@@ -149,7 +149,7 @@ void OCreateContact::useCalendarResource()
 
     QStringList list = settings->remoteUrls().value();
     list.append(davUrl());
-    kDebug() << list;
+    qDebug() << list;
     settings->setRemoteUrls(list).waitForFinished();
     settings->setDefaultUsername(m_config.name()).waitForFinished();
 

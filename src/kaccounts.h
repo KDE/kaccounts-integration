@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef webaccounts_H
-#define webaccounts_H
+#ifndef KACCOUNTS_H
+#define KACCOUNTS_H
 
 #include <kcmodule.h>
 
@@ -27,21 +27,22 @@ class AccountsModel;
 class AccountWidget;
 class QStackedLayout;
 class QItemSelectionModel;
+
 namespace Ui {
     class KCMWebAccounts;
 }
 
-class WebAccounts : public KCModule
+class KAccounts : public KCModule
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    WebAccounts(QWidget *parent, const QVariantList&);
-    virtual ~WebAccounts();
+    KAccounts(QWidget *parent, const QVariantList &);
+    virtual ~KAccounts();
 
 private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
-    void currentChanged(const QModelIndex& current, const QModelIndex& previous);
+    void currentChanged(const QModelIndex &current, const QModelIndex &previous);
 
 private:
     Create *m_create;
@@ -52,4 +53,4 @@ private:
     QItemSelectionModel *m_selectionModel;
 };
 
-#endif // webaccounts_H
+#endif // KACCOUNTS_H

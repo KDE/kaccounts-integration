@@ -17,10 +17,10 @@
  *************************************************************************************/
 
 #include "wallet.h"
-#include "webaccounts.h"
+#include "kaccounts.h"
 
-#include <QtGui/QWizard>
-#include <QtGui/QWizardPage>
+#include <QWizard>
+#include <QWizardPage>
 
 #include <KWallet/Wallet>
 
@@ -73,7 +73,7 @@ void WalletPage::onNext()
 
 bool WalletPage::checkWallet()
 {
-    Wallet *wallet = WebAccounts::wallet();
+    Wallet *wallet = KAccounts::wallet();
 
     if (!wallet) {
         return false;
@@ -84,7 +84,7 @@ bool WalletPage::checkWallet()
 
 void WalletPage::checkWalletSlot()
 {
-    if (!WebAccounts::wallet()) {
+    if (!KAccounts::wallet()) {
         return;
     }
 

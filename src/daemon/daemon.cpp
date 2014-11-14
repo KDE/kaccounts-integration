@@ -17,43 +17,88 @@
  *************************************************************************************/
 
 #include "daemon.h"
-#include "akonadi/akonadiservices.h"
+// #include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
+#include "src/lib/kaccountsdplugin.h"
+#include <core.h>
 
-#include <kdebug.h>
-#include <kdemacros.h>
 #include <KLocalizedString>
-#include <KActionCollection>
 #include <KPluginFactory>
+#include <KSharedConfig>
+#include <KConfigGroup>
+
+#include <QDebug>
+#include <QDir>
+#include <QPluginLoader>
+#include <QCoreApplication>
 
 #include <Accounts/Manager>
 #include <Accounts/Service>
 #include <Accounts/AccountService>
 
-K_PLUGIN_FACTORY(KScreenDaemonFactory, registerPlugin<AccountsDaemon>();)
-K_EXPORT_PLUGIN(KScreenDaemonFactory("accounts", "accounts"))
+K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugin<AccountsDaemon>();)
 
 AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
  : KDEDModule(parent)
- , m_manager(new Accounts::Manager(this))
- , m_akonadi(new AkonadiServices(this))
- , m_kio(new KIOServices(this))
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
-    connect(m_manager, SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
-    connect(m_manager, SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
+    connect(KAccounts::accountsManager(), SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
+    connect(KAccounts::accountsManager(), SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
+
+    QStringList pluginPaths;
+
+    QStringList paths = QCoreApplication::libraryPaths();
+    Q_FOREACH (const QString &libraryPath, paths) {
+        QString path(libraryPath + QStringLiteral("/kaccounts/daemonplugins"));
+        QDir dir(path);
+
+        if (!dir.exists()) {
+            continue;
+        }
+
+        QStringList dirEntries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+
+        Q_FOREACH(const QString &file, dirEntries) {
+            pluginPaths.append(path + '/' + file);
+        }
+    }
+
+    Q_FOREACH (const QString &pluginPath, pluginPaths) {
+        QPluginLoader loader(pluginPath);
+
+        if (!loader.load()) {
+            qWarning() << "Could not create Extractor: " << pluginPath;
+            qWarning() << loader.errorString();
+            continue;
+        }
+
+        QObject *obj = loader.instance();
+        if (obj) {
+            KAccountsDPlugin *plugin = qobject_cast<KAccountsDPlugin*>(obj);
+            if (!plugin) {
+                qDebug() << "Plugin could not be converted to an ExtractorPlugin";
+                qDebug() << pluginPath;
+                continue;
+            }
+            qDebug() << "Loaded KAccounts plugin" << pluginPath;
+            m_plugins << plugin;
+        } else {
+            qDebug() << "Plugin could not creaate instance" << pluginPath;
+        }
+    }
+
+    m_plugins << new KIOServices(this); //TODO: uncomment once Akonadi available << new AkonadiServices(this);
 }
 
 AccountsDaemon::~AccountsDaemon()
 {
-    delete m_manager;
-    delete m_akonadi;
+    qDeleteAll(m_plugins);
 }
 
 void AccountsDaemon::startDaemon()
 {
-    kDebug();
-    Accounts::AccountIdList accList = m_manager->accountList();
+    qDebug();
+    Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
     Q_FOREACH(const Accounts::AccountId &id, accList) {
         monitorAccount(id);
     }
@@ -61,8 +106,8 @@ void AccountsDaemon::startDaemon()
 
 void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 {
-    kDebug() << id;
-    Accounts::Account *acc = m_manager->account(id);
+    qDebug() << id;
+    Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     Accounts::ServiceList services = acc->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         acc->selectService(service);
@@ -74,41 +119,46 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
 
 void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
 {
-    kDebug() << id;
+    qDebug() << id;
     monitorAccount(id);
 
-    Accounts::Account *acc = m_manager->account(id);
+    Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     Accounts::ServiceList services = acc->enabledServices();
 
-    m_akonadi->accountCreated(id, services);
-    m_kio->accountCreated(id, services);
+    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        plugin->onAccountCreated(id, services);
+    }
 }
 
 void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
 {
-    kDebug() << id;
+    qDebug() << id;
 
-    m_akonadi->accountRemoved(id);
-    m_kio->accountRemoved(id);
+    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        plugin->onAccountRemoved(id);
+    }
 }
 
 void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
 {
-    kDebug();
+    qDebug();
     if (serviceName.isEmpty()) {
-        kDebug() << "ServiceName is Empty";
+        qDebug() << "ServiceName is Empty";
         return;
     }
 
     Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
 
-    Accounts::Service service = m_manager->service(serviceName);
+    Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
-        m_akonadi->serviceDisabled(accId, service);
-        m_kio->serviceDisabled(accId, service);
-        return;
+        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+            plugin->onServiceDisabled(accId, service);
+        }
+    } else {
+        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+            plugin->onServiceEnabled(accId, service);
+        }
     }
-
-    m_akonadi->serviceEnabled(accId, service);
-    m_kio->serviceEnabled(accId, service);
 }
+
+#include "daemon.moc"

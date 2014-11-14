@@ -19,9 +19,8 @@
 #ifndef OWNCLOUD_H
 #define OWNCLOUD_H
 
-#include <QtGui/QWizard>
-
-#include <kurl.h>
+#include <QWizard>
+#include <QUrl>
 
 class OwnCloudWizard : public QWizard
 {
@@ -34,11 +33,11 @@ class OwnCloudWizard : public QWizard
 
         void setUsername(const QString &username);
         void setPassword(const QString &password);
-        void setServer(const KUrl &server);
+        void setServer(const QUrl &server);
 
         const QString username() const;
         const QString password() const;
-        const KUrl server() const;
+        const QUrl server() const;
 
         void activateOption(const QString& name, bool checked);
 
@@ -48,7 +47,7 @@ class OwnCloudWizard : public QWizard
     private:
         QString m_username;
         QString m_password;
-        KUrl m_server;
+        QUrl m_server;
 
         QHash<QString, int> m_services;
 };

@@ -34,28 +34,33 @@ namespace SignOn
     class SessionData;
     class IdentityInfo;
 };
+
 class CreateAccount : public KJob
 {
     Q_OBJECT
-    public:
-        explicit CreateAccount(const QString &providerName, QObject* parent = 0);
+public:
+    explicit CreateAccount(const QString &providerName, QObject* parent = 0);
 
-        virtual void start();
+    virtual void start();
 
-    private Q_SLOTS:
-        void processSessionOwncloud();
-        void accountCreated();
-        void processSession();
-        void error(const SignOn::Error &error);
-        void response(const SignOn::SessionData &data);
-        void info(const SignOn::IdentityInfo &info);
-        void credentialsStored(quint32 id);
+private Q_SLOTS:
+    void processSessionOwncloud();
+    void processSessionKTp();
+    void accountCreated();
+    void processSession();
+    void error(const SignOn::Error &error);
+    void response(const SignOn::SessionData &data);
+    void info(const SignOn::IdentityInfo &info);
 
-    private:
-        QString m_providerName;
-        Accounts::Manager *m_manager;
-        Accounts::Account *m_account;
-        Accounts::AccountService *m_accInfo;
-        SignOn::Identity *m_identity;
+    void ktpDialogFinished(const QString &username, const QString &password, const QVariantMap &additionalData);
+    void ktpDialogError(const QString &error);
+
+private:
+    QString m_providerName;
+    Accounts::Manager *m_manager;
+    Accounts::Account *m_account;
+    Accounts::AccountService *m_accInfo;
+    SignOn::Identity *m_identity;
+    bool m_done;
 };
 #endif //CREATE_ACCOUNT_JOB_H

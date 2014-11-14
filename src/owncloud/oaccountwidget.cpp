@@ -25,7 +25,7 @@
 #include "owncloud/jobs/oremovecalendar.h"
 #include "owncloud/jobs/oremovecontact.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 OAccountWidget::OAccountWidget(KConfigGroup group, QWidget* parent)
  : QWidget(parent)

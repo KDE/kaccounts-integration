@@ -19,13 +19,14 @@
 #include "foauth.h"
 #include "facebook/facebook.h"
 
-#include <qjson/parser.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include <KPixmapSequenceOverlayPainter>
 
 #include <kfacebook/authenticationdialog.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIO/Job>
 
 using namespace KFacebook;
@@ -118,8 +119,8 @@ void FOauth::usernameFinished()
     m_painter->stop();
     working->setVisible(false);
 
-    QJson::Parser parser;
-    QMap <QString, QVariant > data = parser.parse(m_json).toMap();;
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject data = parser.object();
 
     if (!data.contains("username") || data["username"].toString().isEmpty()) {
         tryAgain->setVisible(true);
@@ -142,10 +143,10 @@ void FOauth::checkUsername()
     label->setText(i18n("Checking username..."));
     tryAgain->setDisabled(true);
 
-    KUrl url("https://graph.facebook.com/me");
+    QUrl url("https://graph.facebook.com/me");
     url.addQueryItem("access_token", m_wizard->accessToken());
 
-    kDebug() << url;
+    qDebug() << url;
     KIO::TransferJob* job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(gotUsername(KIO::Job*, QByteArray)));
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(usernameFinished()));

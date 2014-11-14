@@ -23,8 +23,7 @@
 #include <QDBusConnection>
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
-
-#include <KDebug>
+#include <QDebug>
 
 ChangeSettingsJob::ChangeSettingsJob(QObject* parent) : AbstractAkonadiJob(parent)
 {
@@ -37,7 +36,7 @@ ChangeSettingsJob::~ChangeSettingsJob()
 
 void ChangeSettingsJob::start()
 {
-    kDebug();
+    qDebug();
     QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
@@ -70,7 +69,7 @@ void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)
 
 void ChangeSettingsJob::setConfiguration()
 {
-    kDebug();
+    qDebug();
 
     QDBusMessage msg = createCall(m_key);
     msg.setArguments(QVariantList() << m_value);
@@ -82,7 +81,7 @@ void ChangeSettingsJob::setConfiguration()
 
 void ChangeSettingsJob::accountSet(QDBusPendingCallWatcher* watcher)
 {
-    kDebug();
+    qDebug();
     QDBusPendingReply<void> reply = *watcher;
     if (reply.isError()) {
         setError(-1);
@@ -98,7 +97,7 @@ void ChangeSettingsJob::accountSet(QDBusPendingCallWatcher* watcher)
 
 void ChangeSettingsJob::writeConfig()
 {
-    kDebug();
+    qDebug();
     QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(createCall("writeConfig"));
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(configWritten(QDBusPendingCallWatcher*)));
@@ -106,7 +105,7 @@ void ChangeSettingsJob::writeConfig()
 
 void ChangeSettingsJob::configWritten(QDBusPendingCallWatcher* watcher)
 {
-    kDebug();
+    qDebug();
     watcher->deleteLater();
 
     QDBusPendingReply<void> reply = *watcher;

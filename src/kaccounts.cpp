@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "webaccounts.h"
+#include "kaccounts.h"
 #include "create.h"
 #include "ui_kcm.h"
 
@@ -24,24 +24,21 @@
 #include "models/modeltest.h"
 #include "accountwidget.h"
 
-#include <QtGui/QLabel>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QAction>
-#include <QtGui/QStackedLayout>
-#include <QtGui/QListView>
+#include <QLabel>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include <QStackedLayout>
+#include <QListView>
 
-#include <KDebug>
-#include <kpluginfactory.h>
-#include <kstandarddirs.h>
+#include <KPluginFactory>
 
-K_PLUGIN_FACTORY(WebAccountsFactory, registerPlugin<WebAccounts>();)
-K_EXPORT_PLUGIN(WebAccountsFactory("webaccounts", "webaccounts"))
+K_PLUGIN_FACTORY_WITH_JSON(KAccountsFactory, "kcm_kaccounts.json", registerPlugin<KAccounts>();)
 
-WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
-: KCModule(WebAccountsFactory::componentData(), parent)
-, m_create(0)
-, m_layout(new QStackedLayout)
+KAccounts::KAccounts(QWidget *parent, const QVariantList &)
+    : KCModule(parent)
+      , m_create(0)
+      , m_layout(new QStackedLayout)
 {
     m_ui = new Ui::KCMWebAccounts();
     m_ui->setupUi(this);
@@ -56,7 +53,15 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     m_model = new AccountsModel(this);
     m_selectionModel = new QItemSelectionModel(m_model);
     connect(m_selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(currentChanged(QModelIndex,QModelIndex)));
-    m_selectionModel->setCurrentIndex(m_model->index(0), QItemSelectionModel::SelectCurrent);
+
+    if (m_model->rowCount() == 0) {
+        m_layout->setCurrentIndex(0);
+    } else {
+        QLabel *label = new QLabel(i18n("Select an account from the left column to configure"), this);
+        label->setAlignment(Qt::AlignCenter);
+        m_layout->addWidget(label);
+        m_layout->setCurrentIndex(2);
+    }
 
     m_ui->accountsView->setIconSize(QSize(32,32));
     m_ui->accountsView->setModel(m_model);
@@ -66,7 +71,7 @@ WebAccounts::WebAccounts(QWidget *parent, const QVariantList&)
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
 }
 
-void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& previous)
+void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (!current.isValid()) {
         return;
@@ -84,24 +89,24 @@ void WebAccounts::currentChanged(const QModelIndex& current, const QModelIndex& 
     m_layout->setCurrentIndex(1);
 }
 
-WebAccounts::~WebAccounts()
+KAccounts::~KAccounts()
 {
     delete m_ui;
 }
 
-void WebAccounts::addBtnClicked()
+void KAccounts::addBtnClicked()
 {
     m_selectionModel->setCurrentIndex(m_model->index(m_model->rowCount() - 1), QItemSelectionModel::SelectCurrent);
 }
 
-void WebAccounts::rmBtnClicked()
+void KAccounts::rmBtnClicked()
 {
     QModelIndex index = m_selectionModel->currentIndex();
     if (!index.isValid()) {
         return;
     }
+    // TODO: ask confirmation first?
     m_model->removeRows(index.row(), 1);
 }
 
-
-#include "webaccounts.moc"
+#include "kaccounts.moc"

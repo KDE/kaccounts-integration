@@ -1,34 +1,37 @@
 add_subdirectory(daemon)
+add_subdirectory(lib)
 
-set(kdeaccounts_SRCS
-    webaccounts.cpp
+set(kaccounts_SRCS
+    kaccounts.cpp
     create.cpp
     accountwidget.cpp
     models/accountsmodel.cpp
-    models/modeltest.cpp
+#     models/modeltest.cpp
     jobs/createaccount.cpp
-    jobs/getcredentialsjob.cpp
     jobs/ownclouddialog.cpp
     jobs/checkowncloudhostjob.cpp
 )
 
-qt4_automoc(${kdeaccounts_SRCS})
+ki18n_wrap_ui(kaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
 
-kde4_add_ui_files(kdeaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
+add_library(kcm_kaccounts MODULE ${kaccounts_SRCS})
+kservice_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)
 
-kde4_add_plugin(kcm_kdeaccounts ${kdeaccounts_SRCS})
-
-target_link_libraries(kcm_kdeaccounts
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${KDE4_KDEUI_LIBRARY}
-    ${KDE4_KIO_LIBRARY}
+target_link_libraries(kcm_kaccounts
+    Qt5::Core
+    Qt5::Gui
+    KF5::KIOCore
+    KF5::I18n
+    KF5::KCMUtils
+    KF5::IconThemes
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
     ${QJSON_LIBRARIES}
     ${QJSON_LIBRARY}
+    kaccounts
 )
 
-install(TARGETS kcm_kdeaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES kcm_kdeaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS kcm_kaccounts DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install(FILES kcm_kaccounts.desktop DESTINATION ${SERVICES_INSTALL_DIR})

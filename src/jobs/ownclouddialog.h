@@ -20,12 +20,13 @@
 #define OWNCLOUD_DIALOG_H
 
 #include "ui_owncloudDialog.h"
-#include <KDialog>
+#include <QDialog>
 
+class QDialogButtonBox;
 class KJob;
 class QTimer;
 class KPixmapSequenceOverlayPainter;
-class OwncloudDialog : public KDialog, Ui::owncloudDialog
+class OwncloudDialog : public QDialog, Ui::owncloudDialog
 {
     Q_OBJECT
 
@@ -58,6 +59,7 @@ class OwncloudDialog : public KDialog, Ui::owncloudDialog
         bool m_hostResult;
         bool m_authResult;
         KPixmapSequenceOverlayPainter *m_painter;
+        QDialogButtonBox *m_buttonBox;
 };
 
 #endif //OWNCLOUD_DIALOG_H

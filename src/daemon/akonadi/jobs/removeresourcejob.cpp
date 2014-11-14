@@ -20,7 +20,7 @@
 
 #include <akonadi/agentmanager.h>
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace Akonadi;
 
@@ -41,7 +41,7 @@ void RemoveResourceJob::removeResource()
     if (instance.isValid()) {
         AgentManager::self()->removeInstance(instance);
     } else {
-        kDebug() << "Agent not found";
+        qDebug() << "Agent not found";
         setError(-1);
         setErrorText("Agent to be removed can't be found:" + m_resourceId);
     }

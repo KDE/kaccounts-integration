@@ -19,9 +19,7 @@
 #ifndef RUNNERID_H
 #define RUNNERID_H
 
-#include <QtGui/QWizard>
-
-#include <kurl.h>
+#include <QWizard>
 
 class RunnerIDWizard : public QWizard
 {

@@ -18,14 +18,13 @@
 
 #include "removenetattachjob.h"
 
-#include <QtCore/QFile>
-#include <QtGui/QWidget>
-#include <QtGui/QApplication>
+#include <QFile>
+#include <QWidget>
+#include <QApplication>
+#include <QUrl>
+#include <QDebug>
 
-#include <KDebug>
-#include <KGlobal>
-#include <KStandardDirs>
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 #include <KDirNotify>
 #include <KConfig>
 
@@ -58,7 +57,7 @@ void RemoveNetAttachJob::removeNetAttach()
 
 void RemoveNetAttachJob::walletOpened(bool opened)
 {
-    kDebug();
+    qDebug();
     if (!opened) {
         setError(-1);
         setErrorText("Can't open wallet");
@@ -71,20 +70,19 @@ void RemoveNetAttachJob::walletOpened(bool opened)
 
 void RemoveNetAttachJob::deleteDesktopFile()
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
-    path.append(m_uniqueId + ".desktop");
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview/") + m_uniqueId + QStringLiteral(".desktop"));
 
     KConfig _desktopFile(path, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
-    KUrl url(desktopFile.readEntry("URL", KUrl()));
+    QUrl url(desktopFile.readEntry("URL", QUrl()));
     Q_ASSERT(!url.isEmpty());
 
-    kDebug() << url.userName() << url.host() << url;
+    qDebug() << url.userName() << url.host() << url;
 
     QFile::remove(path);
-    org::kde::KDirNotify::emitFilesRemoved(QStringList("remote:/" + m_uniqueId));
+    org::kde::KDirNotify::emitFilesRemoved(QList<QUrl>() << QUrl("remote:/" + m_uniqueId));
 
     QString walletUrl("webdav");
     walletUrl.append("-");

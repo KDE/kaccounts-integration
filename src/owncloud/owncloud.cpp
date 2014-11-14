@@ -23,8 +23,9 @@
 #include "../google/pages/wallet.h"
 
 #include <klocalizedstring.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
+
+#include <QPushButton>
 
 #include <KWallet/Wallet>
 
@@ -43,10 +44,20 @@ OwnCloudWizard::OwnCloudWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(
     addPage(connecting);
     addPage(services);
 
-    setButton(QWizard::BackButton, new KPushButton(KStandardGuiItem::back(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::NextButton, new KPushButton(KStandardGuiItem::forward(KStandardGuiItem::UseRTL)));
-    setButton(QWizard::FinishButton, new KPushButton(KStandardGuiItem::apply()));
-    setButton(QWizard::CancelButton, new KPushButton(KStandardGuiItem::cancel()));
+    QPushButton *backButton;
+    QPushButton *forwardButton;
+    QPushButton *applyButton;
+    QPushButton *cancelButton;
+
+    KGuiItem::assign(backButton, KStandardGuiItem::back());
+    KGuiItem::assign(forwardButton, KStandardGuiItem::forward());
+    KGuiItem::assign(applyButton, KStandardGuiItem::apply());
+    KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
+
+    setButton(QWizard::BackButton, backButton);
+    setButton(QWizard::NextButton, forwardButton);
+    setButton(QWizard::FinishButton, applyButton);
+    setButton(QWizard::CancelButton, cancelButton);
 
     //We do not want "Forward" as text
     setButtonText(QWizard::NextButton, i18nc("Action to go to the next page on the wizard", "Next"));
@@ -107,7 +118,7 @@ void OwnCloudWizard::setPassword(const QString& password)
     m_password = password;
 }
 
-void OwnCloudWizard::setServer(const KUrl& server)
+void OwnCloudWizard::setServer(const QUrl &server)
 {
     m_server = server;
 }
@@ -122,7 +133,7 @@ const QString OwnCloudWizard::password() const
     return m_password;
 }
 
-const KUrl OwnCloudWizard::server() const
+const QUrl OwnCloudWizard::server() const
 {
     return m_server;
 }

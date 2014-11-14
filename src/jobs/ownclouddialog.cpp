@@ -20,16 +20,17 @@
 #include "checkowncloudhostjob.h"
 
 #include <QTimer>
+#include <QFontDatabase>
+#include <QDebug>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
-#include <KDebug>
 #include <KIO/Job>
-#include <KGlobalSettings>
 #include <kpixmapsequenceoverlaypainter.h>
-#include <kpushbutton.h>
-
+#include <KIconLoader>
 
 OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
- : KDialog(parent, flags)
+ : QDialog(parent, flags)
  , m_timerHost(new QTimer(this))
  , m_timerAuth(new QTimer(this))
  , m_hostResult(false)
@@ -37,15 +38,21 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
  , m_painter(new KPixmapSequenceOverlayPainter(this))
 {
     int iconSize = IconSize(KIconLoader::MainToolbar);
-    int width = QFontMetrics(KGlobalSettings::generalFont()).xHeight() * 60;
+    int width = QFontMetrics(QFontDatabase::systemFont(QFontDatabase::GeneralFont)).xHeight() * 60;
 
     QWidget *widget = new QWidget(this);
 
     setupUi(widget);
     widget->setMinimumWidth(width);
-    setMainWidget(widget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(widget);
 
-    setCaption(i18n("ownCloud Server"));
+    m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    setWindowTitle(i18n("ownCloud Server"));
     usernameLine->setFocus();
     hostWorking->setMinimumSize(iconSize, iconSize);
     passWorking->setMinimumSize(iconSize, iconSize);
@@ -63,7 +70,7 @@ OwncloudDialog::OwncloudDialog(QWidget* parent, Qt::WindowFlags flags)
     connect(m_timerHost, SIGNAL(timeout()), SLOT(checkServer()));
     connect(m_timerAuth, SIGNAL(timeout()), SLOT(checkAuth()));
 
-    button(KDialog::Ok)->setEnabled(false);
+    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
 QString OwncloudDialog::username() const
@@ -78,7 +85,7 @@ QString OwncloudDialog::password() const
 
 QString OwncloudDialog::host() const
 {
-    return KUrl(m_url).host();
+    return QUrl(m_url).host();
 }
 
 void OwncloudDialog::hostChanged()
@@ -107,7 +114,7 @@ void OwncloudDialog::hostChecked(KJob* job)
 {
     setResult(!job->error(), Host);
     if (job->error()) {
-        kDebug() << job->errorString();
+        qDebug() << job->errorString();
         return;
     }
 
@@ -125,7 +132,7 @@ void OwncloudDialog::checkAuth()
 
     setWorking(true, Auth);
 
-    KUrl url = m_url;
+    QUrl url(m_url);
     url.setPassword(passwordLine->text());
     url.setUserName(usernameLine->text());
     url.setPath(QLatin1String("/files/webdav.php/"));
@@ -140,7 +147,7 @@ void OwncloudDialog::authChecked(KJob* job)
 {
     if (job->error()) {
         setResult(false, Auth);
-        kDebug() << job->errorString();
+        qDebug() << job->errorString();
         return;
     }
 
@@ -182,9 +189,9 @@ void OwncloudDialog::setResult(bool result, Type type)
     }
 
     if (!m_authResult || !m_authResult) {
-        button(KDialog::Ok)->setEnabled(false);
+        m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     } else {
-        button(KDialog::Ok)->setEnabled(true);
+        m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
 }
 

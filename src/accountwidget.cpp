@@ -18,19 +18,18 @@
 
 #include "accountwidget.h"
 #include "models/accountsmodel.h"
+#include <core.h>
 
-#include <QtCore/QDebug>
-#include <QtGui/QCheckBox>
+#include <QDebug>
+#include <QCheckBox>
 
 #include <Accounts/Account>
 #include <Accounts/Service>
 #include <Accounts/Manager>
 
-#include <KDebug>
-
-AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
- : QWidget(parent)
- , m_manager(new Accounts::Manager(this))
+AccountWidget::AccountWidget(Accounts::Account *account, QWidget *parent)
+    : QWidget(parent)
+    , m_manager(KAccounts::accountsManager())
 {
     setupUi(this);
 
@@ -44,10 +43,9 @@ AccountWidget::AccountWidget(Accounts::Account *account, QWidget* parent)
 AccountWidget::~AccountWidget()
 {
     qDeleteAll(m_checkboxes);
-    delete m_manager;
 }
 
-void AccountWidget::setAccount(Accounts::Account* account)
+void AccountWidget::setAccount(Accounts::Account *account)
 {
     if (m_account) {
         disconnect(m_account.data(), 0, this, 0);
@@ -72,7 +70,7 @@ void AccountWidget::setAccount(Accounts::Account* account)
     connect(account, SIGNAL(enabledChanged(QString,bool)), SLOT(serviceEnabledChanged(QString,bool)));
 }
 
-void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabled)
+void AccountWidget::serviceEnabledChanged(const QString &serviceName, bool enabled)
 {
     if (serviceName.isEmpty()) {
         return;
@@ -85,7 +83,7 @@ void AccountWidget::serviceEnabledChanged(const QString& serviceName, bool enabl
 void AccountWidget::serviceChanged(bool enabled)
 {
     QString service = sender()->property("service").toString();
-    kDebug() << "Enabling: " << service << " enabled";
+    qDebug() << "Enabling: " << service << " enabled";
     if (!m_account) {
         return;
     }

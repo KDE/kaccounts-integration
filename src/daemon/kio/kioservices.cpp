@@ -21,41 +21,41 @@
 #include "createkioservice.h"
 #include "removekioservice.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QDirIterator>
+#include <QFile>
+#include <QDirIterator>
+#include <QStandardPaths>
+#include <QDebug>
 
-#include <KDebug>
-#include <KGlobal>
-#include <KStandardDirs>
-
-KIOServices::KIOServices(QObject* parent) : QObject(parent)
+KIOServices::KIOServices(QObject *parent)
+    : KAccountsDPlugin(parent)
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
 }
 
-void KIOServices::accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList)
+void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
-    kDebug();
+    qDebug();
     Q_FOREACH(const Accounts::Service &service, serviceList) {
         if (service.serviceType() != QLatin1String("dav-storage")) {
-            kDebug() << "Ignoring: " << service.serviceType();
+            qDebug() << "Ignoring: " << service.serviceType();
             continue;
         }
         if (isEnabled(accId, service.name())) {
-            kDebug() << "Already configured: " << service.name();
+            qDebug() << "Already configured: " << service.name();
             continue;
         }
 
-        kDebug() << "Creating: " << service.name() << "Of type: " << service.serviceType();
+        qDebug() << "Creating: " << service.name() << "Of type: " << service.serviceType();
         enableService(accId, service);
     }
 }
 
-void KIOServices::accountRemoved(const Accounts::AccountId& accId)
+void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 {
-    kDebug();
+    qDebug();
     QString accountId = QString::number(accId) + "_";
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
+
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path.append(QStringLiteral("/remoteview/"));
 
     QDirIterator i(path, QDir::NoDotAndDotDot | QDir::Files);
     while (i.hasNext()) {
@@ -65,42 +65,42 @@ void KIOServices::accountRemoved(const Accounts::AccountId& accId)
         }
 
         QString serviceName = i.fileName();
-        kDebug() << "Removing: " << serviceName;
+        qDebug() << "Removing: " << serviceName;
         serviceName = serviceName.mid(accountId.count(), serviceName.indexOf(QLatin1String(".desktop")) - accountId.count());
-        kDebug() << "Removing N: " << serviceName;
+        qDebug() << "Removing N: " << serviceName;
         disableService(accId, serviceName);
     }
 }
 
-void KIOServices::serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        kDebug() << "Ignoring: " << service.serviceType();
+        qDebug() << "Ignoring: " << service.serviceType();
         return;
     }
     if (isEnabled(accId, service.name())) {
-        kDebug() << "Already configured: " << service.name();
+        qDebug() << "Already configured: " << service.name();
         return;
     }
 
     enableService(accId, service);
 }
 
-void KIOServices::serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        kDebug() << "Ignoring: " << service.serviceType();
+        qDebug() << "Ignoring: " << service.serviceType();
         return;
     }
     if (!isEnabled(accId, service.name())) {
-        kDebug() << "Already not configured: " << service.name();
+        qDebug() << "Already not configured: " << service.name();
         return;
     }
 
     disableService(accId, service.name());
 }
 
-void KIOServices::enableService(const Accounts::AccountId& accId, const Accounts::Service &service)
+void KIOServices::enableService(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     CreateKioService *job = new CreateKioService(this);
     job->setAccountId(accId);
@@ -109,7 +109,7 @@ void KIOServices::enableService(const Accounts::AccountId& accId, const Accounts
     job->start();
 }
 
-void KIOServices::disableService(const Accounts::AccountId& accId, const QString& serviceName)
+void KIOServices::disableService(const Accounts::AccountId accId, const QString& serviceName)
 {
     RemoveKioService *job = new RemoveKioService(this);
     job->setServiceName(serviceName);
@@ -117,11 +117,12 @@ void KIOServices::disableService(const Accounts::AccountId& accId, const QString
     job->start();
 }
 
-bool KIOServices::isEnabled(const Accounts::AccountId& accId, const QString &serviceName)
+bool KIOServices::isEnabled(const Accounts::AccountId accId, const QString &serviceName)
 {
-    QString path = KGlobal::dirs()->saveLocation("remote_entries");
     QString uniqueId(QString::number(accId) + "_" + serviceName);
-    path +=  uniqueId + ".desktop";
+
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    path += QStringLiteral("/remoteview/") + uniqueId + QStringLiteral(".desktop");
 
     return QFile::exists(path);
 }

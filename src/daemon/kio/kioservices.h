@@ -19,30 +19,39 @@
 #ifndef KIO_SERVICES_H
 #define KIO_SERVICES_H
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
-#include <QtCore/QObject>
+#include "kaccountsdplugin.h"
+
+#include <QMap>
+#include <QString>
+#include <QObject>
 
 #include <Accounts/Account>
 #include <Accounts/Service>
 
 class KJob;
 class AkonadiAccounts;
-class KIOServices : public QObject
+
+namespace Accounts {
+    class Manager;
+}
+
+class KIOServices : public KAccountsDPlugin
 {
     Q_OBJECT
-    public:
-        explicit KIOServices(QObject* parent = 0);
 
-        void accountCreated(const Accounts::AccountId& accId, const Accounts::ServiceList &serviceList);
-        void accountRemoved(const Accounts::AccountId& accId);
-        void serviceEnabled(const Accounts::AccountId& accId, const Accounts::Service &service);
-        void serviceDisabled(const Accounts::AccountId& accId, const Accounts::Service &service);
+public:
+    explicit KIOServices(QObject* parent = 0);
 
-    private:
-        void enableService(const Accounts::AccountId& accId, const Accounts::Service &service);
-        void disableService(const Accounts::AccountId& accId, const QString &serviceName);
-        bool isEnabled(const Accounts::AccountId& accId, const QString &serviceName);
+public Q_SLOTS:
+    void onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList);
+    void onAccountRemoved(const Accounts::AccountId accId);
+    void onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service);
+    void onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service);
+
+private:
+    void enableService(const Accounts::AccountId accId, const Accounts::Service &service);
+    void disableService(const Accounts::AccountId accId, const QString &serviceName);
+    bool isEnabled(const Accounts::AccountId accId, const QString &serviceName);
 };
 
 #endif //KIO_SERVICES_H

@@ -28,9 +28,10 @@ namespace Accounts {
 };
 
 class KJob;
-class KIOServices;
 class AkonadiServices;
-class KDE_EXPORT AccountsDaemon : public KDEDModule
+class KAccountsDPlugin;
+
+class AccountsDaemon : public KDEDModule
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
@@ -48,9 +49,7 @@ class KDE_EXPORT AccountsDaemon : public KDEDModule
     private:
         void monitorAccount(const Accounts::AccountId &id);
 
-        Accounts::Manager* m_manager;
-        AkonadiServices* m_akonadi;
-        KIOServices *m_kio;
+        QList<KAccountsDPlugin*> m_plugins;
 };
 
 #endif /*KSCREN_DAEMON_H*/

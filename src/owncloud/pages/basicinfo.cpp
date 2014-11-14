@@ -19,11 +19,13 @@
 #include "basicinfo.h"
 #include "owncloud/owncloud.h"
 
-#include <KDebug>
-#include <qjson/parser.h>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include <kpixmapsequenceoverlaypainter.h>
 #include <KIO/Job>
+#include <KIO/global.h>
 
 BasicInfo::BasicInfo(OwnCloudWizard* parent)
  : QWizardPage(parent)
@@ -106,17 +108,18 @@ void BasicInfo::checkServer(const QString &path)
         fixedUrl = path;
     }
 
-    KUrl url(fixedUrl);
     m_json.clear();
 
-    url.setFileName("status.php");
+    QUrl url(fixedUrl);
+    url = url.adjusted(QUrl::StripTrailingSlash);
+    url.setPath(url.path() + '/' + "status.php");
 
     checkServer(url);
 }
 
-void BasicInfo::checkServer(const KUrl& url)
+void BasicInfo::checkServer(const QUrl &url)
 {
-    kDebug() << url;
+    qDebug() << url;
     setResult(false);
     setWorking(true);
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
@@ -128,18 +131,18 @@ void BasicInfo::checkServer(const KUrl& url)
 
 void BasicInfo::figureOutServer(const QString& urlStr)
 {
-    KUrl url(urlStr);
-    if (url.directory(KUrl::AppendTrailingSlash) == "/") {
+    if (urlStr == QLatin1String("/") || urlStr.isEmpty()) {
         setResult(false);
         return;
     }
 
     m_json.clear();
-    url.setFileName("");
-    url = url.upUrl();
-    url.setFileName("status.php");
 
-    checkServer(url);
+    QUrl url(urlStr);
+    url = KIO::upUrl(urlStr);
+    url.setPath(url.path() + '/' + "status.php");
+
+    checkServer(url.adjusted(QUrl::NormalizePathSegments));
 }
 
 void BasicInfo::dataReceived(KIO::Job* job, const QByteArray& data)
@@ -151,14 +154,14 @@ void BasicInfo::fileChecked(KJob* job)
 {
     KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob *>(job);
     if (kJob->error()) {
-        kDebug() << job->errorString();
-        kDebug() << job->errorText();
+        qDebug() << job->errorString();
+        qDebug() << job->errorText();
         figureOutServer(kJob->url().url());
         return;
     }
 
-    QJson::Parser parser;
-    QMap <QString, QVariant> map = parser.parse(m_json).toMap();
+    QJsonDocument parser = QJsonDocument::fromJson(m_json);
+    QJsonObject map = parser.object();
     if (!map.contains("version")) {
         figureOutServer(kJob->url().url());
         return;
@@ -166,7 +169,7 @@ void BasicInfo::fileChecked(KJob* job)
 
     m_server = kJob->url();
     m_server.setFileName("");
-    kDebug() << m_server;
+    qDebug() << m_server;
     setResult(true);
 
     Q_EMIT completeChanged();
