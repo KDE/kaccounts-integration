@@ -6,15 +6,21 @@ find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-set(IS_KTP_INTERNAL_MODULE TRUE)
 enable_testing()
+
+set(KACCOUNTS_VERSION "1.0.0")
+set(KACCOUNTS_SOVERSION "1")
+set(REQUIRED_QT_VERSION "5.2.0")
+set(KF5_DEP_VERSION "5.4.0")
+set(ACCOUNTSQT_DEP_VERSION "1.10")
+set(SIGNONQT_DEP_VERSION "8.55")
 
 find_package(Qt5 5.2.0 CONFIG REQUIRED Core Widgets)
 find_package(KF5 5.0.0 REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons IconThemes Config Wallet DBusAddons)
 # find_package(KdepimLibs REQUIRED)
 # find_package(Akonadi REQUIRED)
-find_package(AccountsQt5 1.10 REQUIRED CONFIG)
-find_package(SignOnQt5 8.55 REQUIRED CONFIG)
+find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} REQUIRED CONFIG)
+find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} REQUIRED CONFIG)
 
 add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
