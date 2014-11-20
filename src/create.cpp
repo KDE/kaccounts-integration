@@ -31,6 +31,8 @@
 #include <Accounts/Manager>
 #include <Accounts/Provider>
 
+#include <KLocalizedString>
+
 Create::Create(QWidget *parent)
     : QObject(parent)
     , m_form(0)
@@ -68,10 +70,10 @@ void Create::fillInterface()
 
     QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider &provider, providerList) {
-        button = new QCommandLinkButton(provider.displayName());
+        button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
         button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
-        button->setToolTip(provider.description());
+        button->setToolTip(i18nd(provider.trCatalog().toLatin1().constData(), provider.description().toUtf8().constData()));
 
         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
         m_form->verticalLayout->insertWidget(0, button);

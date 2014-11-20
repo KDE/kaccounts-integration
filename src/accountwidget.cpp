@@ -23,6 +23,8 @@
 #include <QDebug>
 #include <QCheckBox>
 
+#include <KLocalizedString>
+
 #include <Accounts/Account>
 #include <Accounts/Service>
 #include <Accounts/Manager>
@@ -58,7 +60,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
     Accounts::ServiceList services = account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         account->selectService(service);
-        checkbox = new QCheckBox(service.displayName(), this);
+        checkbox = new QCheckBox(i18nd(service.trCatalog().toLatin1().constData(), service.displayName().toUtf8().constData()), this);
         checkbox->setChecked(account->enabled());
         checkbox->setProperty("service", service.name());
         d_layout->addWidget(checkbox);
