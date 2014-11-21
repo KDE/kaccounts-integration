@@ -31,7 +31,7 @@
 using namespace KWallet;
 RunnerIDWizard::RunnerIDWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
 {
-    setWindowTitle(i18n("Runner-id Wizad"));
+    setWindowTitle(i18n("Runner-id Wizard"));
 
     WalletPage *wallet = new WalletPage(this);
     RCredentials *credentials = new RCredentials(this);
