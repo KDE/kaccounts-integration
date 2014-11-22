@@ -101,7 +101,7 @@ void LookupAkonadiServices::findResource()
         CreateResourceJob *job = new CreateResourceJob(this);
         connect(job, SIGNAL(finished(KJob*)), SLOT(createResourceJobDone(KJob*)));
 
-        qDebug() << "Found one: " << m_accountId << type.name() << serviceName;
+        qDebug() << "Found one: " << m_accountId << type.name();
         job->setAccountId(m_accountId);
         job->setAgentType(type);
         Q_FOREACH (const QString &service, servicesToEnable) {
