@@ -52,3 +52,13 @@ void AbstractAkonadiJob::setAccountId(const Accounts::AccountId& accountId)
 {
     m_accountId = accountId;
 }
+
+uint qHash(const Accounts::Service &key, uint seed)
+{
+    return qHash(key.name() + key.provider() + key.serviceType(), seed);
+}
+
+uint qHash(const Accounts::Service &key)
+{
+    return qHash(key.name() + key.provider() + key.serviceType());
+}

@@ -19,6 +19,15 @@
 #ifndef ABSTRACT_AKONADI_JOB_H
 #define ABSTRACT_AKONADI_JOB_H
 
+namespace Accounts {
+    class Service;
+};
+
+#include <cstdlib> //needed for uint below
+
+uint qHash(const Accounts::Service &key, uint seed);
+uint qHash(const Accounts::Service &key);
+
 #include <Accounts/Account>
 
 #include <KJob>
