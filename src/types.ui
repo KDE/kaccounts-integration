@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>createForm</class>
  <widget class="QWidget" name="createForm">
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <widget class="QScrollArea" name="scrollArea">
