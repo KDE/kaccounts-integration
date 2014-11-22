@@ -56,21 +56,21 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
 
     FetchSettingsJob *fetchJob = qobject_cast<FetchSettingsJob*>(job);
     QStringList services = fetchJob->value<QStringList>();
-    if (services.contains(m_serviceType) && m_serviceStatus == Enable) {
-        qDebug() << "Already enabled service: " << m_serviceType;
-        emitResult();
-        return;
-    }
-    if (!services.contains(m_serviceType) && m_serviceStatus == Disable) {
-        qDebug() << "Trying to disable a not enabled service: " << m_serviceType;
-        emitResult();
-        return;
+
+    Q_FOREACH (const Accounts::Service &service, m_services.keys()) {
+        if (services.contains(service.name()) && m_services.value(service) == Disable) {
+            services.removeAll(service.name());
+            continue;
+        }
+
+        if (!services.contains(service.name()) && m_services.value(service) == Enable) {
+            services << service.name();
+        }
     }
 
-    if (m_serviceStatus == Enable) {
-        services.append(m_serviceType);
-    } else {
-        services.removeAll(m_serviceType);
+    if (services.isEmpty()) {
+        emitResult();
+        return;
     }
 
     ChangeSettingsJob *changeJob = new ChangeSettingsJob(this);
@@ -94,8 +94,12 @@ void EnableServiceJob::changeSettingsDone(KJob* job)
     emitResult();
 }
 
-void EnableServiceJob::setServiceType(const QString& serviceType, EnableServiceJob::Status status)
+void EnableServiceJob::addService(const Accounts::Service &service, EnableServiceJob::Status status)
 {
-    m_serviceType = serviceType;
-    m_serviceStatus = status;
+    m_services.insert(service, status);
+}
+
+Accounts::ServiceList EnableServiceJob::services() const
+{
+    return m_services.keys();
 }

@@ -57,20 +57,27 @@ void LookupAkonadiServices::findResource()
         return;
     }
 
-    QString serviceName = m_services.keys().first();
-    QString serviceType = m_services.take(serviceName);
+    QHash<QString, Accounts::Service> servicesHash;
 
-    qDebug() << "Looking for: " << serviceType;
+    Q_FOREACH (const Accounts::Service &service, m_services) {
+        servicesHash.insert(service.name(), service);
+    }
+
+    QSet<QString> services = servicesHash.keys().toSet();
     QString resourceInstance;
     const QString accProp = QLatin1String("KAccounts");
     AgentType::List types = AgentManager::self()->types();
+
     Q_FOREACH(const AgentType &type, types) {
         const QVariantMap props = type.customProperties();
         if (!props.contains(accProp)) {
             continue;
         }
-        const QStringList services = props[accProp].toStringList();
-        if (!services.contains(serviceType)) {
+        const QStringList resourceServices = props[accProp].toStringList();
+
+        const QSet<QString> servicesToEnable = resourceServices.toSet().intersect(services);
+
+        if (servicesToEnable.isEmpty()) {
             continue;
         }
 
@@ -81,8 +88,11 @@ void LookupAkonadiServices::findResource()
             connect(job, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
             job->setAccountId(m_accountId);
             job->setResourceId(resourceInstance);
-            job->setServiceName(serviceName);
-            job->setServiceType(serviceType, EnableServiceJob::Enable);
+
+            Q_FOREACH (const QString &service, servicesToEnable) {
+                job->addService(servicesHash.value(service), EnableServiceJob::Enable);
+            }
+
             job->start();
             return;
         }
@@ -94,8 +104,9 @@ void LookupAkonadiServices::findResource()
         qDebug() << "Found one: " << m_accountId << type.name() << serviceName;
         job->setAccountId(m_accountId);
         job->setAgentType(type);
-        job->setServiceName(serviceName);
-        job->setServiceType(serviceType);
+        Q_FOREACH (const QString &service, servicesToEnable) {
+            job->addService(servicesHash.value(service));
+        }
         job->start();
         return;
     }
@@ -111,30 +122,31 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
         qDebug() << "Error creating resource for: " << cJob->serviceName();
     }
 
-    EnableServiceJob *eJob = new EnableServiceJob(this);
-    connect(eJob, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
-    eJob->setAccountId(cJob->accountId());
-    eJob->setResourceId(cJob->resourceId());
-    eJob->setServiceType(cJob->serviceType(), EnableServiceJob::Enable);
-    eJob->setServiceName(cJob->serviceName());
-    eJob->start();
+    EnableServiceJob *servicesJob = new EnableServiceJob(this);
+    connect(servicesJob, SIGNAL(finished(KJob*)), SLOT(enableServiceJobDone(KJob*)));
+    servicesJob->setAccountId(cJob->accountId());
+    servicesJob->setResourceId(cJob->resourceId());
+    Q_FOREACH (const Accounts::Service &service, cJob->services()) {
+        servicesJob->addService(service, EnableServiceJob::Enable);
+    }
+    servicesJob->start();
 }
 
 void LookupAkonadiServices::enableServiceJobDone(KJob* job)
 {
     qDebug();
-    EnableServiceJob *sJob = qobject_cast<EnableServiceJob*>(job);
-    if (sJob->error()) {
-        qDebug() << "Error enabling service for: " << sJob->serviceName() << sJob->resourceId();
+    EnableServiceJob *servicesJob = qobject_cast<EnableServiceJob*>(job);
+    if (servicesJob->error()) {
+        qDebug() << "Error enabling service for: " << servicesJob->resourceId();
     } else {
-        m_accounts->addService(sJob->accountId(), sJob->serviceName(), sJob->resourceId());
-        AgentManager::self()->instance(sJob->resourceId()).reconfigure();
+        m_accounts->addService(servicesJob->accountId(), servicesJob->services(), servicesJob->resourceId());
+        AgentManager::self()->instance(servicesJob->resourceId()).reconfigure();
     }
 
     findResource();
 }
 
-void LookupAkonadiServices::setServices(const QMap<QString, QString> &services)
+void LookupAkonadiServices::setServices(const Accounts::ServiceList &services)
 {
     m_services = services;
 }

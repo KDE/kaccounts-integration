@@ -32,7 +32,7 @@ class LookupAkonadiServices : public AbstractAkonadiJob
 
         virtual void start();
 
-        void setServices(const QMap<QString, QString> &services);
+        void setServices(const Accounts::ServiceList &services);
 
     private Q_SLOTS:
         void init();
@@ -43,7 +43,7 @@ class LookupAkonadiServices : public AbstractAkonadiJob
 
     private:
         AkonadiAccounts *m_accounts;
-        QMap<QString, QString> m_services;
+        Accounts::ServiceList m_services;
 };
 
 #endif //LOOKUP_AKONADI_SERVICES_H

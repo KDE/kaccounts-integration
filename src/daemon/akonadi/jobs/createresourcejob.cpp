@@ -52,6 +52,16 @@ void CreateResourceJob::setAgentType(const AgentType& type)
     m_type = type;
 }
 
+void CreateResourceJob::addService(const Accounts::Service &service)
+{
+    m_services << service;
+}
+
+Accounts::ServiceList CreateResourceJob::services() const
+{
+    return m_services;
+}
+
 void CreateResourceJob::resourceCreated(KJob* job)
 {
     qDebug();

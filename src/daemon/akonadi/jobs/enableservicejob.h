@@ -33,7 +33,8 @@ class EnableServiceJob : public AbstractAkonadiJob
         explicit EnableServiceJob(QObject* parent = 0);
         virtual void start();
 
-        void setServiceType(const QString &serviceType, Status status);
+        void addService(const Accounts::Service &service, Status status);
+        Accounts::ServiceList services() const;
 
     public Q_SLOTS:
         void init();
@@ -42,6 +43,7 @@ class EnableServiceJob : public AbstractAkonadiJob
 
     private:
         Status m_serviceStatus;
+        QHash<Accounts::Service, Status> m_services;
 };
 
 #endif //ENABLE_SERVICE_JOB_H

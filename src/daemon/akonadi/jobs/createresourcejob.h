@@ -38,6 +38,8 @@ class CreateResourceJob : public AbstractAkonadiJob
         virtual void start();
 
         void setAgentType(const Akonadi::AgentType &type);
+        void addService(const Accounts::Service &service);
+        Accounts::ServiceList services() const;
 
     private Q_SLOTS:
         void resourceCreated(KJob* job);
@@ -46,6 +48,7 @@ class CreateResourceJob : public AbstractAkonadiJob
     private:
         Akonadi::AgentType m_type;
         Akonadi::AgentInstance m_agent;
+        Accounts::ServiceList m_services;
 };
 
 #endif //CREATE_RESOURCE_H

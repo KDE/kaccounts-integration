@@ -43,13 +43,8 @@ AkonadiServices::~AkonadiServices()
 
 void AkonadiServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
-    QMap<QString, QString> services;
-    Q_FOREACH(const Accounts::Service &service, serviceList) {
-        services.insert(service.name(), service.serviceType());
-    }
-
     LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
-    lookup->setServices(services);
+    lookup->setServices(serviceList);
     lookup->setAccountId(accId);
     lookup->start();
 }
@@ -84,8 +79,7 @@ void AkonadiServices::onServiceDisabled(const Accounts::AccountId accId, const A
     EnableServiceJob *job = new EnableServiceJob(this);
     connect(job, SIGNAL(finished(KJob*)), SLOT(disableServiceJobDone(KJob*)));
     job->setResourceId(m_accounts->resource(accId, serviceName));
-    job->setServiceName(serviceName);
-    job->setServiceType(service.serviceType(), EnableServiceJob::Disable);
+    job->addService(service, EnableServiceJob::Disable);
     job->setAccountId(accId);
     job->start();
 }
@@ -100,7 +94,7 @@ void AkonadiServices::disableServiceJobDone(KJob *job)
 
     EnableServiceJob *serviceJob = qobject_cast<EnableServiceJob*>(job);
     AgentManager::self()->instance(serviceJob->resourceId()).reconfigure();
-    m_accounts->removeService(serviceJob->accountId(), serviceJob->serviceName());
+    m_accounts->removeService(serviceJob->accountId(), serviceJob->services());
 
     if (!m_accounts->resources(serviceJob->accountId()).contains(serviceJob->resourceId())) {
         RemoveResourceJob *rJob = new RemoveResourceJob(this);
