@@ -57,6 +57,7 @@ void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
     watcher->deleteLater();
     QDBusPendingReply<QString> reply = *watcher;
     if (reply.isError()) {
+        qDebug() << "Error introspecting DBus";
         qDebug() << reply.error().message();
         qDebug() << reply.error().name();
 
@@ -89,6 +90,7 @@ void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
     }
 
     if (m_interface.isEmpty()) {
+        qDebug() << "Error - settings interface not found";
         setError(-1);
         setErrorText("Settings Interface not found");
     }

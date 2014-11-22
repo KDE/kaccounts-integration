@@ -48,6 +48,7 @@ void EnableServiceJob::init()
 void EnableServiceJob::fetchSettingsJobDone(KJob* job)
 {
     if (job->error()) {
+        qDebug() << "Error fetching the settings" << job->errorText();
         setError(job->error());
         setErrorText(job->errorText());
         emitResult();
@@ -87,6 +88,7 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
 void EnableServiceJob::changeSettingsDone(KJob* job)
 {
     if (job->error()) {
+        qDebug() << "Error changing the settings" << job->errorText();
         setError(job->error());
         setErrorText(job->errorText());
     }

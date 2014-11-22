@@ -46,6 +46,13 @@ void AkonadiServices::onAccountCreated(const Accounts::AccountId accId, const Ac
     LookupAkonadiServices *lookup = new LookupAkonadiServices(m_accounts, this);
     lookup->setServices(serviceList);
     lookup->setAccountId(accId);
+
+    connect(lookup, &LookupAkonadiServices::finished, this, [=](KJob *job){
+        if (job->error()) {
+            qDebug() << "Lookup job failed" << job->errorText();
+        }
+    });
+
     lookup->start();
 }
 
