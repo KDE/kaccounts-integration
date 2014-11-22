@@ -25,6 +25,8 @@ find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} REQUIRED CONFIG)
 add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
 
+add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
+
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
