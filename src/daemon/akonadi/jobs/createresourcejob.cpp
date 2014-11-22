@@ -23,10 +23,8 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 
-#include <Akonadi/AgentManager>
-#include <Akonadi/AgentInstanceCreateJob>
-
-#include <kdebug.h>
+#include <AkonadiCore/AgentManager>
+#include <AkonadiCore/AgentInstanceCreateJob>
 
 using namespace Akonadi;
 

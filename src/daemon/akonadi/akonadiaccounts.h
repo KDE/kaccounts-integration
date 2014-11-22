@@ -22,7 +22,7 @@
 #include <Accounts/Account>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <akonadi/attribute.h>
+#include <AkonadiCore/Attribute>
 
 class AkonadiAccounts
 {

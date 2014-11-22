@@ -18,7 +18,7 @@
 
 #include "removeresourcejob.h"
 
-#include <akonadi/agentmanager.h>
+#include <AkonadiCore/AgentManager>
 
 #include <QDebug>
 

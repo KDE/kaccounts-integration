@@ -23,7 +23,7 @@
 
 #include <QDBusMessage>
 
-#include <Akonadi/AgentInstance>
+#include <AkonadiCore/AgentInstance>
 #include <Accounts/Account>
 
 class QDBusPendingCallWatcher;

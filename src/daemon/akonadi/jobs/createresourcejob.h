@@ -23,8 +23,8 @@
 
 #include <Accounts/Account>
 
-#include <Akonadi/AgentType>
-#include <Akonadi/AgentInstance>
+#include <AkonadiCore/AgentType>
+#include <AkonadiCore/AgentInstance>
 
 class QDBusPendingCallWatcher;
 class CreateResourceJob : public AbstractAkonadiJob

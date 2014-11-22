@@ -21,7 +21,7 @@
 #include "../akonadiaccounts.h"
 
 #include <QDebug>
-#include <Akonadi/AgentManager>
+#include <AkonadiCore/AgentManager>
 
 using namespace Akonadi;
 
