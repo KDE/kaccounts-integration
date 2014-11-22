@@ -16,9 +16,9 @@ set(ACCOUNTSQT_DEP_VERSION "1.10")
 set(SIGNONQT_DEP_VERSION "8.55")
 
 find_package(Qt5 5.2.0 CONFIG REQUIRED Core Widgets)
-find_package(KF5 5.0.0 REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons IconThemes Config Wallet DBusAddons)
+find_package(KF5 5.0.0 REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons IconThemes Config Wallet DBusAddons )
+find_package(KF5 REQUIRED Akonadi) #Akonadi-qt5 is at version 4.75.0 right now, so cannot be up here^
 # find_package(KdepimLibs REQUIRED)
-# find_package(Akonadi REQUIRED)
 find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} REQUIRED CONFIG)
 find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} REQUIRED CONFIG)
 
