@@ -51,20 +51,45 @@ QStringList AkonadiAccounts::services(const Accounts::AccountId accId)
 
 void AkonadiAccounts::addService(const Accounts::AccountId accId, const QString& serviceName, const QString& resourceId)
 {
-    qDebug() << accId << serviceName << resourceId;
+    addService(accId, QStringList() << serviceName, resourceId);
+}
+
+void AkonadiAccounts::addService(const Accounts::AccountId accId, const QStringList& serviceNames, const QString& resourceId)
+{
+    qDebug() << accId << serviceNames << resourceId;
 
     KConfigGroup account = group(accId);
 
-    account.writeEntry(serviceName, resourceId);
+    Q_FOREACH (const QString &service, serviceNames) {
+        account.writeEntry(service, resourceId);
+    }
     account.sync();
 }
 
+void AkonadiAccounts::addService(const Accounts::AccountId accId, const Accounts::ServiceList& services, const QString& resourceId)
 {
-    qDebug() << accId << serviceName;
+    QStringList servicesToStore;
+
+    Q_FOREACH (const Accounts::Service &service, services) {
+        servicesToStore << service.name();
+    }
+
+    addService(accId, servicesToStore, resourceId);
+}
+
 void AkonadiAccounts::removeService(const Accounts::AccountId accId, const QString& serviceName)
+{
+    removeService(accId, QStringList() << serviceName);
+}
+
+void AkonadiAccounts::removeService(const Accounts::AccountId accId, const QStringList& serviceNames)
+{
+    qDebug() << accId << serviceNames;
 
     KConfigGroup account = group(accId);
-    account.deleteEntry(serviceName);
+    Q_FOREACH (const QString &service, serviceNames) {
+        account.deleteEntry(service);
+    }
 
     QString key("Account_" + QString::number(accId));
     if (account.entryMap().isEmpty()) {
@@ -72,6 +97,18 @@ void AkonadiAccounts::removeService(const Accounts::AccountId accId, const QStri
     }
 
     m_config->sync();
+
+}
+
+void AkonadiAccounts::removeService(const Accounts::AccountId accId, const Accounts::ServiceList &services)
+{
+    QStringList servicesToRemove;
+
+    Q_FOREACH (const Accounts::Service &service, services) {
+        servicesToRemove << service.name();
+    }
+
+    removeService(accId, services);
 }
 
 QStringList AkonadiAccounts::resources(const Accounts::AccountId accId)

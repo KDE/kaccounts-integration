@@ -33,7 +33,11 @@ class AkonadiAccounts
         bool hasServices(const Accounts::AccountId accId);
         QStringList services(const Accounts::AccountId accId);
         void addService(const Accounts::AccountId accId, const QString &serviceName, const QString &resourceId);
+        void addService(const Accounts::AccountId accId, const QStringList &serviceNames, const QString &resourceId);
+        void addService(const Accounts::AccountId accId, const Accounts::ServiceList &services, const QString &resourceId);
         void removeService(const Accounts::AccountId accId, const QString &serviceName);
+        void removeService(const Accounts::AccountId accId, const QStringList &serviceNames);
+        void removeService(const Accounts::AccountId accId, const Accounts::ServiceList &services);
 
         QStringList resources(const Accounts::AccountId accId);
         QString resource(const Accounts::AccountId accId, const QString &serviceName) const;
