@@ -31,12 +31,6 @@ class AbstractAkonadiJob : public KJob
         QString resourceId() const;
         void setResourceId(const QString &resourceId);
 
-        QString serviceName() const;
-        void setServiceName(const QString &serviceName);
-
-        QString serviceType() const;
-        void setServiceType(const QString &serviceType);
-
         QString interface() const;
         void setInterface(const QString &interface);
 
@@ -45,8 +39,6 @@ class AbstractAkonadiJob : public KJob
 
     protected:
         QString m_resourceId;
-        QString m_serviceName;
-        QString m_serviceType;
         QString m_interface;
         Accounts::AccountId m_accountId;
 };

@@ -33,26 +33,6 @@ void AbstractAkonadiJob::setResourceId(const QString& resourceId)
     m_resourceId = resourceId;
 }
 
-QString AbstractAkonadiJob::serviceName() const
-{
-    return m_serviceName;
-}
-
-void AbstractAkonadiJob::setServiceName(const QString& serviceName)
-{
-    m_serviceName = serviceName;
-}
-
-QString AbstractAkonadiJob::serviceType() const
-{
-    return m_serviceType;
-}
-
-void AbstractAkonadiJob::setServiceType(const QString& serviceType)
-{
-    m_serviceType = serviceType;
-}
-
 QString AbstractAkonadiJob::interface() const
 {
     return m_interface;
