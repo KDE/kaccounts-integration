@@ -59,8 +59,11 @@ void AccountWidget::setAccount(Accounts::Account *account)
     QCheckBox *checkbox = 0;
     Accounts::ServiceList services = account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
+        // first select the service we'll be manipulating (enable/disable)
         account->selectService(service);
         checkbox = new QCheckBox(i18nd(service.trCatalog().toLatin1().constData(), service.displayName().toUtf8().constData()), this);
+        // if there is a previously selected service (two lines above),
+        // the account->enabled() is about the service, not the account
         checkbox->setChecked(account->enabled());
         checkbox->setProperty("service", service.name());
         d_layout->addWidget(checkbox);
