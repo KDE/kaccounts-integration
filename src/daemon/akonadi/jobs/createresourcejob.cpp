@@ -66,7 +66,10 @@ void CreateResourceJob::resourceCreated(KJob* job)
 {
     qDebug();
     if (job->error()) {
-        qDebug() << "Error creating the job";
+        qDebug() << "Error creating the resource:" << job->errorText();
+        setError(job->error());
+        setErrorText(job->errorText());
+        emitResult();
         return;
     }
 
@@ -84,11 +87,14 @@ void CreateResourceJob::resourceCreated(KJob* job)
 void CreateResourceJob::setAccountDone(KJob* job)
 {
     qDebug();
-    m_agent.reconfigure();
     if (job->error()) {
+        qDebug() << "Error configuring the resource:" << job->errorText();
         setError(job->error());
         setErrorText(job->errorText());
+
+        return;
     }
 
+    m_agent.reconfigure();
     emitResult();
 }

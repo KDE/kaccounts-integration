@@ -119,7 +119,11 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     qDebug();
     CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
     if (cJob->error()) {
-        qDebug() << "Error creating resource for: " << cJob->serviceName();
+        qDebug() << "Error creating resource";
+        setError(job->error());
+        setErrorText(job->errorText());
+        emitResult();
+        return;
     }
 
     EnableServiceJob *servicesJob = new EnableServiceJob(this);
