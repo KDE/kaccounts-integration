@@ -2,6 +2,7 @@
 Name=Accounts
 Name[cs]=Účty
 Name[de]=Zugänge
+Name[el]=Λογαριασμοί
 Name[en_GB]=Accounts
 Name[es]=Cuentas
 Name[fi]=Tilit
@@ -17,6 +18,7 @@ Name[x-test]=xxAccountsxx
 Comment=Accounts management
 Comment[cs]=Správa účtů
 Comment[de]=Zugangs-Verwaltung
+Comment[el]=Διαχείριση λογαριασμών
 Comment[en_GB]=Accounts management
 Comment[es]=Gestión de cuentas
 Comment[fi]=Tilienhallinta
