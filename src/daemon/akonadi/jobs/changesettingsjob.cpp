@@ -98,7 +98,7 @@ void ChangeSettingsJob::accountSet(QDBusPendingCallWatcher* watcher)
 void ChangeSettingsJob::writeConfig()
 {
     qDebug();
-    QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(createCall("writeConfig"));
+    QDBusPendingCall reply = QDBusConnection::sessionBus().asyncCall(createCall("save"));
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(configWritten(QDBusPendingCallWatcher*)));
 }
