@@ -147,7 +147,6 @@ void LookupAkonadiServices::enableServiceJobDone(KJob* job)
         AgentManager::self()->instance(servicesJob->resourceId()).reconfigure();
     }
 
-    findResource();
 }
 
 void LookupAkonadiServices::setServices(const Accounts::ServiceList &services)
