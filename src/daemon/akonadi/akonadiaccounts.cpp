@@ -27,21 +27,21 @@ AkonadiAccounts::AkonadiAccounts(const QString& configName)
     m_config = KSharedConfig::openConfig(configName);
 }
 
-bool AkonadiAccounts::hasService(const Accounts::AccountId& accId, const QString& serviceName)
+bool AkonadiAccounts::hasService(const Accounts::AccountId accId, const QString& serviceName)
 {
     qDebug() << accId;
     KConfigGroup account = group(accId);
     return account.keyList().contains(serviceName);
 }
 
-bool AkonadiAccounts::hasServices(const Accounts::AccountId& accId)
+bool AkonadiAccounts::hasServices(const Accounts::AccountId accId)
 {
     qDebug() << accId;
     KConfigGroup account = group(accId);
     return !account.keyList().isEmpty();
 }
 
-QStringList AkonadiAccounts::services(const Accounts::AccountId& accId)
+QStringList AkonadiAccounts::services(const Accounts::AccountId accId)
 {
     qDebug() << accId;
     KConfigGroup account = group(accId);
@@ -49,7 +49,7 @@ QStringList AkonadiAccounts::services(const Accounts::AccountId& accId)
     return account.keyList();
 }
 
-void AkonadiAccounts::addService(const Accounts::AccountId& accId, const QString& serviceName, const QString& resourceId)
+void AkonadiAccounts::addService(const Accounts::AccountId accId, const QString& serviceName, const QString& resourceId)
 {
     qDebug() << accId << serviceName << resourceId;
 
@@ -59,9 +59,9 @@ void AkonadiAccounts::addService(const Accounts::AccountId& accId, const QString
     account.sync();
 }
 
-void AkonadiAccounts::removeService(const Accounts::AccountId& accId, const QString& serviceName)
 {
     qDebug() << accId << serviceName;
+void AkonadiAccounts::removeService(const Accounts::AccountId accId, const QString& serviceName)
 
     KConfigGroup account = group(accId);
     account.deleteEntry(serviceName);
@@ -74,7 +74,7 @@ void AkonadiAccounts::removeService(const Accounts::AccountId& accId, const QStr
     m_config->sync();
 }
 
-QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId)
+QStringList AkonadiAccounts::resources(const Accounts::AccountId accId)
 {
     qDebug() << accId;
     KConfigGroup account = group(accId);
@@ -92,7 +92,7 @@ QStringList AkonadiAccounts::resources(const Accounts::AccountId& accId)
     return cleaned;
 }
 
-QString AkonadiAccounts::resource(const Accounts::AccountId& accId, const QString& serviceName) const
+QString AkonadiAccounts::resource(const Accounts::AccountId accId, const QString& serviceName) const
 {
     qDebug() << accId << serviceName;
 
@@ -100,7 +100,7 @@ QString AkonadiAccounts::resource(const Accounts::AccountId& accId, const QStrin
     return account.readEntry(serviceName, QString());
 }
 
-QString AkonadiAccounts::resourceFromType(const Accounts::AccountId& accId, const QString& resourceType) const
+QString AkonadiAccounts::resourceFromType(const Accounts::AccountId accId, const QString& resourceType) const
 {
     qDebug() << accId << resourceType;
     KConfigGroup cGroup = group(accId);
@@ -115,7 +115,7 @@ QString AkonadiAccounts::resourceFromType(const Accounts::AccountId& accId, cons
     return QString();
 }
 
-void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
+void AkonadiAccounts::removeAccount(const Accounts::AccountId accId)
 {
     qDebug();
     QString key("Account_" + QString::number(accId));
@@ -123,7 +123,7 @@ void AkonadiAccounts::removeAccount(const Accounts::AccountId& accId)
     m_config->sync();
 }
 
-KConfigGroup AkonadiAccounts::group(const Accounts::AccountId &accId) const
+KConfigGroup AkonadiAccounts::group(const Accounts::AccountId accId) const
 {
     QString group("Account_" + QString::number(accId));
 
