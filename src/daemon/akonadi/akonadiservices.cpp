@@ -72,7 +72,7 @@ void AkonadiServices::onServiceEnabled(const Accounts::AccountId accId, const Ac
 {
     Accounts::ServiceList list;
     list.append(service);
-    accountCreated(accId, list);
+    onAccountCreated(accId, list);
 }
 
 void AkonadiServices::onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service)
