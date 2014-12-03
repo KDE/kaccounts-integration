@@ -69,7 +69,11 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
         }
     }
 
-    if (services.isEmpty()) {
+    // only finish early when the state has not changed,
+    // ie. the service list was empty and now it's also empty
+    // otherwise if there is one service and we disable the last one
+    // the list will be empty but it still needs to be set
+    if (services.isEmpty() && fetchJob->value<QStringList>().isEmpty()) {
         emitResult();
         return;
     }
