@@ -92,4 +92,4 @@ const ProviderConfig testProviderConfig::getProviderConfig(const QString& fileNa
 
 QTEST_MAIN(testProviderConfig)
 
-#include "testscreenconfig.moc"
+#include "testproviderconfig.moc"

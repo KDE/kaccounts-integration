@@ -19,20 +19,17 @@
 #include "../src/daemon/akonadi/akonadiaccounts.h"
 
 #include <QtTest/QtTest>
+#include <QStandardPaths>
 
-#include <KGlobal>
-#include <KComponentData>
-#include <KStandardDirs>
 #include <KConfigGroup>
 
 class testAkonadiAccounts : public QObject
 {
     Q_OBJECT
-    public:
-        explicit testAkonadiAccounts(QObject* parent = 0);
-        virtual ~testAkonadiAccounts();
 
     private Q_SLOTS:
+        void initTestCase();
+        void cleanupTestCase();
         void testResourceWhenEmpty();
         void testAddResource();
         void testResources();
@@ -48,19 +45,21 @@ class testAkonadiAccounts : public QObject
         AkonadiAccounts *m_accounts;
 };
 
-testAkonadiAccounts::testAkonadiAccounts(QObject* parent)
- : QObject(parent)
- , m_resourceId("akonadi_fake_resource_116")
+void testAkonadiAccounts::initTestCase()
 {
-    QString config("akonadiaccountstest");
-    m_path = KGlobal::mainComponent().dirs()->saveLocation("config", QString(), false) + config;
+    m_resourceId = "akonadi_fake_resource_116";
+
+    QString config("/akonadiaccountstest");
+
+    m_path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + config;
     QFile::remove(m_path);
 
     m_config = KSharedConfig::openConfig(config);
     m_accounts = new AkonadiAccounts(config);
+
 }
 
-testAkonadiAccounts::~testAkonadiAccounts()
+void testAkonadiAccounts::cleanupTestCase()
 {
     QFile::remove(m_path);
 }

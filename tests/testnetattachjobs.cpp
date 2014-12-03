@@ -19,15 +19,18 @@
 #include "../src/daemon/kio/createnetattachjob.h"
 #include "../src/daemon/kio/removenetattachjob.h"
 
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 
-#include <KGlobal>
-#include <KStandardDirs>
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 #include <KDirNotify>
+#include <KConfig>
 #include <KConfigGroup>
+
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
+#include <QStandardPaths>
+#include <QTimer>
+#include <QSignalSpy>
 
 using namespace KWallet;
 class testNetAttachJobs : public QObject
@@ -56,9 +59,10 @@ testNetAttachJobs::testNetAttachJobs(QObject* parent): QObject(parent)
 
 void testNetAttachJobs::testCreate()
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-    QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
-    destPath.append("test-unique-id.desktop");
+    QString destPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    destPath.append("/remoteview/test-unique-id.desktop");
+
+    qDebug() << destPath;
 
     org::kde::KDirNotify *watch = new org::kde::KDirNotify(
     QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
@@ -111,8 +115,7 @@ void testNetAttachJobs::testCreate()
 
 void testNetAttachJobs::testRemove()
 {
-    KGlobal::dirs()->addResourceType("remote_entries", "data", "remoteview");
-    QString destPath = KGlobal::dirs()->saveLocation("remote_entries");
+    QString destPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     destPath.append("test-unique-id.desktop");
 
     org::kde::KDirNotify *watch = new org::kde::KDirNotify(
@@ -142,6 +145,6 @@ void testNetAttachJobs::enterLoop()
     m_eventLoop.exec();
 }
 
-QTEST_KDEMAIN_CORE(testNetAttachJobs)
+QTEST_MAIN(testNetAttachJobs)
 
 #include "testnetattachjobs.moc"

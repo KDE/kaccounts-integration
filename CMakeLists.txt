@@ -44,6 +44,6 @@ include_directories(
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 add_subdirectory(src)
-# add_subdirectory(tests)
+add_subdirectory(tests)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

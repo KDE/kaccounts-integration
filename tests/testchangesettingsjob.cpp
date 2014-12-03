@@ -23,6 +23,7 @@
 
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
+#include <QString>
 
 class testChangeSettingsJob : public QObject
 {
@@ -48,7 +49,10 @@ void testChangeSettingsJob::testChangeSettings()
     job->setSetting("setAccountId", 23);
     job->exec();
 
-    QVERIFY2(!job->error(), "Job is set as finished with error");
+    QString error("Job is set as finished with error: ");
+    error.append(job->errorText());
+
+    QVERIFY2(!job->error(), error.toUtf8().data());
     QCOMPARE(FakeResource::self()->accountId(), 23);
     QCOMPARE(signalSpy.count(), 1);
 }

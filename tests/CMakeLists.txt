@@ -1,42 +1,59 @@
-find_package(KdepimLibs REQUIRED)
+include(ECMMarkAsTest)
 
-add_definitions("-DTEST_DATA=\\\"${CMAKE_CURRENT_SOURCE_DIR}/providers/\\\"")
+find_package(KdepimLibs REQUIRED)
+find_package(Qt5 5.2.0 CONFIG REQUIRED Test)
+
+add_definitions("-DTEST_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/data/\"")
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+set(COMMON_LINK_LIBS Qt5::Test Qt5::Core Qt5::Xml Qt5::DBus KF5::CoreAddons ${ACCOUNTSQT_LIBRARIES})
 
 set(testname testproviderconfig)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp ../src/providerconfig.cpp)
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY})
+add_executable(${testname} ${testname}.cpp ../src/providerconfig.cpp)
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS} KF5::ConfigCore)
+
+#=========================================================================
 
 set(testname testdbussettingsjob)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp
+add_executable(${testname} ${testname}.cpp
     ../src/daemon/akonadi/jobs/dbussettingsinterfacejob.cpp
     ../src/daemon/akonadi/jobs/abstractakonadijob.cpp fakeresource.cpp
 )
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS})
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+
+target_link_libraries(${testname} ${COMMON_LINK_LIBS})
+
+#=========================================================================
 
 set(testname testfetchsettingsjob)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp
+add_executable(${testname} ${testname}.cpp
     ../src/daemon/akonadi/jobs/fetchsettingsjob.cpp
     ../src/daemon/akonadi/jobs/abstractakonadijob.cpp
     ../src/daemon/akonadi/jobs/dbussettingsinterfacejob.cpp
     fakeresource.cpp
 )
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS})
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS})
+
+#=========================================================================
 
 set(testname testchangesettingsjob)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp
+add_executable(${testname} ${testname}.cpp
     ../src/daemon/akonadi/jobs/changesettingsjob.cpp
     ../src/daemon/akonadi/jobs/abstractakonadijob.cpp
     ../src/daemon/akonadi/jobs/dbussettingsinterfacejob.cpp
     fakeresource.cpp)
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDEPIMLIBS_AKONADI_LIBS})
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS})
+
+#=========================================================================
 
 set(testname testenableservicejob)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname}
+add_executable(${testname}
     ${testname}.cpp
     ../src/daemon/akonadi/jobs/abstractakonadijob.cpp
     ../src/daemon/akonadi/jobs/fetchsettingsjob.cpp
@@ -45,17 +62,24 @@ kde4_add_unit_test(${testname}
     ../src/daemon/akonadi/jobs/dbussettingsinterfacejob.cpp
     fakeresource.cpp
 )
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDEPIMLIBS_AKONADI_LIBS})
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS})
+
+#=========================================================================
 
 set(testname testakonadiaccounts)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp ../src/daemon/akonadi/akonadiaccounts.cpp)
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS})
+add_executable(${testname} ${testname}.cpp ../src/daemon/akonadi/akonadiaccounts.cpp)
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS} KF5::ConfigCore)
+
+#=========================================================================
 
 set(testname testnetattachjobs)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_unit_test(${testname} ${testname}.cpp
+add_executable(${testname} ${testname}.cpp
     ../src/daemon/kio/createnetattachjob.cpp
     ../src/daemon/kio/removenetattachjob.cpp
 )
-target_link_libraries(${testname} ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${KDE4_KDECORE_LIBS} ${ACCOUNTSQT_LIBRARIES} ${KDE4_KIO_LIBS})
+add_test(kaccounts-${testname} ${testname})
+ecm_mark_as_test(${testname})
+target_link_libraries(${testname} ${COMMON_LINK_LIBS}  KF5::ConfigCore KF5::KIOCore Qt5::Widgets KF5::Wallet)

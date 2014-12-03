@@ -24,6 +24,9 @@
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
 
+#include <Accounts/Provider>
+#include <Accounts/Manager>
+
 class testEnableServiceJob : public QObject
 {
     Q_OBJECT
@@ -31,12 +34,27 @@ class testEnableServiceJob : public QObject
         explicit testEnableServiceJob(QObject* parent = 0);
 
     private Q_SLOTS:
+        void initTestCase();
         void testEnableServiceFromEmpty();
         void testAlreadyEnabledService();
         void testEnableWhenNotEmpty();
         void testDisableWhenNoEmpty();
         void testDisableLast();
+
+    private:
+        Accounts::Service m_service;
+        Accounts::Service m_service2;
 };
+
+void testEnableServiceJob::initTestCase()
+{
+    setenv ("AG_SERVICES", TEST_DATA, false);
+    setenv ("AG_SERVICE_TYPES", TEST_DATA, false);
+    setenv ("AG_PROVIDERS", TEST_DATA, false);
+    Accounts::Manager manager;
+    m_service = manager.service("MyService");
+    m_service2 = manager.service("MyService2");
+}
 
 testEnableServiceJob::testEnableServiceJob(QObject* parent): QObject(parent)
 {
@@ -48,12 +66,12 @@ void testEnableServiceJob::testEnableServiceFromEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setServiceType("foo", EnableServiceJob::Enable);
+    job->addService(m_service, EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
     QCOMPARE(services.count(), 1);
-    QCOMPARE(services.first(), QLatin1String("foo"));
+    QCOMPARE(services.first(), QLatin1String("MyService"));
 }
 
 void testEnableServiceJob::testAlreadyEnabledService()
@@ -61,12 +79,12 @@ void testEnableServiceJob::testAlreadyEnabledService()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setServiceType("foo", EnableServiceJob::Enable);
+    job->addService(m_service, EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
     QCOMPARE(services.count(), 1);
-    QCOMPARE(services.first(), QLatin1String("foo"));
+    QCOMPARE(services.first(), QLatin1String("MyService"));
 }
 
 void testEnableServiceJob::testEnableWhenNotEmpty()
@@ -74,12 +92,12 @@ void testEnableServiceJob::testEnableWhenNotEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setServiceType("bar", EnableServiceJob::Enable);
+    job->addService(m_service2, EnableServiceJob::Enable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
     QCOMPARE(services.count(), 2);
-    QVERIFY2(services.contains("bar"), "bar service has been enabled but it is not in the resource");
+    QVERIFY2(services.contains("MyService2"), "MyService2 has been enabled but it is not in the resource");
 }
 
 void testEnableServiceJob::testDisableWhenNoEmpty()
@@ -87,12 +105,12 @@ void testEnableServiceJob::testDisableWhenNoEmpty()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setServiceType("foo", EnableServiceJob::Disable);
+    job->addService(m_service, EnableServiceJob::Disable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
     QCOMPARE(services.count(), 1);
-    QVERIFY2(!services.contains("foo"), "foo service has been disabled but it is still in the resource");
+    QVERIFY2(!services.contains("MyService"), "MyService has been disabled but it is still in the resource");
 }
 
 void testEnableServiceJob::testDisableLast()
@@ -100,10 +118,16 @@ void testEnableServiceJob::testDisableLast()
     EnableServiceJob *job = new EnableServiceJob(this);
     job->setResourceId("akonadi_fake_resource_116");
     job->setInterface("org.kde.Akonadi.fakeResource.Settings");
-    job->setServiceType("bar", EnableServiceJob::Disable);
+    job->addService(m_service2, EnableServiceJob::Disable);
     job->exec();
 
     QStringList services = FakeResource::self()->accountServices();
+
+    QString error("Job is set as finished with error: ");
+    error.append(job->errorText());
+
+
+    QVERIFY2(!job->error(), error.toUtf8().data());
     QVERIFY2(services.isEmpty(), "Resource has services though all of them have been disabled");
 }
 

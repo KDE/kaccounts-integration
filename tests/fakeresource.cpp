@@ -40,7 +40,7 @@ void FakeResource::setAccountId(int accountId)
     m_accountId = accountId;
 }
 
-void FakeResource::writeConfig()
+void FakeResource::save()
 {
     Q_EMIT configWritten();
 }
@@ -66,5 +66,3 @@ FakeResource::FakeResource(QObject* parent)
     conn.registerService("org.freedesktop.Akonadi.Resource.akonadi_fake_resource_116");
     conn.registerObject(path, this, QDBusConnection::ExportAllContents);
 }
-
-#include "fakeresource.moc"

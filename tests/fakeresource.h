@@ -37,7 +37,7 @@ class FakeResource : public QDBusAbstractAdaptor
         void setAccountId(int accountId);
         QStringList accountServices();
         void setAccountServices(const QStringList &services);
-        void writeConfig();
+        void save();
 
     Q_SIGNALS:
         void configWritten();
