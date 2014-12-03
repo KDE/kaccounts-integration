@@ -26,8 +26,6 @@ target_link_libraries(kcm_kaccounts
     KF5::IconThemes
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
-    ${QJSON_LIBRARIES}
-    ${QJSON_LIBRARY}
     kaccounts
 )
 

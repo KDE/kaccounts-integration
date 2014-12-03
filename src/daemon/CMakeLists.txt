@@ -1,6 +1,3 @@
-# find_package(Akonadi REQUIRED)
-# find_package(KdepimLibs REQUIRED)
-
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
 
 set(accounts_daemon_SRCS
@@ -40,8 +37,6 @@ target_link_libraries(kded_accounts
     KF5::DBusAddons
     KF5::AkonadiCore
     kaccounts
-
-#     ${KDEPIMLIBS_AKONADI_LIBS}
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
 )
