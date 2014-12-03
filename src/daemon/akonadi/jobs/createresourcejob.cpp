@@ -28,7 +28,7 @@
 
 using namespace Akonadi;
 
-CreateResourceJob::CreateResourceJob(QObject* parent)
+CreateResourceJob::CreateResourceJob(QObject *parent)
  : AbstractAkonadiJob(parent)
 {
 }
@@ -47,7 +47,7 @@ void CreateResourceJob::start()
     job->start();
 }
 
-void CreateResourceJob::setAgentType(const AgentType& type)
+void CreateResourceJob::setAgentType(const AgentType &type)
 {
     m_type = type;
 }
@@ -62,7 +62,7 @@ Accounts::ServiceList CreateResourceJob::services() const
     return m_services;
 }
 
-void CreateResourceJob::resourceCreated(KJob* job)
+void CreateResourceJob::resourceCreated(KJob *job)
 {
     qDebug();
     if (job->error()) {
@@ -84,7 +84,7 @@ void CreateResourceJob::resourceCreated(KJob* job)
     setAccJob->start();
 }
 
-void CreateResourceJob::setAccountDone(KJob* job)
+void CreateResourceJob::setAccountDone(KJob *job)
 {
     qDebug();
     if (job->error()) {

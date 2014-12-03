@@ -34,7 +34,7 @@
 
 using namespace KWallet;
 
-CreateNetAttachJob::CreateNetAttachJob(QObject* parent)
+CreateNetAttachJob::CreateNetAttachJob(QObject *parent)
  : KJob(parent)
  , m_wallet(0)
 {
@@ -91,7 +91,7 @@ void CreateNetAttachJob::getRealm()
         return;
     }
 
-    KIO::TransferJob* job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
+    KIO::TransferJob *job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
     connect(job, SIGNAL(finished(KJob*)), SLOT(gotRealm(KJob*)));
     KIO::MetaData data;
     data.insert("PropagateHttpHeader", "true");
@@ -100,9 +100,9 @@ void CreateNetAttachJob::getRealm()
     job->start();
 }
 
-void CreateNetAttachJob::gotRealm(KJob* job)
+void CreateNetAttachJob::gotRealm(KJob *job)
 {
-    KIO::TransferJob* hJob = qobject_cast<KIO::TransferJob*>(job);
+    KIO::TransferJob *hJob = qobject_cast<KIO::TransferJob*>(job);
     QRegExp rx("www-authenticate: Basic realm=\"(\\S+)\"\n");
     QString headers = hJob->metaData().value("HTTP-Headers");
     if (rx.indexIn(headers) != -1) {

@@ -26,27 +26,27 @@
 
 class AkonadiAccounts
 {
-    public:
-        AkonadiAccounts(const QString& configName = QLatin1String("accounts-akonadi"));
+public:
+    AkonadiAccounts(const QString &configName = QLatin1String("accounts-akonadi"));
 
-        bool hasService(const Accounts::AccountId accId, const QString &serviceName);
-        bool hasServices(const Accounts::AccountId accId);
-        QStringList services(const Accounts::AccountId accId);
-        void addService(const Accounts::AccountId accId, const QString &serviceName, const QString &resourceId);
-        void addService(const Accounts::AccountId accId, const QStringList &serviceNames, const QString &resourceId);
-        void addService(const Accounts::AccountId accId, const Accounts::ServiceList &services, const QString &resourceId);
-        void removeService(const Accounts::AccountId accId, const QString &serviceName);
-        void removeService(const Accounts::AccountId accId, const QStringList &serviceNames);
-        void removeService(const Accounts::AccountId accId, const Accounts::ServiceList &services);
+    bool hasService(const Accounts::AccountId accId, const QString &serviceName);
+    bool hasServices(const Accounts::AccountId accId);
+    QStringList services(const Accounts::AccountId accId);
+    void addService(const Accounts::AccountId accId, const QString &serviceName, const QString &resourceId);
+    void addService(const Accounts::AccountId accId, const QStringList &serviceNames, const QString &resourceId);
+    void addService(const Accounts::AccountId accId, const Accounts::ServiceList &services, const QString &resourceId);
+    void removeService(const Accounts::AccountId accId, const QString &serviceName);
+    void removeService(const Accounts::AccountId accId, const QStringList &serviceNames);
+    void removeService(const Accounts::AccountId accId, const Accounts::ServiceList &services);
 
-        QStringList resources(const Accounts::AccountId accId);
-        QString resource(const Accounts::AccountId accId, const QString &serviceName) const;
-        QString resourceFromType(const Accounts::AccountId accId, const QString &resourceType) const;
+    QStringList resources(const Accounts::AccountId accId);
+    QString resource(const Accounts::AccountId accId, const QString &serviceName) const;
+    QString resourceFromType(const Accounts::AccountId accId, const QString &resourceType) const;
 
-        void removeAccount(const Accounts::AccountId accId);
-    private:
-        KSharedConfig::Ptr m_config;
-        KConfigGroup group(const Accounts::AccountId accId) const;
+    void removeAccount(const Accounts::AccountId accId);
+private:
+    KSharedConfig::Ptr m_config;
+    KConfigGroup group(const Accounts::AccountId accId) const;
 };
 
 #endif //ACCOUNTS_AKONADI_DAEMON_H

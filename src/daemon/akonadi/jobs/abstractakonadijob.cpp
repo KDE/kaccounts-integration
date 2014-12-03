@@ -18,7 +18,8 @@
 
 #include "abstractakonadijob.h"
 
-AbstractAkonadiJob::AbstractAkonadiJob(QObject* parent): KJob(parent)
+AbstractAkonadiJob::AbstractAkonadiJob(QObject *parent)
+    : KJob(parent)
 {
 
 }
@@ -28,7 +29,7 @@ QString AbstractAkonadiJob::resourceId() const
     return m_resourceId;
 }
 
-void AbstractAkonadiJob::setResourceId(const QString& resourceId)
+void AbstractAkonadiJob::setResourceId(const QString &resourceId)
 {
     m_resourceId = resourceId;
 }
@@ -38,7 +39,7 @@ QString AbstractAkonadiJob::interface() const
     return m_interface;
 }
 
-void AbstractAkonadiJob::setInterface(const QString& interface)
+void AbstractAkonadiJob::setInterface(const QString &interface)
 {
     m_interface = interface;
 }
@@ -48,7 +49,7 @@ Accounts::AccountId AbstractAkonadiJob::accountId() const
     return m_accountId;
 }
 
-void AbstractAkonadiJob::setAccountId(const Accounts::AccountId& accountId)
+void AbstractAkonadiJob::setAccountId(const Accounts::AccountId accountId)
 {
     m_accountId = accountId;
 }

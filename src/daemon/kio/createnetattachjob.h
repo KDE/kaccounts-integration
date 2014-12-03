@@ -29,55 +29,56 @@ namespace KWallet {
 class CreateNetAttachJob : public KJob
 {
     Q_OBJECT
-    public:
-        explicit CreateNetAttachJob(QObject* parent = 0);
-        virtual ~CreateNetAttachJob();
 
-        virtual void start();
+public:
+    explicit CreateNetAttachJob(QObject *parent = 0);
+    virtual ~CreateNetAttachJob();
 
-        QString host() const;
-        void setHost(const QString &host);
+    virtual void start();
 
-        QString path() const;
-        void setPath(const QString &path);
+    QString host() const;
+    void setHost(const QString &host);
 
-        QString realm() const;
-        void setRealm(const QString &realm);
+    QString path() const;
+    void setPath(const QString &path);
 
-        QString name() const;
-        void setName(const QString &name);
+    QString realm() const;
+    void setRealm(const QString &realm);
 
-        QString username() const;
-        void setUsername(const QString &username);
+    QString name() const;
+    void setName(const QString &name);
 
-        QString password() const;
-        void setPassword(const QString &password);
+    QString username() const;
+    void setUsername(const QString &username);
 
-        QString uniqueId() const;
-        void setUniqueId(const QString &uniqueId);
+    QString password() const;
+    void setPassword(const QString &password);
 
-        QString icon() const;
-        void setIcon(const QString &icon);
+    QString uniqueId() const;
+    void setUniqueId(const QString &uniqueId);
 
-    private Q_SLOTS:
-        void createNetAttach();
-        void walletOpened(bool opened);
-        void gotRealm(KJob* job);
+    QString icon() const;
+    void setIcon(const QString &icon);
 
-    private:
-        void getRealm();
-        void createDesktopFile(const QUrl &url);
+private Q_SLOTS:
+    void createNetAttach();
+    void walletOpened(bool opened);
+    void gotRealm(KJob *job);
 
-        QString m_host;
-        QString m_path;
-        QString m_realm;
-        QString m_name;
-        QString m_username;
-        QString m_password;
-        QString m_uniqueId;
-        QString m_icon;
+private:
+    void getRealm();
+    void createDesktopFile(const QUrl &url);
 
-        KWallet::Wallet *m_wallet;
+    QString m_host;
+    QString m_path;
+    QString m_realm;
+    QString m_name;
+    QString m_username;
+    QString m_password;
+    QString m_uniqueId;
+    QString m_icon;
+
+    KWallet::Wallet *m_wallet;
 };
 
 #endif //CREATE_NETATTACH_H

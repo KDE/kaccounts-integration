@@ -22,7 +22,8 @@
 
 #include <QDebug>
 
-EnableServiceJob::EnableServiceJob(QObject* parent): AbstractAkonadiJob(parent)
+EnableServiceJob::EnableServiceJob(QObject *parent)
+    : AbstractAkonadiJob(parent)
 {
 
 }
@@ -45,7 +46,7 @@ void EnableServiceJob::init()
     job->start();
 }
 
-void EnableServiceJob::fetchSettingsJobDone(KJob* job)
+void EnableServiceJob::fetchSettingsJobDone(KJob *job)
 {
     if (job->error()) {
         qDebug() << "Error fetching the settings" << job->errorText();
@@ -89,7 +90,7 @@ void EnableServiceJob::fetchSettingsJobDone(KJob* job)
     changeJob->start();
 }
 
-void EnableServiceJob::changeSettingsDone(KJob* job)
+void EnableServiceJob::changeSettingsDone(KJob *job)
 {
     if (job->error()) {
         qDebug() << "Error changing the settings" << job->errorText();

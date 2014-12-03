@@ -26,7 +26,8 @@
 #include <QDomDocument>
 #include <QDebug>
 
-DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject* parent) : AbstractAkonadiJob(parent)
+DBusSettingsInterfaceJob::DBusSettingsInterfaceJob(QObject *parent)
+    : AbstractAkonadiJob(parent)
 {
 
 }
@@ -51,7 +52,7 @@ void DBusSettingsInterfaceJob::init()
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(introspectDone(QDBusPendingCallWatcher*)));
 }
 
-void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher* watcher)
+void DBusSettingsInterfaceJob::introspectDone(QDBusPendingCallWatcher *watcher)
 {
     qDebug();
     watcher->deleteLater();

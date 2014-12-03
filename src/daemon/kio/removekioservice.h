@@ -26,24 +26,25 @@
 class RemoveKioService : public KJob
 {
     Q_OBJECT
-    public:
-        explicit RemoveKioService(QObject* parent = 0);
 
-        virtual void start();
+public:
+    explicit RemoveKioService(QObject *parent = 0);
 
-        Accounts::AccountId accountId() const;
-        void setAccountId(const Accounts::AccountId &accId);
+    virtual void start();
 
-        QString serviceName() const;
-        void setServiceName(const QString &serviceName);
+    Accounts::AccountId accountId() const;
+    void setAccountId(const Accounts::AccountId &accId);
 
-    private Q_SLOTS:
-        void removeKioService();
-        void removeNetAatachFinished(KJob* job);
+    QString serviceName() const;
+    void setServiceName(const QString &serviceName);
 
-    private:
-        Accounts::AccountId m_accountId;
-        QString m_serviceName;
+private Q_SLOTS:
+    void removeKioService();
+    void removeNetAatachFinished(KJob *job);
+
+private:
+    Accounts::AccountId m_accountId;
+    QString m_serviceName;
 };
 
 #endif //REMOVE_KIOSERVICE_H

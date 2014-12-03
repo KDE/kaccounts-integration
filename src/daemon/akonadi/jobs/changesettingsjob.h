@@ -31,7 +31,7 @@ class ChangeSettingsJob : public AbstractAkonadiJob
 {
     Q_OBJECT
     public:
-        explicit ChangeSettingsJob(QObject* parent = 0);
+        explicit ChangeSettingsJob(QObject *parent = 0);
         virtual ~ChangeSettingsJob();
 
         virtual void start();
@@ -41,8 +41,8 @@ class ChangeSettingsJob : public AbstractAkonadiJob
     private Q_SLOTS:
         void init();
         void dbusSettingsPath(KJob *job);
-        void accountSet(QDBusPendingCallWatcher* watcher);
-        void configWritten(QDBusPendingCallWatcher* watcher);
+        void accountSet(QDBusPendingCallWatcher *watcher);
+        void configWritten(QDBusPendingCallWatcher *watcher);
 
     private:
         QDBusMessage createCall(const QString &method);

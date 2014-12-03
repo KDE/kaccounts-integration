@@ -24,8 +24,8 @@
 
 using namespace Akonadi;
 
-RemoveResourceJob::RemoveResourceJob(QObject* parent)
-: AbstractAkonadiJob(parent)
+RemoveResourceJob::RemoveResourceJob(QObject *parent)
+    : AbstractAkonadiJob(parent)
 {
 }
 
@@ -36,7 +36,6 @@ void RemoveResourceJob::start()
 
 void RemoveResourceJob::removeResource()
 {
-
     AgentInstance instance = AgentManager::self()->instance(m_resourceId);
     if (instance.isValid()) {
         AgentManager::self()->removeInstance(instance);

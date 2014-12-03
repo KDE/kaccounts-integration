@@ -29,37 +29,38 @@
 class FetchSettingsJob : public AbstractAkonadiJob
 {
     Q_OBJECT
-    public:
-        explicit FetchSettingsJob(QObject* parent = 0);
-        virtual ~FetchSettingsJob();
 
-        virtual void start();
+public:
+    explicit FetchSettingsJob(QObject *parent = 0);
+    virtual ~FetchSettingsJob();
 
-        template< typename T>
-        T value() const
-        {
-            QDBusPendingReply<T> reply = *m_watcher;
-            if (reply.isError()) {
-                qDebug() << reply.error().message();
-                return T();
-            }
+    virtual void start();
 
-            return reply.value();
+    template< typename T>
+    T value() const
+    {
+        QDBusPendingReply<T> reply = *m_watcher;
+        if (reply.isError()) {
+            qDebug() << reply.error().message();
+            return T();
         }
 
-        QString key() const;
-        void setKey(const QString &key);
+        return reply.value();
+    }
 
-    private Q_SLOTS:
-        void init();
-        void dbusSettingsPathDone(KJob *job);
-        void fetchDone(QDBusPendingCallWatcher*);
+    QString key() const;
+    void setKey(const QString &key);
 
-    private:
-        void fetchSettings();
+private Q_SLOTS:
+    void init();
+    void dbusSettingsPathDone(KJob *job);
+    void fetchDone(QDBusPendingCallWatcher*);
 
-        QString m_key;
-        QDBusPendingCallWatcher *m_watcher;
+private:
+    void fetchSettings();
+
+    QString m_key;
+    QDBusPendingCallWatcher *m_watcher;
 };
 
 #endif //FETCH_SETTINGS_JOB_H

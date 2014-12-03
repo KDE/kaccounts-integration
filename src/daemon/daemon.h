@@ -36,20 +36,20 @@ class AccountsDaemon : public KDEDModule
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
 
-    public:
-        AccountsDaemon(QObject *parent, const QList<QVariant>&);
-        virtual ~AccountsDaemon();
+public:
+    AccountsDaemon(QObject *parent, const QList<QVariant>&);
+    virtual ~AccountsDaemon();
 
-    public Q_SLOTS:
-        void startDaemon();
-        void accountCreated(const Accounts::AccountId &id);
-        void accountRemoved(const Accounts::AccountId &id);
-        void enabledChanged(const QString &serviceName, bool enabled);
+public Q_SLOTS:
+    void startDaemon();
+    void accountCreated(const Accounts::AccountId id);
+    void accountRemoved(const Accounts::AccountId id);
+    void enabledChanged(const QString &serviceName, bool enabled);
 
-    private:
-        void monitorAccount(const Accounts::AccountId &id);
+private:
+    void monitorAccount(const Accounts::AccountId id);
 
-        QList<KAccountsDPlugin*> m_plugins;
+    QList<KAccountsDPlugin*> m_plugins;
 };
 
 #endif /*KSCREN_DAEMON_H*/

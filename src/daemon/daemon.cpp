@@ -38,7 +38,7 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugin<AccountsDaemon>();)
 
-AccountsDaemon::AccountsDaemon(QObject* parent, const QList< QVariant >& )
+AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
  : KDEDModule(parent)
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
@@ -104,7 +104,7 @@ void AccountsDaemon::startDaemon()
     }
 }
 
-void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
+void AccountsDaemon::monitorAccount(const Accounts::AccountId id)
 {
     qDebug() << id;
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
@@ -117,7 +117,7 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId &id)
     connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
 }
 
-void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
+void AccountsDaemon::accountCreated(const Accounts::AccountId id)
 {
     qDebug() << id;
     monitorAccount(id);
@@ -130,7 +130,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId &id)
     }
 }
 
-void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
+void AccountsDaemon::accountRemoved(const Accounts::AccountId id)
 {
     qDebug() << id;
 
@@ -139,7 +139,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId& id)
     }
 }
 
-void AccountsDaemon::enabledChanged(const QString& serviceName, bool enabled)
+void AccountsDaemon::enabledChanged(const QString &serviceName, bool enabled)
 {
     qDebug();
     if (serviceName.isEmpty()) {

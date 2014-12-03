@@ -28,24 +28,25 @@ namespace KWallet {
 class RemoveNetAttachJob : public KJob
 {
     Q_OBJECT
-    public:
-        explicit RemoveNetAttachJob(QObject *parent);
-        virtual ~RemoveNetAttachJob();
 
-        virtual void start();
+public:
+    explicit RemoveNetAttachJob(QObject *parent);
+    virtual ~RemoveNetAttachJob();
 
-        QString uniqueId() const;
-        void setUniqueId(const QString &uniqueId);
+    virtual void start();
 
-    private Q_SLOTS:
-        void removeNetAttach();
-        void walletOpened(bool opened);
-        void deleteDesktopFile();
+    QString uniqueId() const;
+    void setUniqueId(const QString &uniqueId);
 
-    private:
-        QString m_uniqueId;
+private Q_SLOTS:
+    void removeNetAttach();
+    void walletOpened(bool opened);
+    void deleteDesktopFile();
 
-        KWallet::Wallet *m_wallet;
+private:
+    QString m_uniqueId;
+
+    KWallet::Wallet *m_wallet;
 };
 
 #endif //OREMOVEFILE_H

@@ -25,9 +25,9 @@
 
 using namespace Akonadi;
 
-RemoveAkonadiServicesJob::RemoveAkonadiServicesJob(AkonadiAccounts *accounts, QObject* parent)
-: KJob(parent)
-, m_accounts(accounts)
+RemoveAkonadiServicesJob::RemoveAkonadiServicesJob(AkonadiAccounts *accounts, QObject *parent)
+    : KJob(parent)
+    , m_accounts(accounts)
 {
 
 }
@@ -59,7 +59,7 @@ void RemoveAkonadiServicesJob::removeResource()
     job->start();
 }
 
-void RemoveAkonadiServicesJob::setAccountId(const Accounts::AccountId& accId)
+void RemoveAkonadiServicesJob::setAccountId(const Accounts::AccountId accId)
 {
     m_accountId = accId;
 }

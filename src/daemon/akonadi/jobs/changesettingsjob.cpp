@@ -25,7 +25,8 @@
 #include <QDBusPendingReply>
 #include <QDebug>
 
-ChangeSettingsJob::ChangeSettingsJob(QObject* parent) : AbstractAkonadiJob(parent)
+ChangeSettingsJob::ChangeSettingsJob(QObject *parent)
+    : AbstractAkonadiJob(parent)
 {
 }
 
@@ -53,7 +54,7 @@ void ChangeSettingsJob::init()
     setConfiguration();
 }
 
-void ChangeSettingsJob::dbusSettingsPath(KJob* job)
+void ChangeSettingsJob::dbusSettingsPath(KJob *job)
 {
     DBusSettingsInterfaceJob *dbusJob = qobject_cast<DBusSettingsInterfaceJob*>(job);
     m_interface = dbusJob->interface();
@@ -61,7 +62,7 @@ void ChangeSettingsJob::dbusSettingsPath(KJob* job)
     setConfiguration();
 }
 
-void ChangeSettingsJob::setSetting(const QString& key, const QVariant& value)
+void ChangeSettingsJob::setSetting(const QString &key, const QVariant &value)
 {
     m_key = key;
     m_value = value;
@@ -117,7 +118,7 @@ void ChangeSettingsJob::configWritten(QDBusPendingCallWatcher* watcher)
     emitResult();
 }
 
-QDBusMessage ChangeSettingsJob::createCall(const QString& method)
+QDBusMessage ChangeSettingsJob::createCall(const QString &method)
 {
     QString service = "org.freedesktop.Akonadi.Resource." + m_resourceId;
     QString path = "/Settings";

@@ -24,12 +24,13 @@
 class RemoveResourceJob : public AbstractAkonadiJob
 {
     Q_OBJECT
-    public:
-        explicit RemoveResourceJob(QObject* parent = 0);
-        virtual void start();
 
-    private Q_SLOTS:
-        void removeResource();
+public:
+    explicit RemoveResourceJob(QObject *parent = 0);
+    virtual void start();
+
+private Q_SLOTS:
+    void removeResource();
 };
 
 #endif //REMOVE_RESOURCE_H

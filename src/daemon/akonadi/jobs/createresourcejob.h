@@ -32,7 +32,7 @@ class CreateResourceJob : public AbstractAkonadiJob
     Q_OBJECT
 
     public:
-        explicit CreateResourceJob(QObject* parent = 0);
+        explicit CreateResourceJob(QObject *parent = 0);
         virtual ~CreateResourceJob();
 
         virtual void start();
@@ -42,8 +42,8 @@ class CreateResourceJob : public AbstractAkonadiJob
         Accounts::ServiceList services() const;
 
     private Q_SLOTS:
-        void resourceCreated(KJob* job);
-        void setAccountDone(KJob* job);
+        void resourceCreated(KJob *job);
+        void setAccountDone(KJob *job);
 
     private:
         Akonadi::AgentType m_type;

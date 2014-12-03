@@ -114,7 +114,7 @@ void LookupAkonadiServices::findResource()
     qDebug() << "No resource found";
 }
 
-void LookupAkonadiServices::createResourceJobDone(KJob* job)
+void LookupAkonadiServices::createResourceJobDone(KJob *job)
 {
     qDebug();
     CreateResourceJob *cJob = qobject_cast<CreateResourceJob*>(job);
@@ -136,7 +136,7 @@ void LookupAkonadiServices::createResourceJobDone(KJob* job)
     servicesJob->start();
 }
 
-void LookupAkonadiServices::enableServiceJobDone(KJob* job)
+void LookupAkonadiServices::enableServiceJobDone(KJob *job)
 {
     qDebug();
     EnableServiceJob *servicesJob = qobject_cast<EnableServiceJob*>(job);

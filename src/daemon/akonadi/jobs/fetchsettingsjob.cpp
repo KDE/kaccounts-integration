@@ -25,12 +25,11 @@
 #include <QDBusPendingCall>
 #include <QDBusPendingCallWatcher>
 #include <QDomDocument>
-
 #include <QDebug>
 
-FetchSettingsJob::FetchSettingsJob(QObject* parent)
-: AbstractAkonadiJob(parent)
- , m_watcher(0)
+FetchSettingsJob::FetchSettingsJob(QObject *parent)
+    : AbstractAkonadiJob(parent)
+    , m_watcher(0)
 {
 
 }
@@ -61,7 +60,7 @@ void FetchSettingsJob::init()
     fetchSettings();
 }
 
-void FetchSettingsJob::dbusSettingsPathDone(KJob* job)
+void FetchSettingsJob::dbusSettingsPathDone(KJob *job)
 {
     if (job->error()) {
         setError(job->error());
@@ -94,7 +93,7 @@ void FetchSettingsJob::fetchSettings()
     connect(m_watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), SLOT(fetchDone(QDBusPendingCallWatcher*)));
 }
 
-void FetchSettingsJob::fetchDone(QDBusPendingCallWatcher* watcher)
+void FetchSettingsJob::fetchDone(QDBusPendingCallWatcher *watcher)
 {
     if (watcher->isError()) {
         setError(-1);
@@ -108,7 +107,7 @@ QString FetchSettingsJob::key() const
     return m_key;
 }
 
-void FetchSettingsJob::setKey(const QString& key)
+void FetchSettingsJob::setKey(const QString &key)
 {
     m_key = key;
 }

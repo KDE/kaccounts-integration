@@ -109,7 +109,7 @@ void KIOServices::enableService(const Accounts::AccountId accId, const Accounts:
     job->start();
 }
 
-void KIOServices::disableService(const Accounts::AccountId accId, const QString& serviceName)
+void KIOServices::disableService(const Accounts::AccountId accId, const QString &serviceName)
 {
     RemoveKioService *job = new RemoveKioService(this);
     job->setServiceName(serviceName);

@@ -24,7 +24,8 @@
 
 #include <KDirNotify>
 
-RemoveKioService::RemoveKioService(QObject* parent): KJob(parent)
+RemoveKioService::RemoveKioService(QObject *parent)
+    : KJob(parent)
 {
 
 }
@@ -37,13 +38,13 @@ void RemoveKioService::start()
 void RemoveKioService::removeKioService()
 {
     qDebug();
-    RemoveNetAttachJob* job = new RemoveNetAttachJob(this);
+    RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
     job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
     connect(job, SIGNAL(finished(KJob*)), SLOT(removeNetAatachFinished(KJob*)));
     job->start();
 }
 
-void RemoveKioService::removeNetAatachFinished(KJob* job)
+void RemoveKioService::removeNetAatachFinished(KJob *job)
 {
     qDebug();
     if (job->error()) {
@@ -59,7 +60,7 @@ Accounts::AccountId RemoveKioService::accountId() const
     return m_accountId;
 }
 
-void RemoveKioService::setAccountId(const Accounts::AccountId& accId)
+void RemoveKioService::setAccountId(const Accounts::AccountId &accId)
 {
     m_accountId = accId;
 }
@@ -69,7 +70,7 @@ QString RemoveKioService::serviceName() const
     return m_serviceName;
 }
 
-void RemoveKioService::setServiceName(const QString& serviceName)
+void RemoveKioService::setServiceName(const QString &serviceName)
 {
     m_serviceName = serviceName;
 }

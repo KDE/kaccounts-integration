@@ -21,29 +21,32 @@
 
 #include "abstractakonadijob.h"
 
+#include <Accounts/Service>
+
 class EnableServiceJob : public AbstractAkonadiJob
 {
     Q_OBJECT
-    public:
-        enum Status {
-            Enable = 1,
-            Disable
-        };
 
-        explicit EnableServiceJob(QObject* parent = 0);
-        virtual void start();
+public:
+    enum Status {
+        Enable = 1,
+        Disable
+    };
 
-        void addService(const Accounts::Service &service, Status status);
-        Accounts::ServiceList services() const;
+    explicit EnableServiceJob(QObject *parent = 0);
+    virtual void start();
 
-    public Q_SLOTS:
-        void init();
-        void fetchSettingsJobDone(KJob* job);
-        void changeSettingsDone(KJob* job);
+    void addService(const Accounts::Service &service, Status status);
+    Accounts::ServiceList services() const;
 
-    private:
-        Status m_serviceStatus;
-        QHash<Accounts::Service, Status> m_services;
+public Q_SLOTS:
+    void init();
+    void fetchSettingsJobDone(KJob *job);
+    void changeSettingsDone(KJob *job);
+
+private:
+    Status m_serviceStatus;
+    QHash<Accounts::Service, Status> m_services;
 };
 
 #endif //ENABLE_SERVICE_JOB_H

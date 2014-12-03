@@ -34,34 +34,35 @@ namespace KWallet {
 class CreateKioService : public KJob
 {
     Q_OBJECT
-    public:
-        explicit CreateKioService(QObject* parent = 0);
-        virtual ~CreateKioService();
 
-        virtual void start();
+public:
+    explicit CreateKioService(QObject *parent = 0);
+    virtual ~CreateKioService();
 
-        Accounts::AccountId accountId() const;
-        void setAccountId(const Accounts::AccountId &accId);
+    virtual void start();
 
-        QString serviceName() const;
-        void setServiceName(const QString &serviceName);
+    Accounts::AccountId accountId() const;
+    void setAccountId(const Accounts::AccountId accId);
 
-        QString serviceType() const;
-        void setServiceType(const QString &serviceType);
+    QString serviceName() const;
+    void setServiceName(const QString &serviceName);
 
-    private Q_SLOTS:
-        void createKioService();
-        void gotCredentials(KJob *job);
-        void netAttachCreated(KJob *job);
+    QString serviceType() const;
+    void setServiceType(const QString &serviceType);
 
-    private:
-        void createDesktopFile();
+private Q_SLOTS:
+    void createKioService();
+    void gotCredentials(KJob *job);
+    void netAttachCreated(KJob *job);
 
-        Accounts::Manager *m_manager;
-        Accounts::Account *m_account;
-        Accounts::AccountId m_accountId;
-        QString m_serviceName;
-        QString m_serviceType;
+private:
+    void createDesktopFile();
+
+    Accounts::Manager *m_manager;
+    Accounts::Account *m_account;
+    Accounts::AccountId m_accountId;
+    QString m_serviceName;
+    QString m_serviceType;
 };
 
 #endif //CREATE_KIOSERVICE_H

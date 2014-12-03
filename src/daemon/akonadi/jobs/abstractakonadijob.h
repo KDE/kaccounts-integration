@@ -35,7 +35,7 @@ class AbstractAkonadiJob : public KJob
 {
     Q_OBJECT
     public:
-        explicit AbstractAkonadiJob(QObject* parent = 0);
+        explicit AbstractAkonadiJob(QObject *parent = 0);
 
         QString resourceId() const;
         void setResourceId(const QString &resourceId);
@@ -44,7 +44,7 @@ class AbstractAkonadiJob : public KJob
         void setInterface(const QString &interface);
 
         Accounts::AccountId accountId() const;
-        void setAccountId(const Accounts::AccountId &accountId);
+        void setAccountId(const Accounts::AccountId accountId);
 
     protected:
         QString m_resourceId;

@@ -29,7 +29,7 @@
 #include <KConfig>
 
 using namespace KWallet;
-RemoveNetAttachJob::RemoveNetAttachJob(QObject* parent)
+RemoveNetAttachJob::RemoveNetAttachJob(QObject *parent)
  : KJob(parent)
  , m_wallet(0)
 {
@@ -108,7 +108,7 @@ QString RemoveNetAttachJob::uniqueId() const
     return m_uniqueId;
 }
 
-void RemoveNetAttachJob::setUniqueId(const QString& uniqueId)
+void RemoveNetAttachJob::setUniqueId(const QString &uniqueId)
 {
     m_uniqueId = uniqueId;
 }

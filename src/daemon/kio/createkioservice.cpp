@@ -24,7 +24,8 @@
 #include <QDebug>
 #include <Accounts/Manager>
 
-CreateKioService::CreateKioService(QObject* parent) : KJob(parent)
+CreateKioService::CreateKioService(QObject *parent)
+    : KJob(parent)
 {
     m_manager = KAccounts::accountsManager();
 }
@@ -50,7 +51,7 @@ void CreateKioService::createKioService()
     job->start();
 }
 
-void CreateKioService::gotCredentials(KJob* job)
+void CreateKioService::gotCredentials(KJob *job)
 {
     qDebug();
     if (job->error()) {
@@ -81,7 +82,7 @@ void CreateKioService::gotCredentials(KJob* job)
     netJob->start();
 }
 
-void CreateKioService::netAttachCreated(KJob* job)
+void CreateKioService::netAttachCreated(KJob *job)
 {
     emitResult();
 }
@@ -91,7 +92,7 @@ Accounts::AccountId CreateKioService::accountId() const
     return m_accountId;
 }
 
-void CreateKioService::setAccountId(const Accounts::AccountId& accId)
+void CreateKioService::setAccountId(const Accounts::AccountId accId)
 {
     m_accountId = accId;
 }
@@ -101,7 +102,7 @@ QString CreateKioService::serviceName() const
     return m_serviceName;
 }
 
-void CreateKioService::setServiceName(const QString& serviceName)
+void CreateKioService::setServiceName(const QString &serviceName)
 {
     m_serviceName = serviceName;
 }
@@ -111,7 +112,7 @@ QString CreateKioService::serviceType() const
     return m_serviceType;
 }
 
-void CreateKioService::setServiceType(const QString& serviceType)
+void CreateKioService::setServiceType(const QString &serviceType)
 {
     m_serviceType = serviceType;
 }

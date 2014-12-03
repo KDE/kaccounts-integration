@@ -21,7 +21,7 @@
 
 #include "abstractakonadijob.h"
 
-#include <kjob.h>
+#include <KJob>
 
 class QDBusPendingCallWatcher;
 class DBusSettingsInterfaceJob : public AbstractAkonadiJob
@@ -29,13 +29,13 @@ class DBusSettingsInterfaceJob : public AbstractAkonadiJob
     Q_OBJECT
 
     public:
-        explicit DBusSettingsInterfaceJob(QObject* parent = 0);
+        explicit DBusSettingsInterfaceJob(QObject *parent = 0);
 
         virtual void start();
 
     private Q_SLOTS:
         void init();
-        void introspectDone(QDBusPendingCallWatcher* watcher);
+        void introspectDone(QDBusPendingCallWatcher *watcher);
 };
 
 #endif //DBUS_SETTINGS_PATH_JOB_H

@@ -27,22 +27,23 @@ class AkonadiAccounts;
 class RemoveAkonadiServicesJob : public KJob
 {
     Q_OBJECT
-    public:
-        explicit RemoveAkonadiServicesJob(AkonadiAccounts *accounts, QObject* parent = 0);
 
-        virtual void start();
+public:
+    explicit RemoveAkonadiServicesJob(AkonadiAccounts *accounts, QObject *parent = 0);
 
-        void setAccountId(const Accounts::AccountId &accId);
+    virtual void start();
 
-    private Q_SLOTS:
-        void init();
+    void setAccountId(const Accounts::AccountId accId);
 
-        void removeResource();
+private Q_SLOTS:
+    void init();
 
-    private:
-        AkonadiAccounts *m_accounts;
-        Accounts::AccountId m_accountId;
-        QStringList m_resources;
+    void removeResource();
+
+private:
+    AkonadiAccounts *m_accounts;
+    Accounts::AccountId m_accountId;
+    QStringList m_resources;
 };
 
 #endif //REMOVE_AKONADI_SERVICES_H
