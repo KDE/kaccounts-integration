@@ -118,7 +118,7 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     qDebug();
 
     QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-    path.append(QStringLiteral("/remoteview"));
+    path.append(QStringLiteral("/remoteview/"));
 
     QDir saveDir(path);
     if (!saveDir.exists()) {
