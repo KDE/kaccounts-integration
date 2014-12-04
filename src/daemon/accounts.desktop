@@ -1,37 +1,6 @@
 [Desktop Entry]
 Name=Accounts
-Name[cs]=Účty
-Name[da]=Konti
-Name[de]=Zugänge
-Name[el]=Λογαριασμοί
-Name[en_GB]=Accounts
-Name[es]=Cuentas
-Name[fi]=Tilit
-Name[fr]=Comptes
-Name[nl]=Accounts
-Name[pl]=Konta
-Name[pt]=Contas
-Name[pt_BR]=Contas
-Name[sk]=Účty
-Name[sl]=Računi
-Name[uk]=Облікові записи
-Name[x-test]=xxAccountsxx
 Comment=Accounts management
-Comment[cs]=Správa účtů
-Comment[de]=Zugangs-Verwaltung
-Comment[el]=Διαχείριση λογαριασμών
-Comment[en_GB]=Accounts management
-Comment[es]=Gestión de cuentas
-Comment[fi]=Tilienhallinta
-Comment[fr]=Gestion des comptes
-Comment[nl]=Beheer van accounts
-Comment[pl]=Zarządzanie kontami
-Comment[pt]=Gestão de contas
-Comment[pt_BR]=Gerenciamento de contas
-Comment[sk]=Správa účtov
-Comment[sl]=Upravljanje računov
-Comment[uk]=Керування обліковими записами
-Comment[x-test]=xxAccounts managementxx
 
 Type=Service
 Icon=preferences-system-power-management
