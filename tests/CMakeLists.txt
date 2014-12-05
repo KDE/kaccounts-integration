@@ -1,6 +1,5 @@
 include(ECMMarkAsTest)
 
-find_package(KdepimLibs REQUIRED)
 find_package(Qt5 5.2.0 CONFIG REQUIRED Test)
 
 add_definitions("-DTEST_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/data/\"")
