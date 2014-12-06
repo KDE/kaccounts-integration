@@ -1,14 +1,18 @@
 [Desktop Entry]
 Name=Accounts
+Name[cs]=Účty
 Name[nl]=Accounts
 Name[pt]=Contas
 Name[pt_BR]=Contas
+Name[sk]=Účty
 Name[uk]=Облікові записи
 Name[x-test]=xxAccountsxx
 Comment=Accounts management
+Comment[cs]=Správa účtů
 Comment[nl]=Accountbeheer
 Comment[pt]=Gestão de contas
 Comment[pt_BR]=Gerenciamento de contas
+Comment[sk]=Správa účtov
 Comment[uk]=Керування обліковими записами
 Comment[x-test]=xxAccounts managementxx
 
