@@ -31,6 +31,8 @@ class AkonadiAccounts;
 class AkonadiServices : public KAccountsDPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.kde.kaccounts.DPlugin")
+    Q_INTERFACES(KAccountsDPlugin)
 
 public:
     explicit AkonadiServices(QObject *parent = 0);

@@ -17,7 +17,6 @@
  *************************************************************************************/
 
 #include "daemon.h"
-#include "akonadi/akonadiservices.h"
 #include "kio/kioservices.h"
 #include "src/lib/kaccountsdplugin.h"
 #include <core.h>
@@ -87,7 +86,7 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
         }
     }
 
-    m_plugins << new KIOServices(this) << new AkonadiServices(this);
+    m_plugins << new KIOServices(this);
 }
 
 AccountsDaemon::~AccountsDaemon()
