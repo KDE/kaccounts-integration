@@ -85,12 +85,10 @@ public:
      */
     Accounts::AccountId accountId() const;
 
-private Q_SLOTS:
-    void getCredentials();
-
 private:
     class Private;
     Private * const d;
+    Q_PRIVATE_SLOT(d, void getCredentials());
 };
 
 #endif //GET_CREDENTIALS_JOB_H

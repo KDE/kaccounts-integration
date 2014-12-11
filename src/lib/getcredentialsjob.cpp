@@ -31,6 +31,11 @@
 
 class GetCredentialsJob::Private {
 public:
+    Private(GetCredentialsJob *job)
+    {
+        q = job;
+    }
+
     QString serviceType;
     QString authMechanism;
     QString authMethod;
@@ -39,11 +44,66 @@ public:
     Accounts::Manager *manager;
     SignOn::SessionData sessionData;
     uint repeatedTries;
+    GetCredentialsJob *q;
+
+    void getCredentials();
 };
+
+void GetCredentialsJob::Private::getCredentials()
+{
+    Accounts::Account *acc = manager->account(id);
+    if (!acc) {
+        qWarning() << "Unable to find account for id" << id;
+        if (repeatedTries < 3) {
+            qDebug() << "Retrying in 2s";
+            QTimer::singleShot(2000, q, SLOT(getCredentials()));
+            repeatedTries++;
+        } else {
+            qDebug() << repeatedTries << "ending with error";
+            q->setError(KJob::UserDefinedError);
+            q->setErrorText(QLatin1String("Could not find account"));
+            q->emitResult();
+        }
+        return;
+    }
+
+    Accounts::AccountService *service = new Accounts::AccountService(acc, manager->service(serviceType), q);
+
+    Accounts::AuthData serviceAuthData = service->authData();
+    authData = serviceAuthData.parameters();
+    SignOn::Identity *identity = SignOn::Identity::existingIdentity(serviceAuthData.credentialsId(), q);
+
+    if (!identity) {
+        qWarning() << "Unable to find identity for account id" << id;
+        q->setError(KJob::UserDefinedError);
+        q->setErrorText(QLatin1String("Could not find credentials"));
+        q->emitResult();
+        return;
+    }
+
+    authData["AccountUsername"] = acc->value(QLatin1String("username")).toString();
+    QPointer<SignOn::AuthSession> authSession = identity->createSession(authMethod.isEmpty() ? serviceAuthData.method() : authMethod);
+
+    QObject::connect(authSession.data(), &SignOn::AuthSession::response,
+            [this, identity](const SignOn::SessionData &data) {
+                sessionData = data;
+                q->emitResult();
+            });
+
+    QObject::connect(authSession.data(), &SignOn::AuthSession::error,
+            [this](const SignOn::Error &error) {
+                qDebug() << error.message();
+                q->setError(KJob::UserDefinedError);
+                q->setErrorText(error.message());
+                q->emitResult();
+            });
+
+    authSession->process(serviceAuthData.parameters(), authMechanism.isEmpty() ? serviceAuthData.mechanism() : authMechanism);
+}
 
 GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, QObject *parent)
     : KJob(parent)
-    , d(new Private)
+    , d(new Private(this))
 {
     d->id = id;
     d->manager = KAccounts::accountsManager();
@@ -53,12 +113,13 @@ GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, QObject *par
 
 GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, const QString &authMethod, const QString &authMechanism, QObject *parent)
     : KJob(parent)
-    , d(new Private)
+    , d(new Private(this))
 {
     d->id = id;
     d->manager = KAccounts::accountsManager();
     d->authMechanism = authMechanism;
     d->authMethod = authMethod;
+    d->repeatedTries = 0;
 }
 
 void GetCredentialsJob::start()
@@ -71,60 +132,6 @@ void GetCredentialsJob::setServiceType(const QString& serviceType)
     d->serviceType = serviceType;
 }
 
-void GetCredentialsJob::getCredentials()
-{
-    Accounts::Account *acc = d->manager->account(d->id);
-    if (!acc) {
-        qWarning() << "Unable to find account for id" << d->id;
-        if (d->repeatedTries < 3) {
-            qDebug() << "Retrying in 2s";
-            QTimer *repeatTimer = new QTimer(this);
-            repeatTimer->setSingleShot(true);
-            connect(repeatTimer, SIGNAL(timeout()), this, SLOT(getCredentials()));
-            repeatTimer->start(2000);
-            d->repeatedTries++;
-        } else {
-            setError(KJob::UserDefinedError);
-            setErrorText(QLatin1String("Could not find account"));
-            emitResult();
-        }
-        return;
-    }
-
-    Accounts::AccountService *service = new Accounts::AccountService(acc, d->manager->service(d->serviceType), this);
-
-    Accounts::AuthData authData = service->authData();
-    d->authData = authData.parameters();
-    SignOn::Identity* identity = SignOn::Identity::existingIdentity(authData.credentialsId(), this);
-
-    if (!identity) {
-        qWarning() << "Unable to find identity for account id" << d->id;
-        setError(KJob::UserDefinedError);
-        setErrorText(QLatin1String("Could not find credentials"));
-        emitResult();
-        return;
-    }
-
-    d->authData["AccountUsername"] = acc->value(QLatin1String("username")).toString();
-    QPointer<SignOn::AuthSession> authSession = identity->createSession(d->authMethod.isEmpty() ? authData.method() : d->authMethod);
-
-    connect(authSession.data(), &SignOn::AuthSession::response,
-            [this, identity](const SignOn::SessionData &data) {
-                d->sessionData = data;
-                emitResult();
-            });
-
-    connect(authSession.data(), &SignOn::AuthSession::error,
-            [this](const SignOn::Error &error) {
-                qDebug() << error.message();
-                setError(KJob::UserDefinedError);
-                setErrorText(error.message());
-                emitResult();
-            });
-
-    authSession->process(authData.parameters(), d->authMechanism.isEmpty() ? authData.mechanism() : d->authMechanism);
-}
-
 Accounts::AccountId GetCredentialsJob::accountId() const
 {
     return d->id;
@@ -134,3 +141,5 @@ QVariantMap GetCredentialsJob::credentialsData() const
 {
     return d->sessionData.toMap().unite(d->authData);
 }
+
+#include "moc_getcredentialsjob.cpp"
