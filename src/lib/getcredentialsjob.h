@@ -36,13 +36,13 @@ class KACCOUNTS_EXPORT GetCredentialsJob : public KJob
 {
     Q_OBJECT
 public:
-    GetCredentialsJob(const Accounts::AccountId &id, QObject *parent = 0);
     /**
      * Constructs the job with auth method and mechanism coming from the service
      * type. If no service type is specified, the default will be used
      *
      * @param id AccountId for which the credentials will be obtained
      */
+    explicit GetCredentialsJob(const Accounts::AccountId &id, QObject *parent = 0);
     /**
      * This version of the constructor allow passing specific auth method and mechanism
      * for which we want the credentials
