@@ -24,6 +24,7 @@ Name[pt]=Contas 'Online'
 Name[pt_BR]=Contas online
 Name[sk]=Online účty
 Name[sl]=Spletni računi
+Name[sv]=Direktkonton
 Name[uk]=Облікові записи у мережі
 Name[x-test]=xxOnline Accountsxx
 
@@ -41,6 +42,7 @@ Comment[pt]=Configure as suas contas da Internet, como as do Google, Live, Owncl
 Comment[pt_BR]=Configure suas contas na Internet, como Google, Live, Owncloud
 Comment[sk]=Nastaviť vaše internetové účty ako Google, Live, Owncloud
 Comment[sl]=Nastavite vaše internetne račune kot npr. Google, Live, Owncloud
+Comment[sv]=Anpassa Internetkonton såsom Google, Live, Owncloud
 Comment[uk]=Налаштування ваших облікових записів у Google, Live, Owncloud тощо
 Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
 
@@ -58,6 +60,7 @@ X-KDE-Keywords[pt]=Rede,Google,Live,ownCloud
 X-KDE-Keywords[pt_BR]=Rede,Google,Live,ownCloud
 X-KDE-Keywords[sk]=Sieť,Google,Live,ownCloud
 X-KDE-Keywords[sl]=Omrežje,Google,Live,ownCloud
+X-KDE-Keywords[sv]=Nätverk,Google,Live,ownCloud
 X-KDE-Keywords[uk]=Network,Google,Live,ownCloud,мережа,гугл,ґуґл,лайф,аунклауд
 X-KDE-Keywords[x-test]=xxNetwork,Google,Live,ownCloudxx
 
