@@ -15,7 +15,7 @@ set(kaccounts_SRCS
 ki18n_wrap_ui(kaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
 
 add_library(kcm_kaccounts MODULE ${kaccounts_SRCS})
-kservice_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)
+kcoreaddons_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)
 
 target_link_libraries(kcm_kaccounts
     Qt5::Core
