@@ -17,6 +17,7 @@ Name[sl]=Računi
 Name[sv]=Konton
 Name[uk]=Облікові записи
 Name[x-test]=xxAccountsxx
+Name[zh_CN]=账户
 Comment=Accounts management
 Comment[cs]=Správa účtů
 Comment[de]=Zugangs-Verwaltung
@@ -34,6 +35,7 @@ Comment[sl]=Upravljanje računov
 Comment[sv]=Kontohantering
 Comment[uk]=Керування обліковими записами
 Comment[x-test]=xxAccounts managementxx
+Comment[zh_CN]=账户管理
 
 Type=Service
 Icon=preferences-system-power-management

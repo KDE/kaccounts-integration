@@ -27,6 +27,7 @@ Name[sl]=Spletni računi
 Name[sv]=Direktkonton
 Name[uk]=Облікові записи у мережі
 Name[x-test]=xxOnline Accountsxx
+Name[zh_CN]=在线账户
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
 Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
@@ -45,6 +46,7 @@ Comment[sl]=Nastavite vaše internetne račune kot npr. Google, Live, Owncloud
 Comment[sv]=Anpassa Internetkonton såsom Google, Live, Owncloud
 Comment[uk]=Налаштування ваших облікових записів у Google, Live, Owncloud тощо
 Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Owncloudxx
+Comment[zh_CN]=配置您的网络账户，例如 Google，Live，OwnCloud
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
 X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
@@ -63,5 +65,6 @@ X-KDE-Keywords[sl]=Omrežje,Google,Live,ownCloud
 X-KDE-Keywords[sv]=Nätverk,Google,Live,ownCloud
 X-KDE-Keywords[uk]=Network,Google,Live,ownCloud,мережа,гугл,ґуґл,лайф,аунклауд
 X-KDE-Keywords[x-test]=xxNetwork,Google,Live,ownCloudxx
+X-KDE-Keywords[zh_CN]=Network,Google,Live,ownCloud,网络,谷歌
 
 Categories=Qt;KDE;X-KDE-settings-kaccounts;
