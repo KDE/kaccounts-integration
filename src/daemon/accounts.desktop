@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Accounts
+Name[ar]=الحسابات
 Name[cs]=Účty
 Name[da]=Konti
 Name[de]=Zugänge
@@ -19,6 +20,7 @@ Name[uk]=Облікові записи
 Name[x-test]=xxAccountsxx
 Name[zh_CN]=账户
 Comment=Accounts management
+Comment[ar]=إدارة الحساباتل
 Comment[cs]=Správa účtů
 Comment[de]=Zugangs-Verwaltung
 Comment[el]=Διαχείριση λογαριασμών

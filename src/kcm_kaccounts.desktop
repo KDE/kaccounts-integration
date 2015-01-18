@@ -11,6 +11,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=personalization
 
 Name=Online Accounts
+Name[ar]=حسابات الإنترنت
 Name[cs]=Účty online
 Name[de]=Online-Zugänge
 Name[el]=Διαδικτυακοί λογαριασμοί
@@ -30,6 +31,7 @@ Name[x-test]=xxOnline Accountsxx
 Name[zh_CN]=在线账户
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
+Comment[ar]=اضبط حساباتك على الإنترنت كغوغل، لايڤ وسحابتك "Owncloud"
 Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
 Comment[de]=Richten Sie Ihre Web-Zugänge wie Google, Live und ownCloud ein
 Comment[el]=Διαμορφώστε τους διαδικτυακούς σας λογαριασμούς όπως Google, Live, Owncloud
@@ -49,6 +51,7 @@ Comment[x-test]=xxConfigure your internet accounts such as Google, Live, Ownclou
 Comment[zh_CN]=配置您的网络账户，例如 Google，Live，OwnCloud
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
+X-KDE-Keywords[ar]=Network,Google,Live,ownCloud,شبكة,غوغل,جوجل,لايف,لايڤ,سحابتك
 X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
 X-KDE-Keywords[de]=Netzwerk,Google,Live,ownCloud
 X-KDE-Keywords[el]=Δίκτυο,Google,Live,ownCloud
