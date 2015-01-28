@@ -104,8 +104,10 @@ void CreateAccount::processSessionKTp()
         connect(ui, SIGNAL(error(QString)),
                 this, SLOT(ktpDialogError(QString)));
 
+        ui->init(KAccountsUiPlugin::NewAccountDialog);
+
         // When the plugin has finished building the UI, show it right away
-        connect(ui, &KAccountsUiPlugin::uiReady, [=](){ui->showDialog();});
+        connect(ui, &KAccountsUiPlugin::uiReady, [=](){ui->showNewAccountDialog();});
 
         // Pass the provider name without the "ktp-" prefix, the rest matches
         // a Telepathy service name, which allows to open a specialized KTp
