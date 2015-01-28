@@ -39,6 +39,7 @@ public:
     virtual ~AccountWidget();
 
     void setAccount(Accounts::Account *account);
+
 public Q_SLOTS:
     void serviceEnabledChanged(const QString &serviceName, bool enabled);
     void serviceChanged(bool enabled);
@@ -47,6 +48,7 @@ private:
     QHash<QString, QCheckBox*> m_checkboxes;
     QPointer<Accounts::Account> m_account;
     Accounts::Manager *m_manager;
+    QMetaObject::Connection m_connection;
 };
 
 #endif //ACCOUNTWIDGET_H

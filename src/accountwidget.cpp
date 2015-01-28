@@ -18,10 +18,13 @@
 
 #include "accountwidget.h"
 #include "models/accountsmodel.h"
+#include "uipluginsmanager.h"
 #include <core.h>
+#include <kaccountsuiplugin.h>
 
 #include <QDebug>
 #include <QCheckBox>
+#include <QPushButton>
 
 #include <KLocalizedString>
 
@@ -55,6 +58,19 @@ void AccountWidget::setAccount(Accounts::Account *account)
 
     qDeleteAll(m_checkboxes);
     m_checkboxes.clear();
+    QObject::disconnect(m_connection);
+
+    QLayoutItem *child;
+    while ((child = d_layout->takeAt(0)) != 0) {
+        if (child->layout() != 0) {
+            QLayoutItem *child2;
+            while ((child2 = child->layout()->takeAt(0)) != 0) {
+                delete child2->widget();
+                delete child2;
+            }
+        }
+        delete child;
+    }
 
     QCheckBox *checkbox = 0;
     Accounts::ServiceList services = account->services();
@@ -66,7 +82,25 @@ void AccountWidget::setAccount(Accounts::Account *account)
         // the account->enabled() is about the service, not the account
         checkbox->setChecked(account->enabled());
         checkbox->setProperty("service", service.name());
-        d_layout->addWidget(checkbox);
+
+        KAccountsUiPlugin *uiPlugin = KAccounts::UiPluginsManager::pluginForService(service.serviceType());
+
+        if (uiPlugin != 0) {
+            QHBoxLayout *hlayout = new QHBoxLayout();
+            QPushButton *imConfigButton = new QPushButton(i18n("Configure..."));
+            connect(imConfigButton, &QPushButton::pressed, [=](){
+                m_connection = connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
+                    uiPlugin->showConfigureAccountDialog(m_account.data()->id());
+                });
+                uiPlugin->init(KAccountsUiPlugin::ConfigureAccountDialog);
+            });
+
+            hlayout->addWidget(checkbox);
+            hlayout->addWidget(imConfigButton);
+            d_layout->addLayout(hlayout);
+        } else {
+            d_layout->addWidget(checkbox);
+        }
         connect(checkbox, SIGNAL(clicked(bool)), SLOT(serviceChanged(bool)));
         m_checkboxes.insert(service.name(), checkbox);
     }
