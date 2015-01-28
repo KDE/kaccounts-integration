@@ -56,6 +56,13 @@ public:
      */
     virtual void showConfigureAccountDialog(const quint32 accountId) = 0;
 
+    /**
+     * Returns a list of services which this plugin supports
+     * configuration of, for example "IM" supports config
+     * of IM/KTp accounts
+     */
+    virtual QStringList supportedServicesForConfig() const = 0;
+
 Q_SIGNALS:
     /**
      * Sometimes the plugins might take time to initialize the UI
