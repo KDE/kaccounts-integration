@@ -31,17 +31,30 @@ class KACCOUNTS_EXPORT KAccountsUiPlugin : public QObject
     Q_OBJECT
 
 public:
+    enum UiType {
+        NewAccountDialog,
+        ConfigureAccountDialog
+    };
+
+
     KAccountsUiPlugin(QObject *parent = 0);
     virtual ~KAccountsUiPlugin();
+
+    virtual void init(UiType type) = 0;
 
     /**
      * Sets the selected Accounts-SSO provider to the plugin
      */
     virtual void setProviderName(const QString &providerName) = 0;
     /**
-     * Called when the dialog with the UI should show
+     * Called when the dialog for creating new account should show
      */
-    virtual void showDialog() = 0;
+    virtual void showNewAccountDialog() = 0;
+    /**
+     * Called when an existing account should be configured
+     * @param accountId The ID of the account that should be configured
+     */
+    virtual void showConfigureAccountDialog(const quint32 accountId) = 0;
 
 Q_SIGNALS:
     /**
