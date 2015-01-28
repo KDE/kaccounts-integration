@@ -5,6 +5,7 @@ set(kaccounts_SRCS
     kaccounts.cpp
     create.cpp
     accountwidget.cpp
+    uipluginsmanager.cpp
     models/accountsmodel.cpp
 #     models/modeltest.cpp
     jobs/createaccount.cpp

@@ -1,0 +1,123 @@
+/*************************************************************************************
+ *  Copyright (C) 2015 by Martin Klapetek <mklapetek@kde.org>                        *
+ *                                                                                   *
+ *  This program is free software; you can redistribute it and/or                    *
+ *  modify it under the terms of the GNU General Public License                      *
+ *  as published by the Free Software Foundation; either version 2                   *
+ *  of the License, or (at your option) any later version.                           *
+ *                                                                                   *
+ *  This program is distributed in the hope that it will be useful,                  *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of                   *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                    *
+ *  GNU General Public License for more details.                                     *
+ *                                                                                   *
+ *  You should have received a copy of the GNU General Public License                *
+ *  along with this program; if not, write to the Free Software                      *
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
+ *************************************************************************************/
+
+#include "uipluginsmanager.h"
+
+#include "lib/kaccountsuiplugin.h"
+
+#include <QHash>
+#include <QStringList>
+#include <QDebug>
+#include <QCoreApplication>
+#include <QDir>
+#include <QPluginLoader>
+
+using namespace KAccounts;
+
+class UiPluginsManagerPrivate
+{
+public:
+    UiPluginsManagerPrivate();
+    ~UiPluginsManagerPrivate();
+
+    void loadPlugins();
+
+    QList<KAccountsUiPlugin*> uiPlugins;
+    QHash<QString, KAccountsUiPlugin*> pluginsForServices;
+    bool pluginsLoaded;
+
+};
+
+Q_GLOBAL_STATIC(UiPluginsManagerPrivate, s_instance);
+
+UiPluginsManagerPrivate::UiPluginsManagerPrivate()
+    : pluginsLoaded(false)
+{
+}
+
+UiPluginsManagerPrivate::~UiPluginsManagerPrivate()
+{
+    qDeleteAll(uiPlugins);
+}
+
+void UiPluginsManagerPrivate::loadPlugins()
+{
+    QString pluginPath;
+
+    QStringList paths = QCoreApplication::libraryPaths();
+    Q_FOREACH (const QString &libraryPath, paths) {
+        QString path(libraryPath + QStringLiteral("/kaccounts/ui"));
+        QDir dir(path);
+
+        if (!dir.exists()) {
+            continue;
+        }
+
+        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        Q_FOREACH (const QString &fileName, entryList) {
+            QPluginLoader loader(dir.absoluteFilePath(fileName));
+
+            if (!loader.load()) {
+                qWarning() << "Could not create KAccountsUiPlugin: " << pluginPath;
+                qWarning() << loader.errorString();
+                continue;
+            }
+
+            QObject *obj = loader.instance();
+            if (obj) {
+                KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
+                if (!ui) {
+                    qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
+                    qDebug() << pluginPath;
+                    continue;
+                }
+
+                qDebug() << "Adding plugin" << ui;
+
+                uiPlugins << ui;
+                Q_FOREACH (const QString &service, ui->supportedServicesForConfig()) {
+                    qDebug() << " Adding service" << service;
+                    pluginsForServices.insert(service, ui);
+                }
+            } else {
+                qDebug() << "Plugin could not creaate instance" << pluginPath;
+            }
+
+        }
+    }
+
+    pluginsLoaded = true;
+}
+
+QList<KAccountsUiPlugin*> UiPluginsManager::uiPlugins()
+{
+    if (!s_instance->pluginsLoaded) {
+        s_instance->loadPlugins();
+    }
+
+    return s_instance->uiPlugins;
+}
+
+KAccountsUiPlugin* UiPluginsManager::pluginForService(const QString &service)
+{
+    if (!s_instance->pluginsLoaded) {
+        s_instance->loadPlugins();
+    }
+
+    return s_instance->pluginsForServices.value(service);
+}
