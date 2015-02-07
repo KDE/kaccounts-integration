@@ -85,7 +85,7 @@
         <string/>
        </property>
        <property name="placeholderText">
-        <string extracomment="A typical username that is used as a hint (placeHolderText) ">JhonDoe</string>
+        <string extracomment="A typical username that is used as a hint (placeHolderText) ">JohnDoe</string>
        </property>
       </widget>
      </item>
