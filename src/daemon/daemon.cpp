@@ -66,7 +66,7 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
         QPluginLoader loader(pluginPath);
 
         if (!loader.load()) {
-            qWarning() << "Could not create Extractor: " << pluginPath;
+            qWarning() << "Could not create KAccounts daemon plugin: " << pluginPath;
             qWarning() << loader.errorString();
             continue;
         }
@@ -75,7 +75,7 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
         if (obj) {
             KAccountsDPlugin *plugin = qobject_cast<KAccountsDPlugin*>(obj);
             if (!plugin) {
-                qDebug() << "Plugin could not be converted to an ExtractorPlugin";
+                qDebug() << "Plugin could not be converted to an KAccountsDPlugin";
                 qDebug() << pluginPath;
                 continue;
             }
