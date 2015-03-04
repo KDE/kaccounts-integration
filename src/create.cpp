@@ -70,6 +70,9 @@ void Create::fillInterface()
 
     QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider &provider, providerList) {
+        if (provider.name() == "ktp-generic") {
+            continue;
+        }
         button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
         button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
