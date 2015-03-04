@@ -307,6 +307,10 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
 
 void CreateAccount::sessionError(const SignOn::Error &signOnError)
 {
+    if (error()) {
+        // Guard against SignOn sending two error() signals
+        return;
+    }
     qWarning() << "Error:";
     qWarning() << "\t" << signOnError.message();
 
