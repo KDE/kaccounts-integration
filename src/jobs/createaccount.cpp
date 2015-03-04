@@ -152,6 +152,7 @@ void CreateAccount::ktpDialogError(const QString &error)
     qWarning() << "Error while creating KTp account:" << error;
     // Delete the KTp dialog
     sender()->deleteLater();
+    emitResult();
 }
 
 void CreateAccount::processSessionOwncloud()
