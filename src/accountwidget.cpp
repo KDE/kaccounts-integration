@@ -84,14 +84,16 @@ void AccountWidget::setAccount(Accounts::Account *account)
         checkbox->setProperty("service", service.name());
 
         KAccountsUiPlugin *uiPlugin = KAccounts::UiPluginsManager::pluginForService(service.serviceType());
+        if (uiPlugin) {
+            m_connection = connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
+                uiPlugin->showConfigureAccountDialog(m_account.data()->id());
+            });
+        }
 
         if (uiPlugin != 0) {
             QHBoxLayout *hlayout = new QHBoxLayout();
             QPushButton *imConfigButton = new QPushButton(i18n("Configure..."));
             connect(imConfigButton, &QPushButton::pressed, [=](){
-                m_connection = connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
-                    uiPlugin->showConfigureAccountDialog(m_account.data()->id());
-                });
                 uiPlugin->init(KAccountsUiPlugin::ConfigureAccountDialog);
             });
 
