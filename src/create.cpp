@@ -92,6 +92,7 @@ void Create::createAccount()
         if (job->error() == KJob::UserDefinedError) {
             QMessageBox::critical(m_parent, i18nc("Messagebox title; meaning 'Unable to finish the action you started'", "Unable to finish"), job->errorText());
         }
+        job->deleteLater();
     });
 
     acc->start();
