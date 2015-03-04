@@ -48,8 +48,8 @@ private Q_SLOTS:
     void processSessionKTp();
     void accountCreated();
     void processSession();
-    void error(const SignOn::Error &error);
-    void response(const SignOn::SessionData &data);
+    void sessionError(const SignOn::Error &signOnError);
+    void sessionResponse(const SignOn::SessionData &data);
     void info(const SignOn::IdentityInfo &info);
 
     void ktpDialogFinished(const QString &username, const QString &password, const QVariantMap &additionalData);

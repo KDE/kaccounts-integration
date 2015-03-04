@@ -230,13 +230,13 @@ void CreateAccount::processSession()
     SignOn::SessionData sessionData(data);
 
     SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
-    connect(session, SIGNAL(error(SignOn::Error)), SLOT(error(SignOn::Error)));
-    connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(response(SignOn::SessionData)));
+    connect(session, SIGNAL(error(SignOn::Error)), SLOT(sessionError(SignOn::Error)));
+    connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(sessionResponse(SignOn::SessionData)));
 
     session->process(sessionData, m_accInfo->authData().mechanism());
 }
 
-void CreateAccount::response(const SignOn::SessionData& data)
+void CreateAccount::sessionResponse(const SignOn::SessionData& data)
 {
     qDebug() << "Response:";
     qDebug() << "\tToken:" << data.getProperty("AccessToken");
@@ -305,12 +305,12 @@ void CreateAccount::info(const SignOn::IdentityInfo& info)
     m_account->sync();
 }
 
-void CreateAccount::error(const SignOn::Error& error)
+void CreateAccount::sessionError(const SignOn::Error &signOnError)
 {
     qWarning() << "Error:";
-    qWarning() << "\t" << error.message();
+    qWarning() << "\t" << signOnError.message();
 
     setError(KJob::UserDefinedError);
-    setErrorText(i18n("There was an error while trying to process the request: %1", error.message()));
+    setErrorText(i18n("There was an error while trying to process the request: %1", signOnError.message()));
     emitResult();
 }
