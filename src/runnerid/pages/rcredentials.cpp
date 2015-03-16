@@ -79,7 +79,7 @@ bool RCredentials::validatePage()
 
     QString str;
     if(accountExists(email->text())) {
-        str = i18n("This account is already configured as a Web Account");
+        str = i18n("This account is already configured in KAccounts");
         !errorString.isEmpty() ? errorString.append("\n" + str) : errorString.append(str);
     }
 
