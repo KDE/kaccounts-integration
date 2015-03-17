@@ -27,6 +27,7 @@ class AccountsModel;
 class AccountWidget;
 class QStackedLayout;
 class QItemSelectionModel;
+class QDBusPendingCallWatcher;
 
 namespace Ui {
     class KCMWebAccounts;
@@ -43,6 +44,7 @@ private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
     void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+    void moduleLoadCallFinished(QDBusPendingCallWatcher *watcher);
 
 private:
     Create *m_create;
