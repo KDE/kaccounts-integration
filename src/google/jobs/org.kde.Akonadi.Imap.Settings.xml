@@ -1,0 +1,147 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.Akonadi.Imap.Wallet">
+    <method name="password">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="setPassword">
+      <arg name="password" type="s" direction="in"/>
+    </method>
+  </interface>
+  <interface name="org.kde.Akonadi.Imap.Settings">
+    <method name="writeConfig"/>
+    <method name="imapServer">
+      <arg direction="out" type="s"/>
+    </method>
+    <method name="setImapServer">
+      <arg direction="in" identifier="value" type="s"/>
+    </method>
+    <method name="imapPort">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setImapPort">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="userName">
+      <arg direction="out" type="s"/>
+    </method>
+    <method name="setUserName">
+      <arg direction="in" identifier="value" type="s"/>
+    </method>
+    <method name="safety">
+      <arg direction="out" type="s"/>
+    </method>
+    <method name="setSafety">
+      <arg direction="in" identifier="value" type="s"/>
+    </method>
+    <method name="authentication">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setAuthentication">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="subscriptionEnabled">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setSubscriptionEnabled">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="sessionTimeout">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setSessionTimeout">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="disconnectedModeEnabled">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setDisconnectedModeEnabled">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="intervalCheckEnabled">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setIntervalCheckEnabled">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="intervalCheckTime">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setIntervalCheckTime">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="retrieveMetadataOnFolderListing">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setRetrieveMetadataOnFolderListing">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="automaticExpungeEnabled">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setAutomaticExpungeEnabled">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="trashCollection">
+      <arg direction="out" type="x"/>
+    </method>
+    <method name="setTrashCollection">
+      <arg direction="in" identifier="value" type="x"/>
+    </method>
+    <method name="useDefaultIdentity">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setUseDefaultIdentity">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="accountIdentity">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setAccountIdentity">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="knownMailBoxes">
+      <arg direction="out" type="as"/>
+    </method>
+    <method name="setKnownMailBoxes">
+      <arg direction="in" identifier="value" type="as"/>
+    </method>
+    <method name="idleRidPath">
+      <arg direction="out" type="as"/>
+    </method>
+    <method name="setIdleRidPath">
+      <arg direction="in" identifier="value" type="as"/>
+    </method>
+    <method name="sieveSupport">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setSieveSupport">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="sieveReuseConfig">
+      <arg direction="out" type="b"/>
+    </method>
+    <method name="setSieveReuseConfig">
+      <arg direction="in" identifier="value" type="b"/>
+    </method>
+    <method name="sievePort">
+      <arg direction="out" type="i"/>
+    </method>
+    <method name="setSievePort">
+      <arg direction="in" identifier="value" type="i"/>
+    </method>
+    <method name="sieveAlternateUrl">
+      <arg direction="out" type="s"/>
+    </method>
+    <method name="setSieveAlternateUrl">
+      <arg direction="in" identifier="value" type="s"/>
+    </method>
+    <method name="sieveVacationFilename">
+      <arg direction="out" type="s"/>
+    </method>
+    <method name="setSieveVacationFilename">
+      <arg direction="in" identifier="value" type="s"/>
+    </method>
+  </interface>
+</node>
