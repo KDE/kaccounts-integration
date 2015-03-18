@@ -58,7 +58,10 @@ void AccountWidget::setAccount(Accounts::Account *account)
 
     qDeleteAll(m_checkboxes);
     m_checkboxes.clear();
-    QObject::disconnect(m_connection);
+    Q_FOREACH (const QMetaObject::Connection &connection, m_connections) {
+        QObject::disconnect(connection);
+    }
+    m_connections.clear();
 
     QLayoutItem *child;
     while ((child = d_layout->takeAt(0)) != 0) {
@@ -85,7 +88,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
 
         KAccountsUiPlugin *uiPlugin = KAccounts::UiPluginsManager::pluginForService(service.serviceType());
         if (uiPlugin) {
-            m_connection = connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
+            m_connections << connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
                 uiPlugin->showConfigureAccountDialog(m_account.data()->id());
             });
         }
@@ -93,7 +96,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
         if (uiPlugin != 0) {
             QHBoxLayout *hlayout = new QHBoxLayout();
             QPushButton *imConfigButton = new QPushButton(i18n("Configure..."));
-            connect(imConfigButton, &QPushButton::pressed, [=](){
+            m_connections << connect(imConfigButton, &QPushButton::pressed, [=](){
                 uiPlugin->init(KAccountsUiPlugin::ConfigureAccountDialog);
             });
 

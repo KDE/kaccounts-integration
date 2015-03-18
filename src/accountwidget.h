@@ -48,7 +48,7 @@ private:
     QHash<QString, QCheckBox*> m_checkboxes;
     QPointer<Accounts::Account> m_account;
     Accounts::Manager *m_manager;
-    QMetaObject::Connection m_connection;
+    QList<QMetaObject::Connection> m_connections;
 };
 
 #endif //ACCOUNTWIDGET_H
