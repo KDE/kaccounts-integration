@@ -21,6 +21,7 @@ kcoreaddons_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)
 target_link_libraries(kcm_kaccounts
     Qt5::Core
     Qt5::Gui
+    Qt5::DBus
     KF5::KIOCore
     KF5::I18n
     KF5::KCMUtils

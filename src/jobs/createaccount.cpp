@@ -150,6 +150,12 @@ void CreateAccount::ktpDialogFinished(const QString &username, const QString &pa
 void CreateAccount::ktpDialogError(const QString &error)
 {
     qWarning() << "Error while creating KTp account:" << error;
+    if (error.isEmpty()) {
+        setError(-1);
+    } else {
+        setError(KJob::UserDefinedError);
+    }
+    setErrorText(error);
     // Delete the KTp dialog
     sender()->deleteLater();
     emitResult();
