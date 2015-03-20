@@ -74,6 +74,15 @@ KAccounts::KAccounts(QWidget *parent, const QVariantList &)
 
     connect(m_ui->removeBtn, SIGNAL(clicked(bool)), this, SLOT(rmBtnClicked()));
     connect(m_ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(addBtnClicked()));
+
+    QDBusMessage moduleLoadCall = QDBusMessage::createMethodCall(QStringLiteral("org.kde.kded5"), QStringLiteral("/kded"),
+                                                                 QStringLiteral("org.kde.kded5"), QStringLiteral("loadModule"));
+    moduleLoadCall.setArguments(QList<QVariant>{QVariant("accounts")});
+
+    QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(moduleLoadCall);
+    QDBusPendingCallWatcher *pendingCallWatcher = new QDBusPendingCallWatcher(pendingCall, this);
+    connect(pendingCallWatcher, &QDBusPendingCallWatcher::finished,
+            this, &KAccounts::moduleLoadCallFinished);
 }
 
 void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
@@ -112,6 +121,21 @@ void KAccounts::rmBtnClicked()
     }
     // TODO: ask confirmation first?
     m_model->removeRows(index.row(), 1);
+}
+
+void KAccounts::moduleLoadCallFinished(QDBusPendingCallWatcher *watcher)
+{
+    QDBusPendingReply<bool> reply = *watcher;
+    bool loaded;
+    if (reply.isError()) {
+        loaded = false;
+    } else {
+        loaded = reply.value();
+    }
+
+    if (!loaded) {
+        qWarning() << "Unable to start the kded module, things may (and most probably will) misbehave";
+    }
 }
 
 #include "kaccounts.moc"
