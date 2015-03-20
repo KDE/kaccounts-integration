@@ -45,15 +45,11 @@ public:
 
 private Q_SLOTS:
     void processSessionOwncloud();
-    void processSessionKTp();
     void accountCreated();
     void processSession();
     void sessionError(const SignOn::Error &signOnError);
     void sessionResponse(const SignOn::SessionData &data);
     void info(const SignOn::IdentityInfo &info);
-
-    void ktpDialogFinished(const QString &username, const QString &password, const QVariantMap &additionalData);
-    void ktpDialogError(const QString &error);
 
 private:
     QString m_providerName;

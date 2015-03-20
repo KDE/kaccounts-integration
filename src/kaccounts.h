@@ -44,7 +44,6 @@ private Q_SLOTS:
     void addBtnClicked();
     void rmBtnClicked();
     void currentChanged(const QModelIndex &current, const QModelIndex &previous);
-    void moduleLoadCallFinished(QDBusPendingCallWatcher *watcher);
 
 private:
     Create *m_create;
