@@ -50,6 +50,7 @@ ecm_configure_package_config_file(
 )
 
 install(FILES
+  "KAccountsMacros.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfig.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfigVersion.cmake"
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
