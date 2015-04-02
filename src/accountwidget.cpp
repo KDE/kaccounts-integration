@@ -48,6 +48,9 @@ AccountWidget::AccountWidget(Accounts::Account *account, QWidget *parent)
 AccountWidget::~AccountWidget()
 {
     qDeleteAll(m_checkboxes);
+    Q_FOREACH (const QMetaObject::Connection &connection, m_connections) {
+        QObject::disconnect(connection);
+    }
 }
 
 void AccountWidget::setAccount(Accounts::Account *account)
