@@ -26,10 +26,10 @@ target_link_libraries(kcm_kaccounts
     KF5::I18n
     KF5::KCMUtils
     KF5::IconThemes
-    ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
     kaccounts
 )
+target_include_directories(kcm_kaccounts PRIVATE "${SIGNONQT_INCLUDE_DIRS}")
 
 
 install(TARGETS kcm_kaccounts DESTINATION ${PLUGIN_INSTALL_DIR})

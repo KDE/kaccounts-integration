@@ -33,11 +33,6 @@ include(KDECompilerSettings)
 include(ECMInstallIcons)
 include(FeatureSummary)
 
-include_directories(
-    ${ACCOUNTSQT_INCLUDE_DIRS}
-    ${SIGNONQT_INCLUDE_DIRS}
-)
-
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 add_subdirectory(src)

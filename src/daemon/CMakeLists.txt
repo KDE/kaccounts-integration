@@ -25,8 +25,6 @@ target_link_libraries(kded_accounts
     KF5::I18n
     KF5::DBusAddons
     kaccounts
-    ${ACCOUNTSQT_LIBRARIES}
-    ${SIGNONQT_LIBRARIES}
 )
 
 install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
