@@ -72,3 +72,5 @@ install (FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${INCLUDE_INSTALL_DIR}/KAccounts COMPONENT Devel
 )
+
+add_subdirectory(cmake)
