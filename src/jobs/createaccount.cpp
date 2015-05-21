@@ -201,8 +201,6 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
 
 
-    QVariantMap data = m_accInfo->authData().parameters();
-    data.insert("Embedded", false);
 
     m_done = true;
 
