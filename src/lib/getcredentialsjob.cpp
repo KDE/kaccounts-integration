@@ -71,7 +71,7 @@ void GetCredentialsJob::Private::getCredentials()
 
     Accounts::AuthData serviceAuthData = service->authData();
     authData = serviceAuthData.parameters();
-    SignOn::Identity *identity = SignOn::Identity::existingIdentity(serviceAuthData.credentialsId(), q);
+    SignOn::Identity *identity = SignOn::Identity::existingIdentity(acc->credentialsId(), q);
 
     if (!identity) {
         qWarning() << "Unable to find identity for account id" << id;
