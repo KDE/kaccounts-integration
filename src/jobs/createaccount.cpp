@@ -228,17 +228,7 @@ void CreateAccount::pluginError(const QString &error)
 
 void CreateAccount::sessionResponse(const SignOn::SessionData &data)
 {
-    qDebug() << "Response:";
-    qDebug() << "\tToken:" << data.getProperty("AccessToken");
-    qDebug() << "\tExpires:" << data.getProperty("ExpiresIn");
-    qDebug() << "\tCaption:" << data.Caption();
-    qDebug() << "\tControlTokens:" << data.getAccessControlTokens();
-    qDebug() << "\tPropertyNames:" << data.propertyNames();
-    qDebug() << "\tProxy:" << data.NetworkProxy();
-    qDebug() << "\tRealm:" << data.Realm();
-    qDebug() << "\tSecret:" << data.Secret();
-    qDebug() << "\tUsername:" << data.UserName();
-    qDebug() << "\t:" << data.getProperty("ScreenName");
+    qDebug() << "Received session response";
 
     m_done = true;
     m_identity->queryInfo();
@@ -248,10 +238,7 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
 {
     qDebug() << "Info:";
     qDebug() << "\tId:" << info.id();
-    qDebug() << "\taccessControl:" << info.accessControlList();
     qDebug() << "\tcaption:" << info.caption();
-    qDebug() << "\tid:" << info.id();
-    qDebug() << "\tstoringSecret:" << info.isStoringSecret();
     qDebug() << "\towner:" << info.owner();
     qDebug() << "\tuserName:" << info.userName();
 
