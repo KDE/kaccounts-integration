@@ -112,34 +112,139 @@ void CreateAccount::accountCreated()
 void CreateAccount::processSession()
 {
     m_account = m_manager->createAccount(m_providerName);
-
-    SignOn::IdentityInfo info;
-    info.setCaption(m_providerName);
-    info.setAccessControlList(QStringList("*"));
-    info.setType(SignOn::IdentityInfo::Application);
-    info.setStoreSecret(true);
-
-    m_identity = SignOn::Identity::newIdentity(info, this);
-    m_identity->storeCredentials();
-
-    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
-
     Accounts::Service service;
     m_accInfo = new Accounts::AccountService(m_account, service, this);
+
+    const QString pluginName = m_account->provider().pluginName();
+    if (!pluginName.isEmpty()) {
+        loadPluginAndShowDialog(pluginName);
+    } else {
+        SignOn::IdentityInfo info;
+        info.setCaption(m_providerName);
+        info.setAccessControlList(QStringList("*"));
+        info.setType(SignOn::IdentityInfo::Application);
+        info.setStoreSecret(true);
+
+        m_identity = SignOn::Identity::newIdentity(info, this);
+        m_identity->storeCredentials();
+
+        connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+
+        QVariantMap data = m_accInfo->authData().parameters();
+        data.insert("Embedded", false);
+
+        SignOn::SessionData sessionData(data);
+        SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
+        qDebug() << "Starting auth session with" << m_accInfo->authData().method();
+        connect(session, SIGNAL(error(SignOn::Error)), SLOT(sessionError(SignOn::Error)));
+        connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(sessionResponse(SignOn::SessionData)));
+
+        session->process(sessionData, m_accInfo->authData().mechanism());
+    }
+}
+
+void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
+{
+    QString pluginPath;
+
+    QStringList paths = QCoreApplication::libraryPaths();
+    Q_FOREACH (const QString &libraryPath, paths) {
+        QString path(libraryPath + QStringLiteral("/kaccounts/ui"));
+        QDir dir(path);
+
+        if (!dir.exists()) {
+            continue;
+        }
+
+        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        Q_FOREACH (const QString &fileName, entryList) {
+            qDebug() << "Checking file" << fileName << dir.absoluteFilePath(fileName);
+            if (fileName == (pluginName + ".so")) {
+                pluginPath = dir.absoluteFilePath(fileName);
+            }
+        }
+    }
+
+    QPluginLoader loader(pluginPath);
+
+    if (!loader.load()) {
+        qWarning() << "Could not create KAccountsUiPlugin: " << pluginPath;
+        qWarning() << loader.errorString();
+        pluginError(i18n("Could not load KAccountsUiPlugin found at %1, please check your installation", pluginPath));
+        return;
+    }
+
+    QObject *obj = loader.instance();
+    if (obj) {
+        KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
+        if (!ui) {
+            qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
+            qDebug() << pluginPath;
+            pluginError(i18n("Could not load KAccountsUiPlugin found at %1, please check your installation", pluginPath));
+            return;
+        }
+
+        connect(ui, SIGNAL(success(QString,QString,QVariantMap)),
+                this, SLOT(pluginFinished(QString,QString,QVariantMap)));
+
+        connect(ui, SIGNAL(error(QString)),
+                this, SLOT(pluginError(QString)));
+
+        ui->init(KAccountsUiPlugin::NewAccountDialog);
+
+        // When the plugin has finished building the UI, show it right away
+        connect(ui, &KAccountsUiPlugin::uiReady, [=](){ui->showNewAccountDialog();});
+
+        // Pass the provider name without the "ktp-" prefix, the rest matches
+        // a Telepathy service name, which allows to open a specialized KTp
+        // dialog for creating that particular account
+        ui->setProviderName(m_providerName.mid(4));
+    } else {
+        qDebug() << "Plugin could not creaate instance" << pluginPath;
+    }
+}
+
+void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
+{
+    // Set up the new identity
+    SignOn::IdentityInfo info;
+    info.setStoreSecret(true);
+    info.setUserName(screenName);
+    info.setSecret(secret, true);
+    info.setCaption(m_providerName);
+    info.setAccessControlList(QStringList(QLatin1String("*")));
+    info.setType(SignOn::IdentityInfo::Application);
+
+    m_identity = SignOn::Identity::newIdentity(info, this);
+    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+
 
     QVariantMap data = m_accInfo->authData().parameters();
     data.insert("Embedded", false);
 
-    SignOn::SessionData sessionData(data);
+    m_done = true;
 
-    SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
-    connect(session, SIGNAL(error(SignOn::Error)), SLOT(sessionError(SignOn::Error)));
-    connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(sessionResponse(SignOn::SessionData)));
+    m_identity->storeCredentials();
+    connect(m_identity, &SignOn::Identity::credentialsStored, m_identity, &SignOn::Identity::queryInfo);
 
-    session->process(sessionData, m_accInfo->authData().mechanism());
+    // Delete the dialog
+    sender()->deleteLater();
 }
 
-void CreateAccount::sessionResponse(const SignOn::SessionData& data)
+void CreateAccount::pluginError(const QString &error)
+{
+    if (error.isEmpty()) {
+        setError(-1);
+    } else {
+        setError(KJob::UserDefinedError);
+    }
+    setErrorText(error);
+    // Delete the dialog
+    sender()->deleteLater();
+    emitResult();
+}
+
+void CreateAccount::sessionResponse(const SignOn::SessionData &data)
 {
     qDebug() << "Response:";
     qDebug() << "\tToken:" << data.getProperty("AccessToken");
@@ -157,7 +262,7 @@ void CreateAccount::sessionResponse(const SignOn::SessionData& data)
     m_identity->queryInfo();
 }
 
-void CreateAccount::info(const SignOn::IdentityInfo& info)
+void CreateAccount::info(const SignOn::IdentityInfo &info)
 {
     qDebug() << "Info:";
     qDebug() << "\tId:" << info.id();

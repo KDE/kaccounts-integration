@@ -50,8 +50,12 @@ private Q_SLOTS:
     void sessionError(const SignOn::Error &signOnError);
     void sessionResponse(const SignOn::SessionData &data);
     void info(const SignOn::IdentityInfo &info);
+    void pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &map);
+    void pluginError(const QString &error);
 
 private:
+    void loadPluginAndShowDialog(const QString &pluginName);
+
     QString m_providerName;
     Accounts::Manager *m_manager;
     Accounts::Account *m_account;
