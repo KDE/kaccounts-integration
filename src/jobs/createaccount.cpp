@@ -251,6 +251,7 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
     }
     m_account->setValue("username", info.userName());
 
+    m_account->selectService();
     m_account->setCredentialsId(info.id());
 
     Accounts::AuthData authData = m_accInfo->authData();
