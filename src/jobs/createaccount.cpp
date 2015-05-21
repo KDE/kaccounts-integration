@@ -91,24 +91,6 @@ void CreateAccount::processSessionOwncloud()
     m_identity->queryInfo();
 }
 
-void CreateAccount::accountCreated()
-{
-    if (m_providerName.startsWith(QLatin1String("ktp-"))) {
-        QString uid = m_account->value("uid").toString();
-
-        KSharedConfigPtr kaccountsConfig = KSharedConfig::openConfig(QStringLiteral("kaccounts-ktprc"));
-        KConfigGroup ktpKaccountsGroup = kaccountsConfig->group(QStringLiteral("ktp-kaccounts"));
-        ktpKaccountsGroup.writeEntry(uid, m_account->id());
-
-        KConfigGroup kaccountsKtpGroup = kaccountsConfig->group(QStringLiteral("kaccounts-ktp"));
-        kaccountsKtpGroup.writeEntry(QString::number(m_account->id()), uid);
-        qDebug() << "Syncing config";
-        kaccountsConfig->sync();
-    }
-
-    emitResult();
-}
-
 void CreateAccount::processSession()
 {
     m_account = m_manager->createAccount(m_providerName);
@@ -309,8 +291,8 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
         m_account->setEnabled(true);
     }
 
-    connect(m_account, SIGNAL(synced()), SLOT(accountCreated()));
     m_account->sync();
+    connect(m_account, &Accounts::Account::synced, this, &CreateAccount::emitResult);
 }
 
 void CreateAccount::sessionError(const SignOn::Error &signOnError)

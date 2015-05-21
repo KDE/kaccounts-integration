@@ -45,7 +45,6 @@ public:
 
 private Q_SLOTS:
     void processSessionOwncloud();
-    void accountCreated();
     void processSession();
     void sessionError(const SignOn::Error &signOnError);
     void sessionResponse(const SignOn::SessionData &data);
