@@ -146,11 +146,7 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
     // When the plugin has finished building the UI, show it right away
     connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog);
 
-
-        // Pass the provider name without the "ktp-" prefix, the rest matches
-        // a Telepathy service name, which allows to open a specialized KTp
-        // dialog for creating that particular account
-        ui->setProviderName(m_providerName.mid(4));
+    ui->setProviderName(m_providerName);
 }
 
 void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
