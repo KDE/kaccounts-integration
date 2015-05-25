@@ -175,7 +175,6 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     connect(m_identity, &SignOn::Identity::credentialsStored, m_identity, &SignOn::Identity::queryInfo);
 
     // Delete the dialog
-    sender()->deleteLater();
 }
 
 void CreateAccount::pluginError(const QString &error)
@@ -187,7 +186,6 @@ void CreateAccount::pluginError(const QString &error)
     }
     setErrorText(error);
     // Delete the dialog
-    sender()->deleteLater();
     emitResult();
 }
 
