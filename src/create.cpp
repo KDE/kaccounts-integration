@@ -86,6 +86,7 @@ void Create::fillInterface()
 void Create::createAccount()
 {
     QString providerName = sender()->property("providerName").toString();
+    qDebug() << "Starting new account dialog for" << providerName;
     CreateAccount *acc = new CreateAccount(providerName, this);
 
     connect(acc, &CreateAccount::finished, [=](KJob *job) {

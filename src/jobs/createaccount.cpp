@@ -112,6 +112,9 @@ void CreateAccount::processSession()
         m_identity->storeCredentials();
 
         connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+        connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
+            qDebug() << "Error storing identity:" << err.message();
+        });
 
         QVariantMap data = m_accInfo->authData().parameters();
         data.insert("Embedded", false);
@@ -131,6 +134,7 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
     KAccountsUiPlugin *ui = KAccounts::UiPluginsManager::pluginForName(pluginName);
 
     if (!ui) {
+        qDebug() << "Plugin could not be loaded";
         pluginError(i18nc("The %1 is for plugin name, eg. Could not load UI plugin", "Could not load %1 plugin, please check your installation", pluginName));
         return;
     }
