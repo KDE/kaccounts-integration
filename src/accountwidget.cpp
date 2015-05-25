@@ -95,9 +95,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
             m_connections << connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
                 uiPlugin->showConfigureAccountDialog(m_account.data()->id());
             });
-        }
 
-        if (uiPlugin != 0) {
             QHBoxLayout *hlayout = new QHBoxLayout();
             QPushButton *imConfigButton = new QPushButton(i18n("Configure..."));
             m_connections << connect(imConfigButton, &QPushButton::pressed, [=](){
