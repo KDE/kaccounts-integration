@@ -94,6 +94,7 @@ void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &pr
     if (current.row() == m_model->rowCount() - 1) {
         m_ui->removeBtn->setDisabled(true);
         m_layout->setCurrentIndex(0);
+        m_accWidget->setAccount(0);
         return;
     }
 
