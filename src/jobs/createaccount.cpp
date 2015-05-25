@@ -19,6 +19,7 @@
 #include "createaccount.h"
 #include "ownclouddialog.h"
 #include "lib/kaccountsuiplugin.h"
+#include "uipluginsmanager.h"
 
 #include <QDebug>
 
@@ -127,63 +128,29 @@ void CreateAccount::processSession()
 
 void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
 {
-    QString pluginPath;
+    KAccountsUiPlugin *ui = KAccounts::UiPluginsManager::pluginForName(pluginName);
 
-    QStringList paths = QCoreApplication::libraryPaths();
-    Q_FOREACH (const QString &libraryPath, paths) {
-        QString path(libraryPath + QStringLiteral("/kaccounts/ui"));
-        QDir dir(path);
-
-        if (!dir.exists()) {
-            continue;
-        }
-
-        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-        Q_FOREACH (const QString &fileName, entryList) {
-            qDebug() << "Checking file" << fileName << dir.absoluteFilePath(fileName);
-            if (fileName == (pluginName + ".so")) {
-                pluginPath = dir.absoluteFilePath(fileName);
-            }
-        }
-    }
-
-    QPluginLoader loader(pluginPath);
-
-    if (!loader.load()) {
-        qWarning() << "Could not create KAccountsUiPlugin: " << pluginPath;
-        qWarning() << loader.errorString();
-        pluginError(i18n("Could not load KAccountsUiPlugin found at %1, please check your installation", pluginPath));
+    if (!ui) {
+        pluginError(i18nc("The %1 is for plugin name, eg. Could not load UI plugin", "Could not load %1 plugin, please check your installation", pluginName));
         return;
     }
 
-    QObject *obj = loader.instance();
-    if (obj) {
-        KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
-        if (!ui) {
-            qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
-            qDebug() << pluginPath;
-            pluginError(i18n("Could not load KAccountsUiPlugin found at %1, please check your installation", pluginPath));
-            return;
-        }
+    connect(ui, SIGNAL(success(QString,QString,QVariantMap)),
+            this, SLOT(pluginFinished(QString,QString,QVariantMap)));
 
-        connect(ui, SIGNAL(success(QString,QString,QVariantMap)),
-                this, SLOT(pluginFinished(QString,QString,QVariantMap)));
+    connect(ui, SIGNAL(error(QString)),
+            this, SLOT(pluginError(QString)));
 
-        connect(ui, SIGNAL(error(QString)),
-                this, SLOT(pluginError(QString)));
+    ui->init(KAccountsUiPlugin::NewAccountDialog);
 
-        ui->init(KAccountsUiPlugin::NewAccountDialog);
+    // When the plugin has finished building the UI, show it right away
+    connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog);
 
-        // When the plugin has finished building the UI, show it right away
-        connect(ui, &KAccountsUiPlugin::uiReady, [=](){ui->showNewAccountDialog();});
 
         // Pass the provider name without the "ktp-" prefix, the rest matches
         // a Telepathy service name, which allows to open a specialized KTp
         // dialog for creating that particular account
         ui->setProviderName(m_providerName.mid(4));
-    } else {
-        qDebug() << "Plugin could not creaate instance" << pluginPath;
-    }
 }
 
 void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
