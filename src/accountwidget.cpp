@@ -75,6 +75,10 @@ void AccountWidget::setAccount(Accounts::Account *account)
         delete child;
     }
 
+    if (!account) {
+        return;
+    }
+
     QCheckBox *checkbox = 0;
     Accounts::ServiceList services = account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
