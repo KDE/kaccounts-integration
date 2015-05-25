@@ -29,6 +29,7 @@ class UiPluginsManager {
 public:
     static QList<KAccountsUiPlugin*> uiPlugins();
     static KAccountsUiPlugin* pluginForService(const QString &service);
+    static KAccountsUiPlugin* pluginForName(const QString &name);
 };
 
 }

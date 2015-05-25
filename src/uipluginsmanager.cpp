@@ -37,7 +37,7 @@ public:
 
     void loadPlugins();
 
-    QList<KAccountsUiPlugin*> uiPlugins;
+    QHash<QString, KAccountsUiPlugin*> pluginsForNames;
     QHash<QString, KAccountsUiPlugin*> pluginsForServices;
     bool pluginsLoaded;
 
@@ -52,7 +52,7 @@ UiPluginsManagerPrivate::UiPluginsManagerPrivate()
 
 UiPluginsManagerPrivate::~UiPluginsManagerPrivate()
 {
-    qDeleteAll(uiPlugins);
+    qDeleteAll(pluginsForNames.values());
 }
 
 void UiPluginsManagerPrivate::loadPlugins()
@@ -87,9 +87,9 @@ void UiPluginsManagerPrivate::loadPlugins()
                     continue;
                 }
 
-                qDebug() << "Adding plugin" << ui;
+                qDebug() << "Adding plugin" << ui << fileName;
 
-                uiPlugins << ui;
+                pluginsForNames.insert(fileName, ui);
                 Q_FOREACH (const QString &service, ui->supportedServicesForConfig()) {
                     qDebug() << " Adding service" << service;
                     pluginsForServices.insert(service, ui);
@@ -104,13 +104,23 @@ void UiPluginsManagerPrivate::loadPlugins()
     pluginsLoaded = true;
 }
 
+
 QList<KAccountsUiPlugin*> UiPluginsManager::uiPlugins()
 {
     if (!s_instance->pluginsLoaded) {
         s_instance->loadPlugins();
     }
 
-    return s_instance->uiPlugins;
+    return s_instance->pluginsForNames.values();
+}
+
+KAccountsUiPlugin* UiPluginsManager::pluginForName(const QString &name)
+{
+    if (!s_instance->pluginsLoaded) {
+        s_instance->loadPlugins();
+    }
+
+    return s_instance->pluginsForNames.value(name + ".so");
 }
 
 KAccountsUiPlugin* UiPluginsManager::pluginForService(const QString &service)
