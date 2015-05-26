@@ -1,4 +1,4 @@
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${AKONADI_INCLUDE_DIR})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
@@ -25,8 +25,6 @@ target_link_libraries(kded_accounts
     KF5::I18n
     KF5::DBusAddons
     kaccounts
-    ${ACCOUNTSQT_LIBRARIES}
-    ${SIGNONQT_LIBRARIES}
 )
 
 install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
@@ -52,7 +50,8 @@ if (KF5Akonadi_FOUND)
 
     target_link_libraries(kaccounts_akonadi_plugin
         kaccounts
-        Qt5::Core
+        Qt5::DBus
+        KF5::ConfigCore
         KF5::AkonadiCore)
 
     # Install:

@@ -30,14 +30,16 @@ add_library (kaccounts SHARED
              ${kaccountslib_SRCS}
 )
 
-target_link_libraries (kaccounts Qt5::Core
-                                 Qt5::Xml
-                                 KF5::CoreAddons
-                                 ${ACCOUNTSQT_LIBRARIES}
-                                 ${SIGNONQT_LIBRARIES}
+target_link_libraries (kaccounts
+    PUBLIC
+        KF5::CoreAddons
+        ${ACCOUNTSQT_LIBRARIES}
+        Qt5::Xml
+    PRIVATE
+        ${SIGNONQT_LIBRARIES}
 )
 
-target_include_directories(kaccounts INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KAccounts>")
+target_include_directories(kaccounts INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KAccounts>" PUBLIC "${ACCOUNTSQT_INCLUDE_DIRS}" PRIVATE "${SIGNONQT_INCLUDE_DIRS}")
 set_target_properties(kaccounts PROPERTIES VERSION   ${KACCOUNTS_VERSION}
                                            SOVERSION ${KACCOUNTS_SOVERSION}
                                            EXPORT_NAME KAccounts
@@ -50,6 +52,7 @@ ecm_configure_package_config_file(
 )
 
 install(FILES
+  "KAccountsMacros.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfig.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfigVersion.cmake"
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
@@ -69,3 +72,5 @@ install (FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${INCLUDE_INSTALL_DIR}/KAccounts COMPONENT Devel
 )
+
+add_subdirectory(cmake)

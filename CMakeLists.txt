@@ -8,7 +8,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_S
 
 enable_testing()
 
-set(KACCOUNTS_VERSION "15.03.95")
+set(KACCOUNTS_VERSION "15.04.1")
 set(KACCOUNTS_SOVERSION "1")
 set(REQUIRED_QT_VERSION "5.2.0")
 set(KF5_DEP_VERSION "5.4.0")
@@ -32,11 +32,6 @@ include(KDEFrameworkCompilerSettings)
 include(KDECompilerSettings)
 include(ECMInstallIcons)
 include(FeatureSummary)
-
-include_directories(
-    ${ACCOUNTSQT_INCLUDE_DIRS}
-    ${SIGNONQT_INCLUDE_DIRS}
-)
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 

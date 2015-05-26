@@ -83,6 +83,13 @@ void GetCredentialsJob::Private::getCredentials()
 
     authData["AccountUsername"] = acc->value(QLatin1String("username")).toString();
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authMethod.isEmpty() ? serviceAuthData.method() : authMethod);
+    if (!authSession) {
+        qWarning() << "Unable to create auth session for" << authMethod << serviceAuthData.method();
+        q->setError(KJob::UserDefinedError);
+        q->setErrorText(QLatin1String("Could not create auth session"));
+        q->emitResult();
+        return;
+    }
 
     QObject::connect(authSession.data(), &SignOn::AuthSession::response,
             [this, identity](const SignOn::SessionData &data) {

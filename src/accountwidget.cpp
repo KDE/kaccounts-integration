@@ -48,6 +48,9 @@ AccountWidget::AccountWidget(Accounts::Account *account, QWidget *parent)
 AccountWidget::~AccountWidget()
 {
     qDeleteAll(m_checkboxes);
+    Q_FOREACH (const QMetaObject::Connection &connection, m_connections) {
+        QObject::disconnect(connection);
+    }
 }
 
 void AccountWidget::setAccount(Accounts::Account *account)
@@ -98,7 +101,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
 
             QHBoxLayout *hlayout = new QHBoxLayout();
             QPushButton *imConfigButton = new QPushButton(i18n("Configure..."));
-            m_connections << connect(imConfigButton, &QPushButton::pressed, [=](){
+            m_connections << connect(imConfigButton, &QPushButton::clicked, [=](){
                 uiPlugin->init(KAccountsUiPlugin::ConfigureAccountDialog);
             });
 
