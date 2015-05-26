@@ -139,16 +139,14 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
         return;
     }
 
-    connect(ui, SIGNAL(success(QString,QString,QVariantMap)),
-            this, SLOT(pluginFinished(QString,QString,QVariantMap)));
+    connect(ui, &KAccountsUiPlugin::success, this, &CreateAccount::pluginFinished, Qt::UniqueConnection);
 
-    connect(ui, SIGNAL(error(QString)),
-            this, SLOT(pluginError(QString)));
+    connect(ui, &KAccountsUiPlugin::error, this, &CreateAccount::pluginError, Qt::UniqueConnection);
 
     ui->init(KAccountsUiPlugin::NewAccountDialog);
 
     // When the plugin has finished building the UI, show it right away
-    connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog);
+    connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog, Qt::UniqueConnection);
 
     ui->setProviderName(m_providerName);
 }
@@ -167,14 +165,10 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     m_identity = SignOn::Identity::newIdentity(info, this);
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
 
-
-
     m_done = true;
 
     m_identity->storeCredentials();
     connect(m_identity, &SignOn::Identity::credentialsStored, m_identity, &SignOn::Identity::queryInfo);
-
-    // Delete the dialog
 }
 
 void CreateAccount::pluginError(const QString &error)
