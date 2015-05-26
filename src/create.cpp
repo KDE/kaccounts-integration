@@ -25,7 +25,7 @@
 #include <QDebug>
 
 #include <QWidget>
-#include <QPushButton>
+#include <QCommandLinkButton>
 #include <QMessageBox>
 
 #include <Accounts/Manager>
@@ -68,19 +68,15 @@ void Create::fillInterface()
         return QString::localeAwareCompare(b.displayName(), a.displayName()) < 0;
     });
 
-    QPushButton *button;
+    QCommandLinkButton *button;
     Q_FOREACH(const Accounts::Provider &provider, providerList) {
         if (provider.name() == "ktp-generic") {
             continue;
         }
-        button = new QPushButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
+        button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
         button->setIcon(QIcon::fromTheme(provider.iconName()));
         button->setProperty("providerName", provider.name());
         button->setToolTip(i18nd(provider.trCatalog().toLatin1().constData(), provider.description().toUtf8().constData()));
-
-        QFont font = button->font();
-        font.setBold(true);
-        button->setFont(font);
 
         connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
         m_form->verticalLayout->insertWidget(0, button);
