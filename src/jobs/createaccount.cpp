@@ -151,7 +151,7 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
     ui->setProviderName(m_providerName);
 }
 
-void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
+void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &/*data*/)
 {
     // Set up the new identity
     SignOn::IdentityInfo info;
@@ -183,7 +183,7 @@ void CreateAccount::pluginError(const QString &error)
     emitResult();
 }
 
-void CreateAccount::sessionResponse(const SignOn::SessionData &data)
+void CreateAccount::sessionResponse(const SignOn::SessionData &/*data*/)
 {
     qDebug() << "Received session response";
 
