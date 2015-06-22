@@ -37,6 +37,12 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 
+CreateAccount::CreateAccount(QObject* parent)
+ : CreateAccount(QString(), parent)
+{
+
+}
+
 CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
  : KJob(parent)
  , m_providerName(providerName)
@@ -252,4 +258,12 @@ void CreateAccount::sessionError(const SignOn::Error &signOnError)
     setError(KJob::UserDefinedError);
     setErrorText(i18n("There was an error while trying to process the request: %1", signOnError.message()));
     emitResult();
+}
+
+void CreateAccount::setProviderName(const QString &name)
+{
+    if (m_providerName != name) {
+        m_providerName = name;
+        Q_EMIT providerNameChanged();
+    }
 }

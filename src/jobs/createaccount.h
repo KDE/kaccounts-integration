@@ -38,10 +38,14 @@ namespace SignOn
 class CreateAccount : public KJob
 {
     Q_OBJECT
+    Q_PROPERTY(QString providerName READ providerName WRITE setProviderName NOTIFY providerNameChanged)
 public:
+    explicit CreateAccount(QObject* parent = 0);
     explicit CreateAccount(const QString &providerName, QObject* parent = 0);
 
-    virtual void start();
+    QString providerName() const { return m_providerName; }
+    void setProviderName(const QString &name);
+    void start() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void processSessionOwncloud();
@@ -51,6 +55,9 @@ private Q_SLOTS:
     void info(const SignOn::IdentityInfo &info);
     void pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &map);
     void pluginError(const QString &error);
+
+Q_SIGNALS:
+    void providerNameChanged();
 
 private:
     void loadPluginAndShowDialog(const QString &pluginName);

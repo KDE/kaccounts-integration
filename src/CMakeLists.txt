@@ -1,5 +1,6 @@
 add_subdirectory(daemon)
 add_subdirectory(lib)
+add_subdirectory(declarative)
 
 set(kaccounts_SRCS
     kaccounts.cpp
