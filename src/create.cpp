@@ -74,7 +74,12 @@ void Create::fillInterface()
             continue;
         }
         button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
-        button->setIcon(QIcon::fromTheme(provider.iconName()));
+        const QString providerIcon = provider.iconName();
+        if (providerIcon.isEmpty()) {
+            button->setIcon(QIcon::fromTheme("list-add"));
+        } else {
+            button->setIcon(QIcon::fromTheme(providerIcon));
+        }
         button->setProperty("providerName", provider.name());
         button->setToolTip(i18nd(provider.trCatalog().toLatin1().constData(), provider.description().toUtf8().constData()));
 
