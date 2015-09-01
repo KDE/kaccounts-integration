@@ -89,6 +89,9 @@ void UiPluginsManagerPrivate::loadPlugins()
 
                 qDebug() << "Adding plugin" << ui << fileName;
 
+                // When the plugin has finished building the UI, show it right away
+                QObject::connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog, Qt::UniqueConnection);
+
                 pluginsForNames.insert(fileName, ui);
                 Q_FOREACH (const QString &service, ui->supportedServicesForConfig()) {
                     qDebug() << " Adding service" << service;
