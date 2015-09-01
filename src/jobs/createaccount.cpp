@@ -116,7 +116,7 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
     ui->init(KAccountsUiPlugin::NewAccountDialog);
 }
 
-void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &/*data*/)
+void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
 {
     // Set up the new identity
     SignOn::IdentityInfo info;
@@ -126,6 +126,10 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     info.setCaption(m_providerName);
     info.setAccessControlList(QStringList(QLatin1String("*")));
     info.setType(SignOn::IdentityInfo::Application);
+
+    Q_FOREACH (const QString &key, data.keys()) {
+        m_account->setValue(key, data.value(key).toString());
+    }
 
     m_identity = SignOn::Identity::newIdentity(info, this);
     connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
