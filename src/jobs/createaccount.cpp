@@ -110,15 +110,10 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
     }
 
     connect(ui, &KAccountsUiPlugin::success, this, &CreateAccount::pluginFinished, Qt::UniqueConnection);
-
     connect(ui, &KAccountsUiPlugin::error, this, &CreateAccount::pluginError, Qt::UniqueConnection);
 
-    ui->init(KAccountsUiPlugin::NewAccountDialog);
-
-    // When the plugin has finished building the UI, show it right away
-    connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog, Qt::UniqueConnection);
-
     ui->setProviderName(m_providerName);
+    ui->init(KAccountsUiPlugin::NewAccountDialog);
 }
 
 void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &/*data*/)
