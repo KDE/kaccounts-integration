@@ -48,7 +48,6 @@ public:
     void start() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void processSessionOwncloud();
     void processSession();
     void sessionError(const SignOn::Error &signOnError);
     void sessionResponse(const SignOn::SessionData &data);
