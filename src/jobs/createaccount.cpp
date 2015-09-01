@@ -58,44 +58,7 @@ CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
 void CreateAccount::start()
 {
     qDebug() << m_providerName;
-    if (m_providerName == QLatin1String("owncloud")) {
-        QMetaObject::invokeMethod(this, "processSessionOwncloud");
-    } else {
-        QMetaObject::invokeMethod(this, "processSession");
-    }
-}
-
-void CreateAccount::processSessionOwncloud()
-{
-    OwncloudDialog* dialog = new OwncloudDialog();
-    int result = dialog->exec();
-    if (result == QDialog::Rejected) {
-        setError(-1);
-        // this should not be user visible string
-        setErrorText("Dialog was canceled");
-        emitResult();
-        return;
-    }
-
-    SignOn::IdentityInfo info;
-    info.setUserName(dialog->username());
-    info.setSecret(dialog->password());
-    info.setCaption(m_providerName);
-    info.setAccessControlList(QStringList(QLatin1String("*")));
-    info.setType(SignOn::IdentityInfo::Application);
-
-    m_identity = SignOn::Identity::newIdentity(info, this);
-    m_identity->storeCredentials();
-    m_done = true;
-
-    m_account = m_manager->createAccount(m_providerName);
-    m_account->setValue("dav/host", dialog->host());
-
-    Accounts::Service service;
-    m_accInfo = new Accounts::AccountService(m_account, service, this);
-
-    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
-    m_identity->queryInfo();
+    QMetaObject::invokeMethod(this, "processSession");
 }
 
 void CreateAccount::processSession()
@@ -105,6 +68,7 @@ void CreateAccount::processSession()
     m_accInfo = new Accounts::AccountService(m_account, service, this);
 
     const QString pluginName = m_account->provider().pluginName();
+    qDebug() << "Looking for plugin" << pluginName;
     if (!pluginName.isEmpty()) {
         loadPluginAndShowDialog(pluginName);
     } else {
