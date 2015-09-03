@@ -21,6 +21,8 @@
 
 #include <kjob.h>
 
+#include <QStringList>
+
 namespace Accounts
 {
     class Account;
@@ -62,6 +64,7 @@ private:
     void loadPluginAndShowDialog(const QString &pluginName);
 
     QString m_providerName;
+    QStringList m_disabledServices;
     Accounts::Manager *m_manager;
     Accounts::Account *m_account;
     Accounts::AccountService *m_accInfo;
