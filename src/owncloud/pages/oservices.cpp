@@ -20,7 +20,8 @@
 #include "oservices.h"
 #include "../owncloud.h"
 
-// #include "google/pages/serviceoption.h"
+#include <QCheckBox>
+#include <QVariant>
 
 OServices::OServices(QWizard *wizard)
     : QWizardPage()
@@ -41,23 +42,39 @@ void OServices::initializePage()
     list << QWizard::FinishButton;
     m_wizard->setButtonLayout(list);
 
-    addOption("File", i18n("Files"));
-    addOption("Calendar", i18n("Calendar"));
-    addOption("Contact", i18n("Contacts"));
+//     addOption("File", i18n("Files"));
+//     addOption("Calendar", i18n("Calendar"));
+    addOption("owncloud-contacts", i18n("Contacts"));
 }
 
-void OServices::addOption(const QString &text, const QString &displayText)
+void OServices::addOption(const QString &id, const QString &displayText)
 {
-//     ServiceOption *option = new ServiceOption(text, displayText, this);
-//     option->setBinary(true);
-//     connect(option, SIGNAL(toggled(QString, bool)), this, SLOT(optionToggled(QString, bool)));
-//
-//     m_wizard->activateOption(text, true);
-//
-//     d_layout->addWidget(option);
+    QCheckBox *option = new QCheckBox(displayText, this);
+    option->setChecked(true);
+    option->setProperty("id", id);
+    connect(option, &QCheckBox::toggled, this, &OServices::optionToggled);
+
+    d_layout->addWidget(option);
 }
 
-void OServices::optionToggled(const QString &name, bool checked)
+void OServices::optionToggled(bool checked)
 {
-//     m_wizard->activateOption(name, checked);
+    if (!sender()) {
+        return;
+    }
+
+    const QString service = sender()->property("id").toString();
+
+    if (checked) {
+        m_disabledServices.removeAll(service);
+    } else {
+        m_disabledServices.append(service);
+    }
+}
+
+bool OServices::validatePage()
+{
+    m_wizard->setProperty("disabledServices", m_disabledServices);
+
+    return true;
 }

@@ -32,15 +32,17 @@ public:
     virtual ~OServices();
 
     virtual void initializePage();
+    virtual bool validatePage();
 
 private Q_SLOTS:
-    void optionToggled(const QString &name, bool checked);
+    void optionToggled(bool checked);
 
 private:
-    void addOption(const QString &text, const QString &displayText);
+    void addOption(const QString &id, const QString &displayText);
 
 private:
     QWizard *m_wizard;
+    QStringList m_disabledServices;
 };
 
 #endif //OSERVICES_H

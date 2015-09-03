@@ -114,6 +114,10 @@ void OwnCloudWizard::done()
     QVariantMap data;
     data.insert("server", m_wizard->property("server"));
 
+    Q_FOREACH (const QString &disabledService, m_wizard->property("disabledServices").toStringList()) {
+        data.insert("__service/" + disabledService, false);
+    }
+
     const QString username = m_wizard->property("username").toString();
     QUrl carddavUrl = m_wizard->property("server").toUrl();
     carddavUrl.setPath(carddavUrl.path() + QString("/remote.php/carddav/addressbooks/%1").arg(username));
