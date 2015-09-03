@@ -19,6 +19,7 @@
 #include "createaccount.h"
 #include "ownclouddialog.h"
 #include "lib/kaccountsuiplugin.h"
+#include "lib/core.h"
 #include "uipluginsmanager.h"
 
 #include <QDebug>
@@ -128,6 +129,12 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     info.setType(SignOn::IdentityInfo::Application);
 
     Q_FOREACH (const QString &key, data.keys()) {
+        // If a key with __service/ prefix exists and its value is false,
+        // add it to m_disabledServices which will later be used for disabling
+        // the services contained in that list
+        if (key.startsWith(QLatin1String("__service/")) && !data.value(key).toBool()) {
+            m_disabledServices << key.mid(10);
+        }
         m_account->setValue(key, data.value(key).toString());
     }
 
@@ -202,7 +209,7 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
     Accounts::ServiceList services = m_account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         m_account->selectService(service);
-        m_account->setEnabled(true);
+        m_account->setEnabled(m_disabledServices.contains(service.name()) ? false : true);
     }
 
     m_account->sync();
