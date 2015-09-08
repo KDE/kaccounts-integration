@@ -21,9 +21,14 @@
 #include "pages/basicinfo.h"
 #include "pages/connecting.h"
 #include "pages/oservices.h"
+#include "qmlhelper.h"
 
 #include <klocalizedstring.h>
 #include <kstandardguiitem.h>
+#include <KDeclarative/QmlObject>
+
+#include <QQmlEngine>
+#include <QQmlContext>
 
 #include <QPushButton>
 #include <QWizard>
@@ -46,6 +51,25 @@ OwnCloudWizard::~OwnCloudWizard()
 void OwnCloudWizard::init(KAccountsUiPlugin::UiType type)
 {
     if (type == KAccountsUiPlugin::NewAccountDialog) {
+
+        const QString packagePath("org.kde.kaccounts.owncloud");
+
+        m_object = new KDeclarative::QmlObject();
+        m_object->setTranslationDomain(packagePath);
+        m_object->setInitializationDelayed(true);
+        m_object->loadPackage(packagePath);
+
+        QmlHelper *helper = new QmlHelper(this);
+        connect(helper, &QmlHelper::wizardFinished, this, &OwnCloudWizard::success);
+        connect(helper, &QmlHelper::wizardFinished, m_object, &QObject::deleteLater);
+        m_object->engine()->rootContext()->setContextProperty("helper", helper);
+
+        m_object->completeInitialization();
+
+        if (!m_object->package().metadata().isValid()) {
+            return;
+        }
+        /*
         m_wizard = new QWizard();
         m_wizard->setWindowTitle(i18n("Add ownCloud Account"));
 
@@ -79,7 +103,7 @@ void OwnCloudWizard::init(KAccountsUiPlugin::UiType type)
         m_wizard->setOption(QWizard::NoDefaultButton, false);
 
 
-        connect(m_wizard, &QWizard::accepted, this, &OwnCloudWizard::done);
+        connect(m_wizard, &QWizard::accepted, this, &OwnCloudWizard::done);*/
 
         Q_EMIT uiReady();
     }
@@ -94,8 +118,15 @@ void OwnCloudWizard::setProviderName(const QString &providerName)
 
 void OwnCloudWizard::showNewAccountDialog()
 {
-    if (m_wizard) {
-        m_wizard->exec();
+//     if (m_wizard) {
+//         m_wizard->exec();
+//     }
+    QWindow *window = qobject_cast<QWindow *>(m_object->rootObject());
+    if (window) {
+        window->show();
+        window->requestActivate();
+        window->setTitle(m_object->package().metadata().name());
+        window->setIcon(QIcon::fromTheme(m_object->package().metadata().iconName()));
     }
 }
 

@@ -1,5 +1,4 @@
 /*************************************************************************************
- *  Copyright (C) 2012 by Alejandro Fiestas Olivares <afiestas@kde.org>              *
  *  Copyright (C) 2015 by Martin Klapetek <mklapetek@kde.org>                        *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
@@ -17,60 +16,62 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OWNCLOUD_H
-#define OWNCLOUD_H
+#ifndef QMLHELPER_H
+#define QMLHELPER_H
 
-#include <QUrl>
-#include <QHash>
+#include <QObject>
 
-#include "../lib/kaccountsuiplugin.h"
+#include <KIO/AccessManager>
 
-class QWizard;
+namespace KIO
+{
+    class Job;
+};
+class KJob;
 
-namespace KDeclarative {
-    class QmlObject;
-}
-
-class OwnCloudWizard : public KAccountsUiPlugin
+class QmlHelper : public QObject
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.kaccounts.UiPlugin")
-    Q_INTERFACES(KAccountsUiPlugin)
+    Q_PROPERTY(bool isWorking READ isWorking NOTIFY isWorkingChanged)
+    Q_PROPERTY(bool isServerValid READ isServerValid NOTIFY isServerValidChanged)
+    Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY errorMessageChanged)
 
 public:
-    explicit OwnCloudWizard(QWidget *parent = 0);
-    virtual ~OwnCloudWizard();
+    QmlHelper(QObject *parent = 0);
+    ~QmlHelper();
 
-    virtual void init(KAccountsUiPlugin::UiType type) Q_DECL_OVERRIDE;
-    virtual void setProviderName(const QString &providerName) Q_DECL_OVERRIDE;
-    virtual void showNewAccountDialog() Q_DECL_OVERRIDE;
-    virtual void showConfigureAccountDialog(const quint32 accountId) Q_DECL_OVERRIDE;
-    virtual QStringList supportedServicesForConfig() const Q_DECL_OVERRIDE;
-
-    void done();
-
-    void setUsername(const QString &username);
-    void setPassword(const QString &password);
-    void setServer(const QUrl &server);
-
-    const QString username() const;
-    const QString password() const;
-    const QUrl server() const;
-
-    void activateOption(const QString &name, bool checked);
+    Q_INVOKABLE void checkServer(const QString &username, const QString &password, const QString &server);
+    Q_INVOKABLE void finish(bool contactsEnabled);
+    bool isWorking();
+    bool isServerValid();
+    QString errorMessage() const;
 
 Q_SIGNALS:
-    void newAccount(const QString &type, const QString &name);
+    void isWorkingChanged();
+    void isServerValidChanged();
+    void errorMessageChanged();
+    void wizardFinished(const QString &username, const QString &password, const QVariantMap &data);
+
+private Q_SLOTS:
+    void fileChecked(KJob *job);
+    void dataReceived(KIO::Job *job, const QByteArray &data);
+    void authCheckResult(KJob *job);
 
 private:
-    QWizard *m_wizard;
+    void checkServer(const QUrl &url);
+    void figureOutServer(const QUrl &url);
+    void setWorking(bool start);
+    void setResult(bool result);
+
+    QByteArray m_json;
+    QString m_errorMessage;
+    QString m_server;
     QString m_username;
     QString m_password;
-    QUrl m_server;
-    QString m_providerName;
+    QStringList m_disabledServices;
+    bool m_isWorking;
+    bool m_isServerValid;
 
-    QHash<QString, int> m_services;
-    KDeclarative::QmlObject *m_object;
 };
 
-#endif //OWNCLOUD_H
+#endif // QMLHELPER_H

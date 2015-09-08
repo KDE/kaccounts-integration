@@ -9,6 +9,7 @@ include_directories (${CMAKE_CURRENT_BUILD_DIR}
 
 set (owncloud_plugin_kaccounts_SRCS
      owncloud.cpp
+     qmlhelper.cpp
      pages/basicinfo.cpp
      pages/connecting.cpp
      pages/oservices.cpp
@@ -33,6 +34,7 @@ target_link_libraries (owncloud_plugin_kaccounts
                        KF5::WidgetsAddons
                        KF5::IconThemes
                        KF5::I18n
+                       KF5::Declarative
                        kaccounts
                        ${ACCOUNTSQT_LIBRARIES}
                        ${SIGNONQT_LIBRARIES}
@@ -42,3 +44,4 @@ target_link_libraries (owncloud_plugin_kaccounts
 install (TARGETS owncloud_plugin_kaccounts
          DESTINATION ${PLUGIN_INSTALL_DIR}/kaccounts/ui
 )
+kpackage_install_package(package org.kde.kaccounts.owncloud genericqml)
