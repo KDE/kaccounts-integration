@@ -38,10 +38,24 @@ ApplicationWindow {
             text: i18n("Add new ownCloud account")
         }
 
-        Loader {
-            id: loader
+        StackView {
+            id: stack
+
             Layout.fillHeight: true
             Layout.fillWidth: true
+
+            initialItem: BasicInfo {
+                id: basicInfoPage
+                objectName: "basicInfoPage"
+            }
+        }
+
+        Component {
+            id: servicesComponent
+
+            Services {
+                objectName: "servicesPage"
+            }
         }
 
         RowLayout {
@@ -49,12 +63,11 @@ ApplicationWindow {
                 id: backButton
                 Layout.fillWidth: true
                 text: i18n("Back");
-                enabled: false
+                enabled: stack.currentItem.objectName == "servicesPage"
 
                 onClicked: {
-                    if (loader.source == Qt.resolvedUrl("Services.qml")) {
-                        loader.source = "BasicInfo.qml";
-                        backButton.enabled = false;
+                    if (stack.currentItem.objectName == "servicesPage") {
+                        stack.pop(servicesComponent);
                     }
                 }
             }
@@ -63,13 +76,12 @@ ApplicationWindow {
                 id: nextButton
                 Layout.fillWidth: true
                 text: i18n("Next")
-                enabled: loader.item ? loader.item.canContinue : false
-                visible: loader.source == Qt.resolvedUrl("BasicInfo.qml")
+                enabled: basicInfoPage.canContinue //: false
+                visible: stack.currentItem == basicInfoPage
 
                 onClicked: {
-                    if (loader.source == Qt.resolvedUrl("BasicInfo.qml")) {
-                        loader.source = "Services.qml";
-                        backButton.enabled = true;
+                    if (stack.currentItem == basicInfoPage) {
+                        stack.push(servicesComponent);
                     }
                 }
             }
@@ -78,17 +90,12 @@ ApplicationWindow {
                 id: finishButton
                 Layout.fillWidth: true
                 text: i18n("Finish")
-                visible: loader.source == Qt.resolvedUrl("Services.qml")
+                visible: stack.currentItem.objectName == "servicesPage"
 
                 onClicked: {
                     helper.finish(loader.item.contactsEnabled ? "" : "contacts");
                 }
             }
         }
-    }
-
-    Component.onCompleted: {
-        loader.source = "BasicInfo.qml"
-        nextButton.enabled = true;
     }
 }
