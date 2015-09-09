@@ -143,6 +143,7 @@ void QmlHelper::setResult(bool result)
 {
 //     setWorking(false);
     m_isServerValid = result;
+    Q_EMIT isServerValidChanged();
 
     if (!result) {
         m_errorMessage = i18n("Unable to connect to ownCloud at the given server URL. Please check the server URL.");
