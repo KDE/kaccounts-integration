@@ -26,11 +26,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
     id: basicInfoLayout
-    property bool canContinue: helper.isServerValid && nameText.length > 0 && passwordText.length > 0
-
-    function checkServer() {
-        helper.checkServer(serverText.text);
-    }
+    property bool canContinue: helper.isServerValid && nameText.text.length > 0 && passwordText.text.length > 0
 
     Timer {
         id: checkServerTimer
