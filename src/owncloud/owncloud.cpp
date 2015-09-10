@@ -59,9 +59,15 @@ void OwnCloudWizard::init(KAccountsUiPlugin::UiType type)
         m_object->setInitializationDelayed(true);
         m_object->loadPackage(packagePath);
 
-        QmlHelper *helper = new QmlHelper(this);
+        QmlHelper *helper = new QmlHelper(m_object);
         connect(helper, &QmlHelper::wizardFinished, this, &OwnCloudWizard::success);
-        connect(helper, &QmlHelper::wizardFinished, m_object, &QObject::deleteLater);
+        connect(helper, &QmlHelper::wizardFinished, [=] {
+            QWindow *window = qobject_cast<QWindow *>(m_object->rootObject());
+            if (window) {
+                window->close();
+            }
+            m_object->deleteLater();
+        });
         m_object->engine()->rootContext()->setContextProperty("helper", helper);
 
         m_object->completeInitialization();
