@@ -94,7 +94,7 @@ ApplicationWindow {
                 visible: stack.currentItem.objectName == "servicesPage"
 
                 onClicked: {
-                    helper.finish(loader.item.contactsEnabled ? "" : "contacts");
+                    helper.finish(stack.currentItem.contactsEnabled ? "" : "contacts");
                 }
             }
         }
