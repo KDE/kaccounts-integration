@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=OwnCloud KAccounts QML plugin
+Name[nl]=OwnCloud KAccounts QML plug-in
+Name[pt]='Plugin' em QML do KAccounts para o OwnCloud
+Name[pt_BR]=Plugin em QML do KAccounts para o OwnCloud
+Name[sv]=OwnCloud QML-insticksprogram för konton
+Name[uk]=Додаток QML KAccounts OwnCloud
+Name[x-test]=xxOwnCloud KAccounts QML pluginxx
 
 Encoding=UTF-8
 Type=Service
