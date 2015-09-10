@@ -33,6 +33,7 @@ ApplicationWindow {
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: units.largeSpacing
 
         PlasmaExtras.Title {
             text: i18n("Add new ownCloud account")

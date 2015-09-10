@@ -68,6 +68,7 @@ ColumnLayout {
         Layout.fillWidth: true
         visible: text.length > 0 && !checkServerTimer.running
         text: helper.errorMessage
+        wrapMode: Text.WordWrap
     }
 
     Item {
@@ -76,12 +77,16 @@ ColumnLayout {
 
         PlasmaComponents.BusyIndicator {
             id: busy
+            width: Math.round(parent.width/2)
+            height: width
             anchors.centerIn: parent
             running: helper.isWorking
             visible: running
         }
 
         PlasmaCore.IconItem {
+            width: Math.round(parent.width/2)
+            height: width
             anchors.centerIn: parent
             source: "dialog-ok"
             visible: !helper.isWorking && helper.isServerValid && !errorLabel.visible
