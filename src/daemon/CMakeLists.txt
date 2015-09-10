@@ -29,34 +29,3 @@ target_link_libraries(kded_accounts
 
 install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES accounts.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded)
-
-####################################################################################
-
-if (KF5Akonadi_FOUND)
-    set(akonadi_plugin_SRCS
-        akonadi/akonadiservices.cpp
-        akonadi/akonadiaccounts.cpp
-        akonadi/jobs/abstractakonadijob.cpp
-        akonadi/jobs/createresourcejob.cpp
-        akonadi/jobs/removeresourcejob.cpp
-        akonadi/jobs/changesettingsjob.cpp
-        akonadi/jobs/fetchsettingsjob.cpp
-        akonadi/jobs/enableservicejob.cpp
-        akonadi/jobs/dbussettingsinterfacejob.cpp
-        akonadi/jobs/lookupakonadiservices.cpp
-        akonadi/jobs/removeakonadiservicesjob.cpp)
-
-    add_library(kaccounts_akonadi_plugin MODULE ${akonadi_plugin_SRCS})
-
-    target_link_libraries(kaccounts_akonadi_plugin
-        kaccounts
-        Qt5::DBus
-        KF5::ConfigCore
-        KF5::AkonadiCore)
-
-    # Install:
-    install (TARGETS kaccounts_akonadi_plugin
-            DESTINATION ${PLUGIN_INSTALL_DIR}/kaccounts/daemonplugins
-)
-
-endif()
