@@ -129,6 +129,7 @@ void OwnCloudWizard::showNewAccountDialog()
 //     }
     QWindow *window = qobject_cast<QWindow *>(m_object->rootObject());
     if (window) {
+        window->setTransientParent(transientParent());
         window->show();
         window->requestActivate();
         window->setTitle(m_object->package().metadata().name());
