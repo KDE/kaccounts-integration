@@ -26,6 +26,8 @@
 
 #include <QObject>
 
+class QWindow;
+
 class KACCOUNTS_EXPORT KAccountsUiPlugin : public QObject
 {
     Q_OBJECT
@@ -46,10 +48,12 @@ public:
      * Sets the selected Accounts-SSO provider to the plugin
      */
     virtual void setProviderName(const QString &providerName) = 0;
+
     /**
      * Called when the dialog for creating new account should show
      */
     virtual void showNewAccountDialog() = 0;
+
     /**
      * Called when an existing account should be configured
      * @param accountId The ID of the account that should be configured
@@ -62,6 +66,8 @@ public:
      * of IM/KTp accounts
      */
     virtual QStringList supportedServicesForConfig() const = 0;
+
+    QWindow* transientParent() const;
 
 Q_SIGNALS:
     /**

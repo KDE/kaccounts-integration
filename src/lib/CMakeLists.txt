@@ -35,6 +35,7 @@ target_link_libraries (kaccounts
         KF5::CoreAddons
         ${ACCOUNTSQT_LIBRARIES}
         Qt5::Xml
+        Qt5::Gui
     PRIVATE
         ${SIGNONQT_LIBRARIES}
 )
