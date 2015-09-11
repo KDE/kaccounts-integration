@@ -26,6 +26,8 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QPluginLoader>
+#include <QGuiApplication>
+#include <QWindow>
 
 using namespace KAccounts;
 
@@ -88,6 +90,13 @@ void UiPluginsManagerPrivate::loadPlugins()
                 }
 
                 qDebug() << "Adding plugin" << ui << fileName;
+                const QWindowList topLevelWindows = QGuiApplication::topLevelWindows();
+                if (topLevelWindows.size() == 1) {
+                    QWindow *topLevelWindow = topLevelWindows.at(0);
+                    obj->setProperty("transientParent", QVariant::fromValue(topLevelWindow));
+                } else {
+                    qWarning() << "Unexpected topLevelWindows found:" << topLevelWindows.size() << "please report a bug";
+                }
 
                 // When the plugin has finished building the UI, show it right away
                 QObject::connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog, Qt::UniqueConnection);
