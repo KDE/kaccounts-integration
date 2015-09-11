@@ -30,12 +30,17 @@ ColumnLayout {
     property alias contactsEnabled: contactsService.checked
 
     PlasmaExtras.Heading {
+        level: 3
         text: i18n("Choose services to enable");
     }
 
     PlasmaComponents.CheckBox {
         id: contactsService
         text: i18n("Contacts")
+    }
 
+    // Just an item padder
+    Item {
+        Layout.fillHeight: true
     }
 }

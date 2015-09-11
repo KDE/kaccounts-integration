@@ -77,7 +77,7 @@ ColumnLayout {
 
         PlasmaComponents.BusyIndicator {
             id: busy
-            width: Math.round(parent.width/2)
+            width: parent.height > parent.width ? Math.round(parent.width/2) : Math.round(parent.height/2)
             height: width
             anchors.centerIn: parent
             running: helper.isWorking
@@ -85,7 +85,7 @@ ColumnLayout {
         }
 
         PlasmaCore.IconItem {
-            width: Math.round(parent.width/2)
+            width: busy.width
             height: width
             anchors.centerIn: parent
             source: "dialog-ok"

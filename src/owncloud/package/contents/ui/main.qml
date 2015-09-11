@@ -26,10 +26,8 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 ApplicationWindow {
     id: kaccountsRoot
     objectName: "_root"
-//     id: _root
 
-    width: 500; height: 800
-
+    width: 400; height: 250
 
     ColumnLayout {
         anchors.fill: parent
