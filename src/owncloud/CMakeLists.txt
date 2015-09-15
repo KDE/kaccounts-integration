@@ -2,9 +2,6 @@ project (owncloud-plugin-kaccounts)
 
 include_directories (${CMAKE_CURRENT_BUILD_DIR}
                      ${CMAKE_CURRENT_SOURCE_DIR}
-                     ${ACCOUNTSQT_INCLUDE_DIRS}
-                     ${SIGNONQT_INCLUDE_DIRS}
-
 )
 
 set (owncloud_plugin_kaccounts_SRCS

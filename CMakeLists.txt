@@ -18,13 +18,17 @@ set(REQUIRED_KF5_VERSION "5.4.0")
 set(ACCOUNTSQT_DEP_VERSION "1.10")
 set(SIGNONQT_DEP_VERSION "8.55")
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Widgets Qml)
-find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons IconThemes Config Wallet DBusAddons Declarative Package)
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Widgets Qml Xml)
+find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED KCMUtils KIO I18n WidgetsAddons CoreAddons
+                                                  IconThemes Config Wallet DBusAddons Declarative Package)
 find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} REQUIRED CONFIG)
 find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} REQUIRED CONFIG)
 
 add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
+find_package(KF5Contacts)
+find_package(KF5GAPI)
+find_package(Qt5WebKitWidgets) #needed for kgapi apparently
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
 
@@ -34,6 +38,8 @@ include(KDEFrameworkCompilerSettings)
 include(KDECompilerSettings)
 include(ECMInstallIcons)
 include(FeatureSummary)
+
+include_directories(${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
 
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
