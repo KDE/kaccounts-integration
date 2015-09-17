@@ -66,6 +66,9 @@ void CreateAccount::processSession()
 {
     m_account = m_manager->createAccount(m_providerName);
     Accounts::Service service;
+    if (m_account->services().size() == 1) {
+        service = m_account->services().at(0);
+    }
     m_accInfo = new Accounts::AccountService(m_account, service, this);
 
     const QString pluginName = m_account->provider().pluginName();
