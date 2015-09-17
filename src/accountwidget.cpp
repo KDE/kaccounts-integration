@@ -95,7 +95,8 @@ void AccountWidget::setAccount(Accounts::Account *account)
 
         KAccountsUiPlugin *uiPlugin = KAccounts::UiPluginsManager::pluginForService(service.serviceType());
         if (uiPlugin) {
-            m_connections << connect(uiPlugin, &KAccountsUiPlugin::uiReady, [=]() {
+            m_connections << connect(uiPlugin, &KAccountsUiPlugin::configUiReady, [=]() {
+                qDebug() << "Config UI ready" << m_account.data()->id() << m_account.data();
                 uiPlugin->showConfigureAccountDialog(m_account.data()->id());
             });
 
