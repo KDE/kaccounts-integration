@@ -77,6 +77,13 @@ Q_SIGNALS:
      * the dialog
      */
     void uiReady();
+
+    /**
+     * This should be emitted when the plugin finishes building the UI
+     * for configuring the selected account
+     */
+    void configUiReady();
+
     /**
      * Emitted when user successfully authenticated using this plugin
      * The params are the username & password that the user used to
