@@ -29,7 +29,7 @@
 QmlHelper::QmlHelper(QObject *parent)
     : QObject(parent),
       m_isWorking(false),
-      m_isServerValid(false),
+      m_noError(false),
       m_errorMessage(QString())
 {
 }
@@ -80,7 +80,7 @@ void QmlHelper::checkServer(const QUrl &url)
 void QmlHelper::figureOutServer(const QUrl& url)
 {
     if (/*url == QLatin1String("/") ||*/ url.isEmpty()) {
-        setResult(false);
+        serverCheckResult(false);
         return;
     }
 
@@ -95,7 +95,7 @@ void QmlHelper::figureOutServer(const QUrl& url)
     if (urlUp != url) {
         checkServer(urlUp.adjusted(QUrl::NormalizePathSegments));
     } else {
-        setResult(false);
+        serverCheckResult(false);
     }
 }
 
@@ -125,7 +125,7 @@ void QmlHelper::fileChecked(KJob* job)
 
     m_server = kJob->url().adjusted(QUrl::RemoveFilename).toString();
     qDebug() << "ownCloud appears to be running at the specified URL";
-    setResult(true);
+    serverCheckResult(true);
 }
 
 void QmlHelper::setWorking(bool start)
@@ -138,11 +138,10 @@ void QmlHelper::setWorking(bool start)
     Q_EMIT isWorkingChanged();
 }
 
-void QmlHelper::setResult(bool result)
+void QmlHelper::serverCheckResult(bool result)
 {
-//     setWorking(false);
-    m_isServerValid = result;
-    Q_EMIT isServerValidChanged();
+    m_noError = result;
+    Q_EMIT noErrorChanged();
 
     if (!result) {
         m_errorMessage = i18n("Unable to connect to ownCloud at the given server URL. Please check the server URL.");
@@ -151,6 +150,8 @@ void QmlHelper::setResult(bool result)
         m_errorMessage.clear();
 
         qDebug() << "Server URL ok, checking auth...";
+
+        m_json.clear();
 
         QUrl url(m_server);
 
@@ -185,6 +186,9 @@ void QmlHelper::authCheckResult(KJob *job)
     }
 
     Q_EMIT errorMessageChanged();
+
+    m_noError = !kJob->isErrorPage();
+    Q_EMIT noErrorChanged();
     setWorking(false);
 }
 
@@ -193,9 +197,9 @@ bool QmlHelper::isWorking()
     return m_isWorking;
 }
 
-bool QmlHelper::isServerValid()
+bool QmlHelper::noError()
 {
-    return m_isServerValid;
+    return m_noError;
 }
 
 QString QmlHelper::errorMessage() const

@@ -26,7 +26,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
     id: basicInfoLayout
-    property bool canContinue: helper.isServerValid && nameText.text.length > 0 && passwordText.text.length > 0
+    property bool canContinue: !helper.isWorking && helper.noError && nameText.text.length > 0 && passwordText.text.length > 0
 
     Timer {
         id: checkServerTimer
@@ -89,7 +89,7 @@ ColumnLayout {
             height: width
             anchors.centerIn: parent
             source: "dialog-ok"
-            visible: !helper.isWorking && helper.isServerValid && !errorLabel.visible
+            visible: !helper.isWorking && helper.noError && !errorLabel.visible
         }
     }
 }
