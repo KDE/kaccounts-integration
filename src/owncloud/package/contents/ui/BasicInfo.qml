@@ -27,6 +27,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 ColumnLayout {
     id: basicInfoLayout
     property bool canContinue: !helper.isWorking && helper.noError && nameText.text.length > 0 && passwordText.text.length > 0
+    property bool canRestartTimer: nameText.text.length > 0 && passwordText.text.length > 0 && serverText.text.length > 0
 
     Timer {
         id: checkServerTimer
@@ -44,6 +45,12 @@ ColumnLayout {
         Layout.fillWidth: true
         clearButtonShown: true
         placeholderText: "Username"
+
+        onTextChanged: {
+            if (basicInfoLayout.canRestartTimer) {
+                checkServerTimer.restart();
+            }
+        }
     }
 
     PlasmaComponents.TextField {
@@ -52,6 +59,12 @@ ColumnLayout {
         clearButtonShown: true
         placeholderText: "Password"
         echoMode: TextInput.Password
+
+        onTextChanged: {
+            if (basicInfoLayout.canRestartTimer) {
+                checkServerTimer.restart();
+            }
+        }
     }
 
     PlasmaComponents.TextField {
@@ -60,7 +73,11 @@ ColumnLayout {
         clearButtonShown: true
         placeholderText: "Server"
 
-        onTextChanged: checkServerTimer.restart();
+        onTextChanged: {
+            if (basicInfoLayout.canRestartTimer) {
+                checkServerTimer.restart();
+            }
+        }
     }
 
     PlasmaComponents.Label {
