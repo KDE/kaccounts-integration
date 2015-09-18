@@ -70,7 +70,6 @@ void QmlHelper::checkServer(const QString &username, const QString &password, co
 void QmlHelper::checkServer(const QUrl &url)
 {
     qDebug() << "Checking for ownCloud instance at" << url;
-    setResult(false);
     setWorking(true);
     KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     job->setUiDelegate(0);
