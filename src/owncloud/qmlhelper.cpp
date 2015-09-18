@@ -19,6 +19,7 @@
 #include "qmlhelper.h"
 
 #include <KIO/Job>
+#include <KIO/DavJob>
 #include <kio/global.h>
 #include <KLocalizedString>
 
@@ -159,12 +160,24 @@ void QmlHelper::serverCheckResult(bool result)
         url.setPassword(m_password);
 
         url = url.adjusted(QUrl::StripTrailingSlash);
-        url.setPath(url.path() + '/' + "remote.php/webdav/");
-        qDebug() << "FinalUrL: " << url;
-        KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(authCheckResult(KJob*)));
+        url.setPath(url.path() + '/' + "remote.php/webdav");
+        // Send a basic PROPFIND command to test access
+        const QString requestStr = QStringLiteral(
+            "<d:propfind xmlns:d=\"DAV:\">"
+            "<d:prop>"
+            "<d:current-user-principal />"
+            "</d:prop>"
+            "</d:propfind>");
 
+        KIO::DavJob *job = KIO::davPropFind(url, QDomDocument(requestStr), "1", KIO::HideProgressInfo);
+        connect(job, SIGNAL(finished(KJob*)), this, SLOT(authCheckResult(KJob*)));
+        connect(job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataReceived(KIO::Job*,QByteArray)));
+
+        QVariantMap metadata{{"cookies","none"}, {"no-cache",true}};
+
+        job->setMetaData(metadata);
         job->setUiDelegate(0);
+        job->start();
     }
 
     Q_EMIT errorMessageChanged();
@@ -178,7 +191,9 @@ void QmlHelper::authCheckResult(KJob *job)
         qDebug() << job->errorText();
     }
 
-    KIO::TransferJob *kJob = qobject_cast<KIO::TransferJob*>(job);
+    KIO::DavJob *kJob = qobject_cast<KIO::DavJob*>(job);
+    qDebug() << "Auth job finished, received error page:" << kJob->isErrorPage();
+
     if (kJob->isErrorPage()) {
         m_errorMessage = i18n("Unable to authenticate using the provided username and password");
     } else {
