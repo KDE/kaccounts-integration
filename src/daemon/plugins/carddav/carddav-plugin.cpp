@@ -72,10 +72,13 @@ void KAccountsCardDavPlugin::syncAllAccounts()
         syncedAccounts << accounts;
     }
 
+    qDebug() << "List of accounts to sync:" << syncedAccounts;
+
     Q_FOREACH (const quint32 accountId, syncedAccounts) {
         KConfigGroup currentAccount = d->config->group("account" + accountId);
         QDateTime lastSync = QDateTime::fromString(currentAccount.readEntry("lastSync", QStringLiteral("2000-09-22T00:00:00+00:00")), Qt::ISODate);
         if (QDateTime::currentDateTime() > lastSync) {
+            qDebug() << "Starting carddav contacts import for account" << accountId;
             getCredentials(accountId);
         }
     }
