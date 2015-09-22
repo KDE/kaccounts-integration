@@ -67,6 +67,11 @@ void KAccountsCardDavPlugin::syncAllAccounts()
     KConfigGroup global = d->config->group("Global");
     QList<quint32> syncedAccounts = global.readEntry("syncedAccounts", QList<quint32>());
 
+    if (syncedAccounts.isEmpty()) {
+        Accounts::AccountIdList accounts = KAccounts::accountsManager()->accountListEnabled(QStringLiteral("dav-contacts"));
+        syncedAccounts << accounts;
+    }
+
     Q_FOREACH (const quint32 accountId, syncedAccounts) {
         KConfigGroup currentAccount = d->config->group("account" + accountId);
         QDateTime lastSync = QDateTime::fromString(currentAccount.readEntry("lastSync", QString()), Qt::ISODate);
