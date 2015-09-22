@@ -74,7 +74,7 @@ void KAccountsCardDavPlugin::syncAllAccounts()
 
     Q_FOREACH (const quint32 accountId, syncedAccounts) {
         KConfigGroup currentAccount = d->config->group("account" + accountId);
-        QDateTime lastSync = QDateTime::fromString(currentAccount.readEntry("lastSync", QString()), Qt::ISODate);
+        QDateTime lastSync = QDateTime::fromString(currentAccount.readEntry("lastSync", QStringLiteral("2000-09-22T00:00:00+00:00")), Qt::ISODate);
         if (QDateTime::currentDateTime() > lastSync) {
             getCredentials(accountId);
         }
