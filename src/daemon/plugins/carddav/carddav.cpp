@@ -99,7 +99,7 @@ CardDav::~CardDav()
 
 void CardDav::errorOccurred(int httpError)
 {
-    emit error(httpError);
+    Q_EMIT error(httpError);
 }
 
 void CardDav::determineRemoteAMR()
@@ -161,7 +161,7 @@ void CardDav::fetchUserInformation()
                 : m_serverUrl;
     QNetworkReply *reply = m_request->currentUserInformation(m_serverUrl);
     if (!reply) {
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -245,7 +245,7 @@ void CardDav::userInformationResponse()
         // the server responded with the expected user principal information.
         if (userPath.isEmpty()) {
             qWarning() << "unable to parse user principal from response";
-            emit error();
+            Q_EMIT error();
             return;
         }
         fetchAddressbookUrls(userPath);
@@ -255,13 +255,13 @@ void CardDav::userInformationResponse()
         QList<ReplyParser::AddressBookInformation> infos = m_parser->parseAddressbookInformation(data);
         if (infos.isEmpty()) {
             qWarning() << "unable to parse addressbook info from user principal response";
-            emit error();
+            Q_EMIT error();
             return;
         }
         downsyncAddressbookContent(infos);
     } else {
         qWarning() << "unknown response from user principal request";
-        emit error();
+        Q_EMIT error();
     }
 }
 
@@ -270,7 +270,7 @@ void CardDav::fetchAddressbookUrls(const QString &userPath)
     qDebug() << "requesting addressbook urls for user";
     QNetworkReply *reply = m_request->addressbookUrls(m_serverUrl, userPath);
     if (!reply) {
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -293,7 +293,7 @@ void CardDav::addressbookUrlsResponse()
     QString addressbooksHomePath = m_parser->parseAddressbookHome(data);
     if (addressbooksHomePath.isEmpty()) {
         qWarning() << "unable to parse addressbook home from response";
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -305,7 +305,7 @@ void CardDav::fetchAddressbooksInformation(const QString &addressbooksHomePath)
     qDebug() << "requesting addressbook sync information" << m_serverUrl << addressbooksHomePath;
     QNetworkReply *reply = m_request->addressbooksInformation(m_serverUrl, addressbooksHomePath);
     if (!reply) {
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -328,7 +328,7 @@ void CardDav::addressbooksInformationResponse()
     QList<ReplyParser::AddressBookInformation> infos = m_parser->parseAddressbookInformation(data);
     if (infos.isEmpty()) {
         qWarning() << "unable to parse addressbook info from response";
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -402,7 +402,7 @@ void CardDav::fetchImmediateDelta(const QString &addressbookUrl, const QString &
 
     QNetworkReply *reply = m_request->syncTokenDelta(m_serverUrl, addressbookUrl, syncToken);
     if (!reply) {
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -438,7 +438,7 @@ void CardDav::fetchContactMetadata(const QString &addressbookUrl)
     qDebug() << "requesting contact metadata for addressbook" << addressbookUrl;
     QNetworkReply *reply = m_request->contactEtags(m_serverUrl, addressbookUrl);
     if (!reply) {
-        emit error();
+        Q_EMIT error();
         return;
     }
 
@@ -502,7 +502,7 @@ void CardDav::fetchContacts(const QString &addressbookUrl, const QList<ReplyPars
         qDebug() << "fetching vcard data for" << contactUris.size() << "contacts";
         QNetworkReply *reply = m_request->contactMultiget(m_serverUrl, addressbookUrl, contactUris);
         if (!reply) {
-            emit error();
+            Q_EMIT error();
             return;
         }
 
@@ -622,7 +622,7 @@ void CardDav::downsyncComplete()
                  << m_remoteAdditions.size() << ","
                  << m_remoteModifications.size() << ","
                  << m_remoteRemovals.size();
-        emit remoteChanges(m_remoteAdditions, m_remoteModifications, m_remoteRemovals);
+        Q_EMIT remoteChanges(m_remoteAdditions, m_remoteModifications, m_remoteRemovals);
     }
 }
 
@@ -660,7 +660,7 @@ void CardDav::upsyncUpdates(const QString &addressbookUrl, const QList<KContacts
             // upload
             QNetworkReply *reply = m_request->upsyncAddMod(m_serverUrl, uri, QString(), vcard);
             if (!reply) {
-                emit error();
+                Q_EMIT error();
                 return;
             }
 
@@ -693,7 +693,7 @@ void CardDav::upsyncUpdates(const QString &addressbookUrl, const QList<KContacts
                     q->m_contactEtags[guidstr],
                     vcard);
             if (!reply) {
-                emit error();
+                Q_EMIT error();
                 return;
             }
 
@@ -711,7 +711,7 @@ void CardDav::upsyncUpdates(const QString &addressbookUrl, const QList<KContacts
                     q->m_contactUris[guidstr],
                     q->m_contactEtags[guidstr]);
             if (!reply) {
-                emit error();
+                Q_EMIT error();
                 return;
             }
 
@@ -775,6 +775,6 @@ void CardDav::upsyncComplete()
     if (m_upsyncRequests == 0) {
         // finished upsyncing all data for all addressbooks.
         qDebug() << "upsync complete";
-        emit upsyncCompleted();
+        Q_EMIT upsyncCompleted();
     }
 }

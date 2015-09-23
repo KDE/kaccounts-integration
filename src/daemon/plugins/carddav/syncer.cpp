@@ -106,7 +106,7 @@ void Syncer::startSync(int accountId)
 
 void Syncer::signInError()
 {
-    emit syncFailed();
+    Q_EMIT syncFailed();
 }
 
 void Syncer::sync(const QString &serverUrl, const QString &addressbookPath, const QString &username, const QString &password, const QString &accessToken, bool ignoreSslErrors)
@@ -309,7 +309,7 @@ void Syncer::syncFinished()
 
     // Success.
     qDebug() << "carddav sync with account" << m_accountId << "finished successfully!";
-    emit syncSucceeded();
+    Q_EMIT syncSucceeded();
 }
 
 void Syncer::cardDavError(int errorCode)
@@ -322,7 +322,7 @@ void Syncer::cardDavError(int errorCode)
     }
     purgeExtraStateData(m_accountId);
 //     purgeSyncStateData(QString::number(m_accountId));
-    emit syncFailed();
+    Q_EMIT syncFailed();
 }
 
 void Syncer::purgeAccount(int accountId)

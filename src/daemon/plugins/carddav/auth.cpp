@@ -67,7 +67,7 @@ void Auth::signIn(int accountId)
     m_account = Accounts::Account::fromId(&m_manager, accountId, this);
     if (!m_account) {
         qWarning() << "unable to load account" << accountId;
-        emit signInError();
+        Q_EMIT signInError();
         return;
     }
 
@@ -83,7 +83,7 @@ void Auth::signIn(int accountId)
 
     if (!srv.isValid()) {
         qWarning() << "unable to find carddav service for account" << accountId;
-        emit signInError();
+        Q_EMIT signInError();
         return;
     }
 
@@ -94,14 +94,14 @@ void Auth::signIn(int accountId)
     m_addressbookPath = m_account->value("addressbook_path").toString(); // optional, may be empty.
     if (m_serverUrl.isEmpty()) {
         qWarning() << "no valid server url setting in account" << accountId;
-        emit signInError();
+        Q_EMIT signInError();
         return;
     }
 
     m_ident = m_account->credentialsId() > 0 ? SignOn::Identity::existingIdentity(m_account->credentialsId()) : 0;
     if (!m_ident) {
         qWarning() << "no valid credentials for account" << accountId;
-        emit signInError();
+        Q_EMIT signInError();
         return;
     }
 
@@ -111,7 +111,7 @@ void Auth::signIn(int accountId)
     SignOn::AuthSession *session = m_ident->createSession(method);
     if (!session) {
         qWarning() << "unable to create authentication session with account" << accountId;
-        emit signInError();
+        Q_EMIT signInError();
         return;
     }
 
@@ -158,19 +158,19 @@ void Auth::signOnResponse(const SignOn::SessionData &response)
 
     // we need both username+password, OR accessToken.
     if (!accessToken.isEmpty()) {
-        emit signInCompleted(m_serverUrl, m_addressbookPath, QString(), QString(), accessToken, m_ignoreSslErrors);
+        Q_EMIT signInCompleted(m_serverUrl, m_addressbookPath, QString(), QString(), accessToken, m_ignoreSslErrors);
     } else if (!username.isEmpty() && !password.isEmpty()) {
-        emit signInCompleted(m_serverUrl, m_addressbookPath, username, password, QString(), m_ignoreSslErrors);
+        Q_EMIT signInCompleted(m_serverUrl, m_addressbookPath, username, password, QString(), m_ignoreSslErrors);
     } else {
         qWarning() << "authentication succeeded, but couldn't find valid credentials";
-        emit signInError();
+        Q_EMIT signInError();
     }
 }
 
 void Auth::signOnError(const SignOn::Error &error)
 {
     qWarning() << "authentication error:" << error.type() << ":" << error.message();
-    emit signInError();
+    Q_EMIT signInError();
     return;
 }
 

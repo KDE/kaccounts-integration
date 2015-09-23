@@ -138,13 +138,13 @@ void CardDavClient::syncFinished(int minorErrorCode, const QString &message)
         m_results = Buteo::SyncResults(QDateTime::currentDateTimeUtc(),
                                        Buteo::SyncResults::SYNC_RESULT_SUCCESS,
                                        Buteo::SyncResults::NO_ERROR);
-        emit success(getProfileName(), message);
+        Q_EMIT success(getProfileName(), message);
     } else {
         LOG_CRITICAL("CardDAV sync failed:" << minorErrorCode << message);
         m_results = Buteo::SyncResults(iProfile.lastSuccessfulSyncTime(), // don't change the last sync time
                                        Buteo::SyncResults::SYNC_RESULT_FAILED,
                                        minorErrorCode);
-        emit error(getProfileName(), message, minorErrorCode);
+        Q_EMIT error(getProfileName(), message, minorErrorCode);
     }
 }
 
