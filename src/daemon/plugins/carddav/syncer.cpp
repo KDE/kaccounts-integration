@@ -390,10 +390,10 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject acgJsonObj = QJsonDocument::fromBinaryData(acgValueBA).object();
     QStringList addressbookUrls = acgJsonObj.keys();
     QMap<QString, QStringList> addressbookUrlToContactGuids;
-    foreach (const QString &url, addressbookUrls) {
+    Q_FOREACH (const QString &url, addressbookUrls) {
         QVariantList contactGuidsVL = acgJsonObj.value(url).toArray().toVariantList();
         QStringList contactGuids;
-        foreach (const QVariant &v, contactGuidsVL) {
+        Q_FOREACH (const QVariant &v, contactGuidsVL) {
             if (!v.toString().isEmpty()) {
                 contactGuids.append(v.toString());
             }
@@ -409,7 +409,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject acJsonObj = QJsonDocument::fromBinaryData(acValueBA).object();
     addressbookUrls = acJsonObj.keys();
     QMap<QString, QString> addressbookUrlToCtag;
-    foreach (const QString &url, addressbookUrls) {
+    Q_FOREACH (const QString &url, addressbookUrls) {
         addressbookUrlToCtag.insert(url, acJsonObj.value(url).toString());
     }
     m_addressbookCtags = addressbookUrlToCtag;
@@ -420,7 +420,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject asJsonObj = QJsonDocument::fromBinaryData(asValueBA).object();
     addressbookUrls = asJsonObj.keys();
     QMap<QString, QString> addressbookUrlToSyncToken;
-    foreach (const QString &url, addressbookUrls) {
+    Q_FOREACH (const QString &url, addressbookUrls) {
         addressbookUrlToSyncToken.insert(url, asJsonObj.value(url).toString());
     }
     m_addressbookSyncTokens = addressbookUrlToSyncToken;
@@ -431,7 +431,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject cuiJsonObj = QJsonDocument::fromBinaryData(cuiValueBA).object();
     QStringList contactGuids = cuiJsonObj.keys();
     QMap<QString, QString> guidToContactUid;
-    foreach (const QString &guid, contactGuids) {
+    Q_FOREACH (const QString &guid, contactGuids) {
         guidToContactUid.insert(guid, cuiJsonObj.value(guid).toString());
     }
     m_contactUids = guidToContactUid;
@@ -442,7 +442,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject cuJsonObj = QJsonDocument::fromBinaryData(cuValueBA).object();
     contactGuids = cuJsonObj.keys();
     QMap<QString, QString> guidToContactUri;
-    foreach (const QString &guid, contactGuids) {
+    Q_FOREACH (const QString &guid, contactGuids) {
         guidToContactUri.insert(guid, cuJsonObj.value(guid).toString());
     }
     m_contactUris = guidToContactUri;
@@ -453,7 +453,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject ceJsonObj = QJsonDocument::fromBinaryData(ceValueBA).object();
     contactGuids = ceJsonObj.keys();
     QMap<QString, QString> guidToContactEtag;
-    foreach (const QString &guid, contactGuids) {
+    Q_FOREACH (const QString &guid, contactGuids) {
         guidToContactEtag.insert(guid, ceJsonObj.value(guid).toString());
     }
     m_contactEtags = guidToContactEtag;
@@ -464,7 +464,7 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject ciJsonObj = QJsonDocument::fromBinaryData(ciValueBA).object();
     contactGuids = ciJsonObj.keys();
     QMap<QString, QString> guidToContactId;
-    foreach (const QString &guid, contactGuids) {
+    Q_FOREACH (const QString &guid, contactGuids) {
         guidToContactId.insert(guid, ciJsonObj.value(guid).toString());
     }
     m_contactIds = guidToContactId;
@@ -475,10 +475,10 @@ bool Syncer::readExtraStateData(int accountId)
     QJsonObject cupJsonObj = QJsonDocument::fromBinaryData(cupValueBA).object();
     contactGuids = cupJsonObj.keys();
     QMap<QString, QStringList> contactGuidToUnsupportedProperties;
-    foreach (const QString &guid, contactGuids) {
+    Q_FOREACH (const QString &guid, contactGuids) {
         QVariantList unsupportedPropertiesVL = cupJsonObj.value(guid).toArray().toVariantList();
         QStringList unsupportedProperties;
-        foreach (const QVariant &v, unsupportedPropertiesVL) {
+        Q_FOREACH (const QVariant &v, unsupportedPropertiesVL) {
             if (!v.toString().isEmpty()) {
                 unsupportedProperties.append(v.toString());
             }
@@ -511,7 +511,7 @@ bool Syncer::readExtraStateData(int accountId)
 //         // filter out any which don't come from this account.
 //         QList<KContacts::Addressee> prevRemote;
 //         QList<QContactId> exportedIds;
-//         foreach (const QContact &c, existingContacts) {
+//         Q_FOREACH (const QContact &c, existingContacts) {
 //             if (c.detail<QContactGuid>().guid().startsWith(QStringLiteral("%1:").arg(accountId))) {
 //                 prevRemote.append(c);
 //                 exportedIds.append(c.id());
