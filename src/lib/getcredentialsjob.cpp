@@ -115,6 +115,7 @@ GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, QObject *par
     d->id = id;
     d->manager = KAccounts::accountsManager();
     d->repeatedTries = 0;
+    d->serviceType = QString();
 }
 
 
@@ -127,6 +128,7 @@ GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, const QStrin
     d->authMechanism = authMechanism;
     d->authMethod = authMethod;
     d->repeatedTries = 0;
+    d->serviceType = QString();
 }
 
 void GetCredentialsJob::start()
