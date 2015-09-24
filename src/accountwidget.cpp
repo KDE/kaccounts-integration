@@ -133,11 +133,39 @@ void AccountWidget::serviceEnabledChanged(const QString &serviceName, bool enabl
 void AccountWidget::serviceChanged(bool enabled)
 {
     QString service = sender()->property("service").toString();
-    qDebug() << "Enabling: " << service << " enabled";
     if (!m_account) {
         return;
     }
-    m_account.data()->selectService(m_manager->service(service));
-    m_account.data()->setEnabled(enabled);
-    m_account.data()->sync();
+
+    qDebug() << "Service" << service << (enabled ? "enabled" : "disabled");
+    m_account->selectService(m_manager->service(service));
+    m_account->setEnabled(enabled);
+
+    // make sure the underlying account also gets enabled
+    // or disabled it all services are disabled
+    if (enabled) {
+        m_account->selectService();
+        m_account->setEnabled(true);
+    } else {
+        bool shouldStayEnabled = false;
+        Q_FOREACH (const Accounts::Service &accountService, m_account->services()) {
+            // Skip the current service, that is not synced to the account yet
+            // so it would return the state before the user clicked the checkbox
+            if (accountService.name() == service) {
+                continue;
+            }
+            m_account->selectService(accountService);
+            if (m_account->isEnabled()) {
+                // At least one service is enabled, leave the account enabled
+                shouldStayEnabled = true;
+                break;
+            }
+        }
+
+        // Make sure we're operating on the global account
+        m_account->selectService();
+        m_account->setEnabled(shouldStayEnabled);
+    }
+
+    m_account->sync();
 }
