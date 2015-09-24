@@ -207,7 +207,6 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
         m_account->setValue(base + i.key(), i.value());
     }
 
-    m_account->setEnabled(true);
 
     Accounts::ServiceList services = m_account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
@@ -215,6 +214,8 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
         m_account->setEnabled(m_disabledServices.contains(service.name()) ? false : true);
     }
 
+    m_account->selectService();
+    m_account->setEnabled(true);
     m_account->sync();
     connect(m_account, &Accounts::Account::synced, this, &CreateAccount::emitResult);
 }
