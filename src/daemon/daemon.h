@@ -28,7 +28,6 @@ namespace Accounts {
 };
 
 class KJob;
-class AkonadiServices;
 class KAccountsDPlugin;
 
 class AccountsDaemon : public KDEDModule
