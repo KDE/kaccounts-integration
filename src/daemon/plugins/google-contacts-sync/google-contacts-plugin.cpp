@@ -93,7 +93,7 @@ GoogleContactsPlugin::GoogleContactsPlugin(QObject *parent)
     : KAccountsDPlugin(parent),
       d(new Private())
 {
-    qInstallMessageHandler(myMessageOutput);
+//     qInstallMessageHandler(myMessageOutput);
 }
 
 GoogleContactsPlugin::~GoogleContactsPlugin()
