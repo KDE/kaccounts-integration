@@ -28,14 +28,14 @@ namespace Accounts
     class Account;
     class Manager;
     class AccountService;
-};
+}
 namespace SignOn
 {
     class Error;
     class Identity;
     class SessionData;
     class IdentityInfo;
-};
+}
 
 class CreateAccount : public KJob
 {
