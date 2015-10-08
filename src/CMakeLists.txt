@@ -9,13 +9,10 @@ set(kaccounts_SRCS
     accountwidget.cpp
     uipluginsmanager.cpp
     models/accountsmodel.cpp
-#     models/modeltest.cpp
     jobs/createaccount.cpp
-    jobs/ownclouddialog.cpp
-    jobs/checkowncloudhostjob.cpp
 )
 
-ki18n_wrap_ui(kaccounts_SRCS kcm.ui types.ui services.ui owncloudDialog.ui)
+ki18n_wrap_ui(kaccounts_SRCS kcm.ui types.ui services.ui)
 
 add_library(kcm_kaccounts MODULE ${kaccounts_SRCS})
 kcoreaddons_desktop_to_json(kcm_kaccounts kcm_kaccounts.desktop)

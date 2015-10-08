@@ -21,7 +21,6 @@
 #include "ui_kcm.h"
 
 #include "models/accountsmodel.h"
-#include "models/modeltest.h"
 #include "accountwidget.h"
 
 #include <QLabel>

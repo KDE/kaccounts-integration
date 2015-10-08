@@ -17,7 +17,6 @@
  *************************************************************************************/
 
 #include "createaccount.h"
-#include "ownclouddialog.h"
 #include "lib/kaccountsuiplugin.h"
 #include "lib/core.h"
 #include "uipluginsmanager.h"
