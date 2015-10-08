@@ -2,11 +2,6 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(accounts_daemon_SRCS
     daemon.cpp
-    kio/kioservices.cpp
-    kio/createnetattachjob.cpp
-    kio/removenetattachjob.cpp
-    kio/createkioservice.cpp
-    kio/removekioservice.cpp
 )
 
 add_library(kded_accounts MODULE

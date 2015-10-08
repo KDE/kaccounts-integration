@@ -17,7 +17,6 @@
  *************************************************************************************/
 
 #include "daemon.h"
-#include "kio/kioservices.h"
 #include "src/lib/kaccountsdplugin.h"
 #include <core.h>
 
@@ -85,8 +84,6 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
             qDebug() << "Plugin could not creaate instance" << pluginPath;
         }
     }
-
-    m_plugins << new KIOServices(this);
 }
 
 AccountsDaemon::~AccountsDaemon()
