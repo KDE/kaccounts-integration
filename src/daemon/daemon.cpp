@@ -20,10 +20,7 @@
 #include "src/lib/kaccountsdplugin.h"
 #include <core.h>
 
-#include <KLocalizedString>
 #include <KPluginFactory>
-#include <KSharedConfig>
-#include <KConfigGroup>
 
 #include <QDebug>
 #include <QDir>

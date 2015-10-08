@@ -11,13 +11,6 @@ kcoreaddons_desktop_to_json(kded_accounts accounts.desktop)
 
 target_link_libraries(kded_accounts
     Qt5::Core
-    Qt5::Xml
-    Qt5::Widgets
-    KF5::CoreAddons
-    KF5::ConfigCore
-    KF5::Wallet
-    KF5::KIOCore
-    KF5::I18n
     KF5::DBusAddons
     kaccounts
 )

@@ -22,11 +22,8 @@
 #include "uipluginsmanager.h"
 
 #include <QDebug>
-
 #include <QPluginLoader>
 #include <QDir>
-#include <QDialog>
-#include <QVBoxLayout>
 
 #include <Accounts/Manager>
 #include <Accounts/AccountService>
@@ -34,8 +31,7 @@
 #include <SignOn/Identity>
 #include <SignOn/AuthSession>
 
-#include <KSharedConfig>
-#include <KConfigGroup>
+#include <KLocalizedString>
 
 CreateAccount::CreateAccount(QObject* parent)
  : CreateAccount(QString(), parent)
