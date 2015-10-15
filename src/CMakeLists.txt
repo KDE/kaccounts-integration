@@ -1,7 +1,6 @@
 add_subdirectory(daemon)
 add_subdirectory(lib)
 add_subdirectory(declarative)
-add_subdirectory(owncloud)
 
 set(kaccounts_SRCS
     kaccounts.cpp
@@ -21,10 +20,8 @@ target_link_libraries(kcm_kaccounts
     Qt5::Core
     Qt5::Gui
     Qt5::DBus
-    KF5::KIOCore
     KF5::I18n
     KF5::KCMUtils
-    KF5::IconThemes
     ${SIGNONQT_LIBRARIES}
     kaccounts
 )
