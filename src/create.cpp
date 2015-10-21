@@ -62,6 +62,7 @@ QWidget* Create::widget()
 void Create::fillInterface()
 {
     Accounts::ProviderList providerList = m_manager->providerList();
+    Accounts::ServiceList serviceList = m_manager->serviceList();
 
     // sort accounts alphabetically
     std::sort(providerList.begin(), providerList.end(), [](const Accounts::Provider &a, const Accounts::Provider &b) {
@@ -73,6 +74,23 @@ void Create::fillInterface()
         if (provider.name() == "ktp-generic") {
             continue;
         }
+
+        // Check if there are any services for the given provider
+        // If not, just skip it and don't allow creating such account
+        bool shouldSkip = true;
+        Q_FOREACH (const Accounts::Service &service, serviceList) {
+            qDebug() << "Checking" << service.name() << provider.name();
+            if (service.provider() == provider.name()) {
+                qDebug() << "Found a service, not skipping:" << service.name();
+                shouldSkip = false;
+                break;
+            }
+        }
+
+        if (shouldSkip) {
+            continue;
+        }
+
         button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
         const QString providerIcon = provider.iconName();
         if (providerIcon.isEmpty()) {
