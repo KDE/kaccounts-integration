@@ -141,8 +141,8 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
 
     m_done = true;
 
-    m_identity->storeCredentials();
     connect(m_identity, &SignOn::Identity::credentialsStored, m_identity, &SignOn::Identity::queryInfo);
+    m_identity->storeCredentials();
 }
 
 void CreateAccount::pluginError(const QString &error)
@@ -177,12 +177,12 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
         return;
     }
 
+    m_account->selectService();
+
     if (m_account->displayName().isEmpty()) {
         m_account->setDisplayName(info.userName());
     }
     m_account->setValue("username", info.userName());
-
-    m_account->selectService();
     m_account->setCredentialsId(info.id());
 
     Accounts::AuthData authData = m_accInfo->authData();
