@@ -37,6 +37,111 @@
 
 #include <KPluginFactory>
 
+// Helper class for drawing error overlays
+class ErrorOverlay : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit ErrorOverlay(QWidget *baseWidget);
+    ~ErrorOverlay();
+
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
+private:
+    void reposition();
+
+private:
+    QWidget *m_BaseWidget;
+};
+
+ErrorOverlay::ErrorOverlay(QWidget *baseWidget)
+    : QWidget(baseWidget->window()),
+      m_BaseWidget(baseWidget)
+{
+    // Build the UI
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setSpacing(10);
+
+    QLabel *pixmap = new QLabel();
+    pixmap->setPixmap(QIcon::fromTheme(QStringLiteral("dialog-error")).pixmap(64));
+
+    QLabel *message = new QLabel(i18nc("Error message that shows up right after the KCM opens and detects that the required variables are empty",
+                                       "It appears your system is not configured properly, please ensure you have AG_PROVIDERS and/or AG_SERVICES "\
+                                       "environment variables set correctly, then restart this configuration module.\n\nPlease contact your distribution "\
+                                       "if you're unsure how to proceed."));
+
+    pixmap->setAlignment(Qt::AlignHCenter);
+    message->setAlignment(Qt::AlignHCenter);
+    message->setWordWrap(true);
+
+    layout->addStretch();
+    layout->addWidget(pixmap);
+    layout->addWidget(message);
+    layout->addStretch();
+
+    setLayout(layout);
+
+    // Draw the transparent overlay background
+    QPalette p = palette();
+    p.setColor(backgroundRole(), QColor(0, 0, 0, 128));
+    p.setColor(foregroundRole(), Qt::white);
+    setPalette(p);
+    setAutoFillBackground(true);
+
+    m_BaseWidget->installEventFilter(this);
+
+    reposition();
+}
+
+ErrorOverlay::~ErrorOverlay()
+{
+}
+
+void ErrorOverlay::reposition()
+{
+    if (!m_BaseWidget) {
+        return;
+    }
+
+    // reparent to the current top level widget of the base widget if needed
+    // needed eg. in dock widgets
+    if (parentWidget() != m_BaseWidget->window()) {
+        setParent(m_BaseWidget->window());
+    }
+
+    // follow base widget visibility
+    // needed eg. in tab widgets
+    if (!m_BaseWidget->isVisible()) {
+        hide();
+        return;
+    }
+
+    show();
+
+    // follow position changes
+    const QPoint topLevelPos = m_BaseWidget->mapTo(window(), QPoint(0, 0));
+    const QPoint parentPos = parentWidget()->mapFrom(window(), topLevelPos);
+    move(parentPos);
+
+    // follow size changes
+    // TODO: hide/scale icon if we don't have enough space
+    resize(m_BaseWidget->size());
+}
+
+bool ErrorOverlay::eventFilter(QObject * object, QEvent * event)
+{
+    if (object == m_BaseWidget &&
+        (event->type() == QEvent::Move || event->type() == QEvent::Resize ||
+        event->type() == QEvent::Show || event->type() == QEvent::Hide ||
+        event->type() == QEvent::ParentChange)) {
+        reposition();
+        }
+        return QWidget::eventFilter(object, event);
+}
+
+//-----------------------------------------------------------------------------
+
 K_PLUGIN_FACTORY_WITH_JSON(KAccountsFactory, "kcm_kaccounts.json", registerPlugin<KAccounts>();)
 
 KAccounts::KAccounts(QWidget *parent, const QVariantList &)
@@ -82,6 +187,13 @@ KAccounts::KAccounts(QWidget *parent, const QVariantList &)
     QDBusPendingCallWatcher *pendingCallWatcher = new QDBusPendingCallWatcher(pendingCall, this);
     connect(pendingCallWatcher, &QDBusPendingCallWatcher::finished,
             this, &KAccounts::moduleLoadCallFinished);
+
+    bool providersEnvVarSet = qEnvironmentVariableIsSet("AG_PROVIDERS");
+    bool servicesEnvVarSet = qEnvironmentVariableIsSet("AG_SERVICES");
+
+    if (!providersEnvVarSet || !servicesEnvVarSet) {
+        new ErrorOverlay(this);
+    }
 }
 
 void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
