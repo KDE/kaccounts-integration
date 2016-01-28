@@ -30,8 +30,8 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDEFrameworkCompilerSettings)
-include(KDECompilerSettings)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(FeatureSummary)
 
