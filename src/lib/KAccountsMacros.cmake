@@ -9,7 +9,8 @@ function(kaccounts_add_provider provider_in_file)
     if(intltool_error)
         message(FATAL_ERROR "error processing ${provider_in_file}: ${intltool_error}")
     endif()
-    install(FILES ${provider_file} DESTINATION ${ACCOUNTS_PROVIDERS_DIR})
+    # The suffix must match whatever we set for $XDG_CURRENT_DESKTOP
+    install(FILES ${provider_file} DESTINATION ${ACCOUNTS_PROVIDERS_DIR}/kde/)
 endfunction()
 
 function(kaccounts_add_service service_file_in)
@@ -23,5 +24,6 @@ function(kaccounts_add_service service_file_in)
     if(intltool_error)
         message(FATAL_ERROR "error processing  ${service_file_in}: ${intltool_error}")
     endif()
-    install(FILES ${service_file} DESTINATION ${ACCOUNTS_SERVICES_DIR})
+    # The suffix must match whatever we set for $XDG_CURRENT_DESKTOP
+    install(FILES ${service_file} DESTINATION ${ACCOUNTS_SERVICES_DIR}/kde/)
 endfunction()
