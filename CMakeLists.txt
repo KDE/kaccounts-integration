@@ -21,9 +21,24 @@ set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Widgets)
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative)
-find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} REQUIRED CONFIG)
-find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} REQUIRED CONFIG)
-find_package(LibAccountsGlib ${ACCOUNTSGLIB_DEP_VERSION} REQUIRED)
+
+find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} CONFIG)
+set_package_properties(AccountsQt5 PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
+   URL "https://gitlab.com/accounts-sso/libaccounts-qt"
+   TYPE REQUIRED
+   PURPOSE "Required for building this module")
+
+find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} CONFIG)
+set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which performs user authentication on behalf of its clients"
+   URL "https://gitlab.com/accounts-sso/signond"
+   TYPE REQUIRED
+   PURPOSE "Required for building this module")
+
+find_package(LibAccountsGlib ${ACCOUNTSGLIB_DEP_VERSION})
+set_package_properties(LibAccountsGlib PROPERTIES DESCRIPTION "GLib-based client library for the accounts database"
+   URL "https://gitlab.com/accounts-sso/libaccounts-glib"
+   TYPE REQUIRED
+   PURPOSE "Required for building this module")
 
 add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
