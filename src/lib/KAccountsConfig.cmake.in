@@ -9,4 +9,4 @@ include("${CMAKE_CURRENT_LIST_DIR}/FindAccountsFileDir.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KAccountsTargets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KAccountsMacros.cmake")
 
-set(KACCOUNTS_MACROS_PATH "@CMAKECONFIG_INSTALL_DIR@/KAccounts")
+set(KACCOUNTS_MACROS_PATH "@CMAKE_INSTALL_PREFIX@/@CMAKECONFIG_INSTALL_DIR@")
