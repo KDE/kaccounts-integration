@@ -35,6 +35,7 @@
 #include <QDBusPendingReply>
 #include <QDebug>
 
+#include <KMessageBox>
 #include <KPluginFactory>
 
 K_PLUGIN_FACTORY_WITH_JSON(KAccountsFactory, "kcm_kaccounts.json", registerPlugin<KAccounts>();)
@@ -119,8 +120,12 @@ void KAccounts::rmBtnClicked()
     if (!index.isValid()) {
         return;
     }
-    // TODO: ask confirmation first?
-    m_model->removeRows(index.row(), 1);
+
+    auto account = qobject_cast<Accounts::Account*>(m_model->data(index, AccountsModel::Data).value<QObject*>());
+    const auto response = KMessageBox::questionYesNo(this, i18n("Are you sure that you want to remove the account '%1'? This cannot be undone.", account->displayName()), i18n("Account Removal"));
+    if (response == KMessageBox::Yes) {
+        m_model->removeRows(index.row(), 1);
+    }
 }
 
 void KAccounts::moduleLoadCallFinished(QDBusPendingCallWatcher *watcher)
