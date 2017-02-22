@@ -93,6 +93,12 @@ void AccountWidget::setAccount(Accounts::Account *account)
         checkbox->setChecked(account->enabled());
         checkbox->setProperty("service", service.name());
 
+        QIcon icon = QIcon::fromTheme(service.iconName());
+        if (icon.isNull()) {
+            icon = QIcon::fromTheme(QStringLiteral("internet-services"));
+        }
+        checkbox->setIcon(icon);
+
         KAccountsUiPlugin *uiPlugin = KAccounts::UiPluginsManager::pluginForService(service.serviceType());
         if (uiPlugin) {
             m_connections << connect(uiPlugin, &KAccountsUiPlugin::configUiReady, [=]() {
