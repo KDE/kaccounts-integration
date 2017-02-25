@@ -74,6 +74,7 @@ install(TARGETS kaccounts EXPORT KAccountsTargets ${INSTALL_TARGETS_DEFAULT_ARGS
 install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF5::
 
 install (FILES
+        kaccounts_export.h
         ${kaccountslib_HEADERS}
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KAccounts COMPONENT Devel
