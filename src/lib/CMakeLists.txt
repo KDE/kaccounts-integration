@@ -6,6 +6,7 @@ include_directories(
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_FULL_CMAKEPACKAGEDIR}/KAccounts")
 
+include(ECMGenerateHeaders)
 include(ECMPackageConfigHelpers)
 include(ECMSetupVersion)
 include(CMakePackageConfigHelpers)
@@ -25,6 +26,14 @@ set (kaccountslib_SRCS
      core.cpp
 )
 
+ecm_generate_headers(kaccountslib_HEADERS
+  HEADER_NAMES
+  Core
+  GetCredentialsJob
+  KAccountsUiPlugin
+  KAccountsDPlugin
+  REQUIRED_HEADERS kaccountslib_HEADERS
+)
 
 add_library (kaccounts SHARED
              ${kaccountslib_SRCS}
@@ -65,13 +74,9 @@ install(TARGETS kaccounts EXPORT KAccountsTargets ${INSTALL_TARGETS_DEFAULT_ARGS
 install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF5::
 
 install (FILES
-        core.h
-        getcredentialsjob.h
-        kaccountsuiplugin.h
-        kaccountsdplugin.h
-        kaccounts_export.h
+        ${kaccountslib_HEADERS}
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
-        DESTINATION ${INCLUDE_INSTALL_DIR}/KAccounts COMPONENT Devel
+        DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KAccounts COMPONENT Devel
 )
 
 add_subdirectory(cmake)
