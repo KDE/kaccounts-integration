@@ -53,6 +53,7 @@ QWidget* Create::widget()
 
     QWidget *widget = new QWidget(m_parent);
     m_form->setupUi(widget);
+    m_form->progressBar->hide();
 
     QMetaObject::invokeMethod(this, "fillInterface", Qt::QueuedConnection);
 
@@ -108,11 +109,15 @@ void Create::fillInterface()
 
 void Create::createAccount()
 {
+    m_form->progressBar->show();
+    m_form->scrollAreaWidgetContents->setEnabled(false);
     QString providerName = sender()->property("providerName").toString();
     qDebug() << "Starting new account dialog for" << providerName;
     CreateAccount *acc = new CreateAccount(providerName, this);
 
-    connect(acc, &CreateAccount::finished, [=](KJob *job) {
+    connect(acc, &CreateAccount::finished, this, [=](KJob *job) {
+        m_form->progressBar->hide();
+        m_form->scrollAreaWidgetContents->setEnabled(true);
         if (job->error() == KJob::UserDefinedError) {
             QMessageBox::critical(m_parent, i18nc("Messagebox title; meaning 'Unable to finish the action you started'", "Unable to finish"), job->errorText());
         }
