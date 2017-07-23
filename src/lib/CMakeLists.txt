@@ -4,7 +4,7 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_FULL_CMAKEPACKAGEDIR}/KAccounts")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KAccounts")
 
 include(ECMGenerateHeaders)
 include(ECMPackageConfigHelpers)
