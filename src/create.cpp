@@ -32,6 +32,7 @@
 #include <Accounts/Provider>
 
 #include <KLocalizedString>
+#include <KMessageWidget>
 
 Create::Create(QWidget *parent)
     : QObject(parent)
@@ -63,26 +64,41 @@ QWidget* Create::widget()
 void Create::fillInterface()
 {
     Accounts::ProviderList providerList = m_manager->providerList();
-    Accounts::ServiceList serviceList = m_manager->serviceList();
+    const Accounts::ServiceList serviceList = m_manager->serviceList();
+
+    if (providerList.isEmpty()) {
+        auto noProvidersMessageWidget = new KMessageWidget(
+                    xi18n("No account providers found.<nl/>"
+                          "Some providers can be found in packages <application>kaccounts-providers</application>"
+                          " and <application>ktp-accounts-kcm</application>."));
+        noProvidersMessageWidget->setMessageType(KMessageWidget::MessageType::Warning);
+        m_form->verticalLayout_2->insertWidget(0, noProvidersMessageWidget);
+        return;
+    }
+
+    QSet<QString> wantedProviders;
+    QSet<QString> locatedProviders;
 
     // sort accounts alphabetically
     std::sort(providerList.begin(), providerList.end(), [](const Accounts::Provider &a, const Accounts::Provider &b) {
         return QString::localeAwareCompare(b.displayName(), a.displayName()) < 0;
     });
 
-    QCommandLinkButton *button;
-    Q_FOREACH(const Accounts::Provider &provider, providerList) {
+    for(const Accounts::Provider &provider : providerList) {
         if (provider.name() == "ktp-generic") {
+            locatedProviders.insert(provider.name());
             continue;
         }
 
         // Check if there are any services for the given provider
         // If not, just skip it and don't allow creating such account
         bool shouldSkip = true;
-        Q_FOREACH (const Accounts::Service &service, serviceList) {
-            qDebug() << "Checking" << service.name() << provider.name();
+        for(const Accounts::Service &service : qAsConst(serviceList)) {
+            qDebug() << "Checking service " << service.name() << " for provider " << provider.name();
+            wantedProviders.insert(service.provider());
             if (service.provider() == provider.name()) {
                 qDebug() << "Found a service, not skipping:" << service.name();
+                locatedProviders.insert(provider.name());
                 shouldSkip = false;
                 break;
             }
@@ -92,19 +108,36 @@ void Create::fillInterface()
             continue;
         }
 
-        button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(), provider.displayName().toUtf8().constData()));
-        const QString providerIcon = provider.iconName();
-        if (providerIcon.isEmpty()) {
-            button->setIcon(QIcon::fromTheme("list-add"));
-        } else {
-            button->setIcon(QIcon::fromTheme(providerIcon));
-        }
-        button->setProperty("providerName", provider.name());
-        button->setToolTip(i18nd(provider.trCatalog().toLatin1().constData(), provider.description().toUtf8().constData()));
-
-        connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
-        m_form->verticalLayout->insertWidget(0, button);
+        createProviderButton(provider);
     }
+
+    const auto missingProviders = wantedProviders.subtract(locatedProviders);
+    if (!missingProviders.isEmpty()) {
+        const auto missingProvidersString = missingProviders.toList().join(" ");
+        const QString infoMessage = i18n("Following missing providers are required by installed services: %1").arg(missingProvidersString);
+
+        auto missingProvidersMessageWidget = new KMessageWidget(infoMessage);
+        missingProvidersMessageWidget->setMessageType(KMessageWidget::MessageType::Warning);
+        m_form->verticalLayout_2->insertWidget(0, missingProvidersMessageWidget);
+        return;
+    }
+}
+
+void Create::createProviderButton(const Accounts::Provider &provider)
+{
+    QCommandLinkButton *button = new QCommandLinkButton(i18nd(provider.trCatalog().toLatin1().constData(),
+                                                              provider.displayName().toUtf8().constData()));
+    const QString providerIcon = provider.iconName();
+    if (providerIcon.isEmpty()) {
+        button->setIcon(QIcon::fromTheme("list-add"));
+    } else {
+        button->setIcon(QIcon::fromTheme(providerIcon));
+    }
+    button->setProperty("providerName", provider.name());
+    button->setToolTip(i18nd(provider.trCatalog().toLatin1().constData(), provider.description().toUtf8().constData()));
+
+    connect(button, SIGNAL(clicked(bool)), SLOT(createAccount()));
+    m_form->verticalLayout->insertWidget(0, button);
 }
 
 void Create::createAccount()

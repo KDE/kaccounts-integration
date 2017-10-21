@@ -28,6 +28,7 @@ class Ui_createForm;
 namespace Accounts
 {
     class Manager;
+    class Provider;
 }
 
 class Create : public QObject
@@ -39,6 +40,9 @@ public:
     virtual ~Create();
 
     QWidget* widget();
+
+private:
+    void createProviderButton(const Accounts::Provider &provider);
 
 private Q_SLOTS:
     void fillInterface();
