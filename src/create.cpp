@@ -114,7 +114,7 @@ void Create::fillInterface()
     const auto missingProviders = wantedProviders.subtract(locatedProviders);
     if (!missingProviders.isEmpty()) {
         const auto missingProvidersString = missingProviders.toList().join(" ");
-        const QString infoMessage = i18n("Following missing providers are required by installed services: %1").arg(missingProvidersString);
+        const QString infoMessage = i18n("Following missing providers are required by installed services: %1", missingProvidersString);
 
         auto missingProvidersMessageWidget = new KMessageWidget(infoMessage);
         missingProvidersMessageWidget->setMessageType(KMessageWidget::MessageType::Warning);
