@@ -15,5 +15,5 @@ target_link_libraries(kded_accounts
     kaccounts
 )
 
-install(TARGETS kded_accounts DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES accounts.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded)
+set_target_properties(kded_accounts PROPERTIES OUTPUT_NAME accounts)
+install(TARGETS kded_accounts DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)
