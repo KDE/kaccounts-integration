@@ -42,7 +42,7 @@ K_PLUGIN_FACTORY_WITH_JSON(KAccountsFactory, "kcm_kaccounts.json", registerPlugi
 
 KAccounts::KAccounts(QWidget *parent, const QVariantList &)
     : KCModule(parent)
-      , m_create(0)
+      , m_create(nullptr)
       , m_layout(new QStackedLayout)
 {
     m_ui = new Ui::KCMWebAccounts();
@@ -52,7 +52,7 @@ KAccounts::KAccounts(QWidget *parent, const QVariantList &)
     m_create = new Create(this);
     m_layout->addWidget(m_create->widget());
 
-    m_accWidget = new AccountWidget(0, this);
+    m_accWidget = new AccountWidget(nullptr, this);
     m_layout->addWidget(m_accWidget);
 
     m_model = new AccountsModel(this);
@@ -94,7 +94,7 @@ void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &pr
     if (current.row() == m_model->rowCount() - 1) {
         m_ui->removeBtn->setDisabled(true);
         m_layout->setCurrentIndex(0);
-        m_accWidget->setAccount(0);
+        m_accWidget->setAccount(nullptr);
         return;
     }
 

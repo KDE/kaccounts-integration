@@ -39,7 +39,7 @@ public:
     };
 
 
-    KAccountsUiPlugin(QObject *parent = 0);
+    KAccountsUiPlugin(QObject *parent = nullptr);
     virtual ~KAccountsUiPlugin();
 
     virtual void init(UiType type) = 0;

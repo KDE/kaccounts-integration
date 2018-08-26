@@ -42,8 +42,8 @@ class CreateAccount : public KJob
     Q_OBJECT
     Q_PROPERTY(QString providerName READ providerName WRITE setProviderName NOTIFY providerNameChanged)
 public:
-    explicit CreateAccount(QObject* parent = 0);
-    explicit CreateAccount(const QString &providerName, QObject* parent = 0);
+    explicit CreateAccount(QObject* parent = nullptr);
+    explicit CreateAccount(const QString &providerName, QObject* parent = nullptr);
 
     QString providerName() const { return m_providerName; }
     void setProviderName(const QString &name);

@@ -56,7 +56,7 @@ AccountWidget::~AccountWidget()
 void AccountWidget::setAccount(Accounts::Account *account)
 {
     if (m_account) {
-        disconnect(m_account.data(), 0, this, 0);
+        disconnect(m_account.data(), nullptr, this, nullptr);
     }
 
     qDeleteAll(m_checkboxes);
@@ -67,10 +67,10 @@ void AccountWidget::setAccount(Accounts::Account *account)
     m_connections.clear();
 
     QLayoutItem *child;
-    while ((child = d_layout->takeAt(0)) != 0) {
-        if (child->layout() != 0) {
+    while ((child = d_layout->takeAt(0)) != nullptr) {
+        if (child->layout() != nullptr) {
             QLayoutItem *child2;
-            while ((child2 = child->layout()->takeAt(0)) != 0) {
+            while ((child2 = child->layout()->takeAt(0)) != nullptr) {
                 delete child2->widget();
                 delete child2;
             }
@@ -82,7 +82,7 @@ void AccountWidget::setAccount(Accounts::Account *account)
         return;
     }
 
-    QCheckBox *checkbox = 0;
+    QCheckBox *checkbox = nullptr;
     Accounts::ServiceList services = account->services();
     Q_FOREACH(const Accounts::Service &service, services) {
         // first select the service we'll be manipulating (enable/disable)

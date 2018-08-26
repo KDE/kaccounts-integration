@@ -54,7 +54,7 @@ class KACCOUNTS_EXPORT KAccountsDPlugin : public QObject
     Q_OBJECT
 
 public:
-    KAccountsDPlugin(QObject *parent = 0);
+    KAccountsDPlugin(QObject *parent = nullptr);
     virtual ~KAccountsDPlugin();
 
 public Q_SLOTS:

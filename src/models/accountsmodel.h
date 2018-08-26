@@ -33,7 +33,7 @@ class AccountsModel : public QAbstractListModel
             Id = Qt::UserRole,
             Data
         };
-        explicit AccountsModel(QObject* parent = 0);
+        explicit AccountsModel(QObject* parent = nullptr);
         virtual ~AccountsModel();
 
         virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;

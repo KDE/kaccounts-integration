@@ -87,7 +87,7 @@ Accounts::Account* AccountsModelPrivate::accountById(int id)
     Accounts::Account* account = m_manager->account(id);
     if (!account) {
         qDebug() << "\t Failed to get the account from manager";
-        return 0;
+        return nullptr;
     }
 
     connect(account, SIGNAL(displayNameChanged(QString)), q, SLOT(accountUpdated()));

@@ -36,7 +36,7 @@
 
 Create::Create(QWidget *parent)
     : QObject(parent)
-    , m_form(0)
+    , m_form(nullptr)
     , m_manager(KAccounts::accountsManager())
 {
     m_parent = parent;
