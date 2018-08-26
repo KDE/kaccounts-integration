@@ -31,4 +31,3 @@ KAccountsDPlugin::~KAccountsDPlugin()
 
 }
 
-#include "kaccountsdplugin.moc"
