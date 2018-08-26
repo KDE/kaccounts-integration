@@ -92,7 +92,7 @@ void GetCredentialsJob::Private::getCredentials()
     }
 
     QObject::connect(authSession.data(), &SignOn::AuthSession::response,
-            [this, identity](const SignOn::SessionData &data) {
+            [this](const SignOn::SessionData &data) {
                 sessionData = data;
                 q->emitResult();
             });
