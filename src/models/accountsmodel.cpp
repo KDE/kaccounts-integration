@@ -175,6 +175,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
 
 bool AccountsModel::removeRows(int row, int count, const QModelIndex& parent)
 {
+    Q_UNUSED(count)
     Q_UNUSED(parent)
     if (row >= d->m_accIdList.count()) {
         return false;

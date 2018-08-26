@@ -87,6 +87,8 @@ KAccounts::KAccounts(QWidget *parent, const QVariantList &)
 
 void KAccounts::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
+    Q_UNUSED(previous)
+
     if (!current.isValid()) {
         return;
     }
