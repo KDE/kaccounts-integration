@@ -20,7 +20,7 @@
 #ifndef KACCOUNTS_EXPORT_H
 #define KACCOUNTS_EXPORT_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 #ifndef KACCOUNTS_EXPORT
 /* We are building this library */

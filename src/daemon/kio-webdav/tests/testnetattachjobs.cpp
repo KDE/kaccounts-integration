@@ -19,7 +19,7 @@
 #include "../src/daemon/kio/createnetattachjob.h"
 #include "../src/daemon/kio/removenetattachjob.h"
 
-#include <QtTest/QTest>
+#include <QTest>
 
 #include <KWallet/KWallet>
 #include <KDirNotify>

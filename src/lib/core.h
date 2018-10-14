@@ -19,6 +19,9 @@
  *
  */
 
+#ifndef KACCOUNTS_CORE_H
+#define KACCOUNTS_CORE_H
+
 #include "kaccounts_export.h"
 
 namespace Accounts {
@@ -35,3 +38,4 @@ namespace KAccounts {
      */
     KACCOUNTS_EXPORT Accounts::Manager* accountsManager();
 }
+#endif

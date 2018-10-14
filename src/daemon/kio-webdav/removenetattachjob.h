@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#ifndef OREMOVEFILE_H
-#define OREMOVEFILE_H
+#ifndef REMOVENETATTACHJOB_H
+#define REMOVENETATTACHJOB_H
 
 #include <KJob>
 #include <KConfigGroup>
@@ -49,4 +49,4 @@ private:
     KWallet::Wallet *m_wallet;
 };
 
-#endif //OREMOVEFILE_H
+#endif //REMOVENETATTACHJOB_H

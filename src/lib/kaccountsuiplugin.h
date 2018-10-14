@@ -94,7 +94,7 @@ Q_SIGNALS:
     /**
      * Emitted when there has been an error during the authentication
      *
-     * @param errorString The error that has occured
+     * @param errorString The error that has occurred
      */
     void error(const QString &errorString);
 };
