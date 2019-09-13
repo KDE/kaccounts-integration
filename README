@@ -1,39 +1,42 @@
 # Setting up accounts-sso
+
 Accounts-SSO is the framework we are using to store secrets (tokens, passwords)
 and for storing Accounts (small pieces of information containing a name,
 a provider, etc).
 
-https://code.google.com/p/accounts-sso/
-
+https://accounts-sso.gitlab.io/
 
 ## Accounts
+
 This is a fairly simply yet powerful framework, it stores all information into a
 sqlite database and then propagates the modifications using dbus so all applications
 using libaccounts will be aware of the modifications.
 
 ### libaccounts-glib
+
 The first thing to compile is libaccounts-glib, which is the code implementing
 all the Read/Write/Notification of Accounts:
 
-    git clone https://code.google.com/p/accounts-sso.libaccounts-glib/ libaccounts-glib
+    git clone https://gitlab.com/accounts-sso/libaccounts-glib libaccounts-glib
     cd libaccounts-glib
-    ./autogen.sh --prefix= --enable-debug
-    make
-    make install
+    meson build
+    ninja -C build && ninja -C build install
 
 ### libaccounts-qt
-This is the Qt bindings for libaccounts-glib, it uses qmake :/
 
-    git clone https://code.google.com/p/accounts-sso.libaccounts-qt/ libaccounts-qt
+This is the Qt bindings for libaccounts-glib, it uses qmake.
+
+    git clone https://gitlab.com/accounts-sso/libaccounts-qt libaccounts-qt
     cd libaccounts-qt
-    qmake PREFIX= LIBDIR=
-    make install
+    qmake
+    make && make install
 
 Note that at this very day libaccounts-qt qmake does **NOT** support compiling the
 library outside the source directory, this means that the command qmake must be
 executed within the root of libaccounts-qt and not for example in a build directory.
 
 ##SSO
+
 Single Sign On is the part of the framework responsable for storing and obtaining
 credentials. It stores the credentials in a secure way (in case of KDE within
 KWallet) and has a plugin system to do authentication in most common cases such
@@ -43,39 +46,43 @@ An interface can be plugged into SSO, at this moment we are using ubuntu's
 implementation signon-ui but that will changes in the future.
 
 ### signond
+
 This includes a daemon that will be dbus activated and will offer a set of dbus api
 to access to credentials and to authenticate to services (google/facebook oauth or
 owncloud user/password). Within this same repo there is a Qt library that we'll use
 in our applications to talk to the daemon.
 
-    git clone https://code.google.com/p/accounts-sso.signond/ signond
-    qmake PREFIX= LIBDIR=
-    make install
+    git clone https://gitlab.com/accounts-sso/signond signond
+    qmake
+    make && make install
 
 Note: Since signond is *dbus* activated be sure that the file
 `com.google.code.AccountsSSO.SingleSignOn.service` is in a location where dbus
 can find it (usually /usr/share/dbus-1/services)
 
 ### Wallet support
+
 In order for sigond to talk to KWallet we need a plugin for it, otherwise it will
 store secrets (tokens and passwords) in plain text
 
     git clone git://anongit.kde.org/signon-kwallet-extension.git
     mkdir signon-kwallet-extension/build
     cd signon-kwallet-extension/build
-    cmake ../ -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
-    make install
+    cmake ..
+    make && make install
 
 ### oauth2 plugin
+
 This plugin makes signond able to deal with oauth2 authentication
 
-    git clone https://code.google.com/p/accounts-sso.signon-plugin-oauth2/ signon-plugin-oauth2
+    git clone https://gitlab.com/accounts-sso/signon-plugin-oauth2 signon-plugin-oauth2
     mkdir signon-plugin-oauth2/build
     cd signon-plugin-oauth2/build
-    qmake .. PREFIX= LIBDIR=
+    qmake ..
     make install
 
 ### signon-ui
+
 At the moment we are u sing Ubuntu's UI which is under CLA and hosted in Launchpad.
 We don't plan to use this for a long time but at the moment it works.
 
@@ -84,22 +91,27 @@ We don't plan to use this for a long time but at the moment it works.
     qmake PREFIX= LIBDIR=
     make install
 
+TODO: migrate to signon-qt from accounts-sso gitlab.
+
 Note that this project does **NOT** support out of tree builds
 
 ### kde providers
+
 This are the providers and services that at this very moment we provide support for.
 For example in Facebook we support Chat, Contacts Calendar... for what we need a
 facebook.provider and chat/contacts/calendar.service files. This is basically a bunch
 of icons and .xml files
 
-    git clone git://anongit.kde.org/scratch/afiestas/kde-account-providers.git
-    mkdir kde-account-providers/build
-    cd kde-account-providers/build
-    cmake ../ -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
+    git clone git://anongit.kde.org/kaccount-providers.git
+    mkdir kaccount-providers/build
+    cd kaccount-providers/build
+    cmake ..
     make install
 
 ##Telepathy support
+
 ### Mission Control UOA pluging
+
 If you use ubuntu, you can get it from repositories.
 If you use arhclinux, you can fetch it from aur
 If you have (or want) to compile it yourself, grab mission-control and apply
