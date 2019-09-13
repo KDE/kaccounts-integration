@@ -83,17 +83,12 @@ This plugin makes signond able to deal with oauth2 authentication
 
 ### signon-ui
 
-At the moment we are u sing Ubuntu's UI which is under CLA and hosted in Launchpad.
-We don't plan to use this for a long time but at the moment it works.
+signon-ui provides the user interface for logging-into various accounts.
 
-    bzr branch lp:signon-ui
+    git clone https://gitlab.com/accounts-sso/signon-ui signon-ui
     cd signon-ui
-    qmake PREFIX= LIBDIR=
+    qmake
     make install
-
-TODO: migrate to signon-qt from accounts-sso gitlab.
-
-Note that this project does **NOT** support out of tree builds
 
 ### kde providers
 

@@ -9,7 +9,7 @@ Steps:
     1-AccountsModel to replace the KConfig+QListWidget hack
     2-ProvidersModel to replace create/types widget
         -Maybe we will need a service model as well
-    3-KDE Signon-ui
+    3-KDE Signon-ui (technically not needed, as we are essentially using upstream signon-ui which is based on qt)
     4-KDE auth plugins (oauth2 and password)
     5-Move telepathy code (if needed) into the ktp-kded and monitor account created/removed events
     6-Create or move to a daemon the akonadi code to create or remove the needed resources once an
