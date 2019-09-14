@@ -26,7 +26,7 @@
 
 namespace Accounts {
     class Account;
-};
+}
 
 class QCheckBox;
 
