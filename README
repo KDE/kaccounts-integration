@@ -108,6 +108,6 @@ of icons and .xml files
 ### Mission Control UOA pluging
 
 If you use ubuntu, you can get it from repositories.
-If you use arhclinux, you can fetch it from aur
+If you use archlinux, you can fetch it from aur
 If you have (or want) to compile it yourself, grab mission-control and apply
 uoa.patch
