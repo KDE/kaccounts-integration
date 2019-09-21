@@ -8,7 +8,7 @@ set(REQUIRED_KF5_VERSION "5.4.0")
 
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
 
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 enable_testing()
 
@@ -33,12 +33,6 @@ set_package_properties(AccountsQt5 PROPERTIES DESCRIPTION "Accounts management l
 find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} CONFIG)
 set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which performs user authentication on behalf of its clients"
    URL "https://gitlab.com/accounts-sso/signond"
-   TYPE REQUIRED
-   PURPOSE "Required for building this module")
-
-find_package(LibAccountsGlib ${ACCOUNTSGLIB_DEP_VERSION})
-set_package_properties(LibAccountsGlib PROPERTIES DESCRIPTION "GLib-based client library for the accounts database"
-   URL "https://gitlab.com/accounts-sso/libaccounts-glib"
    TYPE REQUIRED
    PURPOSE "Required for building this module")
 
