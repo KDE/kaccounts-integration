@@ -39,6 +39,13 @@ Name[x-test]=xxAccountsxx
 Name[zh_CN]=帐户
 Name[zh_TW]=帳號
 Comment=Add Your Online Accounts
+Comment[ca]=Afegiu els vostres comptes en línia
+Comment[ko]=내 온라인 계정 추가
+Comment[nl]=Uw online accounts toevoegen
+Comment[pt]=Adicione as Suas Contas 'Online'
+Comment[sv]=Lägg till dina nätkonton
+Comment[uk]=Додавання ваших облікових записів
+Comment[x-test]=xxAdd Your Online Accountsxx
 
 Encoding=UTF-8
 Type=Service
