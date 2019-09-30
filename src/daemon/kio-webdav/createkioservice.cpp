@@ -46,7 +46,7 @@ void CreateKioService::createKioService()
     m_account = m_manager->account(m_accountId);
 
     GetCredentialsJob *job = new GetCredentialsJob(m_accountId, QString(), QString(), this);
-    connect(job, SIGNAL(finished(KJob*)), SLOT(gotCredentials(KJob*)));
+    connect(job, &GetCredentialsJob::finished, this, &CreateKioService::gotCredentials);
     job->setServiceType(m_serviceType);
     job->start();
 }
@@ -70,7 +70,7 @@ void CreateKioService::gotCredentials(KJob *job)
     m_account->selectService(service);
     QString username = data["UserName"].toString();
     CreateNetAttachJob *netJob = new CreateNetAttachJob(this);
-    connect(netJob, SIGNAL(finished(KJob*)), SLOT(netAttachCreated(KJob*)));
+    connect(netJob, &CreateNetAttachJob::finished, this, &CreateKioService::netAttachCreated);
 
     netJob->setHost(host);
     netJob->setPath(m_account->value("dav/path").toString());

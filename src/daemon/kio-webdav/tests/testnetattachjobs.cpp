@@ -54,7 +54,7 @@ testNetAttachJobs::testNetAttachJobs(QObject* parent): QObject(parent)
     m_timer.setSingleShot(true);
     m_timer.setInterval(10000);// 10 seconds timeout for eventloop
 
-    connect(&m_timer, SIGNAL(timeout()), &m_eventLoop, SLOT(quit()));
+    connect(&m_timer, &QTimer::timeout, &m_eventLoop, &QEventLoop::quit);
 }
 
 void testNetAttachJobs::testCreate()
@@ -66,11 +66,11 @@ void testNetAttachJobs::testCreate()
 
     org::kde::KDirNotify *watch = new org::kde::KDirNotify(
     QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
-    connect(watch, SIGNAL(FilesAdded(QString)), &m_eventLoop, SLOT(quit()));
+    connect(watch, &org::kde::KDirNotify::FilesAdded, &m_eventLoop, &QEventLoop::quit);
 
-    QSignalSpy signalSpy(watch, SIGNAL(FilesAdded(QString)));
+    QSignalSpy signalSpy(watch, &org::kde::KDirNotify::FilesAdded);
 
-    CreateNetAttachJob *job = new CreateNetAttachJob(this);
+    CreateNetAttachJob *job = new CreateNetAttachJob(this)
     job->setHost("host.com");
     job->setUsername("username");
     job->setPassword("password");
@@ -120,9 +120,9 @@ void testNetAttachJobs::testRemove()
 
     org::kde::KDirNotify *watch = new org::kde::KDirNotify(
     QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
-    connect(watch, SIGNAL(FilesRemoved(QStringList)), &m_eventLoop, SLOT(quit()));
+    connect(watch, &org::kde::KDirNotify::FilesRemoved, &m_eventLoop, &QEventLoop::quit);
 
-    QSignalSpy signalSpy(watch, SIGNAL(FilesRemoved(QStringList)));
+    QSignalSpy signalSpy(watch, &org::kde::KDirNotify::FilesRemoved);
 
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
     job->setUniqueId("test-unique-id");

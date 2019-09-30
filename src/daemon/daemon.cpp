@@ -37,8 +37,8 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
  : KDEDModule(parent)
 {
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
-    connect(KAccounts::accountsManager(), SIGNAL(accountCreated(Accounts::AccountId)), SLOT(accountCreated(Accounts::AccountId)));
-    connect(KAccounts::accountsManager(), SIGNAL(accountRemoved(Accounts::AccountId)), SLOT(accountRemoved(Accounts::AccountId)));
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &AccountsDaemon::accountCreated);
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &AccountsDaemon::accountRemoved);
 
     QStringList pluginPaths;
 
@@ -107,7 +107,7 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId id)
     }
     acc->selectService();
 
-    connect(acc, SIGNAL(enabledChanged(QString,bool)), SLOT(enabledChanged(QString,bool)));
+    connect(acc, &Accounts::Account::enabledChanged, this, &AccountsDaemon::enabledChanged);
 }
 
 void AccountsDaemon::accountCreated(const Accounts::AccountId id)

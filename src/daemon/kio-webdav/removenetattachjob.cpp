@@ -52,7 +52,7 @@ void RemoveNetAttachJob::removeNetAttach()
         windowId = qApp->activeWindow()->winId();
     }
     m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Asynchronous);
-    connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+    connect(m_wallet, &KWallet::Wallet::walletOpened, this, &RemoveNetAttachJob::walletOpened);
 }
 
 void RemoveNetAttachJob::walletOpened(bool opened)

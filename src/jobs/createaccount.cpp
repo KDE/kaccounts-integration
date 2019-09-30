@@ -80,7 +80,7 @@ void CreateAccount::processSession()
         m_identity = SignOn::Identity::newIdentity(info, this);
         m_identity->storeCredentials();
 
-        connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+        connect(m_identity, &SignOn::Identity::info, this, &CreateAccount::info);
         connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
             qDebug() << "Error storing identity:" << err.message();
         });
@@ -91,8 +91,8 @@ void CreateAccount::processSession()
         SignOn::SessionData sessionData(data);
         SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
         qDebug() << "Starting auth session with" << m_accInfo->authData().method();
-        connect(session, SIGNAL(error(SignOn::Error)), SLOT(sessionError(SignOn::Error)));
-        connect(session, SIGNAL(response(SignOn::SessionData)), SLOT(sessionResponse(SignOn::SessionData)));
+        connect(session, &SignOn::AuthSession::error, this, &CreateAccount::sessionError);
+        connect(session, &SignOn::AuthSession::response, this, &CreateAccount::sessionResponse);
 
         session->process(sessionData, m_accInfo->authData().mechanism());
     }
@@ -137,7 +137,7 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     }
 
     m_identity = SignOn::Identity::newIdentity(info, this);
-    connect(m_identity, SIGNAL(info(SignOn::IdentityInfo)), SLOT(info(SignOn::IdentityInfo)));
+    connect(m_identity, &SignOn::Identity::info, this, &CreateAccount::info);
 
     m_done = true;
 

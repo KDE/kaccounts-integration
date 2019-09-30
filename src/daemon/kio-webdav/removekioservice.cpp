@@ -40,7 +40,7 @@ void RemoveKioService::removeKioService()
     qDebug();
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
     job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
-    connect(job, SIGNAL(finished(KJob*)), SLOT(removeNetAatachFinished(KJob*)));
+    connect(job, &RemoveNetAttachJob::finished, this, &RemoveKioService::removeNetAatachFinished);
     job->start();
 }
 

@@ -60,7 +60,7 @@ void CreateNetAttachJob::createNetAttach()
     }
     m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), windowId, Wallet::Asynchronous);
 
-    connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+    connect(m_wallet, &KWallet::Wallet::walletOpened, this, &CreateNetAttachJob::walletOpened);
 }
 
 void CreateNetAttachJob::walletOpened(bool opened)
@@ -92,7 +92,7 @@ void CreateNetAttachJob::getRealm()
     }
 
     KIO::TransferJob *job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, SIGNAL(finished(KJob*)), SLOT(gotRealm(KJob*)));
+    connect(job, &KIO::TransferJob::finished, this, &CreateNetAttachJob::gotRealm);
     KIO::MetaData data;
     data.insert("PropagateHttpHeader", "true");
     job->setMetaData(data);
