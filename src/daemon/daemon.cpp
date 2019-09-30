@@ -42,8 +42,8 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
 
     QStringList pluginPaths;
 
-    QStringList paths = QCoreApplication::libraryPaths();
-    Q_FOREACH (const QString &libraryPath, paths) {
+    const QStringList paths = QCoreApplication::libraryPaths();
+    for (const QString &libraryPath : paths) {
         QString path(libraryPath + QStringLiteral("/kaccounts/daemonplugins"));
         QDir dir(path);
 
@@ -51,14 +51,14 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
             continue;
         }
 
-        QStringList dirEntries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        const QStringList dirEntries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
 
-        Q_FOREACH(const QString &file, dirEntries) {
+        for (const QString &file : dirEntries) {
             pluginPaths.append(path + '/' + file);
         }
     }
 
-    Q_FOREACH (const QString &pluginPath, pluginPaths) {
+    for (const QString &pluginPath : qAsConst(pluginPaths)) {
         QPluginLoader loader(pluginPath);
 
         if (!loader.load()) {
@@ -91,8 +91,8 @@ AccountsDaemon::~AccountsDaemon()
 void AccountsDaemon::startDaemon()
 {
     qDebug();
-    Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
-    Q_FOREACH(const Accounts::AccountId &id, accList) {
+    const Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
+    for (const Accounts::AccountId &id : accList) {
         monitorAccount(id);
     }
 }
@@ -101,8 +101,8 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId id)
 {
     qDebug() << id;
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
-    Accounts::ServiceList services = acc->services();
-    Q_FOREACH(const Accounts::Service &service, services) {
+    const Accounts::ServiceList services = acc->services();
+    for (const Accounts::Service &service : services) {
         acc->selectService(service);
     }
     acc->selectService();
@@ -115,10 +115,10 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId id)
     qDebug() << id;
     monitorAccount(id);
 
-    Accounts::Account *acc = KAccounts::accountsManager()->account(id);
-    Accounts::ServiceList services = acc->enabledServices();
+    const Accounts::Account *acc = KAccounts::accountsManager()->account(id);
+    const Accounts::ServiceList services = acc->enabledServices();
 
-    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+    for (KAccountsDPlugin *plugin : qAsConst(m_plugins)) {
         plugin->onAccountCreated(id, services);
     }
 }
@@ -127,7 +127,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId id)
 {
     qDebug() << id;
 
-    Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+    for (KAccountsDPlugin *plugin : qAsConst(m_plugins)) {
         plugin->onAccountRemoved(id);
     }
 }
@@ -140,15 +140,15 @@ void AccountsDaemon::enabledChanged(const QString &serviceName, bool enabled)
         return;
     }
 
-    Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
+    const Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
 
-    Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
+    const Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
-        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        for (KAccountsDPlugin *plugin : qAsConst(m_plugins)) {
             plugin->onServiceDisabled(accId, service);
         }
     } else {
-        Q_FOREACH(KAccountsDPlugin *plugin, m_plugins) {
+        for (KAccountsDPlugin *plugin : qAsConst(m_plugins)) {
             plugin->onServiceEnabled(accId, service);
         }
     }

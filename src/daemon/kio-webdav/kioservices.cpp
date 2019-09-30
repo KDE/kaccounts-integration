@@ -34,7 +34,7 @@ KIOServices::KIOServices(QObject *parent)
 void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
     qDebug();
-    Q_FOREACH(const Accounts::Service &service, serviceList) {
+    for (const Accounts::Service &service : serviceList) {
         if (service.serviceType() != QLatin1String("dav-storage")) {
             qDebug() << "Ignoring: " << service.serviceType();
             continue;

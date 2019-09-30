@@ -126,7 +126,8 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     info.setAccessControlList(QStringList(QLatin1String("*")));
     info.setType(SignOn::IdentityInfo::Application);
 
-    Q_FOREACH (const QString &key, data.keys()) {
+    const auto keys = data.keys();
+    for (const QString &key : keys) {
         // If a key with __service/ prefix exists and its value is false,
         // add it to m_disabledServices which will later be used for disabling
         // the services contained in that list
@@ -203,8 +204,8 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
     }
 
 
-    Accounts::ServiceList services = m_account->services();
-    Q_FOREACH(const Accounts::Service &service, services) {
+    const Accounts::ServiceList services = m_account->services();
+    for (const Accounts::Service &service : services) {
         m_account->selectService(service);
         m_account->setEnabled(m_disabledServices.contains(service.name()) ? false : true);
     }

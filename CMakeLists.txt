@@ -40,6 +40,7 @@ add_definitions (-fexceptions
                  -DQT_NO_KEYWORDS)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
+add_definitions(-DQT_NO_FOREACH)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)

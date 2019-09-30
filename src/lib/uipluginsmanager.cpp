@@ -61,8 +61,8 @@ void UiPluginsManagerPrivate::loadPlugins()
 {
     QString pluginPath;
 
-    QStringList paths = QCoreApplication::libraryPaths();
-    Q_FOREACH (const QString &libraryPath, paths) {
+    const QStringList paths = QCoreApplication::libraryPaths();
+    for (const QString &libraryPath : paths) {
         QString path(libraryPath + QStringLiteral("/kaccounts/ui"));
         QDir dir(path);
 
@@ -70,8 +70,8 @@ void UiPluginsManagerPrivate::loadPlugins()
             continue;
         }
 
-        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-        Q_FOREACH (const QString &fileName, entryList) {
+        const QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        for (const QString &fileName : entryList) {
             QPluginLoader loader(dir.absoluteFilePath(fileName));
 
             if (!loader.load()) {
@@ -102,7 +102,8 @@ void UiPluginsManagerPrivate::loadPlugins()
                 QObject::connect(ui, &KAccountsUiPlugin::uiReady, ui, &KAccountsUiPlugin::showNewAccountDialog, Qt::UniqueConnection);
 
                 pluginsForNames.insert(fileName, ui);
-                Q_FOREACH (const QString &service, ui->supportedServicesForConfig()) {
+                const auto services = ui->supportedServicesForConfig();
+                for (const QString &service : services) {
                     qDebug() << " Adding service" << service;
                     pluginsForServices.insert(service, ui);
                 }
