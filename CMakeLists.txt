@@ -2,11 +2,11 @@ project(KAccounts)
 
 cmake_minimum_required(VERSION 2.8.12)
 
-set(REQUIRED_QT_VERSION "5.7.0")
-set(REQUIRED_KF5_VERSION "5.4.0")
+set(QT_REQUIRED_VERSION "5.7.0")
+set(KF5_MIN_VERSION "5.4.0")
 
 
-find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
@@ -21,8 +21,8 @@ set(ACCOUNTSQT_DEP_VERSION "1.13")
 set(SIGNONQT_DEP_VERSION "8.55")
 set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Widgets)
-find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative)
+find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative)
 
 find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} CONFIG)
 set_package_properties(AccountsQt5 PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
@@ -36,7 +36,7 @@ set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which per
    TYPE REQUIRED
    PURPOSE "Required for building this module")
 
-add_definitions (-fexceptions
+add_definitions (
                  -DQT_NO_KEYWORDS)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
@@ -48,6 +48,8 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(FeatureSummary)
+
+kde_enable_exceptions()
 
 include_directories(${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
 
