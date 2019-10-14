@@ -32,11 +32,9 @@ import Ubuntu.OnlineAccounts 0.1 as OA
 
 ScrollViewKCM {
     id: kaccountsRoot
-    objectName: "kaccountsModule"
 
     // Existing accounts
-    view: ListView {
-        clip: true
+    ListView {
         model: OA.AccountServiceModel {
             id: accountsModel
             service: "global"
