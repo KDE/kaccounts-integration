@@ -1,7 +1,7 @@
 @PACKAGE_INIT@
 
-find_dependency(Qt5Widgets @REQUIRED_QT_VERSION@)
-find_dependency(KF5CoreAddons @REQUIRED_KF5_VERSION@)
+find_dependency(Qt5Widgets @QT_REQUIRED_VERSION@)
+find_dependency(KF5CoreAddons @KF5_MIN_VERSION@)
 find_dependency(AccountsQt5 @ACCOUNTSQT_DEP_VERSION@)
 find_dependency(SignOnQt5 @SIGNONQT_DEP_VERSION@)
 include("${CMAKE_CURRENT_LIST_DIR}/FindAccountsFileDir.cmake")
