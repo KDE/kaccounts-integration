@@ -36,7 +36,7 @@ class CreateKioService : public KJob
     Q_OBJECT
 
 public:
-    explicit CreateKioService(QObject *parent = 0);
+    explicit CreateKioService(QObject *parent = nullptr);
     virtual ~CreateKioService();
 
     virtual void start();

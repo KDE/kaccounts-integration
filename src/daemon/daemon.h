@@ -25,7 +25,7 @@
 
 namespace Accounts {
     class Manager;
-};
+}
 
 class KJob;
 class AkonadiServices;

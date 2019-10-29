@@ -28,7 +28,7 @@ class RemoveKioService : public KJob
     Q_OBJECT
 
 public:
-    explicit RemoveKioService(QObject *parent = 0);
+    explicit RemoveKioService(QObject *parent = nullptr);
 
     virtual void start();
 

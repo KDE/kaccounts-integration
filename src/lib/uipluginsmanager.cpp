@@ -45,7 +45,7 @@ public:
 
 };
 
-Q_GLOBAL_STATIC(UiPluginsManagerPrivate, s_instance);
+Q_GLOBAL_STATIC(UiPluginsManagerPrivate, s_instance)
 
 UiPluginsManagerPrivate::UiPluginsManagerPrivate()
     : pluginsLoaded(false)
