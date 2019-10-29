@@ -62,7 +62,7 @@ public:
     /**
      * Starts the credentials job
      */
-    virtual void start();
+    void start() override;
 
     /**
      * Set service for which the auth method and mechanism will be selected

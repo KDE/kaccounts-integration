@@ -33,7 +33,7 @@ public:
     explicit RemoveNetAttachJob(QObject *parent);
     virtual ~RemoveNetAttachJob();
 
-    virtual void start();
+    void start() override;
 
     QString uniqueId() const;
     void setUniqueId(const QString &uniqueId);

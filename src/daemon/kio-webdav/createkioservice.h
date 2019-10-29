@@ -39,7 +39,7 @@ public:
     explicit CreateKioService(QObject *parent = nullptr);
     virtual ~CreateKioService();
 
-    virtual void start();
+    void start() override;
 
     Accounts::AccountId accountId() const;
     void setAccountId(const Accounts::AccountId accId);

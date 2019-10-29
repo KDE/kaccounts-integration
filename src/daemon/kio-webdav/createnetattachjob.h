@@ -34,7 +34,7 @@ public:
     explicit CreateNetAttachJob(QObject *parent = nullptr);
     virtual ~CreateNetAttachJob();
 
-    virtual void start();
+    void start() override;
 
     QString host() const;
     void setHost(const QString &host);

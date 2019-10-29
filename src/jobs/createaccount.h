@@ -47,7 +47,7 @@ public:
 
     QString providerName() const { return m_providerName; }
     void setProviderName(const QString &name);
-    void start() Q_DECL_OVERRIDE;
+    void start()  override;
 
 private Q_SLOTS:
     void processSession();

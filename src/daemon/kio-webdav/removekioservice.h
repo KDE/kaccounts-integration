@@ -30,7 +30,7 @@ class RemoveKioService : public KJob
 public:
     explicit RemoveKioService(QObject *parent = nullptr);
 
-    virtual void start();
+    void start() override;
 
     Accounts::AccountId accountId() const;
     void setAccountId(const Accounts::AccountId &accId);
