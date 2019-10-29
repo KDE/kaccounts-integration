@@ -12,6 +12,7 @@ include(ECMSetupVersion)
 include(CMakePackageConfigHelpers)
 include(WriteBasicConfigVersionFile)
 include(KDECMakeSettings)
+include(GenerateExportHeader)
 
 ecm_setup_version(${KACCOUNTS_VERSION}
   VARIABLE_PREFIX KACCOUNTS
@@ -39,6 +40,7 @@ add_library (kaccounts SHARED
              ${kaccountslib_SRCS}
 )
 
+generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
     PUBLIC
         KF5::CoreAddons
@@ -74,7 +76,7 @@ install(TARGETS kaccounts EXPORT KAccountsTargets ${INSTALL_TARGETS_DEFAULT_ARGS
 install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF5::
 
 install (FILES
-        kaccounts_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_export.h
         ${kaccountslib_HEADERS}
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KAccounts COMPONENT Devel
