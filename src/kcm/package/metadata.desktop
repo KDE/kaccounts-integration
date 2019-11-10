@@ -44,6 +44,7 @@ Comment[cs]=Přidejte svoje účty online
 Comment[de]=Fügen Sie Ihre Online-Zugänge hinzu
 Comment[en_GB]=Add Your Online Accounts
 Comment[es]=Añadir cuentas con conexión
+Comment[et]=Võrgukontode lisamine
 Comment[eu]=Gehitu zure online kontuak
 Comment[fr]=Ajouter vos comptes en ligne
 Comment[gl]=Engadir as contas de Internet
@@ -56,6 +57,7 @@ Comment[pt_BR]=Adicione suas contas online
 Comment[sv]=Lägg till dina nätkonton
 Comment[uk]=Додавання ваших облікових записів
 Comment[x-test]=xxAdd Your Online Accountsxx
+Comment[zh_CN]=添加在线账户
 Comment[zh_TW]=新增線上帳號
 
 Encoding=UTF-8
