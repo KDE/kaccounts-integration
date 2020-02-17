@@ -31,8 +31,7 @@ ScrollViewKCM {
 
     property alias accountId: servicesModel.accountId
 
-    ListView {
-        anchors.fill: parent
+    view: ListView {
         model: OA.AccountServiceModel {
             id: servicesModel
         }

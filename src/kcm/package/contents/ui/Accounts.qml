@@ -34,7 +34,7 @@ ScrollViewKCM {
     id: kaccountsRoot
 
     // Existing accounts
-    ListView {
+    view: ListView {
         model: OA.AccountServiceModel {
             id: accountsModel
             service: "global"
@@ -45,7 +45,7 @@ ScrollViewKCM {
             width: ListView.view.width
 
             contentItem: Controls.Label {
-                text: i18n("%1 (%2)", model.displayName, providerName)
+                text: i18n("%1 (%2)", model.displayName, model.providerName)
 
                 OA.Account {
                     id: account
