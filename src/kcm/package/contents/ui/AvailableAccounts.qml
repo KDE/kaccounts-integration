@@ -29,9 +29,7 @@ ScrollViewKCM {
     id: root
     title: i18n("Add new Account")
 
-    ListView {
-        anchors.fill: parent
-
+    view: ListView {
         model: OA.ProviderModel {}
 
         delegate: Kirigami.BasicListItem {
