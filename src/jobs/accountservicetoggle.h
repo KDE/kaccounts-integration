@@ -1,5 +1,5 @@
 /*************************************************************************************
- *  Copyright (C) 2015 by Aleix Pol <aleixpol@kde.org>                               *
+ *  Copyright (C) 2020 by Dan Leinir Turthra Jensen <admin@leinir.dk>                *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -16,13 +16,39 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "kaccountsdeclarativeplugin.h"
-#include "../jobs/createaccount.h"
-#include "../jobs/accountservicetoggle.h"
-#include <qqml.h>
+#ifndef ACCOUNTSERVICETOGGLE_H
+#define ACCOUNTSERVICETOGGLE_H
 
-void KAccountsDeclarativePlugin::registerTypes(const char* uri)
+
+#include <kjob.h>
+
+#include <QStringList>
+
+class AccountServiceToggle : public KJob
 {
-    qmlRegisterType<CreateAccount>(uri, 1, 0, "CreateAccount");
-    qmlRegisterType<AccountServiceToggle>(uri, 1, 1, "AccountServiceToggle");
-}
+    Q_OBJECT
+    Q_PROPERTY(QString accountId READ accountId WRITE setAccountId NOTIFY accountIdChanged)
+    Q_PROPERTY(QString serviceId READ serviceId WRITE setServiceId NOTIFY serviceIdChanged)
+    Q_PROPERTY(bool serviceEnabled READ serviceEnabled WRITE setServiceEnabled NOTIFY serviceEnabledChanged)
+public:
+    explicit AccountServiceToggle(QObject* parent = nullptr);
+    virtual ~AccountServiceToggle();
+
+    void start() override;
+
+    QString accountId() const;
+    void setAccountId(const QString& accountId);
+    Q_SIGNAL void accountIdChanged();
+
+    QString serviceId() const;
+    void setServiceId(const QString& serviceId);
+    Q_SIGNAL void serviceIdChanged();
+
+    bool serviceEnabled() const;
+    void setServiceEnabled(bool serviceEnabled);
+    Q_SIGNAL void serviceEnabledChanged();
+private:
+    class Private;
+    Private* d;
+};
+#endif//ACCOUNTSERVICETOGGLE_H
