@@ -102,12 +102,3 @@ of icons and .xml files
     cd kaccount-providers/build
     cmake ..
     make install
-
-##Telepathy support
-
-### Mission Control UOA pluging
-
-If you use ubuntu, you can get it from repositories.
-If you use archlinux, you can fetch it from aur
-If you have (or want) to compile it yourself, grab mission-control and apply
-uoa.patch
