@@ -19,7 +19,7 @@
 #include "accountservicetoggle.h"
 
 #include <QDebug>
-#include <KAccounts/Core>
+#include "core.h"
 #include <Accounts/Manager>
 
 class AccountServiceToggle::Private {
