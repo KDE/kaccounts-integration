@@ -54,7 +54,7 @@ class KACCOUNTS_EXPORT KAccountsDPlugin : public QObject
     Q_OBJECT
 
 public:
-    KAccountsDPlugin(QObject *parent = nullptr);
+    KAccountsDPlugin(QObject *parent, const QVariantList& args);
     virtual ~KAccountsDPlugin();
 
 public Q_SLOTS:
@@ -89,7 +89,5 @@ public Q_SLOTS:
      */
     virtual void onServiceDisabled(const Accounts::AccountId accountId, const Accounts::Service &service) = 0;
 };
-
-Q_DECLARE_INTERFACE(KAccountsDPlugin, "org.kde.kaccounts.DPlugin")
 
 #endif // KACCOUNTSDPLUGIN_H

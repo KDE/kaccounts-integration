@@ -21,6 +21,8 @@
 #include <core.h>
 
 #include <KPluginFactory>
+#include <KPluginMetaData>
+#include <KPluginLoader>
 
 #include <QDebug>
 #include <QDir>
@@ -36,50 +38,34 @@ K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugi
 AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
  : KDEDModule(parent)
 {
+
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &AccountsDaemon::accountCreated);
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &AccountsDaemon::accountRemoved);
 
-    QStringList pluginPaths;
+    const QVector<KPluginMetaData> data = KPluginLoader::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
+    for (const KPluginMetaData& metadata : data) {
 
-    const QStringList paths = QCoreApplication::libraryPaths();
-    for (const QString &libraryPath : paths) {
-        QString path(libraryPath + QStringLiteral("/kaccounts/daemonplugins"));
-        QDir dir(path);
-
-        if (!dir.exists()) {
+        if (!metadata.isValid()) {
+            qDebug() << "Invalid metadata" << metadata.name();
             continue;
         }
 
-        const QStringList dirEntries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        KPluginLoader loader(metadata.fileName());
+        KPluginFactory* factory = loader.factory();
 
-        for (const QString &file : dirEntries) {
-            pluginPaths.append(path + '/' + file);
-        }
-    }
-
-    for (const QString &pluginPath : qAsConst(pluginPaths)) {
-        QPluginLoader loader(pluginPath);
-
-        if (!loader.load()) {
-            qWarning() << "Could not create KAccounts daemon plugin: " << pluginPath;
-            qWarning() << loader.errorString();
+        if (!factory) {
+            qDebug() << "KPluginFactory could not load the plugin:" << metadata.pluginId() << loader.errorString();
             continue;
         }
 
-        QObject *obj = loader.instance();
-        if (obj) {
-            KAccountsDPlugin *plugin = qobject_cast<KAccountsDPlugin*>(obj);
-            if (!plugin) {
-                qDebug() << "Plugin could not be converted to an KAccountsDPlugin";
-                qDebug() << pluginPath;
-                continue;
-            }
-            qDebug() << "Loaded KAccounts plugin" << pluginPath;
-            m_plugins << plugin;
-        } else {
-            qDebug() << "Plugin could not creaate instance" << pluginPath;
+        KAccountsDPlugin* plugin = factory->create<KAccountsDPlugin>(this, {});
+        if (!plugin) {
+            qDebug() << "Error loading plugin" << metadata.name() << loader.errorString();
+            continue;
         }
+
+        m_plugins << plugin;
     }
 }
 

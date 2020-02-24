@@ -21,7 +21,7 @@
 
 #include "kaccountsdplugin.h"
 
-KAccountsDPlugin::KAccountsDPlugin(QObject *parent)
+KAccountsDPlugin::KAccountsDPlugin(QObject *parent, const QVariantList& args)
     : QObject(parent)
 {
 }
