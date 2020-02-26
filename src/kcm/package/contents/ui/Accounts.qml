@@ -26,40 +26,40 @@ import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.7 as Kirigami
 
-import org.kde.kaccounts 1.0
+import org.kde.kaccounts 1.2 as KAccounts
 import org.kde.kcm 1.2
-
-import Ubuntu.OnlineAccounts 0.1 as OA
 
 ScrollViewKCM {
     id: kaccountsRoot
 
     // Existing accounts
     view: ListView {
-        model: OA.AccountServiceModel {
-            id: accountsModel
-            service: "global"
-            includeDisabled: true
-        }
+        model: KAccounts.AccountsModel { }
 
         delegate: Kirigami.SwipeListItem {
             id: accountDelegate
             width: ListView.view.width
 
-            contentItem: Controls.Label {
-                text: {
-                    if (model.displayName.length > 0 && model.providerName.length > 0) {
-                        return i18n("%1 (%2)", model.displayName, model.providerName)
-                    } else if (model.displayName.length > 0) {
-                        return model.displayName
-                    } else {
-                        return i18n("%1 account", model.providerName)
-                    }
+            contentItem: RowLayout {
+                implicitWidth: accountDelegate.ListView.view.width
+                implicitHeight: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
+                spacing: Kirigami.Units.smallSpacing
+                Kirigami.Icon {
+                    source: model.iconName
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
                 }
-
-                OA.Account {
-                    id: account
-                    objectHandle: model.accountHandle
+                Controls.Label {
+                    Layout.fillWidth: true
+                    text: {
+                        if (model.displayName.length > 0 && model.providerName.length > 0) {
+                            return i18n("%1 (%2)", model.displayName, model.providerName)
+                        } else if (model.displayName.length > 0) {
+                            return model.displayName
+                        } else {
+                            return i18n("%1 account", model.providerName)
+                        }
+                    }
                 }
             }
             actions: [
@@ -67,14 +67,14 @@ ScrollViewKCM {
                     text: i18nc("Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
                     iconName: "edit-delete-remove"
                     onTriggered: {
-                        accountRemovalDlg.account = account;
+                        accountRemovalDlg.accountId = model.id;
                         accountRemovalDlg.displayName = model.displayName;
                         accountRemovalDlg.providerName = model.providerName;
                         accountRemovalDlg.open();
                     }
                 }
             ]
-            onClicked: kcm.push("AvailableServices.qml", {accountId: model.accountId})
+            onClicked: kcm.push("AvailableServices.qml", {model: model.services})
         }
         Controls.Label {
             anchors {
@@ -92,7 +92,7 @@ ScrollViewKCM {
     MessageBoxSheet {
         id: accountRemovalDlg
         parent: kaccountsRoot
-        property QtObject account
+        property int accountId
         property string displayName
         property string providerName
         title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
@@ -108,9 +108,16 @@ ScrollViewKCM {
         actions: [
             Kirigami.Action {
                 text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
-                onTriggered: { accountRemovalDlg.account.remove(); }
+                onTriggered: {
+                    var job = accountRemovalJob.createObject(kaccountsRoot, { "accountId": accountRemovalDlg.accountId });
+                    job.start();
+                }
             }
         ]
+    }
+    Component {
+        id: accountRemovalJob
+        KAccounts.RemoveAccount { }
     }
 
     footer: RowLayout {
