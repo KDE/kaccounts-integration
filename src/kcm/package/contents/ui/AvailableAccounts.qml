@@ -21,7 +21,7 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kaccounts 1.0
+import org.kde.kaccounts 1.0 as KAccounts
 import org.kde.kcm 1.2
 import Ubuntu.OnlineAccounts 0.1 as OA
 
@@ -36,6 +36,7 @@ ScrollViewKCM {
             icon: model.iconName
             label: model.displayName
             width: parent.width
+            height: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
 
             onClicked: {
                 var job = jobComponent.createObject(root, { "providerName": providerId })
@@ -46,7 +47,7 @@ ScrollViewKCM {
 
     Component {
         id: jobComponent
-        CreateAccount {
+        KAccounts.CreateAccount {
             onFinished: kcm.pop()
         }
     }
