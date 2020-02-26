@@ -18,7 +18,7 @@
 
 #include "uipluginsmanager.h"
 
-#include "lib/kaccountsuiplugin.h"
+#include "kaccountsuiplugin.h"
 
 #include <QHash>
 #include <QStringList>
