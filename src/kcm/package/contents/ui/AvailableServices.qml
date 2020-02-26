@@ -22,33 +22,63 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kaccounts 1.1 as KAccounts
+import org.kde.kaccounts 1.2 as KAccounts
 import org.kde.kcm 1.2
-import Ubuntu.OnlineAccounts 0.1 as OA
 
-ScrollViewKCM {
+SimpleKCM {
     id: component;
 
     title: i18n("Available Services")
 
-    property alias accountId: servicesModel.accountId
+    property alias model: servicesList.model
 
-    view: ListView {
-        model: OA.AccountServiceModel {
-            id: servicesModel
-            includeDisabled: true
-            function refreshData() {
-                // Because AccountServiceModel seems to not pick this up itself, we'll reset the model... like so, because there's no reset
-                var oldId = component.accountId;
-                component.accountId = "";
-                component.accountId = oldId;
+    header: RowLayout {
+        Layout.fillWidth: true
+        Layout.margins: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
+        Kirigami.Icon {
+            source: model.accountIconName
+            Layout.preferredWidth: Kirigami.Units.iconSizes.large
+            Layout.preferredHeight: Kirigami.Units.iconSizes.large
+        }
+        Controls.Label {
+            Layout.fillWidth: true
+            text: {
+                if (model.accountDisplayName.length > 0 && model.accountProviderName.length > 0) {
+                    return i18n("%1 (%2)", model.accountDisplayName, model.accountProviderName)
+                } else if (model.accountDisplayName.length > 0) {
+                    return model.accountDisplayName
+                } else {
+                    return i18n("%1 account", model.accountProviderName)
+                }
             }
         }
-        delegate: Kirigami.AbstractListItem {
-            width: parent.width
-            Controls.CheckBox {
+    }
+    contentItem: Kirigami.FormLayout {
+        Layout.fillWidth: true
+        Item {
+            visible: servicesList.count === 0
+            Layout.fillWidth: true
+            height: Kirigami.Units.largeSpacing
+        }
+        Kirigami.AbstractCard {
+            Layout.fillWidth: true
+            visible: servicesList.count === 0
+            header: Kirigami.Heading {
+                text: i18nc("Heading for a box informing the user there are no configuration points in this account", "No Services")
+            }
+            contentItem: Controls.Label {
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.Wrap
+                text: i18nc("A text shown when an account has no configurable services", "This account has no services available for configuration")
+            }
+        }
+        Repeater {
+            id: servicesList
+            delegate: Controls.CheckBox {
                 id: serviceCheck
-                text: model.serviceName
+                Kirigami.FormData.label: model.displayName + "\n" + model.description
                 checked: model.enabled
                 Binding {
                     target: serviceCheck
@@ -56,24 +86,61 @@ ScrollViewKCM {
                     value: model.enabled
                 }
                 onClicked: {
-                    var job = jobComponent.createObject(component, { "accountId": component.accountId, "serviceId": model.serviceName, "serviceEnabled": !model.enabled })
-                    job.result.connect(servicesModel.refreshData);
+                    var job = jobComponent.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
                     job.start()
                 }
             }
         }
-        Controls.Label {
-            anchors.fill: parent
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-            visible: parent.count === 0
-            opacity: 0.5
-            text: i18nc("A text shown when an account has no configurable services", "(No services for this account)")
+    }
+    footer: RowLayout {
+        Controls.Button {
+            Layout.alignment: Qt.AlignRight
+            text: i18n("Remove This Account")
+            icon.name: "edit-delete-remove"
+            onClicked: {
+                accountRemovalDlg.accountId = servicesList.model.accountId;
+                accountRemovalDlg.displayName = servicesList.model.accountDisplayName;
+                accountRemovalDlg.providerName = servicesList.model.accountProviderName;
+                accountRemovalDlg.open();
+            }
         }
     }
     Component {
         id: jobComponent
         KAccounts.AccountServiceToggle { }
+    }
+    MessageBoxSheet {
+        id: accountRemovalDlg
+        parent: component
+        property int accountId
+        property string displayName
+        property string providerName
+        title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
+        text: {
+            if (accountRemovalDlg.displayName.length > 0 && accountRemovalDlg.providerName.length > 0) {
+                return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", accountRemovalDlg.providerName, accountRemovalDlg.displayName)
+            } else if (accountRemovalDlg.displayName.length > 0) {
+                return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", accountRemovalDlg.displayName)
+            } else {
+                return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", accountRemovalDlg.providerName)
+            }
+        }
+        actions: [
+            Kirigami.Action {
+                text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
+                onTriggered: {
+                    var job = accountRemovalJob.createObject(kaccountsRoot, { "accountId": accountRemovalDlg.accountId });
+                    job.start();
+                }
+            }
+        ]
+    }
+    Component {
+        id: accountRemovalJob
+        KAccounts.RemoveAccount {
+            onFinished: {
+                kcm.pop();
+            }
+        }
     }
 }
