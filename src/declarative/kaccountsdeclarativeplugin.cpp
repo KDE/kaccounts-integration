@@ -1,5 +1,6 @@
 /*************************************************************************************
  *  Copyright (C) 2015 by Aleix Pol <aleixpol@kde.org>                               *
+ *  Copyright (C) 2020 by Dan Leinir Turthra Jensen <admin@leinir.dk>                *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
  *  modify it under the terms of the GNU General Public License                      *
@@ -17,12 +18,18 @@
  *************************************************************************************/
 
 #include "kaccountsdeclarativeplugin.h"
-#include "../jobs/createaccount.h"
-#include "../jobs/accountservicetoggle.h"
+#include "../jobs/createaccountjob.h"
+#include "../jobs/accountservicetogglejob.h"
+#include "../jobs/removeaccountjob.h"
+#include "accountsmodel.h"
+#include "servicesmodel.h"
 #include <qqml.h>
 
 void KAccountsDeclarativePlugin::registerTypes(const char* uri)
 {
-    qmlRegisterType<CreateAccount>(uri, 1, 0, "CreateAccount");
-    qmlRegisterType<AccountServiceToggle>(uri, 1, 1, "AccountServiceToggle");
+    qmlRegisterType<CreateAccountJob>(uri, 1, 0, "CreateAccount");
+    qmlRegisterType<AccountServiceToggleJob>(uri, 1, 1, "AccountServiceToggle");
+    qmlRegisterType<RemoveAccountJob>(uri, 1, 2, "RemoveAccount");
+    qmlRegisterType<AccountsModel>(uri, 1, 2, "AccountsModel");
+    qmlRegisterType<ServicesModel>(uri, 1, 2, "ServicesModel");
 }
