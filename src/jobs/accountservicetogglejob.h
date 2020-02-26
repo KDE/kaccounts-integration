@@ -20,19 +20,21 @@
 #define ACCOUNTSERVICETOGGLE_H
 
 
+#include "kaccounts_export.h"
+
 #include <kjob.h>
 
 #include <QStringList>
 
-class AccountServiceToggle : public KJob
+class KACCOUNTS_EXPORT AccountServiceToggleJob : public KJob
 {
     Q_OBJECT
     Q_PROPERTY(QString accountId READ accountId WRITE setAccountId NOTIFY accountIdChanged)
     Q_PROPERTY(QString serviceId READ serviceId WRITE setServiceId NOTIFY serviceIdChanged)
     Q_PROPERTY(bool serviceEnabled READ serviceEnabled WRITE setServiceEnabled NOTIFY serviceEnabledChanged)
 public:
-    explicit AccountServiceToggle(QObject* parent = nullptr);
-    virtual ~AccountServiceToggle();
+    explicit AccountServiceToggleJob(QObject* parent = nullptr);
+    virtual ~AccountServiceToggleJob();
 
     void start() override;
 

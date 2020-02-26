@@ -19,6 +19,8 @@
 #ifndef CREATE_ACCOUNT_JOB_H
 #define CREATE_ACCOUNT_JOB_H
 
+#include "kaccounts_export.h"
+
 #include <kjob.h>
 
 #include <QStringList>
@@ -37,13 +39,13 @@ namespace SignOn
     class IdentityInfo;
 }
 
-class CreateAccount : public KJob
+class KACCOUNTS_EXPORT CreateAccountJob : public KJob
 {
     Q_OBJECT
     Q_PROPERTY(QString providerName READ providerName WRITE setProviderName NOTIFY providerNameChanged)
 public:
-    explicit CreateAccount(QObject* parent = nullptr);
-    explicit CreateAccount(const QString &providerName, QObject* parent = nullptr);
+    explicit CreateAccountJob(QObject* parent = nullptr);
+    explicit CreateAccountJob(const QString &providerName, QObject* parent = nullptr);
 
     QString providerName() const { return m_providerName; }
     void setProviderName(const QString &name);
