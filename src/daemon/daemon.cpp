@@ -59,7 +59,7 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
             continue;
         }
 
-        KAccountsDPlugin* plugin = factory->create<KAccountsDPlugin>(this, {});
+        KAccountsDPlugin* plugin = factory->create<KAccountsDPlugin>(this, QVariantList());
         if (!plugin) {
             qDebug() << "Error loading plugin" << metadata.name() << loader.errorString();
             continue;
