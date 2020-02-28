@@ -41,10 +41,19 @@ public:
     {
         accountIDs = accountsManager->accountList();
 
-        connect(accountsManager, SIGNAL(accountCreated(Accounts::AccountId)), 
-                q, SLOT(accountCreated(Accounts::AccountId)));
-        connect(accountsManager, SIGNAL(accountRemoved(Accounts::AccountId)), 
-                q, SLOT(accountRemoved(Accounts::AccountId)));
+        connect(accountsManager, &Accounts::Manager::accountCreated,
+                q, [this](Accounts::AccountId accountId){
+                    int row = accountIDs.count();
+                    q->beginInsertRows(QModelIndex(), row, row);
+                    accountIDs.insert(row, accountId);
+                    q->endInsertRows();
+                });
+        connect(accountsManager, &Accounts::Manager::accountRemoved,
+                q, [this](Accounts::AccountId accountId) {
+                    q->beginRemoveRows(QModelIndex(), accountIDs.indexOf(accountId), accountIDs.indexOf(accountId));
+                    removeAccount(accountId);
+                    q->endRemoveRows();
+                });
     };
     virtual ~Private()
     {
@@ -69,13 +78,17 @@ Accounts::Account* AccountsModel::Private::accountById(int id)
         return accounts.value(id);
     }
 
+    // If we don't yet have this account cached, get it and connect it up to the model
     Accounts::Account* account = accountsManager->account(id);
     if (!account) {
         qDebug() << "\t Failed to get the account from manager";
         return nullptr;
     }
 
-    connect(account, SIGNAL(displayNameChanged(QString)), q, SLOT(accountUpdated()));
+    connect(account, &Accounts::Account::displayNameChanged, q, [this,account](){
+        QModelIndex accountIndex = q->index(accountIDs.indexOf(account->id()));
+        Q_EMIT q->dataChanged(accountIndex, accountIndex, QVector<int>() << AccountsModel::DisplayNameRole);
+    });
 
     accounts[id] = account;
     return account;
@@ -177,31 +190,4 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
     }
 
     return data;
-}
-
-void AccountsModel::accountCreated(Accounts::AccountId accountId)
-{
-    qDebug() << "AccountsModel::accountCreated: " << accountId;
-    int row = d->accountIDs.count();
-    beginInsertRows(QModelIndex(), row, row);
-    d->accountIDs.insert(row, accountId);
-    endInsertRows();
-}
-
-void AccountsModel::accountRemoved(Accounts::AccountId accountId)
-{
-    qDebug() << "AccountsModel::accountRemoved: " << accountId;
-    beginRemoveRows(QModelIndex(), d->accountIDs.indexOf(accountId), d->accountIDs.indexOf(accountId));
-    d->removeAccount(accountId);
-    endRemoveRows();
-}
-
-void AccountsModel::accountUpdated()
-{
-    Accounts::Account *acc = qobject_cast<Accounts::Account*>(sender());
-    Accounts::AccountId accountId = acc->id();
-    qDebug() << "Account updated: " << accountId;
-
-    QModelIndex accountIndex = index(d->accountIDs.indexOf(accountId), 0);
-    Q_EMIT dataChanged(accountIndex, accountIndex);
 }

@@ -48,11 +48,6 @@ class KACCOUNTS_EXPORT AccountsModel : public QAbstractListModel
         virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
         virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
-    public Q_SLOTS:
-        void accountCreated(Accounts::AccountId accountId);
-        void accountRemoved(Accounts::AccountId accountId);
-        void accountUpdated();
-
     private:
         class Private;
         Private *d;
