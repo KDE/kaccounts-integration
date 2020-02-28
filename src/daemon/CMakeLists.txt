@@ -1,19 +1,14 @@
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(accounts_daemon_SRCS
-    daemon.cpp
+kcoreaddons_add_plugin(
+    kded_accounts
+    SOURCES daemon.cpp
+    JSON kded_accounts.json
+    INSTALL_NAMESPACE "kf5/kded"
 )
-
-add_library(kded_accounts MODULE
-    ${accounts_daemon_SRCS}
-)
-kcoreaddons_desktop_to_json(kded_accounts accounts.desktop)
 
 target_link_libraries(kded_accounts
     Qt5::Core
     KF5::DBusAddons
     kaccounts
 )
-
-set_target_properties(kded_accounts PROPERTIES OUTPUT_NAME accounts)
-install(TARGETS kded_accounts DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)
