@@ -24,8 +24,13 @@
 
 #include <QAbstractListModel>
 
-#include <Accounts/Account>
-
+/**
+ * @brief A model which represents the services in a single account
+ *
+ * You can create this manually, but usually you would get an instance of it from the
+ * AccountsModel::Roles::ServicesRole data role (model.services) of an AccountsModel
+ * instance.
+ */
 class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
 {
     Q_OBJECT

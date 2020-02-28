@@ -26,6 +26,9 @@
 
 #include <Accounts/Account>
 
+/**
+ * @brief A model representing all the accounts registered on a system
+ */
 class KACCOUNTS_EXPORT AccountsModel : public QAbstractListModel
 {
     Q_OBJECT
