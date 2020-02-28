@@ -5,12 +5,9 @@ cmake_minimum_required(VERSION 2.8.12)
 set(QT_REQUIRED_VERSION "5.7.0")
 set(KF5_MIN_VERSION "5.4.0")
 
-
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
-
-enable_testing()
 
 set(RELEASE_SERVICE_VERSION_MAJOR "20")
 set(RELEASE_SERVICE_VERSION_MINOR "03")
@@ -36,11 +33,8 @@ set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which per
    TYPE REQUIRED
    PURPOSE "Required for building this module")
 
-add_definitions (
-                 -DQT_NO_KEYWORDS)
+add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\" -DQT_NO_KEYWORDS -DQT_NO_FOREACH)
 
-add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
-add_definitions(-DQT_NO_FOREACH)
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git" AND AccountsQt5_VERSION VERSION_GREATER 1.15)
    add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
    add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x060000)
@@ -52,12 +46,12 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(FeatureSummary)
-
-kde_enable_exceptions()
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
+include(GenerateExportHeader)
+include(ECMPackageConfigHelpers)
 
 include_directories(${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
-
-remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 add_subdirectory(src)
 

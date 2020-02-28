@@ -1,18 +1,4 @@
-project (kaccounts-support-library)
-
-include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KAccounts")
-
-include(ECMGenerateHeaders)
-include(ECMPackageConfigHelpers)
-include(ECMSetupVersion)
-include(CMakePackageConfigHelpers)
-include(WriteBasicConfigVersionFile)
-include(KDECMakeSettings)
-include(GenerateExportHeader)
 
 ecm_setup_version(${KACCOUNTS_VERSION}
   VARIABLE_PREFIX KACCOUNTS
@@ -20,7 +6,7 @@ ecm_setup_version(${KACCOUNTS_VERSION}
   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfigVersion.cmake"
   SOVERSION ${KACCOUNTS_SOVERSION})
 
-set (kaccountslib_SRCS
+set(kaccountslib_SRCS
      accountservicetogglejob.cpp
      createaccountjob.cpp
      kaccountsuiplugin.cpp
@@ -41,9 +27,7 @@ ecm_generate_headers(kaccountslib_HEADERS
   REQUIRED_HEADERS kaccountslib_HEADERS
 )
 
-add_library (kaccounts SHARED
-             ${kaccountslib_SRCS}
-)
+add_library(kaccounts ${kaccountslib_SRCS})
 
 generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
