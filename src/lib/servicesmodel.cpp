@@ -183,8 +183,8 @@ QString ServicesModel::accountProviderName() const
 
 QString ServicesModel::accountIconName() const
 {
-    if (d->account && !d->account->provider().iconName().isEmpty()) {
+    if (d->account && d->account->provider().isValid() && !d->account->provider().iconName().isEmpty()) {
         return d->account->provider().iconName();
     }
-    return QString{"unknown"};
+    return QString::fromLatin1("unknown");
 }

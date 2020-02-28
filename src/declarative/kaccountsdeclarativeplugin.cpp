@@ -18,9 +18,9 @@
  *************************************************************************************/
 
 #include "kaccountsdeclarativeplugin.h"
-#include "../jobs/createaccountjob.h"
-#include "../jobs/accountservicetogglejob.h"
-#include "../jobs/removeaccountjob.h"
+#include "createaccountjob.h"
+#include "accountservicetogglejob.h"
+#include "removeaccountjob.h"
 #include "accountsmodel.h"
 #include "servicesmodel.h"
 #include <qqml.h>
@@ -32,4 +32,6 @@ void KAccountsDeclarativePlugin::registerTypes(const char* uri)
     qmlRegisterType<RemoveAccountJob>(uri, 1, 2, "RemoveAccount");
     qmlRegisterType<AccountsModel>(uri, 1, 2, "AccountsModel");
     qmlRegisterType<ServicesModel>(uri, 1, 2, "ServicesModel");
+    qmlRegisterType<CreateAccountJob>(uri, 1, 0, "CreateAccountJob");
+    qmlRegisterType<AccountServiceToggleJob>(uri, 1, 1, "AccountServiceToggleJob");
 }

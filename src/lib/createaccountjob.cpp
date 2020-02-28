@@ -74,7 +74,7 @@ void CreateAccountJob::processSession()
     } else {
         SignOn::IdentityInfo info;
         info.setCaption(m_providerName);
-        info.setAccessControlList(QStringList("*"));
+        info.setAccessControlList({QStringLiteral("*")});
         info.setType(SignOn::IdentityInfo::Application);
         info.setStoreSecret(true);
 
@@ -87,7 +87,7 @@ void CreateAccountJob::processSession()
         });
 
         QVariantMap data = m_accInfo->authData().parameters();
-        data.insert("Embedded", false);
+        data.insert(QStringLiteral("Embedded"), false);
 
         SignOn::SessionData sessionData(data);
         SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
@@ -184,18 +184,18 @@ void CreateAccountJob::info(const SignOn::IdentityInfo &info)
     if (m_account->displayName().isEmpty()) {
         m_account->setDisplayName(info.userName());
     }
-    m_account->setValue("username", info.userName());
+    m_account->setValue(QStringLiteral("username"), info.userName());
     m_account->setCredentialsId(info.id());
 
     Accounts::AuthData authData = m_accInfo->authData();
-    m_account->setValue("auth/mechanism", authData.mechanism());
-    m_account->setValue("auth/method", authData.method());
+    m_account->setValue(QStringLiteral("auth/mechanism"), authData.mechanism());
+    m_account->setValue(QStringLiteral("auth/method"), authData.method());
 
-    QString base("auth/");
+    QString base = QStringLiteral("auth/");
     base.append(authData.method());
-    base.append("/");
+    base.append(QLatin1Char('/'));
     base.append(authData.mechanism());
-    base.append("/");
+    base.append(QLatin1Char('/'));
 
     QVariantMap data = authData.parameters();
     QMapIterator<QString, QVariant> i(data);

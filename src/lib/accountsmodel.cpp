@@ -162,7 +162,7 @@ QVariant AccountsModel::data(const QModelIndex& index, int role) const
                     break;
                 case IconNameRole:
                 {
-                    QString iconName{"unknown"};
+                    QString iconName = QString::fromLatin1("unknown");
                     if (account->provider().isValid() && !account->provider().iconName().isEmpty()) {
                         iconName = account->provider().iconName();
                     }

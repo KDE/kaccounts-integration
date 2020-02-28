@@ -1,18 +1,4 @@
-project (kaccounts-support-library)
-
-include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KAccounts")
-
-include(ECMGenerateHeaders)
-include(ECMPackageConfigHelpers)
-include(ECMSetupVersion)
-include(CMakePackageConfigHelpers)
-include(WriteBasicConfigVersionFile)
-include(KDECMakeSettings)
-include(GenerateExportHeader)
 
 ecm_setup_version(${KACCOUNTS_VERSION}
   VARIABLE_PREFIX KACCOUNTS
@@ -23,38 +9,33 @@ ecm_setup_version(${KACCOUNTS_VERSION}
 set (kaccountslib_SRCS
      accountsmodel.cpp
      core.cpp
-     getcredentialsjob.cpp
      kaccountsdplugin.cpp
      kaccountsuiplugin.cpp
      servicesmodel.cpp
      uipluginsmanager.cpp
-    ../jobs/accountservicetogglejob.cpp
-    ../jobs/createaccountjob.cpp
-    ../jobs/removeaccountjob.cpp
+
+     accountservicetogglejob.cpp
+     createaccountjob.cpp
+     getcredentialsjob.cpp
+     removeaccountjob.cpp
 )
 
 ecm_generate_headers(kaccountslib_HEADERS
   HEADER_NAMES
   AccountsModel
   Core
-  GetCredentialsJob
   KAccountsUiPlugin
   KAccountsDPlugin
   ServicesModel
-  REQUIRED_HEADERS kaccountslib_HEADERS
-)
-ecm_generate_headers(kaccountslib_jobs_HEADERS
-  HEADER_NAMES
+
   AccountServiceToggleJob
+  GetCredentialsJob
   CreateAccountJob
   RemoveAccountJob
-  RELATIVE ../jobs
-  REQUIRED_HEADERS kaccountslib_jobs_HEADERS
+  REQUIRED_HEADERS kaccountslib_HEADERS
 )
 
-add_library (kaccounts SHARED
-             ${kaccountslib_SRCS}
-)
+add_library(kaccounts ${kaccountslib_SRCS})
 
 generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
@@ -95,7 +76,6 @@ install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KA
 install (FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_export.h
         ${kaccountslib_HEADERS}
-        ${kaccountslib_jobs_HEADERS}
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KAccounts COMPONENT Devel
 )

@@ -19,6 +19,7 @@
 #ifndef ACCOUNTSERVICETOGGLE_H
 #define ACCOUNTSERVICETOGGLE_H
 
+#include "kaccounts_export.h"
 
 #include "kaccounts_export.h"
 
