@@ -54,7 +54,7 @@ ApplicationWindow
 
                 Component {
                     id: jobComponent
-                    CreateAccount {}
+                    CreateAccountJob {}
                 }
 
                 onClicked: {

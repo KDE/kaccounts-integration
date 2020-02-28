@@ -21,10 +21,13 @@ ecm_setup_version(${KACCOUNTS_VERSION}
   SOVERSION ${KACCOUNTS_SOVERSION})
 
 set (kaccountslib_SRCS
+     accountservicetogglejob.cpp
+     createaccountjob.cpp
      kaccountsuiplugin.cpp
      kaccountsdplugin.cpp
      getcredentialsjob.cpp
      core.cpp
+     uipluginsmanager.cpp
 )
 
 ecm_generate_headers(kaccountslib_HEADERS
@@ -33,6 +36,8 @@ ecm_generate_headers(kaccountslib_HEADERS
   GetCredentialsJob
   KAccountsUiPlugin
   KAccountsDPlugin
+  AccountServiceToggleJob
+  CreateAccountJob
   REQUIRED_HEADERS kaccountslib_HEADERS
 )
 
@@ -44,6 +49,7 @@ generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
     PUBLIC
         KF5::CoreAddons
+        KF5::I18n
         ${ACCOUNTSQT_LIBRARIES}
         Qt5::Xml
         Qt5::Gui

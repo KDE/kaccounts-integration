@@ -16,9 +16,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "createaccount.h"
-#include "lib/kaccountsuiplugin.h"
-#include "lib/core.h"
+#include "createaccountjob.h"
+#include "kaccountsuiplugin.h"
+#include "core.h"
 #include "uipluginsmanager.h"
 
 #include <QDebug>
@@ -33,13 +33,13 @@
 
 #include <KLocalizedString>
 
-CreateAccount::CreateAccount(QObject* parent)
- : CreateAccount(QString(), parent)
+CreateAccountJob::CreateAccountJob(QObject* parent)
+ : CreateAccountJob(QString(), parent)
 {
 
 }
 
-CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
+CreateAccountJob::CreateAccountJob(const QString &providerName, QObject* parent)
  : KJob(parent)
  , m_providerName(providerName)
  , m_manager(new Accounts::Manager(this))
@@ -51,13 +51,13 @@ CreateAccount::CreateAccount(const QString &providerName, QObject* parent)
 
 }
 
-void CreateAccount::start()
+void CreateAccountJob::start()
 {
     qDebug() << m_providerName;
     QMetaObject::invokeMethod(this, "processSession");
 }
 
-void CreateAccount::processSession()
+void CreateAccountJob::processSession()
 {
     m_account = m_manager->createAccount(m_providerName);
     Accounts::Service service;
@@ -80,7 +80,7 @@ void CreateAccount::processSession()
         m_identity = SignOn::Identity::newIdentity(info, this);
         m_identity->storeCredentials();
 
-        connect(m_identity, &SignOn::Identity::info, this, &CreateAccount::info);
+        connect(m_identity, &SignOn::Identity::info, this, &CreateAccountJob::info);
         connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
             qDebug() << "Error storing identity:" << err.message();
         });
@@ -91,14 +91,14 @@ void CreateAccount::processSession()
         SignOn::SessionData sessionData(data);
         SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
         qDebug() << "Starting auth session with" << m_accInfo->authData().method();
-        connect(session, &SignOn::AuthSession::error, this, &CreateAccount::sessionError);
-        connect(session, &SignOn::AuthSession::response, this, &CreateAccount::sessionResponse);
+        connect(session, &SignOn::AuthSession::error, this, &CreateAccountJob::sessionError);
+        connect(session, &SignOn::AuthSession::response, this, &CreateAccountJob::sessionResponse);
 
         session->process(sessionData, m_accInfo->authData().mechanism());
     }
 }
 
-void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
+void CreateAccountJob::loadPluginAndShowDialog(const QString &pluginName)
 {
     KAccountsUiPlugin *ui = KAccounts::UiPluginsManager::pluginForName(pluginName);
 
@@ -108,14 +108,14 @@ void CreateAccount::loadPluginAndShowDialog(const QString &pluginName)
         return;
     }
 
-    connect(ui, &KAccountsUiPlugin::success, this, &CreateAccount::pluginFinished, Qt::UniqueConnection);
-    connect(ui, &KAccountsUiPlugin::error, this, &CreateAccount::pluginError, Qt::UniqueConnection);
+    connect(ui, &KAccountsUiPlugin::success, this, &CreateAccountJob::pluginFinished, Qt::UniqueConnection);
+    connect(ui, &KAccountsUiPlugin::error, this, &CreateAccountJob::pluginError, Qt::UniqueConnection);
 
     ui->setProviderName(m_providerName);
     ui->init(KAccountsUiPlugin::NewAccountDialog);
 }
 
-void CreateAccount::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
+void CreateAccountJob::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)
 {
     // Set up the new identity
     SignOn::IdentityInfo info;
@@ -138,7 +138,7 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     }
 
     m_identity = SignOn::Identity::newIdentity(info, this);
-    connect(m_identity, &SignOn::Identity::info, this, &CreateAccount::info);
+    connect(m_identity, &SignOn::Identity::info, this, &CreateAccountJob::info);
 
     m_done = true;
 
@@ -146,7 +146,7 @@ void CreateAccount::pluginFinished(const QString &screenName, const QString &sec
     m_identity->storeCredentials();
 }
 
-void CreateAccount::pluginError(const QString &error)
+void CreateAccountJob::pluginError(const QString &error)
 {
     if (error.isEmpty()) {
         setError(-1);
@@ -158,7 +158,7 @@ void CreateAccount::pluginError(const QString &error)
     emitResult();
 }
 
-void CreateAccount::sessionResponse(const SignOn::SessionData &/*data*/)
+void CreateAccountJob::sessionResponse(const SignOn::SessionData &/*data*/)
 {
     qDebug() << "Received session response";
 
@@ -166,7 +166,7 @@ void CreateAccount::sessionResponse(const SignOn::SessionData &/*data*/)
     m_identity->queryInfo();
 }
 
-void CreateAccount::info(const SignOn::IdentityInfo &info)
+void CreateAccountJob::info(const SignOn::IdentityInfo &info)
 {
     qDebug() << "Info:";
     qDebug() << "\tId:" << info.id();
@@ -213,10 +213,10 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
     m_account->selectService();
     m_account->setEnabled(true);
     m_account->sync();
-    connect(m_account, &Accounts::Account::synced, this, &CreateAccount::emitResult);
+    connect(m_account, &Accounts::Account::synced, this, &CreateAccountJob::emitResult);
 }
 
-void CreateAccount::sessionError(const SignOn::Error &signOnError)
+void CreateAccountJob::sessionError(const SignOn::Error &signOnError)
 {
     if (error()) {
         // Guard against SignOn sending two error() signals
@@ -230,7 +230,7 @@ void CreateAccount::sessionError(const SignOn::Error &signOnError)
     emitResult();
 }
 
-void CreateAccount::setProviderName(const QString &name)
+void CreateAccountJob::setProviderName(const QString &name)
 {
     if (m_providerName != name) {
         m_providerName = name;

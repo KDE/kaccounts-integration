@@ -1,9 +1,4 @@
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
-
-add_library(kaccountsdeclarativeplugin SHARED kaccountsdeclarativeplugin.cpp
-                            ../jobs/createaccount.cpp
-                            ../jobs/accountservicetoggle.cpp
-                            ../lib/uipluginsmanager.cpp)
+add_library(kaccountsdeclarativeplugin SHARED kaccountsdeclarativeplugin.cpp)
 
 target_link_libraries(kaccountsdeclarativeplugin Qt5::Qml
                                                  KF5::I18n

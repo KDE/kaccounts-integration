@@ -74,6 +74,6 @@ ScrollViewKCM {
     }
     Component {
         id: jobComponent
-        KAccounts.AccountServiceToggle { }
+        KAccounts.AccountServiceToggleJob { }
     }
 }

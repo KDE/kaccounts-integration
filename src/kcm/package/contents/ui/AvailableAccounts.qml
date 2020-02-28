@@ -46,7 +46,7 @@ ScrollViewKCM {
 
     Component {
         id: jobComponent
-        CreateAccount {
+        CreateAccountJob {
             onFinished: kcm.pop()
         }
     }

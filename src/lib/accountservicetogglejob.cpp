@@ -16,13 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "accountservicetoggle.h"
+#include "accountservicetogglejob.h"
 
 #include <QDebug>
 #include "core.h"
 #include <Accounts/Manager>
 
-class AccountServiceToggle::Private {
+class AccountServiceToggleJob::Private {
 public:
     Private() {}
     QString accountId;
@@ -30,50 +30,50 @@ public:
     bool serviceEnabled{false};
 };
 
-AccountServiceToggle::AccountServiceToggle(QObject* parent)
+AccountServiceToggleJob::AccountServiceToggleJob(QObject* parent)
     : KJob(parent)
     , d(new Private)
 { }
 
-AccountServiceToggle::~AccountServiceToggle()
+AccountServiceToggleJob::~AccountServiceToggleJob()
 {
     delete d;
 }
 
-QString AccountServiceToggle::accountId() const
+QString AccountServiceToggleJob::accountId() const
 {
     return d->accountId;
 }
 
-void AccountServiceToggle::setAccountId(const QString& accountId)
+void AccountServiceToggleJob::setAccountId(const QString& accountId)
 {
     d->accountId = accountId;
     Q_EMIT accountIdChanged();
 }
 
-QString AccountServiceToggle::serviceId() const
+QString AccountServiceToggleJob::serviceId() const
 {
     return d->serviceId;
 }
 
-void AccountServiceToggle::setServiceId(const QString& serviceId)
+void AccountServiceToggleJob::setServiceId(const QString& serviceId)
 {
     d->serviceId = serviceId;
     Q_EMIT serviceIdChanged();
 }
 
-bool AccountServiceToggle::serviceEnabled() const
+bool AccountServiceToggleJob::serviceEnabled() const
 {
     return d->serviceEnabled;
 }
 
-void AccountServiceToggle::setServiceEnabled(bool serviceEnabled)
+void AccountServiceToggleJob::setServiceEnabled(bool serviceEnabled)
 {
     d->serviceEnabled = serviceEnabled;
     Q_EMIT serviceEnabledChanged();
 }
 
-void AccountServiceToggle::start()
+void AccountServiceToggleJob::start()
 {
     Accounts::Manager* accountsManager = KAccounts::accountsManager();
     if (accountsManager) {
