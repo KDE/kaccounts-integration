@@ -81,7 +81,7 @@ void GetCredentialsJob::Private::getCredentials()
         return;
     }
 
-    authData["AccountUsername"] = acc->value(QLatin1String("username")).toString();
+    authData[QStringLiteral("AccountUsername")] = acc->value(QLatin1String("username")).toString();
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authMethod.isEmpty() ? serviceAuthData.method() : authMethod);
     if (!authSession) {
         qWarning() << "Unable to create auth session for" << authMethod << serviceAuthData.method();

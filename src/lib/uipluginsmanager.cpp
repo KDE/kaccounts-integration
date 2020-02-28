@@ -133,7 +133,7 @@ KAccountsUiPlugin* UiPluginsManager::pluginForName(const QString &name)
         s_instance->loadPlugins();
     }
 
-    return s_instance->pluginsForNames.value(name + ".so");
+    return s_instance->pluginsForNames.value(name + QStringLiteral(".so"));
 }
 
 KAccountsUiPlugin* UiPluginsManager::pluginForService(const QString &service)

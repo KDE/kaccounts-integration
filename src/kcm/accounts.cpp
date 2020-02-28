@@ -29,9 +29,9 @@ K_PLUGIN_CLASS_WITH_JSON(AccountsSettings, "kcm_kaccounts.json")
 AccountsSettings::AccountsSettings(QObject* parent, const QVariantList& args)
     : KQuickAddons::ConfigModule(parent, args)
 {
-    KAboutData* about = new KAboutData("kcm_kaccounts", i18n("Accounts"),
-                                       "1.0", QString(), KAboutLicense::LGPL);
-    about->addAuthor(i18n("Sebastian Kügler"), QString(), "sebas@kde.org");
+    KAboutData* about = new KAboutData(QStringLiteral("kcm_kaccounts"), i18n("Accounts"),
+                                       QStringLiteral("1.0"), QString(), KAboutLicense::LGPL);
+    about->addAuthor(i18n("Sebastian Kügler"), QString(), QStringLiteral("sebas@kde.org"));
     setAboutData(about);
 }
 
