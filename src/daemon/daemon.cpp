@@ -33,7 +33,7 @@
 #include <Accounts/Service>
 #include <Accounts/AccountService>
 
-K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "accounts.json", registerPlugin<AccountsDaemon>();)
+K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "kded_accounts.json", registerPlugin<AccountsDaemon>();)
 
 AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
  : KDEDModule(parent)
