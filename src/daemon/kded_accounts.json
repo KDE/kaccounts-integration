@@ -1,7 +1,23 @@
 {
     "KPlugin": {
         "Description": "Accounts management",
-        "Name": "Accounts"
+        "Description[ca@valencia]": "Gestor de comptes",
+        "Description[ca]": "Gestor de comptes",
+        "Description[eu]": "Kontu kudeaketa",
+        "Description[nl]": "Accountbeheer",
+        "Description[pt]": "Gestão de contas",
+        "Description[sv]": "Kontohantering",
+        "Description[uk]": "Керування обліковими записами",
+        "Description[x-test]": "xxAccounts managementxx",
+        "Name": "Accounts",
+        "Name[ca@valencia]": "Comptes",
+        "Name[ca]": "Comptes",
+        "Name[eu]": "Kontuak",
+        "Name[nl]": "Accounts",
+        "Name[pt]": "Contas",
+        "Name[sv]": "Konton",
+        "Name[uk]": "Облікові записи",
+        "Name[x-test]": "xxAccountsxx"
     },
     "OnlyShowIn": "KDE;",
     "X-KDE-Kded-autoload": true,
