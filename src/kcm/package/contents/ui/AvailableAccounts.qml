@@ -1,5 +1,6 @@
 /*
  *   Copyright 2019 Nicolas Fella <nicolas.fella@gmx.de>
+ *   Copyright 2020 Dan Leinir Turthra Jensen <admin@leinir.dk>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -21,25 +22,61 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kaccounts 1.0 as KAccounts
+import org.kde.kaccounts 1.2 as KAccounts
 import org.kde.kcm 1.2
-import Ubuntu.OnlineAccounts 0.1 as OA
 
 ScrollViewKCM {
     id: root
-    title: i18n("Add new Account")
+    title: i18n("Add New Account")
 
     view: ListView {
-        model: OA.ProviderModel {}
+        model: KAccounts.ProvidersModel {}
+        delegate: Kirigami.AbstractListItem {
+            id: accountDelegate
+            width: ListView.view.width
+            enabled: model.supportsMultipleAccounts === true || model.accountsCount === 0
 
-        delegate: Kirigami.BasicListItem {
-            icon: model.iconName
-            label: model.displayName
-            width: parent.width
-            height: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
-
+            contentItem: RowLayout {
+                implicitWidth: accountDelegate.ListView.view.width
+                implicitHeight: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
+                spacing: Kirigami.Units.smallSpacing
+                Kirigami.Icon {
+                    source: model.iconName
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
+                    Item {
+                        visible: model.accountsCount > 0
+                        anchors {
+                            bottom: parent.bottom
+                            right: parent.right
+                        }
+                        height: parent.height / 3
+                        width: height
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: height / 2
+                            color: Kirigami.Theme.highlightColor
+                            border {
+                                width: 1
+                                color: Kirigami.Theme.highlightedTextColor
+                            }
+                        }
+                        Controls.Label {
+                            anchors.fill: parent
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            color: Kirigami.Theme.highlightedTextColor
+                            text: model.accountsCount
+                        }
+                    }
+                }
+                Controls.Label {
+                    Layout.fillWidth: true
+                    text: model.displayName + "\n" + model.description;
+                }
+            }
             onClicked: {
-                var job = jobComponent.createObject(root, { "providerName": providerId })
+                var job = jobComponent.createObject(root, { "providerName": model.name })
                 job.start()
             }
         }
