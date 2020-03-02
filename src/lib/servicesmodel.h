@@ -70,4 +70,4 @@ class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
         Private *d;
 };
 
-#endif //ACCOUNTS_MODEL_H
+#endif//SERVICES_MODEL_H
