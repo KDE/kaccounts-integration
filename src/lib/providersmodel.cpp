@@ -56,7 +56,7 @@ QHash<int, QByteArray> ProvidersModel::roleNames() const
         {DisplayNameRole, "displayName"},
         {DescriptionRole, "description"},
         {IconNameRole, "iconName"},
-        {SupportsMultipleLoginsRole, "supportsMultipleLogins"},
+        {SupportsMultipleAccountsRole, "supportsMultipleAccounts"},
         {AccountsCountRole, "accountsCount"}
     };
     return roleNames;
@@ -89,7 +89,7 @@ QVariant ProvidersModel::data(const QModelIndex& index, int role) const
                 case IconNameRole:
                     data.setValue(provider.iconName());
                     break;
-                case SupportsMultipleLoginsRole:
+                case SupportsMultipleAccountsRole:
                     data.setValue(!provider.isSingleAccount());
                     break;
                 case AccountsCountRole:

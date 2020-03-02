@@ -35,7 +35,7 @@ class KACCOUNTS_EXPORT ProvidersModel : public QAbstractListModel
             DisplayNameRole, ///< The human-readable name for this provider
             DescriptionRole, ///< A (usually single sentence) description of this provider
             IconNameRole, ///< The name of the icon to be used for this provider (an XDG Icon Spec style name)
-            SupportsMultipleLoginsRole, ///< Whether or not this provider supports multiple simultaneous accounts
+            SupportsMultipleAccountsRole, ///< Whether or not this provider supports multiple simultaneous accounts
             AccountsCountRole ///< The number of accounts which already exist for this provider
         };
         explicit ProvidersModel(QObject* parent = nullptr);
