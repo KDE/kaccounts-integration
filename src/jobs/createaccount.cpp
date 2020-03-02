@@ -181,7 +181,12 @@ void CreateAccount::info(const SignOn::IdentityInfo &info)
     m_account->selectService();
 
     if (m_account->displayName().isEmpty()) {
-        m_account->setDisplayName(info.userName());
+        if(info.userName().isEmpty()) {
+            // info.userName() can be empty, see bug#414219
+            m_account->setDisplayName(QString("%1%2").arg(info.caption()).arg(info.id()));
+        } else {
+            m_account->setDisplayName(info.userName());
+        }
     }
     m_account->setValue("username", info.userName());
     m_account->setCredentialsId(info.id());
