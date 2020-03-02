@@ -11,6 +11,7 @@ set (kaccountslib_SRCS
      core.cpp
      kaccountsdplugin.cpp
      kaccountsuiplugin.cpp
+     providersmodel.cpp
      servicesmodel.cpp
      uipluginsmanager.cpp
 
@@ -26,6 +27,7 @@ ecm_generate_headers(kaccountslib_HEADERS
   Core
   KAccountsUiPlugin
   KAccountsDPlugin
+  ProvidersModel
   ServicesModel
 
   AccountServiceToggleJob
