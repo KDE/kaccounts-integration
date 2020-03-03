@@ -128,6 +128,7 @@ void ServicesModel::setAccount(QObject* account)
         }
         d->account = qobject_cast<Accounts::Account*>(account);
         if (d->account) {
+            connect(d->account, &Accounts::Account::displayNameChanged, this, &ServicesModel::accountChanged);
             connect(d->account, &Accounts::Account::enabledChanged, this, [this](const QString& serviceName, bool /*enabled*/){
                 int i{0};
                 for (const Accounts::Service& service : d->services) {
