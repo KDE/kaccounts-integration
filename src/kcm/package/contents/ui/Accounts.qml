@@ -125,7 +125,7 @@ ScrollViewKCM {
 
     Component {
         id: accountRemovalJob
-        KAccounts.RemoveAccount { }
+        KAccounts.RemoveAccountJob { }
     }
 
     footer: RowLayout {

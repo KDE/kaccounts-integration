@@ -84,7 +84,7 @@ ScrollViewKCM {
 
     Component {
         id: jobComponent
-        KAccounts.CreateAccount {
+        KAccounts.CreateAccountJob {
             onFinished: kcm.pop()
         }
     }
