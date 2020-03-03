@@ -74,7 +74,7 @@ ScrollViewKCM {
                     }
                 }
             ]
-            onClicked: kcm.push("AvailableServices.qml", {model: model.services})
+            onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
         Kirigami.AbstractCard {
             visible: view.count === 0

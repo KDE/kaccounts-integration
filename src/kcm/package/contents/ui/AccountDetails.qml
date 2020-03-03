@@ -28,7 +28,7 @@ import org.kde.kcm 1.2
 SimpleKCM {
     id: component;
 
-    title: i18n("Available Services")
+    title: i18n("Account Details")
 
     property alias model: servicesList.model
 
