@@ -31,11 +31,12 @@ void KAccountsDeclarativePlugin::registerTypes(const char* uri)
 {
     qmlRegisterType<CreateAccountJob>(uri, 1, 0, "CreateAccount");
     qmlRegisterType<AccountServiceToggleJob>(uri, 1, 1, "AccountServiceToggle");
-    qmlRegisterType<RemoveAccountJob>(uri, 1, 2, "RemoveAccount");
+    qmlRegisterType<RemoveAccountJob>(uri, 1, 2, "RemoveAccountJob");
     qmlRegisterType<ProvidersModel>(uri, 1, 2, "ProvidersModel");
     qmlRegisterType<AccountsModel>(uri, 1, 2, "AccountsModel");
     qmlRegisterType<ServicesModel>(uri, 1, 2, "ServicesModel");
     qmlRegisterType<CreateAccountJob>(uri, 1, 0, "CreateAccountJob");
     qmlRegisterType<AccountServiceToggleJob>(uri, 1, 1, "AccountServiceToggleJob");
     qmlRegisterType<ChangeAccountDisplayNameJob>(uri, 1, 2, "ChangeAccountDisplayNameJob");
+    qmlRegisterType<AccountServiceToggleJob>(uri, 1, 2, "AccountServiceToggleJob");
 }
