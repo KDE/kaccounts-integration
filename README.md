@@ -35,6 +35,13 @@ other central classes are:
 * CreateAccountJob
 * RemoveAccountJob
 
+# KDE Control Module
+
+The Online Accounts KCM is the main user-visible point for KAccounts, and can be accessed
+either through System Settings, or directly from any system menu which allows launching of
+KCMs directly (including KRunner). It is built using the Qt Quick module mentioned above,
+and uses Kirigami as its base.
+
 # Provider and Service files
 
 If you plan on creating new providers and services, you will need to register those with
