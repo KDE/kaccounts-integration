@@ -35,9 +35,8 @@ SimpleKCM {
     MessageBoxSheet {
         id: accountRemovalDlg
         parent: component
-        property int accountId
-        property string displayName
-        property string providerName
+        property string displayName: servicesList.model.accountDisplayName
+        property string providerName: servicesList.model.accountProviderName
         title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
         text: {
             if (accountRemovalDlg.displayName.length > 0 && accountRemovalDlg.providerName.length > 0) {
@@ -52,7 +51,36 @@ SimpleKCM {
             Kirigami.Action {
                 text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
                 onTriggered: {
-                    var job = accountRemovalJob.createObject(kaccountsRoot, { "accountId": accountRemovalDlg.accountId });
+                    var job = accountRemovalJob.createObject(component, { "accountId": servicesList.model.accountId });
+                    job.start();
+                }
+            }
+        ]
+    }
+
+    MessageBoxSheet {
+        id: renameAccountDlg
+        parent: component
+        title: i18nc("The title for a dialog which lets you set the human-readable name of an account", "Rename Account")
+        onSheetOpenChanged: {
+            if (sheetOpen === true) {
+                newAccountDisplayName.text = servicesList.model.accountDisplayName;
+            }
+        }
+        contentItem: Kirigami.FormLayout {
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 10
+            Layout.margins: Kirigami.Units.largeSpacing
+            Controls.TextField {
+                id: newAccountDisplayName
+                Kirigami.FormData.label: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter the new name of the account")
+            }
+        }
+        actions: [
+            Kirigami.Action {
+                enabled: newAccountDisplayName.text.length > 0
+                text: i18nc("Text of a button which will cause the human-readable name of an account to be set to a text specified by the user", "Set Account Name")
+                onTriggered: {
+                    var job = accountDisplayNameJob.createObject(component, { "accountId": servicesList.model.accountId, "displayName": newAccountDisplayName.text })
                     job.start();
                 }
             }
@@ -60,13 +88,18 @@ SimpleKCM {
     }
 
     Component {
-        id: jobComponent
-        KAccounts.AccountServiceToggle { }
+        id: accountDisplayNameJob
+        KAccounts.ChangeAccountDisplayNameJob { }
+    }
+
+    Component {
+        id: serviceToggleJob
+        KAccounts.AccountServiceToggleJob { }
     }
 
     Component {
         id: accountRemovalJob
-        KAccounts.RemoveAccount {
+        KAccounts.RemoveAccountJob {
             onFinished: {
                 kcm.pop();
             }
@@ -94,6 +127,20 @@ SimpleKCM {
                 }
             }
         }
+        Controls.ToolButton {
+            icon.name: "edit-entry"
+            display: Controls.AbstractButton.IconOnly
+            Layout.preferredHeight: Kirigami.Units.iconSizes.large
+            Layout.preferredWidth: Kirigami.Units.iconSizes.large
+            onClicked: renameAccountDlg.open();
+            Controls.ToolTip {
+                visible: parent.hovered && !parent.pressed
+                text: i18nc("Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
+                delay: Kirigami.Units.toolTipDelay
+                timeout: 5000
+                y: parent.height
+            }
+        }
     }
 
     footer: RowLayout {
@@ -101,12 +148,7 @@ SimpleKCM {
             Layout.alignment: Qt.AlignRight
             text: i18n("Remove This Account")
             icon.name: "edit-delete-remove"
-            onClicked: {
-                accountRemovalDlg.accountId = servicesList.model.accountId;
-                accountRemovalDlg.displayName = servicesList.model.accountDisplayName;
-                accountRemovalDlg.providerName = servicesList.model.accountProviderName;
-                accountRemovalDlg.open();
-            }
+            onClicked: accountRemovalDlg.open();
         }
     }
 
@@ -142,7 +184,7 @@ SimpleKCM {
                     value: model.enabled
                 }
                 onClicked: {
-                    var job = jobComponent.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
+                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
                     job.start()
                 }
             }
