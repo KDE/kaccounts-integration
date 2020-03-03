@@ -25,6 +25,9 @@
 
 #include <QString>
 
+/**
+ * @brief A job which will attempt to remove the specified account
+ */
 class KACCOUNTS_EXPORT RemoveAccountJob : public KJob
 {
     Q_OBJECT

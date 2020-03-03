@@ -25,6 +25,12 @@
 
 #include <QStringList>
 
+/**
+ * @brief A job used to change the human-readable name of a specified account
+ *
+ * This job will refuse to change the name to something empty (while it is technically
+ * possible to do so for an account, it is highly undesirable)
+ */
 class KACCOUNTS_EXPORT ChangeAccountDisplayNameJob : public KJob
 {
     Q_OBJECT

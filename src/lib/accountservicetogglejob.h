@@ -25,6 +25,9 @@
 
 #include <QStringList>
 
+/**
+ * @brief A job used to change the enabled state of a specific service on a specific account
+ */
 class KACCOUNTS_EXPORT AccountServiceToggleJob : public KJob
 {
     Q_OBJECT

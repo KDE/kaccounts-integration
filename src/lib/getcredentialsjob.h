@@ -30,7 +30,7 @@ namespace Accounts {
 }
 
 /**
- * A KJob for obtaining user's credentials for the given Accounts::AccountId
+ * @brief A KJob for obtaining user's credentials for the given Accounts::AccountId
  */
 class KACCOUNTS_EXPORT GetCredentialsJob : public KJob
 {
