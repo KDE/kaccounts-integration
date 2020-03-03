@@ -22,7 +22,8 @@
 #include "accountservicetogglejob.h"
 #include "removeaccountjob.h"
 #include "accountsmodel.h"
-#include <providersmodel.h>
+#include "providersmodel.h"
+#include "changeaccountdisplaynamejob.h"
 #include "servicesmodel.h"
 #include <qqml.h>
 
@@ -36,4 +37,5 @@ void KAccountsDeclarativePlugin::registerTypes(const char* uri)
     qmlRegisterType<ServicesModel>(uri, 1, 2, "ServicesModel");
     qmlRegisterType<CreateAccountJob>(uri, 1, 0, "CreateAccountJob");
     qmlRegisterType<AccountServiceToggleJob>(uri, 1, 1, "AccountServiceToggleJob");
+    qmlRegisterType<ChangeAccountDisplayNameJob>(uri, 1, 2, "ChangeAccountDisplayNameJob");
 }
