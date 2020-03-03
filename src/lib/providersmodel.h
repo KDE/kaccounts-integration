@@ -25,6 +25,17 @@
 
 /**
  * @brief A model which represents the available providers
+ *
+ * # Roles
+ *
+ * The role names available in this model are:
+ *
+ * * name: The internal name identifying this provider
+ * * displayName: The human-readable name for this provider
+ * * description: A (usually single sentence) description of this provider
+ * * iconName: An XDG Icon specification icon name for this provider
+ * * supportsMultipleAccounts: Whether or not this provider supports multiple simultaneous accounts
+ * * accountsCount: The number of accounts which already exist on the system for this provider
  */
 class KACCOUNTS_EXPORT ProvidersModel : public QAbstractListModel
 {
