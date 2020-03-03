@@ -16,6 +16,7 @@ set (kaccountslib_SRCS
      uipluginsmanager.cpp
 
      accountservicetogglejob.cpp
+     changeaccountdisplaynamejob.cpp
      createaccountjob.cpp
      getcredentialsjob.cpp
      removeaccountjob.cpp
@@ -31,8 +32,9 @@ ecm_generate_headers(kaccountslib_HEADERS
   ServicesModel
 
   AccountServiceToggleJob
-  GetCredentialsJob
+  ChangeAccountDisplayNameJob
   CreateAccountJob
+  GetCredentialsJob
   RemoveAccountJob
   REQUIRED_HEADERS kaccountslib_HEADERS
 )
