@@ -28,6 +28,19 @@
 
 /**
  * @brief A model representing all the accounts registered on a system
+ *
+ * # Roles
+ *
+ * The following role names are available in this model:
+ *
+ * * id: The internal ID of the account
+ * * services: A model which contains information about the services this account supports (see ServicesModel)
+ * * enabled: Whether or not this account is enabled
+ * * credentialsId: The internal ID for any stored credentials for this account
+ * * displayName: A human-readable name for this account (change this using ChangeAccountDisplayNameJob)
+ * * providerName: The internal name of the provider this account is registered through
+ * * iconName: An XDG Icon specification icon name
+ * * dataObject: The instance of Accounts::Account which the data for this account is fetched from
  */
 class KACCOUNTS_EXPORT AccountsModel : public QAbstractListModel
 {
