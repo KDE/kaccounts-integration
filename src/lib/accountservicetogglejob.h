@@ -21,8 +21,6 @@
 
 #include "kaccounts_export.h"
 
-#include "kaccounts_export.h"
-
 #include <kjob.h>
 
 #include <QStringList>
