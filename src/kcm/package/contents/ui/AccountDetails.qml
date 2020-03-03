@@ -154,6 +154,7 @@ SimpleKCM {
 
     Kirigami.FormLayout {
         Layout.fillWidth: true
+        Layout.margins: Kirigami.Units.largeSpacing
         Item {
             visible: servicesList.count === 0
             Layout.fillWidth: true
@@ -172,12 +173,18 @@ SimpleKCM {
                 text: i18nc("A text shown when an account has no configurable services", "This account has no services available for configuration")
             }
         }
+        Kirigami.Separator {
+            visible: servicesList.count > 0
+            Kirigami.FormData.label: i18nc("Heading for a list of services available with this account", "Use This Account For")
+            Kirigami.FormData.isSection: true
+        }
         Repeater {
             id: servicesList
             delegate: Controls.CheckBox {
                 id: serviceCheck
-                Kirigami.FormData.label: model.displayName + "\n" + model.description
+                Kirigami.FormData.label: model.description
                 checked: model.enabled
+                text: model.displayName
                 Binding {
                     target: serviceCheck
                     property: "checked"
