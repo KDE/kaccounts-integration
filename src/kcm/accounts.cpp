@@ -34,6 +34,7 @@ AccountsSettings::AccountsSettings(QObject* parent, const QVariantList& args)
     about->addAuthor(i18n("Sebastian Kügler"), QString(), QStringLiteral("sebas@kde.org"));
     about->addAuthor(i18n("Dan Leinir Turthra Jensen"), QString(), QStringLiteral("admin@leinir.dk"), QString(), QStringLiteral("leinir"));
     setAboutData(about);
+    setButtons(KQuickAddons::ConfigModule::NoAdditionalButton);
 }
 
 #include "accounts.moc"
