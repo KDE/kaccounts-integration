@@ -10,6 +10,7 @@
         "Description[ko]": "계정 관리",
         "Description[nl]": "Accountbeheer",
         "Description[pt]": "Gestão de contas",
+        "Description[pt_BR]": "Gerenciamento de contas",
         "Description[sv]": "Kontohantering",
         "Description[uk]": "Керування обліковими записами",
         "Description[x-test]": "xxAccounts managementxx",
@@ -23,6 +24,7 @@
         "Name[ko]": "계정",
         "Name[nl]": "Accounts",
         "Name[pt]": "Contas",
+        "Name[pt_BR]": "Contas",
         "Name[sv]": "Konton",
         "Name[uk]": "Облікові записи",
         "Name[x-test]": "xxAccountsxx"
