@@ -76,23 +76,16 @@ ScrollViewKCM {
             ]
             onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
-        Kirigami.AbstractCard {
+        Controls.Label {
             visible: view.count === 0
-            anchors.centerIn: parent
-            width: kaccountsRoot.width * 2/ 3
-            height: kaccountsRoot.height * 2 / 3
-            header: Kirigami.Heading {
-                Layout.fillWidth: true;
-                text: i18n("No accounts yet")
-            }
-            contentItem: Controls.Label {
-                clip: true
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.Wrap
-                textFormat: Text.RichText
-                text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.<br /><br />Click on <a href=\"add-new-account\">\"Add New Account\"</a> to do so.")
-                onLinkActivated: kcm.push("AvailableAccounts.qml")
-            }
+            anchors.fill: parent
+            clip: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            textFormat: Text.RichText
+            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.<br /><br />Click on <a href=\"add-new-account\">\"Add New Account...\"</a> to do so.")
+            onLinkActivated: kcm.push("AvailableAccounts.qml")
         }
     }
 
@@ -131,7 +124,7 @@ ScrollViewKCM {
     footer: RowLayout {
         Controls.Button {
             Layout.alignment: Qt.AlignRight
-            text: i18n("Add new Account")
+            text: i18n("Add New Account...")
             icon.name: "contact-new"
             onClicked: kcm.push("AvailableAccounts.qml")
         }
