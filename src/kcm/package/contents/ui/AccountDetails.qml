@@ -160,18 +160,15 @@ SimpleKCM {
             Layout.fillWidth: true
             height: Kirigami.Units.largeSpacing
         }
-        Kirigami.AbstractCard {
-            Layout.fillWidth: true
+        Controls.Label {
             visible: servicesList.count === 0
-            header: Kirigami.Heading {
-                text: i18nc("Heading for a box informing the user there are no configuration points in this account", "No Services")
-            }
-            contentItem: Controls.Label {
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.Wrap
-                text: i18nc("A text shown when an account has no configurable services", "This account has no services available for configuration")
-            }
+            Layout.fillWidth: true
+            height: component.height / 3
+            enabled: false
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+            text: i18nc("A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
         }
         Kirigami.Separator {
             visible: servicesList.count > 0
