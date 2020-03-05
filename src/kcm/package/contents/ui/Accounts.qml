@@ -80,12 +80,11 @@ ScrollViewKCM {
             visible: view.count === 0
             anchors.fill: parent
             clip: true
+            enabled: false
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.Wrap
-            textFormat: Text.RichText
-            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.<br /><br />Click on <a href=\"add-new-account\">\"Add New Account...\"</a> to do so.")
-            onLinkActivated: kcm.push("AvailableAccounts.qml")
+            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.\n\nClick on \"Add New Account...\" below to do so.")
         }
     }
 
