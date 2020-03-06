@@ -77,7 +77,7 @@ SimpleKCM {
         }
         actions: [
             Kirigami.Action {
-                enabled: newAccountDisplayName.text.length > 0
+                enabled: newAccountDisplayName.text.length > 0 && newAccountDisplayName.text !== servicesList.model.accountDisplayName
                 text: i18nc("Text of a button which will cause the human-readable name of an account to be set to a text specified by the user", "Set Account Name")
                 onTriggered: {
                     var job = accountDisplayNameJob.createObject(component, { "accountId": servicesList.model.accountId, "displayName": newAccountDisplayName.text })
