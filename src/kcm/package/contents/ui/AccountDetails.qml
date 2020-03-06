@@ -155,11 +155,6 @@ SimpleKCM {
     Kirigami.FormLayout {
         Layout.fillWidth: true
         Layout.margins: Kirigami.Units.largeSpacing
-        Item {
-            visible: servicesList.count === 0
-            Layout.fillWidth: true
-            height: Kirigami.Units.largeSpacing
-        }
         Controls.Label {
             visible: servicesList.count === 0
             Layout.fillWidth: true
