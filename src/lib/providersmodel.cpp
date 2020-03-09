@@ -18,9 +18,10 @@
 
 #include "providersmodel.h"
 
+#include "core.h"
+
 #include <Accounts/Provider>
 #include <Accounts/Manager>
-#include <KAccounts/Core>
 
 class ProvidersModel::Private {
 public:
