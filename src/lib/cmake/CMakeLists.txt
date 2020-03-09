@@ -1,1 +1,0 @@
-install(FILES FindAccountsFileDir.cmake DESTINATION ${CMAKECONFIG_INSTALL_DIR})
