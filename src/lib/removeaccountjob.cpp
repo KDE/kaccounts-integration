@@ -56,7 +56,13 @@ void RemoveAccountJob::start()
     if (accountsManager) {
         Accounts::Account *account = accountsManager->account(d->accountId.toInt());
         if (account) {
-            connect(account, &Accounts::Account::synced, this, [this](){ emitResult(); });
+            // We can't depend on Accounts::Account::synced, as that doesn't necessarily get fired when
+            // asking for the account to be removed...
+            connect(accountsManager, &Accounts::Manager::accountRemoved, this, [this](Accounts::AccountId id) {
+                if (id == d->accountId.toUInt()) {
+                    emitResult();
+                }
+            });
             SignOn::Identity *identity = SignOn::Identity::existingIdentity(account->credentialsId(), this);
             if (identity) {
                 identity->remove();
