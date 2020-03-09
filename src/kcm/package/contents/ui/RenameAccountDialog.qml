@@ -33,7 +33,7 @@ MessageBoxSheet {
     signal accountRenamed()
     onSheetOpenChanged: {
         if (sheetOpen === true) {
-            newAccountDisplayName.text = component.currentDisplayName;
+            newAccountDisplayName.text = currentDisplayName;
         }
     }
     contentItem: Kirigami.FormLayout {

@@ -32,12 +32,12 @@ MessageBoxSheet {
     signal accountRemoved()
     title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
     text: {
-        if (component.displayName.length > 0 && component.providerName.length > 0) {
-            return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", component.providerName, component.displayName)
-        } else if (component.displayName.length > 0) {
-            return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", component.displayName)
+        if (displayName.length > 0 && providerName.length > 0) {
+            return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", providerName, displayName)
+        } else if (displayName.length > 0) {
+            return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", displayName)
         } else {
-            return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", component.providerName)
+            return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", providerName)
         }
     }
     actions: [
