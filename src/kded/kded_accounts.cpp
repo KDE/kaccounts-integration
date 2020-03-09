@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "daemon.h"
+#include "kded_accounts.h"
 #include "src/lib/kaccountsdplugin.h"
 #include <core.h>
 
@@ -33,15 +33,15 @@
 #include <Accounts/Service>
 #include <Accounts/AccountService>
 
-K_PLUGIN_FACTORY_WITH_JSON(AccountsDaemonFactory, "kded_accounts.json", registerPlugin<AccountsDaemon>();)
+K_PLUGIN_CLASS_WITH_JSON(KDEDAccounts, "kded_accounts.json")
 
-AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
+KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant>&)
  : KDEDModule(parent)
 {
 
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
-    connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &AccountsDaemon::accountCreated);
-    connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &AccountsDaemon::accountRemoved);
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &KDEDAccounts::accountCreated);
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &KDEDAccounts::accountRemoved);
 
     const QVector<KPluginMetaData> data = KPluginLoader::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
     for (const KPluginMetaData& metadata : data) {
@@ -69,12 +69,12 @@ AccountsDaemon::AccountsDaemon(QObject *parent, const QList<QVariant>&)
     }
 }
 
-AccountsDaemon::~AccountsDaemon()
+KDEDAccounts::~KDEDAccounts()
 {
     qDeleteAll(m_plugins);
 }
 
-void AccountsDaemon::startDaemon()
+void KDEDAccounts::startDaemon()
 {
     qDebug();
     const Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
@@ -83,7 +83,7 @@ void AccountsDaemon::startDaemon()
     }
 }
 
-void AccountsDaemon::monitorAccount(const Accounts::AccountId id)
+void KDEDAccounts::monitorAccount(const Accounts::AccountId id)
 {
     qDebug() << id;
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
@@ -93,10 +93,10 @@ void AccountsDaemon::monitorAccount(const Accounts::AccountId id)
     }
     acc->selectService();
 
-    connect(acc, &Accounts::Account::enabledChanged, this, &AccountsDaemon::enabledChanged);
+    connect(acc, &Accounts::Account::enabledChanged, this, &KDEDAccounts::enabledChanged);
 }
 
-void AccountsDaemon::accountCreated(const Accounts::AccountId id)
+void KDEDAccounts::accountCreated(const Accounts::AccountId id)
 {
     qDebug() << id;
     monitorAccount(id);
@@ -109,7 +109,7 @@ void AccountsDaemon::accountCreated(const Accounts::AccountId id)
     }
 }
 
-void AccountsDaemon::accountRemoved(const Accounts::AccountId id)
+void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 {
     qDebug() << id;
 
@@ -118,7 +118,7 @@ void AccountsDaemon::accountRemoved(const Accounts::AccountId id)
     }
 }
 
-void AccountsDaemon::enabledChanged(const QString &serviceName, bool enabled)
+void KDEDAccounts::enabledChanged(const QString &serviceName, bool enabled)
 {
     qDebug();
     if (serviceName.isEmpty()) {
@@ -140,4 +140,4 @@ void AccountsDaemon::enabledChanged(const QString &serviceName, bool enabled)
     }
 }
 
-#include "daemon.moc"
+#include "kded_accounts.moc"

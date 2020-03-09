@@ -2,7 +2,7 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 kcoreaddons_add_plugin(
     kded_accounts
-    SOURCES daemon.cpp
+    SOURCES kded_accounts.cpp
     JSON kded_accounts.json
     INSTALL_NAMESPACE "kf5/kded"
 )

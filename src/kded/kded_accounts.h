@@ -19,26 +19,20 @@
 #ifndef ACCOUNTS_DAEMON_H
 #define ACCOUNTS_DAEMON_H
 
-#include <kdedmodule.h>
+#include <KDEDModule>
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
-}
-
-class KJob;
-class AkonadiServices;
 class KAccountsDPlugin;
 
-class AccountsDaemon : public KDEDModule
+class KDEDAccounts : public KDEDModule
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
 
 public:
-    AccountsDaemon(QObject *parent, const QList<QVariant>&);
-    virtual ~AccountsDaemon();
+    KDEDAccounts(QObject *parent, const QList<QVariant>&);
+    virtual ~KDEDAccounts();
 
 public Q_SLOTS:
     void startDaemon();
@@ -52,4 +46,4 @@ private:
     QList<KAccountsDPlugin*> m_plugins;
 };
 
-#endif /*KSCREN_DAEMON_H*/
+#endif /*ACCOUNTS_DAEMON_H*/
