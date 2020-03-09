@@ -67,10 +67,10 @@ ScrollViewKCM {
                     text: i18nc("Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
                     iconName: "edit-delete-remove"
                     onTriggered: {
-                        accountRemovalDlg.accountId = model.id;
-                        accountRemovalDlg.displayName = model.displayName;
-                        accountRemovalDlg.providerName = model.providerName;
-                        accountRemovalDlg.open();
+                        accountRemover.accountId = model.id;
+                        accountRemover.displayName = model.displayName;
+                        accountRemover.providerName = model.providerName;
+                        accountRemover.open();
                     }
                 }
             ]
@@ -88,36 +88,9 @@ ScrollViewKCM {
         }
     }
 
-    MessageBoxSheet {
-        id: accountRemovalDlg
+    RemoveAccountDialog {
+        id: accountRemover
         parent: kaccountsRoot
-        property int accountId
-        property string displayName
-        property string providerName
-        title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
-        text: {
-            if (accountRemovalDlg.displayName.length > 0 && accountRemovalDlg.providerName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", accountRemovalDlg.providerName, accountRemovalDlg.displayName)
-            } else if (accountRemovalDlg.displayName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", accountRemovalDlg.displayName)
-            } else {
-                return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", accountRemovalDlg.providerName)
-            }
-        }
-        actions: [
-            Kirigami.Action {
-                text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
-                onTriggered: {
-                    var job = accountRemovalJob.createObject(kaccountsRoot, { "accountId": accountRemovalDlg.accountId });
-                    job.start();
-                }
-            }
-        ]
-    }
-
-    Component {
-        id: accountRemovalJob
-        KAccounts.RemoveAccountJob { }
     }
 
     footer: RowLayout {

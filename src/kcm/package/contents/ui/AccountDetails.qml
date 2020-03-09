@@ -32,78 +32,25 @@ SimpleKCM {
 
     property alias model: servicesList.model
 
-    MessageBoxSheet {
-        id: accountRemovalDlg
+    RemoveAccountDialog {
+        id: accountRemover
         parent: component
-        property string displayName: servicesList.model.accountDisplayName
-        property string providerName: servicesList.model.accountProviderName
-        title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
-        text: {
-            if (accountRemovalDlg.displayName.length > 0 && accountRemovalDlg.providerName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", accountRemovalDlg.providerName, accountRemovalDlg.displayName)
-            } else if (accountRemovalDlg.displayName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", accountRemovalDlg.displayName)
-            } else {
-                return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", accountRemovalDlg.providerName)
-            }
-        }
-        actions: [
-            Kirigami.Action {
-                text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
-                onTriggered: {
-                    var job = accountRemovalJob.createObject(component, { "accountId": servicesList.model.accountId });
-                    job.start();
-                }
-            }
-        ]
+        accountId: servicesList.model.accountId
+        displayName: servicesList.model.accountDisplayName
+        providerName: servicesList.model.accountProviderName
+        onAccountRemoved: kcm.pop()
     }
 
-    MessageBoxSheet {
-        id: renameAccountDlg
+    RenameAccountDialog {
+        id: accountRenamer
         parent: component
-        title: i18nc("The title for a dialog which lets you set the human-readable name of an account", "Rename Account")
-        onSheetOpenChanged: {
-            if (sheetOpen === true) {
-                newAccountDisplayName.text = servicesList.model.accountDisplayName;
-            }
-        }
-        contentItem: Kirigami.FormLayout {
-            Layout.preferredWidth: Kirigami.Units.gridUnit * 10
-            Layout.margins: Kirigami.Units.largeSpacing
-            Controls.TextField {
-                id: newAccountDisplayName
-                Kirigami.FormData.label: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter the new name of the account")
-            }
-        }
-        actions: [
-            Kirigami.Action {
-                enabled: newAccountDisplayName.text.length > 0 && newAccountDisplayName.text !== servicesList.model.accountDisplayName
-                text: i18nc("Text of a button which will cause the human-readable name of an account to be set to a text specified by the user", "Set Account Name")
-                onTriggered: {
-                    var job = accountDisplayNameJob.createObject(component, { "accountId": servicesList.model.accountId, "displayName": newAccountDisplayName.text })
-                    job.start();
-                }
-            }
-        ]
-    }
-
-    Component {
-        id: accountDisplayNameJob
-        KAccounts.ChangeAccountDisplayNameJob { }
+        accountId: servicesList.model.accountId
+        currentDisplayName: servicesList.model.accountDisplayName
     }
 
     Component {
         id: serviceToggleJob
         KAccounts.AccountServiceToggleJob { }
-    }
-
-    Component {
-        id: accountRemovalJob
-        KAccounts.RemoveAccountJob {
-            onFinished: {
-                kcm.pop();
-            }
-        }
     }
 
     header: RowLayout {
@@ -132,7 +79,7 @@ SimpleKCM {
             display: Controls.AbstractButton.IconOnly
             Layout.preferredHeight: Kirigami.Units.iconSizes.large
             Layout.preferredWidth: Kirigami.Units.iconSizes.large
-            onClicked: renameAccountDlg.open();
+            onClicked: accountRenamer.open();
             Controls.ToolTip {
                 visible: parent.hovered && !parent.pressed
                 text: i18nc("Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
@@ -148,7 +95,7 @@ SimpleKCM {
             Layout.alignment: Qt.AlignRight
             text: i18n("Remove This Account")
             icon.name: "edit-delete-remove"
-            onClicked: accountRemovalDlg.open();
+            onClicked: accountRemover.open();
         }
     }
 
