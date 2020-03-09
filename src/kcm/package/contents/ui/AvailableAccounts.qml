@@ -18,12 +18,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.11
-import QtQuick.Controls 2.0 as Controls
+import QtQuick 2.12
+import QtQuick.Controls 2.12 as Controls
+import QtQuick.Layouts 1.12
+
 import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kaccounts 1.2 as KAccounts
 import org.kde.kcm 1.2
+
+import org.kde.kaccounts 1.2 as KAccounts
 
 ScrollViewKCM {
     id: root
