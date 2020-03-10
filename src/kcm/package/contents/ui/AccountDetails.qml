@@ -101,40 +101,68 @@ SimpleKCM {
         }
     }
 
-    Kirigami.FormLayout {
+    Controls.Frame {
         Layout.fillWidth: true
-        Layout.margins: Kirigami.Units.largeSpacing
-        Controls.Label {
-            visible: servicesList.count === 0
-            Layout.fillWidth: true
-            height: component.height / 3
-            enabled: false
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-            text: i18nc("A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
+        background: Rectangle {
+            Kirigami.Theme.colorSet: Kirigami.Theme.Button
+            border {
+                width: 1
+                color: Qt.tint(Kirigami.Theme.textColor, Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.8))
+            }
         }
-        Kirigami.Separator {
-            visible: servicesList.count > 0
-            Kirigami.FormData.label: i18nc("Heading for a list of services available with this account", "Use This Account For")
-            Kirigami.FormData.isSection: true
-        }
-        Repeater {
-            id: servicesList
-            delegate: Controls.CheckBox {
-                id: serviceCheck
-                Kirigami.FormData.label: model.description
-                checked: model.enabled
-                text: model.displayName
-                Binding {
-                    target: serviceCheck
-                    property: "checked"
-                    value: model.enabled
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: Kirigami.Units.smallSpacing
+            Controls.Label {
+                visible: servicesList.count === 0
+                Layout.fillWidth: true
+                Layout.minimumHeight: component.height / 3
+                enabled: false
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.Wrap
+                text: i18nc("A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
+            }
+            Kirigami.Heading {
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.smallSpacing
+                visible: servicesList.count > 0
+                level: 3
+                text: i18nc("Heading for a list of services available with this account", "Use This Account For")
+            }
+            Repeater {
+                id: servicesList
+                delegate: ColumnLayout {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Kirigami.Units.smallSpacing
+                    spacing: 0
+                    Controls.CheckBox {
+                        id: serviceCheck
+                        Layout.fillWidth: true
+                        checked: model.enabled
+                        text: model.displayName
+                        Binding {
+                            target: serviceCheck
+                            property: "checked"
+                            value: model.enabled
+                        }
+                        onClicked: {
+                            var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
+                            job.start()
+                        }
+                    }
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        Layout.leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
+                        visible: text.length > 0
+                        text: model.description
+                        wrapMode: Text.Wrap
+                    }
                 }
-                onClicked: {
-                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
-                    job.start()
-                }
+            }
+            Item {
+                Layout.fillWidth: true
+                height: Kirigami.Units.smallSpacing
             }
         }
     }
