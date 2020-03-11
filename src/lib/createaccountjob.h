@@ -39,6 +39,9 @@ namespace SignOn
     class IdentityInfo;
 }
 
+/**
+ * @brief Create a new account for the specified provider
+ */
 class KACCOUNTS_EXPORT CreateAccountJob : public KJob
 {
     Q_OBJECT

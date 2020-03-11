@@ -18,48 +18,46 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-
-import QtQuick 2.7
-import QtQuick.Layouts 1.11
-import QtQuick.Controls 2.0 as Controls
+import QtQuick 2.12
+import QtQuick.Controls 2.12 as Controls
+import QtQuick.Layouts 1.12
 
 import org.kde.kirigami 2.7 as Kirigami
-
-import org.kde.kaccounts 1.0
 import org.kde.kcm 1.2
 
-import Ubuntu.OnlineAccounts 0.1 as OA
+import org.kde.kaccounts 1.2 as KAccounts
 
 ScrollViewKCM {
     id: kaccountsRoot
 
     // Existing accounts
     view: ListView {
-        model: OA.AccountServiceModel {
-            id: accountsModel
-            service: "global"
-            includeDisabled: true
-        }
+        model: KAccounts.AccountsModel { }
 
         delegate: Kirigami.SwipeListItem {
             id: accountDelegate
             width: ListView.view.width
 
-            contentItem: Controls.Label {
-                text: {
-                    if (model.displayName.length > 0 && model.providerName.length > 0) {
-                        return i18n("%1 (%2)", model.displayName, model.providerName)
-                    } else if (model.displayName.length > 0) {
-                        return model.displayName
-                    } else {
-                        return i18n("%1 account", model.providerName)
-                    }
+            contentItem: RowLayout {
+                implicitWidth: accountDelegate.ListView.view.width
+                implicitHeight: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
+                spacing: Kirigami.Units.smallSpacing
+                Kirigami.Icon {
+                    source: model.iconName
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
                 }
-
-                OA.Account {
-                    id: account
-                    objectHandle: model.accountHandle
+                Controls.Label {
+                    Layout.fillWidth: true
+                    text: {
+                        if (model.displayName.length > 0 && model.providerName.length > 0) {
+                            return i18n("%1 (%2)", model.displayName, model.providerName)
+                        } else if (model.displayName.length > 0) {
+                            return model.displayName
+                        } else {
+                            return i18n("%1 account", model.providerName)
+                        }
+                    }
                 }
             }
             actions: [
@@ -67,56 +65,36 @@ ScrollViewKCM {
                     text: i18nc("Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
                     iconName: "edit-delete-remove"
                     onTriggered: {
-                        accountRemovalDlg.account = account;
-                        accountRemovalDlg.displayName = model.displayName;
-                        accountRemovalDlg.providerName = model.providerName;
-                        accountRemovalDlg.open();
+                        accountRemover.accountId = model.id;
+                        accountRemover.displayName = model.displayName;
+                        accountRemover.providerName = model.providerName;
+                        accountRemover.open();
                     }
                 }
             ]
-            onClicked: kcm.push("AvailableServices.qml", {accountId: model.accountId})
+            onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
         Controls.Label {
-            anchors {
-                fill: parent
-                margins: Kirigami.Units.largeSpacing
-            }
-            verticalAlignment: Text.AlignVCenter
+            visible: view.count === 0
+            anchors.fill: parent
+            clip: true
+            enabled: false
             horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             wrapMode: Text.Wrap
-            visible: parent.count === 0
-            opacity: 0.5
-            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.\nClick the \"Add new Account\" button below to do so.")
+            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.\n\nClick on \"Add New Account...\" below to do so.")
         }
     }
-    MessageBoxSheet {
-        id: accountRemovalDlg
+
+    RemoveAccountDialog {
+        id: accountRemover
         parent: kaccountsRoot
-        property QtObject account
-        property string displayName
-        property string providerName
-        title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
-        text: {
-            if (accountRemovalDlg.displayName.length > 0 && accountRemovalDlg.providerName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", accountRemovalDlg.providerName, accountRemovalDlg.displayName)
-            } else if (accountRemovalDlg.displayName.length > 0) {
-                return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", accountRemovalDlg.displayName)
-            } else {
-                return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", accountRemovalDlg.providerName)
-            }
-        }
-        actions: [
-            Kirigami.Action {
-                text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
-                onTriggered: { accountRemovalDlg.account.remove(); }
-            }
-        ]
     }
 
     footer: RowLayout {
         Controls.Button {
             Layout.alignment: Qt.AlignRight
-            text: i18n("Add new Account")
+            text: i18n("Add New Account...")
             icon.name: "contact-new"
             onClicked: kcm.push("AvailableAccounts.qml")
         }

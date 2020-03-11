@@ -1,5 +1,4 @@
 /*************************************************************************************
- *  Copyright (C) 2015 by Aleix Pol <aleixpol@kde.org>                               *
  *  Copyright (C) 2020 by Dan Leinir Turthra Jensen <admin@leinir.dk>                *
  *                                                                                   *
  *  This program is free software; you can redistribute it and/or                    *
@@ -17,36 +16,41 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA   *
  *************************************************************************************/
 
-#include "kaccountsdeclarativeplugin.h"
+#ifndef CHANGEACCOUNTDISPLAYNAMEJOB_H
+#define CHANGEACCOUNTDISPLAYNAMEJOB_H
 
-#include "accountsmodel.h"
-#include "servicesmodel.h"
-#include "providersmodel.h"
+#include "kaccounts_export.h"
 
-#include "accountservicetogglejob.h"
-#include "changeaccountdisplaynamejob.h"
-#include "createaccountjob.h"
-#include "removeaccountjob.h"
+#include <kjob.h>
 
-#include <qqml.h>
+#include <QStringList>
 
-void KAccountsDeclarativePlugin::registerTypes(const char* uri)
+/**
+ * @brief A job used to change the human-readable name of a specified account
+ *
+ * This job will refuse to change the name to something empty (while it is technically
+ * possible to do so for an account, it is highly undesirable)
+ */
+class KACCOUNTS_EXPORT ChangeAccountDisplayNameJob : public KJob
 {
-    // Version 1.0
-    // Consider this registration deprecated - use the one named ...Job below instead
-    qmlRegisterType<CreateAccountJob>(            uri, 1, 0, "CreateAccount");
+    Q_OBJECT
+    Q_PROPERTY(QString accountId READ accountId WRITE setAccountId NOTIFY accountIdChanged)
+    Q_PROPERTY(QString displayName READ displayName WRITE setDisplayName NOTIFY displayNameChanged)
+public:
+    explicit ChangeAccountDisplayNameJob(QObject* parent = nullptr);
+    virtual ~ChangeAccountDisplayNameJob();
 
-    // Version 1.1
-    // Consider this registration deprecated - use the one named ...Job below instead
-    qmlRegisterType<AccountServiceToggleJob>(     uri, 1, 1, "AccountServiceToggle");
+    void start() override;
 
-    // Version 1.2
-    qmlRegisterType<AccountsModel>(               uri, 1, 2, "AccountsModel");
-    qmlRegisterType<ProvidersModel>(              uri, 1, 2, "ProvidersModel");
-    qmlRegisterType<ServicesModel>(               uri, 1, 2, "ServicesModel");
+    QString accountId() const;
+    void setAccountId(const QString& accountId);
+    Q_SIGNAL void accountIdChanged();
 
-    qmlRegisterType<AccountServiceToggleJob>(     uri, 1, 2, "AccountServiceToggleJob");
-    qmlRegisterType<ChangeAccountDisplayNameJob>( uri, 1, 2, "ChangeAccountDisplayNameJob");
-    qmlRegisterType<CreateAccountJob>(            uri, 1, 2, "CreateAccountJob");
-    qmlRegisterType<RemoveAccountJob>(            uri, 1, 2, "RemoveAccountJob");
-}
+    QString displayName() const;
+    void setDisplayName(const QString& displayName);
+    Q_SIGNAL void displayNameChanged();
+private:
+    class Private;
+    Private* d;
+};
+#endif//CHANGEACCOUNTDISPLAYNAMEJOB_H

@@ -17,6 +17,7 @@
  *************************************************************************************/
 
 #include "createaccountjob.h"
+
 #include "kaccountsuiplugin.h"
 #include "core.h"
 #include "uipluginsmanager.h"

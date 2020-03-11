@@ -6,24 +6,36 @@ ecm_setup_version(${KACCOUNTS_VERSION}
   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfigVersion.cmake"
   SOVERSION ${KACCOUNTS_SOVERSION})
 
-set(kaccountslib_SRCS
-     accountservicetogglejob.cpp
-     createaccountjob.cpp
-     kaccountsuiplugin.cpp
-     kaccountsdplugin.cpp
-     getcredentialsjob.cpp
+set (kaccountslib_SRCS
+     accountsmodel.cpp
      core.cpp
+     kaccountsdplugin.cpp
+     kaccountsuiplugin.cpp
+     providersmodel.cpp
+     servicesmodel.cpp
      uipluginsmanager.cpp
+
+     accountservicetogglejob.cpp
+     changeaccountdisplaynamejob.cpp
+     createaccountjob.cpp
+     getcredentialsjob.cpp
+     removeaccountjob.cpp
 )
 
 ecm_generate_headers(kaccountslib_HEADERS
   HEADER_NAMES
+  AccountsModel
   Core
-  GetCredentialsJob
   KAccountsUiPlugin
   KAccountsDPlugin
+  ProvidersModel
+  ServicesModel
+
   AccountServiceToggleJob
+  ChangeAccountDisplayNameJob
   CreateAccountJob
+  GetCredentialsJob
+  RemoveAccountJob
   REQUIRED_HEADERS kaccountslib_HEADERS
 )
 
