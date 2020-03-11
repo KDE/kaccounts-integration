@@ -32,6 +32,9 @@ ScrollViewKCM {
     title: i18n("Add New Account")
 
     view: ListView {
+
+        clip: true
+
         model: KAccounts.ProvidersModel {}
         delegate: Kirigami.AbstractListItem {
             id: accountDelegate

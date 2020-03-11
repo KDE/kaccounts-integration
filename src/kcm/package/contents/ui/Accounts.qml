@@ -32,6 +32,9 @@ ScrollViewKCM {
 
     // Existing accounts
     view: ListView {
+
+        clip: true
+
         model: KAccounts.AccountsModel { }
 
         delegate: Kirigami.SwipeListItem {
