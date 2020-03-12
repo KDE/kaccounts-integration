@@ -41,6 +41,12 @@ ecm_generate_headers(kaccountslib_HEADERS
 
 add_library(kaccounts ${kaccountslib_SRCS})
 
+target_compile_definitions(kaccounts
+    PRIVATE
+    ACCOUNTSQT5_VERSION_MAJOR=${AccountsQt5_VERSION_MAJOR}
+    ACCOUNTSQT5_VERSION_MINOR=${AccountsQt5_VERSION_MINOR}
+)
+
 generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
     PUBLIC
