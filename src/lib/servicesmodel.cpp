@@ -191,5 +191,5 @@ QString ServicesModel::accountIconName() const
     if (d->account && d->account->provider().isValid() && !d->account->provider().iconName().isEmpty()) {
         return d->account->provider().iconName();
     }
-    return QString::fromLatin1("unknown");
+    return QString::fromLatin1("user-identity");
 }
