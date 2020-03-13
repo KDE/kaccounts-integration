@@ -77,15 +77,27 @@ ScrollViewKCM {
             ]
             onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
-        Controls.Label {
+        ColumnLayout {
+            id: noAccountsLayout
             visible: view.count === 0
-            anchors.fill: parent
-            clip: true
-            enabled: false
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            text: i18nc("A text shown when a user has not yet added any accounts", "You have not added any accounts yet.\n\nClick on \"Add New Account...\" below to do so.")
+            anchors.centerIn: parent
+            width: parent.width
+            spacing: Kirigami.Units.gridUnit
+
+            Kirigami.Heading {
+                enabled: false
+                Layout.maximumWidth: parent.width
+                Layout.alignment: Qt.AlignHCenter
+                level: 3
+                wrapMode: Text.Wrap
+                text: i18nc("A text shown when a user has not yet added any accounts", "No accounts added yet")
+            }
+            Controls.Button {
+                Layout.alignment: Qt.AlignHCenter
+                text: i18n("Add New Account...")
+                icon.name: "contact-new"
+                onClicked: kcm.push("AvailableAccounts.qml")
+            }
         }
     }
 
@@ -96,6 +108,7 @@ ScrollViewKCM {
 
     footer: RowLayout {
         Controls.Button {
+            visible: !noAccountsLayout.visible
             Layout.alignment: Qt.AlignRight
             text: i18n("Add New Account...")
             icon.name: "contact-new"
