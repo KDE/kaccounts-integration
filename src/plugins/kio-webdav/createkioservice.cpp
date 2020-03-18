@@ -66,6 +66,7 @@ void CreateKioService::gotCredentials(KJob *job)
 
     Accounts::Service service = m_manager->service(m_serviceName);
     QString host = m_account->value("dav/host").toString();
+    QString path = m_account->value("dav/storagePath").toString();
 
     m_account->selectService(service);
     QString username = data["UserName"].toString();
@@ -73,7 +74,7 @@ void CreateKioService::gotCredentials(KJob *job)
     connect(netJob, &CreateNetAttachJob::finished, this, &CreateKioService::netAttachCreated);
 
     netJob->setHost(host);
-    netJob->setPath(m_account->value("dav/path").toString());
+    netJob->setPath(path);
     netJob->setUsername(username);
     netJob->setPassword(data["Secret"].toString());
     netJob->setIcon(service.iconName());

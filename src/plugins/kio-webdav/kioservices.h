@@ -40,7 +40,8 @@ class KIOServices : public KAccountsDPlugin
     Q_OBJECT
 
 public:
-    explicit KIOServices(QObject* parent =nullptr);
+    KIOServices(QObject* parent, const QVariantList &args);
+    ~KIOServices() override;
 
 public Q_SLOTS:
     void onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList);

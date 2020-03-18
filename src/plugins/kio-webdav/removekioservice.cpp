@@ -22,8 +22,6 @@
 #include <QFile>
 #include <QDebug>
 
-#include <KDirNotify>
-
 RemoveKioService::RemoveKioService(QObject *parent)
     : KJob(parent)
 {

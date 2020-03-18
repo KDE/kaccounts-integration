@@ -21,7 +21,7 @@
 #include <Accounts/Manager>
 
 #include <KDirNotify>
-#include <KWallet/KWallet>
+#include <KWallet>
 #include <KConfig>
 #include <KIO/Job>
 #include <KConfigGroup>
@@ -83,8 +83,7 @@ void CreateNetAttachJob::getRealm()
     url.setHost(m_host);
     url.setUserName(m_username);
     url.setScheme("webdav");
-    url = url.adjusted(QUrl::StripTrailingSlash);
-    url.setPath(url.path() + '/' + m_path);
+    url.setPath(m_path);
 
     if (!m_realm.isEmpty()) {
         createDesktopFile(url);

@@ -1,0 +1,11 @@
+{
+    "KPlugin": {
+        "Description": "Mount WebDAV shares with KIO",
+        "EnabledByDefault": true,
+        "Icon": "system-file-manager",
+        "Id": "kaccounts_kio_webdav",
+        "License": "GPL",
+        "Name": "KIO WebDAV",
+        "Version": "0.1"
+    }
+}

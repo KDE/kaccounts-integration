@@ -26,10 +26,16 @@
 #include <QStandardPaths>
 #include <QDebug>
 
-KIOServices::KIOServices(QObject *parent)
-    : KAccountsDPlugin(parent)
+#include <KPluginFactory>
+
+K_PLUGIN_CLASS_WITH_JSON(KIOServices, "kio-webdav.json")
+
+KIOServices::KIOServices(QObject *parent, const QVariantList &args)
+    : KAccountsDPlugin(parent, args)
 {
 }
+
+KIOServices::~KIOServices() = default;
 
 void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
@@ -126,3 +132,5 @@ bool KIOServices::isEnabled(const Accounts::AccountId accId, const QString &serv
 
     return QFile::exists(path);
 }
+
+#include "kioservices.moc"

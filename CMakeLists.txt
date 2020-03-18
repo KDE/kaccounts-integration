@@ -19,7 +19,7 @@ set(SIGNONQT_DEP_VERSION "8.55")
 set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative Wallet KIO)
 
 find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} CONFIG)
 set_package_properties(AccountsQt5 PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
