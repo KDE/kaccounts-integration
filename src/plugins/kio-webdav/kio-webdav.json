@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Mount WebDAV shares with KIO",
+        "Description[ca@valencia]": "Munta comparticions WebDAV amb el KIO",
         "Description[ca]": "Munta comparticions WebDAV amb el KIO",
         "Description[es]": "Montar recursos compartidos WebDAV con KIO",
         "Description[et]": "WebDAV-i jagatud ressursside ühendamine KIO-mooduli abil",
@@ -12,11 +13,13 @@
         "Description[sv]": "Montera delade WebDAV-resurser med KIO",
         "Description[uk]": "Монтування спільних ресурсів WebDAV за допомогою KIO",
         "Description[x-test]": "xxMount WebDAV shares with KIOxx",
+        "Description[zh_TW]": "使用 KIO 掛載 WebDAV 共用項目",
         "EnabledByDefault": true,
         "Icon": "system-file-manager",
         "Id": "kaccounts_kio_webdav",
         "License": "GPL",
         "Name": "KIO WebDAV",
+        "Name[ca@valencia]": "KIO WebDAV",
         "Name[ca]": "KIO WebDAV",
         "Name[es]": "KIO WebDAV",
         "Name[et]": "WebDAV-i KIO-moodul",
@@ -28,6 +31,7 @@
         "Name[sv]": "KIO WebDAV",
         "Name[uk]": "KIO WebDAV",
         "Name[x-test]": "xxKIO WebDAVxx",
+        "Name[zh_TW]": "KIO WebDAV",
         "Version": "0.1"
     }
 }
