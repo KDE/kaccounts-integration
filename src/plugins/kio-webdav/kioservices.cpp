@@ -58,7 +58,7 @@ void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accoun
 void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 {
     qDebug();
-    QString accountId = QString::number(accId) + "_";
+    QString accountId = QString::number(accId) + QStringLiteral("_");
 
     QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     path.append(QStringLiteral("/remoteview/"));
@@ -125,7 +125,7 @@ void KIOServices::disableService(const Accounts::AccountId accId, const QString 
 
 bool KIOServices::isEnabled(const Accounts::AccountId accId, const QString &serviceName)
 {
-    QString uniqueId(QString::number(accId) + "_" + serviceName);
+    QString uniqueId(QString::number(accId) + QStringLiteral("_") + serviceName);
 
     QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     path += QStringLiteral("/remoteview/") + uniqueId + QStringLiteral(".desktop");

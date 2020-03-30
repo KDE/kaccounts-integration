@@ -68,7 +68,7 @@ void CreateNetAttachJob::walletOpened(bool opened)
     qDebug();
     if (!opened) {
         setError(-1);
-        setErrorText("Can't open wallet");
+        setErrorText(QStringLiteral("Can't open wallet"));
         emitResult();
         return;
     }
@@ -82,7 +82,7 @@ void CreateNetAttachJob::getRealm()
     QUrl url;
     url.setHost(m_host);
     url.setUserName(m_username);
-    url.setScheme("webdav");
+    url.setScheme(QStringLiteral("webdav"));
     url.setPath(m_path);
 
     if (!m_realm.isEmpty()) {
@@ -93,7 +93,7 @@ void CreateNetAttachJob::getRealm()
     KIO::TransferJob *job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::TransferJob::finished, this, &CreateNetAttachJob::gotRealm);
     KIO::MetaData data;
-    data.insert("PropagateHttpHeader", "true");
+    data.insert(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
     job->setMetaData(data);
     job->setUiDelegate(0);
     job->start();
@@ -102,8 +102,8 @@ void CreateNetAttachJob::getRealm()
 void CreateNetAttachJob::gotRealm(KJob *job)
 {
     KIO::TransferJob *hJob = qobject_cast<KIO::TransferJob*>(job);
-    QRegExp rx("www-authenticate: Basic realm=\"(\\S+)\"\n");
-    QString headers = hJob->metaData().value("HTTP-Headers");
+    QRegExp rx(QStringLiteral("www-authenticate: Basic realm=\"(\\S+)\"\n"));
+    QString headers = hJob->metaData().value(QStringLiteral("HTTP-Headers"));
     if (rx.indexIn(headers) != -1) {
         m_realm = rx.cap(1);
     }
@@ -125,7 +125,7 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
             qWarning() << "Directory" << path << "for storage couldn't be created!";
         }
     }
-    path += m_uniqueId + ".desktop";
+    path += m_uniqueId + QStringLiteral(".desktop");
 
     qDebug() << "Creating knetAttach place";
     qDebug() << path;
@@ -143,25 +143,25 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     desktopFile.sync();
 
     QString walletUrl(url.scheme());
-    walletUrl.append("-");
+    walletUrl.append(QStringLiteral("-"));
     walletUrl.append(m_username);
-    walletUrl.append("@");
+    walletUrl.append(QStringLiteral("@"));
     walletUrl.append(url.host());
-    walletUrl.append(":-1-");//Overwrite the first option
+    walletUrl.append(QStringLiteral(":-1-"));//Overwrite the first option
 
     QMap<QString, QString> info;
-    info["login"] = m_username;
-    info["password"] = m_password;
+    info[QStringLiteral("login")] = m_username;
+    info[QStringLiteral("password")] = m_password;
 
-    m_wallet->setFolder("Passwords");
+    m_wallet->setFolder(QStringLiteral("Passwords"));
 
     if (!m_realm.isEmpty()) {
         m_wallet->writeMap(walletUrl + m_realm, info);
     }
-    m_wallet->writeMap(walletUrl + "webdav", info);
+    m_wallet->writeMap(walletUrl + QStringLiteral("webdav"), info);
     m_wallet->sync();
 
-    org::kde::KDirNotify::emitFilesAdded(QUrl("remote:/"));
+    org::kde::KDirNotify::emitFilesAdded(QUrl(QStringLiteral("remote:/")));
 
     emitResult();
 }

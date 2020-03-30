@@ -60,7 +60,7 @@ void RemoveNetAttachJob::walletOpened(bool opened)
     qDebug();
     if (!opened) {
         setError(-1);
-        setErrorText("Can't open wallet");
+        setErrorText(QStringLiteral("Can't open wallet"));
         emitResult();
         return;
     }
@@ -82,16 +82,16 @@ void RemoveNetAttachJob::deleteDesktopFile()
     qDebug() << url.userName() << url.host() << url;
 
     QFile::remove(path);
-    org::kde::KDirNotify::emitFilesRemoved(QList<QUrl>() << QUrl("remote:/" + m_uniqueId));
+    org::kde::KDirNotify::emitFilesRemoved(QList<QUrl>() << QUrl(QStringLiteral("remote:/") + m_uniqueId));
 
-    QString walletUrl("webdav");
-    walletUrl.append("-");
+    QString walletUrl(QStringLiteral("webdav"));
+    walletUrl.append(QStringLiteral("-"));
     walletUrl.append(url.userName());
-    walletUrl.append("@");
+    walletUrl.append(QStringLiteral("@"));
     walletUrl.append(url.host());
-    walletUrl.append(":-1");//Overwrite the first option
+    walletUrl.append(QStringLiteral(":-1"));//Overwrite the first option
 
-    m_wallet->setFolder("Passwords");
+    m_wallet->setFolder(QStringLiteral("Passwords"));
     const QStringList entries = m_wallet->entryList();
     for (const QString &entry : entries) {
         if (!entry.startsWith(walletUrl)) {

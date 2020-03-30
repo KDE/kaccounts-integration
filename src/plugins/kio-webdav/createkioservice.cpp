@@ -65,21 +65,21 @@ void CreateKioService::gotCredentials(KJob *job)
     QVariantMap data = gjob->credentialsData();
 
     Accounts::Service service = m_manager->service(m_serviceName);
-    QString host = m_account->value("dav/host").toString();
-    QString path = m_account->value("dav/storagePath").toString();
+    QString host = m_account->value(QStringLiteral("dav/host")).toString();
+    QString path = m_account->value(QStringLiteral("dav/storagePath")).toString();
 
     m_account->selectService(service);
-    QString username = data["UserName"].toString();
+    QString username = data[QStringLiteral("UserName")].toString();
     CreateNetAttachJob *netJob = new CreateNetAttachJob(this);
     connect(netJob, &CreateNetAttachJob::finished, this, &CreateKioService::netAttachCreated);
 
     netJob->setHost(host);
     netJob->setPath(path);
     netJob->setUsername(username);
-    netJob->setPassword(data["Secret"].toString());
+    netJob->setPassword(data[QStringLiteral("Secret")].toString());
     netJob->setIcon(service.iconName());
-    netJob->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
-    netJob->setName(m_manager->provider(service.provider()).displayName() + " " + service.displayName());
+    netJob->setUniqueId(QString::number(m_accountId) + QStringLiteral("_") + m_serviceName);
+    netJob->setName(m_manager->provider(service.provider()).displayName() + QStringLiteral(" ") + service.displayName());
     netJob->start();
 }
 

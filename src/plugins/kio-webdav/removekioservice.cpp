@@ -37,7 +37,7 @@ void RemoveKioService::removeKioService()
 {
     qDebug();
     RemoveNetAttachJob *job = new RemoveNetAttachJob(this);
-    job->setUniqueId(QString::number(m_accountId) + "_" + m_serviceName);
+    job->setUniqueId(QString::number(m_accountId) + QStringLiteral("_") + m_serviceName);
     connect(job, &RemoveNetAttachJob::finished, this, &RemoveKioService::removeNetAatachFinished);
     job->start();
 }
