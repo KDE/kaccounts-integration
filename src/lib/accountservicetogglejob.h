@@ -50,7 +50,9 @@ public:
 
     bool serviceEnabled() const;
     void setServiceEnabled(bool serviceEnabled);
-    Q_SIGNAL void serviceEnabledChanged();
+
+Q_SIGNALS:
+    void serviceEnabledChanged();
 private:
     class Private;
     Private* d;

@@ -131,6 +131,11 @@ GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, const QStrin
     d->serviceType = QString();
 }
 
+GetCredentialsJob::~GetCredentialsJob()
+{
+    delete d;
+}
+
 void GetCredentialsJob::start()
 {
     QMetaObject::invokeMethod(this, "getCredentials", Qt::QueuedConnection);

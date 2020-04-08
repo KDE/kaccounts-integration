@@ -24,7 +24,7 @@
 
 namespace KWallet {
     class Wallet;
-};
+}
 
 class CreateNetAttachJob : public KJob
 {
@@ -78,7 +78,7 @@ private:
     QString m_uniqueId;
     QString m_icon;
 
-    KWallet::Wallet *m_wallet;
+    KWallet::Wallet *m_wallet = nullptr;
 };
 
 #endif //CREATE_NETATTACH_H

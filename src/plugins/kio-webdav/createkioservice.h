@@ -25,11 +25,11 @@
 
 namespace Accounts {
     class Manager;
-};
+}
 
 namespace KWallet {
     class Wallet;
-};
+}
 
 class CreateKioService : public KJob
 {
@@ -58,8 +58,8 @@ private Q_SLOTS:
 private:
     void createDesktopFile();
 
-    Accounts::Manager *m_manager;
-    Accounts::Account *m_account;
+    Accounts::Manager *m_manager = nullptr;
+    Accounts::Account *m_account = nullptr;
     Accounts::AccountId m_accountId;
     QString m_serviceName;
     QString m_serviceType;

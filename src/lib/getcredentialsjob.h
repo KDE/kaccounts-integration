@@ -59,6 +59,7 @@ public:
      */
     GetCredentialsJob(const Accounts::AccountId &id, const QString &authMethod = QString(), const QString &authMechanism = QString(), QObject *parent = nullptr);
 
+    ~GetCredentialsJob();
     /**
      * Starts the credentials job
      */

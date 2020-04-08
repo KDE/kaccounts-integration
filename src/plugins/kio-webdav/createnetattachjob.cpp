@@ -36,7 +36,6 @@ using namespace KWallet;
 
 CreateNetAttachJob::CreateNetAttachJob(QObject *parent)
  : KJob(parent)
- , m_wallet(0)
 {
 
 }
@@ -95,7 +94,7 @@ void CreateNetAttachJob::getRealm()
     KIO::MetaData data;
     data.insert(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
     job->setMetaData(data);
-    job->setUiDelegate(0);
+    job->setUiDelegate(nullptr);
     job->start();
 }
 

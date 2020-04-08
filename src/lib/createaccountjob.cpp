@@ -44,10 +44,6 @@ CreateAccountJob::CreateAccountJob(const QString &providerName, QObject* parent)
  : KJob(parent)
  , m_providerName(providerName)
  , m_manager(new Accounts::Manager(this))
- , m_account(nullptr)
- , m_accInfo(nullptr)
- , m_identity(nullptr)
- , m_done(false)
 {
 
 }

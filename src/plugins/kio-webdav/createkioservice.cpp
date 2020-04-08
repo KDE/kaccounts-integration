@@ -78,8 +78,8 @@ void CreateKioService::gotCredentials(KJob *job)
     netJob->setUsername(username);
     netJob->setPassword(data[QStringLiteral("Secret")].toString());
     netJob->setIcon(service.iconName());
-    netJob->setUniqueId(QString::number(m_accountId) + QStringLiteral("_") + m_serviceName);
-    netJob->setName(m_manager->provider(service.provider()).displayName() + QStringLiteral(" ") + service.displayName());
+    netJob->setUniqueId(QString::number(m_accountId) + QLatin1Char('_') + m_serviceName);
+    netJob->setName(m_manager->provider(service.provider()).displayName() + QLatin1Char(' ') + service.displayName());
     netJob->start();
 }
 

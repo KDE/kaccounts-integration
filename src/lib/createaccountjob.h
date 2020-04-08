@@ -70,10 +70,10 @@ private:
 
     QString m_providerName;
     QStringList m_disabledServices;
-    Accounts::Manager *m_manager;
-    Accounts::Account *m_account;
-    Accounts::AccountService *m_accInfo;
-    SignOn::Identity *m_identity;
-    bool m_done;
+    Accounts::Manager *m_manager = nullptr;
+    Accounts::Account *m_account = nullptr;
+    Accounts::AccountService *m_accInfo = nullptr;
+    SignOn::Identity *m_identity = nullptr;
+    bool m_done = false;
 };
 #endif //CREATE_ACCOUNT_JOB_H

@@ -44,10 +44,10 @@ public:
     ~KIOServices() override;
 
 public Q_SLOTS:
-    void onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList);
-    void onAccountRemoved(const Accounts::AccountId accId);
-    void onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service);
-    void onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service);
+    void onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList) override;
+    void onAccountRemoved(const Accounts::AccountId accId) override;
+    void onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service) override;
+    void onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service) override;
 
 private:
     void enableService(const Accounts::AccountId accId, const Accounts::Service &service);

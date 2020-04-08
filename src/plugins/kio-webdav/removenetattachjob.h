@@ -24,7 +24,7 @@
 
 namespace KWallet {
     class Wallet;
-};
+}
 class RemoveNetAttachJob : public KJob
 {
     Q_OBJECT
@@ -46,7 +46,7 @@ private Q_SLOTS:
 private:
     QString m_uniqueId;
 
-    KWallet::Wallet *m_wallet;
+    KWallet::Wallet *m_wallet = nullptr;
 };
 
 #endif //REMOVENETATTACHJOB_H

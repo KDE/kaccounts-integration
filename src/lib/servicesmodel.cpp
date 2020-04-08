@@ -35,9 +35,9 @@ class ServicesModel::Private : public QObject
 public:
     Private(ServicesModel *model)
         : q(model)
-    { };
+    { }
     virtual ~Private()
-    { };
+    { }
 
     Accounts::ServiceList services;
     Accounts::Account* account{nullptr};

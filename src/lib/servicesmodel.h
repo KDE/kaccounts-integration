@@ -82,8 +82,8 @@ class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
         virtual ~ServicesModel();
 
         QHash< int, QByteArray > roleNames() const override;
-        virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-        virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+        int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+        QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
         void setAccount(QObject* account);
         QObject* account() const;
@@ -91,7 +91,8 @@ class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
         QString accountDisplayName() const;
         QString accountProviderName() const;
         QString accountIconName() const;
-        Q_SIGNAL void accountChanged();
+Q_SIGNALS:
+        void accountChanged();
 
     private:
         class Private;

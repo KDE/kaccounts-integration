@@ -27,11 +27,11 @@
 #include <KWallet/KWallet>
 #include <KDirNotify>
 #include <KConfig>
+#include <KLocalizedString>
 
 using namespace KWallet;
 RemoveNetAttachJob::RemoveNetAttachJob(QObject *parent)
  : KJob(parent)
- , m_wallet(0)
 {
 }
 
@@ -60,7 +60,7 @@ void RemoveNetAttachJob::walletOpened(bool opened)
     qDebug();
     if (!opened) {
         setError(-1);
-        setErrorText(QStringLiteral("Can't open wallet"));
+        setErrorText(i18n("Can't open wallet"));
         emitResult();
         return;
     }
