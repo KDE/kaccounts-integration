@@ -33,7 +33,7 @@ public:
     void start() override;
 
     Accounts::AccountId accountId() const;
-    void setAccountId(const Accounts::AccountId &accId);
+    void setAccountId(Accounts::AccountId accId);
 
     QString serviceName() const;
     void setServiceName(const QString &serviceName);

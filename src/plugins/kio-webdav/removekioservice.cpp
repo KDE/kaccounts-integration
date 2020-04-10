@@ -58,7 +58,7 @@ Accounts::AccountId RemoveKioService::accountId() const
     return m_accountId;
 }
 
-void RemoveKioService::setAccountId(const Accounts::AccountId &accId)
+void RemoveKioService::setAccountId(Accounts::AccountId accId)
 {
     m_accountId = accId;
 }

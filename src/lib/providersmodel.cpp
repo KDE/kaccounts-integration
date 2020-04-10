@@ -107,7 +107,7 @@ QVariant ProvidersModel::data(const QModelIndex& index, int role) const
                     break;
                 }
                 default:
-                    data.setValue(QString::fromLatin1("No such role: %1").arg(role));
+                    data.setValue(QStringLiteral("No such role: %1").arg(role));
                     break;
             }
         }

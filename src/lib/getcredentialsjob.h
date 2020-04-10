@@ -42,7 +42,7 @@ public:
      *
      * @param id AccountId for which the credentials will be obtained
      */
-    explicit GetCredentialsJob(const Accounts::AccountId &id, QObject *parent = nullptr);
+    explicit GetCredentialsJob(Accounts::AccountId id, QObject *parent = nullptr);
     /**
      * This version of the constructor allow passing specific auth method and mechanism
      * for which we want the credentials
@@ -57,7 +57,7 @@ public:
      * @param authMethod Auth method for which the credentials will be obtained
      * @param authMechanism Auth mechanism for which the credentials will be obtained
      */
-    GetCredentialsJob(const Accounts::AccountId &id, const QString &authMethod = QString(), const QString &authMechanism = QString(), QObject *parent = nullptr);
+    GetCredentialsJob(Accounts::AccountId id, const QString &authMethod = QString(), const QString &authMechanism = QString(), QObject *parent = nullptr);
 
     ~GetCredentialsJob();
     /**

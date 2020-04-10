@@ -26,6 +26,8 @@
 
 #include <SignOn/Identity>
 
+#include <KLocalizedString>
+
 #include <QDebug>
 #include <QTimer>
 
@@ -61,7 +63,7 @@ void GetCredentialsJob::Private::getCredentials()
         } else {
             qDebug() << repeatedTries << "ending with error";
             q->setError(KJob::UserDefinedError);
-            q->setErrorText(QLatin1String("Could not find account"));
+            q->setErrorText(i18n("Could not find account"));
             q->emitResult();
         }
         return;
@@ -76,17 +78,17 @@ void GetCredentialsJob::Private::getCredentials()
     if (!identity) {
         qWarning() << "Unable to find identity for account id" << id;
         q->setError(KJob::UserDefinedError);
-        q->setErrorText(QLatin1String("Could not find credentials"));
+        q->setErrorText(i18n("Could not find credentials"));
         q->emitResult();
         return;
     }
 
-    authData[QStringLiteral("AccountUsername")] = acc->value(QLatin1String("username")).toString();
+    authData[QStringLiteral("AccountUsername")] = acc->value(QStringLiteral("username")).toString();
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authMethod.isEmpty() ? serviceAuthData.method() : authMethod);
     if (!authSession) {
         qWarning() << "Unable to create auth session for" << authMethod << serviceAuthData.method();
         q->setError(KJob::UserDefinedError);
-        q->setErrorText(QLatin1String("Could not create auth session"));
+        q->setErrorText(i18n("Could not create auth session"));
         q->emitResult();
         return;
     }
@@ -108,7 +110,7 @@ void GetCredentialsJob::Private::getCredentials()
     authSession->process(serviceAuthData.parameters(), authMechanism.isEmpty() ? serviceAuthData.mechanism() : authMechanism);
 }
 
-GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, QObject *parent)
+GetCredentialsJob::GetCredentialsJob(Accounts::AccountId id, QObject *parent)
     : KJob(parent)
     , d(new Private(this))
 {
@@ -119,7 +121,7 @@ GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, QObject *par
 }
 
 
-GetCredentialsJob::GetCredentialsJob(const Accounts::AccountId &id, const QString &authMethod, const QString &authMechanism, QObject *parent)
+GetCredentialsJob::GetCredentialsJob(Accounts::AccountId id, const QString &authMethod, const QString &authMechanism, QObject *parent)
     : KJob(parent)
     , d(new Private(this))
 {

@@ -120,7 +120,7 @@ void CreateAccountJob::pluginFinished(const QString &screenName, const QString &
     info.setUserName(screenName);
     info.setSecret(secret, true);
     info.setCaption(m_providerName);
-    info.setAccessControlList(QStringList(QLatin1String("*")));
+    info.setAccessControlList(QStringList(QStringLiteral("*")));
     info.setType(SignOn::IdentityInfo::Application);
 
     const auto keys = data.keys();

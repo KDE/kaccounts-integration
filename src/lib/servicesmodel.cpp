@@ -135,7 +135,7 @@ void ServicesModel::setAccount(QObject* account)
             connect(d->account, &Accounts::Account::displayNameChanged, this, &ServicesModel::accountChanged);
             connect(d->account, &Accounts::Account::enabledChanged, this, [this](const QString& serviceName, bool /*enabled*/){
                 int i{0};
-                for (const Accounts::Service& service : d->services) {
+                for (const Accounts::Service& service : qAsConst(d->services)) {
                     if (service.name() == serviceName) {
                         break;
                     }
