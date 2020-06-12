@@ -22,7 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
 
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami 2.12 as Kirigami
 import org.kde.kcm 1.2
 
 import org.kde.kaccounts 1.2 as KAccounts
@@ -77,26 +77,17 @@ ScrollViewKCM {
             ]
             onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
-        ColumnLayout {
-            id: noAccountsLayout
+
+        Kirigami.PlaceholderMessage {
             visible: view.count === 0
             anchors.centerIn: parent
-            width: parent.width
-            spacing: Kirigami.Units.gridUnit
+            width: parent.width - (Kirigami.Units.largeSpacing * 4)
+            text: i18nc("A text shown when a user has not yet added any accounts", "No accounts added yet")
 
-            Kirigami.Heading {
-                enabled: false
-                Layout.maximumWidth: parent.width
-                Layout.alignment: Qt.AlignHCenter
-                level: 3
-                wrapMode: Text.Wrap
-                text: i18nc("A text shown when a user has not yet added any accounts", "No accounts added yet")
-            }
-            Controls.Button {
-                Layout.alignment: Qt.AlignHCenter
+            helpfulAction: Kirigami.Action {
                 text: i18n("Add New Account...")
                 icon.name: "contact-new"
-                onClicked: kcm.push("AvailableAccounts.qml")
+                onTriggered: kcm.push("AvailableAccounts.qml")
             }
         }
     }
