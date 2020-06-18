@@ -21,6 +21,7 @@
         "Description[sk]": "Správa účtov",
         "Description[sv]": "Kontohantering",
         "Description[uk]": "Керування обліковими записами",
+        "Description[x-test]": "xxAccounts managementxx",
         "Description[zh_CN]": "账户管理",
         "Description[zh_TW]": "帳號管理",
         "Name": "Accounts",
@@ -45,6 +46,7 @@
         "Name[sk]": "Účty",
         "Name[sv]": "Konton",
         "Name[uk]": "Облікові записи",
+        "Name[x-test]": "xxAccountsxx",
         "Name[zh_CN]": "帐户",
         "Name[zh_TW]": "帳號"
     },

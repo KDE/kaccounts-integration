@@ -35,6 +35,7 @@ Name[sr@latin]=Nalozi
 Name[sv]=Konton
 Name[tr]=Hesaplar
 Name[uk]=Облікові записи
+Name[x-test]=xxAccountsxx
 Name[zh_CN]=帐户
 Name[zh_TW]=帳號
 Comment=Add Your Online Accounts
@@ -63,6 +64,7 @@ Comment[ru]=Используйте свои учётные записи в Ин�
 Comment[sk]=Pridajte svoje online účty
 Comment[sv]=Lägg till dina nätkonton
 Comment[uk]=Додавання ваших облікових записів
+Comment[x-test]=xxAdd Your Online Accountsxx
 Comment[zh_CN]=添加在线账户
 Comment[zh_TW]=新增線上帳號
 
