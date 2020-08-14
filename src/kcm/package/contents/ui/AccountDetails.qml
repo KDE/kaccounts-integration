@@ -105,6 +105,7 @@ SimpleKCM {
         Layout.fillWidth: true
         background: Rectangle {
             Kirigami.Theme.colorSet: Kirigami.Theme.Button
+            color: Kirigami.Theme.backgroundColor
             border {
                 width: 1
                 color: Qt.tint(Kirigami.Theme.textColor, Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.8))
