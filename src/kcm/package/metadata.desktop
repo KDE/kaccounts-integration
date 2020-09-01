@@ -82,7 +82,6 @@ X-KDE-PluginInfo-Name=kcm_kaccounts
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=https://plasma-mobile.org
 X-KDE-PluginInfo-Category=Network
-X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-FormFactors=desktop,handset,tablet,mediacenter
