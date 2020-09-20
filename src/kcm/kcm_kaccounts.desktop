@@ -12,6 +12,7 @@ X-KDE-System-Settings-Parent-Category=personalization
 
 Name=Online Accounts
 Name[ar]=حسابات الإنترنت
+Name[az]=Onlayn İstifaadəçi Hesabları
 Name[ca]=Comptes en línia
 Name[ca@valencia]=Comptes en línia
 Name[cs]=Účty online
@@ -52,6 +53,7 @@ Name[zh_TW]=線上帳號
 
 Comment=Configure your internet accounts such as Google, Live, Owncloud
 Comment[ar]=اضبط حساباتك على الإنترنت كغوغل، لايڤ وسحابتك "Owncloud"
+Comment[az]=Google, Live, Owncloud kimi internet hesablarınızı ayarlayın
 Comment[ca]=Configura els vostres comptes d'Internet com Google, Live, Owncloud
 Comment[ca@valencia]=Configura els vostres comptes d'Internet com Google, Live, Owncloud
 Comment[cs]=Nastavte své webové účty jako např. Google, Live, Owncloud
@@ -92,6 +94,7 @@ Comment[zh_TW]=設定您的網際網路帳號，如 Google, Live, Owncloud 等
 
 X-KDE-Keywords=Network,Google,Live,ownCloud
 X-KDE-Keywords[ar]=Network,Google,Live,ownCloud,شبكة,غوغل,جوجل,لايف,لايڤ,سحابتك
+X-KDE-Keywords[az]=Network,Google,Live,ownCloud,Şəbəkə,Google,Live,ownCloud
 X-KDE-Keywords[ca]=Xarxa,Google,Live,ownCloud
 X-KDE-Keywords[ca@valencia]=Xarxa,Google,Live,ownCloud
 X-KDE-Keywords[cs]=Síť,Google,Live,ownCloud
