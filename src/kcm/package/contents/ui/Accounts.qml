@@ -17,6 +17,9 @@ import org.kde.kaccounts 1.2 as KAccounts
 ScrollViewKCM {
     id: kaccountsRoot
 
+    implicitHeight: Kirigami.Units.gridUnit * 28
+    implicitWidth: Kirigami.Units.gridUnit * 28
+
     // Existing accounts
     view: ListView {
 
