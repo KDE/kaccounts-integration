@@ -14,7 +14,7 @@ import org.kde.kcm 1.2
 
 import org.kde.kaccounts 1.2 as KAccounts
 
-SimpleKCM {
+ScrollViewKCM {
     id: component;
 
     title: i18n("Account Details")
@@ -42,40 +42,43 @@ SimpleKCM {
         KAccounts.AccountServiceToggleJob { }
     }
 
-    header: RowLayout {
-        Layout.fillWidth: true
-        Layout.margins: Kirigami.Units.smallSpacing
-        spacing: Kirigami.Units.smallSpacing
-        Kirigami.Icon {
-            source: model.accountIconName
-            Layout.preferredWidth: Kirigami.Units.iconSizes.large
-            Layout.preferredHeight: Kirigami.Units.iconSizes.large
-        }
-        Controls.Label {
+    header: ColumnLayout {
+        RowLayout {
             Layout.fillWidth: true
-            text: {
-                if (model.accountDisplayName.length > 0 && model.accountProviderName.length > 0) {
-                    return i18n("%1 (%2)", model.accountDisplayName, model.accountProviderName)
-                } else if (model.accountDisplayName.length > 0) {
-                    return model.accountDisplayName
-                } else {
-                    return i18n("%1 account", model.accountProviderName)
+            Layout.margins: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
+            Kirigami.Icon {
+                source: model.accountIconName
+                Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                Layout.preferredHeight: Kirigami.Units.iconSizes.large
+            }
+            Controls.Label {
+                Layout.fillWidth: true
+                text: {
+                    if (model.accountDisplayName.length > 0 && model.accountProviderName.length > 0) {
+                        return i18n("%1 (%2)", model.accountDisplayName, model.accountProviderName)
+                    } else if (model.accountDisplayName.length > 0) {
+                        return model.accountDisplayName
+                    } else {
+                        return i18n("%1 account", model.accountProviderName)
+                    }
+                }
+            }
+            Controls.ToolButton {
+                icon.name: "edit-entry"
+                Layout.preferredHeight: Kirigami.Units.iconSizes.large
+                Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                onClicked: accountRenamer.open();
+                Controls.ToolTip {
+                    text: i18nc("Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
                 }
             }
         }
-        Controls.ToolButton {
-            icon.name: "edit-entry"
-            display: Controls.AbstractButton.IconOnly
-            Layout.preferredHeight: Kirigami.Units.iconSizes.large
-            Layout.preferredWidth: Kirigami.Units.iconSizes.large
-            onClicked: accountRenamer.open();
-            Controls.ToolTip {
-                visible: parent.hovered && !parent.pressed
-                text: i18nc("Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
-                delay: Kirigami.Units.toolTipDelay
-                timeout: 5000
-                y: parent.height
-            }
+        Kirigami.Heading {
+            leftPadding: Kirigami.Units.smallSpacing
+            visible: servicesList.count > 0
+            level: 3
+            text: i18nc("Heading for a list of services available with this account", "Use This Account For")
         }
     }
 
@@ -88,16 +91,11 @@ SimpleKCM {
         }
     }
 
-    Controls.Frame {
-        Layout.fillWidth: true
-        background: Rectangle {
-            Kirigami.Theme.colorSet: Kirigami.Theme.Button
-            color: Kirigami.Theme.backgroundColor
-            border {
-                width: 1
-                color: Qt.tint(Kirigami.Theme.textColor, Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.8))
-            }
-        }
+    view: ListView {
+        id: servicesList
+
+        clip: true
+
         ColumnLayout {
             anchors.fill: parent
             spacing: Kirigami.Units.smallSpacing
@@ -111,46 +109,33 @@ SimpleKCM {
                 wrapMode: Text.Wrap
                 text: i18nc("A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
             }
-            Kirigami.Heading {
+        }
+
+        delegate: ColumnLayout {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            spacing: 0
+            Controls.CheckBox {
+                id: serviceCheck
                 Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.smallSpacing
-                visible: servicesList.count > 0
-                level: 3
-                text: i18nc("Heading for a list of services available with this account", "Use This Account For")
-            }
-            Repeater {
-                id: servicesList
-                delegate: ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.leftMargin: Kirigami.Units.smallSpacing
-                    spacing: 0
-                    Controls.CheckBox {
-                        id: serviceCheck
-                        Layout.fillWidth: true
-                        checked: model.enabled
-                        text: model.displayName
-                        Binding {
-                            target: serviceCheck
-                            property: "checked"
-                            value: model.enabled
-                        }
-                        onClicked: {
-                            var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
-                            job.start()
-                        }
-                    }
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        Layout.leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
-                        visible: text.length > 0
-                        text: model.description
-                        wrapMode: Text.Wrap
-                    }
+                checked: model.enabled
+                text: model.displayName
+                Binding {
+                    target: serviceCheck
+                    property: "checked"
+                    value: model.enabled
+                }
+                onClicked: {
+                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
+                    job.start()
                 }
             }
-            Item {
+            Controls.Label {
                 Layout.fillWidth: true
-                height: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
+                visible: text.length > 0
+                text: model.description
+                wrapMode: Text.Wrap
             }
         }
     }
