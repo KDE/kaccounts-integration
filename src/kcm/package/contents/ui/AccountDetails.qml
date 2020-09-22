@@ -111,31 +111,54 @@ ScrollViewKCM {
             }
         }
 
-        delegate: ColumnLayout {
-            Layout.fillWidth: true
-            Layout.leftMargin: Kirigami.Units.smallSpacing
-            spacing: 0
-            Controls.CheckBox {
-                id: serviceCheck
-                Layout.fillWidth: true
-                checked: model.enabled
-                text: model.displayName
-                Binding {
-                    target: serviceCheck
-                    property: "checked"
-                    value: model.enabled
-                }
-                onClicked: {
-                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
-                    job.start()
-                }
+        // Cheap copy of Kirigami.BasicListItem with CheckBox instead of Icon
+        delegate: Kirigami.AbstractListItem {
+            id: listItem
+            highlighted: false
+            onClicked: toggleIt()
+
+            function toggleIt() {
+                var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
+                job.start()
             }
-            Controls.Label {
-                Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
-                visible: text.length > 0
-                text: model.description
-                wrapMode: Text.Wrap
+
+            RowLayout {
+                Controls.CheckBox {
+                    id: serviceCheck
+                    Layout.alignment: Qt.AlignVCenter
+                    checked: model.enabled
+
+                    Binding {
+                        target: serviceCheck
+                        property: "checked"
+                        value: model.enabled
+                    }
+
+                    onClicked: toggleIt()
+                }
+
+                ColumnLayout {
+                    spacing: 0
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
+
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: model.displayName
+                        color: listItem.pressed ? listItem.activeTextColor : listItem.textColor
+                        elide: Text.ElideRight
+                    }
+
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: model.description
+                        color: listItem.pressed ? listItem.activeTextColor : listItem.textColor
+                        elide: Text.ElideRight
+                        font: Kirigami.Theme.smallFont
+                        opacity: 0.7
+                        visible: text.length > 0
+                    }
+                }
             }
         }
     }
