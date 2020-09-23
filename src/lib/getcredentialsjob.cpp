@@ -79,13 +79,13 @@ void GetCredentialsJob::Private::getCredentials()
         return;
     }
 
-    QObject::connect(authSession.data(), &SignOn::AuthSession::response,
+    QObject::connect(authSession.data(), &SignOn::AuthSession::response, q,
             [this](const SignOn::SessionData &data) {
                 sessionData = data;
                 q->emitResult();
             });
 
-    QObject::connect(authSession.data(), &SignOn::AuthSession::error,
+    QObject::connect(authSession.data(), &SignOn::AuthSession::error, q,
             [this](const SignOn::Error &error) {
                 qDebug() << error.message();
                 q->setError(KJob::UserDefinedError);
