@@ -70,7 +70,8 @@ void AccountServiceToggleJob::start()
             Accounts::Service service = accountsManager->service(d->serviceId);
             if (!service.isValid()) {
 //                 qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu AccountServiceModel, which only gives you the name";
-                for (const Accounts::Service& aService : account->services()) {
+                const auto services = account->services();
+                for (const Accounts::Service& aService : services) {
                     if (aService.displayName() == d->serviceId) {
                         service = aService;
                         break;
@@ -86,7 +87,8 @@ void AccountServiceToggleJob::start()
                     account->setEnabled(true);
                 } else {
                     bool shouldStayEnabled = false;
-                    for (const Accounts::Service &accountService : account->services()) {
+                    const auto services = account->services();
+                    for (const Accounts::Service &accountService : services) {
                         // Skip the current service, that is not synced to the account yet
                         // so it would return the state before the user clicked the checkbox
                         if (accountService == service) {
