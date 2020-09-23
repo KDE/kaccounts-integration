@@ -129,7 +129,7 @@ void ServicesModel::setAccount(QObject* account)
                     }
                     ++i;
                 }
-                dataChanged(index(i), index(i));
+                Q_EMIT dataChanged(index(i), index(i));
             });
             connect(d->account, &QObject::destroyed, this, [this](){ 
                 beginResetModel();
