@@ -27,7 +27,7 @@ MessageBoxSheet {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         Layout.margins: Kirigami.Units.largeSpacing
         Controls.Label {
-            text: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter the new name of the account")
+            text: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter new name:")
         }
         Controls.TextField {
             id: newAccountDisplayName
