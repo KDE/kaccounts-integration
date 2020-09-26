@@ -23,12 +23,14 @@ MessageBoxSheet {
             newAccountDisplayName.text = currentDisplayName;
         }
     }
-    contentItem: Kirigami.FormLayout {
+    contentItem: ColumnLayout {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         Layout.margins: Kirigami.Units.largeSpacing
+        Controls.Label {
+            text: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter the new name of the account")
+        }
         Controls.TextField {
             id: newAccountDisplayName
-            Kirigami.FormData.label: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter the new name of the account")
         }
     }
     actions: [
