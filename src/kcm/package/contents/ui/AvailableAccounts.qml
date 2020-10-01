@@ -62,9 +62,28 @@ ScrollViewKCM {
                         }
                     }
                 }
-                Controls.Label {
+
+                ColumnLayout {
+                    spacing: 0
                     Layout.fillWidth: true
-                    text: model.displayName + "\n" + model.description;
+                    Layout.alignment: Qt.AlignVCenter
+
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: model.displayName
+                        color: accountDelegate.pressed || accountDelegate.highlighted ? accountDelegate.activeTextColor : accountDelegate.textColor
+                        elide: Text.ElideRight
+                    }
+
+                    Controls.Label {
+                        Layout.fillWidth: true
+                        text: model.description
+                        color: accountDelegate.pressed || accountDelegate.highlighted ? accountDelegate.activeTextColor : accountDelegate.textColor
+                        elide: Text.ElideRight
+                        font: Kirigami.Theme.smallFont
+                        opacity: 0.7
+                        visible: text.length > 0
+                    }
                 }
             }
             onClicked: {
