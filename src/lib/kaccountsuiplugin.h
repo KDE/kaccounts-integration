@@ -11,6 +11,7 @@
 #include "kaccounts_export.h"
 
 #include <QObject>
+#include <QVariant>
 
 class QWindow;
 
