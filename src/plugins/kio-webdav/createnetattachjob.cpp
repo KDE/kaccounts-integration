@@ -31,6 +31,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QDebug>
+#include <QRegularExpression>
 
 using namespace KWallet;
 
@@ -101,10 +102,14 @@ void CreateNetAttachJob::getRealm()
 void CreateNetAttachJob::gotRealm(KJob *job)
 {
     KIO::TransferJob *hJob = qobject_cast<KIO::TransferJob*>(job);
-    QRegExp rx(QStringLiteral("www-authenticate: Basic realm=\"(\\S+)\"\n"));
+    QRegularExpression rx(QStringLiteral("www-authenticate: Basic realm=\"([^\"]+)\""));
+    Q_ASSERT(rx.isValid());
     QString headers = hJob->metaData().value(QStringLiteral("HTTP-Headers"));
-    if (rx.indexIn(headers) != -1) {
-        m_realm = rx.cap(1);
+
+    auto match = rx.match(headers);
+
+    if (match.hasMatch()) {
+        m_realm = match.captured(1);
     }
 
     createDesktopFile(hJob->url());
