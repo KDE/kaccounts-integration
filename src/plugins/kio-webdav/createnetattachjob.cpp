@@ -103,16 +103,15 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
     qDebug();
 
-    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-    path.append(QStringLiteral("/remoteview/"));
+    const QString folderPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/remoteview/");
 
-    QDir saveDir(path);
+    QDir saveDir(folderPath);
     if (!saveDir.exists()) {
-        if (!saveDir.mkpath(path)) {
-            qWarning() << "Directory" << path << "for storage couldn't be created!";
+        if (!saveDir.mkpath(folderPath)) {
+            qWarning() << "Directory" << folderPath << "for storage couldn't be created!";
         }
     }
-    path += m_uniqueId + QStringLiteral(".desktop");
+    const QString path = folderPath + m_uniqueId + QStringLiteral(".desktop");
 
     qDebug() << "Creating knetAttach place";
     qDebug() << path;

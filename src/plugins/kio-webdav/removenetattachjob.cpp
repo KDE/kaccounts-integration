@@ -64,7 +64,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
     KConfig _desktopFile(path, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
-    QUrl url(desktopFile.readEntry("URL", QUrl()));
+    const QUrl url(desktopFile.readEntry("URL", QUrl()));
     Q_ASSERT(!url.isEmpty());
 
     qDebug() << url.userName() << url.host() << url;

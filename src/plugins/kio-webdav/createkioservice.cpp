@@ -50,14 +50,14 @@ void CreateKioService::gotCredentials(KJob *job)
     }
 
     GetCredentialsJob *gjob = qobject_cast<GetCredentialsJob*>(job);
-    QVariantMap data = gjob->credentialsData();
+    const QVariantMap data = gjob->credentialsData();
 
-    Accounts::Service service = m_manager->service(m_serviceName);
-    QString host = m_account->value(QStringLiteral("dav/host")).toString();
-    QString path = m_account->value(QStringLiteral("dav/storagePath")).toString();
+    const Accounts::Service service = m_manager->service(m_serviceName);
+    const QString host = m_account->value(QStringLiteral("dav/host")).toString();
+    const QString path = m_account->value(QStringLiteral("dav/storagePath")).toString();
 
     m_account->selectService(service);
-    QString username = data[QStringLiteral("UserName")].toString();
+    const QString username = data[QStringLiteral("UserName")].toString();
     CreateNetAttachJob *netJob = new CreateNetAttachJob(this);
     connect(netJob, &CreateNetAttachJob::finished, this, &CreateKioService::netAttachCreated);
 
