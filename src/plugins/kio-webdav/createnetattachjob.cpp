@@ -69,7 +69,7 @@ void CreateNetAttachJob::getRealm()
     QUrl url;
     url.setHost(m_host);
     url.setUserName(m_username);
-    url.setScheme(QStringLiteral("webdav"));
+    url.setScheme(QStringLiteral("webdavs"));
     url.setPath(m_path);
 
     if (!m_realm.isEmpty()) {
