@@ -31,6 +31,13 @@ ScrollViewKCM {
     id: root
     title: i18n("Add New Account")
 
+    header: Kirigami.InlineMessage {
+        id: errorMessage
+        type: Kirigami.MessageType.Error
+        showCloseButton: true
+        visible: false
+    }
+
     view: ListView {
 
         clip: true
@@ -90,7 +97,15 @@ ScrollViewKCM {
     Component {
         id: jobComponent
         KAccounts.CreateAccountJob {
-            onFinished: kcm.pop()
+            onFinished: {
+                // Don't close when there is an error to show an error message
+                if (error == 0) {
+                    kcm.pop()
+                } else {
+                    errorMessage.text = errorText
+                    errorMessage.visible = true
+                }
+            }
         }
     }
 }
