@@ -103,7 +103,7 @@ void testNetAttachJobs::testCreate()
 
 void testNetAttachJobs::testRemove()
 {
-    QString destPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    QString destPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     destPath.append("test-unique-id.desktop");
 
     org::kde::KDirNotify *watch = new org::kde::KDirNotify(
