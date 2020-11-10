@@ -108,6 +108,11 @@ ScrollViewKCM {
                 if (error == 0) {
                     kcm.pop()
                 } else {
+
+                    if (error === 1) { // KJob::KilledJobError, cancelled by user
+                        return
+                    }
+
                     errorMessage.text = errorText
                     errorMessage.visible = true
                 }
