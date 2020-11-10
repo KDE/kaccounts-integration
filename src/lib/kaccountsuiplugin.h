@@ -73,7 +73,7 @@ Q_SIGNALS:
     /**
      * Emitted when user successfully authenticated using this plugin
      * The params are the username & password that the user used to
-     * authenticate himself and any additional data that might be needed
+     * authenticate themselves and any additional data that might be needed
      */
     void success(const QString &username, const QString &password, const QVariantMap &additionalData);
 
