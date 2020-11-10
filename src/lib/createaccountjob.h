@@ -49,6 +49,7 @@ private Q_SLOTS:
     void info(const SignOn::IdentityInfo &info);
     void pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &map);
     void pluginError(const QString &error);
+    void pluginCancelled();
 
 Q_SIGNALS:
     void providerNameChanged();
