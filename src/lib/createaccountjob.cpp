@@ -94,6 +94,7 @@ void CreateAccountJob::loadPluginAndShowDialog(const QString &pluginName)
 
     connect(ui, &KAccountsUiPlugin::success, this, &CreateAccountJob::pluginFinished, Qt::UniqueConnection);
     connect(ui, &KAccountsUiPlugin::error, this, &CreateAccountJob::pluginError, Qt::UniqueConnection);
+    connect(ui, &KAccountsUiPlugin::cancelled, this, &CreateAccountJob::pluginCancelled, Qt::UniqueConnection);
 
     ui->setProviderName(m_providerName);
     ui->init(KAccountsUiPlugin::NewAccountDialog);
@@ -139,6 +140,14 @@ void CreateAccountJob::pluginError(const QString &error)
     }
     setErrorText(error);
     // Delete the dialog
+    emitResult();
+}
+
+void CreateAccountJob::pluginCancelled()
+{
+    setError(KJob::KilledJobError);
+    setErrorText(i18n("Cancelled by user"));
+
     emitResult();
 }
 

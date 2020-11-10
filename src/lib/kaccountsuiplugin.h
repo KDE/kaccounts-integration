@@ -83,6 +83,11 @@ Q_SIGNALS:
      * @param errorString The error that has occurred
      */
     void error(const QString &errorString);
+
+    /**
+     * Emitted when the user cancels the account creation
+     */
+    void cancelled();
 };
 
 Q_DECLARE_INTERFACE(KAccountsUiPlugin, "org.kde.kaccounts.UiPlugin")
