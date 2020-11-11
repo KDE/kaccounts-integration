@@ -87,7 +87,7 @@ Q_SIGNALS:
     /**
      * Emitted when the user cancels the account creation
      */
-    void cancelled();
+    void canceled();
 };
 
 Q_DECLARE_INTERFACE(KAccountsUiPlugin, "org.kde.kaccounts.UiPlugin")
