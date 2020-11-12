@@ -10,9 +10,9 @@
 
 #include "kaccounts_export.h"
 
-#include <QObject>
-#include <Accounts/Service>
 #include <Accounts/Account>
+#include <Accounts/Service>
+#include <QObject>
 
 /**
  * Plugin for KAccounts daemon
@@ -40,7 +40,7 @@ class KACCOUNTS_EXPORT KAccountsDPlugin : public QObject
     Q_OBJECT
 
 public:
-    KAccountsDPlugin(QObject *parent, const QVariantList& args);
+    KAccountsDPlugin(QObject *parent, const QVariantList &args);
     virtual ~KAccountsDPlugin();
 
 public Q_SLOTS:

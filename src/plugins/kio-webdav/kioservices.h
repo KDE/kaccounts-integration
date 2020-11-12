@@ -10,8 +10,8 @@
 #include "kaccountsdplugin.h"
 
 #include <QMap>
-#include <QString>
 #include <QObject>
+#include <QString>
 
 #include <Accounts/Account>
 #include <Accounts/Service>
@@ -19,8 +19,9 @@
 class KJob;
 class AkonadiAccounts;
 
-namespace Accounts {
-    class Manager;
+namespace Accounts
+{
+class Manager;
 }
 
 class KIOServices : public KAccountsDPlugin
@@ -28,7 +29,7 @@ class KIOServices : public KAccountsDPlugin
     Q_OBJECT
 
 public:
-    KIOServices(QObject* parent, const QVariantList &args);
+    KIOServices(QObject *parent, const QVariantList &args);
     ~KIOServices() override;
 
 public Q_SLOTS:
@@ -43,4 +44,4 @@ private:
     bool isEnabled(const Accounts::AccountId accId, const QString &serviceName);
 };
 
-#endif //KIO_SERVICES_H
+#endif // KIO_SERVICES_H

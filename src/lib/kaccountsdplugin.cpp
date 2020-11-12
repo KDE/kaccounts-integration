@@ -7,13 +7,11 @@
 
 #include "kaccountsdplugin.h"
 
-KAccountsDPlugin::KAccountsDPlugin(QObject *parent, const QVariantList& /*args*/)
+KAccountsDPlugin::KAccountsDPlugin(QObject *parent, const QVariantList & /*args*/)
     : QObject(parent)
 {
 }
 
 KAccountsDPlugin::~KAccountsDPlugin()
 {
-
 }
-

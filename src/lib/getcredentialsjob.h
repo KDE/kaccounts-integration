@@ -9,11 +9,12 @@
 
 #include "kaccounts_export.h"
 
-#include <KJob>
 #include <Accounts/Account>
+#include <KJob>
 
-namespace Accounts {
-    class Manager;
+namespace Accounts
+{
+class Manager;
 }
 
 /**
@@ -75,8 +76,8 @@ public:
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
     Q_PRIVATE_SLOT(d, void getCredentials())
 };
 
-#endif //GET_CREDENTIALS_JOB_H
+#endif // GET_CREDENTIALS_JOB_H

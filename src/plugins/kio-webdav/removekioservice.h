@@ -35,4 +35,4 @@ private:
     QString m_serviceName;
 };
 
-#endif //REMOVE_KIOSERVICE_H
+#endif // REMOVE_KIOSERVICE_H

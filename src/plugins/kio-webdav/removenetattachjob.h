@@ -7,11 +7,12 @@
 #ifndef REMOVENETATTACHJOB_H
 #define REMOVENETATTACHJOB_H
 
-#include <KJob>
 #include <KConfigGroup>
+#include <KJob>
 
-namespace KWallet {
-    class Wallet;
+namespace KWallet
+{
+class Wallet;
 }
 class RemoveNetAttachJob : public KJob
 {
@@ -37,4 +38,4 @@ private:
     KWallet::Wallet *m_wallet = nullptr;
 };
 
-#endif //REMOVENETATTACHJOB_H
+#endif // REMOVENETATTACHJOB_H

@@ -6,9 +6,9 @@
 #include "getcredentialsjob.h"
 #include "core.h"
 
-#include <Accounts/Manager>
 #include <Accounts/Account>
 #include <Accounts/AccountService>
+#include <Accounts/Manager>
 
 #include <SignOn/Identity>
 
@@ -17,7 +17,8 @@
 #include <QDebug>
 #include <QTimer>
 
-class GetCredentialsJob::Private {
+class GetCredentialsJob::Private
+{
 public:
     Private(GetCredentialsJob *job)
     {
@@ -79,19 +80,17 @@ void GetCredentialsJob::Private::getCredentials()
         return;
     }
 
-    QObject::connect(authSession.data(), &SignOn::AuthSession::response, q,
-            [this](const SignOn::SessionData &data) {
-                sessionData = data;
-                q->emitResult();
-            });
+    QObject::connect(authSession.data(), &SignOn::AuthSession::response, q, [this](const SignOn::SessionData &data) {
+        sessionData = data;
+        q->emitResult();
+    });
 
-    QObject::connect(authSession.data(), &SignOn::AuthSession::error, q,
-            [this](const SignOn::Error &error) {
-                qDebug() << error.message();
-                q->setError(KJob::UserDefinedError);
-                q->setErrorText(error.message());
-                q->emitResult();
-            });
+    QObject::connect(authSession.data(), &SignOn::AuthSession::error, q, [this](const SignOn::Error &error) {
+        qDebug() << error.message();
+        q->setError(KJob::UserDefinedError);
+        q->setErrorText(error.message());
+        q->emitResult();
+    });
 
     authSession->process(serviceAuthData.parameters(), authMechanism.isEmpty() ? serviceAuthData.mechanism() : authMechanism);
 }
@@ -105,7 +104,6 @@ GetCredentialsJob::GetCredentialsJob(Accounts::AccountId id, QObject *parent)
     d->repeatedTries = 0;
     d->serviceType = QString();
 }
-
 
 GetCredentialsJob::GetCredentialsJob(Accounts::AccountId id, const QString &authMethod, const QString &authMechanism, QObject *parent)
     : KJob(parent)
@@ -129,7 +127,7 @@ void GetCredentialsJob::start()
     QMetaObject::invokeMethod(this, "getCredentials", Qt::QueuedConnection);
 }
 
-void GetCredentialsJob::setServiceType(const QString& serviceType)
+void GetCredentialsJob::setServiceType(const QString &serviceType)
 {
     d->serviceType = serviceType;
 }

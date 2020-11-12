@@ -9,45 +9,43 @@
 #include <core.h>
 
 #include <KPluginFactory>
-#include <KPluginMetaData>
 #include <KPluginLoader>
+#include <KPluginMetaData>
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QPluginLoader>
-#include <QCoreApplication>
 
+#include <Accounts/AccountService>
 #include <Accounts/Manager>
 #include <Accounts/Service>
-#include <Accounts/AccountService>
 
 K_PLUGIN_CLASS_WITH_JSON(KDEDAccounts, "kded_accounts.json")
 
-KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant>&)
- : KDEDModule(parent)
+KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant> &)
+    : KDEDModule(parent)
 {
-
     QMetaObject::invokeMethod(this, "startDaemon", Qt::QueuedConnection);
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &KDEDAccounts::accountCreated);
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &KDEDAccounts::accountRemoved);
 
     const QVector<KPluginMetaData> data = KPluginLoader::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
-    for (const KPluginMetaData& metadata : data) {
-
+    for (const KPluginMetaData &metadata : data) {
         if (!metadata.isValid()) {
             qDebug() << "Invalid metadata" << metadata.name();
             continue;
         }
 
         KPluginLoader loader(metadata.fileName());
-        KPluginFactory* factory = loader.factory();
+        KPluginFactory *factory = loader.factory();
 
         if (!factory) {
             qDebug() << "KPluginFactory could not load the plugin:" << metadata.pluginId() << loader.errorString();
             continue;
         }
 
-        KAccountsDPlugin* plugin = factory->create<KAccountsDPlugin>(this, QVariantList());
+        KAccountsDPlugin *plugin = factory->create<KAccountsDPlugin>(this, QVariantList());
         if (!plugin) {
             qDebug() << "Error loading plugin" << metadata.name() << loader.errorString();
             continue;
@@ -114,7 +112,7 @@ void KDEDAccounts::enabledChanged(const QString &serviceName, bool enabled)
         return;
     }
 
-    const Accounts::AccountId accId = qobject_cast<Accounts::Account*>(sender())->id();
+    const Accounts::AccountId accId = qobject_cast<Accounts::Account *>(sender())->id();
 
     const Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {

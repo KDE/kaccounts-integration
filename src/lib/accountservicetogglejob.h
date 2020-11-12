@@ -23,17 +23,17 @@ class KACCOUNTS_EXPORT AccountServiceToggleJob : public KJob
     Q_PROPERTY(QString serviceId READ serviceId WRITE setServiceId NOTIFY serviceIdChanged)
     Q_PROPERTY(bool serviceEnabled READ serviceEnabled WRITE setServiceEnabled NOTIFY serviceEnabledChanged)
 public:
-    explicit AccountServiceToggleJob(QObject* parent = nullptr);
+    explicit AccountServiceToggleJob(QObject *parent = nullptr);
     virtual ~AccountServiceToggleJob();
 
     void start() override;
 
     QString accountId() const;
-    void setAccountId(const QString& accountId);
+    void setAccountId(const QString &accountId);
     Q_SIGNAL void accountIdChanged();
 
     QString serviceId() const;
-    void setServiceId(const QString& serviceId);
+    void setServiceId(const QString &serviceId);
     Q_SIGNAL void serviceIdChanged();
 
     bool serviceEnabled() const;
@@ -41,8 +41,9 @@ public:
 
 Q_SIGNALS:
     void serviceEnabledChanged();
+
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
-#endif//ACCOUNTSERVICETOGGLE_H
+#endif // ACCOUNTSERVICETOGGLE_H

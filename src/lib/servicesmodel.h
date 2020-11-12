@@ -38,7 +38,7 @@ class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
     /**
      * The Accounts::Account instance which this model should use for fetching the list of services
      */
-    Q_PROPERTY(QObject* account READ account WRITE setAccount NOTIFY accountChanged)
+    Q_PROPERTY(QObject *account READ account WRITE setAccount NOTIFY accountChanged)
     /**
      * The internal ID for the account this model represents
      */
@@ -55,36 +55,36 @@ class KACCOUNTS_EXPORT ServicesModel : public QAbstractListModel
      * The XDG Icon specification icon name for this model's account
      */
     Q_PROPERTY(QString accountIconName READ accountIconName NOTIFY accountChanged)
-    public:
-        enum Roles {
-            NameRole = Qt::UserRole + 1,
-            DescriptionRole,
-            DisplayNameRole,
-            ServiceTypeRole,
-            ProviderNameRole,
-            IconNameRole,
-            TagsRole,
-            EnabledRole
-        };
-        explicit ServicesModel(QObject* parent = nullptr);
-        virtual ~ServicesModel();
+public:
+    enum Roles {
+        NameRole = Qt::UserRole + 1,
+        DescriptionRole,
+        DisplayNameRole,
+        ServiceTypeRole,
+        ProviderNameRole,
+        IconNameRole,
+        TagsRole,
+        EnabledRole,
+    };
+    explicit ServicesModel(QObject *parent = nullptr);
+    virtual ~ServicesModel();
 
-        QHash< int, QByteArray > roleNames() const override;
-        int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-        QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-        void setAccount(QObject* account);
-        QObject* account() const;
-        quint32 accountId() const;
-        QString accountDisplayName() const;
-        QString accountProviderName() const;
-        QString accountIconName() const;
+    void setAccount(QObject *account);
+    QObject *account() const;
+    quint32 accountId() const;
+    QString accountDisplayName() const;
+    QString accountProviderName() const;
+    QString accountIconName() const;
 Q_SIGNALS:
-        void accountChanged();
+    void accountChanged();
 
-    private:
-        class Private;
-        Private *d;
+private:
+    class Private;
+    Private *d;
 };
 
-#endif//SERVICES_MODEL_H
+#endif // SERVICES_MODEL_H

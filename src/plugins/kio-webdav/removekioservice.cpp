@@ -7,13 +7,12 @@
 #include "removekioservice.h"
 #include "removenetattachjob.h"
 
-#include <QFile>
 #include <QDebug>
+#include <QFile>
 
 RemoveKioService::RemoveKioService(QObject *parent)
     : KJob(parent)
 {
-
 }
 
 void RemoveKioService::start()

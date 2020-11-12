@@ -5,12 +5,12 @@
  */
 
 #include "createkioservice.h"
-#include "createnetattachjob.h"
 #include "../lib/getcredentialsjob.h"
+#include "createnetattachjob.h"
 #include <core.h>
 
-#include <QDebug>
 #include <Accounts/Manager>
+#include <QDebug>
 
 CreateKioService::CreateKioService(QObject *parent)
     : KJob(parent)
@@ -49,7 +49,7 @@ void CreateKioService::gotCredentials(KJob *job)
         return;
     }
 
-    GetCredentialsJob *gjob = qobject_cast<GetCredentialsJob*>(job);
+    GetCredentialsJob *gjob = qobject_cast<GetCredentialsJob *>(job);
     const QVariantMap data = gjob->credentialsData();
 
     const Accounts::Service service = m_manager->service(m_serviceName);

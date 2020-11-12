@@ -11,15 +11,16 @@
 
 class KAccountsUiPlugin;
 
-namespace KAccounts {
-
-class UiPluginsManager {
+namespace KAccounts
+{
+class UiPluginsManager
+{
 public:
-    static QList<KAccountsUiPlugin*> uiPlugins();
-    static KAccountsUiPlugin* pluginForService(const QString &service);
-    static KAccountsUiPlugin* pluginForName(const QString &name);
+    static QList<KAccountsUiPlugin *> uiPlugins();
+    static KAccountsUiPlugin *pluginForService(const QString &service);
+    static KAccountsUiPlugin *pluginForName(const QString &name);
 };
 
 }
 
-#endif //UIPLUGINSMANAGER_H
+#endif // UIPLUGINSMANAGER_H

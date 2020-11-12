@@ -11,17 +11,21 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-class ChangeAccountDisplayNameJob::Private {
+class ChangeAccountDisplayNameJob::Private
+{
 public:
-    Private() {}
+    Private()
+    {
+    }
     QString accountId;
     QString displayName;
 };
 
-ChangeAccountDisplayNameJob::ChangeAccountDisplayNameJob(QObject* parent)
+ChangeAccountDisplayNameJob::ChangeAccountDisplayNameJob(QObject *parent)
     : KJob(parent)
     , d(new Private)
-{ }
+{
+}
 
 ChangeAccountDisplayNameJob::~ChangeAccountDisplayNameJob()
 {
@@ -33,7 +37,7 @@ QString ChangeAccountDisplayNameJob::accountId() const
     return d->accountId;
 }
 
-void ChangeAccountDisplayNameJob::setAccountId(const QString& accountId)
+void ChangeAccountDisplayNameJob::setAccountId(const QString &accountId)
 {
     d->accountId = accountId;
     Q_EMIT accountIdChanged();
@@ -44,7 +48,7 @@ QString ChangeAccountDisplayNameJob::displayName() const
     return d->displayName;
 }
 
-void ChangeAccountDisplayNameJob::setDisplayName(const QString& displayName)
+void ChangeAccountDisplayNameJob::setDisplayName(const QString &displayName)
 {
     d->displayName = displayName;
     Q_EMIT displayNameChanged();
@@ -53,12 +57,14 @@ void ChangeAccountDisplayNameJob::setDisplayName(const QString& displayName)
 void ChangeAccountDisplayNameJob::start()
 {
     if (!d->displayName.isEmpty()) {
-        Accounts::Manager* accountsManager = KAccounts::accountsManager();
+        Accounts::Manager *accountsManager = KAccounts::accountsManager();
         if (accountsManager) {
             Accounts::Account *account = accountsManager->account(d->accountId.toInt());
             if (account) {
                 account->setDisplayName(d->displayName);
-                connect(account, &Accounts::Account::synced, this, [this](){ emitResult(); });
+                connect(account, &Accounts::Account::synced, this, [this]() {
+                    emitResult();
+                });
                 account->sync();
             } else {
                 qWarning() << "No account found with the ID" << d->accountId;

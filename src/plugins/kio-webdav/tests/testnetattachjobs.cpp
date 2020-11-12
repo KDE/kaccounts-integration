@@ -9,38 +9,40 @@
 
 #include <QTest>
 
-#include <KWallet/KWallet>
-#include <KDirNotify>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KDirNotify>
+#include <KWallet/KWallet>
 
-#include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
+#include <QDBusConnection>
+#include <QSignalSpy>
 #include <QStandardPaths>
 #include <QTimer>
-#include <QSignalSpy>
 
 using namespace KWallet;
 class testNetAttachJobs : public QObject
 {
     Q_OBJECT
 
-    public:
-        explicit testNetAttachJobs(QObject* parent = 0);
-    private Q_SLOTS:
-        void testCreate();
-        void testRemove();
-    private:
-        void enterLoop();
+public:
+    explicit testNetAttachJobs(QObject *parent = 0);
+private Q_SLOTS:
+    void testCreate();
+    void testRemove();
 
-        QTimer m_timer;
-        QEventLoop m_eventLoop;
+private:
+    void enterLoop();
+
+    QTimer m_timer;
+    QEventLoop m_eventLoop;
 };
 
-testNetAttachJobs::testNetAttachJobs(QObject* parent): QObject(parent)
+testNetAttachJobs::testNetAttachJobs(QObject *parent)
+    : QObject(parent)
 {
     m_timer.setSingleShot(true);
-    m_timer.setInterval(10000);// 10 seconds timeout for eventloop
+    m_timer.setInterval(10000); // 10 seconds timeout for eventloop
 
     connect(&m_timer, &QTimer::timeout, &m_eventLoop, &QEventLoop::quit);
 }
@@ -52,14 +54,12 @@ void testNetAttachJobs::testCreate()
 
     qDebug() << destPath;
 
-    org::kde::KDirNotify *watch = new org::kde::KDirNotify(
-    QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
+    org::kde::KDirNotify *watch = new org::kde::KDirNotify(QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
     connect(watch, &org::kde::KDirNotify::FilesAdded, &m_eventLoop, &QEventLoop::quit);
 
     QSignalSpy signalSpy(watch, &org::kde::KDirNotify::FilesAdded);
 
-    CreateNetAttachJob *job = new CreateNetAttachJob(this)
-    job->setHost("host.com");
+    CreateNetAttachJob *job = new CreateNetAttachJob(this) job->setHost("host.com");
     job->setUsername("username");
     job->setPassword("password");
     job->setIcon("modem");
@@ -80,7 +80,7 @@ void testNetAttachJobs::testCreate()
     QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-testRealm"), "Wallet realm entry does not exists");
     QVERIFY2(wallet->hasEntry("webdav-username@host.com:-1-webdav"), "Wallet schema entry does not exists");
 
-    KConfig _desktopFile(destPath, KConfig::SimpleConfig );
+    KConfig _desktopFile(destPath, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
     QCOMPARE(desktopFile.readEntry("Icon", ""), QLatin1String("modem"));
     QCOMPARE(desktopFile.readEntry("Name", ""), QLatin1String("test-service"));
@@ -98,7 +98,6 @@ void testNetAttachJobs::testCreate()
     QVERIFY2(data.keys().contains("password"), "Password data is not stored in the wallet");
     QCOMPARE(data["login"], QLatin1String("username"));
     QCOMPARE(data["password"], QLatin1String("password"));
-
 }
 
 void testNetAttachJobs::testRemove()
@@ -106,8 +105,7 @@ void testNetAttachJobs::testRemove()
     QString destPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     destPath.append("test-unique-id.desktop");
 
-    org::kde::KDirNotify *watch = new org::kde::KDirNotify(
-    QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
+    org::kde::KDirNotify *watch = new org::kde::KDirNotify(QDBusConnection::sessionBus().baseService(), QString(), QDBusConnection::sessionBus());
     connect(watch, &org::kde::KDirNotify::FilesRemoved, &m_eventLoop, &QEventLoop::quit);
 
     QSignalSpy signalSpy(watch, &org::kde::KDirNotify::FilesRemoved);

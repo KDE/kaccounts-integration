@@ -6,21 +6,25 @@
 
 #include "removeaccountjob.h"
 
-#include <QDebug>
 #include "core.h"
 #include <Accounts/Manager>
+#include <QDebug>
 #include <SignOn/Identity>
 
-class RemoveAccountJob::Private {
+class RemoveAccountJob::Private
+{
 public:
-    Private() {}
+    Private()
+    {
+    }
     QString accountId;
 };
 
-RemoveAccountJob::RemoveAccountJob(QObject* parent)
+RemoveAccountJob::RemoveAccountJob(QObject *parent)
     : KJob(parent)
     , d(new Private)
-{ }
+{
+}
 
 RemoveAccountJob::~RemoveAccountJob()
 {
@@ -32,7 +36,7 @@ QString RemoveAccountJob::accountId() const
     return d->accountId;
 }
 
-void RemoveAccountJob::setAccountId(const QString& accountId)
+void RemoveAccountJob::setAccountId(const QString &accountId)
 {
     d->accountId = accountId;
     Q_EMIT accountIdChanged();
@@ -40,7 +44,7 @@ void RemoveAccountJob::setAccountId(const QString& accountId)
 
 void RemoveAccountJob::start()
 {
-    Accounts::Manager* accountsManager = KAccounts::accountsManager();
+    Accounts::Manager *accountsManager = KAccounts::accountsManager();
     if (accountsManager) {
         Accounts::Account *account = accountsManager->account(d->accountId.toInt());
         if (account) {

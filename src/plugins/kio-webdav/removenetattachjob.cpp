@@ -6,20 +6,20 @@
 
 #include "removenetattachjob.h"
 
-#include <QFile>
-#include <QWidget>
 #include <QApplication>
-#include <QUrl>
 #include <QDebug>
+#include <QFile>
+#include <QUrl>
+#include <QWidget>
 
-#include <KWallet/KWallet>
-#include <KDirNotify>
 #include <KConfig>
+#include <KDirNotify>
 #include <KLocalizedString>
+#include <KWallet/KWallet>
 
 using namespace KWallet;
 RemoveNetAttachJob::RemoveNetAttachJob(QObject *parent)
- : KJob(parent)
+    : KJob(parent)
 {
 }
 
@@ -77,7 +77,7 @@ void RemoveNetAttachJob::deleteDesktopFile()
     walletUrl.append(url.userName());
     walletUrl.append(QStringLiteral("@"));
     walletUrl.append(url.host());
-    walletUrl.append(QStringLiteral(":-1"));//Overwrite the first option
+    walletUrl.append(QStringLiteral(":-1")); // Overwrite the first option
 
     m_wallet->setFolder(QStringLiteral("Passwords"));
     const QStringList entries = m_wallet->entryList();

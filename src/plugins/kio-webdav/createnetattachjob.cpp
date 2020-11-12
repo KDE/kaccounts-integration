@@ -8,25 +8,24 @@
 
 #include <Accounts/Manager>
 
-#include <KDirNotify>
-#include <KWallet>
 #include <KConfig>
-#include <KIO/Job>
 #include <KConfigGroup>
+#include <KDirNotify>
+#include <KIO/Job>
+#include <KWallet>
 
 #include <QApplication>
-#include <QWidget>
-#include <QUrl>
-#include <QDir>
 #include <QDebug>
+#include <QDir>
 #include <QRegularExpression>
+#include <QUrl>
+#include <QWidget>
 
 using namespace KWallet;
 
 CreateNetAttachJob::CreateNetAttachJob(QObject *parent)
- : KJob(parent)
+    : KJob(parent)
 {
-
 }
 
 CreateNetAttachJob::~CreateNetAttachJob()
@@ -78,7 +77,7 @@ void CreateNetAttachJob::getRealm()
         return;
     }
 
-    KIO::TransferJob *job = KIO::get(url , KIO::NoReload, KIO::HideProgressInfo);
+    KIO::TransferJob *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::TransferJob::finished, this, &CreateNetAttachJob::gotRealm);
     KIO::MetaData data;
     data.insert(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
@@ -89,7 +88,7 @@ void CreateNetAttachJob::getRealm()
 
 void CreateNetAttachJob::gotRealm(KJob *job)
 {
-    KIO::TransferJob *hJob = qobject_cast<KIO::TransferJob*>(job);
+    KIO::TransferJob *hJob = qobject_cast<KIO::TransferJob *>(job);
     QRegularExpression rx(QStringLiteral("www-authenticate: Basic realm=\"([^\"]+)\""));
     Q_ASSERT(rx.isValid());
     QString headers = hJob->metaData().value(QStringLiteral("HTTP-Headers"));
@@ -102,7 +101,6 @@ void CreateNetAttachJob::gotRealm(KJob *job)
 
     createDesktopFile(hJob->url());
 }
-
 
 void CreateNetAttachJob::createDesktopFile(const QUrl &url)
 {
@@ -123,14 +121,14 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     qDebug() << url.host();
     qDebug() << url.toString();
 
-    KConfig _desktopFile( path, KConfig::SimpleConfig );
+    KConfig _desktopFile(path, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
 
     desktopFile.writeEntry("Icon", m_icon);
     desktopFile.writeEntry("Name", m_name);
     desktopFile.writeEntry("Type", "Link");
     desktopFile.writeEntry("URL", url.toString());
-//     desktopFile.writeEntry("Charset", url.fileEncoding());
+    //     desktopFile.writeEntry("Charset", url.fileEncoding());
     desktopFile.sync();
 
     QString walletUrl(url.scheme());
@@ -138,7 +136,7 @@ void CreateNetAttachJob::createDesktopFile(const QUrl &url)
     walletUrl.append(m_username);
     walletUrl.append(QStringLiteral("@"));
     walletUrl.append(url.host());
-    walletUrl.append(QStringLiteral(":-1-"));//Overwrite the first option
+    walletUrl.append(QStringLiteral(":-1-")); // Overwrite the first option
 
     QMap<QString, QString> info;
     info[QStringLiteral("login")] = m_username;
@@ -171,7 +169,7 @@ QString CreateNetAttachJob::path() const
     return m_path;
 }
 
-void CreateNetAttachJob::setPath(const QString& path)
+void CreateNetAttachJob::setPath(const QString &path)
 {
     m_path = path;
 }
@@ -191,7 +189,7 @@ QString CreateNetAttachJob::name() const
     return m_name;
 }
 
-void CreateNetAttachJob::setName(const QString& name)
+void CreateNetAttachJob::setName(const QString &name)
 {
     m_name = name;
 }
@@ -221,7 +219,7 @@ QString CreateNetAttachJob::uniqueId() const
     return m_uniqueId;
 }
 
-void CreateNetAttachJob::setUniqueId(const QString& uniqueId)
+void CreateNetAttachJob::setUniqueId(const QString &uniqueId)
 {
     m_uniqueId = uniqueId;
 }

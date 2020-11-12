@@ -8,13 +8,13 @@
 
 #include "kaccountsuiplugin.h"
 
-#include <QHash>
-#include <QStringList>
-#include <QDebug>
 #include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
-#include <QPluginLoader>
 #include <QGuiApplication>
+#include <QHash>
+#include <QPluginLoader>
+#include <QStringList>
 #include <QWindow>
 
 using namespace KAccounts;
@@ -27,10 +27,9 @@ public:
 
     void loadPlugins();
 
-    QHash<QString, KAccountsUiPlugin*> pluginsForNames;
-    QHash<QString, KAccountsUiPlugin*> pluginsForServices;
+    QHash<QString, KAccountsUiPlugin *> pluginsForNames;
+    QHash<QString, KAccountsUiPlugin *> pluginsForServices;
     bool pluginsLoaded;
-
 };
 
 Q_GLOBAL_STATIC(UiPluginsManagerPrivate, s_instance)
@@ -70,7 +69,7 @@ void UiPluginsManagerPrivate::loadPlugins()
 
             QObject *obj = loader.instance();
             if (obj) {
-                KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin*>(obj);
+                KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin *>(obj);
                 if (!ui) {
                     qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
                     qDebug() << pluginPath;
@@ -98,15 +97,13 @@ void UiPluginsManagerPrivate::loadPlugins()
             } else {
                 qDebug() << "Plugin could not create instance" << pluginPath;
             }
-
         }
     }
 
     pluginsLoaded = true;
 }
 
-
-QList<KAccountsUiPlugin*> UiPluginsManager::uiPlugins()
+QList<KAccountsUiPlugin *> UiPluginsManager::uiPlugins()
 {
     if (!s_instance->pluginsLoaded) {
         s_instance->loadPlugins();
@@ -115,7 +112,7 @@ QList<KAccountsUiPlugin*> UiPluginsManager::uiPlugins()
     return s_instance->pluginsForNames.values();
 }
 
-KAccountsUiPlugin* UiPluginsManager::pluginForName(const QString &name)
+KAccountsUiPlugin *UiPluginsManager::pluginForName(const QString &name)
 {
     if (!s_instance->pluginsLoaded) {
         s_instance->loadPlugins();
@@ -124,7 +121,7 @@ KAccountsUiPlugin* UiPluginsManager::pluginForName(const QString &name)
     return s_instance->pluginsForNames.value(name + QStringLiteral(".so"));
 }
 
-KAccountsUiPlugin* UiPluginsManager::pluginForService(const QString &service)
+KAccountsUiPlugin *UiPluginsManager::pluginForService(const QString &service)
 {
     if (!s_instance->pluginsLoaded) {
         s_instance->loadPlugins();

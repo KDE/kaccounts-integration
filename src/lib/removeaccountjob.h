@@ -21,16 +21,17 @@ class KACCOUNTS_EXPORT RemoveAccountJob : public KJob
     Q_OBJECT
     Q_PROPERTY(QString accountId READ accountId WRITE setAccountId NOTIFY accountIdChanged)
 public:
-    explicit RemoveAccountJob(QObject* parent = nullptr);
+    explicit RemoveAccountJob(QObject *parent = nullptr);
     virtual ~RemoveAccountJob();
 
     void start() override;
 
     QString accountId() const;
-    void setAccountId(const QString& accountId);
+    void setAccountId(const QString &accountId);
     Q_SIGNAL void accountIdChanged();
+
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
-#endif//REMOVEACCOUNT_H
+#endif // REMOVEACCOUNT_H

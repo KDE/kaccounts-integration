@@ -5,14 +5,14 @@
  */
 
 #include "kioservices.h"
-#include "createnetattachjob.h"
 #include "createkioservice.h"
+#include "createnetattachjob.h"
 #include "removekioservice.h"
 
-#include <QFile>
-#include <QDirIterator>
-#include <QStandardPaths>
 #include <QDebug>
+#include <QDirIterator>
+#include <QFile>
+#include <QStandardPaths>
 
 #include <KPluginFactory>
 

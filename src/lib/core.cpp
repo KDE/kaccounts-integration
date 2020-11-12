@@ -19,12 +19,11 @@ public:
 CorePrivate::CorePrivate()
     : m_manager(new Accounts::Manager())
 {
-
 }
 
 Q_GLOBAL_STATIC(CorePrivate, s_instance)
 
-Accounts::Manager* KAccounts::accountsManager()
+Accounts::Manager *KAccounts::accountsManager()
 {
     return s_instance->m_manager;
 }

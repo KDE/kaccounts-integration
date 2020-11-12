@@ -21,9 +21,8 @@ class KACCOUNTS_EXPORT KAccountsUiPlugin : public QObject
 public:
     enum UiType {
         NewAccountDialog,
-        ConfigureAccountDialog
+        ConfigureAccountDialog,
     };
-
 
     explicit KAccountsUiPlugin(QObject *parent = nullptr);
     virtual ~KAccountsUiPlugin();
@@ -53,7 +52,7 @@ public:
      */
     virtual QStringList supportedServicesForConfig() const = 0;
 
-    QWindow* transientParent() const;
+    QWindow *transientParent() const;
 
 Q_SIGNALS:
     /**

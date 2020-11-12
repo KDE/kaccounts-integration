@@ -19,7 +19,7 @@ class KDEDAccounts : public KDEDModule
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
 
 public:
-    KDEDAccounts(QObject *parent, const QList<QVariant>&);
+    KDEDAccounts(QObject *parent, const QList<QVariant> &);
     virtual ~KDEDAccounts();
 
 public Q_SLOTS:
@@ -31,7 +31,7 @@ public Q_SLOTS:
 private:
     void monitorAccount(const Accounts::AccountId id);
 
-    QList<KAccountsDPlugin*> m_plugins;
+    QList<KAccountsDPlugin *> m_plugins;
 };
 
 #endif /*ACCOUNTS_DAEMON_H*/

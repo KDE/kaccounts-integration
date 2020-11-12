@@ -2,7 +2,7 @@
  *  SPDX-FileCopyrightText: 2012 Alejandro Fiestas Olivares <afiestas@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef CREATE_NETATTACH_H
 #define CREATE_NETATTACH_H
@@ -10,8 +10,9 @@
 #include <KJob>
 #include <QUrl>
 
-namespace KWallet {
-    class Wallet;
+namespace KWallet
+{
+class Wallet;
 }
 
 class CreateNetAttachJob : public KJob
@@ -69,4 +70,4 @@ private:
     KWallet::Wallet *m_wallet = nullptr;
 };
 
-#endif //CREATE_NETATTACH_H
+#endif // CREATE_NETATTACH_H

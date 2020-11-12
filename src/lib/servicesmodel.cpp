@@ -23,20 +23,22 @@ class ServicesModel::Private : public QObject
 public:
     Private(ServicesModel *model)
         : q(model)
-    { }
+    {
+    }
     virtual ~Private()
-    { }
+    {
+    }
 
     Accounts::ServiceList services;
-    Accounts::Account* account{nullptr};
+    Accounts::Account *account{nullptr};
 
 private:
-    ServicesModel* q;
+    ServicesModel *q;
 };
 
-ServicesModel::ServicesModel(QObject* parent)
- : QAbstractListModel(parent)
- , d(new ServicesModel::Private(this))
+ServicesModel::ServicesModel(QObject *parent)
+    : QAbstractListModel(parent)
+    , d(new ServicesModel::Private(this))
 {
 }
 
@@ -48,19 +50,11 @@ ServicesModel::~ServicesModel()
 QHash<int, QByteArray> ServicesModel::roleNames() const
 {
     static QHash<int, QByteArray> roles{
-        {NameRole, "name"},
-        {DescriptionRole, "description"},
-        {DisplayNameRole, "displayName"},
-        {ServiceTypeRole, "servieType"},
-        {ProviderNameRole, "providerName"},
-        {IconNameRole, "iconName"},
-        {TagsRole, "tags"},
-        {EnabledRole, "enabled"}
-    };
+        {NameRole, "name"}, {DescriptionRole, "description"}, {DisplayNameRole, "displayName"}, {ServiceTypeRole, "servieType"}, {ProviderNameRole, "providerName"}, {IconNameRole, "iconName"}, {TagsRole, "tags"}, {EnabledRole, "enabled"}};
     return roles;
 }
 
-int ServicesModel::rowCount(const QModelIndex& parent) const
+int ServicesModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return 0;
@@ -69,48 +63,48 @@ int ServicesModel::rowCount(const QModelIndex& parent) const
     return d->services.count();
 }
 
-QVariant ServicesModel::data(const QModelIndex& index, int role) const
+QVariant ServicesModel::data(const QModelIndex &index, int role) const
 {
     QVariant data;
-    if(checkIndex(index)) {
-        const Accounts::Service& service = d->services.value(index.row());
+    if (checkIndex(index)) {
+        const Accounts::Service &service = d->services.value(index.row());
         if (service.isValid()) {
             switch (role) {
-                case NameRole:
-                    data.setValue(service.name());
-                    break;
-                case DescriptionRole:
-#if ACCOUNTSQT5_VERSION_MAJOR==1 && ACCOUNTSQT5_VERSION_MINOR>=16
-                    // Not all services have descriptions and UIs should be designed with that in mind.
-                    // Consequently, we can accept not having a fallback for this.
-                    data.setValue(service.description());
+            case NameRole:
+                data.setValue(service.name());
+                break;
+            case DescriptionRole:
+#if ACCOUNTSQT5_VERSION_MAJOR == 1 && ACCOUNTSQT5_VERSION_MINOR >= 16
+                // Not all services have descriptions and UIs should be designed with that in mind.
+                // Consequently, we can accept not having a fallback for this.
+                data.setValue(service.description());
 #endif
-                    break;
-                case DisplayNameRole:
-                    data.setValue(service.displayName());
-                    break;
-                case ServiceTypeRole:
-                    data.setValue(service.serviceType());
-                    break;
-                case ProviderNameRole:
-                    data.setValue(service.provider());
-                    break;
-                case IconNameRole:
-                    data.setValue(service.iconName());
-                    break;
-                case TagsRole:
-                    data.setValue(service.tags().values());
-                    break;
-                case EnabledRole:
-                    data.setValue(d->account->enabledServices().contains(service));
-                    break;
+                break;
+            case DisplayNameRole:
+                data.setValue(service.displayName());
+                break;
+            case ServiceTypeRole:
+                data.setValue(service.serviceType());
+                break;
+            case ProviderNameRole:
+                data.setValue(service.provider());
+                break;
+            case IconNameRole:
+                data.setValue(service.iconName());
+                break;
+            case TagsRole:
+                data.setValue(service.tags().values());
+                break;
+            case EnabledRole:
+                data.setValue(d->account->enabledServices().contains(service));
+                break;
             }
         }
     }
     return data;
 }
 
-void ServicesModel::setAccount(QObject* account)
+void ServicesModel::setAccount(QObject *account)
 {
     if (d->account != account) {
         beginResetModel();
@@ -118,12 +112,12 @@ void ServicesModel::setAccount(QObject* account)
         if (d->account) {
             disconnect(d->account, nullptr, this, nullptr);
         }
-        d->account = qobject_cast<Accounts::Account*>(account);
+        d->account = qobject_cast<Accounts::Account *>(account);
         if (d->account) {
             connect(d->account, &Accounts::Account::displayNameChanged, this, &ServicesModel::accountChanged);
-            connect(d->account, &Accounts::Account::enabledChanged, this, [this](const QString& serviceName, bool /*enabled*/){
+            connect(d->account, &Accounts::Account::enabledChanged, this, [this](const QString &serviceName, bool /*enabled*/) {
                 int i{0};
-                for (const Accounts::Service& service : qAsConst(d->services)) {
+                for (const Accounts::Service &service : qAsConst(d->services)) {
                     if (service.name() == serviceName) {
                         break;
                     }
@@ -131,7 +125,7 @@ void ServicesModel::setAccount(QObject* account)
                 }
                 Q_EMIT dataChanged(index(i), index(i));
             });
-            connect(d->account, &QObject::destroyed, this, [this](){ 
+            connect(d->account, &QObject::destroyed, this, [this]() {
                 beginResetModel();
                 d->account = nullptr;
                 Q_EMIT accountChanged();
@@ -145,7 +139,7 @@ void ServicesModel::setAccount(QObject* account)
     }
 }
 
-QObject * ServicesModel::account() const
+QObject *ServicesModel::account() const
 {
     return d->account;
 }

@@ -10,18 +10,20 @@
 
 #include "kaccounts_export.h"
 
-namespace Accounts {
-    class Manager;
+namespace Accounts
+{
+class Manager;
 }
 
-namespace KAccounts {
-    /**
-     * Returns a single instance of Accounts::Manager
-     *
-     * Always use this in your application if you need Accounts::Manager
-     * as multiple managers can lead to concurrency issues
-     * with the backend
-     */
-    KACCOUNTS_EXPORT Accounts::Manager* accountsManager();
+namespace KAccounts
+{
+/**
+ * Returns a single instance of Accounts::Manager
+ *
+ * Always use this in your application if you need Accounts::Manager
+ * as multiple managers can lead to concurrency issues
+ * with the backend
+ */
+KACCOUNTS_EXPORT Accounts::Manager *accountsManager();
 }
 #endif

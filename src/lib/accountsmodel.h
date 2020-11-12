@@ -34,27 +34,27 @@ class KACCOUNTS_EXPORT AccountsModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    public:
-        enum Roles {
-            IdRole = Qt::UserRole + 1,
-            ServicesRole,
-            EnabledRole,
-            CredentialsIdRole,
-            DisplayNameRole,
-            ProviderNameRole,
-            IconNameRole,
-            DataObjectRole
-        };
-        explicit AccountsModel(QObject* parent = nullptr);
-        virtual ~AccountsModel();
+public:
+    enum Roles {
+        IdRole = Qt::UserRole + 1,
+        ServicesRole,
+        EnabledRole,
+        CredentialsIdRole,
+        DisplayNameRole,
+        ProviderNameRole,
+        IconNameRole,
+        DataObjectRole,
+    };
+    explicit AccountsModel(QObject *parent = nullptr);
+    virtual ~AccountsModel();
 
-        QHash< int, QByteArray > roleNames() const override;
-        int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-        QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    private:
-        class Private;
-        Private *d;
+private:
+    class Private;
+    Private *d;
 };
 
-#endif //ACCOUNTS_MODEL_H
+#endif // ACCOUNTS_MODEL_H

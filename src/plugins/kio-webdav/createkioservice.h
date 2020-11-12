@@ -11,12 +11,14 @@
 
 #include <Accounts/Account>
 
-namespace Accounts {
-    class Manager;
+namespace Accounts
+{
+class Manager;
 }
 
-namespace KWallet {
-    class Wallet;
+namespace KWallet
+{
+class Wallet;
 }
 
 class CreateKioService : public KJob
@@ -53,4 +55,4 @@ private:
     QString m_serviceType;
 };
 
-#endif //CREATE_KIOSERVICE_H
+#endif // CREATE_KIOSERVICE_H

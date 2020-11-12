@@ -6,22 +6,26 @@
 
 #include "accountservicetogglejob.h"
 
-#include <QDebug>
 #include "core.h"
 #include <Accounts/Manager>
+#include <QDebug>
 
-class AccountServiceToggleJob::Private {
+class AccountServiceToggleJob::Private
+{
 public:
-    Private() {}
+    Private()
+    {
+    }
     QString accountId;
     QString serviceId;
     bool serviceEnabled{false};
 };
 
-AccountServiceToggleJob::AccountServiceToggleJob(QObject* parent)
+AccountServiceToggleJob::AccountServiceToggleJob(QObject *parent)
     : KJob(parent)
     , d(new Private)
-{ }
+{
+}
 
 AccountServiceToggleJob::~AccountServiceToggleJob()
 {
@@ -33,7 +37,7 @@ QString AccountServiceToggleJob::accountId() const
     return d->accountId;
 }
 
-void AccountServiceToggleJob::setAccountId(const QString& accountId)
+void AccountServiceToggleJob::setAccountId(const QString &accountId)
 {
     d->accountId = accountId;
     Q_EMIT accountIdChanged();
@@ -44,7 +48,7 @@ QString AccountServiceToggleJob::serviceId() const
     return d->serviceId;
 }
 
-void AccountServiceToggleJob::setServiceId(const QString& serviceId)
+void AccountServiceToggleJob::setServiceId(const QString &serviceId)
 {
     d->serviceId = serviceId;
     Q_EMIT serviceIdChanged();
@@ -63,15 +67,15 @@ void AccountServiceToggleJob::setServiceEnabled(bool serviceEnabled)
 
 void AccountServiceToggleJob::start()
 {
-    Accounts::Manager* accountsManager = KAccounts::accountsManager();
+    Accounts::Manager *accountsManager = KAccounts::accountsManager();
     if (accountsManager) {
         Accounts::Account *account = accountsManager->account(d->accountId.toInt());
         if (account) {
             Accounts::Service service = accountsManager->service(d->serviceId);
             if (!service.isValid()) {
-//                 qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu AccountServiceModel, which only gives you the name";
+                // qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu AccountServiceModel, which only gives you the name";
                 const auto services = account->services();
-                for (const Accounts::Service& aService : services) {
+                for (const Accounts::Service &aService : services) {
                     if (aService.displayName() == d->serviceId) {
                         service = aService;
                         break;
@@ -107,7 +111,9 @@ void AccountServiceToggleJob::start()
                     account->setEnabled(shouldStayEnabled);
                 }
 
-                connect(account, &Accounts::Account::synced, this, [this](){ emitResult(); });
+                connect(account, &Accounts::Account::synced, this, [this]() {
+                    emitResult();
+                });
                 account->sync();
             } else {
                 qWarning() << "No service found with the ID" << d->serviceId << "on account" << account->displayName();

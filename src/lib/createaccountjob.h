@@ -15,16 +15,16 @@
 
 namespace Accounts
 {
-    class Account;
-    class Manager;
-    class AccountService;
+class Account;
+class Manager;
+class AccountService;
 }
 namespace SignOn
 {
-    class Error;
-    class Identity;
-    class SessionData;
-    class IdentityInfo;
+class Error;
+class Identity;
+class SessionData;
+class IdentityInfo;
 }
 
 /**
@@ -35,12 +35,15 @@ class KACCOUNTS_EXPORT CreateAccountJob : public KJob
     Q_OBJECT
     Q_PROPERTY(QString providerName READ providerName WRITE setProviderName NOTIFY providerNameChanged)
 public:
-    explicit CreateAccountJob(QObject* parent = nullptr);
-    explicit CreateAccountJob(const QString &providerName, QObject* parent = nullptr);
+    explicit CreateAccountJob(QObject *parent = nullptr);
+    explicit CreateAccountJob(const QString &providerName, QObject *parent = nullptr);
 
-    QString providerName() const { return m_providerName; }
+    QString providerName() const
+    {
+        return m_providerName;
+    }
     void setProviderName(const QString &name);
-    void start()  override;
+    void start() override;
 
 private Q_SLOTS:
     void processSession();
@@ -65,4 +68,4 @@ private:
     SignOn::Identity *m_identity = nullptr;
     bool m_done = false;
 };
-#endif //CREATE_ACCOUNT_JOB_H
+#endif // CREATE_ACCOUNT_JOB_H

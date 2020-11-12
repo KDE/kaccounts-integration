@@ -25,20 +25,21 @@ class KACCOUNTS_EXPORT ChangeAccountDisplayNameJob : public KJob
     Q_PROPERTY(QString accountId READ accountId WRITE setAccountId NOTIFY accountIdChanged)
     Q_PROPERTY(QString displayName READ displayName WRITE setDisplayName NOTIFY displayNameChanged)
 public:
-    explicit ChangeAccountDisplayNameJob(QObject* parent = nullptr);
+    explicit ChangeAccountDisplayNameJob(QObject *parent = nullptr);
     virtual ~ChangeAccountDisplayNameJob();
 
     void start() override;
 
     QString accountId() const;
-    void setAccountId(const QString& accountId);
+    void setAccountId(const QString &accountId);
     Q_SIGNAL void accountIdChanged();
 
     QString displayName() const;
-    void setDisplayName(const QString& displayName);
+    void setDisplayName(const QString &displayName);
     Q_SIGNAL void displayNameChanged();
+
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
-#endif//CHANGEACCOUNTDISPLAYNAMEJOB_H
+#endif // CHANGEACCOUNTDISPLAYNAMEJOB_H

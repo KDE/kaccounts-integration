@@ -5,34 +5,32 @@
  */
 #include "createaccountjob.h"
 
-#include "kaccountsuiplugin.h"
 #include "core.h"
+#include "kaccountsuiplugin.h"
 #include "uipluginsmanager.h"
 
 #include <QDebug>
-#include <QPluginLoader>
 #include <QDir>
+#include <QPluginLoader>
 
-#include <Accounts/Manager>
 #include <Accounts/AccountService>
+#include <Accounts/Manager>
 
-#include <SignOn/Identity>
 #include <SignOn/AuthSession>
+#include <SignOn/Identity>
 
 #include <KLocalizedString>
 
-CreateAccountJob::CreateAccountJob(QObject* parent)
- : CreateAccountJob(QString(), parent)
+CreateAccountJob::CreateAccountJob(QObject *parent)
+    : CreateAccountJob(QString(), parent)
 {
-
 }
 
-CreateAccountJob::CreateAccountJob(const QString &providerName, QObject* parent)
- : KJob(parent)
- , m_providerName(providerName)
- , m_manager(new Accounts::Manager(this))
+CreateAccountJob::CreateAccountJob(const QString &providerName, QObject *parent)
+    : KJob(parent)
+    , m_providerName(providerName)
+    , m_manager(new Accounts::Manager(this))
 {
-
 }
 
 void CreateAccountJob::start()
@@ -151,7 +149,7 @@ void CreateAccountJob::pluginCancelled()
     emitResult();
 }
 
-void CreateAccountJob::sessionResponse(const SignOn::SessionData &/*data*/)
+void CreateAccountJob::sessionResponse(const SignOn::SessionData & /*data*/)
 {
     qDebug() << "Received session response";
 
@@ -174,7 +172,7 @@ void CreateAccountJob::info(const SignOn::IdentityInfo &info)
     m_account->selectService();
 
     if (m_account->displayName().isEmpty()) {
-        if(info.userName().isEmpty()) {
+        if (info.userName().isEmpty()) {
             // info.userName() can be empty, see bug#414219
             m_account->setDisplayName(QStringLiteral("%1%2").arg(info.caption()).arg(info.id()));
         } else {
@@ -200,7 +198,6 @@ void CreateAccountJob::info(const SignOn::IdentityInfo &info)
         i.next();
         m_account->setValue(base + i.key(), i.value());
     }
-
 
     const Accounts::ServiceList services = m_account->services();
     for (const Accounts::Service &service : services) {
