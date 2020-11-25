@@ -96,7 +96,7 @@ void UiPluginsManagerPrivate::loadPlugins()
                     pluginsForServices.insert(service, ui);
                 }
             } else {
-                qDebug() << "Plugin could not creaate instance" << pluginPath;
+                qDebug() << "Plugin could not create instance" << pluginPath;
             }
 
         }
