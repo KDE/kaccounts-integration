@@ -16,7 +16,7 @@ import org.kde.kaccounts 1.2 as KAccounts
 
 ScrollViewKCM {
     id: root
-    title: i18n("Add New Account")
+    title: i18nd("kaccounts-integration", "Add New Account")
 
     header: Kirigami.InlineMessage {
         id: errorMessage

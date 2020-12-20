@@ -44,18 +44,18 @@ ScrollViewKCM {
                     Layout.fillWidth: true
                     text: {
                         if (model.displayName.length > 0 && model.providerName.length > 0) {
-                            return i18n("%1 (%2)", model.displayName, model.providerName)
+                            return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerName)
                         } else if (model.displayName.length > 0) {
                             return model.displayName
                         } else {
-                            return i18n("%1 account", model.providerName)
+                            return i18nd("kaccounts-integration", "%1 account", model.providerName)
                         }
                     }
                 }
             }
             actions: [
                 Kirigami.Action {
-                    text: i18nc("Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
+                    text: i18ndc("kaccounts-integration", "Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
                     iconName: "edit-delete-remove"
                     onTriggered: {
                         accountRemover.accountId = model.id;
@@ -72,10 +72,10 @@ ScrollViewKCM {
             visible: view.count === 0
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
-            text: i18nc("A text shown when a user has not yet added any accounts", "No accounts added yet")
+            text: i18ndc("kaccounts-integration", "A text shown when a user has not yet added any accounts", "No accounts added yet")
 
             helpfulAction: Kirigami.Action {
-                text: i18n("Add New Account...")
+                text: i18nd("kaccounts-integration", "Add New Account...")
                 icon.name: "contact-new"
                 onTriggered: kcm.push("AvailableAccounts.qml")
             }
@@ -91,7 +91,7 @@ ScrollViewKCM {
         Controls.Button {
             visible: !noAccountsLayout.visible
             Layout.alignment: Qt.AlignRight
-            text: i18n("Add New Account...")
+            text: i18nd("kaccounts-integration", "Add New Account...")
             icon.name: "contact-new"
             onClicked: kcm.push("AvailableAccounts.qml")
         }

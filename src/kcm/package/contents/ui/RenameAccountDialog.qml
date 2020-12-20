@@ -14,7 +14,7 @@ import org.kde.kaccounts 1.2 as KAccounts
 
 MessageBoxSheet {
     id: component
-    title: i18nc("The title for a dialog which lets you set the human-readable name of an account", "Rename Account")
+    title: i18ndc("kaccounts-integration", "The title for a dialog which lets you set the human-readable name of an account", "Rename Account")
     property int accountId
     property string currentDisplayName
     signal accountRenamed()
@@ -28,13 +28,13 @@ MessageBoxSheet {
         Layout.margins: Kirigami.Units.largeSpacing
         Controls.TextField {
             id: newAccountDisplayName
-            Kirigami.FormData.label: i18nc("Label for the text field used to enter a new human-readable name for an account", "Enter new name:")
+            Kirigami.FormData.label: i18ndc("kaccounts-integration", "Label for the text field used to enter a new human-readable name for an account", "Enter new name:")
         }
     }
     actions: [
         Kirigami.Action {
             enabled: newAccountDisplayName.text.length > 0 && newAccountDisplayName.text !== component.currentDisplayName
-            text: i18nc("Text of a button which will cause the human-readable name of an account to be set to a text specified by the user", "Set Account Name")
+            text: i18ndc("kaccounts-integration", "Text of a button which will cause the human-readable name of an account to be set to a text specified by the user", "Set Account Name")
             onTriggered: {
                 var job = accountDisplayNameJob.createObject(component, { "accountId": component.accountId, "displayName": newAccountDisplayName.text })
                 job.start();
