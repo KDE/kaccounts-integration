@@ -17,19 +17,19 @@ MessageBoxSheet {
     property string displayName
     property string providerName
     signal accountRemoved()
-    title: i18nc("The title for a dialog which lets you remove an account", "Remove Account?")
+    title: i18ndc("kaccounts-integration", "The title for a dialog which lets you remove an account", "Remove Account?")
     text: {
         if (displayName.length > 0 && providerName.length > 0) {
-            return i18nc("The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", providerName, displayName)
+            return i18ndc("kaccounts-integration", "The text for a dialog which lets you remove an account when both provider name and account name are available", "Are you sure you wish to remove the \"%1\" account \"%2\"?", providerName, displayName)
         } else if (displayName.length > 0) {
-            return i18nc("The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", displayName)
+            return i18ndc("kaccounts-integration", "The text for a dialog which lets you remove an account when only the account name is available", "Are you sure you wish to remove the account \"%1\"?", displayName)
         } else {
-            return i18nc("The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", providerName)
+            return i18ndc("kaccounts-integration", "The text for a dialog which lets you remove an account when only the provider name is available", "Are you sure you wish to remove this \"%1\" account?", providerName)
         }
     }
     actions: [
         Kirigami.Action {
-            text: i18nc("The label for a button which will cause the removal of a specified account", "Remove Account")
+            text: i18ndc("kaccounts-integration", "The label for a button which will cause the removal of a specified account", "Remove Account")
             onTriggered: {
                 var job = accountRemovalJob.createObject(component, { "accountId": component.accountId });
                 job.start();

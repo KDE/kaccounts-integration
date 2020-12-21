@@ -17,7 +17,7 @@ import org.kde.kaccounts 1.2 as KAccounts
 ScrollViewKCM {
     id: component;
 
-    title: i18n("Account Details")
+    title: i18nd("kaccounts-integration", "Account Details")
 
     property alias model: servicesList.model
 
@@ -56,11 +56,11 @@ ScrollViewKCM {
                 Layout.fillWidth: true
                 text: {
                     if (model.accountDisplayName.length > 0 && model.accountProviderName.length > 0) {
-                        return i18n("%1 (%2)", model.accountDisplayName, model.accountProviderName)
+                        return i18nd("kaccounts-integration", "%1 (%2)", model.accountDisplayName, model.accountProviderName)
                     } else if (model.accountDisplayName.length > 0) {
                         return model.accountDisplayName
                     } else {
-                        return i18n("%1 account", model.accountProviderName)
+                        return i18nd("kaccounts-integration", "%1 account", model.accountProviderName)
                     }
                 }
             }
@@ -70,7 +70,7 @@ ScrollViewKCM {
                 Layout.preferredWidth: Kirigami.Units.iconSizes.large
                 onClicked: accountRenamer.open();
                 Controls.ToolTip {
-                    text: i18nc("Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
+                    text: i18ndc("kaccounts-integration", "Button which spawns a dialog allowing the user to change the displayed account's human-readable name", "Change Account Display Name")
                 }
             }
         }
@@ -78,14 +78,14 @@ ScrollViewKCM {
             leftPadding: Kirigami.Units.smallSpacing
             visible: servicesList.count > 0
             level: 3
-            text: i18nc("Heading for a list of services available with this account", "Use This Account For")
+            text: i18ndc("kaccounts-integration", "Heading for a list of services available with this account", "Use This Account For")
         }
     }
 
     footer: RowLayout {
         Controls.Button {
             Layout.alignment: Qt.AlignRight
-            text: i18n("Remove This Account")
+            text: i18nd("kaccounts-integration", "Remove This Account")
             icon.name: "edit-delete-remove"
             onClicked: accountRemover.open();
         }
@@ -107,7 +107,7 @@ ScrollViewKCM {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.Wrap
-                text: i18nc("A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
+                text: i18ndc("kaccounts-integration", "A text shown when an account has no configurable services", "There are no configurable services available for this account. You can still change its display name by clicking the edit icon above.")
             }
         }
 
