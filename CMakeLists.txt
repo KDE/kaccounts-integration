@@ -47,6 +47,7 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(ECMPackageConfigHelpers)
 include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 include_directories(${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
 
@@ -54,5 +55,7 @@ add_subdirectory(src)
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
