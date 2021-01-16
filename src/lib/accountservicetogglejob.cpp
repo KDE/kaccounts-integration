@@ -73,7 +73,8 @@ void AccountServiceToggleJob::start()
         if (account) {
             Accounts::Service service = accountsManager->service(d->serviceId);
             if (!service.isValid()) {
-                // qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu AccountServiceModel, which only gives you the name";
+                // qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu
+                // AccountServiceModel, which only gives you the name";
                 const auto services = account->services();
                 for (const Accounts::Service &aService : services) {
                     if (aService.displayName() == d->serviceId) {

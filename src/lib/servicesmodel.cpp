@@ -49,8 +49,14 @@ ServicesModel::~ServicesModel()
 
 QHash<int, QByteArray> ServicesModel::roleNames() const
 {
-    static QHash<int, QByteArray> roles{
-        {NameRole, "name"}, {DescriptionRole, "description"}, {DisplayNameRole, "displayName"}, {ServiceTypeRole, "servieType"}, {ProviderNameRole, "providerName"}, {IconNameRole, "iconName"}, {TagsRole, "tags"}, {EnabledRole, "enabled"}};
+    static QHash<int, QByteArray> roles{{NameRole, "name"},
+                                        {DescriptionRole, "description"},
+                                        {DisplayNameRole, "displayName"},
+                                        {ServiceTypeRole, "servieType"},
+                                        {ProviderNameRole, "providerName"},
+                                        {IconNameRole, "iconName"},
+                                        {TagsRole, "tags"},
+                                        {EnabledRole, "enabled"}};
     return roles;
 }
 
