@@ -89,5 +89,3 @@ install (FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KAccounts COMPONENT Devel
 )
-
-add_subdirectory(cmake)
