@@ -5,7 +5,7 @@
  */
 
 #include "kded_accounts.h"
-#include "src/lib/kaccountsdplugin.h"
+#include "kaccountsdplugin.h"
 #include <core.h>
 
 #include <KPluginFactory>
