@@ -48,8 +48,8 @@ include(GenerateExportHeader)
 include(ECMPackageConfigHelpers)
 include(KDEClangFormat)
 
-if (KF5_VERSION VERSION_GREATER_EQUAL 5.79)
-include(KDEGitCommitHooks)
+if(KF5_VERSION VERSION_GREATER_EQUAL 5.79)
+    include(KDEGitCommitHooks)
 endif()
 
 include_directories(${ACCOUNTSQT_INCLUDE_DIRS} ${SIGNONQT_INCLUDE_DIRS})
@@ -59,7 +59,7 @@ add_subdirectory(src)
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
-if (KF5_VERSION VERSION_GREATER_EQUAL 5.79)
+if(KF5_VERSION VERSION_GREATER_EQUAL 5.79)
     kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 endif()
 
