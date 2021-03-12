@@ -1,5 +1,7 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+
 find_dependency(Qt5Widgets @QT_REQUIRED_VERSION@)
 find_dependency(KF5CoreAddons @KF5_MIN_VERSION@)
 find_dependency(AccountsQt5 @ACCOUNTSQT_DEP_VERSION@)
