@@ -39,6 +39,7 @@ set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which per
 
 add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\" -DQT_NO_KEYWORDS -DQT_NO_FOREACH)
 
+include(CMakePackageConfigHelpers)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
@@ -47,7 +48,6 @@ include(FeatureSummary)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(GenerateExportHeader)
-include(ECMPackageConfigHelpers)
 include(KDEClangFormat)
 
 if(KF5_VERSION VERSION_GREATER_EQUAL 5.79)

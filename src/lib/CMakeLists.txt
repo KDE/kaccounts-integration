@@ -65,7 +65,7 @@ set_target_properties(kaccounts PROPERTIES VERSION   ${KACCOUNTS_VERSION}
                                            EXPORT_NAME KAccounts
 )
 
-ecm_configure_package_config_file(
+configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KAccountsConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccountsConfig.cmake"
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
