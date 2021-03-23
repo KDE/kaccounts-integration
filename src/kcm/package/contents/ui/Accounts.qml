@@ -73,12 +73,7 @@ ScrollViewKCM {
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
             text: i18ndc("kaccounts-integration", "A text shown when a user has not yet added any accounts", "No accounts added yet")
-
-            helpfulAction: Kirigami.Action {
-                text: i18nd("kaccounts-integration", "Add New Account...")
-                icon.name: "contact-new"
-                onTriggered: kcm.push("AvailableAccounts.qml")
-            }
+            explanation: xi18nc("@info", "Click the <interface>Add New Account...</interface> button below to add one")
         }
     }
 
