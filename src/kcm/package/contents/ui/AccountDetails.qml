@@ -9,7 +9,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
 
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 import org.kde.kcm 1.2
 
 import org.kde.kaccounts 1.2 as KAccounts
@@ -111,53 +111,18 @@ ScrollViewKCM {
             }
         }
 
-        // Cheap copy of Kirigami.BasicListItem with CheckBox instead of Icon
-        delegate: Kirigami.AbstractListItem {
-            id: listItem
-            highlighted: false
-            onClicked: toggleIt()
+        delegate: Kirigami.CheckableListItem {
+            icon: undefined
+            text: model.displayName
+            subtitle: model.description
 
-            function toggleIt() {
-                var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
+            checked: model.enabled
+
+            action: Controls.Action {
+                onTriggered: {
+                    checked = !checked
+                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
                 job.start()
-            }
-
-            RowLayout {
-                Controls.CheckBox {
-                    id: serviceCheck
-                    Layout.alignment: Qt.AlignVCenter
-                    checked: model.enabled
-
-                    Binding {
-                        target: serviceCheck
-                        property: "checked"
-                        value: model.enabled
-                    }
-
-                    onClicked: toggleIt()
-                }
-
-                ColumnLayout {
-                    spacing: 0
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignVCenter
-
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        text: model.displayName
-                        color: listItem.pressed ? listItem.activeTextColor : listItem.textColor
-                        elide: Text.ElideRight
-                    }
-
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        text: model.description
-                        color: listItem.pressed ? listItem.activeTextColor : listItem.textColor
-                        elide: Text.ElideRight
-                        font: Kirigami.Theme.smallFont
-                        opacity: 0.7
-                        visible: text.length > 0
-                    }
                 }
             }
         }
