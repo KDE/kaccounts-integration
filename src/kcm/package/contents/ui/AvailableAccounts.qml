@@ -27,7 +27,9 @@ ScrollViewKCM {
 
     view: ListView {
 
+        id: accountListView
         clip: true
+        currentIndex: -1
 
         model: KAccounts.ProvidersModel {}
         delegate: Kirigami.AbstractListItem {
@@ -96,6 +98,7 @@ ScrollViewKCM {
             onClicked: {
                 var job = jobComponent.createObject(root, { "providerName": model.name })
                 job.start()
+                accountListView.currentIndex = -1
             }
         }
     }
