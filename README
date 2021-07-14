@@ -37,7 +37,7 @@ executed within the root of libaccounts-qt and not for example in a build direct
 
 ##SSO
 
-Single Sign On is the part of the framework responsable for storing and obtaining
+Single Sign On is the part of the framework responsible for storing and obtaining
 credentials. It stores the credentials in a secure way (in case of KDE within
 KWallet) and has a plugin system to do authentication in most common cases such
 oauth/2 or simple user and password.
