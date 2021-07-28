@@ -7,7 +7,6 @@ set(kio-webdav_SRCS
 
 kcoreaddons_add_plugin(kaccounts_kio_webdav_plugin
     SOURCES ${kio-webdav_SRCS}
-    JSON "kio-webdav.json"
     INSTALL_NAMESPACE "kaccounts/daemonplugins"
     )
 
