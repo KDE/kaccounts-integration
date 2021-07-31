@@ -120,9 +120,9 @@ ScrollViewKCM {
 
             action: Controls.Action {
                 onTriggered: {
-                    checked = !checked
-                    var job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled })
-                job.start()
+                    checked = !checked;
+                    const job = serviceToggleJob.createObject(component, { "accountId": servicesList.model.accountId, "serviceId": model.name, "serviceEnabled": !model.enabled });
+                    job.start();
                 }
             }
         }
