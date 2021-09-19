@@ -97,6 +97,7 @@ Comment[zh_CN]=配置您的网络账户，例如 Google，Live，OwnCloud
 Comment[zh_TW]=設定您的網際網路帳號，如 Google, Live, Owncloud 等
 
 X-KDE-Keywords=network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
+X-KDE-Keywords[az]=network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar,int. şəbəkəsi,canlı,eyniləşdirmə,hesablar,onlayn,google təqvim
 X-KDE-Keywords[ca]=xarxa,google,live,owncloud,sincronitza,en línia,comptes,sincronització,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
 X-KDE-Keywords[el]=δίκτυο,google,live,owncloud,sync,επιγραμμικοί,λογαριασμοί,συγχρονισμός,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
 X-KDE-Keywords[en_GB]=network,google,live,owncloud,sync,online,accounts,synchronisation,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
