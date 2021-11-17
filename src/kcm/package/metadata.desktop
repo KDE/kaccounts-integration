@@ -81,7 +81,7 @@ Comment[zh_TW]=新增線上帳號
 
 Encoding=UTF-8
 Type=Service
-Icon=applications-internet
+Icon=preferences-online-accounts
 X-KDE-ServiceTypes=KCModule
 X-KDE-PluginInfo-Author=Martin Klapetek
 X-KDE-PluginInfo-Email=mklapetek@kde.org

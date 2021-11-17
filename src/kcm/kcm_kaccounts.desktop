@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=systemsettings5 kcm_kaccounts
-Icon=applications-internet
+Icon=preferences-online-accounts
 Type=Service
 
 X-KDE-ServiceTypes=KCModule
