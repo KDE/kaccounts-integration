@@ -93,9 +93,46 @@ void CreateAccountJob::loadPluginAndShowDialog(const QString &pluginName)
     connect(ui, &KAccountsUiPlugin::success, this, &CreateAccountJob::pluginFinished, Qt::UniqueConnection);
     connect(ui, &KAccountsUiPlugin::error, this, &CreateAccountJob::pluginError, Qt::UniqueConnection);
     connect(ui, &KAccountsUiPlugin::canceled, this, &CreateAccountJob::pluginCancelled, Qt::UniqueConnection);
+    connect(ui, &KAccountsUiPlugin::startAuthSession, this, &CreateAccountJob::startAuthSession, Qt::UniqueConnection);
 
     ui->setProviderName(m_providerName);
     ui->init(KAccountsUiPlugin::NewAccountDialog);
+}
+
+void CreateAccountJob::startAuthSession(const QVariantMap &data)
+{
+    SignOn::IdentityInfo info;
+    info.setCaption(m_providerName);
+    info.setAccessControlList({QStringLiteral("*")});
+    info.setType(SignOn::IdentityInfo::Application);
+    info.setStoreSecret(true);
+
+    m_identity = SignOn::Identity::newIdentity(info, this);
+    m_identity->storeCredentials();
+
+    connect(m_identity, &SignOn::Identity::info, this, &CreateAccountJob::info);
+    connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
+        qDebug() << "Error storing identity:" << err.message();
+    });
+
+    auto i = data.constBegin();
+    while (i != data.constEnd()) {
+        m_account->setValue(i.key(), i.value());
+        ++i;
+    }
+
+    m_account->syncAndBlock();
+
+    QVariantMap authData = m_accInfo->authData().parameters();
+    authData.insert(QStringLiteral("Embedded"), false);
+
+    SignOn::SessionData sessionData(authData);
+    SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
+    qDebug() << "Starting auth session with" << m_accInfo->authData().method();
+    connect(session, &SignOn::AuthSession::error, this, &CreateAccountJob::sessionError);
+    connect(session, &SignOn::AuthSession::response, this, &CreateAccountJob::sessionResponse);
+
+    session->process(sessionData, m_accInfo->authData().mechanism());
 }
 
 void CreateAccountJob::pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &data)

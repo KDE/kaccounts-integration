@@ -53,6 +53,7 @@ private Q_SLOTS:
     void pluginFinished(const QString &screenName, const QString &secret, const QVariantMap &map);
     void pluginError(const QString &error);
     void pluginCancelled();
+    void startAuthSession(const QVariantMap &data);
 
 Q_SIGNALS:
     void providerNameChanged();

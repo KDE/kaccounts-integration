@@ -77,6 +77,12 @@ Q_SIGNALS:
     void success(const QString &username, const QString &password, const QVariantMap &additionalData);
 
     /**
+     * Emit this to start an auth session. Any values in data are passed to the started session.
+     * This is useful e.g. when doing oauth login but you need to show a UI to get some data before.
+     */
+    void startAuthSession(const QVariantMap &data);
+
+    /**
      * Emitted when there has been an error during the authentication
      *
      * @param errorString The error that has occurred
