@@ -99,14 +99,17 @@ AccountsModel::~AccountsModel()
 
 QHash<int, QByteArray> AccountsModel::roleNames() const
 {
-    static QHash<int, QByteArray> roles{{IdRole, "id"},
-                                        {ServicesRole, "services"},
-                                        {EnabledRole, "enabled"},
-                                        {CredentialsIdRole, "credentialsId"},
-                                        {DisplayNameRole, "displayName"},
-                                        {ProviderNameRole, "providerName"},
-                                        {IconNameRole, "iconName"},
-                                        {DataObjectRole, "dataObject"}};
+    static QHash<int, QByteArray> roles{
+        {IdRole, "id"},
+        {ServicesRole, "services"},
+        {EnabledRole, "enabled"},
+        {CredentialsIdRole, "credentialsId"},
+        {DisplayNameRole, "displayName"},
+        {ProviderNameRole, "providerName"},
+        {IconNameRole, "iconName"},
+        {DataObjectRole, "dataObject"},
+        {ProviderDisplayNameRole, "providerDisplayName"},
+    };
     return roles;
 }
 
@@ -155,6 +158,9 @@ QVariant AccountsModel::data(const QModelIndex &index, int role) const
                 break;
             case ProviderNameRole:
                 data.setValue(account->providerName());
+                break;
+            case ProviderDisplayNameRole:
+                data.setValue(account->provider().displayName());
                 break;
             case IconNameRole: {
                 QString iconName = QStringLiteral("user-identity");

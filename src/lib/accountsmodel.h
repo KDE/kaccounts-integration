@@ -44,6 +44,7 @@ public:
         ProviderNameRole,
         IconNameRole,
         DataObjectRole,
+        ProviderDisplayNameRole,
     };
     explicit AccountsModel(QObject *parent = nullptr);
     ~AccountsModel() override;
