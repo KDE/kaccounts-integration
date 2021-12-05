@@ -44,7 +44,7 @@ ScrollViewKCM {
                     Layout.fillWidth: true
                     text: {
                         if (model.displayName.length > 0 && model.providerName.length > 0) {
-                            return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerName)
+                            return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerDisplayName)
                         } else if (model.displayName.length > 0) {
                             return model.displayName
                         } else {
