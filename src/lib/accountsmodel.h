@@ -36,16 +36,17 @@ class KACCOUNTS_EXPORT AccountsModel : public QAbstractListModel
 
 public:
     enum Roles {
-        DisplayNameRole = Qt::DisplayRole,
         IdRole = Qt::UserRole + 1,
         ServicesRole,
         EnabledRole,
         CredentialsIdRole,
+        DisplayNameRole,
         ProviderNameRole,
         IconNameRole,
         DataObjectRole,
         ProviderDisplayNameRole,
     };
+    Q_ENUM(Roles);
     explicit AccountsModel(QObject *parent = nullptr);
     ~AccountsModel() override;
 
