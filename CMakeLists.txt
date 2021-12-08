@@ -8,14 +8,23 @@ set(KACCOUNTS_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSIO
 project(KAccounts LANGUAGES CXX VERSION ${KACCOUNTS_VERSION})
 
 set(QT_REQUIRED_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.78.0")
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(KF5_MIN_VERSION "5.85.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
-
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
+include(ECMInstallIcons)
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
+include(CMakePackageConfigHelpers)
+include(GenerateExportHeader)
+include(FeatureSummary)
 
 set(KACCOUNTS_SOVERSION "2")
 set(ACCOUNTSQT_DEP_VERSION "1.13")
@@ -37,30 +46,13 @@ set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which per
    TYPE REQUIRED
    PURPOSE "Required for building this module")
 
-add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\" -DQT_NO_KEYWORDS -DQT_NO_FOREACH)
-
-include(CMakePackageConfigHelpers)
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
-include(ECMInstallIcons)
-include(FeatureSummary)
-include(ECMSetupVersion)
-include(ECMGenerateHeaders)
-include(GenerateExportHeader)
-include(KDEClangFormat)
-
-if(KF5_VERSION VERSION_GREATER_EQUAL 5.79)
-    include(KDEGitCommitHooks)
-endif()
+add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
 
 add_subdirectory(src)
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
-if(KF5_VERSION VERSION_GREATER_EQUAL 5.79)
-    kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
-endif()
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
