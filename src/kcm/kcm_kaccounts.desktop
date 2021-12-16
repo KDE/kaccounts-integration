@@ -97,6 +97,7 @@ Comment[zh_CN]=配置您的网络账户，例如 Google，Live，OwnCloud
 Comment[zh_TW]=設定您的網際網路帳號，如 Google, Live, Owncloud 等
 
 X-KDE-Keywords=network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
+X-KDE-Keywords[ar]=,شبكة,غوغل,جوجل,لايف,لايڤ,سحابتك,سحابة,جيميل,تقويم جوجل,تزامن
 X-KDE-Keywords[az]=network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar,int. şəbəkəsi,canlı,eyniləşdirmə,hesablar,onlayn,google təqvim
 X-KDE-Keywords[ca]=xarxa,google,live,owncloud,sincronitza,en línia,comptes,sincronització,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
 X-KDE-Keywords[ca@valencia]=xarxa,google,live,owncloud,sincronitza,en línia,comptes,sincronització,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
@@ -112,6 +113,7 @@ X-KDE-Keywords[it]=rete,google,live,owncloud,sync,online,account,sincronizzazion
 X-KDE-Keywords[ko]=network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar,구글,동기화,온라인,계정,유튜브,드라이브,행아웃,구글 캘린더,google 캘린더
 X-KDE-Keywords[lt]=tinklas,google,live,owncloud,sinchorizuoti,sinchronizacija,sinchronizavimas,internetinės,internetines,paskyros,opendesktop,nextcloud,youtube,drive,diskas,hangouts,gmail,google calendar,google kalendorius
 X-KDE-Keywords[nl]=netwerk,google,live,owncloud,sync,online,accounts,synchronisatie,opendesktop,nextcloud,youtube,station,hangouts,gmail,google-agenda
+X-KDE-Keywords[nn]=nettverk,google,live,owncloud,synk,nett,kontoar,synkronisering,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar, google kalender
 X-KDE-Keywords[pl]=sieć,google,na żywo,owncloud,synchronizacja,w sieci,konta,synchronizacja,opendesktop,nextcloud,youtube,dysk,hangouts,gmail,kalendarz google
 X-KDE-Keywords[pt]=rede,google,live,owncloud,sincronizar,online,contas,sincronização,opendesktop,nextcloud,youtube,drive,hangouts,gmail,calendário da google
 X-KDE-Keywords[pt_BR]=rede,google,live,owncloud,sincronizar,online,contas,sincronização,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar
