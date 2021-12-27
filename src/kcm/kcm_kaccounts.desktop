@@ -7,6 +7,7 @@ X-KDE-ServiceTypes=KCModule
 
 X-KDE-Library=kcm_kaccounts
 X-KDE-ParentApp=kcontrol
+X-KDE-FormFactors=desktop,handset,tablet,mediacenter
 
 X-KDE-System-Settings-Parent-Category=personalization
 
