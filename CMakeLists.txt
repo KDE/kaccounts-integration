@@ -8,7 +8,7 @@ set(KACCOUNTS_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSIO
 project(KAccounts LANGUAGES CXX VERSION ${KACCOUNTS_VERSION})
 
 set(QT_REQUIRED_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.85.0")
+set(KF5_MIN_VERSION "5.91.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -25,6 +25,7 @@ include(KDEGitCommitHooks)
 include(CMakePackageConfigHelpers)
 include(GenerateExportHeader)
 include(FeatureSummary)
+include(ECMQmlModule)
 
 set(KACCOUNTS_SOVERSION "2")
 set(ACCOUNTSQT_DEP_VERSION "1.13")
