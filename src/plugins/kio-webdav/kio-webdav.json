@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Mount WebDAV shares with KIO",
+        "Description[ar]": "تضم أجزاء ويب داف بواسطة KIO",
         "Description[ast]": "Monta comparticiones de WebDAV con KIO",
         "Description[az]": "KİO ilə WebDAV paylaşımlarını qoşun",
         "Description[ca@valencia]": "Munta comparticions WebDAV amb el KIO",
@@ -39,6 +40,7 @@
         "Id": "kaccounts_kio_webdav",
         "License": "GPL",
         "Name": "KIO WebDAV",
+        "Name[ar]": "جزء ويب داف",
         "Name[ast]": "WebDAV pa KIO",
         "Name[az]": "KIO WebDAV",
         "Name[ca@valencia]": "KIO WebDAV",
