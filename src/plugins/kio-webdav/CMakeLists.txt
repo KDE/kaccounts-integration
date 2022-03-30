@@ -17,8 +17,8 @@ kcoreaddons_add_plugin(kaccounts_kio_webdav_plugin
     )
 
 target_link_libraries(kaccounts_kio_webdav_plugin
-    Qt5::Core
-    Qt5::Widgets
+    Qt::Core
+    Qt::Widgets
     KF5::CoreAddons
     KF5::ConfigCore
     KF5::Wallet

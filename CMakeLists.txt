@@ -32,17 +32,17 @@ set(ACCOUNTSQT_DEP_VERSION "1.13")
 set(SIGNONQT_DEP_VERSION "8.55")
 set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative Wallet KIO)
 
-find_package(AccountsQt5 ${ACCOUNTSQT_DEP_VERSION} CONFIG)
-set_package_properties(AccountsQt5 PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
+find_package(AccountsQt${QT_MAJOR_VERSION} ${ACCOUNTSQT_DEP_VERSION} CONFIG)
+set_package_properties(AccountsQt${QT_MAJOR_VERSION} PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
    URL "https://gitlab.com/accounts-sso/libaccounts-qt"
    TYPE REQUIRED
    PURPOSE "Required for building this module")
 
-find_package(SignOnQt5 ${SIGNONQT_DEP_VERSION} CONFIG)
-set_package_properties(SignOnQt5 PROPERTIES DESCRIPTION "D-Bus service which performs user authentication on behalf of its clients"
+find_package(SignOnQt${QT_MAJOR_VERSION} ${SIGNONQT_DEP_VERSION} CONFIG)
+set_package_properties(SignOnQt${QT_MAJOR_VERSION} PROPERTIES DESCRIPTION "D-Bus service which performs user authentication on behalf of its clients"
    URL "https://gitlab.com/accounts-sso/signond"
    TYPE REQUIRED
    PURPOSE "Required for building this module")
