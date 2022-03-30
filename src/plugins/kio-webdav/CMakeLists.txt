@@ -3,7 +3,13 @@ set(kio-webdav_SRCS
     createnetattachjob.cpp
     removenetattachjob.cpp
     createkioservice.cpp
-    removekioservice.cpp)
+    removekioservice.cpp
+    kioservices.h
+    createnetattachjob.h
+    removenetattachjob.h
+    createkioservice.h
+    removekioservice.h
+)
 
 kcoreaddons_add_plugin(kaccounts_kio_webdav_plugin
     SOURCES ${kio-webdav_SRCS}

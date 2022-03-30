@@ -1,4 +1,4 @@
-add_library(kcm_kaccounts MODULE accounts.cpp)
+add_library(kcm_kaccounts MODULE accounts.cpp accounts.h)
 
 target_link_libraries(kcm_kaccounts
     Qt5::Core

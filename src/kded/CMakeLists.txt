@@ -1,6 +1,6 @@
 kcoreaddons_add_plugin(
     kded_accounts
-    SOURCES kded_accounts.cpp
+    SOURCES kded_accounts.cpp kded_accounts.h
     INSTALL_NAMESPACE "kf5/kded"
 )
 

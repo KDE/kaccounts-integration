@@ -20,6 +20,20 @@ set (kaccountslib_SRCS
      createaccountjob.cpp
      getcredentialsjob.cpp
      removeaccountjob.cpp
+
+     accountsmodel.h
+     core.h
+     kaccountsdplugin.h
+     kaccountsuiplugin.h
+     providersmodel.h
+     servicesmodel.h
+     uipluginsmanager.h
+
+     accountservicetogglejob.h
+     changeaccountdisplaynamejob.h
+     createaccountjob.h
+     getcredentialsjob.h
+     removeaccountjob.h
 )
 
 ecm_generate_headers(kaccountslib_HEADERS
