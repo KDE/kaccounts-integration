@@ -19,8 +19,8 @@ class KDEDAccounts : public KDEDModule
     Q_CLASSINFO("D-Bus Interface", "org.kde.Accounts")
 
 public:
-    KDEDAccounts(QObject *parent, const QList<QVariant> &);
-    virtual ~KDEDAccounts();
+    explicit KDEDAccounts(QObject *parent, const QList<QVariant> &);
+    ~KDEDAccounts() override;
 
 public Q_SLOTS:
     void startDaemon();

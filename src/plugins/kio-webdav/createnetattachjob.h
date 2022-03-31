@@ -21,7 +21,7 @@ class CreateNetAttachJob : public KJob
 
 public:
     explicit CreateNetAttachJob(QObject *parent = nullptr);
-    virtual ~CreateNetAttachJob();
+    ~CreateNetAttachJob() override;
 
     void start() override;
 

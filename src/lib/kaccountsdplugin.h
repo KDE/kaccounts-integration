@@ -41,7 +41,7 @@ class KACCOUNTS_EXPORT KAccountsDPlugin : public QObject
 
 public:
     KAccountsDPlugin(QObject *parent, const QVariantList &args);
-    virtual ~KAccountsDPlugin();
+    ~KAccountsDPlugin() override;
 
 public Q_SLOTS:
     /**

@@ -25,7 +25,7 @@ public:
     };
 
     explicit KAccountsUiPlugin(QObject *parent = nullptr);
-    virtual ~KAccountsUiPlugin();
+    ~KAccountsUiPlugin() override;
 
     virtual void init(UiType type) = 0;
 

@@ -46,7 +46,7 @@ public:
         DataObjectRole,
     };
     explicit AccountsModel(QObject *parent = nullptr);
-    virtual ~AccountsModel();
+    ~AccountsModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

@@ -20,7 +20,7 @@ class RemoveNetAttachJob : public KJob
 
 public:
     explicit RemoveNetAttachJob(QObject *parent);
-    virtual ~RemoveNetAttachJob();
+    ~RemoveNetAttachJob() override;
 
     void start() override;
 

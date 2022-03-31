@@ -24,7 +24,7 @@ class KACCOUNTS_EXPORT AccountServiceToggleJob : public KJob
     Q_PROPERTY(bool serviceEnabled READ serviceEnabled WRITE setServiceEnabled NOTIFY serviceEnabledChanged)
 public:
     explicit AccountServiceToggleJob(QObject *parent = nullptr);
-    virtual ~AccountServiceToggleJob();
+    ~AccountServiceToggleJob() override;
 
     void start() override;
 

@@ -26,7 +26,7 @@ class KACCOUNTS_EXPORT ChangeAccountDisplayNameJob : public KJob
     Q_PROPERTY(QString displayName READ displayName WRITE setDisplayName NOTIFY displayNameChanged)
 public:
     explicit ChangeAccountDisplayNameJob(QObject *parent = nullptr);
-    virtual ~ChangeAccountDisplayNameJob();
+    ~ChangeAccountDisplayNameJob() override;
 
     void start() override;
 

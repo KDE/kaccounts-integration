@@ -38,7 +38,7 @@ public:
         AccountsCountRole, ///< The number of accounts which already exist for this provider
     };
     explicit ProvidersModel(QObject *parent = nullptr);
-    virtual ~ProvidersModel();
+    ~ProvidersModel() override;
 
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

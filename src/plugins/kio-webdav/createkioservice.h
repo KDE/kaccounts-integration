@@ -27,7 +27,7 @@ class CreateKioService : public KJob
 
 public:
     explicit CreateKioService(QObject *parent = nullptr);
-    virtual ~CreateKioService();
+    ~CreateKioService() override;
 
     void start() override;
 
