@@ -10,5 +10,5 @@ kcoreaddons_desktop_to_json(kcm_kaccounts "kcm_kaccounts.desktop")
 
 install(TARGETS kcm_kaccounts DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
 
-install(FILES kcm_kaccounts.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES kcm_kaccounts.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR})
 kpackage_install_package(package kcm_kaccounts kcms)
