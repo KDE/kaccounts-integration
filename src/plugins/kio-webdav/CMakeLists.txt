@@ -1,14 +1,6 @@
 set(kio-webdav_SRCS
     kioservices.cpp
-    createnetattachjob.cpp
-    removenetattachjob.cpp
-    createkioservice.cpp
-    removekioservice.cpp
     kioservices.h
-    createnetattachjob.h
-    removenetattachjob.h
-    createkioservice.h
-    removekioservice.h
 )
 
 kcoreaddons_add_plugin(kaccounts_kio_webdav_plugin
@@ -28,4 +20,5 @@ target_link_libraries(kaccounts_kio_webdav_plugin
     kaccounts
     ${ACCOUNTSQT_LIBRARIES}
     ${SIGNONQT_LIBRARIES}
+    QCoro::Core
 )

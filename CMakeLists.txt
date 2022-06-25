@@ -9,6 +9,8 @@ project(KAccounts LANGUAGES CXX VERSION ${KACCOUNTS_VERSION})
 
 set(QT_REQUIRED_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.97.0")
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -46,6 +48,10 @@ set_package_properties(SignOnQt${QT_MAJOR_VERSION} PROPERTIES DESCRIPTION "D-Bus
    URL "https://gitlab.com/accounts-sso/signond"
    TYPE REQUIRED
    PURPOSE "Required for building this module")
+
+find_package(QCoro${QT_MAJOR_VERSION} REQUIRED COMPONENTS Core)
+
+qcoro_enable_coroutines()
 
 add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
 

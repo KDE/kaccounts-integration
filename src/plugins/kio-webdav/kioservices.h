@@ -16,6 +16,8 @@
 #include <Accounts/Account>
 #include <Accounts/Service>
 
+#include <QCoroCore>
+
 class KJob;
 class AkonadiAccounts;
 
@@ -41,6 +43,9 @@ public Q_SLOTS:
 private:
     void enableService(const Accounts::AccountId accId, const Accounts::Service &service);
     void disableService(const Accounts::AccountId accId, const QString &serviceName);
+    QCoro::Task<void> createNetAttach(const Accounts::AccountId accId, const Accounts::Service &service);
+    QCoro::Task<QString> getRealm(const QUrl &url);
+    QCoro::Task<void> removeNetAttach(const QString &id);
     bool isEnabled(const Accounts::AccountId accId, const QString &serviceName);
 };
 
