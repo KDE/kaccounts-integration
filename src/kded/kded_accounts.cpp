@@ -9,7 +9,6 @@
 #include <core.h>
 
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KPluginMetaData>
 
 #include <QCoreApplication>
@@ -30,28 +29,21 @@ KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant> &)
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &KDEDAccounts::accountCreated);
     connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &KDEDAccounts::accountRemoved);
 
-    const QVector<KPluginMetaData> data = KPluginLoader::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
+    const QVector<KPluginMetaData> data = KPluginMetaData::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
     for (const KPluginMetaData &metadata : data) {
         if (!metadata.isValid()) {
             qDebug() << "Invalid metadata" << metadata.name();
             continue;
         }
 
-        KPluginLoader loader(metadata.fileName());
-        KPluginFactory *factory = loader.factory();
+        const auto result = KPluginFactory::instantiatePlugin<KAccountsDPlugin>(metadata, this, {});
 
-        if (!factory) {
-            qDebug() << "KPluginFactory could not load the plugin:" << metadata.pluginId() << loader.errorString();
+        if (!result) {
+            qDebug() << "Error loading plugin" << metadata.name() << result.errorString;
             continue;
         }
 
-        KAccountsDPlugin *plugin = factory->create<KAccountsDPlugin>(this, QVariantList());
-        if (!plugin) {
-            qDebug() << "Error loading plugin" << metadata.name() << loader.errorString();
-            continue;
-        }
-
-        m_plugins << plugin;
+        m_plugins << result.plugin;
     }
 }
 
