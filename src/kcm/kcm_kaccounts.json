@@ -97,10 +97,7 @@
         "Name[uk]": "Облікові записи у інтернеті",
         "Name[x-test]": "xxOnline Accountsxx",
         "Name[zh_CN]": "在线账户",
-        "Name[zh_TW]": "線上帳號",
-        "ServiceTypes": [
-            "KCModule"
-        ]
+        "Name[zh_TW]": "線上帳號"
     },
     "X-KDE-Keywords": "network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar",
     "X-KDE-Keywords[ar]": ",شبكة,غوغل,جوجل,لايف,لايڤ,سحابتك,سحابة,جيميل,تقويم جوجل,تزامن",
