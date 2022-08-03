@@ -1,5 +1,4 @@
 {
-    "Categories": "Qt;KDE;X-KDE-settings-kaccounts;",
     "KPlugin": {
         "Description": "Configure your internet accounts such as Google, Live, Owncloud",
         "Description[ar]": "اضبط حساباتك على الإنترنت كغوغل، لايڤ وسحابتك \"Owncloud\"",
