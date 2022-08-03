@@ -16,7 +16,7 @@ class AccountsSettings : public KQuickAddons::ConfigModule
     Q_OBJECT
 
 public:
-    explicit AccountsSettings(QObject *parent, const QVariantList &args);
+    explicit AccountsSettings(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~AccountsSettings() override = default;
 };
 
