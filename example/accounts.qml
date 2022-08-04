@@ -1,8 +1,8 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import Ubuntu.OnlineAccounts 0.1 as OA
-import org.kde.kaccounts 1.0
+import org.kde.kaccounts 1.2
 
 ApplicationWindow
 {
