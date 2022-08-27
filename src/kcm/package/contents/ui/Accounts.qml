@@ -73,7 +73,7 @@ ScrollViewKCM {
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
             text: i18ndc("kaccounts-integration", "A text shown when a user has not yet added any accounts", "No accounts added yet")
-            explanation: xi18ndc("kaccounts-integration", "@info", "Click the <interface>Add New Account...</interface> button below to add one")
+            explanation: xi18nc("@info", "Click the <interface>Add New Account...</interface> button below to add one")
         }
     }
 
