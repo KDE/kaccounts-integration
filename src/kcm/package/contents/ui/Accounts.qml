@@ -84,7 +84,6 @@ ScrollViewKCM {
 
     footer: RowLayout {
         Controls.Button {
-            visible: !noAccountsLayout.visible
             Layout.alignment: Qt.AlignRight
             text: i18nd("kaccounts-integration", "Add New Account...")
             icon.name: "contact-new"
