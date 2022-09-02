@@ -46,7 +46,7 @@ public:
         DataObjectRole,
         ProviderDisplayNameRole,
     };
-    Q_ENUM(Roles);
+    Q_ENUM(Roles)
     explicit AccountsModel(QObject *parent = nullptr);
     ~AccountsModel() override;
 
