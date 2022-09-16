@@ -73,7 +73,7 @@ target_link_libraries (kaccounts
         ${SIGNONQT_LIBRARIES}
 )
 
-target_include_directories(kaccounts INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KAccounts>" PUBLIC "${ACCOUNTSQT_INCLUDE_DIRS}" PRIVATE "${SIGNONQT_INCLUDE_DIRS}")
+target_include_directories(kaccounts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KAccounts>" PUBLIC "${ACCOUNTSQT_INCLUDE_DIRS}" PRIVATE "${SIGNONQT_INCLUDE_DIRS}")
 set_target_properties(kaccounts PROPERTIES VERSION   ${KACCOUNTS_VERSION}
                                            SOVERSION ${KACCOUNTS_SOVERSION}
                                            EXPORT_NAME KAccounts
@@ -93,7 +93,7 @@ install(FILES
   COMPONENT Devel
 )
 
-install(TARGETS kaccounts EXPORT KAccountsTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kaccounts EXPORT KAccountsTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF5::
 
