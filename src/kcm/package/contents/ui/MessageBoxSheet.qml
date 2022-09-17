@@ -37,7 +37,7 @@ Kirigami.OverlaySheet {
                 action: modelData
                 Connections {
                     target: action
-                    onTriggered: component.close()
+                    function onTriggered() { component.close(); }
                 }
             }
         }
