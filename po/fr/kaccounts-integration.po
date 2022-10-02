@@ -1,0 +1,440 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Maxence Le Doré <maxence.ledore@gmail.com>, 2014, 2015.
+# Vincent Pinon <vpinon@kde.org>, 2017.
+# Simon Depiets <sdepiets@gmail.com>, 2018, 2019, 2020.
+# Xavier Besnard <xavier.besnard@neuf.fr>, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-03-24 18:51+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 20.12.3\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Détails du compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "%1 compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Changer le nom d'affichage du compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Utiliser ce compte pour"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Supprimer ce compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Il n'y a aucun service configurable disponible pour cet acompte. Vous pouvez "
+"toujours modifier son nom d'affichage en cliquant sur l'icône de "
+"modification ci-dessus."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Ajouter un nouveau compte"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Supprimer %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Aucun compte encore ajouté"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Cliquez sur le bouton ci-dessous <interface>Ajouter un nouveau</interface> "
+"pour en ajouter un."
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Ajouter un nouveau compte..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Supprimer le compte ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Voulez-vous vraiment effacer le compte « %1 » « %2 » ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Voulez-vous vraiment supprimer le compte « %1 » ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Voulez-vous vraiment supprimer le compte « %1 » ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Supprimer le compte"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Renommer le compte"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Saisissez votre nouveau nom :"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Définir le nom du compte"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Aucun compte trouvé pour l'ID %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Aucun gestionnaire de comptes. Ceci est incroyable."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Le nom de l'affichage ne peut être vide"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+"Impossible de charger le module %1, veuillez vérifier votre installation"
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Annulé par l'utilisateur"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Il y a une eu une erreur durant le traitement de la requête : %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Impossible de trouver de compte"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Impossible de trouver des identifiants"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Impossible de créer une session d'authentification"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Impossible d'ouvrir le portefeuille"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Simon Depiets, Xavier Besnard"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "sdepiets@gmail.com, xavier.besnard@neuf.fr"
+
+#~ msgid "Accounts"
+#~ msgstr "Comptes"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Label for the text field used to enter a new human-readable name for an "
+#~ "account"
+#~ msgid "Enter the new name of the account"
+#~ msgstr "Saisissez un nouveau nom pour le compte"
+
+#~ msgid "Configure..."
+#~ msgstr "Configurer..."
+
+#~ msgid ""
+#~ "No account providers found.<nl/>Some providers can be found in packages "
+#~ "<application>kaccounts-providers</application> and <application>ktp-"
+#~ "accounts-kcm</application>."
+#~ msgstr ""
+#~ "Aucun fournisseur de compte trouvé.<nl/>Certains fournisseurs sont "
+#~ "disponibles dans les paquets <application>kaccounts-providers</"
+#~ "application> et <application>ktp-accounts-kcm</application>."
+
+#~ msgid "Following missing providers are required by installed services: %1"
+#~ msgstr ""
+#~ "Les services installés nécessitent les fournisseurs manquants ci-après : "
+#~ "%1"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Impossible de terminer"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Sélectionner un compte à configurer depuis la colonne de gauche"
+
+#~ msgid "Create"
+#~ msgstr "Créer"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Sélectionner les services que vous souhaitez activer"
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Mot de passe :"
+
+#~ msgid "Username"
+#~ msgstr "Nom utilisateur"
+
+#, fuzzy
+#~| msgid "my.owncloudserver.org"
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Serveur"
+
+#, fuzzy
+#~| msgid "JhonDoe"
+#~ msgid "JohnDoe"
+#~ msgstr "JhonDoe"
+
+#~ msgid "Connecting to:"
+#~ msgstr "Connexion à :"
+
+#~ msgid "Contacts"
+#~ msgstr "Contacts"
+
+#~ msgid "ownCloud Server"
+#~ msgstr "Serveur ownCloud"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Tout est correct"
+
+#~ msgid "Information is invalid"
+#~ msgstr "L'information n'est pas valable"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "JohnDoe (nom d'utilisateur)"
+
+#~ msgid "Username:"
+#~ msgstr "Nom d'utilisateur :"
+
+#~ msgid "Password"
+#~ msgstr "Mot de passe"
+
+#~ msgid "Host:"
+#~ msgstr "Hôte :"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Suivant"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Terminer"
+
+#~ msgid "Files"
+#~ msgstr "Fichiers"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendrier"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Assistant de compte Facebook"
+
+#~ msgid "Credentials"
+#~ msgstr "Informations de connexion"
+
+#~ msgid "The email and password are required"
+#~ msgstr "L'adresse mail et le mot de passe sont requis"
+
+#~ msgid "The email is required"
+#~ msgstr "L'adresse mail est requise"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Ce compte est déjà configuré comme un compte Web"
+
+#~ msgid "The password is required"
+#~ msgstr "Le mot de passe est requis"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Authentification Facebook"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Erreur authentification avec Facebook, veuillez revenir et vérifier vos "
+#~ "informations de connexion"
+
+#~ msgid "Checking username..."
+#~ msgstr "Vérification du nom d'utilisateur..."
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "Attente d'autorisation..."
+
+#~ msgid "Try again"
+#~ msgstr "Essayer de nouveau"
+
+#~ msgid "Chat"
+#~ msgstr "Discuter"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Contacts et Événements"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Assistant de compte Google"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Calendrier / Tâches"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr "L'adresse mail semble être erronée (format non valable)"
+
+#~ msgid "Email address:"
+#~ msgstr "Adresse mail :"
+
+#~ msgid "Google Authentication"
+#~ msgstr "Authentification Google"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Erreur authentification avec Google, veuillez revenir et vérifier vos "
+#~ "informations de connexion"
+
+#~ msgid "TextLabel"
+#~ msgstr "TextLabel"
+
+#~ msgid "Select services"
+#~ msgstr "Sélectionner des services"
+
+#~ msgid "EMail"
+#~ msgstr "Adresse mail"
+
+#~ msgid "Tasks"
+#~ msgstr "Tâches"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "WebAccounts requiert avoir à accès à"
+
+#~ msgid "Retry"
+#~ msgstr "Réessayer"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Calendrier et Contacts"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "Utilisateur ou mot de passe incorrect"
+
+#~ msgid "The username and password are required"
+#~ msgstr "L'adresse mail et le mot de passe sont requis"
+
+#~ msgid "The username is required"
+#~ msgstr "Le nom d'utilisateur est requis"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Assistant Runner-id"
+
+#, fuzzy
+#~| msgid "This account is already configured as a Web Account"
+#~ msgid "This account is already configured in KAccounts"
+#~ msgstr "Ce compte est déjà configuré comme un compte Web"

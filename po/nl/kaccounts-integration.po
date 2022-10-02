@@ -1,0 +1,458 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-03-24 09:52+0100\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Accountdetails"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "%1 account"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Schermnaam van account wijzigen"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Dit account gebruiken voor"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Dit account verwijderen"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Er zijn geen te configureren services beschikbaar voor dit account. U kunt "
+"toch zijn schermnaam wijzigen door te klikken op het bovenstaande pictogram "
+"Bewerken."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Een nieuw account toevoegen"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "%1 verwijderen"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Nog geen accounts toegevoegd"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Op de onderstaande knop <interface>Nieuw account toevoegen...</interface> "
+"klikken om er een toe te voegen"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Nieuw account toevoegen..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Account verwijderen?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Wilt u het \"%1\"-account '%2' verwijderen?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Wilt u het account '%1' verwijderen?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Wilt u dit account \"%1\"-verwijderen?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Account verwijderen"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Account hernoemen"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Nieuwe naam invoeren:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Accountnaam instellen"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Geen account gevonden met het ID %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Geen beheerder van accounts, dit is niet geweldig."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "De schermnaam mag niet leeg zijn"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr "Kan de plug-in %1 niet laden, controleer uw installatie"
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Geannuleerd door de gebruiker"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Er was een fout bij het proberen om het verzoek te verwerken: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Kon account niet vinden "
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Kon credentials niet vinden"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Kon autorisatiesessie niet aanmaken"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Kan portefeuille niet openen"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Freek de Kruijf - t/m 2021"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "freekdekruijf@kde.nl"
+
+#~ msgid "Accounts"
+#~ msgstr "Accounts"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Label for the text field used to enter a new human-readable name for an "
+#~ "account"
+#~ msgid "Enter the new name of the account"
+#~ msgstr "Geef de nieuwe naam van het account"
+
+#~ msgid "Configure..."
+#~ msgstr "Instellen..."
+
+#~ msgid ""
+#~ "No account providers found.<nl/>Some providers can be found in packages "
+#~ "<application>kaccounts-providers</application> and <application>ktp-"
+#~ "accounts-kcm</application>."
+#~ msgstr ""
+#~ "Geen leveranciers van accounts gevonden.<nl/>Sommige leverancires zijn te "
+#~ "vinden in de pakketten <application>kaccounts-providers</application> en "
+#~ "<application>ktp-accounts-kcm</application>."
+
+#~ msgid "Following missing providers are required by installed services: %1"
+#~ msgstr ""
+#~ "De volgende ontbrekende leveraciers zijn vereist door geïnstalleerde "
+#~ "services: %1"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Niet staat te eindigen"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Een in te stellen account selecteren uit de linker kolom"
+
+#~ msgid "Create"
+#~ msgstr "Aanmaken"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Selecteer welke services u wilt activeren"
+
+#~ msgctxt ""
+#~ "Error message that shows up right after the KCM opens and detects that "
+#~ "the required variables are empty"
+#~ msgid ""
+#~ "It appears your system is not configured properly, please ensure you have "
+#~ "AG_PROVIDERS and/or AG_SERVICES environment variables set correctly, then "
+#~ "restart this configuration module.\n"
+#~ "\n"
+#~ "Please contact your distribution if you're unsure how to proceed."
+#~ msgstr ""
+#~ "Het lijkt erop dat uw systeem niet juist is ingesteld, ga na dat u de "
+#~ "omgevingsvariabelen AG_PROVIDERS en/of AG_SERVICES juist hebt ingesteld, "
+#~ "start daarna opnieuw deze instellingenmodule.\n"
+#~ "\n"
+#~ "Neem contact op met uw distributie als u niet zeker bent hoe door te gaan."
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Wachtwoord:"
+
+#~ msgid "Username"
+#~ msgstr "Gebruikersnaam"
+
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "http://my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "JohnDoe"
+#~ msgstr "JanKlaassen"
+
+#~ msgid "Unable to authenticate using the provided username and password"
+#~ msgstr ""
+#~ "Authenticatie met behulp van de opgegeven gebruikersnaam en wachtwoord "
+#~ "lukt niet"
+
+#~ msgid "Connecting to:"
+#~ msgstr "Verbinding maken met:"
+
+#~ msgid "Contacts"
+#~ msgstr "Contactpersonen"
+
+#~ msgid ""
+#~ "Unable to connect to ownCloud at the given server URL. Please check the "
+#~ "server URL."
+#~ msgstr ""
+#~ "Er kon geen verbinding met de ownCloud-server worden gemaakt met de "
+#~ "gegeven URL. Controleer het adres van de server-URL."
+
+#~ msgid "ownCloud Server"
+#~ msgstr "ownCloud-server"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Alles is OK"
+
+#~ msgid "Information is invalid"
+#~ msgstr "Informatie is ongeldig"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "Janklaassen (gebruikersnaam)"
+
+#~ msgid "Username:"
+#~ msgstr "Gebruikersnaam:"
+
+#~ msgid "Password"
+#~ msgstr "Wachtwoord"
+
+#~ msgid "Host:"
+#~ msgstr "Host:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Volgende"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Voltooien"
+
+#~ msgid "Files"
+#~ msgstr "Bestanden"
+
+#~ msgid "Calendar"
+#~ msgstr "Agenda"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Accountassistent voor Facebook"
+
+#~ msgid "Credentials"
+#~ msgstr "Credentials"
+
+#~ msgid "The email and password are required"
+#~ msgstr "Het e-mailadres en wachtwoord zijn vereist"
+
+#~ msgid "The email is required"
+#~ msgstr "Het e-mailadres is vereist"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Dit account is al ingesteld als een webaccount"
+
+#~ msgid "The password is required"
+#~ msgstr "Het wachtwoord is vereist"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Authenticatie voor Facebook"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Er deed zich een fout voor tijdens het authenticeren met Facebook, druk "
+#~ "op terug en controleer uw credentials"
+
+#~ msgid "Checking username..."
+#~ msgstr "Gebruikersnaam controleren..."
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "Bezig met wachten op autorisatie..."
+
+#~ msgid "Try again"
+#~ msgstr "Opnieuw proberen"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Contactpersonen en gebeurtenissen"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Accountassistent voor Google"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Agenda / taken"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr "Het e-mailadres lijkt verkeerd te zijn (Ongeldige opmaak)"
+
+#~ msgid "Email address:"
+#~ msgstr "E-mailadres:"
+
+#~ msgid "Google Authentication"
+#~ msgstr "Authenticatie bij Google"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Er deed zich een fout voor tijdens het authenticeren met Google, druk op "
+#~ "terug en controleer uw credentials"
+
+#~ msgid "TextLabel"
+#~ msgstr "Tekstlabel"
+
+#~ msgid "Select services"
+#~ msgstr "Services selecteren"
+
+#~ msgid "EMail"
+#~ msgstr "E-mail"
+
+#~ msgid "Tasks"
+#~ msgstr "Taken"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "WebAccounts vereist toegang tot"
+
+#~ msgid "Retry"
+#~ msgstr "Opnieuw proberen"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Agenda en contactpersonen"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "Gebruikersnaam of wachtwoord is onjuist"
+
+#~ msgid "The username and password are required"
+#~ msgstr "De gebruikersnaam en wachtwoord zijn vereist"
+
+#~ msgid "The username is required"
+#~ msgstr "De gebruikersnaam is vereist"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Assistent van Runner-id"
+
+#~ msgid "This account is already configured in KAccounts"
+#~ msgstr "Dit account is al ingesteld in KAccounts"
+
+#~ msgid "Form"
+#~ msgstr "Formulier"

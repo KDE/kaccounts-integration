@@ -1,0 +1,453 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-03-24 07:31+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Kontoinformation"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "%1 konto"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Ändra kontots visade namn"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Använd kontot för"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Ta bort kontot"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Det finns inga inställningsbara tjänster tillgängliga för kontot. Du kan "
+"fortfarande ändra dess visade namn genom att klicka på redigeringsikonen "
+"ovan."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Lägg till nytt konto"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Ta bort %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Inga konton ännu tillagda"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Klicka på knappen <interface>Lägg till nytt konto...</interface> nedan för "
+"att lägga till ett"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Lägg till nytt konto..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Ta bort konto?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Är du säker på att du vill ta bort kontot \"%1\" \"%2\"?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Är du säker på att du vill ta bort kontot \"%1\"?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Är du säker på att du vill ta bort det här kontot \"%1\"?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Ta bort konto"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Byt namn på konto"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Ange nytt namn:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Ange kontonamn"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Inget konto hittades med id %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Ingen kontohanterare, det är inte så bra."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Skärmnamnet kan inte vara tomt"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr "Kunde inte ladda insticksprogrammet %1. Kontrollera installationen."
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Avbruten av användaren"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Ett fel uppstod när begäran skulle behandlas: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Kunde inte hitta konto"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Kunde inte hitta inloggningsinformation"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Kunde inte skapa auth-session"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Kan inte öppna plånbok"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Stefan Asserhäll"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "stefan.asserhall@bredband.net"
+
+#~ msgid "Accounts"
+#~ msgstr "Konton"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Label for the text field used to enter a new human-readable name for an "
+#~ "account"
+#~ msgid "Enter the new name of the account"
+#~ msgstr "Ange kontots nya namn"
+
+#~ msgid "Configure..."
+#~ msgstr "Anpassa..."
+
+#~ msgid ""
+#~ "No account providers found.<nl/>Some providers can be found in packages "
+#~ "<application>kaccounts-providers</application> and <application>ktp-"
+#~ "accounts-kcm</application>."
+#~ msgstr ""
+#~ "Inga kontoleverantörer hittades.<nl/>Visa leverantörer kan hittas i "
+#~ "paketen <application>kaccounts-providers</application> och "
+#~ "<application>ktp-accounts-kcm</application>."
+
+#~ msgid "Following missing providers are required by installed services: %1"
+#~ msgstr "Följande saknade leverantörer krävs av installerade tjänster: %1"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Kan inte slutföra"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Välj ett konto från vänstra kolumnen för att ställa in det"
+
+#~ msgid "Create"
+#~ msgstr "Skapa"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Välj vilka tjänster du vill aktivera"
+
+#~ msgctxt ""
+#~ "Error message that shows up right after the KCM opens and detects that "
+#~ "the required variables are empty"
+#~ msgid ""
+#~ "It appears your system is not configured properly, please ensure you have "
+#~ "AG_PROVIDERS and/or AG_SERVICES environment variables set correctly, then "
+#~ "restart this configuration module.\n"
+#~ "\n"
+#~ "Please contact your distribution if you're unsure how to proceed."
+#~ msgstr ""
+#~ "Det verkar som om systemet inte är riktigt inställt. Försäkra dig om att "
+#~ "miljövariablerna AG_PROVIDERS och/eller AG_SERVICES är riktigt inställda, "
+#~ "och starta därefter om inställningsmodulen.\n"
+#~ "\n"
+#~ "Kontakta distributionen om du är osäker om hur du ska göra."
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Lösenord:"
+
+#~ msgid "Username"
+#~ msgstr "Användarnamn"
+
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "http://my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "JohnDoe"
+#~ msgstr "AnnaSvensson"
+
+#~ msgid "Unable to authenticate using the provided username and password"
+#~ msgstr ""
+#~ "Kunde inte kontrollera behörighet med användning av angivet användarnamn "
+#~ "och lösenord"
+
+#~ msgid "Connecting to:"
+#~ msgstr "Ansluter till:"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakter"
+
+#~ msgid ""
+#~ "Unable to connect to ownCloud at the given server URL. Please check the "
+#~ "server URL."
+#~ msgstr ""
+#~ "Kan inte ansluta till ownCloud med angiven serverwebbadress. Kontrollera "
+#~ "serverns webbadress."
+
+#~ msgid "ownCloud Server"
+#~ msgstr "ownCloud-server"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Allting är ok"
+
+#~ msgid "Information is invalid"
+#~ msgstr "Informationen är ogiltig"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "AnnaSvensson (användarnamn)"
+
+#~ msgid "Username:"
+#~ msgstr "Användarnamn:"
+
+#~ msgid "Password"
+#~ msgstr "Lösenord"
+
+#~ msgid "Host:"
+#~ msgstr "Värddator:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Nästa"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Slutför"
+
+#~ msgid "Files"
+#~ msgstr "Filer"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Facebook-kontoguide"
+
+#~ msgid "Credentials"
+#~ msgstr "Inloggningsinformation"
+
+#~ msgid "The email and password are required"
+#~ msgstr "E-postadressen och lösenord krävs"
+
+#~ msgid "The email is required"
+#~ msgstr "E-postadressen krävs"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Kontot är redan inställt som ett webbkonto"
+
+#~ msgid "The password is required"
+#~ msgstr "Lösenordet krävs"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Facebook behörighetskontroll"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Fel vid behörighetskontroll hos Facebook. Tryck på Bakåt och kontrollera "
+#~ "din behörighetsinformation."
+
+#~ msgid "Checking username..."
+#~ msgstr "Kontrollerar användarnamn..."
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "Väntar på godkännande..."
+
+#~ msgid "Try again"
+#~ msgstr "Försök igen"
+
+#~ msgid "Chat"
+#~ msgstr "Chatt"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Kontakter och händelser"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Google-kontoguide"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Kalender och uppgifter"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr "E-postadressen verkar vara felaktig (ogiltigt format)"
+
+#~ msgid "Email address:"
+#~ msgstr "E-postadress:"
+
+#~ msgid "Google Authentication"
+#~ msgstr "Google behörighetskontroll"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Fel vid behörighetskontroll hos Google. Tryck på Bakåt och kontrollera "
+#~ "din behörighetsinformation."
+
+#~ msgid "TextLabel"
+#~ msgstr "Textetikett"
+
+#~ msgid "Select services"
+#~ msgstr "Välj tjänster"
+
+#~ msgid "EMail"
+#~ msgstr "E-post"
+
+#~ msgid "Tasks"
+#~ msgstr "Uppgifter"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "WebAccounts kräver åtkomst till"
+
+#~ msgid "Retry"
+#~ msgstr "Försök igen"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Kalender och kontakter"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "Användare eller lösenord är felaktigt"
+
+#~ msgid "The username and password are required"
+#~ msgstr "Användarnamn och lösenord krävs"
+
+#~ msgid "The username is required"
+#~ msgstr "Användarnamn krävs"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Runner ID-guide"
+
+#~ msgid "This account is already configured in KAccounts"
+#~ msgstr "Kontot är redan inställt i KAccounts"

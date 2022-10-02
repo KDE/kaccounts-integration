@@ -1,0 +1,341 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# A S Alam <aalam@users.sf.net>, 2014, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-04-25 13:07-0700\n"
+"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "ਖਾਤੇ ਦੇ ਵੇਰਵੇ"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "%1 ਖਾਤਾ"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "ਆਪਣਾ ਖਾਤੇ ਲਈ ਦਿਖਾਵਾ ਨਾਂ ਬਦਲੋ"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "ਇਹ ਖਾਤੇ ਨੂੰ ਇਸ ਲਈ ਵਰਤੋਂ"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "ਇਹ ਖਾਤੇ ਨੂੰ ਹਟਾਓ"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "%1 ਨੂੰ ਹਟਾਓ"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "ਹਾਲੇ ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਜੋੜਿਆ"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr "ਨਵਾਂ ਜੋੜਨ ਲਈ <interface>...ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ</interface> ਬਟਨ ਨੂੰ ਦਬਾਓ"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "...ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "ਖਾਤੇ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "ਕੀ ਤੁਸੀਂ \"%1\" ਖਾਤੇ \"%2\" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "ਕੀ ਤੁਸੀਂ \"%1\" ਖਾਤੇ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr ""
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "ਖਾਤੇ ਨੂੰ ਹਟਾਓ"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "ਖਾਤੇ ਦਾ ਨਾਂ ਬਦਲੋ"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "ਨਵਾਂ ਨਾਂ ਦਿਓ:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "ਖਾਤੇ ਨੂੰ ਨਾਂ ਦਿਓ"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "ਵਰਤੋਂਕਾਰ ਵਲੋਂ ਰੱਦ ਕੀਤਾ"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr ""
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "ਵਾਲੇਟ ਨੂੰ ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੨੧"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "alam.yellow@gmail.com"
+
+#~ msgid "Accounts"
+#~ msgstr "ਖਾਤੇ"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "ਮੁਕੰਮਲ ਕਰਨ ਲਈ ਅਸਮਰੱਥ"
+
+#~ msgid "Create"
+#~ msgstr "ਬਣਾਓ"
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "ਪਾਸਵਰਡ:"
+
+#~ msgid "Username"
+#~ msgstr "ਵਰਤੋਂਕਾਰ"
+
+#, fuzzy
+#~| msgid "my.owncloudserver.org"
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "ਸਰਵਰ"
+
+#, fuzzy
+#~| msgid "JhonDoe"
+#~ msgid "JohnDoe"
+#~ msgstr "JhonDoe"
+
+#~ msgid "Contacts"
+#~ msgstr "ਸੰਪਰਕ"
+
+#~ msgid "ownCloud Server"
+#~ msgstr "ownCloud ਸਰਵਰ"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "ਹਰ ਚੀਜ਼ ਠੀਕ ਹੈ"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "Username:"
+#~ msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ:"
+
+#~ msgid "Password"
+#~ msgstr "ਪਾਸਵਰਡ"
+
+#~ msgid "Host:"
+#~ msgstr "ਹੋਸਟ:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "ਅੱਗੇ"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "ਮੁਕੰਮਲ"
+
+#~ msgid "Files"
+#~ msgstr "ਫ਼ਾਈਲਾਂ"
+
+#~ msgid "Calendar"
+#~ msgstr "ਕੈਲੰਡਰ"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "ਫੇਸਬੁੱਕ ਖਾਤਾ ਸਹਾਇਕ"
+
+#~ msgid "Credentials"
+#~ msgstr "ਸਨਦ"
+
+#~ msgid "The email and password are required"
+#~ msgstr "ਈਮੇਲ ਅਤੇ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੈ"
+
+#~ msgid "The email is required"
+#~ msgstr "ਈਮੇਲ ਦੀ ਲੋੜ ਹੈ"
+
+#~ msgid "The password is required"
+#~ msgstr "ਪਾਸਵਰਡ ਚਾਹੀਦਾ ਹੈ"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "ਫੇਸਬੁੱਕ ਪਰਮਾਣਕਿਤਾ"
+
+#~ msgid "Checking username..."
+#~ msgstr "...ਯੂਜ਼ਰ-ਨਾਂ ਜਾਂਚਿਆ ਜਾ ਰਿਹਾ ਹੈ"
+
+#~ msgid "Try again"
+#~ msgstr "ਫ਼ੇਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+
+#~ msgid "Chat"
+#~ msgstr "ਗੱਲਬਾਤ"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "ਗੂਗਲ ਖਾਤਾ ਸਹਾਇਕ"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "ਕੈਲੰਡਰ / ਟਾਸਕ"
+
+#~ msgid "Email address:"
+#~ msgstr "ਈਮੇਲ ਸਿਰਨਾਵਾਂ:"
+
+#~ msgid "Google Authentication"
+#~ msgstr "ਗੂਗਲ ਪਰਮਾਣਕਿਤਾ"
+
+#~ msgid "Select services"
+#~ msgstr "ਸੇਵਾਵਾਂ ਚੁਣੋ"
+
+#~ msgid "EMail"
+#~ msgstr "ਈਮੇਲ"
+
+#~ msgid "Tasks"
+#~ msgstr "ਟਾਸਕ"
+
+#~ msgid "Retry"
+#~ msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "ਕੈਲੰਡਰ ਅਤੇ ਸੰਪਰਕ"

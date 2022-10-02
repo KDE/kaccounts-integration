@@ -1,0 +1,91 @@
+# Translation of kaccounts-integration.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: kaccounts-integration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-04-11 03:03+0200\n"
+"PO-Revision-Date: 2017-10-30 23:08+0100\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+# >> @title:column
+#: src/kcm/accounts.cpp:32
+#, kde-format
+msgid "Accounts"
+msgstr "налози"
+
+#: src/kcm/accounts.cpp:34
+#, kde-format
+msgid "Sebastian Kügler"
+msgstr ""
+
+#: src/kcm/accounts.cpp:35
+#, kde-format
+msgid "Dan Leinir Turthra Jensen"
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:77
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:82
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:87
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:104
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr "Не могу да учитам прикључак „%1“, проверите инсталацију."
+
+#: src/lib/createaccountjob.cpp:231
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Дошло је до грешке при покушају обраде захтева: %1"
+
+#: src/lib/getcredentialsjob.cpp:66
+#, kde-format
+msgid "Could not find account"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:81
+#, kde-format
+msgid "Could not find credentials"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:91
+#, kde-format
+msgid "Could not create auth session"
+msgstr ""
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:63
+#, kde-format
+msgid "Can't open wallet"
+msgstr ""

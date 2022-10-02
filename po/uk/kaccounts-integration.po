@@ -1,0 +1,464 @@
+# Translation of kaccounts-integration.po to Ukrainian
+# Copyright (C) 2014-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kaccounts-integration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-03-24 08:38+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.11.70\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Параметри рахунка"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "Обліковий запис %1"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Змінити екранне ім'я облікового запису"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Використовувати цей обліковий запис для"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Вилучити цей обліковий запис"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Для цього облікового запису немає придатних до налаштовування служб. Втім, "
+"ви можете змінити його екранне ім'я натисканням піктограми редагування вище."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Додати новий обліковий запис"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Вилучити %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Жодного облікового запису ще не додано"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Натисніть розташовану нижче кнопку <interface>Додати новий обліковий запис…</"
+"interface>, щоб додати його"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Додати новий обліковий запис…"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Вилучити обліковий запис?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Ви справді хочете вилучити обліковий запис «%2» «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Ви справді хочете вилучити обліковий запис «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Ви справді хочете вилучити цей обліковий запис «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Вилучити обліковий запис"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Перейменування облікового запису"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Введіть нову назву:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Встановити назву облікового запису"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Не знайдено облікових записів із ідентифікатором %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "На жаль, немає засобу керування обліковими записами."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Показане ім'я не може бути порожнім."
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+"Не вдалося завантажити додаток %1. Перевірте, чи правильно встановлено "
+"систему."
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Скасовано користувачем"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Під час спроби обробки запиту сталася помилка: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Не вдалося знайти обліковий запис"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Не вдалося знайти реєстраційні дані"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Не вдалося створити сеанс розпізнавання"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Не вдалося відкрити торбинку"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Юрій Чорноіван"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "yurchor@ukr.net"
+
+#~ msgid "Accounts"
+#~ msgstr "Облікові записи"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Label for the text field used to enter a new human-readable name for an "
+#~ "account"
+#~ msgid "Enter the new name of the account"
+#~ msgstr "Введіть нову назву облікового запису"
+
+#~ msgid "Configure..."
+#~ msgstr "Налаштувати…"
+
+#~ msgid ""
+#~ "No account providers found.<nl/>Some providers can be found in packages "
+#~ "<application>kaccounts-providers</application> and <application>ktp-"
+#~ "accounts-kcm</application>."
+#~ msgstr ""
+#~ "Не знайдено засобів надання облікових записів.<nl/>Роботу деяких з таких "
+#~ "засобів забезпечують пакунки <application>kaccounts-providers</"
+#~ "application> і <application>ktp-accounts-kcm</application>."
+
+#~ msgid "Following missing providers are required by installed services: %1"
+#~ msgstr ""
+#~ "Для роботи встановлених служб потрібні такі засоби надання даних: %1"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Не вдалося завершити"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Виберіть у лівому стовпчику обліковий запис для налаштовування"
+
+#~ msgid "Create"
+#~ msgstr "Створити"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Виберіть служби, які слід задіяти"
+
+#~ msgctxt ""
+#~ "Error message that shows up right after the KCM opens and detects that "
+#~ "the required variables are empty"
+#~ msgid ""
+#~ "It appears your system is not configured properly, please ensure you have "
+#~ "AG_PROVIDERS and/or AG_SERVICES environment variables set correctly, then "
+#~ "restart this configuration module.\n"
+#~ "\n"
+#~ "Please contact your distribution if you're unsure how to proceed."
+#~ msgstr ""
+#~ "Здається, вашу систему не налаштовано належним чином. Будь ласка, "
+#~ "встановіть правильні значення для змінних середовища AG_PROVIDERS і/або "
+#~ "AG_SERVICES, а потім перезапустіть модуль налаштовування.\n"
+#~ "\n"
+#~ "Будь ласка, зв’яжіться із розробниками вашого дистрибутива, якщо не "
+#~ "знаєте що робити."
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Пароль:"
+
+#~ msgid "Username"
+#~ msgstr "Користувач"
+
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "http://my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Сервер"
+
+#~ msgid "JohnDoe"
+#~ msgstr "JohnDoe"
+
+#~ msgid "Unable to authenticate using the provided username and password"
+#~ msgstr ""
+#~ "Не вдалося пройти розпізнавання на основі вказаного імені користувача і "
+#~ "пароля"
+
+#~ msgid "Connecting to:"
+#~ msgstr "З’єднуємося з:"
+
+#~ msgid "Contacts"
+#~ msgstr "Контакти"
+
+#~ msgid ""
+#~ "Unable to connect to ownCloud at the given server URL. Please check the "
+#~ "server URL."
+#~ msgstr ""
+#~ "Не вдалося встановити з’єднання з ownCloud за вказаною адресою сервера. "
+#~ "Будь ласка, перевірте, чи правильно вказано цю адресу."
+
+#~ msgid "ownCloud Server"
+#~ msgstr "Сервер ownCloud"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Все гаразд"
+
+#~ msgid "Information is invalid"
+#~ msgstr "Інформація є некоректною"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "JohnDoe (ім’я користувача)"
+
+#~ msgid "Username:"
+#~ msgstr "Користувач:"
+
+#~ msgid "Password"
+#~ msgstr "Пароль"
+
+#~ msgid "Host:"
+#~ msgstr "Вузол:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Далі"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Завершити"
+
+#~ msgid "Files"
+#~ msgstr "Файли"
+
+#~ msgid "Calendar"
+#~ msgstr "Календар"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Майстер обліковий записів Facebook"
+
+#~ msgid "Credentials"
+#~ msgstr "Реєстраційні дані"
+
+#~ msgid "The email and password are required"
+#~ msgstr "Слід вказати адресу електронної пошти і пароль"
+
+#~ msgid "The email is required"
+#~ msgstr "Слід вказати адресу електронної пошти"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Цей обліковий запис вже налаштовано як обліковий запис інтернету"
+
+#~ msgid "The password is required"
+#~ msgstr "Слід вказати пароль"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Розпізнавання на Facebook"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Помилка розпізнавання на Facebook. Будь ласка, натисніть кнопку «Назад» і "
+#~ "перевірте, чи правильно вказано реєстраційні дані"
+
+#~ msgid "Checking username..."
+#~ msgstr "Перевіряємо ім’я користувача…"
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "Очікуємо на завершення розпізнавання…"
+
+#~ msgid "Try again"
+#~ msgstr "Повторити спробу"
+
+#~ msgid "Chat"
+#~ msgstr "Спілкування"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Контакти і події"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Майстер облікового запису Google"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Календар/Завдання"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr ""
+#~ "Здається, адресу електронної пошти вказано неправильно (некоректний "
+#~ "формат)"
+
+#~ msgid "Email address:"
+#~ msgstr "Адреса ел. пошти:"
+
+#~ msgid "Google Authentication"
+#~ msgstr "Розпізнавання у Google"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Помилка розпізнавання у Google. Будь ласка, натисніть кнопку «Назад» і "
+#~ "перевірте, чи правильно вказано реєстраційні дані"
+
+#~ msgid "TextLabel"
+#~ msgstr "TextLabel"
+
+#~ msgid "Select services"
+#~ msgstr "Виберіть служби"
+
+#~ msgid "EMail"
+#~ msgstr "Ел. пошта"
+
+#~ msgid "Tasks"
+#~ msgstr "Завдання"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "Потрібні WebAccounts для доступу до"
+
+#~ msgid "Retry"
+#~ msgstr "Повторити"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Календар і контакти"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "Неправильно вказано користувача або пароль"
+
+#~ msgid "The username and password are required"
+#~ msgstr "Слід вказати ім’я користувача і пароль"
+
+#~ msgid "The username is required"
+#~ msgstr "Слід вказати ім’я користувача"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Майстер Runner-id"
+
+#~ msgid "This account is already configured in KAccounts"
+#~ msgstr "Цей обліковий запис вже налаштовано у KAccounts"
+
+#~ msgid "Form"
+#~ msgstr "Форма"

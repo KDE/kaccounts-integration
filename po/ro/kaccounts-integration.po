@@ -1,0 +1,406 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sergiu Bivol <sergiu@cip.md>, 2015, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-06-02 20:51+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Detalii cont"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "Cont %1"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Schimbă numele afișat al contului"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Folosește acest cont pentru"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Elimină acest cont"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Nu sunt servicii configurabile pentru acest cont. Îi puteți schimba numele "
+"afișat apăsând pe pictograma de redactare de mai sus."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Adaugă cont nou"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Elimină %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Încă nu au fost adăugate conturi"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Apăsați butonul <interface>Adaugă cont nou...</interface> de mai jos pentru "
+"a adăuga unul"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Adaugă cont nou..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Eliminați contul?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Sigur doriți să eliminați contul „%2” din „%1”?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Sigur doriți să eliminați contul „%1”?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Sigur doriți să eliminați acest cont „%1”?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Elimină contul"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Redenumește contul"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Introduceți noua denumire:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Stabilește denumirea contului"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Nu s-a găsit niciun cont cu identificatorul %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Niciun gestionar de conturi, asta nu e bine."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Numele afișat nu poate fi gol"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr "Extensia %1 nu poate fi încărcată, verificați instalarea"
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Anulat de utilizator"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "A avut loc o eroare la încercarea de a prelucra cererea: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Contul nu poate fi găsit"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Acreditările nu pot fi găsite"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Sesiunea de autentificare nu poate fi creată"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Portofelul nu poate fi deschis"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Sergiu Bivol"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "sergiu@cip.md"
+
+#~ msgid "Accounts"
+#~ msgstr "Conturi"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgid "Configure..."
+#~ msgstr "Configurare..."
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Imposibil de finalizat"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Alegeți un cont din coloana stângă pentru a-l configura"
+
+#~ msgid "Create"
+#~ msgstr "Creează"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Alegeți care servicii să fie activate"
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Parolă:"
+
+#~ msgid "Username"
+#~ msgstr "Nume de utilizator"
+
+#, fuzzy
+#~| msgid "my.owncloudserver.org"
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "JohnDoe"
+#~ msgstr "IonPopescu"
+
+#~ msgid "Connecting to:"
+#~ msgstr "Conectare la:"
+
+#~ msgid "Contacts"
+#~ msgstr "Contacte"
+
+#~ msgid "ownCloud Server"
+#~ msgstr "Server ownCloud"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Totul e în ordine"
+
+#~ msgid "Information is invalid"
+#~ msgstr "Informația nu e validă"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "IonPopescu (nume de utilizator)"
+
+#~ msgid "Username:"
+#~ msgstr "Nume de utilizator:"
+
+#~ msgid "Password"
+#~ msgstr "Parolă"
+
+#~ msgid "Host:"
+#~ msgstr "Gazdă:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Următor"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Finalizează"
+
+#~ msgid "Files"
+#~ msgstr "Fișiere"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendar"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Asistent pentru conturi Facebook"
+
+#~ msgid "Credentials"
+#~ msgstr "Acreditări"
+
+#~ msgid "The email and password are required"
+#~ msgstr "Adresa de e-mail și parola sunt necesare"
+
+#~ msgid "The email is required"
+#~ msgstr "Adresa de e-mail e necesară"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Acest cont este configurat deja ca un cont web"
+
+#~ msgid "The password is required"
+#~ msgstr "Este necesară parola"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Autentificare Facebook"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Eroare la autentificarea cu Facebook. Apăsați „Înapoi” și verificați "
+#~ "acreditările"
+
+#~ msgid "Checking username..."
+#~ msgstr "Se verifică numele de utilizator"
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "Se așteaptă autorizarea..."
+
+#~ msgid "Try again"
+#~ msgstr "Reîncearcă"
+
+#~ msgid "Chat"
+#~ msgstr "Discuții"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Contacte și evenimente"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Asistent pentru conturi Google"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Calendar / sarcini"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr "Adresa de e-mail pare să fie greșită (format nevalid)"
+
+#~ msgid "Email address:"
+#~ msgstr "Adresă de e-mail:"
+
+#~ msgid "Google Authentication"
+#~ msgstr "Autentificare Google"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Eroare la autentificarea cu Google. Apăsați „Înapoi” și verificați "
+#~ "acreditările"
+
+#~ msgid "TextLabel"
+#~ msgstr "EtichetăTextuală"
+
+#~ msgid "Select services"
+#~ msgstr "Alegeți serviciile"
+
+#~ msgid "EMail"
+#~ msgstr "Poștă electronică"
+
+#~ msgid "Tasks"
+#~ msgstr "Sarcini"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "WebAccounts cere să aibă acces la"
+
+#~ msgid "Retry"
+#~ msgstr "Reîncearcă"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Calendar și contacte"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "Utilizatorul sau parola sunt greșite"
+
+#~ msgid "The username and password are required"
+#~ msgstr "Numele de utilizator și parola sunt necesare"
+
+#~ msgid "The username is required"
+#~ msgstr "Numele de utilizator e necesar"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Asistent pentru Runner-id"

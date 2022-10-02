@@ -1,0 +1,450 @@
+# Translation of kaccounts-integration.po to Catalan
+# Copyright (C) 2015-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2015, 2016, 2020, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2015, 2016, 2017, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kaccounts-integration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-10-29 17:53+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Detalls del compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "Compte de %1"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Canvia el nom a mostrar del compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Usa aquest compte per a"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Elimina aquest compte"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"No hi ha cap servei configurable per a aquest compte. Encara podreu canviar "
+"el seu nom a mostrar fent clic a la icona d'edició de dalt."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Afegeix un compte nou"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Elimina %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Encara no s'ha afegit cap compte"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Feu clic al botó <interface>Afegeix un compte nou...</interface> que hi ha a "
+"sota per a afegir-ne un"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Afegeix un compte nou..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Elimino el compte?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Esteu segur que voleu eliminar el compte «%2» de «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Esteu segur que voleu eliminar el compte «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Esteu segur que voleu eliminar aquest compte de «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Elimina el compte"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Reanomena el compte"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Introduïu el nom nou:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Indiqueu el nom del compte"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "No s'ha trobat cap compte amb la ID %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "No hi ha cap gestor de comptes, això no és impressionant."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "El nom de la pantalla no pot estar buit"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+"No s'ha pogut carregar el connector %1. Si us plau, comproveu la instal·lació"
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Cancel·lada per l'usuari"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "S'ha produït un error en provar de processar la sol·licitud: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "No s'ha pogut trobar el compte"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "No s'han pogut trobar les credencials"
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "No s'ha pogut crear la sessió d'autorització"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "No s'ha pogut obrir la cartera"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Antoni Bella"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "antonibella5@yahoo.com"
+
+#~ msgid "Accounts"
+#~ msgstr "Comptes"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgctxt ""
+#~ "Label for the text field used to enter a new human-readable name for an "
+#~ "account"
+#~ msgid "Enter the new name of the account"
+#~ msgstr "Introduïu el nom nou del compte"
+
+#~ msgid "Configure..."
+#~ msgstr "Configura..."
+
+#~ msgid ""
+#~ "No account providers found.<nl/>Some providers can be found in packages "
+#~ "<application>kaccounts-providers</application> and <application>ktp-"
+#~ "accounts-kcm</application>."
+#~ msgstr ""
+#~ "No s'ha trobat cap compte de proveïdor.<nl/>Es poden trobar diversos "
+#~ "proveïdors als paquets <application>kaccounts-providers</application> i "
+#~ "<application>ktp-accounts-kcm</application>."
+
+#~ msgid "Following missing providers are required by installed services: %1"
+#~ msgstr ""
+#~ "Els serveis instal·lats requereixen els proveïdors següents que manquen: "
+#~ "%1"
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "No s'ha pogut finalitzar"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Seleccioneu un compte de la columna esquerra per a configurar-lo"
+
+#~ msgid "Create"
+#~ msgstr "Crea"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Seleccioneu els serveis que voleu activar"
+
+#~ msgctxt ""
+#~ "Error message that shows up right after the KCM opens and detects that "
+#~ "the required variables are empty"
+#~ msgid ""
+#~ "It appears your system is not configured properly, please ensure you have "
+#~ "AG_PROVIDERS and/or AG_SERVICES environment variables set correctly, then "
+#~ "restart this configuration module.\n"
+#~ "\n"
+#~ "Please contact your distribution if you're unsure how to proceed."
+#~ msgstr ""
+#~ "Sembla que aquest sistema no està configurat adequadament. Comproveu que "
+#~ "les variables d'entorn AG_PROVIDERS i/o AG_SERVICES estan configurades "
+#~ "correctament, després reinicieu aquests mòdul de configuració.\n"
+#~ "\n"
+#~ "Contacteu amb la distribució si no esteu segur de com fer-ho."
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Contrasenya:"
+
+#~ msgid "Username"
+#~ msgstr "Nom d'usuari"
+
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "http://my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Servidor"
+
+#~ msgid "JohnDoe"
+#~ msgstr "JoanPruna"
+
+#~ msgid "Unable to authenticate using the provided username and password"
+#~ msgstr ""
+#~ "No s'ha pogut autenticar usant el nom d'usuari i la contrasenya "
+#~ "proporcionats"
+
+#~ msgid "Connecting to:"
+#~ msgstr "S'està connectant a:"
+
+#~ msgid "Contacts"
+#~ msgstr "Contactes"
+
+#~ msgid ""
+#~ "Unable to connect to ownCloud at the given server URL. Please check the "
+#~ "server URL."
+#~ msgstr ""
+#~ "No s'ha pogut connectar amb ownCloud a l'URL del servidor donat. "
+#~ "Verifiqueu l'URL del servidor."
+
+#~ msgid "ownCloud Server"
+#~ msgstr "Servidor ownCloud"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Tot està bé"
+
+#~ msgid "Information is invalid"
+#~ msgstr "La informació no és vàlida"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "JoanPruna (nom d'usuari)"
+
+#~ msgid "Username:"
+#~ msgstr "Nom d'usuari:"
+
+#~ msgid "Password"
+#~ msgstr "Contrasenya"
+
+#~ msgid "Host:"
+#~ msgstr "Màquina:"
+
+#~ msgctxt "Action to go to the next page on the wizard"
+#~ msgid "Next"
+#~ msgstr "Següent"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Finalitza"
+
+#~ msgid "Files"
+#~ msgstr "Fitxers"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendari"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Assistent de comptes pel Facebook"
+
+#~ msgid "Credentials"
+#~ msgstr "Credencials"
+
+#~ msgid "The email and password are required"
+#~ msgstr "Es necessita el correu electrònic i la contrasenya"
+
+#~ msgid "The email is required"
+#~ msgstr "Es necessita el correu electrònic"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Aquest compte ja està configurat com un compte web"
+
+#~ msgid "The password is required"
+#~ msgstr "Es necessita la contrasenya"
+
+#~ msgid "Facebook Authentication"
+#~ msgstr "Autenticació pel Facebook"
+
+#~ msgid ""
+#~ "Error authenticating with Facebook, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Error en autenticar amb Facebook. Si us plau, premeu cap enrere i "
+#~ "verifiqueu les vostres credencials"
+
+#~ msgid "Checking username..."
+#~ msgstr "S'està comprant el nom d'usuari..."
+
+#~ msgid "Waiting for authorization..."
+#~ msgstr "S'està esperant autorització..."
+
+#~ msgid "Try again"
+#~ msgstr "Torneu-ho a provar"
+
+#~ msgid "Chat"
+#~ msgstr "Xat"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Contactes i esdeveniments"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Calendari / Tasques"
+
+#~ msgid "The email seems to be wrong (Invalid format)"
+#~ msgstr "El correu electrònic sembla estar malament (format no vàlid)"
+
+#~ msgid "Email address:"
+#~ msgstr "Adreça de correu electrònic:"
+
+#~ msgid ""
+#~ "Error authenticating with Google, please press back and check your "
+#~ "credentials"
+#~ msgstr ""
+#~ "Error en autenticar amb Google. Si us plau, premeu cap enrere i "
+#~ "verifiqueu les vostres credencials"
+
+#~ msgid "TextLabel"
+#~ msgstr "Etiqueta de text"
+
+#~ msgid "Select services"
+#~ msgstr "Selecciona els serveis"
+
+#~ msgid "EMail"
+#~ msgstr "Correu electrònic"
+
+#~ msgid "Tasks"
+#~ msgstr "Tasques"
+
+#~ msgid "WebAccounts requires to have access to"
+#~ msgstr "WebAccounts requereix tenir accés a"
+
+#~ msgid "Retry"
+#~ msgstr "Torna a intentar-ho"
+
+#~ msgid "Calendar and Contacts"
+#~ msgstr "Calendari i contactes"
+
+#~ msgid "User or password are incorrect"
+#~ msgstr "L'usuari o la contrasenya són incorrectes"
+
+#~ msgid "The username and password are required"
+#~ msgstr "Es necessita el nom d'usuari i la contrasenya"
+
+#~ msgid "The username is required"
+#~ msgstr "Es necessita el nom d'usuari"
+
+#~ msgid "This account is already configured in KAccounts"
+#~ msgstr "Aquest compte ja està configurat en el KAccounts"

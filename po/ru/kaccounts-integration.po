@@ -1,0 +1,367 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Alexander Potashev <aspotashev@gmail.com>, 2015, 2017.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"PO-Revision-Date: 2021-04-17 21:46+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Сведения об учётной записи"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:59
+#: src/kcm/package/contents/ui/main.qml:47
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:63
+#: src/kcm/package/contents/ui/main.qml:51
+#, kde-format
+msgid "%1 account"
+msgstr "Учётная запись %1"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Изменение отображаемого имени учётной записи"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Использовать ресурсы учётной записи:"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Удалить учётную запись"
+
+#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Для этой учётной записи отсутствуют службы, которые могут быть настроены. "
+"Для изменения её отображаемого имени нажмите на значок, расположенный выше."
+
+#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#, kde-format
+msgid "Add New Account"
+msgstr "Добавление учётной записи"
+
+#: src/kcm/package/contents/ui/main.qml:58
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Удалить %1"
+
+#: src/kcm/package/contents/ui/main.qml:75
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Пока не добавлено ни одной учётной записи"
+
+#: src/kcm/package/contents/ui/main.qml:76
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Click the <interface>Add New Account...</interface> button below to add one"
+msgstr ""
+"Для добавления учётной записи нажмите кнопку <interface>Добавить учётную "
+"запись...</interface>"
+
+#: src/kcm/package/contents/ui/main.qml:88
+#, kde-format
+msgid "Add New Account..."
+msgstr "Добавить учётную запись..."
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Удалить учётную запись?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Удалить учётную запись «%2», используемую для %1?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Удалить учётную запись «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Удалить учётную запись «%1»?"
+
+#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#, kde-format
+msgctxt ""
+"The label for a button which will cause the removal of a specified account"
+msgid "Remove Account"
+msgstr "Удалить учётную запись"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Переименовать учётную запись"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Введите новое имя:"
+
+#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Text of a button which will cause the human-readable name of an account to "
+"be set to a text specified by the user"
+msgid "Set Account Name"
+msgstr "Переименовать"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:71
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Отсутствует учётная запись с идентификатором %1"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Отсутствует диспетчер учётных записей."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Отображаемое имя не может быть пустым"
+
+#: src/lib/createaccountjob.cpp:89
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr "Не удалось загрузить модуль %1. Проверьте правильность установки."
+
+#: src/lib/createaccountjob.cpp:147
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Отменено пользователем"
+
+#: src/lib/createaccountjob.cpp:224
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "При обработке запроса произошла ошибка: %1"
+
+#: src/lib/getcredentialsjob.cpp:53
+#, kde-format
+msgid "Could not find account"
+msgstr "Не удалось найти учётную"
+
+#: src/lib/getcredentialsjob.cpp:68
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Не удалось найти учётные данные "
+
+#: src/lib/getcredentialsjob.cpp:78
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Не удалось начать проверку подлинности"
+
+#: src/plugins/kio-webdav/removenetattachjob.cpp:51
+#, kde-format
+msgid "Can't open wallet"
+msgstr "Не удалось открыть бумажник"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Александр Яворский"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "kekcuha@gmail.com"
+
+#~ msgid "Accounts"
+#~ msgstr "Учётные записи"
+
+#~ msgid "Sebastian Kügler"
+#~ msgstr "Sebastian Kügler"
+
+#~ msgid "Dan Leinir Turthra Jensen"
+#~ msgstr "Dan Leinir Turthra Jensen"
+
+#~ msgid "Configure..."
+#~ msgstr "Настроить..."
+
+#~ msgctxt ""
+#~ "Messagebox title; meaning 'Unable to finish the action you started'"
+#~ msgid "Unable to finish"
+#~ msgstr "Не удалось завершить"
+
+#~ msgid "Select an account from the left column to configure"
+#~ msgstr "Выберите из списка слева учётную запись, которую хотите настроить"
+
+#~ msgid "Create"
+#~ msgstr "Добавить"
+
+#~ msgid "Select what services you want to activate"
+#~ msgstr "Выберите службы, которые хотите задействовать:"
+
+#~ msgid "ownCloud"
+#~ msgstr "ownCloud"
+
+#~ msgid "Password:"
+#~ msgstr "Пароль:"
+
+#~ msgid "Username"
+#~ msgstr "Имя пользователя:"
+
+#~ msgid "http://my.owncloudserver.org"
+#~ msgstr "http://my.owncloudserver.org"
+
+#~ msgid "Server"
+#~ msgstr "Сервер:"
+
+#~ msgid "JohnDoe"
+#~ msgstr "VasyaPupkin"
+
+#~ msgid "Unable to authenticate using the provided username and password"
+#~ msgstr ""
+#~ "Не удалось выполнить вход с указанными именем пользователя и паролем."
+
+#~ msgid "Connecting to:"
+#~ msgstr "Идёт подключение к:"
+
+#~ msgid "Contacts"
+#~ msgstr "Контакты"
+
+#~ msgid ""
+#~ "Unable to connect to ownCloud at the given server URL. Please check the "
+#~ "server URL."
+#~ msgstr ""
+#~ "Не удалось подключиться к ownCloud по указанному адресу URL сервера. "
+#~ "Проверьте правильность адреса сервера."
+
+#~ msgid "ownCloud Server"
+#~ msgstr "Сервер ownCloud"
+
+#~ msgid "Everything is Ok"
+#~ msgstr "Всё хорошо"
+
+#~ msgid "Information is invalid"
+#~ msgstr "Информация некорректна"
+
+#~ msgid "owncloud.org"
+#~ msgstr "owncloud.org"
+
+#~ msgid "JohnDoe (username)"
+#~ msgstr "VasyaPupkin (имя пользователя)"
+
+#~ msgid "Username:"
+#~ msgstr "Имя пользователя:"
+
+#~ msgid "Password"
+#~ msgstr "Пароль"
+
+#~ msgid "Host:"
+#~ msgstr "Хост:"
+
+#~ msgctxt "Action to finish the wizard"
+#~ msgid "Finish"
+#~ msgstr "Готово"
+
+#~ msgid "Calendar"
+#~ msgstr "Календарь"
+
+#~ msgid "Facebook account Wizard"
+#~ msgstr "Добавление учётной записи Facebook"
+
+#~ msgid "The email and password are required"
+#~ msgstr "Необходимо ввести адрес электронной почты и пароль"
+
+#~ msgid "The email is required"
+#~ msgstr "Необходимо ввести адрес электронной почты"
+
+#~ msgid "This account is already configured as a Web Account"
+#~ msgstr "Эта учётная запись уже настроена с помощью веб-интерфейса"
+
+#~ msgid "The password is required"
+#~ msgstr "Необходимо ввести пароль"
+
+#~ msgid "Try again"
+#~ msgstr "Повторите попытку"
+
+# В Facebook это называется "чат", но "личные сообщения" -- понятнее. Особенно для тех, кто не пользуется Facebook. --aspotashev
+#~ msgid "Chat"
+#~ msgstr "Личные сообщения"
+
+#~ msgid "Contacts and Events"
+#~ msgstr "Контакты и мероприятия"
+
+#~ msgid "Google account Wizard"
+#~ msgstr "Добавление учётной записи Google"
+
+#~ msgid "Calendar / Tasks"
+#~ msgstr "Календари и задачи"
+
+#~ msgid "Email address:"
+#~ msgstr "Адрес электронной почты:"
+
+# BUGME: this should not be translatable --aspotashev
+#~ msgid "TextLabel"
+#~ msgstr "TextLabel"
+
+#~ msgid "EMail"
+#~ msgstr "Электронная почта"
+
+#~ msgid "Tasks"
+#~ msgstr "Задачи"
+
+#~ msgid "Retry"
+#~ msgstr "Повторить попытку"
+
+#~ msgid "The username and password are required"
+#~ msgstr "Необходимо ввести имя пользователя и пароль"
+
+#~ msgid "The username is required"
+#~ msgstr "Необходимо ввести имя пользователя"
+
+#~ msgid "Runner-id Wizard"
+#~ msgstr "Добавление учётной записи Runners-ID"
