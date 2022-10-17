@@ -44,7 +44,7 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Canvia el nom que es mostrarà del compte"
+msgstr "Canvia el nom que s'ha de mostrar del compte"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
@@ -143,7 +143,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Canvia el nom el compte"
+msgstr "Canvia el nom del compte"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
 #, kde-format

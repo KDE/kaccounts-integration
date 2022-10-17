@@ -209,20 +209,3 @@ msgstr "Неуспешно създаване на сесия за удосто�
 #, kde-format
 msgid "Can't open wallet"
 msgstr "Неуспешно отваряне на портфейл"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Минчо Кондареж"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "Вашите имейли"
-
-#~ msgid "Accounts"
-#~ msgstr "Акаунти"
-
-#~ msgid "Sebastian Kügler"
-#~ msgstr "Sebastian Kügler"
-
-#~ msgid "Dan Leinir Turthra Jensen"
-#~ msgstr "Дан Лейнир Туртра Йенсен"
