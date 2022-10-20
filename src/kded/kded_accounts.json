@@ -2,7 +2,6 @@
     "KPlugin": {
         "Description": "Accounts management",
         "Description[ar]": "إدارة الحسابات",
-        "Description[ast]": "Xestión de cuentes",
         "Description[az]": "İstiifadəçi Hesabları Meneceri",
         "Description[bg]": "Управление на акаунти",
         "Description[ca@valencia]": "Gestor de comptes",
@@ -42,7 +41,6 @@
         "Description[zh_TW]": "帳號管理",
         "Name": "Accounts",
         "Name[ar]": "الحسابات",
-        "Name[ast]": "Cuentes",
         "Name[az]": "İstifadəçi Hesabları",
         "Name[bg]": "Акаунти",
         "Name[ca@valencia]": "Comptes",
