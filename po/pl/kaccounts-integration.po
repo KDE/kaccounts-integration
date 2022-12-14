@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-04-05 08:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -204,10 +204,8 @@ msgstr "Nie można znaleźć danych dostępowych"
 msgid "Could not create auth session"
 msgstr "Nie można utworzyć sesji uwierzytelnionej"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Nie można otworzyć portfela"
+#~ msgid "Can't open wallet"
+#~ msgstr "Nie można otworzyć portfela"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-05-06 22:24+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -207,10 +207,8 @@ msgstr "Ezin izan da egiaztagiririk aurkitu"
 msgid "Could not create auth session"
 msgstr "Ezin izan da sortu autentifikatutako saiorik"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Ezin da zorroa ireki"
+#~ msgid "Can't open wallet"
+#~ msgstr "Ezin da zorroa ireki"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

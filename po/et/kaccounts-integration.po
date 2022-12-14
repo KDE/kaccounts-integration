@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2020-10-07 10:58+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -202,10 +202,8 @@ msgstr "Kasutajatunnuseid ei leitud"
 msgid "Could not create auth session"
 msgstr "Autentimisseansi loomine nurjus"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Turvalaeka avamine nurjus"
+#~ msgid "Can't open wallet"
+#~ msgstr "Turvalaeka avamine nurjus"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

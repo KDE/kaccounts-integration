@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-03-24 08:38+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -208,10 +208,8 @@ msgstr "Не вдалося знайти реєстраційні дані"
 msgid "Could not create auth session"
 msgstr "Не вдалося створити сеанс розпізнавання"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Не вдалося відкрити торбинку"
+#~ msgid "Can't open wallet"
+#~ msgstr "Не вдалося відкрити торбинку"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

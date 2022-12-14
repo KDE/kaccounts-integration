@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-04-24 10:35+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -202,10 +202,8 @@ msgstr "Anmeldungsdaten wurden nicht gefunden"
 msgid "Could not create auth session"
 msgstr "Autorisierungssitzung kann nicht erstellt werden"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Der Passwortspeicher kann nicht geöffnet werden"
+#~ msgid "Can't open wallet"
+#~ msgstr "Der Passwortspeicher kann nicht geöffnet werden"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

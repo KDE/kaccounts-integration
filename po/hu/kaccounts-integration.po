@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-09-20 10:03+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -204,10 +204,8 @@ msgstr "Nem találhatók hitelesítési adatok"
 msgid "Could not create auth session"
 msgstr "Nem lehet létrehozni hitelesítési munkamenetet"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "A jelszókezelő nem nyitható meg"
+#~ msgid "Can't open wallet"
+#~ msgstr "A jelszókezelő nem nyitható meg"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

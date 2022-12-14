@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-03-24 12:39+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -208,10 +208,8 @@ msgstr "Não foi possível encontrar as credenciais"
 msgid "Could not create auth session"
 msgstr "Não foi possível criar uma sessão de autenticação"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Não é possível abrir a carteira"
+#~ msgid "Can't open wallet"
+#~ msgstr "Não é possível abrir a carteira"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

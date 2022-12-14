@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-06-02 20:51+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -204,10 +204,8 @@ msgstr "Acreditările nu pot fi găsite"
 msgid "Could not create auth session"
 msgstr "Sesiunea de autentificare nu poate fi creată"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Portofelul nu poate fi deschis"
+#~ msgid "Can't open wallet"
+#~ msgstr "Portofelul nu poate fi deschis"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

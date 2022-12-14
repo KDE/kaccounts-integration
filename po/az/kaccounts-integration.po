@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-03-24 12:21+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -203,10 +203,8 @@ msgstr "Hesab məlumatlarını"
 msgid "Could not create auth session"
 msgstr "Doğrulama sessiyası yaradıla bilmədi"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Cüzdan açıla bilmir"
+#~ msgid "Can't open wallet"
+#~ msgstr "Cüzdan açıla bilmir"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

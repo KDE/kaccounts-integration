@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2022-07-21 19:53+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -205,7 +205,5 @@ msgstr "Неуспешно намиране на идентификационн�
 msgid "Could not create auth session"
 msgstr "Неуспешно създаване на сесия за удостоверяване"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Неуспешно отваряне на портфейл"
+#~ msgid "Can't open wallet"
+#~ msgstr "Неуспешно отваряне на портфейл"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-06-04 21:52+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -204,10 +204,8 @@ msgstr "Αδυναμία εύρεσης διαπιστευτηρίων"
 msgid "Could not create auth session"
 msgstr "Αδυναμία δημιουργίας συνεδρίας ταυτοποίησης"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Αδυναμία ανοίγματος πορτοφολιού"
+#~ msgid "Can't open wallet"
+#~ msgstr "Αδυναμία ανοίγματος πορτοφολιού"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-09-09 21:51+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -203,10 +203,8 @@ msgstr "Kunne ikke finde akkreditiver"
 msgid "Could not create auth session"
 msgstr "Kunne ikke oprette auth-session"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Kan ikke åbne tegnebog"
+#~ msgid "Can't open wallet"
+#~ msgstr "Kan ikke åbne tegnebog"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-03-24 09:52+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -204,10 +204,8 @@ msgstr "Kon credentials niet vinden"
 msgid "Could not create auth session"
 msgstr "Kon autorisatiesessie niet aanmaken"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Kan portefeuille niet openen"
+#~ msgid "Can't open wallet"
+#~ msgstr "Kan portefeuille niet openen"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

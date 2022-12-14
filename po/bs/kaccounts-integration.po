@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2015-02-19 10:14+0100\n"
 "Last-Translator: Samir ribic <megaribi@localhost>\n"
 "Language-Team: Bosnian\n"
@@ -199,9 +199,4 @@ msgstr ""
 #: src/lib/getcredentialsjob.cpp:78
 #, kde-format
 msgid "Could not create auth session"
-msgstr ""
-
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
 msgstr ""

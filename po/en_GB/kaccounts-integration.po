@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-04-03 15:07+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -202,10 +202,8 @@ msgstr "Could not find credentials"
 msgid "Could not create auth session"
 msgstr "Could not create auth session"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Cannot open wallet"
+#~ msgid "Can't open wallet"
+#~ msgstr "Cannot open wallet"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

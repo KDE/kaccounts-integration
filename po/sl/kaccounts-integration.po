@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-19 00:44+0000\n"
+"POT-Creation-Date: 2022-12-14 00:46+0000\n"
 "PO-Revision-Date: 2021-10-14 22:45+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -206,10 +206,8 @@ msgstr "Ni mogoče najti poverilnic"
 msgid "Could not create auth session"
 msgstr "Ni mogoče ustvariti avtorske seje"
 
-#: src/plugins/kio-webdav/removenetattachjob.cpp:51
-#, kde-format
-msgid "Can't open wallet"
-msgstr "Ni mogoče odpreti listnice"
+#~ msgid "Can't open wallet"
+#~ msgstr "Ni mogoče odpreti listnice"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
