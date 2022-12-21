@@ -25,6 +25,7 @@
         "Description[tr]": "Owncloud, Live veya Google gibi internet hesaplarınızı yapılandırın",
         "Description[uk]": "Налаштування ваших облікових записів у Google, Live, Owncloud тощо",
         "Description[x-test]": "xxConfigure your internet accounts such as Google, Live, Owncloudxx",
+        "Description[zh_TW]": "設定您的網路帳號，例如 Google、Live、Owncloud",
         "FormFactors": [
             "desktop",
             "handset",
@@ -56,7 +57,8 @@
         "Name[sv]": "Nätkonton",
         "Name[tr]": "Çevrimiçi Hesaplar",
         "Name[uk]": "Облікові записи в інтернеті",
-        "Name[x-test]": "xxOnline Accountsxx"
+        "Name[x-test]": "xxOnline Accountsxx",
+        "Name[zh_TW]": "線上帳號"
     },
     "X-KDE-Keywords": "network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar",
     "X-KDE-Keywords[ar]": ",شبكة,غوغل,جوجل,لايف,لايڤ,سحابتك,سحابة,جيميل,تقويم جوجل,تزامن",
