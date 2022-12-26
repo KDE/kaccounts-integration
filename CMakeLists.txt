@@ -7,7 +7,7 @@ set(KACCOUNTS_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSIO
 
 project(KAccounts LANGUAGES CXX VERSION ${KACCOUNTS_VERSION})
 
-set(QT_REQUIRED_VERSION "5.15.0")
+set(QT_REQUIRED_VERSION "5.15.2")
 set(KF5_MIN_VERSION "5.97.0")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -28,6 +28,7 @@ include(CMakePackageConfigHelpers)
 include(GenerateExportHeader)
 include(FeatureSummary)
 include(ECMQmlModule)
+include(ECMDeprecationSettings)
 
 set(KACCOUNTS_SOVERSION "2")
 set(ACCOUNTSQT_DEP_VERSION "1.13")
@@ -54,6 +55,11 @@ find_package(QCoro${QT_MAJOR_VERSION} REQUIRED COMPONENTS Core)
 qcoro_enable_coroutines()
 
 add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
+
+ecm_set_disabled_deprecation_versions(QT 5.13.0
+     KF 5.101.0
+    )
+
 
 add_subdirectory(src)
 
