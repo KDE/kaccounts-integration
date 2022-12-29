@@ -12,3 +12,4 @@ Dependencies:
     'frameworks/kdeclarative': '@stable'
     'frameworks/kwallet': '@stable'
     'frameworks/kio': '@stable'
+    'third-party/qcoro': '@latest'
