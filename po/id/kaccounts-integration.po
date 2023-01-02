@@ -1,30 +1,26 @@
-# Translation of kaccounts-integration.po to Catalan (Valencian)
-# Copyright (C) 2015-2021 This_file_is_part_of_KDE
-# This file is distributed under the license LGPL version 2.1 or
-# version 3 or later versions approved by the membership of KDE e.V.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kaccounts-integration package.
+# Wantoyèk <wantoyek@gmail.com>, 2023.
 #
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2015, 2016, 2020, 2021.
-# Josep M. Ferrer <txemaq@gmail.com>, 2015, 2016, 2017, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-19 00:44+0000\n"
-"PO-Revision-Date: 2021-10-29 17:53+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
-"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
-"Language: ca@valencia\n"
+"PO-Revision-Date: 2023-01-01 21:27+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
-msgstr "Detalls del compte"
+msgstr "Detail Akun"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:59
 #: src/kcm/package/contents/ui/main.qml:47
@@ -36,7 +32,7 @@ msgstr "%1 (%2)"
 #: src/kcm/package/contents/ui/main.qml:51
 #, kde-format
 msgid "%1 account"
-msgstr "Compte de %1"
+msgstr "%1 akun"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:73
 #, kde-format
@@ -44,18 +40,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Canvia el nom que s'ha de mostrar del compte"
+msgstr "Ubah Nama Tampilan Akun"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr "Utilitza este compte per a"
+msgstr "Gunakan Akun Ini Untuk"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr "Elimina este compte"
+msgstr "Hapus Akun Ini"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:110
 #, kde-format
@@ -64,13 +60,13 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
-"No hi ha cap servei configurable per a este compte. Encara podreu canviar el "
-"nom que es mostrarà fent clic damunt de la icona d'edició de dalt."
+"Tidak ada layanan yang dapat diatur yang tersedia untuk akun ini. Kamu masih "
+"bisa mengubah nama yang ditampilkan dengan mengeklik ikon edit di atas."
 
 #: src/kcm/package/contents/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
-msgstr "Afig un compte nou"
+msgstr "Tambahkan Akun Baru"
 
 #: src/kcm/package/contents/ui/main.qml:58
 #, kde-format
@@ -78,13 +74,13 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "Elimina %1"
+msgstr "Hapus %1"
 
 #: src/kcm/package/contents/ui/main.qml:75
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr "Encara no s'ha afegit cap compte"
+msgstr "Belum ada akun yang ditambahkan"
 
 #: src/kcm/package/contents/ui/main.qml:76
 #, kde-kuit-format
@@ -92,19 +88,19 @@ msgctxt "@info"
 msgid ""
 "Click the <interface>Add New Account...</interface> button below to add one"
 msgstr ""
-"Feu clic en el botó <interface>Afig un compte nou...</interface> que hi ha "
-"davall per a afegir-ne un"
+"Klik tombol <interface>Tambahkan Akun Baru...</interface> di bawah untuk "
+"menambahkannya"
 
 #: src/kcm/package/contents/ui/main.qml:88
 #, kde-format
 msgid "Add New Account..."
-msgstr "Afig un compte nou..."
+msgstr "Tambahkan Akun Baru..."
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "Voleu eliminar el compte?"
+msgstr "Hapus Akun?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
 #, kde-format
@@ -112,7 +108,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "Segur que voleu eliminar el compte «%2» de «%1»?"
+msgstr "Apakah kamu yakin ingin menghapus akun \"%1\" \"%2\"?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
 #, kde-format
@@ -120,7 +116,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr "Segur que voleu eliminar el compte «%1»?"
+msgstr "Apakah kamu yakin ingin menghapus akun \"%1\"?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
 #, kde-format
@@ -128,14 +124,14 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr "Segur que voleu eliminar este compte de «%1»?"
+msgstr "Apakah kamu yakin ingin menghapus akun \"%1\" ini?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
 #, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
-msgstr "Elimina el compte"
+msgstr "Hapus Akun"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -143,7 +139,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Canvia el nom del compte"
+msgstr "Ubah Nama Akun"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
 #, kde-format
@@ -151,7 +147,7 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr "Introduïu el nom nou:"
+msgstr "Masukkan nama baru:"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -159,55 +155,55 @@ msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
 "be set to a text specified by the user"
 msgid "Set Account Name"
-msgstr "Indiqueu el nom del compte"
+msgstr "Setel Nama Akun"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:71
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr "No s'ha trobat cap compte amb la ID %1"
+msgstr "Tidak ada akun yang ditemukan dengan ID %1"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr "No hi ha cap gestor de comptes, açò no és impressionant."
+msgstr "Tidak ada pengelola akun, ini tidak mengagumkan."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "El nom de la pantalla no pot estar buit"
+msgstr "Nama yang ditampilkan tidak boleh kosong"
 
 #: src/lib/createaccountjob.cpp:89
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "No s'ha pogut carregar el connector %1. Comproveu la instal·lació"
+msgstr "Tidak bisa memuat plugin %1, silakan periksa instalanmu"
 
 #: src/lib/createaccountjob.cpp:147
 #, kde-format
 msgid "Cancelled by user"
-msgstr "Cancel·lada per l'usuari"
+msgstr "Dibatalkan oleh pengguna"
 
 #: src/lib/createaccountjob.cpp:224
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "S'ha produït un error en provar de processar la sol·licitud: %1"
+msgstr "Ada sebuah galat selagi mencoba memproses permintaan: %1"
 
 #: src/lib/getcredentialsjob.cpp:53
 #, kde-format
 msgid "Could not find account"
-msgstr "No s'ha pogut trobar el compte"
+msgstr "Tidak bisa menemukan akun"
 
 #: src/lib/getcredentialsjob.cpp:68
 #, kde-format
 msgid "Could not find credentials"
-msgstr "No s'han pogut trobar les credencials"
+msgstr "Tidak bisa menemukan kredensial"
 
 #: src/lib/getcredentialsjob.cpp:78
 #, kde-format
 msgid "Could not create auth session"
-msgstr "No s'ha pogut crear la sessió d'autorització"
+msgstr "Tidak bisa membuat sesi autentikasi"
 
 #: src/plugins/kio-webdav/removenetattachjob.cpp:51
 #, kde-format
 msgid "Can't open wallet"
-msgstr "No s'ha pogut obrir la cartera"
+msgstr "Tidak bisa membuka wallet"
