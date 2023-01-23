@@ -62,7 +62,6 @@ void testNetAttachJobs::testCreate()
     CreateNetAttachJob *job = new CreateNetAttachJob(this) job->setHost("host.com");
     job->setUsername("username");
     job->setPassword("password");
-    job->setIcon("modem");
     job->setUniqueId("test-unique-id");
     job->setPath("files/webdav.php/");
     job->setName("test-service");
