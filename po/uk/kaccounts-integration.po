@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:46+0000\n"
+"POT-Creation-Date: 2023-01-30 00:57+0000\n"
 "PO-Revision-Date: 2021-03-24 08:38+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -183,12 +183,12 @@ msgstr ""
 "Не вдалося завантажити додаток %1. Перевірте, чи правильно встановлено "
 "систему."
 
-#: src/lib/createaccountjob.cpp:147
+#: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Скасовано користувачем"
 
-#: src/lib/createaccountjob.cpp:224
+#: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Під час спроби обробки запиту сталася помилка: %1"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:46+0000\n"
+"POT-Creation-Date: 2023-01-30 00:57+0000\n"
 "PO-Revision-Date: 2021-03-24 14:52+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -183,12 +183,12 @@ msgstr ""
 "No se ha podido cargar el complemento %1. Por favor, compruebe su "
 "instalación."
 
-#: src/lib/createaccountjob.cpp:147
+#: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Cancelado por el usuario"
 
-#: src/lib/createaccountjob.cpp:224
+#: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Ocurrió un error al intentar procesar la petición: %1"

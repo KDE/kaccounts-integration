@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:46+0000\n"
+"POT-Creation-Date: 2023-01-30 00:57+0000\n"
 "PO-Revision-Date: 2021-10-29 17:53+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -183,12 +183,12 @@ msgid "Could not load %1 plugin, please check your installation"
 msgstr ""
 "No s'ha pogut carregar el connector %1. Si us plau, comproveu la instal·lació"
 
-#: src/lib/createaccountjob.cpp:147
+#: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Cancel·lada per l'usuari"
 
-#: src/lib/createaccountjob.cpp:224
+#: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "S'ha produït un error en provar de processar la sol·licitud: %1"

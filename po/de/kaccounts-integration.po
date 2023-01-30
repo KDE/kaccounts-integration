@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:46+0000\n"
+"POT-Creation-Date: 2023-01-30 00:57+0000\n"
 "PO-Revision-Date: 2021-04-24 10:35+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -177,12 +177,12 @@ msgstr ""
 "Das Modul %1 kann nicht geladen werden, bitte überprüfen Sie Ihre "
 "Installation"
 
-#: src/lib/createaccountjob.cpp:147
+#: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Vom Benutzer abgebrochen"
 
-#: src/lib/createaccountjob.cpp:224
+#: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Beim Bearbeiten der Anfrage ist ein Fehler aufgetreten: %1"

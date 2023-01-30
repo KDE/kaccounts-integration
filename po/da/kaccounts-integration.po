@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-14 00:46+0000\n"
+"POT-Creation-Date: 2023-01-30 00:57+0000\n"
 "PO-Revision-Date: 2021-09-09 21:51+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -178,12 +178,12 @@ msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Kunne ikke indlæse %1-plugin. Tjek din installation"
 
-#: src/lib/createaccountjob.cpp:147
+#: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Annulleret af brugeren"
 
-#: src/lib/createaccountjob.cpp:224
+#: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Der opstod en fejl under forsøg på at behandle anmodningen: %1"
