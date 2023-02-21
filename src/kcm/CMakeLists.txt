@@ -10,3 +10,4 @@ target_link_libraries(kcm_kaccounts
 install(TARGETS kcm_kaccounts DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/kcms/systemsettings)
 
 kpackage_install_package(package kcm_kaccounts kcms)
+kcmutils_generate_desktop_file(kcm_kaccounts)
