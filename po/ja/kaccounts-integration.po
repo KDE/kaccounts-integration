@@ -1,10 +1,11 @@
+# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-30 00:57+0000\n"
-"PO-Revision-Date: 2014-11-27 00:20-0800\n"
-"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2023-02-23 18:31+0900\n"
+"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -13,23 +14,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
-msgstr ""
+msgstr "アカウントの詳細"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:59
 #: src/kcm/package/contents/ui/main.qml:47
 #, kde-format
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:63
 #: src/kcm/package/contents/ui/main.qml:51
 #, kde-format
 msgid "%1 account"
-msgstr ""
+msgstr "%1 アカウント"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:73
 #, kde-format
@@ -37,18 +39,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr ""
+msgstr "アカウントの表示名を変更"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr ""
+msgstr "アカウントを使用するサービス"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr ""
+msgstr "このアカウントを削除"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:110
 #, kde-format
@@ -57,11 +59,13 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
+"このアカウントのために利用できる設定可能なサービスがありません。上の編集アイ"
+"コンをクリックして、表示名を変更することは可能です。"
 
 #: src/kcm/package/contents/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
-msgstr ""
+msgstr "新しいアカウントを追加"
 
 #: src/kcm/package/contents/ui/main.qml:58
 #, kde-format
@@ -69,13 +73,13 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr ""
+msgstr "%1 を削除"
 
 #: src/kcm/package/contents/ui/main.qml:75
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr ""
+msgstr "追加されたアカウントはありません"
 
 #: src/kcm/package/contents/ui/main.qml:76
 #, kde-kuit-format
@@ -83,17 +87,18 @@ msgctxt "@info"
 msgid ""
 "Click the <interface>Add New Account...</interface> button below to add one"
 msgstr ""
+"<interface>新しいアカウントを追加...</interface>ボタンをクリックして追加"
 
 #: src/kcm/package/contents/ui/main.qml:88
 #, kde-format
 msgid "Add New Account..."
-msgstr ""
+msgstr "新しいアカウントを追加..."
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr ""
+msgstr "削除しますか？"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
 #, kde-format
@@ -101,7 +106,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr ""
+msgstr "本当に \"%1\" アカウント \"%2\" を削除しますか？"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
 #, kde-format
@@ -109,7 +114,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr ""
+msgstr "本当にアカウント \"%1\" を削除しますか？"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
 #, kde-format
@@ -117,14 +122,14 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr ""
+msgstr "本当にこの \"%1\" アカウントを削除しますか？"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
 #, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
-msgstr ""
+msgstr "アカウントを削除"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -132,7 +137,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr ""
+msgstr "アカウントの名前を変更"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
 #, kde-format
@@ -140,7 +145,7 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr ""
+msgstr "新しい名前を入力:"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -148,50 +153,52 @@ msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
 "be set to a text specified by the user"
 msgid "Set Account Name"
-msgstr ""
+msgstr "アカウント名を設定"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:71
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr ""
+msgstr "ID %1 を使用するアカウントが見つかりませんでした"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr ""
+msgstr "アカウントマネージャがありません。"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr ""
+msgstr "表示名は空にはできません"
 
 #: src/lib/createaccountjob.cpp:89
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr ""
+"プラグイン %1 を読み込めませんでした。正しくインストールされているか確認して"
+"ください"
 
 #: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
-msgstr ""
+msgstr "ユーザによってキャンセルされました"
 
 #: src/lib/createaccountjob.cpp:261
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr ""
+msgstr "要求の処理中にエラーが発生しました: %1"
 
 #: src/lib/getcredentialsjob.cpp:53
 #, kde-format
 msgid "Could not find account"
-msgstr ""
+msgstr "アカウントが見つかりません"
 
 #: src/lib/getcredentialsjob.cpp:68
 #, kde-format
 msgid "Could not find credentials"
-msgstr ""
+msgstr "認証情報が見つかりません"
 
 #: src/lib/getcredentialsjob.cpp:78
 #, kde-format
 msgid "Could not create auth session"
-msgstr ""
+msgstr "認証セッションを作成できません"
