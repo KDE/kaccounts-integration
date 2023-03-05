@@ -2,7 +2,7 @@
     "KPlugin": {
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=systemsettings&component=kcm_kaccounts",
         "Description": "Configure your internet accounts such as Google, Live, Owncloud",
-        "Description[ar]": "اضبط حساباتك على الإنترنت كغوغل، لايڤ وسحابتك \"Owncloud\"",
+        "Description[ar]": "اضبط حساباتك على الإنترنت كغوغل، لايف وسحابتك \"Owncloud\"",
         "Description[bg]": "Настройване на интернет акаунти като Google, Live, Owncloud",
         "Description[ca@valencia]": "Configura els vostres comptes d'Internet com Google, Live, Owncloud",
         "Description[ca]": "Configura els vostres comptes d'Internet com Google, Live, Owncloud",
