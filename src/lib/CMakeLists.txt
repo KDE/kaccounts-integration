@@ -73,7 +73,13 @@ target_link_libraries (kaccounts
         ${SIGNONQT_LIBRARIES}
 )
 
-target_include_directories(kaccounts INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KAccounts>" PUBLIC "${ACCOUNTSQT_INCLUDE_DIRS}" PRIVATE "${SIGNONQT_INCLUDE_DIRS}")
+target_include_directories(kaccounts
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KAccounts>"
+)
+target_include_directories(kaccounts SYSTEM
+    PUBLIC "${ACCOUNTSQT_INCLUDE_DIRS}"
+    PRIVATE "${SIGNONQT_INCLUDE_DIRS}"
+)
 set_target_properties(kaccounts PROPERTIES VERSION   ${KACCOUNTS_VERSION}
                                            SOVERSION ${KACCOUNTS_SOVERSION}
                                            EXPORT_NAME KAccounts
