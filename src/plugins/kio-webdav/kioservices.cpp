@@ -21,7 +21,7 @@
 #include <KIO/TransferJob>
 #include <KLocalizedString>
 #include <KPluginFactory>
-#include <KWallet/KWallet>
+#include <KWallet>
 
 #include <Accounts/Manager>
 

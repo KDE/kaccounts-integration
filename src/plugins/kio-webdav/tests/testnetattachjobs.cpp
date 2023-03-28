@@ -12,7 +12,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDirNotify>
-#include <KWallet/KWallet>
+#include <KWallet>
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusConnection>
