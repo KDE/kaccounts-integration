@@ -7,11 +7,20 @@
 #ifndef ACCOUNTSSETTINGS_H
 #define ACCOUNTSSETTINGS_H
 
-#include <KQuickAddons/ConfigModule>
 #include <QObject>
 #include <QVariant>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <KQuickAddons/ConfigModule>
+#else
+#include <KQuickConfigModule>
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class AccountsSettings : public KQuickAddons::ConfigModule
+#else
+class AccountsSettings : public KQuickConfigModule
+#endif
 {
     Q_OBJECT
 

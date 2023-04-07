@@ -2,10 +2,10 @@
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Qt5Widgets @QT_REQUIRED_VERSION@)
-find_dependency(KF5CoreAddons @KF5_MIN_VERSION@)
-find_dependency(AccountsQt5 @ACCOUNTSQT_DEP_VERSION@)
-find_dependency(SignOnQt5 @SIGNONQT_DEP_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@Widgets @QT_REQUIRED_VERSION@)
+find_dependency(KF@QT_MAJOR_VERSION@CoreAddons @KF5_MIN_VERSION@)
+find_dependency(AccountsQt@QT_MAJOR_VERSION@ @ACCOUNTSQT_DEP_VERSION@)
+find_dependency(SignOnQt@QT_MAJOR_VERSION@ @SIGNONQT_DEP_VERSION@)
 
 include("${CMAKE_CURRENT_LIST_DIR}/KAccountsTargets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KAccountsMacros.cmake")

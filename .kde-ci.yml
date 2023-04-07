@@ -12,6 +12,7 @@ Dependencies:
     'frameworks/kdeclarative': '@stable'
     'frameworks/kwallet': '@stable'
     'frameworks/kio': '@stable'
+    'frameworks/kpackage': '@stable'
     'third-party/qcoro': '@latest'
     'third-party/libaccounts-qt': '@latest'
     'third-party/signond': '@latest'

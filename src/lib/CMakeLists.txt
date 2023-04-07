@@ -64,8 +64,8 @@ target_compile_definitions(kaccounts
 generate_export_header(kaccounts BASE_NAME kaccounts)
 target_link_libraries (kaccounts
     PUBLIC
-        KF5::CoreAddons
-        KF5::I18n
+        KF${QT_MAJOR_VERSION}::CoreAddons
+        KF${QT_MAJOR_VERSION}::I18n
         ${ACCOUNTSQT_LIBRARIES}
         Qt::Xml
         Qt::Gui
@@ -101,7 +101,7 @@ install(FILES
 
 install(TARGETS kaccounts EXPORT KAccountsTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF5::
+install(EXPORT KAccountsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KAccountsTargets.cmake ) #NAMESPACE KF${QT_MAJOR_VERSION}::
 
 install (FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kaccounts_export.h

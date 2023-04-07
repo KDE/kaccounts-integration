@@ -6,6 +6,6 @@ kcoreaddons_add_plugin(
 
 target_link_libraries(kded_accounts
     Qt::Core
-    KF5::DBusAddons
+    KF${QT_MAJOR_VERSION}::DBusAddons
     kaccounts
 )

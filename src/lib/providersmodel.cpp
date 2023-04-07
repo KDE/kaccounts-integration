@@ -94,7 +94,7 @@ QVariant ProvidersModel::data(const QModelIndex &index, int role) const
                         ++i;
                     }
                 }
-                data.setValue<int>(i);
+                data.setValue(i);
                 break;
             }
             default:

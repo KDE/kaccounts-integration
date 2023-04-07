@@ -139,7 +139,10 @@ Accounts::AccountId GetCredentialsJob::accountId() const
 
 QVariantMap GetCredentialsJob::credentialsData() const
 {
-    return d->sessionData.toMap().unite(d->authData);
+    auto data = d->sessionData.toMap();
+    data.insert(d->authData);
+
+    return data;
 }
 
 #include "moc_getcredentialsjob.cpp"
