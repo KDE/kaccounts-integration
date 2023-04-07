@@ -80,11 +80,9 @@ QVariant ServicesModel::data(const QModelIndex &index, int role) const
                 data.setValue(service.name());
                 break;
             case DescriptionRole:
-#if ACCOUNTSQT5_VERSION_MAJOR == 1 && ACCOUNTSQT5_VERSION_MINOR >= 16
                 // Not all services have descriptions and UIs should be designed with that in mind.
                 // Consequently, we can accept not having a fallback for this.
                 data.setValue(service.description());
-#endif
                 break;
             case DisplayNameRole:
                 data.setValue(service.displayName());
