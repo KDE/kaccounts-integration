@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-30 00:57+0000\n"
-"PO-Revision-Date: 2019-09-28 23:50+0200\n"
+"PO-Revision-Date: 2023-04-30 10:01+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,26 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:20
-#, fuzzy, kde-format
-#| msgid "Account Removal"
+#, kde-format
 msgid "Account Details"
-msgstr "Eliminación de conta"
+msgstr "Detalles da conta"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:59
 #: src/kcm/package/contents/ui/main.qml:47
 #, kde-format
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:63
 #: src/kcm/package/contents/ui/main.qml:51
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgid "%1 account"
-msgstr "Contas"
+msgstr "Conta de %1"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:73
 #, kde-format
@@ -43,18 +41,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr ""
+msgstr "Cambiar o nome para mostrar da conta"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr ""
+msgstr "Usar esta conta para"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr ""
+msgstr "Retirar esta conta"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:110
 #, kde-format
@@ -63,12 +61,13 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
+"Non hai servizos configurábeis dispoñíbeis para esta conta. Pero podes "
+"cambiar o seu nome para mostrar premendo a icona de editar de enriba."
 
 #: src/kcm/package/contents/ui/AvailableAccounts.qml:19
-#, fuzzy, kde-format
-#| msgid "ownCloud account Wizard"
+#, kde-format
 msgid "Add New Account"
-msgstr "Asistente de contas de ownCloud"
+msgstr "Engadir unha nova conta"
 
 #: src/kcm/package/contents/ui/main.qml:58
 #, kde-format
@@ -76,13 +75,13 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr ""
+msgstr "Retirar %1"
 
 #: src/kcm/package/contents/ui/main.qml:75
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr ""
+msgstr "Aínda non se engadiu ningunha conta."
 
 #: src/kcm/package/contents/ui/main.qml:76
 #, kde-kuit-format
@@ -90,72 +89,58 @@ msgctxt "@info"
 msgid ""
 "Click the <interface>Add New Account...</interface> button below to add one"
 msgstr ""
+"Preme o botón de <interface>Engadir unha nova conta…</interface> embaixo "
+"para engadir unha"
 
 #: src/kcm/package/contents/ui/main.qml:88
-#, fuzzy, kde-format
-#| msgid "ownCloud account Wizard"
+#, kde-format
 msgid "Add New Account..."
-msgstr "Asistente de contas de ownCloud"
+msgstr "Engadir unha nova conta…"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "Contas"
+msgstr "Retirar a conta?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr ""
-"Está seguro de que quere retirar a conta «%1»? Isto non pode desfacerse."
+msgstr "Seguro que quere retirar a conta «%2» de «%1»?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr ""
-"Está seguro de que quere retirar a conta «%1»? Isto non pode desfacerse."
+msgstr "Seguro que quere retirar a conta «%1»?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr ""
-"Está seguro de que quere retirar a conta «%1»? Isto non pode desfacerse."
+msgstr "Seguro que quere retirar esta conta de «%1»?"
 
 #: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
-msgstr "Contas"
+msgstr "Retirar a conta"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Contas"
+msgstr "Cambiar o nome da conta"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
 #, kde-format
@@ -163,7 +148,7 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr ""
+msgstr "Escriba o novo nome"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -171,22 +156,22 @@ msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
 "be set to a text specified by the user"
 msgid "Set Account Name"
-msgstr ""
+msgstr "Definir o nome da conta"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:71
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr ""
+msgstr "Non se atopou ningunha conta co identificador %1"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr ""
+msgstr "Non hai xestor de contas, isto non é o ideal."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr ""
+msgstr "O nome para mostrar non pode estar baleiro"
 
 #: src/lib/createaccountjob.cpp:89
 #, kde-format
@@ -197,7 +182,7 @@ msgstr "Non se puido cargar o complemento %1. Comprobe a instalación."
 #: src/lib/createaccountjob.cpp:184
 #, kde-format
 msgid "Cancelled by user"
-msgstr ""
+msgstr "Cancelado pola persoa usuaria"
 
 #: src/lib/createaccountjob.cpp:261
 #, kde-format
@@ -207,17 +192,17 @@ msgstr "Produciuse un erro ao intentar procesar a solicitude: %1"
 #: src/lib/getcredentialsjob.cpp:53
 #, kde-format
 msgid "Could not find account"
-msgstr ""
+msgstr "Non se puido atopar a conta"
 
 #: src/lib/getcredentialsjob.cpp:68
 #, kde-format
 msgid "Could not find credentials"
-msgstr ""
+msgstr "Non se puideron atopar as credenciais"
 
 #: src/lib/getcredentialsjob.cpp:78
 #, kde-format
 msgid "Could not create auth session"
-msgstr ""
+msgstr "Non se puido crear unha sesión de autenticación"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
