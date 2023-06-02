@@ -56,7 +56,7 @@ ScrollViewKCM {
             actions: [
                 Kirigami.Action {
                     text: i18ndc("kaccounts-integration", "Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
-                    iconName: "edit-delete-remove"
+                    icon.name: "edit-delete-remove"
                     onTriggered: {
                         accountRemover.accountId = model.id;
                         accountRemover.displayName = model.displayName;
