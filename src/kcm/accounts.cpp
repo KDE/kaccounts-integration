@@ -15,7 +15,7 @@ AccountsSettings::AccountsSettings(QObject *parent, const KPluginMetaData &data,
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     : KQuickAddons::ConfigModule(parent, data, args)
 #else
-    : KQuickConfigModule(parent, data, args)
+    : KQuickConfigModule(parent, data)
 #endif
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
