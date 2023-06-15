@@ -10,7 +10,7 @@ import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
 
 import org.kde.kirigami 2.4 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.kcmutils
 
 import org.kde.kaccounts 1.2 as KAccounts
 
