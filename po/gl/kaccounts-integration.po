@@ -41,7 +41,7 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Cambiar o nome para mostrar da conta"
+msgstr "Cambiar o nome para amosar da conta"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
@@ -62,7 +62,7 @@ msgid ""
 "change its display name by clicking the edit icon above."
 msgstr ""
 "Non hai servizos configurábeis dispoñíbeis para esta conta. Pero podes "
-"cambiar o seu nome para mostrar premendo a icona de editar de enriba."
+"cambiar o seu nome para amosar premendo a icona de editar de enriba."
 
 #: src/kcm/package/contents/ui/AvailableAccounts.qml:19
 #, kde-format
@@ -171,7 +171,7 @@ msgstr "Non hai xestor de contas, isto non é o ideal."
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "O nome para mostrar non pode estar baleiro"
+msgstr "O nome para amosar non pode estar baleiro"
 
 #: src/lib/createaccountjob.cpp:89
 #, kde-format
