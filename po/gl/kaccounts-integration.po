@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-30 00:57+0000\n"
-"PO-Revision-Date: 2023-04-30 10:01+0200\n"
+"PO-Revision-Date: 2023-06-23 22:22+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:20
 #, kde-format
@@ -41,7 +41,7 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Cambiar o nome para amosar da conta"
+msgstr "Cambiar o nome visual da conta"
 
 #: src/kcm/package/contents/ui/AccountDetails.qml:81
 #, kde-format
@@ -62,7 +62,7 @@ msgid ""
 "change its display name by clicking the edit icon above."
 msgstr ""
 "Non hai servizos configurábeis dispoñíbeis para esta conta. Pero podes "
-"cambiar o seu nome para amosar premendo a icona de editar de enriba."
+"cambiar o seu nome visual premendo a icona de editar de enriba."
 
 #: src/kcm/package/contents/ui/AvailableAccounts.qml:19
 #, kde-format
@@ -140,7 +140,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Cambiar o nome da conta"
+msgstr "Renomear a conta"
 
 #: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
 #, kde-format
@@ -171,7 +171,7 @@ msgstr "Non hai xestor de contas, isto non é o ideal."
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "O nome para amosar non pode estar baleiro"
+msgstr "O nome visual non pode estar baleiro"
 
 #: src/lib/createaccountjob.cpp:89
 #, kde-format
