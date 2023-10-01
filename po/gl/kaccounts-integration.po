@@ -177,7 +177,7 @@ msgstr "O nome visual non pode estar baleiro"
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "Non se puido cargar o complemento %1. Comprobe a instalación."
+msgstr "Non foi posíbel cargar o complemento %1. Comprobe a instalación."
 
 #: src/lib/createaccountjob.cpp:184
 #, kde-format
@@ -192,17 +192,17 @@ msgstr "Produciuse un erro ao intentar procesar a solicitude: %1"
 #: src/lib/getcredentialsjob.cpp:53
 #, kde-format
 msgid "Could not find account"
-msgstr "Non se puido atopar a conta"
+msgstr "Non foi posíbel atopar a conta"
 
 #: src/lib/getcredentialsjob.cpp:68
 #, kde-format
 msgid "Could not find credentials"
-msgstr "Non se puideron atopar as credenciais"
+msgstr "Non foi posíbel atopar as credenciais"
 
 #: src/lib/getcredentialsjob.cpp:78
 #, kde-format
 msgid "Could not create auth session"
-msgstr "Non se puido crear unha sesión de autenticación"
+msgstr "Non foi posíbel crear unha sesión de autenticación"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
