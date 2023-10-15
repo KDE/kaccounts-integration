@@ -4,13 +4,13 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami as Kirigami
 
-import org.kde.kaccounts 1.2 as KAccounts
+import org.kde.kaccounts as KAccounts
 
 MessageBoxSheet {
     id: component
@@ -18,7 +18,7 @@ MessageBoxSheet {
     property int accountId
     property string currentDisplayName
     signal accountRenamed()
-    onSheetOpenChanged: {
+    onVisibleChanged: {
         if (sheetOpen === true) {
             newAccountDisplayName.text = currentDisplayName;
         }
@@ -31,6 +31,12 @@ MessageBoxSheet {
             Kirigami.FormData.label: i18ndc("kaccounts-integration", "Label for the text field used to enter a new human-readable name for an account", "Enter new name:")
         }
     }
+    Component {
+        id: accountDisplayNameJob
+        KAccounts.ChangeAccountDisplayNameJob {
+            onFinished: component.accountRenamed()
+        }
+    }
     actions: [
         Kirigami.Action {
             enabled: newAccountDisplayName.text.length > 0 && newAccountDisplayName.text !== component.currentDisplayName
@@ -38,12 +44,6 @@ MessageBoxSheet {
             onTriggered: {
                 var job = accountDisplayNameJob.createObject(component, { "accountId": component.accountId, "displayName": newAccountDisplayName.text })
                 job.start();
-            }
-            Component {
-                id: accountDisplayNameJob
-                KAccounts.ChangeAccountDisplayNameJob {
-                    onFinished: component.accountRenamed()
-                }
             }
         }
     ]

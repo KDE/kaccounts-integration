@@ -5,16 +5,16 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.14 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-import org.kde.kaccounts 1.2 as KAccounts
+import org.kde.kaccounts as KAccounts
 
-ScrollViewKCM {
+KCM.ScrollViewKCM {
     id: component;
 
     title: i18nd("kaccounts-integration", "Account Details")
@@ -111,12 +111,12 @@ ScrollViewKCM {
             }
         }
 
-        delegate: Kirigami.CheckableListItem {
-            icon: undefined
+        delegate: Kirigami.CheckSubtitleDelegate {
+            width: ListView.view.width
             text: model.displayName
-            subtitle: model.description
-
             checked: model.enabled
+            subtitle: model.description
+            icon.width: 0
 
             action: Controls.Action {
                 onTriggered: {

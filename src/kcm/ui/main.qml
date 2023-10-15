@@ -5,16 +5,16 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.12 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-import org.kde.kaccounts 1.2 as KAccounts
+import org.kde.kaccounts as KAccounts
 
-ScrollViewKCM {
+KCM.ScrollViewKCM {
     id: kaccountsRoot
 
     implicitHeight: Kirigami.Units.gridUnit * 28
@@ -28,34 +28,29 @@ ScrollViewKCM {
         model: KAccounts.AccountsModel { }
 
         delegate: Kirigami.SwipeListItem {
-            id: accountDelegate
+            id: delegate
             width: ListView.view.width
 
-            contentItem: RowLayout {
-                implicitWidth: accountDelegate.ListView.view.width
-                implicitHeight: Kirigami.Units.iconSizes.large + Kirigami.Units.smallSpacing * 2
-                spacing: Kirigami.Units.smallSpacing
-                Kirigami.Icon {
-                    source: model.iconName
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
-                }
-                Controls.Label {
-                    Layout.fillWidth: true
-                    text: {
-                        if (model.displayName.length > 0 && model.providerName.length > 0) {
-                            return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerDisplayName)
-                        } else if (model.displayName.length > 0) {
-                            return model.displayName
-                        } else {
-                            return i18nd("kaccounts-integration", "%1 account", model.providerName)
-                        }
+            contentItem: Kirigami.IconTitleSubtitle {
+                Layout.fillWidth: true
+
+                icon.name: model.iconName
+                title: {
+                    if (model.displayName.length > 0 && model.providerName.length > 0) {
+                        return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerDisplayName)
+                    } else if (model.displayName.length > 0) {
+                        return model.displayName
+                    } else {
+                        return i18nd("kaccounts-integration", "%1 account", model.providerName)
                     }
                 }
+                selected: delegate.highlighted
+                font: delegate.font
             }
+
             actions: [
                 Kirigami.Action {
-                    text: i18ndc("kaccounts-integration", "Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", accountDelegate.contentItem.text)
+                    text: i18ndc("kaccounts-integration", "Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", delegate.contentItem.text)
                     icon.name: "edit-delete-remove"
                     onTriggered: {
                         accountRemover.accountId = model.id;

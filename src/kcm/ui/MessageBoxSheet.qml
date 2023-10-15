@@ -4,11 +4,11 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as QtControls
-import QtQuick.Layouts 1.12 as QtLayouts
+import QtQuick
+import QtQuick.Controls as QtControls
+import QtQuick.Layouts as QtLayouts
 
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Kirigami.OverlaySheet {
     id: component
@@ -23,7 +23,7 @@ Kirigami.OverlaySheet {
         QtLayouts.Layout.fillWidth: true
         elide: Text.ElideRight
     }
-    contentItem: QtControls.Label {
+    QtControls.Label {
         id: messageLabel
         QtLayouts.Layout.preferredWidth: Kirigami.Units.gridUnit * 10
         QtLayouts.Layout.margins: Kirigami.Units.largeSpacing

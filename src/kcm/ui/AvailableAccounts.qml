@@ -1,0 +1,70 @@
+/*
+ *   SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
+ *   SPDX-FileCopyrightText: 2020 Dan Leinir Turthra Jensen <admin@leinir.dk>
+ *
+ *   SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
+
+import org.kde.kaccounts as KAccounts
+
+KCM.ScrollViewKCM {
+    id: root
+    title: i18nd("kaccounts-integration", "Add New Account")
+
+    header: Kirigami.InlineMessage {
+        id: errorMessage
+        type: Kirigami.MessageType.Error
+        showCloseButton: true
+        visible: false
+    }
+
+    view: ListView {
+
+        id: accountListView
+        clip: true
+
+        model: KAccounts.ProvidersModel {}
+
+        delegate: Kirigami.SubtitleDelegate {
+            width: ListView.view.width
+
+            icon.name: model.iconName
+            text: model.displayName
+            subtitle: model.description
+            enabled: model.supportsMultipleAccounts === true || model.accountsCount === 0
+
+            onClicked: {
+                var job = jobComponent.createObject(root, { "providerName": model.name })
+                job.start()
+                accountListView.currentIndex = -1
+            }
+        }
+    }
+
+    Component {
+        id: jobComponent
+        KAccounts.CreateAccountJob {
+            onFinished: {
+                // Don't close when there is an error to show an error message
+                if (error == 0) {
+                    kcm.pop()
+                } else {
+
+                    if (error === 1) { // KJob::KilledJobError, cancelled by user
+                        return
+                    }
+
+                    errorMessage.text = errorText
+                    errorMessage.visible = true
+                }
+            }
+        }
+    }
+}

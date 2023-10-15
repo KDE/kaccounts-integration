@@ -4,12 +4,12 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami as Kirigami
 
-import org.kde.kaccounts 1.2 as KAccounts
+import org.kde.kaccounts as KAccounts
 
 MessageBoxSheet {
     id: component
@@ -17,6 +17,14 @@ MessageBoxSheet {
     property string displayName
     property string providerName
     signal accountRemoved()
+
+    Component {
+        id: accountRemovalJob
+        KAccounts.RemoveAccountJob {
+            onFinished: component.accountRemoved()
+        }
+    }
+
     title: i18ndc("kaccounts-integration", "The title for a dialog which lets you remove an account", "Remove Account?")
     text: {
         if (displayName.length > 0 && providerName.length > 0) {
@@ -33,12 +41,6 @@ MessageBoxSheet {
             onTriggered: {
                 var job = accountRemovalJob.createObject(component, { "accountId": component.accountId });
                 job.start();
-            }
-            Component {
-                id: accountRemovalJob
-                KAccounts.RemoveAccountJob {
-                    onFinished: component.accountRemoved()
-                }
             }
         }
     ]
