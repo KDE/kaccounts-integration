@@ -39,6 +39,7 @@
         "Description[sv]": "Kontohantering",
         "Description[tr]": "Hesaplar yönetimi",
         "Description[uk]": "Керування обліковими записами",
+        "Description[x-test]": "xxAccounts managementxx",
         "Description[zh_CN]": "账户管理",
         "Description[zh_TW]": "帳號管理",
         "Name": "Accounts",
@@ -80,6 +81,7 @@
         "Name[sv]": "Konton",
         "Name[tr]": "Hesaplar",
         "Name[uk]": "Облікові записи",
+        "Name[x-test]": "xxAccountsxx",
         "Name[zh_CN]": "账户",
         "Name[zh_TW]": "帳號"
     },

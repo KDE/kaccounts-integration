@@ -38,6 +38,7 @@
         "Description[sv]": "Montera delade WebDAV-resurser med KIO",
         "Description[tr]": "KIO ile WebDAV paylaşımlarınızı bağlayın",
         "Description[uk]": "Монтування спільних ресурсів WebDAV за допомогою KIO",
+        "Description[x-test]": "xxMount WebDAV shares with KIOxx",
         "Description[zh_CN]": "用 KIO 挂载 WebDAV 共享",
         "Description[zh_TW]": "使用 KIO 掛載 WebDAV 共用項目",
         "EnabledByDefault": true,
@@ -82,6 +83,7 @@
         "Name[sv]": "KIO WebDAV",
         "Name[tr]": "KIO WebDAV",
         "Name[uk]": "KIO WebDAV",
+        "Name[x-test]": "xxKIO WebDAVxx",
         "Name[zh_CN]": "KIO WebDAV",
         "Name[zh_TW]": "KIO WebDAV",
         "Version": "0.1"
