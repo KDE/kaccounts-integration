@@ -1,7 +1,10 @@
 add_definitions(-DTRANSLATION_DOMAIN="kaccounts-integration")
 
-add_subdirectory(kded)
 add_subdirectory(lib)
 add_subdirectory(declarative)
-add_subdirectory(kcm)
-add_subdirectory(plugins)
+
+if (NOT KF6_COMPAT_BUILD)
+    add_subdirectory(plugins)
+    add_subdirectory(kcm)
+    add_subdirectory(kded)
+endif()

@@ -35,6 +35,8 @@ set(ACCOUNTSQT_DEP_VERSION "1.16")
 set(SIGNONQT_DEP_VERSION "8.55")
 set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
+option(KF6_COMPAT_BUILD "Enable this to get a build to support KF5 applications" OFF)
+
 find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
 find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative Wallet KIO Package)
 
@@ -63,7 +65,9 @@ ecm_set_disabled_deprecation_versions(QT 5.13.0
 
 add_subdirectory(src)
 
-ki18n_install(po)
+if (NOT KF6_COMPAT_BUILD)
+   ki18n_install(po)
+endif()
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
