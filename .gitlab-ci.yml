@@ -4,6 +4,7 @@
 include:
   - project: sysadmin/ci-utilities
     file:
+      - /gitlab-templates/json-validation.yml
   #    - /gitlab-templates/reuse-lint.yml
       # - /gitlab-templates/linux-qt6.yml # no libaccounts-qt and friends in CI yet
       # - /gitlab-templates/freebsd-qt6.yml
