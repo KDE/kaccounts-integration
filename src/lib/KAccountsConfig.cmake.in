@@ -7,7 +7,7 @@ find_dependency(KF@QT_MAJOR_VERSION@CoreAddons @KF5_MIN_VERSION@)
 find_dependency(AccountsQt@QT_MAJOR_VERSION@ @ACCOUNTSQT_DEP_VERSION@)
 find_dependency(SignOnQt@QT_MAJOR_VERSION@ @SIGNONQT_DEP_VERSION@)
 
-include("${CMAKE_CURRENT_LIST_DIR}/KAccountsTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KAccounts@KACCOUNTS_SUFFIX@Targets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KAccountsMacros.cmake")
 
 set(KACCOUNTS_MACROS_PATH "${CMAKE_CURRENT_LIST_DIR}")
