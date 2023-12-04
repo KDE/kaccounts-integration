@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:31+0000\n"
+"POT-Creation-Date: 2023-12-04 00:41+0000\n"
 "PO-Revision-Date: 2021-10-29 17:53+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21,24 +21,22 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
 msgstr "Detalls del compte"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:59
-#: src/kcm/package/contents/ui/main.qml:47
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:63
-#: src/kcm/package/contents/ui/main.qml:51
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
 #, kde-format
 msgid "%1 account"
 msgstr "Compte de %1"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#: src/kcm/ui/AccountDetails.qml:73
 #, kde-format
 msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
@@ -46,18 +44,18 @@ msgctxt ""
 msgid "Change Account Display Name"
 msgstr "Canvia el nom a mostrar del compte"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
 msgstr "Usa aquest compte per a"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
 msgstr "Elimina aquest compte"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
 msgctxt "A text shown when an account has no configurable services"
 msgid ""
@@ -67,12 +65,12 @@ msgstr ""
 "No hi ha cap servei configurable per a aquest compte. Encara podreu canviar "
 "el seu nom a mostrar fent clic a la icona d'edició de dalt."
 
-#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#: src/kcm/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
 msgstr "Afegeix un compte nou"
 
-#: src/kcm/package/contents/ui/main.qml:58
+#: src/kcm/ui/main.qml:53
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -80,13 +78,13 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "Elimina %1"
 
-#: src/kcm/package/contents/ui/main.qml:75
+#: src/kcm/ui/main.qml:70
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "Encara no s'ha afegit cap compte"
 
-#: src/kcm/package/contents/ui/main.qml:76
+#: src/kcm/ui/main.qml:71
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -95,18 +93,18 @@ msgstr ""
 "Feu clic al botó <interface>Afegeix un compte nou...</interface> que hi ha a "
 "sota per a afegir-ne un"
 
-#: src/kcm/package/contents/ui/main.qml:88
+#: src/kcm/ui/main.qml:83
 #, kde-format
 msgid "Add New Account..."
 msgstr "Afegeix un compte nou..."
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Elimino el compte?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#: src/kcm/ui/RemoveAccountDialog.qml:31
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -114,7 +112,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Esteu segur que voleu eliminar el compte «%2» de «%1»?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#: src/kcm/ui/RemoveAccountDialog.qml:33
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -122,7 +120,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Esteu segur que voleu eliminar el compte «%1»?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#: src/kcm/ui/RemoveAccountDialog.qml:35
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
@@ -130,14 +128,14 @@ msgctxt ""
 msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "Esteu segur que voleu eliminar aquest compte de «%1»?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
 msgstr "Elimina el compte"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
 msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
@@ -145,7 +143,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Reanomena el compte"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#: src/kcm/ui/RenameAccountDialog.qml:31
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
@@ -153,7 +151,7 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Introduïu el nom nou:"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#: src/kcm/ui/RenameAccountDialog.qml:43
 #, kde-format
 msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "

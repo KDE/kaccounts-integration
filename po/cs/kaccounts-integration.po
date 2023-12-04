@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:31+0000\n"
+"POT-Creation-Date: 2023-12-04 00:41+0000\n"
 "PO-Revision-Date: 2023-01-04 10:29+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,24 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:20
+#: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
 msgstr "Podrobnosti o účtu"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:59
-#: src/kcm/package/contents/ui/main.qml:47
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:63
-#: src/kcm/package/contents/ui/main.qml:51
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
 #, kde-format
 msgid "%1 account"
 msgstr "%1 účet"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:73
+#: src/kcm/ui/AccountDetails.qml:73
 #, kde-format
 msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
@@ -43,18 +41,18 @@ msgctxt ""
 msgid "Change Account Display Name"
 msgstr "Změnit zobrazovaný název účtu"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:81
+#: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
 msgstr "Použít tento účet pro"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:88
+#: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
 msgstr "Odstranit tento účet"
 
-#: src/kcm/package/contents/ui/AccountDetails.qml:110
+#: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
 msgctxt "A text shown when an account has no configurable services"
 msgid ""
@@ -62,12 +60,12 @@ msgid ""
 "change its display name by clicking the edit icon above."
 msgstr ""
 
-#: src/kcm/package/contents/ui/AvailableAccounts.qml:19
+#: src/kcm/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
 msgstr "Přidat nový účet"
 
-#: src/kcm/package/contents/ui/main.qml:58
+#: src/kcm/ui/main.qml:53
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -75,13 +73,13 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "Odstranit %1"
 
-#: src/kcm/package/contents/ui/main.qml:75
+#: src/kcm/ui/main.qml:70
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "Žádné účty zatím nebyly přidány"
 
-#: src/kcm/package/contents/ui/main.qml:76
+#: src/kcm/ui/main.qml:71
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -90,18 +88,18 @@ msgstr ""
 "Pro přidání klikněte na tlačítko <interface>Přidat nový účet...</interface> "
 "níže"
 
-#: src/kcm/package/contents/ui/main.qml:88
+#: src/kcm/ui/main.qml:83
 #, kde-format
 msgid "Add New Account..."
 msgstr "Přidat nový účet..."
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:20
+#: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Odstranit účet"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:23
+#: src/kcm/ui/RemoveAccountDialog.qml:31
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -109,7 +107,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Opravdu si přejete odstranit  \"%1\"  účet \"%2\"?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:25
+#: src/kcm/ui/RemoveAccountDialog.qml:33
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -117,7 +115,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Opravdu si přejete odstranit účet \"%1\"?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:27
+#: src/kcm/ui/RemoveAccountDialog.qml:35
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
@@ -125,14 +123,14 @@ msgctxt ""
 msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "Určitě chcete odstranit tento \"%1\" účet?"
 
-#: src/kcm/package/contents/ui/RemoveAccountDialog.qml:32
+#: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
 msgstr "Odstranit účet"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:17
+#: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
 msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
@@ -140,7 +138,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Přejmenovat účet"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:31
+#: src/kcm/ui/RenameAccountDialog.qml:31
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
@@ -148,7 +146,7 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Zadejte nový název:"
 
-#: src/kcm/package/contents/ui/RenameAccountDialog.qml:37
+#: src/kcm/ui/RenameAccountDialog.qml:43
 #, kde-format
 msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
