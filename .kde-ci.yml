@@ -16,3 +16,6 @@ Dependencies:
     'third-party/qcoro': '@latest'
     'third-party/libaccounts-qt': '@latest'
     'third-party/signond': '@latest'
+
+Options:
+  cmake-options: "-DKF6_COMPAT_BUILD=ON" # This is for the Qt5 build. Revisit this once we have a working Qt6 build and only enable for Qt5
