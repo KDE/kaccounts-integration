@@ -10,6 +10,9 @@
 #include <Accounts/Manager>
 #include <Accounts/Provider>
 
+namespace KAccounts
+{
+
 class ProvidersModel::Private
 {
 public:
@@ -105,3 +108,5 @@ QVariant ProvidersModel::data(const QModelIndex &index, int role) const
     }
     return data;
 }
+
+};

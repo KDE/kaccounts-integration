@@ -14,6 +14,9 @@
 #include <Accounts/Service>
 #include <QObject>
 
+namespace KAccounts
+{
+
 /**
  * Plugin for KAccounts daemon
  *
@@ -74,6 +77,8 @@ public Q_SLOTS:
      * @param service The service that got disabled
      */
     virtual void onServiceDisabled(const Accounts::AccountId accountId, const Accounts::Service &service) = 0;
+};
+
 };
 
 #endif // KACCOUNTSDPLUGIN_H

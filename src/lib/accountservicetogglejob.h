@@ -13,6 +13,9 @@
 
 #include <QStringList>
 
+namespace KAccounts
+{
+
 /**
  * @brief A job used to change the enabled state of a specific service on a specific account
  */
@@ -46,4 +49,7 @@ private:
     class Private;
     Private *d;
 };
+
+};
+
 #endif // ACCOUNTSERVICETOGGLE_H

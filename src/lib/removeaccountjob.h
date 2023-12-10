@@ -13,6 +13,9 @@
 
 #include <QString>
 
+namespace KAccounts
+{
+
 /**
  * @brief A job which will attempt to remove the specified account
  */
@@ -34,4 +37,7 @@ private:
     class Private;
     Private *d;
 };
+
+};
+
 #endif // REMOVEACCOUNT_H

@@ -10,6 +10,9 @@
 #include <QVariant>
 #include <QWindow>
 
+namespace KAccounts
+{
+
 KAccountsUiPlugin::KAccountsUiPlugin(QObject *parent)
     : QObject(parent)
 {
@@ -23,5 +26,7 @@ QWindow *KAccountsUiPlugin::transientParent() const
 {
     return property("transientParent").value<QWindow *>();
 }
+
+};
 
 #include "moc_kaccountsuiplugin.cpp"

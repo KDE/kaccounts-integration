@@ -11,6 +11,9 @@
 #include <KLocalizedString>
 #include <QDebug>
 
+namespace KAccounts
+{
+
 class ChangeAccountDisplayNameJob::Private
 {
 public:
@@ -82,3 +85,5 @@ void ChangeAccountDisplayNameJob::start()
         emitResult();
     }
 }
+
+};

@@ -17,6 +17,9 @@
 #include <QDebug>
 #include <QTimer>
 
+namespace KAccounts
+{
+
 class GetCredentialsJob::Private
 {
 public:
@@ -143,6 +146,8 @@ QVariantMap GetCredentialsJob::credentialsData() const
     data.insert(d->authData);
 
     return data;
+}
+
 }
 
 #include "moc_getcredentialsjob.cpp"

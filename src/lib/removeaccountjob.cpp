@@ -11,6 +11,9 @@
 #include <QDebug>
 #include <SignOn/Identity>
 
+namespace KAccounts
+{
+
 class RemoveAccountJob::Private
 {
 public:
@@ -71,3 +74,5 @@ void RemoveAccountJob::start()
         emitResult();
     }
 }
+
+};

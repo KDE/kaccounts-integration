@@ -10,6 +10,9 @@
 #include <Accounts/Manager>
 #include <QDebug>
 
+namespace KAccounts
+{
+
 class AccountServiceToggleJob::Private
 {
 public:
@@ -128,4 +131,5 @@ void AccountServiceToggleJob::start()
         qWarning() << "No accounts manager, this is not awesome.";
         emitResult();
     }
+}
 }

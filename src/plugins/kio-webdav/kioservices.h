@@ -26,7 +26,7 @@ namespace Accounts
 class Manager;
 }
 
-class KIOServices : public KAccountsDPlugin
+class KIOServices : public KAccounts::KAccountsDPlugin
 {
     Q_OBJECT
 

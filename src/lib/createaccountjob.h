@@ -27,6 +27,9 @@ class SessionData;
 class IdentityInfo;
 }
 
+namespace KAccounts
+{
+
 /**
  * @brief Create a new account for the specified provider
  */
@@ -69,4 +72,7 @@ private:
     SignOn::Identity *m_identity = nullptr;
     bool m_done = false;
 };
+
+};
+
 #endif // CREATE_ACCOUNT_JOB_H

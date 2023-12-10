@@ -30,7 +30,7 @@ using namespace KWallet;
 K_PLUGIN_CLASS_WITH_JSON(KIOServices, "kio-webdav.json")
 
 KIOServices::KIOServices(QObject *parent, const QVariantList &args)
-    : KAccountsDPlugin(parent, args)
+    : KAccounts::KAccountsDPlugin(parent, args)
 {
 }
 
@@ -129,7 +129,7 @@ QCoro::Task<void> KIOServices::createNetAttach(const Accounts::AccountId account
     std::unique_ptr<Accounts::Account> account(KAccounts::accountsManager()->account(accountId));
     const Accounts::Service service = _service;
 
-    GetCredentialsJob *job = new GetCredentialsJob(accountId, QString(), QString(), this);
+    KAccounts::GetCredentialsJob *job = new KAccounts::GetCredentialsJob(accountId, QString(), QString(), this);
     job->setServiceType(service.serviceType());
     job->start();
 

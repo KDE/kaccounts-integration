@@ -11,7 +11,10 @@
 
 #include <Accounts/Account>
 
+namespace KAccounts
+{
 class KAccountsDPlugin;
+};
 
 class KDEDAccounts : public KDEDModule
 {
@@ -31,7 +34,7 @@ public Q_SLOTS:
 private:
     void monitorAccount(const Accounts::AccountId id);
 
-    QList<KAccountsDPlugin *> m_plugins;
+    QList<KAccounts::KAccountsDPlugin *> m_plugins;
 };
 
 #endif /*ACCOUNTS_DAEMON_H*/

@@ -17,6 +17,9 @@ namespace Accounts
 class Manager;
 }
 
+namespace KAccounts
+{
+
 /**
  * @brief A KJob for obtaining user's credentials for the given Accounts::AccountId
  */
@@ -78,6 +81,8 @@ private:
     class Private;
     Private *const d;
     Q_PRIVATE_SLOT(d, void getCredentials())
+};
+
 };
 
 #endif // GET_CREDENTIALS_JOB_H

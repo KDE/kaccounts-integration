@@ -13,6 +13,9 @@
 
 #include <QStringList>
 
+namespace KAccounts
+{
+
 /**
  * @brief A job used to change the human-readable name of a specified account
  *
@@ -42,4 +45,7 @@ private:
     class Private;
     Private *d;
 };
+
+};
+
 #endif // CHANGEACCOUNTDISPLAYNAMEJOB_H

@@ -36,7 +36,7 @@ KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant> &)
             continue;
         }
 
-        const auto result = KPluginFactory::instantiatePlugin<KAccountsDPlugin>(metadata, this, {});
+        const auto result = KPluginFactory::instantiatePlugin<KAccounts::KAccountsDPlugin>(metadata, this, {});
 
         if (!result) {
             qDebug() << "Error loading plugin" << metadata.name() << result.errorString;
@@ -82,7 +82,7 @@ void KDEDAccounts::accountCreated(const Accounts::AccountId id)
     const Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     const Accounts::ServiceList services = acc->enabledServices();
 
-    for (KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
+    for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
         plugin->onAccountCreated(id, services);
     }
 }
@@ -91,7 +91,7 @@ void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 {
     qDebug() << id;
 
-    for (KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
+    for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
         plugin->onAccountRemoved(id);
     }
 }
@@ -108,11 +108,11 @@ void KDEDAccounts::enabledChanged(const QString &serviceName, bool enabled)
 
     const Accounts::Service service = KAccounts::accountsManager()->service(serviceName);
     if (!enabled) {
-        for (KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
+        for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
             plugin->onServiceDisabled(accId, service);
         }
     } else {
-        for (KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
+        for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
             plugin->onServiceEnabled(accId, service);
         }
     }

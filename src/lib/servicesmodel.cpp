@@ -18,6 +18,9 @@
 #include <Accounts/Account>
 #include <Accounts/Manager>
 
+namespace KAccounts
+{
+
 class ServicesModel::Private : public QObject
 {
 public:
@@ -179,3 +182,5 @@ QString ServicesModel::accountIconName() const
     }
     return QString::fromLatin1("user-identity");
 }
+
+};

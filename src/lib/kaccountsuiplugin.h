@@ -14,6 +14,9 @@
 
 class QWindow;
 
+namespace KAccounts
+{
+
 class KACCOUNTS_EXPORT KAccountsUiPlugin : public QObject
 {
     Q_OBJECT
@@ -95,6 +98,8 @@ Q_SIGNALS:
     void canceled();
 };
 
-Q_DECLARE_INTERFACE(KAccountsUiPlugin, "org.kde.kaccounts.UiPlugin")
+};
+
+Q_DECLARE_INTERFACE(KAccounts::KAccountsUiPlugin, "org.kde.kaccounts.UiPlugin")
 
 #endif // KACCOUNTSUIPLUGIN_H

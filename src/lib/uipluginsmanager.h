@@ -9,10 +9,9 @@
 
 #include <QList>
 
-class KAccountsUiPlugin;
-
 namespace KAccounts
 {
+class KAccountsUiPlugin;
 class UiPluginsManager
 {
 public:
@@ -21,6 +20,6 @@ public:
     static KAccountsUiPlugin *pluginForName(const QString &name);
 };
 
-}
+};
 
 #endif // UIPLUGINSMANAGER_H

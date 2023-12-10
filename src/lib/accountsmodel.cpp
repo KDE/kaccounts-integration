@@ -20,6 +20,9 @@
 #include <Accounts/Account>
 #include <Accounts/Manager>
 
+namespace KAccounts
+{
+
 class AccountsModel::Private : public QObject
 {
 public:
@@ -179,3 +182,5 @@ QVariant AccountsModel::data(const QModelIndex &index, int role) const
 
     return data;
 }
+
+};

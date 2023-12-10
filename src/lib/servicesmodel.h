@@ -12,6 +12,9 @@
 
 #include <QAbstractListModel>
 
+namespace KAccounts
+{
+
 /**
  * @brief A model which represents the services in a single account
  *
@@ -85,6 +88,8 @@ Q_SIGNALS:
 private:
     class Private;
     Private *d;
+};
+
 };
 
 #endif // SERVICES_MODEL_H

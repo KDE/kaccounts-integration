@@ -11,6 +11,9 @@
 
 #include <QAbstractListModel>
 
+namespace KAccounts
+{
+
 /**
  * @brief A model which represents the available providers
  *
@@ -47,6 +50,8 @@ public:
 private:
     class Private;
     Private *d;
+};
+
 };
 
 #endif // PROVIDERS_MODEL_H

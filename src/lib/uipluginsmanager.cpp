@@ -18,7 +18,8 @@
 #include <QStringList>
 #include <QWindow>
 
-using namespace KAccounts;
+namespace KAccounts
+{
 
 class UiPluginsManagerPrivate
 {
@@ -117,3 +118,5 @@ KAccountsUiPlugin *UiPluginsManager::pluginForService(const QString &service)
 
     return s_instance->pluginsForServices.value(service);
 }
+
+};

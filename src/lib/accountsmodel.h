@@ -14,6 +14,9 @@
 
 #include <Accounts/Account>
 
+namespace KAccounts
+{
+
 /**
  * @brief A model representing all the accounts registered on a system
  *
@@ -57,6 +60,8 @@ public:
 private:
     class Private;
     Private *d;
+};
+
 };
 
 #endif // ACCOUNTS_MODEL_H

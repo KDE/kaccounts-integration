@@ -21,6 +21,9 @@
 
 #include <KLocalizedString>
 
+namespace KAccounts
+{
+
 CreateAccountJob::CreateAccountJob(QObject *parent)
     : CreateAccountJob(QString(), parent)
 {
@@ -269,3 +272,5 @@ void CreateAccountJob::setProviderName(const QString &name)
         Q_EMIT providerNameChanged();
     }
 }
+
+};
