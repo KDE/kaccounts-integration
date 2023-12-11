@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:41+0000\n"
+"POT-Creation-Date: 2023-12-11 01:35+0000\n"
 "PO-Revision-Date: 2021-09-09 21:51+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -155,48 +155,48 @@ msgctxt ""
 msgid "Set Account Name"
 msgstr "Angiv kontonavn"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:71
+#: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Ingen konto fundet med id %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:76
+#: src/lib/changeaccountdisplaynamejob.cpp:79
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Ingen håndtering af konti, dette er ikke optimalt."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:81
+#: src/lib/changeaccountdisplaynamejob.cpp:84
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Det viste navn må ikke være tomt"
 
-#: src/lib/createaccountjob.cpp:89
+#: src/lib/createaccountjob.cpp:92
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Kunne ikke indlæse %1-plugin. Tjek din installation"
 
-#: src/lib/createaccountjob.cpp:184
+#: src/lib/createaccountjob.cpp:187
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Annulleret af brugeren"
 
-#: src/lib/createaccountjob.cpp:261
+#: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Der opstod en fejl under forsøg på at behandle anmodningen: %1"
 
-#: src/lib/getcredentialsjob.cpp:53
+#: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
 msgstr "Kunne ikke finde konto"
 
-#: src/lib/getcredentialsjob.cpp:68
+#: src/lib/getcredentialsjob.cpp:71
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Kunne ikke finde akkreditiver"
 
-#: src/lib/getcredentialsjob.cpp:78
+#: src/lib/getcredentialsjob.cpp:81
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Kunne ikke oprette auth-session"

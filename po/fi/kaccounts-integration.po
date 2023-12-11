@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:41+0000\n"
+"POT-Creation-Date: 2023-12-11 01:35+0000\n"
 "PO-Revision-Date: 2022-07-29 22:29+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -158,48 +158,48 @@ msgctxt ""
 msgid "Set Account Name"
 msgstr "Aseta tilin nimi"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:71
+#: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Tunnistetta %1 vastaavaa tiliä ei löytynyt."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:76
+#: src/lib/changeaccountdisplaynamejob.cpp:79
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Ei tilien hallintaa: tämä ei ole hyvä."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:81
+#: src/lib/changeaccountdisplaynamejob.cpp:84
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Näyttönimi ei voi olla tyhjä"
 
-#: src/lib/createaccountjob.cpp:89
+#: src/lib/createaccountjob.cpp:92
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Ei voitu ladata liitännäistä %1. Tarkista asennus."
 
-#: src/lib/createaccountjob.cpp:184
+#: src/lib/createaccountjob.cpp:187
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Käyttäjä perui"
 
-#: src/lib/createaccountjob.cpp:261
+#: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Pyyntösi käsittelyssä tapahtui virhe: %1"
 
-#: src/lib/getcredentialsjob.cpp:53
+#: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
 msgstr "Tiliä ei löytynyt"
 
-#: src/lib/getcredentialsjob.cpp:68
+#: src/lib/getcredentialsjob.cpp:71
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Todennustietoja ei löytynyt"
 
-#: src/lib/getcredentialsjob.cpp:78
+#: src/lib/getcredentialsjob.cpp:81
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Todennusistuntoa ei voitu luoda"

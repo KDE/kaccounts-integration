@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:41+0000\n"
+"POT-Creation-Date: 2023-12-11 01:35+0000\n"
 "PO-Revision-Date: 2021-03-26 19:57+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -156,50 +156,50 @@ msgctxt ""
 msgid "Set Account Name"
 msgstr "Imposta il nome dell'account"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:71
+#: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Nessun account trovato con ID %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:76
+#: src/lib/changeaccountdisplaynamejob.cpp:79
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Nessun gestore degli account, questo non va bene."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:81
+#: src/lib/changeaccountdisplaynamejob.cpp:84
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Il nome visualizzato non può essere vuoto"
 
-#: src/lib/createaccountjob.cpp:89
+#: src/lib/createaccountjob.cpp:92
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Impossibile caricare l'estensione %1, controlla la tua installazione"
 
-#: src/lib/createaccountjob.cpp:184
+#: src/lib/createaccountjob.cpp:187
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Annullato dall'utente"
 
-#: src/lib/createaccountjob.cpp:261
+#: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr ""
 "Si è verificato un errore durante il tentativo di elaborazione della "
 "richiesta: %1"
 
-#: src/lib/getcredentialsjob.cpp:53
+#: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
 msgstr "Impossibile trovare l'account"
 
-#: src/lib/getcredentialsjob.cpp:68
+#: src/lib/getcredentialsjob.cpp:71
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Impossibile trovare le credenziali"
 
-#: src/lib/getcredentialsjob.cpp:78
+#: src/lib/getcredentialsjob.cpp:81
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Impossibile creare una sessione di autenticazione"
