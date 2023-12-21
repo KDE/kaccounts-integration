@@ -184,7 +184,7 @@ QCoro::Task<void> KIOServices::createNetAttach(const Accounts::AccountId account
     qDebug() << url.toString();
 
     KConfig _desktopFile(desktopFilePath, KConfig::SimpleConfig);
-    KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
+    KConfigGroup desktopFile(&_desktopFile, QStringLiteral("Desktop Entry"));
 
     const QString label = KAccounts::accountsManager()->provider(service.provider()).displayName() + QLatin1Char(' ') + service.displayName();
 
@@ -259,7 +259,7 @@ QCoro::Task<void> KIOServices::removeNetAttach(const QString &id)
     path.append(QStringLiteral("/remoteview/") + id + QStringLiteral(".desktop"));
 
     KConfig _desktopFile(path, KConfig::SimpleConfig);
-    KConfigGroup desktopFile(&_desktopFile, "Desktop Entry");
+    KConfigGroup desktopFile(&_desktopFile, QStringLiteral("Desktop Entry"));
 
     const QUrl url(desktopFile.readEntry("URL", QUrl()));
     Q_ASSERT(!url.isEmpty());
