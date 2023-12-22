@@ -43,8 +43,8 @@ set(ACCOUNTSQT_DEP_VERSION "1.16")
 set(SIGNONQT_DEP_VERSION "8.55")
 set(ACCOUNTSGLIB_DEP_VERSION "1.21")
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets)
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Declarative Wallet KIO Package)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Widgets Qml)
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED KCMUtils I18n CoreAddons DBusAddons Wallet KIO)
 
 find_package(AccountsQt${QT_MAJOR_VERSION} ${ACCOUNTSQT_DEP_VERSION} CONFIG)
 set_package_properties(AccountsQt${QT_MAJOR_VERSION} PROPERTIES DESCRIPTION "Accounts management library for Qt applications"
