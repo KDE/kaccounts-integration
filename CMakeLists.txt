@@ -62,16 +62,15 @@ find_package(QCoro${QT_MAJOR_VERSION} REQUIRED COMPONENTS Core)
 
 qcoro_enable_coroutines()
 
-add_definitions (-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
+add_definitions(-DTRANSLATION_DOMAIN=\"kaccounts-integration\")
 
 ecm_set_disabled_deprecation_versions(QT 5.13.0
      KF 5.101.0
-    )
-
+)
 
 add_subdirectory(src)
 
-if (NOT KF6_COMPAT_BUILD)
+if(NOT KF6_COMPAT_BUILD)
    ki18n_install(po)
 endif()
 
