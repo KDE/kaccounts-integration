@@ -20,6 +20,14 @@ KCM.ScrollViewKCM {
     implicitHeight: Kirigami.Units.gridUnit * 28
     implicitWidth: Kirigami.Units.gridUnit * 28
 
+    actions: [
+        Kirigami.Action {
+            text: i18nc("@action:button", "Add New Account…")
+            icon.name: "contact-new-symbolic"
+            onTriggered: kcm.push("AvailableAccounts.qml")
+        }
+    ]
+
     // Existing accounts
     view: ListView {
 
@@ -67,22 +75,15 @@ KCM.ScrollViewKCM {
             visible: view.count === 0
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
+            icon.name: "internet-services"
             text: i18ndc("kaccounts-integration", "A text shown when a user has not yet added any accounts", "No accounts added yet")
-            explanation: xi18ndc("kaccounts-integration", "@info", "Click the <interface>Add New Account...</interface> button below to add one")
+            explanation: xi18ndc("kaccounts-integration", "@info", "Click <interface>Add New Account…</interface> to add one")
+
         }
     }
 
     RemoveAccountDialog {
         id: accountRemover
         parent: kaccountsRoot
-    }
-
-    footer: RowLayout {
-        Controls.Button {
-            Layout.alignment: Qt.AlignRight
-            text: i18nd("kaccounts-integration", "Add New Account...")
-            icon.name: "contact-new"
-            onClicked: kcm.push("AvailableAccounts.qml")
-        }
     }
 }
