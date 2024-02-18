@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-02-18 00:37+0000\n"
 "PO-Revision-Date: 2023-12-17 17:02+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "கணக்கின் விவரங்கள்"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
 msgstr "%1 கணக்கு"
@@ -66,7 +66,14 @@ msgstr ""
 msgid "Add New Account"
 msgstr "புதிய கணக்கை சேர்"
 
-#: src/kcm/ui/main.qml:53
+#: src/kcm/ui/main.qml:25
+#, fuzzy, kde-format
+#| msgid "Add New Account"
+msgctxt "@action:button"
+msgid "Add New Account…"
+msgstr "புதிய கணக்கை சேர்"
+
+#: src/kcm/ui/main.qml:61
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -74,25 +81,23 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "%1 தனை நீக்கு"
 
-#: src/kcm/ui/main.qml:70
+#: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "எந்த கணக்கும் சேர்க்கப்படவில்லை"
 
-#: src/kcm/ui/main.qml:71
-#, kde-kuit-format
+#: src/kcm/ui/main.qml:80
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Click the <interface>Add New Account...</interface> button below to add "
+#| "one"
 msgctxt "@info"
-msgid ""
-"Click the <interface>Add New Account...</interface> button below to add one"
+msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
 "புதிய கணக்கை சேர்க்க, கீழுள்ள <interface>புதிய கணக்கை சேர்…</interface> பட்டனை "
 "அழுத்தவும்"
-
-#: src/kcm/ui/main.qml:83
-#, kde-format
-msgid "Add New Account..."
-msgstr "புதிய கணக்கை சேர்..."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -200,3 +205,6 @@ msgstr "சான்றுகளை கண்டுபிடிக்க மு�
 #, kde-format
 msgid "Could not create auth session"
 msgstr "உறுதிப்பாட்டு அமர்வை உருவாக்க முடியவில்லை"
+
+#~ msgid "Add New Account..."
+#~ msgstr "புதிய கணக்கை சேர்..."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-02-18 00:37+0000\n"
 "PO-Revision-Date: 2021-07-10 19:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -24,12 +24,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "تفاصيل الحساب"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
 msgstr "حساب %1"
@@ -68,7 +68,14 @@ msgstr ""
 msgid "Add New Account"
 msgstr "أضف حسابًا جديدًا"
 
-#: src/kcm/ui/main.qml:53
+#: src/kcm/ui/main.qml:25
+#, fuzzy, kde-format
+#| msgid "Add New Account"
+msgctxt "@action:button"
+msgid "Add New Account…"
+msgstr "أضف حسابًا جديدًا"
+
+#: src/kcm/ui/main.qml:61
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -76,24 +83,22 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "أزِل %1"
 
-#: src/kcm/ui/main.qml:70
+#: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "لم تضف أي حساب بعد"
 
-#: src/kcm/ui/main.qml:71
-#, kde-kuit-format
+#: src/kcm/ui/main.qml:80
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Click the <interface>Add New Account...</interface> button below to add "
+#| "one"
 msgctxt "@info"
-msgid ""
-"Click the <interface>Add New Account...</interface> button below to add one"
+msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
 "انقر على زر<interface>أضف حساب جديد...</interface> في الأسفل لتضيف واحد"
-
-#: src/kcm/ui/main.qml:83
-#, kde-format
-msgid "Add New Account..."
-msgstr "أضف حسابًا جديدًا..."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -201,6 +206,9 @@ msgstr "تعذر العثور على معلومات الاستيثاق"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "تعثذر إنشاء جلسة استيثاق"
+
+#~ msgid "Add New Account..."
+#~ msgstr "أضف حسابًا جديدًا..."
 
 #~ msgid "Can't open wallet"
 #~ msgstr "تعذّر فتح المحفظة"

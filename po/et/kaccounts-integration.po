@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-02-18 00:37+0000\n"
 "PO-Revision-Date: 2020-10-07 10:58+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -23,12 +23,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "Konto üksikasjad"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
 msgstr "%1 konto"
@@ -67,7 +67,14 @@ msgstr ""
 msgid "Add New Account"
 msgstr "Uue konto lisamine"
 
-#: src/kcm/ui/main.qml:53
+#: src/kcm/ui/main.qml:25
+#, fuzzy, kde-format
+#| msgid "Add New Account"
+msgctxt "@action:button"
+msgid "Add New Account…"
+msgstr "Uue konto lisamine"
+
+#: src/kcm/ui/main.qml:61
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -75,23 +82,17 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "Eemalda %1"
 
-#: src/kcm/ui/main.qml:70
+#: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "Ühtegi kontot pole veel lisatud."
 
-#: src/kcm/ui/main.qml:71
+#: src/kcm/ui/main.qml:80
 #, kde-kuit-format
 msgctxt "@info"
-msgid ""
-"Click the <interface>Add New Account...</interface> button below to add one"
+msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-
-#: src/kcm/ui/main.qml:83
-#, kde-format
-msgid "Add New Account..."
-msgstr "Lisa uus konto ..."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -199,6 +200,9 @@ msgstr "Kasutajatunnuseid ei leitud"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Autentimisseansi loomine nurjus"
+
+#~ msgid "Add New Account..."
+#~ msgstr "Lisa uus konto ..."
 
 #~ msgid "Can't open wallet"
 #~ msgstr "Turvalaeka avamine nurjus"

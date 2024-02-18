@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-02-18 00:37+0000\n"
 "PO-Revision-Date: 2023-01-02 23:31+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "İstifadəçi Hesabları haqqında"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
 msgstr "%1 hesab"
@@ -66,7 +66,14 @@ msgstr ""
 msgid "Add New Account"
 msgstr "Yeni hesab əlavə et"
 
-#: src/kcm/ui/main.qml:53
+#: src/kcm/ui/main.qml:25
+#, fuzzy, kde-format
+#| msgid "Add New Account"
+msgctxt "@action:button"
+msgid "Add New Account…"
+msgstr "Yeni hesab əlavə et"
+
+#: src/kcm/ui/main.qml:61
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -74,25 +81,23 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "%1 silmək"
 
-#: src/kcm/ui/main.qml:70
+#: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "Hələlik hesablar əlavə edilməyib"
 
-#: src/kcm/ui/main.qml:71
-#, kde-kuit-format
+#: src/kcm/ui/main.qml:80
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Click the <interface>Add New Account...</interface> button below to add "
+#| "one"
 msgctxt "@info"
-msgid ""
-"Click the <interface>Add New Account...</interface> button below to add one"
+msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
 "Bir hesab əlavə etmək üçün, aşağıda <interface>Yeni hesab əlavə edin...</"
 "interface> düyməsinə vurun"
-
-#: src/kcm/ui/main.qml:83
-#, kde-format
-msgid "Add New Account..."
-msgstr "Yeni Hesab əlavə etmək..."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -200,6 +205,9 @@ msgstr "Hesab məlumatlarını"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Doğrulama sessiyası yaradıla bilmədi"
+
+#~ msgid "Add New Account..."
+#~ msgstr "Yeni Hesab əlavə etmək..."
 
 #~ msgid "Can't open wallet"
 #~ msgstr "Cüzdan açıla bilmir"

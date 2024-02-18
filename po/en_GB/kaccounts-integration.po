@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-02-18 00:37+0000\n"
 "PO-Revision-Date: 2021-04-03 15:07+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "Account Details"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:40
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:44
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
 msgstr "%1 account"
@@ -66,7 +66,14 @@ msgstr ""
 msgid "Add New Account"
 msgstr "Add New Account"
 
-#: src/kcm/ui/main.qml:53
+#: src/kcm/ui/main.qml:25
+#, fuzzy, kde-format
+#| msgid "Add New Account"
+msgctxt "@action:button"
+msgid "Add New Account…"
+msgstr "Add New Account"
+
+#: src/kcm/ui/main.qml:61
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -74,24 +81,22 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "Remove %1"
 
-#: src/kcm/ui/main.qml:70
+#: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "No accounts added yet"
 
-#: src/kcm/ui/main.qml:71
-#, kde-kuit-format
+#: src/kcm/ui/main.qml:80
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Click the <interface>Add New Account...</interface> button below to add "
+#| "one"
 msgctxt "@info"
-msgid ""
-"Click the <interface>Add New Account...</interface> button below to add one"
+msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
 "Click the <interface>Add New Account...</interface> button below to add one"
-
-#: src/kcm/ui/main.qml:83
-#, kde-format
-msgid "Add New Account..."
-msgstr "Add New Account..."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -199,6 +204,9 @@ msgstr "Could not find credentials"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Could not create auth session"
+
+#~ msgid "Add New Account..."
+#~ msgstr "Add New Account..."
 
 #~ msgid "Can't open wallet"
 #~ msgstr "Cannot open wallet"

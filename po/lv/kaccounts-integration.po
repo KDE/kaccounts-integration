@@ -1,27 +1,27 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2014, 2015, 2017.
-# Vit Pelcak <vit@pelcak.org>, 2017, 2019, 2020, 2021, 2023.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kaccounts-integration package.
 #
+# SPDX-FileCopyrightText: 2024 Toms Trasūns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2023-01-04 10:29+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
-"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
-"Language: cs\n"
+"PO-Revision-Date: 2024-02-16 19:42+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
-msgstr "Podrobnosti o účtu"
+msgstr "Konta informācija"
 
 #: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
@@ -31,7 +31,7 @@ msgstr "%1 (%2)"
 #: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
-msgstr "%1 účet"
+msgstr "%1 konts"
 
 #: src/kcm/ui/AccountDetails.qml:73
 #, kde-format
@@ -39,18 +39,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Změnit zobrazovaný název účtu"
+msgstr "Mainīt konta parādāmo nosaukumu"
 
 #: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr "Použít tento účet pro"
+msgstr "Lietot šo kontu, lai"
 
 #: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr "Odstranit tento účet"
+msgstr "Noņemt šo kontu"
 
 #: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
@@ -59,18 +59,20 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
+"Šim kontam nav pieejami konfigurējami pakalpojumi. Joprojām varat mainīt tā "
+"parādāmo vārdu, spiežot uz tā rediģēšanas pogas."
 
 #: src/kcm/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
-msgstr "Přidat nový účet"
+msgstr "Pievienot jaunu kontu"
 
 #: src/kcm/ui/main.qml:25
 #, fuzzy, kde-format
 #| msgid "Add New Account"
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Přidat nový účet"
+msgstr "Pievienot jaunu kontu"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -78,13 +80,13 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "Odstranit %1"
+msgstr "Noņemt „%1“"
 
 #: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr "Žádné účty zatím nebyly přidány"
+msgstr "Vēl nav pievienotu kontu"
 
 #: src/kcm/ui/main.qml:80
 #, fuzzy, kde-kuit-format
@@ -95,14 +97,13 @@ msgstr "Žádné účty zatím nebyly přidány"
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Pro přidání klikněte na tlačítko <interface>Přidat nový účet...</interface> "
-"níže"
+"Spiediet uz <interface>Pievienot jaunu kontu...</interface>, lai pievienotu"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "Odstranit účet"
+msgstr "Vai noņemt kontu?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:31
 #, kde-format
@@ -110,7 +111,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "Opravdu si přejete odstranit  \"%1\"  účet \"%2\"?"
+msgstr "Vai tiešām vēlaties noņemt „%1“ kontu „%2“?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:33
 #, kde-format
@@ -118,7 +119,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr "Opravdu si přejete odstranit účet \"%1\"?"
+msgstr "Vai tiešām vēlaties noņemt kontu „%1“?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:35
 #, kde-format
@@ -126,14 +127,14 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr "Určitě chcete odstranit tento \"%1\" účet?"
+msgstr "Vai tiešām vēlaties noņemt šo „%1“ kontu?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The label for a button which will cause the removal of a specified account"
 msgid "Remove Account"
-msgstr "Odstranit účet"
+msgstr "Noņemt kontu"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -141,7 +142,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Přejmenovat účet"
+msgstr "Pārdēvēt kontu"
 
 #: src/kcm/ui/RenameAccountDialog.qml:31
 #, kde-format
@@ -149,7 +150,7 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr "Zadejte nový název:"
+msgstr "Ievadīt jaunu nosaukumu:"
 
 #: src/kcm/ui/RenameAccountDialog.qml:43
 #, kde-format
@@ -157,53 +158,53 @@ msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
 "be set to a text specified by the user"
 msgid "Set Account Name"
-msgstr "Nastavit název účtu"
+msgstr "Iestatīt konta nosaukumu"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr ""
+msgstr "Nav atrasts konts ar ID %1"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:79
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr ""
+msgstr "Nav kontu pārvaldītāja — tas nav forši."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:84
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "Název obrazovky nesmí být prázdný"
+msgstr "Parādāmais nosaukums nevar būt tukšs"
 
 #: src/lib/createaccountjob.cpp:92
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "Nelze načíst zásuvný modul %1. Prosím, zkontrolujte svou instalaci"
+msgstr "Neizdevās ielādēt „%1“ spraudni, pārbaudiet instalāciju"
 
 #: src/lib/createaccountjob.cpp:187
 #, kde-format
 msgid "Cancelled by user"
-msgstr "Zrušeno uživatelem"
+msgstr "Atcēla lietotājs"
 
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "Nastala chyba při pokusu o zpracování žádosti: %1"
+msgstr "Ir notikusi kļūda, mēģinot apstrādāt pieprasījumu: %1"
 
 #: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
-msgstr "Nelze najít účet"
+msgstr "Neizdevās atrast kontu"
 
 #: src/lib/getcredentialsjob.cpp:71
 #, kde-format
 msgid "Could not find credentials"
-msgstr "Nelze najít přihlašovací údaje"
+msgstr "Neizdevās atrast ierakstīšanās informāciju"
 
 #: src/lib/getcredentialsjob.cpp:81
 #, kde-format
 msgid "Could not create auth session"
-msgstr ""
+msgstr "Neizdevās izveidot autentifikācijas sesiju"
 
 #~ msgid "Add New Account..."
-#~ msgstr "Přidat nový účet..."
+#~ msgstr "Pievienot jaunu kontu..."
