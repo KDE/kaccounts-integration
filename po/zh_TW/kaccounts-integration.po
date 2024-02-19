@@ -4,21 +4,21 @@
 # Franklin, 2015.
 # Jeff Huang <s8321414@gmail.com>, 2017.
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2022-06-08 17:09+0900\n"
+"PO-Revision-Date: 2024-02-19 05:47+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
-"Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -69,11 +69,10 @@ msgid "Add New Account"
 msgstr "新增帳號"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "新增帳號"
+msgstr "新增帳號…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,14 +89,10 @@ msgid "No accounts added yet"
 msgstr "尚未新增任何帳號"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
-msgstr "點擊下方的 <interface>新增帳號…</interface> 按鈕來新增一個"
+msgstr "點擊 <interface>新增帳號…</interface> 來新增一個"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format

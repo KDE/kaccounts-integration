@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2022-03-26 13:37+0300\n"
+"PO-Revision-Date: 2024-02-18 16:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -68,11 +68,10 @@ msgid "Add New Account"
 msgstr "Yeni Hesap Ekle"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Yeni Hesap Ekle"
+msgstr "Yeni Hesap Ekle…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -80,7 +79,7 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "%1 Kaldır"
+msgstr "Kaldır: %1"
 
 #: src/kcm/ui/main.qml:79
 #, kde-format
@@ -89,16 +88,11 @@ msgid "No accounts added yet"
 msgstr "Henüz bir hesap eklenmedi"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Eklemek için aşağıdaki <interface>Yeni Hesap Ekle...</interface> düğmesine "
-"tıklayın"
+"Bir tane eklemek için <interface>Yeni Hesap Ekle…</interface>’ye tıklayın"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -112,7 +106,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "\"%1\" \"%2\" hesabını kaldırmak istediğinizden emin misiniz?"
+msgstr "“%2” “%1” hesabını kaldırmak istediğinizden emin misiniz?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:33
 #, kde-format
@@ -159,7 +153,7 @@ msgctxt ""
 "Text of a button which will cause the human-readable name of an account to "
 "be set to a text specified by the user"
 msgid "Set Account Name"
-msgstr "Hesap Adı Ayarlayın"
+msgstr "Hesap Adı Ayarla"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format

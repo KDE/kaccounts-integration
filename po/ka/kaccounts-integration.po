@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2022-04-24 19:15+0200\n"
+"PO-Revision-Date: 2024-02-18 05:29+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -68,11 +68,10 @@ msgid "Add New Account"
 msgstr "ახალი ანგარიშის დამატება"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "ახალი ანგარიშის დამატება"
+msgstr "ახალი ანგარიშის დამატება…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -89,16 +88,12 @@ msgid "No accounts added yet"
 msgstr "ანგარიშები დამატებული არაა"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"დასამატებლად დააწკაპუნეთ <interface>ახალი ანგარიშის დამატება...</interface>-"
-"ზე ქვემოთ"
+"ახლის დასამატებლად დააწკაპუნეთ <interface>ახალი ანგარიშის დამატების…</"
+"interface> ღილაკზე"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format

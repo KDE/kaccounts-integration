@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2023-12-04 15:25+0100\n"
+"PO-Revision-Date: 2024-02-18 08:21+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -67,11 +67,10 @@ msgid "Add New Account"
 msgstr "Aldoni Novan Konton"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Aldoni Novan Konton"
+msgstr "Aldoni Novan Konton…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -88,16 +87,10 @@ msgid "No accounts added yet"
 msgstr "Ankoraŭ neniuj kontoj aldonitaj"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
-msgstr ""
-"Alklaku la suban butonon <interface>Aldoni novan konton...</interface> por "
-"aldoni unu"
+msgstr "Alklaku <interface>Aldoni novan konton…</interface> por aldoni unu"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -205,6 +198,3 @@ msgstr "Ne eblis trovi akreditaĵojn"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Ne eblis krei aŭtentikigseancon"
-
-#~ msgid "Add New Account..."
-#~ msgstr "Aldoni novan konton..."
