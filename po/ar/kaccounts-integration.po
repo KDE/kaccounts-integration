@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2021-07-10 19:37+0400\n"
+"PO-Revision-Date: 2024-02-19 17:49+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -69,11 +69,10 @@ msgid "Add New Account"
 msgstr "أضف حسابًا جديدًا"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "أضف حسابًا جديدًا"
+msgstr "أضف حسابًا جديدًا…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,15 +89,10 @@ msgid "No accounts added yet"
 msgstr "لم تضف أي حساب بعد"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
-msgstr ""
-"انقر على زر<interface>أضف حساب جديد...</interface> في الأسفل لتضيف واحد"
+msgstr "انقر<interface>أضف حساباً جديداً...</interface> لتضيف واحداً"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
