@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2024-02-02 16:10+0200\n"
+"PO-Revision-Date: 2024-02-20 13:21+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -69,11 +69,10 @@ msgid "Add New Account"
 msgstr "Pridėti naują paskyrą"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Pridėti naują paskyrą"
+msgstr "Pridėti naują paskyrą…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,16 +89,11 @@ msgid "No accounts added yet"
 msgstr "Kol kas nėra pridėta jokių paskyrų"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Norėdami pridėti paskyrą, spustelėkite žemiau mygtuką <interface>Pridėti "
-"naują paskyrą...</interface>"
+"Norėdami pridėti, spustelėkite <interface>Pridėti naują paskyrą…</interface>"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
