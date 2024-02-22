@@ -1,16 +1,16 @@
 # Translation of kaccounts-integration.po to Catalan (Valencian)
-# Copyright (C) 2015-2021 This_file_is_part_of_KDE
+# Copyright (C) 2015-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2015, 2016, 2020, 2021.
-# Josep M. Ferrer <txemaq@gmail.com>, 2015, 2016, 2017, 2019, 2020, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2015, 2016, 2017, 2019, 2020, 2021, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2021-10-29 17:53+0200\n"
+"PO-Revision-Date: 2024-02-18 10:39+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -71,11 +71,10 @@ msgid "Add New Account"
 msgstr "Afig un compte nou"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Afig un compte nou"
+msgstr "Afig un compte nou…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -92,16 +91,11 @@ msgid "No accounts added yet"
 msgstr "Encara no s'ha afegit cap compte"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Feu clic en el botó <interface>Afig un compte nou...</interface> que hi ha "
-"davall per a afegir-ne un"
+"Feu clic en <interface>Afig un compte nou…</interface> per a afegir-ne un"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -209,6 +203,3 @@ msgstr "No s'han pogut trobar les credencials"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "No s'ha pogut crear la sessió d'autorització"
-
-#~ msgid "Add New Account..."
-#~ msgstr "Afig un compte nou..."
