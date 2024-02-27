@@ -1,14 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kaccounts-integration package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# SPDX-FileCopyrightText: 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2022-07-21 19:53+0200\n"
+"PO-Revision-Date: 2024-02-26 08:42+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -16,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -69,11 +68,10 @@ msgid "Add New Account"
 msgstr "Добавяне на нов акаунт"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Добавяне на нов акаунт"
+msgstr "Добавяне на нов акаунт..."
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,16 +88,12 @@ msgid "No accounts added yet"
 msgstr "Все още няма добавени акаунти"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Кликнете върху бутона <interface> Добавяне на нов акаунт ... </interface> по-"
-"долу, за добавяне"
+"Кликнете върху бутона <interface> Добавяне на нов акаунт ... </interface> за "
+"добавяне"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
