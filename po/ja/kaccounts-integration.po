@@ -1,12 +1,12 @@
-# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2023-02-23 18:31+0900\n"
+"PO-Revision-Date: 2024-02-24 23:52+0900\n"
 "Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
+"Language-Team: ja\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -66,11 +66,10 @@ msgid "Add New Account"
 msgstr "新しいアカウントを追加"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "新しいアカウントを追加"
+msgstr "新しいアカウントを追加..."
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -87,11 +86,7 @@ msgid "No accounts added yet"
 msgstr "追加されたアカウントはありません"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
@@ -205,6 +200,3 @@ msgstr "認証情報が見つかりません"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "認証セッションを作成できません"
-
-#~ msgid "Add New Account..."
-#~ msgstr "新しいアカウントを追加..."
