@@ -207,6 +207,3 @@ msgstr "Fann ikkje brukarinformasjon"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Klarte ikkje starta autentiseringsøkt"
-
-#~ msgid "Add New Account..."
-#~ msgstr "Legg til konto …"
