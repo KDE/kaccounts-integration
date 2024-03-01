@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 00:37+0000\n"
-"PO-Revision-Date: 2024-02-05 11:38\n"
+"PO-Revision-Date: 2024-02-29 12:53\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -67,11 +67,10 @@ msgid "Add New Account"
 msgstr "添加新账户"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "添加新账户"
+msgstr "添加新账户…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -88,14 +87,10 @@ msgid "No accounts added yet"
 msgstr "尚未添加任何账户"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
-msgstr "请点击下方的<interface>添加新账户…</interface>按钮来添加账户"
+msgstr "点击 <interface>添加新账户…</interface> 进行添加"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:28
 #, kde-format
@@ -203,6 +198,3 @@ msgstr "找不到凭据"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "无法创建认证会话"
-
-#~ msgid "Add New Account..."
-#~ msgstr "添加新账户..."
