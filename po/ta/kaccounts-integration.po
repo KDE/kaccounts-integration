@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-18 00:37+0000\n"
+"POT-Creation-Date: 2024-03-19 00:37+0000\n"
 "PO-Revision-Date: 2024-02-18 17:05+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -94,13 +94,13 @@ msgstr ""
 "புதிய கணக்கை சேர்க்க, கீழுள்ள <interface>புதிய கணக்கை சேர்…</interface> பட்டனை "
 "அழுத்தவும்"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:28
+#: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "கணக்கை நீக்கலாமா?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:31
+#: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -108,7 +108,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "\"%2\" எனும் \"%1\" கணக்கை உறுதியாக நீக்கலாமா?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:33
+#: src/kcm/ui/RemoveAccountDialog.qml:42
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -116,20 +116,13 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "\"%1\" எனும் கணக்கை உறுதியாக நீக்கலாமா?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:35
+#: src/kcm/ui/RemoveAccountDialog.qml:44
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "இந்த \"%1\" கணக்கை உறுதியாக நீக்க வேண்டுமா?"
-
-#: src/kcm/ui/RemoveAccountDialog.qml:40
-#, kde-format
-msgctxt ""
-"The label for a button which will cause the removal of a specified account"
-msgid "Remove Account"
-msgstr "கணக்கை நீக்கு"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -139,21 +132,13 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "கணக்குக்கு மறுபெயரிடு"
 
-#: src/kcm/ui/RenameAccountDialog.qml:31
+#: src/kcm/ui/RenameAccountDialog.qml:38
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
 msgstr "புதிய பெயரை உள்ளிடுக"
-
-#: src/kcm/ui/RenameAccountDialog.qml:43
-#, kde-format
-msgctxt ""
-"Text of a button which will cause the human-readable name of an account to "
-"be set to a text specified by the user"
-msgid "Set Account Name"
-msgstr "கணக்குப்பெயரை அமை"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
@@ -200,6 +185,17 @@ msgstr "சான்றுகளை கண்டுபிடிக்க மு�
 #, kde-format
 msgid "Could not create auth session"
 msgstr "உறுதிப்பாட்டு அமர்வை உருவாக்க முடியவில்லை"
+
+#~ msgctxt ""
+#~ "The label for a button which will cause the removal of a specified account"
+#~ msgid "Remove Account"
+#~ msgstr "கணக்கை நீக்கு"
+
+#~ msgctxt ""
+#~ "Text of a button which will cause the human-readable name of an account "
+#~ "to be set to a text specified by the user"
+#~ msgid "Set Account Name"
+#~ msgstr "கணக்குப்பெயரை அமை"
 
 #~ msgid "Add New Account..."
 #~ msgstr "புதிய கணக்கை சேர்..."

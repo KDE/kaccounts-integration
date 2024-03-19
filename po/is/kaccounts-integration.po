@@ -1,27 +1,26 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kaccounts-integration package.
 #
-# Kristóf Kiszel <ulysses@kubuntu.org>, 2019, 2020.
-# SPDX-FileCopyrightText: 2021, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:37+0000\n"
-"PO-Revision-Date: 2024-03-03 22:27+0100\n"
-"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
-"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
-"Language: hu\n"
+"PO-Revision-Date: 2024-03-18 15:08+0000\n"
+"Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
+"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
 msgid "Account Details"
-msgstr "Fiókadatok"
+msgstr "Upplýsingar um aðgang"
 
 #: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
@@ -31,7 +30,7 @@ msgstr "%1 (%2)"
 #: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
 msgid "%1 account"
-msgstr "%1 fiók"
+msgstr "%1 aðgangur"
 
 #: src/kcm/ui/AccountDetails.qml:73
 #, kde-format
@@ -39,18 +38,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Megjelenített név módosítása"
+msgstr "Breyta birtingarnafni aðgangs"
 
 #: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr "A fiókhoz csatolt szolgáltatások:"
+msgstr "Nota þennan aðgang fyrir"
 
 #: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr "Fiók eltávolítása"
+msgstr "Fjarlægja þennan aðgang"
 
 #: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
@@ -59,19 +58,19 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
-"Nincsenek szerkeszthető szolgáltatások ehhez a fiókhoz. A megjelenített "
-"nevet ettől függetlenül módosíthatja a fenti ikonra kattintással."
+"Engar grunnstillanlegar þjónustur eru til staðar fyrir þennan aðgang. Þú "
+"getur samt breytt birtingarnafninu með því smella á breytitáknið fyrir ofan."
 
 #: src/kcm/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
-msgstr "Új fiók hozzáadása"
+msgstr " Bæta við nýjum aðgangi"
 
 #: src/kcm/ui/main.qml:25
 #, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Új fiók hozzáadása…"
+msgstr " Bæta við nýjum aðgangi…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -79,27 +78,27 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "%1 eltávolítása"
+msgstr "Fjarlægja %1"
 
 #: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr "Nincsenek fiókok hozzáadva"
+msgstr "Engum aðgangi bætt við ennþá"
 
 #: src/kcm/ui/main.qml:80
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Kattintson az <interface>Új fiók hozzáadása…</interface> gombra új fiók "
-"felvételéhez"
+"Smelltu á <interface>Bæta við nýjum aðgangi...</interface> til að bæta við "
+"einum slíkum"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "Fiók eltávolítása?"
+msgstr "Fjarlægja aðgang?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
@@ -107,7 +106,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "Biztosan szeretné eltávolítani a(z) „%2” „%1” fiókot?"
+msgstr "Ertu viss um að þú viljir fjarlægja \"%1\"-aðganginn \"%2\"?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:42
 #, kde-format
@@ -115,7 +114,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr "Biztosan szeretné eltávolítani a(z) „%1” fiókot?"
+msgstr "Ertu viss um að þú viljir fjarlægja aðganginn \"%1\"?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:44
 #, kde-format
@@ -123,7 +122,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr "Biztosan szeretné eltávolítani ezt a(z) „%1” fiókot?"
+msgstr "Ertu viss um að þú viljir fjarlægja þennan \"%1\"-aðgang?"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -131,7 +130,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Fiók átnevezése"
+msgstr "Endurnefna aðgang"
 
 #: src/kcm/ui/RenameAccountDialog.qml:38
 #, kde-format
@@ -139,84 +138,61 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr "Új név:"
+msgstr "Sláðu inn nýtt nafn:"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr "Nem található %1 azonosítójú fiók"
+msgstr "Enginn aðgangur fannst með auðkenninu %1"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:79
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr "Nincs fiókkezelő, ez nagyon nincs rendben."
+msgstr "Enginn aðgangsstjóri, það er ekki frábært"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:84
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "A megjelenített név nem lehet üres"
+msgstr "Birtingarnafnið má ekki vera autt"
 
 #: src/lib/createaccountjob.cpp:92
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "A(z) %1 bővítmény nem tölthető be, ellenőrizze a rendszert"
+msgstr "Gat ekki hlaðið inn viðbótinni %1, athugaðu uppsetninguna þína"
 
 #: src/lib/createaccountjob.cpp:187
 #, kde-format
 msgid "Cancelled by user"
-msgstr "Felhasználói megszakítás"
+msgstr "Notandi hætti við"
 
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "Hiba történt a kérés feldolgozása során: %1"
+msgstr "Upp kom villa þegar reynt var að vinna úr beiðninni: %1"
 
 #: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
-msgstr "Nem található fiók"
+msgstr "Aðgangur finnst ekki"
 
 #: src/lib/getcredentialsjob.cpp:71
 #, kde-format
 msgid "Could not find credentials"
-msgstr "Nem találhatók hitelesítési adatok"
+msgstr "Auðkennisupplýsingar finnast ekki"
 
 #: src/lib/getcredentialsjob.cpp:81
 #, kde-format
 msgid "Could not create auth session"
-msgstr "Nem lehet létrehozni hitelesítési munkamenetet"
+msgstr "Gat ekki sett upp auth-setu"
 
 #~ msgctxt ""
 #~ "The label for a button which will cause the removal of a specified account"
 #~ msgid "Remove Account"
-#~ msgstr "Fiók eltávolítása"
+#~ msgstr "Fjarlægja aðgang"
 
 #~ msgctxt ""
 #~ "Text of a button which will cause the human-readable name of an account "
 #~ "to be set to a text specified by the user"
 #~ msgid "Set Account Name"
-#~ msgstr "Fióknév megadása"
-
-#~ msgid "Add New Account..."
-#~ msgstr "Új fiók hozzáadása…"
-
-#~ msgid "Can't open wallet"
-#~ msgstr "A jelszókezelő nem nyitható meg"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Kiszel Kristóf"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "kiszel.kristof@gmail.com"
-
-#~ msgid "Accounts"
-#~ msgstr "Fiókok"
-
-#~ msgid "Sebastian Kügler"
-#~ msgstr "Sebastian Kügler"
-
-#~ msgid "Dan Leinir Turthra Jensen"
-#~ msgstr "Dan Leinir Turthra Jensen"
+#~ msgstr "Velja heiti aðgangs"

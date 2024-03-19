@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-18 00:37+0000\n"
+"POT-Creation-Date: 2024-03-19 00:37+0000\n"
 "PO-Revision-Date: 2021-06-04 21:52+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -100,13 +100,13 @@ msgstr ""
 "Κάνετε κλικ στο παρακάτω κουμπί <interface>Προσθήκη νέου λογαριασμού...</"
 "interface> για να προσθέσετε έναν"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:28
+#: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Αφαίρεση λογαριασμού;"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:31
+#: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -114,7 +114,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον «%1» λογαριασμό «%2»;"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:33
+#: src/kcm/ui/RemoveAccountDialog.qml:42
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -122,20 +122,13 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το λογαριασμό «%1';"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:35
+#: src/kcm/ui/RemoveAccountDialog.qml:44
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτόν τον «%1» λογαριασμό '%1';"
-
-#: src/kcm/ui/RemoveAccountDialog.qml:40
-#, kde-format
-msgctxt ""
-"The label for a button which will cause the removal of a specified account"
-msgid "Remove Account"
-msgstr "Αφαίρεση λογαριασμού"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -145,21 +138,13 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Μετονομασία λογαριασμού"
 
-#: src/kcm/ui/RenameAccountDialog.qml:31
+#: src/kcm/ui/RenameAccountDialog.qml:38
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
 msgstr "Δώστε νέο όνομα:"
-
-#: src/kcm/ui/RenameAccountDialog.qml:43
-#, kde-format
-msgctxt ""
-"Text of a button which will cause the human-readable name of an account to "
-"be set to a text specified by the user"
-msgid "Set Account Name"
-msgstr "Ρύθμιση ονόματος λογαριασμού"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
@@ -206,6 +191,17 @@ msgstr "Αδυναμία εύρεσης διαπιστευτηρίων"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Αδυναμία δημιουργίας συνεδρίας ταυτοποίησης"
+
+#~ msgctxt ""
+#~ "The label for a button which will cause the removal of a specified account"
+#~ msgid "Remove Account"
+#~ msgstr "Αφαίρεση λογαριασμού"
+
+#~ msgctxt ""
+#~ "Text of a button which will cause the human-readable name of an account "
+#~ "to be set to a text specified by the user"
+#~ msgid "Set Account Name"
+#~ msgstr "Ρύθμιση ονόματος λογαριασμού"
 
 #~ msgid "Add New Account..."
 #~ msgstr "Προσθήκη νέου λογαριασμού..."
