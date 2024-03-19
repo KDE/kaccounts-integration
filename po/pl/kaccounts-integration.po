@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-11 01:35+0000\n"
+"POT-Creation-Date: 2024-03-19 02:29+0000\n"
 "PO-Revision-Date: 2021-04-05 08:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -95,13 +95,13 @@ msgstr ""
 msgid "Add New Account..."
 msgstr "Dodaj nowe konto..."
 
-#: src/kcm/ui/RemoveAccountDialog.qml:28
+#: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Usunąć konto?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:31
+#: src/kcm/ui/RemoveAccountDialog.qml:40
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -109,7 +109,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Czy na pewno chcesz usunąć konto \"%1\" \"%2\"?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:33
+#: src/kcm/ui/RemoveAccountDialog.qml:42
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -117,20 +117,13 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Czy na pewno chcesz usunąć konto \"%1\"?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:35
+#: src/kcm/ui/RemoveAccountDialog.qml:44
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "Czy na pewno chcesz usunąć konto \"%1\"?"
-
-#: src/kcm/ui/RemoveAccountDialog.qml:40
-#, kde-format
-msgctxt ""
-"The label for a button which will cause the removal of a specified account"
-msgid "Remove Account"
-msgstr "Usuń konto"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -140,21 +133,13 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Przemianuj konto"
 
-#: src/kcm/ui/RenameAccountDialog.qml:31
+#: src/kcm/ui/RenameAccountDialog.qml:38
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
 msgstr "Wpisz nową nazwę:"
-
-#: src/kcm/ui/RenameAccountDialog.qml:43
-#, kde-format
-msgctxt ""
-"Text of a button which will cause the human-readable name of an account to "
-"be set to a text specified by the user"
-msgid "Set Account Name"
-msgstr "Ustaw nazwę konta"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:74
 #, kde-format
@@ -201,6 +186,17 @@ msgstr "Nie można znaleźć danych dostępowych"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Nie można utworzyć sesji uwierzytelnionej"
+
+#~ msgctxt ""
+#~ "The label for a button which will cause the removal of a specified account"
+#~ msgid "Remove Account"
+#~ msgstr "Usuń konto"
+
+#~ msgctxt ""
+#~ "Text of a button which will cause the human-readable name of an account "
+#~ "to be set to a text specified by the user"
+#~ msgid "Set Account Name"
+#~ msgstr "Ustaw nazwę konta"
 
 #~ msgid "Can't open wallet"
 #~ msgstr "Nie można otworzyć portfela"
