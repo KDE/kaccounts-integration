@@ -46,7 +46,6 @@
         "Description[zh_TW]": "使用 KIO 掛載 WebDAV 共用項目",
         "EnabledByDefault": true,
         "Icon": "system-file-manager",
-        "Id": "kaccounts_kio_webdav",
         "License": "GPL",
         "Name": "KIO WebDAV",
         "Name[ar]": "جزء ويب داف",
