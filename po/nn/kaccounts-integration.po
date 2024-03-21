@@ -192,14 +192,3 @@ msgstr "Fann ikkje brukarinformasjon"
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Klarte ikkje starta autentiseringsøkt"
-
-#~ msgctxt ""
-#~ "The label for a button which will cause the removal of a specified account"
-#~ msgid "Remove Account"
-#~ msgstr "Fjern konto"
-
-#~ msgctxt ""
-#~ "Text of a button which will cause the human-readable name of an account "
-#~ "to be set to a text specified by the user"
-#~ msgid "Set Account Name"
-#~ msgstr "Vel kontonamn"
