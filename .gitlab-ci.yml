@@ -8,5 +8,5 @@ include:
   #    - /gitlab-templates/reuse-lint.yml
       - /gitlab-templates/linux.yml
       - /gitlab-templates/freebsd.yml
-      # - /gitlab-templates/linux-qt6.yml # no libaccounts-qt and friends in CI yet
-      # - /gitlab-templates/freebsd-qt6.yml
+      - /gitlab-templates/linux-qt6.yml
+      - /gitlab-templates/freebsd-qt6.yml

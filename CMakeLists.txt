@@ -12,6 +12,11 @@ set(KF_MIN_VERSION "5.240.0")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# make KDE CI pass the right flag when building for Qt5
+if($ENV{CI_JOB_NAME} MATCHES ".*qt515")
+   set(KF6_COMPAT_BUILD ON)
+endif()
+
 option(KF6_COMPAT_BUILD "Enable this to get a build to support KF5 applications" OFF)
 
 if(KF6_COMPAT_BUILD)

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
+- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
   'require':
     'frameworks/extra-cmake-modules': '@stable'
     'frameworks/kcmutils': '@stable'
@@ -15,5 +15,15 @@ Dependencies:
     'third-party/libaccounts-qt': '@latest'
     'third-party/signond': '@latest'
 
-Options:
-  cmake-options: "-DKF6_COMPAT_BUILD=ON" # This is for the Qt5 build. Revisit this once we have a working Qt6 build and only enable for Qt5
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest-kf6'
+    'frameworks/kcmutils': '@latest-kf6'
+    'frameworks/ki18n': '@latest-kf6'
+    'frameworks/kcoreaddons': '@latest-kf6'
+    'frameworks/kdbusaddons': '@latest-kf6'
+    'frameworks/kwallet': '@latest-kf6'
+    'frameworks/kio': '@latest-kf6'
+    'third-party/qcoro': '@latest'
+    'third-party/libaccounts-qt': '@latest'
+    'third-party/signond': '@latest'
