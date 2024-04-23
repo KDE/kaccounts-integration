@@ -27,3 +27,6 @@ Dependencies:
     'third-party/qcoro': '@latest'
     'third-party/libaccounts-qt': '@latest'
     'third-party/signond': '@latest'
+
+Options:
+  require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
