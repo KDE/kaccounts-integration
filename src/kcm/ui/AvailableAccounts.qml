@@ -18,8 +18,10 @@ KCM.ScrollViewKCM {
     id: root
     title: i18nd("kaccounts-integration", "Add New Account")
 
+    headerPaddingEnabled: false // Let the InlineMessage touch the edges
     header: Kirigami.InlineMessage {
         id: errorMessage
+        position: Kirigami.InlineMessage.Position.Header
         type: Kirigami.MessageType.Error
         showCloseButton: true
         visible: false
