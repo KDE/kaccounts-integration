@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:37+0000\n"
-"PO-Revision-Date: 2024-02-26 08:42+0100\n"
+"PO-Revision-Date: 2024-05-13 23:14+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -71,7 +71,7 @@ msgstr "Добавяне на нов акаунт"
 #, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Добавяне на нов акаунт..."
+msgstr "Добавяне на нов акаунт…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Все още няма добавени акаунти"
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Кликнете върху бутона <interface> Добавяне на нов акаунт ... </interface> за "
+"Кликнете върху бутона <interface> Добавяне на нов акаунт… </interface> за "
 "добавяне"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
