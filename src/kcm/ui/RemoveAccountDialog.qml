@@ -21,7 +21,6 @@ Kirigami.PromptDialog {
 
     title: i18ndc("kaccounts-integration", "The title for a dialog which lets you remove an account", "Remove Account?")
 
-    padding: Kirigami.Units.largeSpacing
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     onAccepted: {

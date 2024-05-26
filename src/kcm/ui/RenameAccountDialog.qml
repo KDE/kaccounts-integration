@@ -24,7 +24,6 @@ Kirigami.PromptDialog {
         }
     }
 
-    padding: Kirigami.Units.largeSpacing
     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
     onAccepted: {
