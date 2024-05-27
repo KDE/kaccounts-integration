@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:37+0000\n"
+"POT-Creation-Date: 2024-05-27 00:38+0000\n"
 "PO-Revision-Date: 2023-12-03 13:14+0700\n"
 "Last-Translator: Linerly <linerly@linerly.xyz>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -106,7 +106,7 @@ msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Hapus Akun?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:40
+#: src/kcm/ui/RemoveAccountDialog.qml:39
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -114,7 +114,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Apakah Anda yakin ingin menghapus akun \"%1\" \"%2\"?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:42
+#: src/kcm/ui/RemoveAccountDialog.qml:41
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -122,7 +122,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Apakah Anda yakin ingin menghapus akun \"%1\"?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:44
+#: src/kcm/ui/RemoveAccountDialog.qml:43
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
@@ -138,7 +138,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Ubah Nama Akun"
 
-#: src/kcm/ui/RenameAccountDialog.qml:38
+#: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "

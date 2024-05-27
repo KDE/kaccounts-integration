@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:37+0000\n"
+"POT-Creation-Date: 2024-05-27 00:38+0000\n"
 "PO-Revision-Date: 2022-07-29 22:29+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -108,7 +108,7 @@ msgid "Remove Account?"
 msgstr "Poistetaanko tili?"
 
 # %1 suluissa, jotta vältetään puuttuvan sanavälin ongelma, jos se on sanaliitto (esim. ”Google Drive”)
-#: src/kcm/ui/RemoveAccountDialog.qml:40
+#: src/kcm/ui/RemoveAccountDialog.qml:39
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -116,7 +116,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Haluatko varmasti poistaa tilin ”%2” (%1)?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:42
+#: src/kcm/ui/RemoveAccountDialog.qml:41
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -124,7 +124,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Haluatko varmasti poistaa tilin ”%1”?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:44
+#: src/kcm/ui/RemoveAccountDialog.qml:43
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
@@ -140,7 +140,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Muuta tilin nimeä"
 
-#: src/kcm/ui/RenameAccountDialog.qml:38
+#: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "

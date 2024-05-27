@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:37+0000\n"
+"POT-Creation-Date: 2024-05-27 00:38+0000\n"
 "PO-Revision-Date: 2024-02-18 15:41+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -99,7 +99,7 @@ msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Eliminați contul?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:40
+#: src/kcm/ui/RemoveAccountDialog.qml:39
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
@@ -107,7 +107,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Sigur doriți să eliminați contul „%2” din „%1”?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:42
+#: src/kcm/ui/RemoveAccountDialog.qml:41
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
@@ -115,7 +115,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Sigur doriți să eliminați contul „%1”?"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:44
+#: src/kcm/ui/RemoveAccountDialog.qml:43
 #, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
@@ -131,7 +131,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Redenumește contul"
 
-#: src/kcm/ui/RenameAccountDialog.qml:38
+#: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "

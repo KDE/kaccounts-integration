@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:37+0000\n"
+"POT-Creation-Date: 2024-05-27 00:38+0000\n"
 "PO-Revision-Date: 2019-11-05 20:12+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -100,7 +100,7 @@ msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
 msgstr "Účty"
 
-#: src/kcm/ui/RemoveAccountDialog.qml:40
+#: src/kcm/ui/RemoveAccountDialog.qml:39
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure that you want to remove the account '%1'? This cannot be "
@@ -111,7 +111,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 msgstr "Určite chcete odstrániť účet '%1'? Toto sa nedá vrátiť späť."
 
-#: src/kcm/ui/RemoveAccountDialog.qml:42
+#: src/kcm/ui/RemoveAccountDialog.qml:41
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure that you want to remove the account '%1'? This cannot be "
@@ -122,7 +122,7 @@ msgctxt ""
 msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Určite chcete odstrániť účet '%1'? Toto sa nedá vrátiť späť."
 
-#: src/kcm/ui/RemoveAccountDialog.qml:44
+#: src/kcm/ui/RemoveAccountDialog.qml:43
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure that you want to remove the account '%1'? This cannot be "
@@ -142,7 +142,7 @@ msgctxt ""
 msgid "Rename Account"
 msgstr "Účty"
 
-#: src/kcm/ui/RenameAccountDialog.qml:38
+#: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
 msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
