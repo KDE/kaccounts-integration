@@ -186,17 +186,3 @@ msgstr "Неуспешно намиране на идентификационн�
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Неуспешно създаване на сесия за удостоверяване"
-
-#~ msgctxt ""
-#~ "The label for a button which will cause the removal of a specified account"
-#~ msgid "Remove Account"
-#~ msgstr "Премахване на акаунт"
-
-#~ msgctxt ""
-#~ "Text of a button which will cause the human-readable name of an account "
-#~ "to be set to a text specified by the user"
-#~ msgid "Set Account Name"
-#~ msgstr "Задаване на име на акаунт"
-
-#~ msgid "Add New Account..."
-#~ msgstr "Добавяне на нов акаунт..."
