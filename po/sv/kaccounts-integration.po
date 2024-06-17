@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-27 00:38+0000\n"
-"PO-Revision-Date: 2021-03-24 07:31+0100\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
+"PO-Revision-Date: 2024-06-16 22:51+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -68,11 +68,10 @@ msgid "Add New Account"
 msgstr "Lägg till nytt konto"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Lägg till nytt konto"
+msgstr "Lägg till nytt konto…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -89,16 +88,12 @@ msgid "No accounts added yet"
 msgstr "Inga konton ännu tillagda"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Klicka på knappen <interface>Lägg till nytt konto...</interface> nedan för "
-"att lägga till ett"
+"Klicka på <interface>Lägg till nytt konto...</interface> för att lägga till "
+"ett"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
