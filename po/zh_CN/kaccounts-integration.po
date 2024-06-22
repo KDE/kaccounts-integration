@@ -172,7 +172,7 @@ msgstr "处理请求时出错：%1"
 #: src/lib/getcredentialsjob.cpp:56
 #, kde-format
 msgid "Could not find account"
-msgstr "找不到账号"
+msgstr "找不到账户"
 
 #: src/lib/getcredentialsjob.cpp:71
 #, kde-format
