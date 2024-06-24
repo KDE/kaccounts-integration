@@ -22,7 +22,7 @@ KCM.ScrollViewKCM {
 
     actions: [
         Kirigami.Action {
-            text: i18nc("@action:button", "Add New Account…")
+            text: i18ndc("kaccounts-integration", "@action:button", "Add New Account…")
             icon.name: "contact-new-symbolic"
             onTriggered: kcm.push("AvailableAccounts.qml")
         }
