@@ -22,8 +22,8 @@ KCM.ScrollViewKCM {
 
     actions: [
         Kirigami.Action {
-            text: i18ndc("kaccounts-integration", "@action:button", "Add New Account…")
-            icon.name: "contact-new-symbolic"
+            text: i18ndc("kaccounts-integration", "@action:button", "Add Account…")
+            icon.name: "list-add-symbolic"
             onTriggered: kcm.push("AvailableAccounts.qml")
         }
     ]
@@ -77,7 +77,7 @@ KCM.ScrollViewKCM {
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
             icon.name: "internet-services"
             text: i18ndc("kaccounts-integration", "A text shown when a user has not yet added any accounts", "No accounts added yet")
-            explanation: xi18ndc("kaccounts-integration", "@info", "Click <interface>Add New Account…</interface> to add one")
+            explanation: xi18ndc("kaccounts-integration", "@info", "Click <interface>Add Account…</interface> to add one")
 
         }
     }
