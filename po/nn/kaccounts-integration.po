@@ -1,21 +1,20 @@
 # Translation of kaccounts-integration to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2020.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-27 00:38+0000\n"
-"PO-Revision-Date: 2021-12-15 12:43+0100\n"
-"Last-Translator: Oystein Steffensen-Alvaervik <ystein@posteo.net>\n"
+"PO-Revision-Date: 2024-07-21 14:18+0200\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -70,11 +69,10 @@ msgid "Add New Account"
 msgstr "Legg til konto"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "Add New Account"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add New Account…"
-msgstr "Legg til konto"
+msgstr "Legg til konto …"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -91,15 +89,11 @@ msgid "No accounts added yet"
 msgstr "Ingen kontoar er lagde til"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Click the <interface>Add New Account...</interface> button below to add "
-#| "one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add New Account…</interface> to add one"
 msgstr ""
-"Trykk <interface>Legg til konto …</interface> for å leggja til ein ny konto"
+"Trykk <interface>Legg til konto</interface> for å leggja til ein ny konto"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
