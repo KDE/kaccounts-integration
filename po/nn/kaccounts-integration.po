@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-07-21 14:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -69,9 +69,11 @@ msgid "Add New Account"
 msgstr "Legg til konto"
 
 #: src/kcm/ui/main.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Add New Account…"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "Legg til konto …"
 
 #: src/kcm/ui/main.qml:61
@@ -89,9 +91,11 @@ msgid "No accounts added yet"
 msgstr "Ingen kontoar er lagde til"
 
 #: src/kcm/ui/main.qml:80
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 "Trykk <interface>Legg til konto</interface> for å leggja til ein ny konto"
 

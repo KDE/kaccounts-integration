@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-02-19 09:59+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -68,9 +68,11 @@ msgid "Add New Account"
 msgstr "Adde un nove conto"
 
 #: src/kcm/ui/main.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Add New Account…"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "Adde nove conto ..."
 
 #: src/kcm/ui/main.qml:61
@@ -88,9 +90,11 @@ msgid "No accounts added yet"
 msgstr "Ancora necun contos addite"
 
 #: src/kcm/ui/main.qml:80
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr "Pulsa  <interface>Adde Nove Conto...</interface>  per adder un"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22

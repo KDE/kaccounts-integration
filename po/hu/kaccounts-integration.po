@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-03-03 22:27+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -68,9 +68,11 @@ msgid "Add New Account"
 msgstr "Új fiók hozzáadása"
 
 #: src/kcm/ui/main.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Add New Account…"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "Új fiók hozzáadása…"
 
 #: src/kcm/ui/main.qml:61
@@ -88,9 +90,11 @@ msgid "No accounts added yet"
 msgstr "Nincsenek fiókok hozzáadva"
 
 #: src/kcm/ui/main.qml:80
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 "Kattintson az <interface>Új fiók hozzáadása…</interface> gombra új fiók "
 "felvételéhez"

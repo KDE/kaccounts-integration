@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-03-27 23:12+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 #: src/kcm/ui/main.qml:25
 #, kde-format
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr ""
 
 #: src/kcm/ui/main.qml:61
@@ -87,7 +87,7 @@ msgstr ""
 #: src/kcm/ui/main.qml:80
 #, kde-kuit-format
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22

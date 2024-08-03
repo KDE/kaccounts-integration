@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-05-21 22:40+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -69,9 +69,11 @@ msgid "Add New Account"
 msgstr "Добавление учётной записи"
 
 #: src/kcm/ui/main.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Add New Account…"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "Добавить учётную запись…"
 
 #: src/kcm/ui/main.qml:61
@@ -89,9 +91,11 @@ msgid "No accounts added yet"
 msgstr "Пока не добавлено ни одной учётной записи"
 
 #: src/kcm/ui/main.qml:80
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 "Для добавления учётной записи нажмите кнопку <interface>Добавить учётную "
 "запись...</interface>"

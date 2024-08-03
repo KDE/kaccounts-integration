@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-01-28 13:54-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -68,7 +68,7 @@ msgstr "ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ"
 #, fuzzy, kde-format
 #| msgid "Add New Account"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ"
 
 #: src/kcm/ui/main.qml:61
@@ -92,7 +92,7 @@ msgstr "ਹਾਲੇ ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਜੋੜਿਆ"
 #| "Click the <interface>Add New Account...</interface> button below to add "
 #| "one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr "ਨਵਾਂ ਜੋੜਨ ਲਈ <interface>...ਨਵਾਂ ਖਾਤਾ ਜੋੜੋ</interface> ਬਟਨ ਨੂੰ ਦਬਾਓ"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22

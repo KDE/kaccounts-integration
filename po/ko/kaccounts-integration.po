@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2024-02-19 21:42+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -67,9 +67,11 @@ msgid "Add New Account"
 msgstr "새 계정 추가"
 
 #: src/kcm/ui/main.qml:25
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Add New Account…"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "새 계정 추가…"
 
 #: src/kcm/ui/main.qml:61
@@ -87,9 +89,11 @@ msgid "No accounts added yet"
 msgstr "추가한 계정 없음"
 
 #: src/kcm/ui/main.qml:80
-#, kde-kuit-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
+#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 "<interface>새 계정 추가...</interface> 단추를 클릭해서 계정을 추가하십시오"
 

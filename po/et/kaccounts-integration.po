@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-08-03 00:39+0000\n"
 "PO-Revision-Date: 2020-10-07 10:58+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -71,7 +71,7 @@ msgstr "Uue konto lisamine"
 #, fuzzy, kde-format
 #| msgid "Add New Account"
 msgctxt "@action:button"
-msgid "Add New Account…"
+msgid "Add Account…"
 msgstr "Uue konto lisamine"
 
 #: src/kcm/ui/main.qml:61
@@ -91,7 +91,7 @@ msgstr "Ühtegi kontot pole veel lisatud."
 #: src/kcm/ui/main.qml:80
 #, kde-kuit-format
 msgctxt "@info"
-msgid "Click <interface>Add New Account…</interface> to add one"
+msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
