@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-03-18 10:26+0200\n"
+"PO-Revision-Date: 2024-08-03 07:10+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -68,12 +68,10 @@ msgid "Add New Account"
 msgstr "הוספת חשבון חדש"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "הוספת חשבון חדש…"
+msgstr "הוספת חשבון…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,12 +88,10 @@ msgid "No accounts added yet"
 msgstr "עדיין לא נוספו חשבונות"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "יש ללחוץ על <interface>הוספת חשבון חדש…</interface> כדי להוסיף אחד כזה"
+msgstr "יש ללחוץ על <interface>הוספת חשבון…</interface> כדי להוסיף אחד כזה"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format

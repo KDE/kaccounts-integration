@@ -67,12 +67,10 @@ msgid "Add New Account"
 msgstr "添加新账户"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "添加新账户…"
+msgstr ""
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -89,12 +87,10 @@ msgid "No accounts added yet"
 msgstr "尚未添加任何账户"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "点击 <interface>添加新账户…</interface> 进行添加"
+msgstr ""
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format

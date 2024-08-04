@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 05:50+0100\n"
+"PO-Revision-Date: 2024-08-03 08:29+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -71,12 +71,10 @@ msgid "Add New Account"
 msgstr "Dodaj nov račun"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Dodaj nov račun…"
+msgstr "Dodaj račun…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -93,12 +91,10 @@ msgid "No accounts added yet"
 msgstr "Nobenega računa še ni dodanega"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "Kliknite <interface>Dodaj nov račun...</interface> za dodajanje novega"
+msgstr "Kliknite <interface>Dodaj račun...</interface> za dodajanje novega"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format

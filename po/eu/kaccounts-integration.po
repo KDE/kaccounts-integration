@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 19:30+0100\n"
+"PO-Revision-Date: 2024-08-03 11:07+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -71,12 +71,10 @@ msgid "Add New Account"
 msgstr "Gehitu kontu berria"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Gehitu kontu berria..."
+msgstr "Gehitu kontua..."
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -93,13 +91,11 @@ msgid "No accounts added yet"
 msgstr "Ez da oraindik konturik gehitu"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
-"Egin klik <interface>Gehitu kontu berria...</interface> aukeran bat gehitzeko"
+"Egin klik <interface>Gehitu kontua...</interface> aukeran bat gehitzeko"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
