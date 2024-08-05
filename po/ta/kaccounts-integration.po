@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 17:05+0530\n"
+"PO-Revision-Date: 2024-08-04 16:42+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -67,12 +67,10 @@ msgid "Add New Account"
 msgstr "புதிய கணக்கை சேர்"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "புதிய கணக்கை சேர்…"
+msgstr "கணக்கை சேர்…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -89,14 +87,10 @@ msgid "No accounts added yet"
 msgstr "எந்த கணக்கும் சேர்க்கப்படவில்லை"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr ""
-"புதிய கணக்கை சேர்க்க, கீழுள்ள <interface>புதிய கணக்கை சேர்…</interface> பட்டனை "
-"அழுத்தவும்"
+msgstr "புதிய கணக்கை சேர்க்க, <interface>கணக்கை சேர்…</interface> பட்டனை அழுத்தவும்"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format

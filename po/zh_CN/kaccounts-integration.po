@@ -70,7 +70,7 @@ msgstr "添加新账户"
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr ""
+msgstr "添加账户…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,7 +90,7 @@ msgstr "尚未添加任何账户"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr ""
+msgstr "点击 <interface>添加账户…</interface> 以添加一个账户"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
