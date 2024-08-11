@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-18 13:46+0100\n"
+"PO-Revision-Date: 2024-08-04 19:55+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -68,12 +68,10 @@ msgid "Add New Account"
 msgstr "Aggiungi un nuovo account"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Aggiungi un nuovo account…"
+msgstr "Aggiungi account…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,14 +88,10 @@ msgid "No accounts added yet"
 msgstr "Nessun account è stato aggiunto"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr ""
-"Fai clic <interface>Aggiungi un nuovo account…</interface> per aggiungerne "
-"uno"
+msgstr "Fai clic <interface>Aggiungi account…</interface> per aggiungerne uno"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
