@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-20 13:21+0200\n"
+"PO-Revision-Date: 2024-08-17 22:19+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -69,12 +69,10 @@ msgid "Add New Account"
 msgstr "Pridėti naują paskyrą"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Pridėti naują paskyrą…"
+msgstr "Pridėti paskyrą…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -91,13 +89,10 @@ msgid "No accounts added yet"
 msgstr "Kol kas nėra pridėta jokių paskyrų"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr ""
-"Norėdami pridėti, spustelėkite <interface>Pridėti naują paskyrą…</interface>"
+msgstr "Norėdami pridėti, spustelėkite <interface>Pridėti paskyrą…</interface>"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
