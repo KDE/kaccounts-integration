@@ -70,8 +70,6 @@ msgstr "Legg til konto"
 
 #: src/kcm/ui/main.qml:25
 #, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
 msgctxt "@action:button"
 msgid "Add Account…"
 msgstr "Legg til konto …"
@@ -92,8 +90,6 @@ msgstr "Ingen kontoar er lagde til"
 
 #: src/kcm/ui/main.qml:80
 #, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""

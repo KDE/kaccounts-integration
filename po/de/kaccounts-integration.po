@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-03-20 20:52+0100\n"
+"PO-Revision-Date: 2024-08-20 20:20+0200\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -66,9 +66,7 @@ msgid "Add New Account"
 msgstr "Neuen Zugang hinzufügen"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
 msgstr "Neuen Zugang hinzufügen …"
@@ -88,14 +86,12 @@ msgid "No accounts added yet"
 msgstr "Es wurden noch keine Zugänge hinzugefügt."
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
-"Klicken Sie auf <interface>Neuen Zugang hinzufügen …</interface>, um einen "
-"neuen Zugang hinzuzufügen"
+"Klicken Sie auf <interface>Zugang hinzufügen …</interface>, um einen neuen "
+"Zugang hinzuzufügen"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
