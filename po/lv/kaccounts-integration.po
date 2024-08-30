@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-03 00:39+0000\n"
-"PO-Revision-Date: 2024-02-29 12:41+0200\n"
-"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2024-08-28 09:39+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -68,12 +68,10 @@ msgid "Add New Account"
 msgstr "Pievienot jaunu kontu"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Pievienot jaunu kontu..."
+msgstr "Pievienot kontu…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -90,13 +88,11 @@ msgid "No accounts added yet"
 msgstr "Vēl nav pievienotu kontu"
 
 #: src/kcm/ui/main.qml:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
-"Spiediet uz <interface>Pievienot jaunu kontu...</interface>, lai pievienotu"
+"Spiediet uz <interface>Pievienot jaunu kontu…</interface>, lai pievienotu"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
