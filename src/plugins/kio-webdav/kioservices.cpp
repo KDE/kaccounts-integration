@@ -56,7 +56,6 @@ void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accoun
 
 void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 {
-    qCDebug(KACCOUNTS_DAV_LOG);
     const QString accountId = QString::number(accId) + QStringLiteral("_");
 
     const QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/remoteview/");
@@ -178,10 +177,7 @@ QCoro::Task<void> KIOServices::createNetAttach(const Accounts::AccountId account
     }
     const QString desktopFilePath = folderPath + QString::number(accountId) + QLatin1Char('_') + service.name() + QStringLiteral(".desktop");
 
-    qCDebug(KACCOUNTS_DAV_LOG) << "Creating knetAttach place";
-    qCDebug(KACCOUNTS_DAV_LOG) << desktopFilePath;
-    qCDebug(KACCOUNTS_DAV_LOG) << url.host();
-    qCDebug(KACCOUNTS_DAV_LOG) << url.toString();
+    qCDebug(KACCOUNTS_DAV_LOG) << "Creating knetAttach place" << desktopFilePath << url.host() << url.toString();
 
     KConfig _desktopFile(desktopFilePath, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, QStringLiteral("Desktop Entry"));
