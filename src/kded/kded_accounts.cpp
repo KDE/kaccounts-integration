@@ -56,7 +56,6 @@ KDEDAccounts::~KDEDAccounts()
 
 void KDEDAccounts::startDaemon()
 {
-    qCDebug(KACCOUNTS_KDED_LOG);
     const Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
     for (const Accounts::AccountId &id : accList) {
         monitorAccount(id);
@@ -65,7 +64,7 @@ void KDEDAccounts::startDaemon()
 
 void KDEDAccounts::monitorAccount(const Accounts::AccountId id)
 {
-    qCDebug(KACCOUNTS_KDED_LOG) << id;
+    qCDebug(KACCOUNTS_KDED_LOG) << "Monitor account" << id;
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     const Accounts::ServiceList services = acc->services();
     for (const Accounts::Service &service : services) {
@@ -78,7 +77,7 @@ void KDEDAccounts::monitorAccount(const Accounts::AccountId id)
 
 void KDEDAccounts::accountCreated(const Accounts::AccountId id)
 {
-    qCDebug(KACCOUNTS_KDED_LOG) << id;
+    qCDebug(KACCOUNTS_KDED_LOG) << "Created account" << id;
     monitorAccount(id);
 
     const Accounts::Account *acc = KAccounts::accountsManager()->account(id);
@@ -91,8 +90,7 @@ void KDEDAccounts::accountCreated(const Accounts::AccountId id)
 
 void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 {
-    qCDebug(KACCOUNTS_KDED_LOG) << id;
-
+    qCDebug(KACCOUNTS_KDED_LOG) << "Removed account" << id;
     for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
         plugin->onAccountRemoved(id);
     }
@@ -100,7 +98,6 @@ void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 
 void KDEDAccounts::enabledChanged(const QString &serviceName, bool enabled)
 {
-    qCDebug(KACCOUNTS_KDED_LOG);
     if (serviceName.isEmpty()) {
         qCDebug(KACCOUNTS_KDED_LOG) << "ServiceName is Empty";
         return;
