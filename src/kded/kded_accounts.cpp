@@ -5,7 +5,9 @@
  */
 
 #include "kded_accounts.h"
+#include "debug.h"
 #include "kaccountsdplugin.h"
+
 #include <core.h>
 
 #include <KPluginFactory>
@@ -32,14 +34,14 @@ KDEDAccounts::KDEDAccounts(QObject *parent, const QList<QVariant> &)
     const QVector<KPluginMetaData> data = KPluginMetaData::findPlugins(QStringLiteral("kaccounts/daemonplugins"));
     for (const KPluginMetaData &metadata : data) {
         if (!metadata.isValid()) {
-            qDebug() << "Invalid metadata" << metadata.name();
+            qCDebug(KACCOUNTS_KDED_LOG) << "Invalid metadata" << metadata.name();
             continue;
         }
 
         const auto result = KPluginFactory::instantiatePlugin<KAccounts::KAccountsDPlugin>(metadata, this, {});
 
         if (!result) {
-            qDebug() << "Error loading plugin" << metadata.name() << result.errorString;
+            qCDebug(KACCOUNTS_KDED_LOG) << "Error loading plugin" << metadata.name() << result.errorString;
             continue;
         }
 
@@ -54,7 +56,7 @@ KDEDAccounts::~KDEDAccounts()
 
 void KDEDAccounts::startDaemon()
 {
-    qDebug();
+    qCDebug(KACCOUNTS_KDED_LOG);
     const Accounts::AccountIdList accList = KAccounts::accountsManager()->accountList();
     for (const Accounts::AccountId &id : accList) {
         monitorAccount(id);
@@ -63,7 +65,7 @@ void KDEDAccounts::startDaemon()
 
 void KDEDAccounts::monitorAccount(const Accounts::AccountId id)
 {
-    qDebug() << id;
+    qCDebug(KACCOUNTS_KDED_LOG) << id;
     Accounts::Account *acc = KAccounts::accountsManager()->account(id);
     const Accounts::ServiceList services = acc->services();
     for (const Accounts::Service &service : services) {
@@ -76,7 +78,7 @@ void KDEDAccounts::monitorAccount(const Accounts::AccountId id)
 
 void KDEDAccounts::accountCreated(const Accounts::AccountId id)
 {
-    qDebug() << id;
+    qCDebug(KACCOUNTS_KDED_LOG) << id;
     monitorAccount(id);
 
     const Accounts::Account *acc = KAccounts::accountsManager()->account(id);
@@ -89,7 +91,7 @@ void KDEDAccounts::accountCreated(const Accounts::AccountId id)
 
 void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 {
-    qDebug() << id;
+    qCDebug(KACCOUNTS_KDED_LOG) << id;
 
     for (KAccounts::KAccountsDPlugin *plugin : std::as_const(m_plugins)) {
         plugin->onAccountRemoved(id);
@@ -98,9 +100,9 @@ void KDEDAccounts::accountRemoved(const Accounts::AccountId id)
 
 void KDEDAccounts::enabledChanged(const QString &serviceName, bool enabled)
 {
-    qDebug();
+    qCDebug(KACCOUNTS_KDED_LOG);
     if (serviceName.isEmpty()) {
-        qDebug() << "ServiceName is Empty";
+        qCDebug(KACCOUNTS_KDED_LOG) << "ServiceName is Empty";
         return;
     }
 

@@ -7,6 +7,8 @@
 #include "removeaccountjob.h"
 
 #include "core.h"
+#include "debug.h"
+
 #include <Accounts/Manager>
 #include <QDebug>
 #include <SignOn/Identity>
@@ -66,11 +68,11 @@ void RemoveAccountJob::start()
             account->remove();
             account->sync();
         } else {
-            qWarning() << "No account found with the ID" << d->accountId;
+            qCWarning(KACCOUNTS_LIB_LOG) << "No account found with the ID" << d->accountId;
             emitResult();
         }
     } else {
-        qWarning() << "No accounts manager, this is not awesome.";
+        qCWarning(KACCOUNTS_LIB_LOG) << "No accounts manager, this is not awesome.";
         emitResult();
     }
 }

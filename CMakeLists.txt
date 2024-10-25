@@ -42,6 +42,7 @@ include(GenerateExportHeader)
 include(FeatureSummary)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
+include(ECMQtDeclareLoggingCategory)
 
 set(KACCOUNTS_SOVERSION "2")
 set(ACCOUNTSQT_DEP_VERSION "1.16")
@@ -78,6 +79,12 @@ add_subdirectory(src)
 if(NOT KF6_COMPAT_BUILD)
    ki18n_install(po)
 endif()
+
+ecm_qt_install_logging_categories(
+    EXPORT KAccounts
+    FILE kaccounts.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})

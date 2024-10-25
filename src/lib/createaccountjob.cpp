@@ -6,6 +6,7 @@
 #include "createaccountjob.h"
 
 #include "core.h"
+#include "debug.h"
 #include "kaccountsuiplugin.h"
 #include "uipluginsmanager.h"
 
@@ -38,7 +39,7 @@ CreateAccountJob::CreateAccountJob(const QString &providerName, QObject *parent)
 
 void CreateAccountJob::start()
 {
-    qDebug() << m_providerName;
+    qCDebug(KACCOUNTS_LIB_LOG) << m_providerName;
     QMetaObject::invokeMethod(this, "processSession");
 }
 
@@ -52,7 +53,7 @@ void CreateAccountJob::processSession()
     m_accInfo = new Accounts::AccountService(m_account, service, this);
 
     const QString pluginName = m_account->provider().pluginName();
-    qDebug() << "Looking for plugin" << pluginName;
+    qCDebug(KACCOUNTS_LIB_LOG) << "Looking for plugin" << pluginName;
     if (!pluginName.isEmpty()) {
         loadPluginAndShowDialog(pluginName);
     } else {
@@ -67,7 +68,7 @@ void CreateAccountJob::processSession()
 
         connect(m_identity, &SignOn::Identity::info, this, &CreateAccountJob::info);
         connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
-            qDebug() << "Error storing identity:" << err.message();
+            qCDebug(KACCOUNTS_LIB_LOG) << "Error storing identity:" << err.message();
         });
 
         QVariantMap data = m_accInfo->authData().parameters();
@@ -75,7 +76,7 @@ void CreateAccountJob::processSession()
 
         SignOn::SessionData sessionData(data);
         SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
-        qDebug() << "Starting auth session with" << m_accInfo->authData().method();
+        qCDebug(KACCOUNTS_LIB_LOG) << "Starting auth session with" << m_accInfo->authData().method();
         connect(session, &SignOn::AuthSession::error, this, &CreateAccountJob::sessionError);
         connect(session, &SignOn::AuthSession::response, this, &CreateAccountJob::sessionResponse);
 
@@ -88,7 +89,7 @@ void CreateAccountJob::loadPluginAndShowDialog(const QString &pluginName)
     KAccountsUiPlugin *ui = KAccounts::UiPluginsManager::pluginForName(pluginName);
 
     if (!ui) {
-        qDebug() << "Plugin could not be loaded";
+        qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be loaded";
         pluginError(i18nc("The %1 is for plugin name, eg. Could not load UI plugin", "Could not load %1 plugin, please check your installation", pluginName));
         return;
     }
@@ -115,7 +116,7 @@ void CreateAccountJob::startAuthSession(const QVariantMap &data)
 
     connect(m_identity, &SignOn::Identity::info, this, &CreateAccountJob::info);
     connect(m_identity, &SignOn::Identity::error, [=](const SignOn::Error &err) {
-        qDebug() << "Error storing identity:" << err.message();
+        qCDebug(KACCOUNTS_LIB_LOG) << "Error storing identity:" << err.message();
     });
 
     auto i = data.constBegin();
@@ -131,7 +132,7 @@ void CreateAccountJob::startAuthSession(const QVariantMap &data)
 
     SignOn::SessionData sessionData(authData);
     SignOn::AuthSessionP session = m_identity->createSession(m_accInfo->authData().method());
-    qDebug() << "Starting auth session with" << m_accInfo->authData().method();
+    qCDebug(KACCOUNTS_LIB_LOG) << "Starting auth session with" << m_accInfo->authData().method();
     connect(session, &SignOn::AuthSession::error, this, &CreateAccountJob::sessionError);
     connect(session, &SignOn::AuthSession::response, this, &CreateAccountJob::sessionResponse);
 
@@ -191,7 +192,7 @@ void CreateAccountJob::pluginCancelled()
 
 void CreateAccountJob::sessionResponse(const SignOn::SessionData & /*data*/)
 {
-    qDebug() << "Received session response";
+    qCDebug(KACCOUNTS_LIB_LOG) << "Received session response";
 
     m_done = true;
     m_identity->queryInfo();
@@ -199,11 +200,11 @@ void CreateAccountJob::sessionResponse(const SignOn::SessionData & /*data*/)
 
 void CreateAccountJob::info(const SignOn::IdentityInfo &info)
 {
-    qDebug() << "Info:";
-    qDebug() << "\tId:" << info.id();
-    qDebug() << "\tcaption:" << info.caption();
-    qDebug() << "\towner:" << info.owner();
-    qDebug() << "\tuserName:" << info.userName();
+    qCDebug(KACCOUNTS_LIB_LOG) << "Info:";
+    qCDebug(KACCOUNTS_LIB_LOG) << "\tId:" << info.id();
+    qCDebug(KACCOUNTS_LIB_LOG) << "\tcaption:" << info.caption();
+    qCDebug(KACCOUNTS_LIB_LOG) << "\towner:" << info.owner();
+    qCDebug(KACCOUNTS_LIB_LOG) << "\tuserName:" << info.userName();
 
     if (!m_done) {
         return;
@@ -257,8 +258,8 @@ void CreateAccountJob::sessionError(const SignOn::Error &signOnError)
         // Guard against SignOn sending two error() signals
         return;
     }
-    qWarning() << "Error:";
-    qWarning() << "\t" << signOnError.message();
+    qCWarning(KACCOUNTS_LIB_LOG) << "Error:";
+    qCWarning(KACCOUNTS_LIB_LOG) << "\t" << signOnError.message();
 
     setError(KJob::UserDefinedError);
     setErrorText(i18n("There was an error while trying to process the request: %1", signOnError.message()));

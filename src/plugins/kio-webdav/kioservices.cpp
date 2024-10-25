@@ -6,6 +6,7 @@
 
 #include "kioservices.h"
 #include "core.h"
+#include "debug.h"
 #include "getcredentialsjob.h"
 
 #include <QApplication>
@@ -38,25 +39,24 @@ KIOServices::~KIOServices() = default;
 
 void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accounts::ServiceList &serviceList)
 {
-    qDebug();
     for (const Accounts::Service &service : serviceList) {
         if (service.serviceType() != QLatin1String("dav-storage")) {
-            qDebug() << "Ignoring: " << service.serviceType();
+            qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
             continue;
         }
         if (isEnabled(accId, service.name())) {
-            qDebug() << "Already configured: " << service.name();
+            qCDebug(KACCOUNTS_DAV_LOG) << "Already configured: " << service.name();
             continue;
         }
 
-        qDebug() << "Creating: " << service.name() << "Of type: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Creating: " << service.name() << "Of type: " << service.serviceType();
         enableService(accId, service);
     }
 }
 
 void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 {
-    qDebug();
+    qCDebug(KACCOUNTS_DAV_LOG);
     const QString accountId = QString::number(accId) + QStringLiteral("_");
 
     const QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/remoteview/");
@@ -69,9 +69,9 @@ void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
         }
 
         QString serviceName = i.fileName();
-        qDebug() << "Removing: " << serviceName;
+        qCDebug(KACCOUNTS_DAV_LOG) << "Removing: " << serviceName;
         serviceName = serviceName.mid(accountId.count(), serviceName.indexOf(QLatin1String(".desktop")) - accountId.count());
-        qDebug() << "Removing N: " << serviceName;
+        qCDebug(KACCOUNTS_DAV_LOG) << "Removing N: " << serviceName;
         disableService(accId, serviceName);
     }
 }
@@ -79,11 +79,11 @@ void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        qDebug() << "Ignoring: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
         return;
     }
     if (isEnabled(accId, service.name())) {
-        qDebug() << "Already configured: " << service.name();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Already configured: " << service.name();
         return;
     }
 
@@ -93,11 +93,11 @@ void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accoun
 void KIOServices::onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        qDebug() << "Ignoring: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
         return;
     }
     if (!isEnabled(accId, service.name())) {
-        qDebug() << "Already not configured: " << service.name();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Already not configured: " << service.name();
         return;
     }
 
@@ -173,15 +173,15 @@ QCoro::Task<void> KIOServices::createNetAttach(const Accounts::AccountId account
     QDir saveDir(folderPath);
     if (!saveDir.exists()) {
         if (!saveDir.mkpath(folderPath)) {
-            qWarning() << "Directory" << folderPath << "for storage couldn't be created!";
+            qCWarning(KACCOUNTS_DAV_LOG) << "Directory" << folderPath << "for storage couldn't be created!";
         }
     }
     const QString desktopFilePath = folderPath + QString::number(accountId) + QLatin1Char('_') + service.name() + QStringLiteral(".desktop");
 
-    qDebug() << "Creating knetAttach place";
-    qDebug() << desktopFilePath;
-    qDebug() << url.host();
-    qDebug() << url.toString();
+    qCDebug(KACCOUNTS_DAV_LOG) << "Creating knetAttach place";
+    qCDebug(KACCOUNTS_DAV_LOG) << desktopFilePath;
+    qCDebug(KACCOUNTS_DAV_LOG) << url.host();
+    qCDebug(KACCOUNTS_DAV_LOG) << url.toString();
 
     KConfig _desktopFile(desktopFilePath, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, QStringLiteral("Desktop Entry"));
@@ -271,7 +271,7 @@ QCoro::Task<void> KIOServices::removeNetAttach(const QString &_id)
     const QUrl url(desktopFile.readEntry("URL", QUrl()));
     Q_ASSERT(!url.isEmpty());
 
-    qDebug() << url.userName() << url.host() << url;
+    qCDebug(KACCOUNTS_DAV_LOG) << url.userName() << url.host() << url;
 
     QFile::remove(path);
     org::kde::KDirNotify::emitFilesRemoved(QList<QUrl>() << QUrl(QStringLiteral("remote:/") + id));
