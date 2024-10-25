@@ -114,6 +114,11 @@ set_target_properties(kaccounts PROPERTIES VERSION   ${KACCOUNTS_VERSION}
                                            LIBRARY_OUTPUT_NAME kaccounts${KACCOUNTS_SUFFIX}
 )
 
+ecm_qt_declare_logging_category(kaccounts HEADER debug.h IDENTIFIER KACCOUNTS_LIB_LOG CATEGORY_NAME org.kde.kaccounts.lib
+    DESCRIPTION "KAccounts Library"
+    EXPORT KAccounts
+)
+
 configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KAccountsConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KAccounts${KACCOUNTS_SUFFIX}Config.cmake"

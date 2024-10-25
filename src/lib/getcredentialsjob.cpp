@@ -5,6 +5,7 @@
  */
 #include "getcredentialsjob.h"
 #include "core.h"
+#include "debug.h"
 
 #include <Accounts/Account>
 #include <Accounts/AccountService>
@@ -45,13 +46,13 @@ void GetCredentialsJob::Private::getCredentials()
 {
     Accounts::Account *acc = manager->account(id);
     if (!acc) {
-        qWarning() << "Unable to find account for id" << id;
+        qCWarning(KACCOUNTS_LIB_LOG) << "Unable to find account for id" << id;
         if (repeatedTries < 3) {
-            qDebug() << "Retrying in 2s";
+            qCDebug(KACCOUNTS_LIB_LOG) << "Retrying in 2s";
             QTimer::singleShot(2000, q, SLOT(getCredentials()));
             repeatedTries++;
         } else {
-            qDebug() << repeatedTries << "ending with error";
+            qCDebug(KACCOUNTS_LIB_LOG) << repeatedTries << "ending with error";
             q->setError(KJob::UserDefinedError);
             q->setErrorText(i18n("Could not find account"));
             q->emitResult();
@@ -66,7 +67,7 @@ void GetCredentialsJob::Private::getCredentials()
     SignOn::Identity *identity = SignOn::Identity::existingIdentity(acc->credentialsId(), q);
 
     if (!identity) {
-        qWarning() << "Unable to find identity for account id" << id;
+        qCWarning(KACCOUNTS_LIB_LOG) << "Unable to find identity for account id" << id;
         q->setError(KJob::UserDefinedError);
         q->setErrorText(i18n("Could not find credentials"));
         q->emitResult();
@@ -76,7 +77,7 @@ void GetCredentialsJob::Private::getCredentials()
     authData[QStringLiteral("AccountUsername")] = acc->value(QStringLiteral("username")).toString();
     QPointer<SignOn::AuthSession> authSession = identity->createSession(authMethod.isEmpty() ? serviceAuthData.method() : authMethod);
     if (!authSession) {
-        qWarning() << "Unable to create auth session for" << authMethod << serviceAuthData.method();
+        qCWarning(KACCOUNTS_LIB_LOG) << "Unable to create auth session for" << authMethod << serviceAuthData.method();
         q->setError(KJob::UserDefinedError);
         q->setErrorText(i18n("Could not create auth session"));
         q->emitResult();
@@ -89,7 +90,7 @@ void GetCredentialsJob::Private::getCredentials()
     });
 
     QObject::connect(authSession.data(), &SignOn::AuthSession::error, q, [this](const SignOn::Error &error) {
-        qDebug() << error.message();
+        qCDebug(KACCOUNTS_LIB_LOG) << error.message();
         q->setError(KJob::UserDefinedError);
         q->setErrorText(error.message());
         q->emitResult();

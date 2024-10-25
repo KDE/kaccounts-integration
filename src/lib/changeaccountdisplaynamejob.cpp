@@ -7,6 +7,8 @@
 #include "changeaccountdisplaynamejob.h"
 
 #include "core.h"
+#include "debug.h"
+
 #include <Accounts/Manager>
 #include <KLocalizedString>
 #include <QDebug>
@@ -70,17 +72,17 @@ void ChangeAccountDisplayNameJob::start()
                 });
                 account->sync();
             } else {
-                qWarning() << "No account found with the ID" << d->accountId;
+                qCWarning(KACCOUNTS_LIB_LOG) << "No account found with the ID" << d->accountId;
                 setErrorText(i18n("No account found with the ID %1").arg(d->accountId));
                 emitResult();
             }
         } else {
-            qWarning() << "No accounts manager, this is not awesome.";
+            qCWarning(KACCOUNTS_LIB_LOG) << "No accounts manager, this is not awesome.";
             setErrorText(i18n("No accounts manager, this is not awesome."));
             emitResult();
         }
     } else {
-        qWarning() << "Setting an account display name to empty is a terrible idea, and we refuse to do that";
+        qCWarning(KACCOUNTS_LIB_LOG) << "Setting an account display name to empty is a terrible idea, and we refuse to do that";
         setErrorText(i18n("The display name cannot be empty"));
         emitResult();
     }

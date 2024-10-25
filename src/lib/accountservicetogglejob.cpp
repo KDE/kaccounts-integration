@@ -7,6 +7,8 @@
 #include "accountservicetogglejob.h"
 
 #include "core.h"
+#include "debug.h"
+
 #include <Accounts/Manager>
 #include <QDebug>
 
@@ -76,8 +78,8 @@ void AccountServiceToggleJob::start()
         if (account) {
             Accounts::Service service = accountsManager->service(d->serviceId);
             if (!service.isValid()) {
-                // qWarning() << "Looks like we might have been given a name instead of an ID for the service, which will be expected when using the Ubuntu
-                // AccountServiceModel, which only gives you the name";
+                // qCWarning(KACCOUNTS_LIB_LOG) << "Looks like we might have been given a name instead of an ID for the service, which will be expected when
+                // using the Ubuntu AccountServiceModel, which only gives you the name";
                 const auto services = account->services();
                 for (const Accounts::Service &aService : services) {
                     if (aService.displayName() == d->serviceId) {
@@ -120,15 +122,15 @@ void AccountServiceToggleJob::start()
                 });
                 account->sync();
             } else {
-                qWarning() << "No service found with the ID" << d->serviceId << "on account" << account->displayName();
+                qCWarning(KACCOUNTS_LIB_LOG) << "No service found with the ID" << d->serviceId << "on account" << account->displayName();
                 emitResult();
             }
         } else {
-            qWarning() << "No account found with the ID" << d->accountId;
+            qCWarning(KACCOUNTS_LIB_LOG) << "No account found with the ID" << d->accountId;
             emitResult();
         }
     } else {
-        qWarning() << "No accounts manager, this is not awesome.";
+        qCWarning(KACCOUNTS_LIB_LOG) << "No accounts manager, this is not awesome.";
         emitResult();
     }
 }

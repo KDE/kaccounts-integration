@@ -6,6 +6,7 @@
 
 #include "uipluginsmanager.h"
 
+#include "debug.h"
 #include "kaccountsuiplugin.h"
 
 #include <KPluginMetaData>
@@ -53,26 +54,26 @@ void UiPluginsManagerPrivate::loadPlugins()
         QPluginLoader loader(plugin.fileName());
 
         if (!loader.load()) {
-            qWarning() << "Could not create KAccountsUiPlugin: " << plugin.fileName();
-            qWarning() << loader.errorString();
+            qCWarning(KACCOUNTS_LIB_LOG) << "Could not create KAccountsUiPlugin: " << plugin.fileName();
+            qCWarning(KACCOUNTS_LIB_LOG) << loader.errorString();
             continue;
         }
 
         if (QObject *obj = loader.instance()) {
             KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin *>(obj);
             if (!ui) {
-                qDebug() << "Plugin could not be converted to an KAccountsUiPlugin";
-                qDebug() << plugin.fileName();
+                qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be converted to an KAccountsUiPlugin";
+                qCDebug(KACCOUNTS_LIB_LOG) << plugin.fileName();
                 continue;
             }
 
-            qDebug() << "Adding plugin" << ui << plugin.fileName();
+            qCDebug(KACCOUNTS_LIB_LOG) << "Adding plugin" << ui << plugin.fileName();
             const QWindowList topLevelWindows = QGuiApplication::topLevelWindows();
             if (topLevelWindows.size() == 1) {
                 QWindow *topLevelWindow = topLevelWindows.at(0);
                 obj->setProperty("transientParent", QVariant::fromValue(topLevelWindow));
             } else {
-                qWarning() << "Unexpected topLevelWindows found:" << topLevelWindows.size() << "please report a bug";
+                qCWarning(KACCOUNTS_LIB_LOG) << "Unexpected topLevelWindows found:" << topLevelWindows.size() << "please report a bug";
             }
 
             // When the plugin has finished building the UI, show it right away
@@ -81,11 +82,11 @@ void UiPluginsManagerPrivate::loadPlugins()
             pluginsForNames.insert(plugin.pluginId(), ui);
             const auto services = ui->supportedServicesForConfig();
             for (const QString &service : services) {
-                qDebug() << " Adding service" << service;
+                qCDebug(KACCOUNTS_LIB_LOG) << " Adding service" << service;
                 pluginsForServices.insert(service, ui);
             }
         } else {
-            qDebug() << "Plugin could not create instance" << plugin.fileName();
+            qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not create instance" << plugin.fileName();
         }
     }
 

@@ -22,3 +22,8 @@ target_link_libraries(kaccounts_kio_webdav_plugin
     ${SIGNONQT_LIBRARIES}
     QCoro::Core
 )
+
+ecm_qt_declare_logging_category(kaccounts_kio_webdav_plugin HEADER debug.h IDENTIFIER KACCOUNTS_DAV_LOG CATEGORY_NAME org.kde.kaccounts.dav
+    DESCRIPTION "KAccounts DAV Plugin"
+    EXPORT KAccounts
+)
