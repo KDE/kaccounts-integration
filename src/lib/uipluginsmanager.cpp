@@ -54,16 +54,14 @@ void UiPluginsManagerPrivate::loadPlugins()
         QPluginLoader loader(plugin.fileName());
 
         if (!loader.load()) {
-            qCWarning(KACCOUNTS_LIB_LOG) << "Could not create KAccountsUiPlugin: " << plugin.fileName();
-            qCWarning(KACCOUNTS_LIB_LOG) << loader.errorString();
+            qCWarning(KACCOUNTS_LIB_LOG) << "Could not create KAccountsUiPlugin:" << plugin.fileName() << loader.errorString();
             continue;
         }
 
         if (QObject *obj = loader.instance()) {
             KAccountsUiPlugin *ui = qobject_cast<KAccountsUiPlugin *>(obj);
             if (!ui) {
-                qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be converted to an KAccountsUiPlugin";
-                qCDebug(KACCOUNTS_LIB_LOG) << plugin.fileName();
+                qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be converted to an KAccountsUiPlugin" << plugin.fileName();
                 continue;
             }
 

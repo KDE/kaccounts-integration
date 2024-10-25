@@ -89,7 +89,7 @@ void CreateAccountJob::loadPluginAndShowDialog(const QString &pluginName)
     KAccountsUiPlugin *ui = KAccounts::UiPluginsManager::pluginForName(pluginName);
 
     if (!ui) {
-        qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be loaded";
+        qCDebug(KACCOUNTS_LIB_LOG) << "Plugin could not be loaded:" << pluginName;
         pluginError(i18nc("The %1 is for plugin name, eg. Could not load UI plugin", "Could not load %1 plugin, please check your installation", pluginName));
         return;
     }
@@ -258,8 +258,7 @@ void CreateAccountJob::sessionError(const SignOn::Error &signOnError)
         // Guard against SignOn sending two error() signals
         return;
     }
-    qCWarning(KACCOUNTS_LIB_LOG) << "Error:";
-    qCWarning(KACCOUNTS_LIB_LOG) << "\t" << signOnError.message();
+    qCWarning(KACCOUNTS_LIB_LOG) << "Error:" << signOnError.message();
 
     setError(KJob::UserDefinedError);
     setErrorText(i18n("There was an error while trying to process the request: %1", signOnError.message()));

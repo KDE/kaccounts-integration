@@ -41,15 +41,15 @@ void KIOServices::onAccountCreated(const Accounts::AccountId accId, const Accoun
 {
     for (const Accounts::Service &service : serviceList) {
         if (service.serviceType() != QLatin1String("dav-storage")) {
-            qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
+            qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring:" << service.serviceType();
             continue;
         }
         if (isEnabled(accId, service.name())) {
-            qCDebug(KACCOUNTS_DAV_LOG) << "Already configured: " << service.name();
+            qCDebug(KACCOUNTS_DAV_LOG) << "Already configured:" << service.name();
             continue;
         }
 
-        qCDebug(KACCOUNTS_DAV_LOG) << "Creating: " << service.name() << "Of type: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Creating:" << service.name() << "Of type:" << service.serviceType();
         enableService(accId, service);
     }
 }
@@ -69,7 +69,7 @@ void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
         }
 
         QString serviceName = i.fileName();
-        qCDebug(KACCOUNTS_DAV_LOG) << "Removing: " << serviceName;
+        qCDebug(KACCOUNTS_DAV_LOG) << "Removing:" << serviceName;
         serviceName = serviceName.mid(accountId.count(), serviceName.indexOf(QLatin1String(".desktop")) - accountId.count());
         qCDebug(KACCOUNTS_DAV_LOG) << "Removing N: " << serviceName;
         disableService(accId, serviceName);
@@ -79,11 +79,11 @@ void KIOServices::onAccountRemoved(const Accounts::AccountId accId)
 void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring:" << service.serviceType();
         return;
     }
     if (isEnabled(accId, service.name())) {
-        qCDebug(KACCOUNTS_DAV_LOG) << "Already configured: " << service.name();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Already configured:" << service.name();
         return;
     }
 
@@ -93,11 +93,11 @@ void KIOServices::onServiceEnabled(const Accounts::AccountId accId, const Accoun
 void KIOServices::onServiceDisabled(const Accounts::AccountId accId, const Accounts::Service &service)
 {
     if (service.serviceType() != QLatin1String("dav-storage")) {
-        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring: " << service.serviceType();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Ignoring:" << service.serviceType();
         return;
     }
     if (!isEnabled(accId, service.name())) {
-        qCDebug(KACCOUNTS_DAV_LOG) << "Already not configured: " << service.name();
+        qCDebug(KACCOUNTS_DAV_LOG) << "Already not configured:" << service.name();
         return;
     }
 

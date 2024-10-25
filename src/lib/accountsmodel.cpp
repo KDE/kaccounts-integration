@@ -71,7 +71,7 @@ Accounts::Account *AccountsModel::Private::accountById(int id)
     // If we don't yet have this account cached, get it and connect it up to the model
     Accounts::Account *account = accountsManager->account(id);
     if (!account) {
-        qCDebug(KACCOUNTS_LIB_LOG) << "\t Failed to get the account from manager";
+        qCDebug(KACCOUNTS_LIB_LOG) << "Failed to get the account from manager";
         return nullptr;
     }
 
