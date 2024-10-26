@@ -237,8 +237,10 @@ QCoro::Task<QString> KIOServices::getRealm(const QUrl &url)
     co_return QString();
 }
 
-QCoro::Task<void> KIOServices::removeNetAttach(const QString &id)
+QCoro::Task<void> KIOServices::removeNetAttach(const QString &_id)
 {
+    QString id = _id;
+
     WId windowId = 0;
     if (qApp->activeWindow()) {
         windowId = qApp->activeWindow()->winId();
