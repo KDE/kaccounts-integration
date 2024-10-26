@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-03 00:39+0000\n"
+"POT-Creation-Date: 2024-10-26 00:39+0000\n"
 "PO-Revision-Date: 2024-08-04 16:42+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -138,28 +138,28 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "புதிய பெயரை உள்ளிடுக"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "%1 எனும் அடையாளத்துடன் எந்த கணக்கும் கண்டுபிடிக்கபடவில்லை"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "கணக்கு மேலாளியைக் கண்டுபிடிக்க முடியவில்லை."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "காட்சிப்பெயர் காலியாக இருக்கக்கூடாது"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "%1 செருகுநிரலை ஏற்ற முடியவில்லை, உங்கள் நிறுவலை சரிபாருங்கள்"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "பயனர் ரத்துசெய்தார்"
@@ -169,17 +169,17 @@ msgstr "பயனர் ரத்துசெய்தார்"
 msgid "There was an error while trying to process the request: %1"
 msgstr "கோரிக்கையை நிறைவேற்றுவதில் சிக்கல் நேர்ந்தது: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "கணக்கைக் கண்டுபிடிக்க முடியவில்லை"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "சான்றுகளை கண்டுபிடிக்க முடியவில்லை"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "உறுதிப்பாட்டு அமர்வை உருவாக்க முடியவில்லை"

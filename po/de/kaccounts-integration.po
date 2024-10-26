@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-03 00:39+0000\n"
+"POT-Creation-Date: 2024-10-26 00:39+0000\n"
 "PO-Revision-Date: 2024-08-20 20:20+0200\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -139,22 +139,22 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Neuen Namen eingeben:"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Kein Zugang mit der Kennung „%1“ gefunden"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Es wurde keine Zugangsverwaltung gefunden."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Der Anzeigename darf nicht leer sein"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
@@ -162,7 +162,7 @@ msgstr ""
 "Das Modul %1 kann nicht geladen werden, bitte überprüfen Sie Ihre "
 "Installation"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Vom Benutzer abgebrochen"
@@ -172,17 +172,17 @@ msgstr "Vom Benutzer abgebrochen"
 msgid "There was an error while trying to process the request: %1"
 msgstr "Beim Bearbeiten der Anfrage ist ein Fehler aufgetreten: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "Zugang wurde nicht gefunden"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Anmeldungsdaten wurden nicht gefunden"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Autorisierungssitzung kann nicht erstellt werden"
