@@ -260,6 +260,11 @@ QCoro::Task<void> KIOServices::removeNetAttach(const QString &_id)
     QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     path.append(QStringLiteral("/remoteview/") + id + QStringLiteral(".desktop"));
 
+    if (!QFileInfo::exists(path)) {
+        qCWarning(KACCOUNTS_DAV_LOG) << "removeNetAttach: File not found" << path;
+        co_return;
+    }
+
     KConfig _desktopFile(path, KConfig::SimpleConfig);
     KConfigGroup desktopFile(&_desktopFile, QStringLiteral("Desktop Entry"));
 
