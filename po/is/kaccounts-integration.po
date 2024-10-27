@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-10-27 02:39+0000\n"
 "PO-Revision-Date: 2024-03-18 15:08+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -140,48 +140,48 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Sláðu inn nýtt nafn:"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Enginn aðgangur fannst með auðkenninu %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Enginn aðgangsstjóri, það er ekki frábært"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Birtingarnafnið má ekki vera autt"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Gat ekki hlaðið inn viðbótinni %1, athugaðu uppsetninguna þína"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Notandi hætti við"
 
-#: src/lib/createaccountjob.cpp:264
+#: src/lib/createaccountjob.cpp:265
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Upp kom villa þegar reynt var að vinna úr beiðninni: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "Aðgangur finnst ekki"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Auðkennisupplýsingar finnast ekki"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Gat ekki sett upp auth-setu"

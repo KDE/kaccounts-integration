@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-10-27 02:39+0000\n"
 "PO-Revision-Date: 2024-03-18 10:26+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -139,48 +139,48 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "נא למלא שם חדש:"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "לא נמצא חשבון עם המזהה %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "אין מנהל חשבונות, זה לא סבבה כל כך."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "שם התצוגה לא יכול להישאר ריק"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "לא ניתן לטעון את התוסף %1, נא לוודא שההתקנה שלך תקינה"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "בוטל על ידי המשתמש"
 
-#: src/lib/createaccountjob.cpp:264
+#: src/lib/createaccountjob.cpp:265
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "אירעה שגיאה בניסיון לעבד את הבקשה: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "לא ניתן למצוא חשבון"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "לא ניתן למצוא פרטי גישה"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "לא ניתן ליצור שיח אימות"

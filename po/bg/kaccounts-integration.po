@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-10-27 02:39+0000\n"
 "PO-Revision-Date: 2024-05-13 23:14+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -141,48 +141,48 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Въведете ново име:"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Не е намерен акаунт с идентификатор %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Няма мениджър на акаунти, това не е добре."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Показваното име не може да бъде празно"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Неуспешно зареждане на %1 приставка, моля, проверете вашата инсталация"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Oтмененo от потребителя"
 
-#: src/lib/createaccountjob.cpp:264
+#: src/lib/createaccountjob.cpp:265
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "При опит за обработка на заявката възникна грешка: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "Неуспешно намиране на акаунт"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Неуспешно намиране на идентификационни данни"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Неуспешно създаване на сесия за удостоверяване"

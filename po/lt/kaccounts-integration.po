@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:38+0000\n"
+"POT-Creation-Date: 2024-10-27 02:39+0000\n"
 "PO-Revision-Date: 2024-02-20 13:21+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -141,48 +141,48 @@ msgctxt ""
 msgid "Enter new name:"
 msgstr "Įveskite naują pavadinimą:"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:74
+#: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
 msgstr "Nerasta jokios paskyros su ID %1"
 
-#: src/lib/changeaccountdisplaynamejob.cpp:79
+#: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
 msgstr "Nėra paskyrų tvarkytuvės, nuostabu."
 
-#: src/lib/changeaccountdisplaynamejob.cpp:84
+#: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
 msgstr "Rodomas vardas negali būti tuščias"
 
-#: src/lib/createaccountjob.cpp:92
+#: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
 msgstr "Nepavyko įkelti %1 įskiepio, patikrinkite savo diegimą"
 
-#: src/lib/createaccountjob.cpp:187
+#: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
 msgstr "Naudotojas atsisakė"
 
-#: src/lib/createaccountjob.cpp:264
+#: src/lib/createaccountjob.cpp:265
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
 msgstr "Bandant apdoroti užklausą, įvyko klaida: %1"
 
-#: src/lib/getcredentialsjob.cpp:56
+#: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
 msgstr "Nepavyko rasti paskyros"
 
-#: src/lib/getcredentialsjob.cpp:71
+#: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
 msgstr "Nepavyko rasti prisijungimo duomenų"
 
-#: src/lib/getcredentialsjob.cpp:81
+#: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
 msgstr "Nepavyko sukurti tapatybės nustatymo seanso"
