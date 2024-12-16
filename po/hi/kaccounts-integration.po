@@ -1,23 +1,20 @@
-# Sanskrit translations for kaccounts-integration package.
+# Hindi translations for kaccounts-integration package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kaccounts-integration package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
-# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:39+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
-"Last-Translator: kali <skkalwar999@gmail.com>\n"
-"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
-"Language: sa\n"
+"PO-Revision-Date: 2024-12-15 17:36+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
-"X-Generator: Lokalize 24.08.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -27,7 +24,7 @@ msgstr "खाता विवरण"
 #: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 (%2)"
-msgstr "%1 (%2) २."
+msgstr "%1 (%2)"
 
 #: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
 #, kde-format
@@ -40,18 +37,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "खाताप्रदर्शननाम परिवर्तयतु"
+msgstr "खाता प्रदर्शन नाम बदलें"
 
 #: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr "Use This Account For"
+msgstr "इस खाते का उपयोग करें"
 
 #: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr "इदं खातं निष्कासयन्तु"
+msgstr "यह खाता हटाएँ"
 
 #: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
@@ -60,19 +57,19 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
-"अस्य खातेः कृते विन्यासयोग्याः सेवाः उपलभ्यन्ते । अद्यापि उपरि सम्पादनचिह्नं नुत्वा तस्य "
-"प्रदर्शननाम परिवर्तयितुं शक्नुवन्ति ।"
+"इस खाते के लिए कोई कॉन्फ़िगर करने योग्य सेवाएँ उपलब्ध नहीं हैं। आप अभी भी ऊपर दिए गए "
+"संपादन आइकन पर क्लिक करके इसका प्रदर्शन नाम बदल सकते हैं।"
 
 #: src/kcm/ui/AvailableAccounts.qml:19
 #, kde-format
 msgid "Add New Account"
-msgstr "New Account योजयतु"
+msgstr "नया खाता जोड़ें"
 
 #: src/kcm/ui/main.qml:25
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "खाता योजयतु…"
+msgstr "खाता जोड़ें…"
 
 #: src/kcm/ui/main.qml:61
 #, kde-format
@@ -80,25 +77,25 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "%1 निष्कासयन्तु"
+msgstr "%1 हटाएं"
 
 #: src/kcm/ui/main.qml:79
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr "अद्यापि कोऽपि लेखाः न योजिताः"
+msgstr "अभी तक कोई खाता नहीं जोड़ा गया"
 
 #: src/kcm/ui/main.qml:80
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "एकं योजयितुं <interface>Add Account…</interface> नुदन्तु"
+msgstr "खाता जोड़ने के लिए <interface>खाता जोड़ें…</interface> पर क्लिक करें"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "खातं निष्कासयन्तु ?"
+msgstr "खाता हटाएँ?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:39
 #, kde-format
@@ -106,7 +103,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "किं भवान् निश्चितः यत् भवान् \"%1\" खातं \"%2\" अपसारयितुम् इच्छति?"
+msgstr "क्या आप वाकई \"%1\" खाता \"%2\" हटाना चाहते हैं?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:41
 #, kde-format
@@ -114,7 +111,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
 msgid "Are you sure you wish to remove the account \"%1\"?"
-msgstr "किं भवान् निश्चितः यत् भवान् \"%1\" खातं हर्तुं इच्छति?"
+msgstr "क्या आप वाकई \"%1\" खाता हटाना चाहते हैं?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:43
 #, kde-format
@@ -122,7 +119,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr "किं भवान् निश्चयेन एतत् \"%1\" खातं हर्तुं इच्छति?"
+msgstr "क्या आप वाकई इस \"%1\" खाते को हटाना चाहते हैं?"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -130,7 +127,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "खातेः नाम परिवर्तनं कुर्वन्तु"
+msgstr "खाते का नाम बदलें"
 
 #: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -138,50 +135,50 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr "नूतनं नाम प्रविष्टं कुर्वन्तु:"
+msgstr "नया नाम दर्ज करें:"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr "%1 ID इत्यनेन सह कोऽपि खातः न प्राप्तः"
+msgstr "आईडी %1 वाला कोई खाता नहीं मिला"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr "न खाताप्रबन्धकः, एतत् भयानकं नास्ति।"
+msgstr "कोई लेखा प्रबंधक नहीं, यह भयानक नहीं है।"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "प्रदर्शननाम रिक्तं न भवितुम् अर्हति"
+msgstr "प्रदर्शन नाम रिक्त नहीं हो सकता"
 
 #: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "%1 प्लगिन् लोड् कर्तुं न शक्यते, कृपया स्वस्य संस्थापनं परीक्ष्यताम्"
+msgstr "%1 प्लगइन लोड नहीं हो सका, कृपया अपनी स्थापना जांचें"
 
 #: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
-msgstr "उपयोक्त्रा रद्दं कृतम्"
+msgstr "उपयोगकर्ता द्वारा रद्द किया गया"
 
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "अनुरोधं संसाधितुं प्रयतमाने त्रुटिः अभवत्: %1"
+msgstr "अनुरोध संसाधित करने का प्रयास करते समय एक त्रुटि हुई: %1"
 
 #: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
-msgstr "लेखान् न प्राप्नोत्"
+msgstr "खाता नहीं मिल सका"
 
 #: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
-msgstr "प्रमाणपत्राणि न प्राप्नुवन्"
+msgstr "क्रेडेंशियल नहीं मिल सका"
 
 #: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
-msgstr "प्रमाणीकरणसत्रं निर्मातुं न शक्तवान्"
+msgstr "प्रमाणीकरण सत्र नहीं बनाया जा सका"
