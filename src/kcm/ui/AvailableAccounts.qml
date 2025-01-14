@@ -10,6 +10,7 @@ import QtQuick.Controls as Controls
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.delegates as KD
 import org.kde.kcmutils as KCM
 
 import org.kde.kaccounts as KAccounts
@@ -34,13 +35,23 @@ KCM.ScrollViewKCM {
 
         model: KAccounts.ProvidersModel {}
 
-        delegate: Kirigami.SubtitleDelegate {
+        delegate: Controls.ItemDelegate {
+            id: account
+
             width: ListView.view.width
 
             icon.name: model.iconName
             text: model.displayName
-            subtitle: model.description
             enabled: model.supportsMultipleAccounts === true || model.accountsCount === 0
+
+            contentItem: KD.IconTitleSubtitle {
+                icon: icon.fromControlsIcon(account.icon)
+                title: account.text
+                subtitle: model.description
+                selected: account.highlighted || account.down
+                font: account.font
+                wrapMode: Text.Wrap
+            }
 
             onClicked: {
                 var job = jobComponent.createObject(root, { "providerName": model.name })
