@@ -35,39 +35,47 @@ KCM.ScrollViewKCM {
 
         model: KAccounts.AccountsModel { }
 
-        delegate: Kirigami.SwipeListItem {
+        delegate: Controls.ItemDelegate {
             id: delegate
             width: ListView.view.width
 
-            contentItem: Kirigami.IconTitleSubtitle {
-                Layout.fillWidth: true
-
-                icon.name: model.iconName
-                title: {
-                    if (model.displayName.length > 0 && model.providerName.length > 0) {
-                        return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerDisplayName)
-                    } else if (model.displayName.length > 0) {
-                        return model.displayName
-                    } else {
-                        return i18nd("kaccounts-integration", "%1 account", model.providerName)
-                    }
+            text: {
+                if (model.displayName.length > 0 && model.providerName.length > 0) {
+                    return i18nd("kaccounts-integration", "%1 (%2)", model.displayName, model.providerDisplayName)
+                } else if (model.displayName.length > 0) {
+                    return model.displayName
+                } else {
+                    return i18nd("kaccounts-integration", "%1 account", model.providerName)
                 }
-                selected: delegate.highlighted
-                font: delegate.font
             }
+            icon.name: model.iconName
 
-            actions: [
-                Kirigami.Action {
+            contentItem: RowLayout {
+
+                spacing: Kirigami.Units.smallSpacing
+
+                Kirigami.IconTitleSubtitle {
+                    Layout.fillWidth: true
+
+                    title: delegate.text
+                    icon: icon.fromControlsIcon(delegate.icon)
+                    selected: delegate.highlighted
+                    font: delegate.font
+                }
+
+                Controls.ToolButton {
                     text: i18ndc("kaccounts-integration", "Tooltip for an action which will offer the user to remove the mentioned account", "Remove %1", delegate.contentItem.text)
                     icon.name: "edit-delete-remove"
-                    onTriggered: {
+                    display: Controls.ToolButton.IconOnly
+                    onClicked: {
                         accountRemover.accountId = model.id;
                         accountRemover.displayName = model.displayName;
                         accountRemover.providerName = model.providerName;
                         accountRemover.open();
                     }
                 }
-            ]
+            }
+
             onClicked: kcm.push("AccountDetails.qml", {model: model.services})
         }
 
