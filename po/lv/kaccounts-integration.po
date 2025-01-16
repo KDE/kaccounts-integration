@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:39+0000\n"
+"POT-Creation-Date: 2025-01-16 00:40+0000\n"
 "PO-Revision-Date: 2024-08-28 09:39+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -23,12 +23,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "Konta informācija"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:44
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 account"
 msgstr "%1 konts"
@@ -62,7 +62,7 @@ msgstr ""
 "Šim kontam nav pieejami konfigurējami pakalpojumi. Joprojām varat mainīt tā "
 "parādāmo vārdu, spiežot uz tā rediģēšanas pogas."
 
-#: src/kcm/ui/AvailableAccounts.qml:19
+#: src/kcm/ui/AvailableAccounts.qml:20
 #, kde-format
 msgid "Add New Account"
 msgstr "Pievienot jaunu kontu"
@@ -73,7 +73,7 @@ msgctxt "@action:button"
 msgid "Add Account…"
 msgstr "Pievienot kontu…"
 
-#: src/kcm/ui/main.qml:61
+#: src/kcm/ui/main.qml:67
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -81,13 +81,13 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "Noņemt „%1“"
 
-#: src/kcm/ui/main.qml:79
+#: src/kcm/ui/main.qml:87
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "Vēl nav pievienotu kontu"
 
-#: src/kcm/ui/main.qml:80
+#: src/kcm/ui/main.qml:88
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"

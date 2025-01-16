@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:39+0000\n"
+"POT-Creation-Date: 2025-01-16 00:40+0000\n"
 "PO-Revision-Date: 2024-08-19 22:32+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 msgid "Account Details"
 msgstr "계정 정보"
 
-#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:48
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:44
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1(%2)"
 
-#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:52
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:48
 #, kde-format
 msgid "%1 account"
 msgstr "%1 계정"
@@ -61,7 +61,7 @@ msgstr ""
 "이 계정에서 설정할 수 있는 서비스가 없습니다. 위에 있는 아이콘을 클릭해서 표"
 "시 이름을 바꿀 수 있습니다."
 
-#: src/kcm/ui/AvailableAccounts.qml:19
+#: src/kcm/ui/AvailableAccounts.qml:20
 #, kde-format
 msgid "Add New Account"
 msgstr "새 계정 추가"
@@ -72,7 +72,7 @@ msgctxt "@action:button"
 msgid "Add Account…"
 msgstr "계정 추가…"
 
-#: src/kcm/ui/main.qml:61
+#: src/kcm/ui/main.qml:67
 #, kde-format
 msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
@@ -80,13 +80,13 @@ msgctxt ""
 msgid "Remove %1"
 msgstr "%1 삭제"
 
-#: src/kcm/ui/main.qml:79
+#: src/kcm/ui/main.qml:87
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
 msgstr "추가한 계정 없음"
 
-#: src/kcm/ui/main.qml:80
+#: src/kcm/ui/main.qml:88
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
