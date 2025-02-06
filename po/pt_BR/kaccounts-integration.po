@@ -4,13 +4,13 @@
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2014, 2015, 2016, 2019, 2020.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2017, 2019, 2020, 2021.
-# SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
+# SPDX-FileCopyrightText: 2024, 2025 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-16 00:40+0000\n"
-"PO-Revision-Date: 2024-07-29 10:34-0300\n"
+"PO-Revision-Date: 2025-02-05 20:52-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -70,12 +70,10 @@ msgid "Add New Account"
 msgstr "Adicionar nova conta"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add New Account…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Adicionar nova conta..."
+msgstr "Adicionar conta..."
 
 #: src/kcm/ui/main.qml:67
 #, kde-format
@@ -92,14 +90,11 @@ msgid "No accounts added yet"
 msgstr "Nenhuma conta adicionada ainda"
 
 #: src/kcm/ui/main.qml:88
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid "Click <interface>Add New Account…</interface> to add one"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
-"Clique no botão <interface>Adicionar nova conta...</interface> paraadicionar "
-"uma"
+"Clique no botão <interface>Adicionar conta...</interface> para adicionar uma"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
