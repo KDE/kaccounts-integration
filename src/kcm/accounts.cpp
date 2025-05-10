@@ -21,6 +21,7 @@ AccountsSettings::AccountsSettings(QObject *parent, const KPluginMetaData &data,
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     setButtons(KQuickAddons::ConfigModule::NoAdditionalButton);
 #else
+    Q_UNUSED(args)
     setButtons(KQuickConfigModule::NoAdditionalButton);
 #endif
 }
