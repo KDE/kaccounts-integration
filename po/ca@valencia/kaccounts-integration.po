@@ -63,7 +63,7 @@ msgid ""
 "change its display name by clicking the edit icon above."
 msgstr ""
 "No hi ha cap servei configurable per a este compte. Encara podreu canviar el "
-"nom que es mostrarà fent clic damunt de la icona d'edició de dalt."
+"nom que es mostrarà clicant damunt de la icona d'edició de dalt."
 
 #: src/kcm/ui/AvailableAccounts.qml:20
 #, kde-format
@@ -94,7 +94,8 @@ msgstr "Encara no s'ha afegit cap compte"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "Feu clic en <interface>Afig un compte…</interface> per a afegir-ne un"
+msgstr ""
+"Cliqueu damunt <interface>Afig un compte…</interface> per a afegir-ne un"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
