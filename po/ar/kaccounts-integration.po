@@ -148,7 +148,7 @@ msgstr "لم يعثر على حساب بالمعرف %1"
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr "لا يوجد مدير حسابات ، هذا ليس رائعًا."
+msgstr "لا يوجد مدير حسابات، هذا ليس رائعًا."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
