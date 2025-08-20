@@ -48,8 +48,7 @@
         "FormFactors": [
             "desktop",
             "handset",
-            "tablet",
-            "mediacenter"
+            "tablet"
         ],
         "Icon": "preferences-online-accounts",
         "Name": "Online Accounts",
