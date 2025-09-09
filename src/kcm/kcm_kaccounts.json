@@ -42,7 +42,6 @@
         "Description[sv]": "Anpassa Internetkonton såsom Google, Live, Owncloud",
         "Description[tr]": "Owncloud, Live veya Google gibi internet hesaplarınızı yapılandırın",
         "Description[uk]": "Налаштування ваших облікових записів у Google, Live, Owncloud тощо",
-        "Description[x-test]": "xxConfigure your internet accounts such as Google, Live, Owncloudxx",
         "Description[zh_CN]": "配置您的网络账户，例如 Google、Live、OwnCloud 等",
         "Description[zh_TW]": "設定您的網路帳號，例如 Google、Live、Owncloud",
         "FormFactors": [
@@ -94,7 +93,6 @@
         "Name[ta]": "இணைய கணக்குகள்",
         "Name[tr]": "Çevrimiçi Hesaplar",
         "Name[uk]": "Облікові записи в інтернеті",
-        "Name[x-test]": "xxOnline Accountsxx",
         "Name[zh_CN]": "在线账户",
         "Name[zh_TW]": "線上帳號"
     },
@@ -130,7 +128,6 @@
     "X-KDE-Keywords[sv]": "nätverk,google,levande,owncloud,synkronisera,uppkopplad,konton,synkronisering,opendesktop,nextcloud,youtube,enhet,hangouts,gmail,google kalender",
     "X-KDE-Keywords[tr]": "ağ,google,live,owncloud,sync,eşzamanla,online,çevrimiçi,hesaplar,eşzamanlama,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google takvim,google calendar",
     "X-KDE-Keywords[uk]": "network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar,мережа,гугл,ґуґл,інтерактив,аунклауд,синхронізація,синхронізувати,інтернет,записи,облікові,ютюб,диск,хенгаут,жмейл,календар",
-    "X-KDE-Keywords[x-test]": "xxnetworkxx,xxgooglexx,xxlivexx,xxowncloudxx,xxsyncxx,xxonlinexx,xxaccountsxx,xxsynchronizationxx,xxopendesktopxx,xxnextcloudxx,xxyoutubexx,xxdrivexx,xxhangoutsxx,xxgmailxx,xxgoogle calendarxx",
     "X-KDE-Keywords[zh_CN]": "network,google,live,owncloud,sync,online,accounts,synchronization,opendesktop,nextcloud,youtube,drive,hangouts,gmail,google calendar,wangluo,tongbu,zaixianfuwu,zhanghao,wangluoqudongqi,wangpan,rili,youjian,网络,同步,在线服务,账号,网络驱动器,网盘,日历,邮件",
     "X-KDE-Keywords[zh_TW]": "網路,網絡,線上服務,微軟,google,同步,帳號,帳戶,雲端硬碟,google 行事曆",
     "X-KDE-System-Settings-Parent-Category": "network",
