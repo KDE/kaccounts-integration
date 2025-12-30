@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kaccounts-integration package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kaccounts-integration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/kcm/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:44
+#, kde-format
+msgid "%1 (%2)"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:48
+#, kde-format
+msgid "%1 account"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr ""
+
+#: src/kcm/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+
+#: src/kcm/ui/AvailableAccounts.qml:20
+#, kde-format
+msgid "Add New Account"
+msgstr ""
+
+#: src/kcm/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Account…"
+msgstr ""
+
+#: src/kcm/ui/main.qml:67
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr ""
+
+#: src/kcm/ui/main.qml:87
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr ""
+
+#: src/kcm/ui/main.qml:88
+#, kde-kuit-format
+msgctxt "@info"
+msgid "Click <interface>Add Account…</interface> to add one"
+msgstr ""
+
+#: src/kcm/ui/RemoveAccountDialog.qml:22
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr ""
+
+#: src/kcm/ui/RemoveAccountDialog.qml:39
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr ""
+
+#: src/kcm/ui/RemoveAccountDialog.qml:41
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr ""
+
+#: src/kcm/ui/RemoveAccountDialog.qml:43
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr ""
+
+#: src/kcm/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr ""
+
+#: src/kcm/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr ""
+
+#: src/lib/changeaccountdisplaynamejob.cpp:86
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:93
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:188
+#, kde-format
+msgid "Cancelled by user"
+msgstr ""
+
+#: src/lib/createaccountjob.cpp:264
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:57
+#, kde-format
+msgid "Could not find account"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:72
+#, kde-format
+msgid "Could not find credentials"
+msgstr ""
+
+#: src/lib/getcredentialsjob.cpp:82
+#, kde-format
+msgid "Could not create auth session"
+msgstr ""
