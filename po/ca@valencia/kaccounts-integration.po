@@ -172,7 +172,8 @@ msgstr "Cancel·lada per l'usuari"
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "S'ha produït un error en provar de processar la sol·licitud: %1"
+msgstr ""
+"S'ha produït un error mentre es provava de processar la sol·licitud: %1"
 
 #: src/lib/getcredentialsjob.cpp:57
 #, kde-format
