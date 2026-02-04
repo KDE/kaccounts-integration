@@ -152,7 +152,7 @@ msgstr "계정 관리자가 없습니다. 무언가 잘못되었습니다."
 #: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "표시 이름을 비워둘 수 없음"
+msgstr "표시 이름을 비워 둘 수 없음"
 
 #: src/lib/createaccountjob.cpp:93
 #, kde-format
