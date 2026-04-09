@@ -13,25 +13,23 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.08.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.08.2\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
-#, fuzzy, kde-format
-#| msgid "Account Removal"
+#, kde-format
 msgid "Account Details"
-msgstr "Odstránenie účtu"
+msgstr "Podrobnosti účtu"
 
 #: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:44
 #, kde-format
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:48
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgid "%1 account"
-msgstr "Účty"
+msgstr "Účet %1"
 
 #: src/kcm/ui/AccountDetails.qml:73
 #, kde-format
@@ -39,18 +37,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr ""
+msgstr "Zmeniť zobrazované meno účtu"
 
 #: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr ""
+msgstr "Používať tento účet na"
 
 #: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr ""
+msgstr "Odstrániť tento účet"
 
 #: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
@@ -59,19 +57,19 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
+"Pre tento účet nie sú k dispozícii žiadne konfigurovateľné služby. Stále "
+"môžete zmeniť jeho zobrazované meno kliknutím na ikonu úprav vyššie."
 
 #: src/kcm/ui/AvailableAccounts.qml:20
-#, fuzzy, kde-format
-#| msgid "ownCloud account Wizard"
+#, kde-format
 msgid "Add New Account"
-msgstr "Sprievodca účtom ownCloud"
+msgstr "Pridať nový účet"
 
 #: src/kcm/ui/main.qml:25
-#, fuzzy, kde-format
-#| msgid "ownCloud account Wizard"
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Sprievodca účtom ownCloud"
+msgstr "Pridať účet…"
 
 #: src/kcm/ui/main.qml:67
 #, kde-format
@@ -79,43 +77,36 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr ""
+msgstr "Odstrániť %1"
 
 #: src/kcm/ui/main.qml:87
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr ""
+msgstr "Zatiaľ neboli pridané žiadne účty"
 
 #: src/kcm/ui/main.qml:88
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr ""
+msgstr "Kliknite na <interface>Pridať účet…</interface> pre pridanie účtu"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgctxt "The title for a dialog which lets you remove an account"
 msgid "Remove Account?"
-msgstr "Účty"
+msgstr "Odstrániť účet?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:39
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "Určite chcete odstrániť účet '%1'? Toto sa nedá vrátiť späť."
+msgstr "Are you sure you wish to remove the \"%1\" account \"%2\"?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:41
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the account "
 "name is available"
@@ -123,10 +114,7 @@ msgid "Are you sure you wish to remove the account \"%1\"?"
 msgstr "Určite chcete odstrániť účet '%1'? Toto sa nedá vrátiť späť."
 
 #: src/kcm/ui/RemoveAccountDialog.qml:43
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure that you want to remove the account '%1'? This cannot be "
-#| "undone."
+#, kde-format
 msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
@@ -134,13 +122,12 @@ msgid "Are you sure you wish to remove this \"%1\" account?"
 msgstr "Určite chcete odstrániť účet '%1'? Toto sa nedá vrátiť späť."
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
-#, fuzzy, kde-format
-#| msgid "Accounts"
+#, kde-format
 msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Účty"
+msgstr "Premenovať účet"
 
 #: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -148,22 +135,22 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr ""
+msgstr "Zadajte nové meno:"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr ""
+msgstr "Nebol nájdený žiadny účet s ID %1"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr ""
+msgstr "Žiadny správca účtov, toto nie je v poriadku."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr ""
+msgstr "Zobrazované meno nemôže byť prázdne"
 
 #: src/lib/createaccountjob.cpp:93
 #, kde-format
@@ -174,7 +161,7 @@ msgstr "Nemôžem načítať plugin %1, prosím skontrolujte si inštaláciu"
 #: src/lib/createaccountjob.cpp:188
 #, kde-format
 msgid "Cancelled by user"
-msgstr ""
+msgstr "Zrušené používateľom"
 
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
@@ -184,27 +171,25 @@ msgstr "Nastala chyba počas pokusu o spracovanie požiadavky: %1"
 #: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
-msgstr ""
+msgstr "Nepodarilo sa nájsť účet"
 
 #: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
-msgstr ""
+msgstr "Nepodarilo sa nájsť prihlasovacie údaje"
 
 #: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
-msgstr ""
+msgstr "Nepodarilo sa vytvoriť reláciu overenia"
 
 #, fuzzy
-#~| msgid "Accounts"
 #~ msgctxt ""
 #~ "The label for a button which will cause the removal of a specified account"
 #~ msgid "Remove Account"
 #~ msgstr "Účty"
 
 #, fuzzy
-#~| msgid "ownCloud account Wizard"
 #~ msgid "Add New Account..."
 #~ msgstr "Sprievodca účtom ownCloud"
 
