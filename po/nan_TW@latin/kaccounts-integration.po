@@ -1,0 +1,186 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the kaccounts-integration package.
+#
+# SPDX-FileCopyrightText: 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kaccounts-integration\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:51+0000\n"
+"PO-Revision-Date: 2026-06-15 21:43+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Taiwanese Hokkien <zh-l10n@lists.slat.org>\n"
+"Language: nan_TW@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 26.07.70\n"
+
+#: src/kcm/ui/AccountDetails.qml:20
+#, kde-format
+msgid "Account Details"
+msgstr "Kháu-tsō Siông-sè"
+
+#: src/kcm/ui/AccountDetails.qml:59 src/kcm/ui/main.qml:44
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/kcm/ui/AccountDetails.qml:63 src/kcm/ui/main.qml:48
+#, kde-format
+msgid "%1 account"
+msgstr "%1 kháu-tsō"
+
+#: src/kcm/ui/AccountDetails.qml:73
+#, kde-format
+msgctxt ""
+"Button which spawns a dialog allowing the user to change the displayed "
+"account's human-readable name"
+msgid "Change Account Display Name"
+msgstr "Kái-piàn Kháu-tsō Hián-sī-miâ"
+
+#: src/kcm/ui/AccountDetails.qml:81
+#, kde-format
+msgctxt "Heading for a list of services available with this account"
+msgid "Use This Account For"
+msgstr "Iōng Tse Kháu-tsō ê Ho̍k-bū"
+
+#: src/kcm/ui/AccountDetails.qml:88
+#, kde-format
+msgid "Remove This Account"
+msgstr "Î-tû Tsit-ê Kháu-tsō"
+
+#: src/kcm/ui/AccountDetails.qml:110
+#, kde-format
+msgctxt "A text shown when an account has no configurable services"
+msgid ""
+"There are no configurable services available for this account. You can still "
+"change its display name by clicking the edit icon above."
+msgstr ""
+"Tsit-ê kháu-tsō bô ē-sái siat-tīng ê ho̍k-bū ē-iōng. Lí á-sī ē-sái tshi̍h tíng-"
+"kuân ê pian-tsi̍p tôo-sī lâi kái i ê hián-sī-miâ."
+
+#: src/kcm/ui/AvailableAccounts.qml:20
+#, kde-format
+msgid "Add New Account"
+msgstr "Thiam Sin ê Kháu-tsō"
+
+#: src/kcm/ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Account…"
+msgstr "Thiam Kháu-tsō…"
+
+#: src/kcm/ui/main.qml:67
+#, kde-format
+msgctxt ""
+"Tooltip for an action which will offer the user to remove the mentioned "
+"account"
+msgid "Remove %1"
+msgstr "Î-tû %1"
+
+#: src/kcm/ui/main.qml:87
+#, kde-format
+msgctxt "A text shown when a user has not yet added any accounts"
+msgid "No accounts added yet"
+msgstr "Á-buē thiam kháu-tsō"
+
+#: src/kcm/ui/main.qml:88
+#, kde-kuit-format
+msgctxt "@info"
+msgid "Click <interface>Add Account…</interface> to add one"
+msgstr "Tshi̍h <interface>Thiam Kháu-tsō…</interface> lâi thiam"
+
+#: src/kcm/ui/RemoveAccountDialog.qml:22
+#, kde-format
+msgctxt "The title for a dialog which lets you remove an account"
+msgid "Remove Account?"
+msgstr "Kám Ài Î-tû Kháu-tsō?"
+
+#: src/kcm/ui/RemoveAccountDialog.qml:39
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when both provider "
+"name and account name are available"
+msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
+msgstr "Lí kám tsin-tsiànn ài î-tû \"%1\" ê kháu-tsō \"%2\"?"
+
+#: src/kcm/ui/RemoveAccountDialog.qml:41
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the account "
+"name is available"
+msgid "Are you sure you wish to remove the account \"%1\"?"
+msgstr "Lí kám tsin-tsiànn ài î-tû kháu-tsō \"%1\"?"
+
+#: src/kcm/ui/RemoveAccountDialog.qml:43
+#, kde-format
+msgctxt ""
+"The text for a dialog which lets you remove an account when only the "
+"provider name is available"
+msgid "Are you sure you wish to remove this \"%1\" account?"
+msgstr "Lí kám tsin-tsiànn ài î-tû tsit-ê \"%1\" ê kháu-tsō?"
+
+#: src/kcm/ui/RenameAccountDialog.qml:17
+#, kde-format
+msgctxt ""
+"The title for a dialog which lets you set the human-readable name of an "
+"account"
+msgid "Rename Account"
+msgstr "Kā Kháu-tsō Kái-miâ"
+
+#: src/kcm/ui/RenameAccountDialog.qml:37
+#, kde-format
+msgctxt ""
+"Label for the text field used to enter a new human-readable name for an "
+"account"
+msgid "Enter new name:"
+msgstr "Su-ji̍p sin ê miâ:"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:76
+#, kde-format
+msgid "No account found with the ID %1"
+msgstr "Bô tshuē-tio̍h ID sī %1 ê kháu-tsō"
+
+#: src/lib/changeaccountdisplaynamejob.cpp:81
+#, kde-format
+msgid "No accounts manager, this is not awesome."
+msgstr "Bô kháu-tsō kuán-lí-tsiá, tse-sī tsi̍t-ê būn-tê."
+
+#: src/lib/changeaccountdisplaynamejob.cpp:86
+#, kde-format
+msgid "The display name cannot be empty"
+msgstr "Hián-sī-miâ bē-sái sī khang--ê"
+
+#: src/lib/createaccountjob.cpp:93
+#, kde-format
+msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
+msgid "Could not load %1 plugin, please check your installation"
+msgstr ""
+"Bô-huat-tōo tsài-ji̍p %1 guā-kuà-tîng-sik, tshiánn kiám-tsa lí ê an-tsong"
+
+#: src/lib/createaccountjob.cpp:188
+#, kde-format
+msgid "Cancelled by user"
+msgstr "Iōng-tsiá tshú-siau--ah"
+
+#: src/lib/createaccountjob.cpp:264
+#, kde-format
+msgid "There was an error while trying to process the request: %1"
+msgstr "Tshú-lí tshíng-kiû ê sî-tsūn ū tshò-gōo: %1"
+
+#: src/lib/getcredentialsjob.cpp:57
+#, kde-format
+msgid "Could not find account"
+msgstr "Tshuē-bô kháu-tsō"
+
+#: src/lib/getcredentialsjob.cpp:72
+#, kde-format
+msgid "Could not find credentials"
+msgstr "Tshuē-bô jīn-tsìng tsū-sìn"
+
+#: src/lib/getcredentialsjob.cpp:82
+#, kde-format
+msgid "Could not create auth session"
+msgstr "Bô-huat-tōo kiàn-li̍p jīn-tsìng kang-tsok-kai-tuānn"
