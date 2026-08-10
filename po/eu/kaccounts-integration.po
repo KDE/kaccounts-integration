@@ -1,17 +1,23 @@
 # Translation for kaccounts-integration.po to Euskara/Basque (eu).
-# Copyright (C) 2018-2024 This file is copyright:
+# Copyright (C) 2018-2026 This file is copyright:
 # This file is distributed under the same license as the kaccounts-integration package.
-# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018.
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2019, 2020, 2021, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2019, 2020, 2021, 2024, 2026.
+#
+# Egoera:
+# Proiektu osoaren berrikuspen integrala: 2026-08-09.
+# Terminologia, estiloa, ortotipografia, kohesioa eta koherentzia berrikusi dira.
+# Erreferentzia-gida: -
+# Ikus, halaber: KDE-eu-berrikuspen-integralen-erregistroa.md
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2025-07-23 13:59+0200\n"
+"PO-Revision-Date: 2026-08-09 11:30+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -42,18 +48,18 @@ msgctxt ""
 "Button which spawns a dialog allowing the user to change the displayed "
 "account's human-readable name"
 msgid "Change Account Display Name"
-msgstr "Aldatu kontuan azalduko den izena"
+msgstr "Kontuaren bistaratze-izena aldatu"
 
 #: src/kcm/ui/AccountDetails.qml:81
 #, kde-format
 msgctxt "Heading for a list of services available with this account"
 msgid "Use This Account For"
-msgstr "Erabili kontu hau"
+msgstr "Erabili kontu hau honetarako"
 
 #: src/kcm/ui/AccountDetails.qml:88
 #, kde-format
 msgid "Remove This Account"
-msgstr "Kendu kontu hau"
+msgstr "Kontu hau kendu"
 
 #: src/kcm/ui/AccountDetails.qml:110
 #, kde-format
@@ -62,19 +68,19 @@ msgid ""
 "There are no configurable services available for this account. You can still "
 "change its display name by clicking the edit icon above."
 msgstr ""
-"Ez dago kontu honetarako konfigura daitekeen zerbitzurik. Azaltzen duen "
+"Ez dago kontu honetarako konfigura daitekeen zerbitzurik. Haren bistaratze-"
 "izena alda dezakezu goiko editatzeko botoiari klik eginez."
 
 #: src/kcm/ui/AvailableAccounts.qml:20
 #, kde-format
 msgid "Add New Account"
-msgstr "Gehitu kontu berria"
+msgstr "Kontu berria gehitu"
 
 #: src/kcm/ui/main.qml:25
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Gehitu kontua…"
+msgstr "Kontua gehitu…"
 
 #: src/kcm/ui/main.qml:67
 #, kde-format
@@ -82,19 +88,19 @@ msgctxt ""
 "Tooltip for an action which will offer the user to remove the mentioned "
 "account"
 msgid "Remove %1"
-msgstr "Kendu %1"
+msgstr "%1 kendu"
 
 #: src/kcm/ui/main.qml:87
 #, kde-format
 msgctxt "A text shown when a user has not yet added any accounts"
 msgid "No accounts added yet"
-msgstr "Ez da oraindik konturik gehitu"
+msgstr "Oraindik ez da konturik gehitu"
 
 #: src/kcm/ui/main.qml:88
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "Egin klik <interface>Gehitu kontua…</interface> aukeran bat gehitzeko"
+msgstr "<interface>Kontua gehitu…</interface> aukeran klik egin bat gehitzeko"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
@@ -108,7 +114,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when both provider "
 "name and account name are available"
 msgid "Are you sure you wish to remove the \"%1\" account \"%2\"?"
-msgstr "Ziur zaude «%1» «%2» kontua kendu nahi duzula?"
+msgstr "Ziur zaude «%1» hornitzailearen «%2» kontua kendu nahi duzula?"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:41
 #, kde-format
@@ -124,7 +130,7 @@ msgctxt ""
 "The text for a dialog which lets you remove an account when only the "
 "provider name is available"
 msgid "Are you sure you wish to remove this \"%1\" account?"
-msgstr "Ziur zaude «%1» kontua hau nahi duzula?"
+msgstr "Ziur zaude «%1» hornitzailearen kontu hau kendu nahi duzula?"
 
 #: src/kcm/ui/RenameAccountDialog.qml:17
 #, kde-format
@@ -132,7 +138,7 @@ msgctxt ""
 "The title for a dialog which lets you set the human-readable name of an "
 "account"
 msgid "Rename Account"
-msgstr "Berrizendatu kontua"
+msgstr "Kontua berrizendatu"
 
 #: src/kcm/ui/RenameAccountDialog.qml:37
 #, kde-format
@@ -140,28 +146,28 @@ msgctxt ""
 "Label for the text field used to enter a new human-readable name for an "
 "account"
 msgid "Enter new name:"
-msgstr "Sartu izen berria:"
+msgstr "Izen berria sartu:"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:76
 #, kde-format
 msgid "No account found with the ID %1"
-msgstr "Ez da aurkitu ID %1  duen konturik"
+msgstr "Ez da %1 IDa duen konturik aurkitu"
 
 #: src/lib/changeaccountdisplaynamejob.cpp:81
 #, kde-format
 msgid "No accounts manager, this is not awesome."
-msgstr "Ez dago kontu kudeatzailerik, ez da ona."
+msgstr "Ez dago kontu kudeatzailerik, hori ez da ona."
 
 #: src/lib/changeaccountdisplaynamejob.cpp:86
 #, kde-format
 msgid "The display name cannot be empty"
-msgstr "Azaldu beharreko izena ezin da hutsik egon"
+msgstr "Bistaratze-izena ezin da hutsik egon"
 
 #: src/lib/createaccountjob.cpp:93
 #, kde-format
 msgctxt "The %1 is for plugin name, eg. Could not load UI plugin"
 msgid "Could not load %1 plugin, please check your installation"
-msgstr "Ezin izan da %1 plugina zamatu, ikuskatu zure instalazioa"
+msgstr "%1 plugina ezin izan da zamatu; egiaztatu zure instalazioa"
 
 #: src/lib/createaccountjob.cpp:188
 #, kde-format
@@ -171,39 +177,39 @@ msgstr "Erabiltzaileak bertan behera utzi du"
 #: src/lib/createaccountjob.cpp:264
 #, kde-format
 msgid "There was an error while trying to process the request: %1"
-msgstr "Errore bat gertatu da eskaera prozesatzen saiatzean: %1"
+msgstr "Eskaera prozesatzen saiatzean errore bat gertatu da: %1"
 
 #: src/lib/getcredentialsjob.cpp:57
 #, kde-format
 msgid "Could not find account"
-msgstr "Ezin izan da kontua aurkitu"
+msgstr "Kontua ezin izan da aurkitu"
 
 #: src/lib/getcredentialsjob.cpp:72
 #, kde-format
 msgid "Could not find credentials"
-msgstr "Ezin izan da egiaztagiririk aurkitu"
+msgstr "Egiaztagiriak ezin izan dira aurkitu"
 
 #: src/lib/getcredentialsjob.cpp:82
 #, kde-format
 msgid "Could not create auth session"
-msgstr "Ezin izan da sortu autentifikatutako saiorik"
+msgstr "Ezin izan da autentifikazio-saiorik sortu"
 
 #~ msgctxt ""
 #~ "The label for a button which will cause the removal of a specified account"
 #~ msgid "Remove Account"
-#~ msgstr "Kendu kontua"
+#~ msgstr "Kontua kendu"
 
 #~ msgctxt ""
 #~ "Text of a button which will cause the human-readable name of an account "
 #~ "to be set to a text specified by the user"
 #~ msgid "Set Account Name"
-#~ msgstr "Ezarri kontuaren izena"
+#~ msgstr "Kontuaren izena ezarri"
 
 #~ msgid "Add New Account..."
-#~ msgstr "Gehitu kontu berria..."
+#~ msgstr "Kontu berria gehitu…"
 
 #~ msgid "Can't open wallet"
-#~ msgstr "Ezin da zorroa ireki"
+#~ msgstr "Zorroa ezin da ireki"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -226,24 +232,23 @@ msgstr "Ezin izan da sortu autentifikatutako saiorik"
 #~ "Label for the text field used to enter a new human-readable name for an "
 #~ "account"
 #~ msgid "Enter the new name of the account"
-#~ msgstr "Sartu kontuaren izen berria"
+#~ msgstr "Kontuaren izen berria sartu"
 
 #~ msgid "Configure..."
-#~ msgstr "Konfiguratu..."
+#~ msgstr "Konfiguratu…"
 
 #~ msgid ""
 #~ "No account providers found.<nl/>Some providers can be found in packages "
 #~ "<application>kaccounts-providers</application> and <application>ktp-"
 #~ "accounts-kcm</application>."
 #~ msgstr ""
-#~ "Ez da aurkitu kontu hornitzailerik.<nl/>Hornitzaile batzuk aurki daitezke "
-#~ "<application>kaccounts-providers</application> eta <application>ktp-"
-#~ "accounts-kcm</application> paketeetan."
+#~ "Ez da kontu-hornitzailerik aurkitu.<nl/><application>kaccounts-providers</"
+#~ "application> eta <application>ktp-accounts-kcm</application> paketeetan "
+#~ "hornitzaile batzuk aurki daitezke."
 
 #~ msgid "Following missing providers are required by installed services: %1"
 #~ msgstr ""
-#~ "Falta diren ondoko hornitzaileak behar dituzte instalatutako zerbitzuek: "
-#~ "%1"
+#~ "Instalatutako zerbitzuek falta diren hornitzaile hauek behar dituzte: %1"
 
 #~ msgctxt ""
 #~ "Messagebox title; meaning 'Unable to finish the action you started'"
@@ -257,4 +262,4 @@ msgstr "Ezin izan da sortu autentifikatutako saiorik"
 #~ msgstr "Sortu"
 
 #~ msgid "Select what services you want to activate"
-#~ msgstr "Hautatu aktibatu nahi dituzun zerbitzuak"
+#~ msgstr "Aktibatu nahi dituzun zerbitzuak hautatu"
