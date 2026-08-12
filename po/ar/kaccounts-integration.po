@@ -92,7 +92,7 @@ msgstr "لم تضف أي حساب بعد"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
-msgstr "انقر <interface>أضف حساباً…</interface> لتضيف واحدًا"
+msgstr "انقر <interface>أضف حسابًا…</interface> لتضيف واحدًا"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
 #, kde-format
