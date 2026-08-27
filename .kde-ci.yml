@@ -17,13 +17,13 @@ Dependencies:
 
 - 'on': ['Linux/Qt6', 'Linux/Qt6Next', 'FreeBSD/Qt6']
   'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kcmutils': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/kdbusaddons': '@latest-kf6'
-    'frameworks/kwallet': '@latest-kf6'
-    'frameworks/kio': '@latest-kf6'
+    'frameworks/extra-cmake-modules': 'Frameworks/6.24'
+    'frameworks/kcmutils': 'Frameworks/6.24'
+    'frameworks/ki18n': 'Frameworks/6.24'
+    'frameworks/kcoreaddons': 'Frameworks/6.24'
+    'frameworks/kdbusaddons': 'Frameworks/6.24'
+    'frameworks/kwallet': 'Frameworks/6.24'
+    'frameworks/kio': 'Frameworks/6.24'
     'third-party/qcoro': '@latest'
     'third-party/libaccounts-qt': '@latest'
     'third-party/signond': '@latest'
