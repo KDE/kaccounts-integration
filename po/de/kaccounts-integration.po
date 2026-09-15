@@ -1,20 +1,21 @@
 # SPDX-FileCopyrightText: 2014-2015, 2017, 2019-2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kaccounts-integration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2024-08-20 20:20+0200\n"
-"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
+"PO-Revision-Date: 2026-09-13 02:04+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
@@ -69,7 +70,7 @@ msgstr "Neuen Zugang hinzufügen"
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Account…"
-msgstr "Neuen Zugang hinzufügen …"
+msgstr "Zugang hinzufügen …"
 
 #: src/kcm/ui/main.qml:67
 #, kde-format
@@ -90,7 +91,7 @@ msgstr "Es wurden noch keine Zugänge hinzugefügt."
 msgctxt "@info"
 msgid "Click <interface>Add Account…</interface> to add one"
 msgstr ""
-"Klicken Sie auf <interface>Zugang hinzufügen …</interface>, um einen neuen "
+"Klicken Sie auf <interface>Zugang hinzufügen …</interface>, um einen neuen "
 "Zugang hinzuzufügen"
 
 #: src/kcm/ui/RemoveAccountDialog.qml:22
