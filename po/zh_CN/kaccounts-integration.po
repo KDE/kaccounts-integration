@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kaccounts-integration/kaccounts-"
+"X-Crowdin-File: /kf6-stable/messages/kaccounts-integration/kaccounts-"
 "integration.pot\n"
-"X-Crowdin-File-ID: 48752\n"
+"X-Crowdin-File-ID: 51642\n"
 
 #: src/kcm/ui/AccountDetails.qml:20
 #, kde-format
